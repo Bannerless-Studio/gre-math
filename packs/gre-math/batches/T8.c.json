@@ -1,0 +1,1742 @@
+[
+ {
+  "id": "t8-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms",
+   "t8.seq-conv",
+   "t2.seq-series"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $S=\\left\\{(-1)^n+\\tfrac1n : n\\ge 1\\right\\}$. What is $\\sup S+\\inf S$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$\\tfrac12$",
+    "$0$",
+    "$\\tfrac32$",
+    "$\\tfrac52$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "evaluated the first even term as $2$ instead of $\\tfrac32$",
+    "",
+    "took the limit points $1$ and $-1$ as sup and inf",
+    "took the least element $0$ (at $n=1$) as the infimum",
+    "computed $\\sup S-\\inf S$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Even-indexed terms $1+\\tfrac1n$ decrease, so the sup is the attained value $\\tfrac32$ (n=2)",
+    "weight": 2
+   },
+   {
+    "text": "Odd-indexed terms $-1+\\tfrac1n$ stay above $-1$ and approach it, so $\\inf S=-1$ is not attained",
+    "weight": 1
+   },
+   {
+    "text": "Combined: $\\tfrac32+(-1)=\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Even $n$: terms $1+\\frac1n$ decrease from $\\frac32$ (seq-conv). Odd $n$: terms $-1+\\frac1n>-1$ and tend to $-1$.\nSo $\\sup S=\\frac32$ is attained and $\\inf S=-1$ is the greatest lower bound, not attained (real-axioms).\nSum: $\\frac32-1=\\frac12$.",
+  "hints": [
+   "Split into even and odd $n$ and find each subsequence's extreme."
+  ],
+  "check": "Fraction(3,2)+Fraction(-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms",
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $T=\\left\\{\\dfrac{x^2}{1+x^2} : x\\in\\mathbb R\\right\\}$. Which statement is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sup T=1$ and it is attained",
+    "$\\sup T=\\tfrac12$",
+    "$\\inf T=0$ is not attained",
+    "$T$ has no supremum",
+    "$\\inf T=0$ is attained and $\\sup T=1$ is not attained"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "assumed the limit value $1$ at infinity is reached",
+    "evaluated at $x=1$ only",
+    "$x=0$ gives $0$, so the infimum is attained",
+    "$T$ is bounded above by $1$, so the supremum exists",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rewrite $\\frac{x^2}{1+x^2}=1-\\frac1{1+x^2}$",
+    "weight": 2
+   },
+   {
+    "text": "Range is $[0,1)$: value $0$ at $x=0$, values approach but never equal $1$",
+    "weight": 1
+   },
+   {
+    "text": "State inf attained, sup not attained",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Write $\\frac{x^2}{1+x^2}=1-\\frac{1}{1+x^2}$ (curve-shape): $\\frac1{1+x^2}\\in(0,1]$.\nSo $T=[0,1)$.\n$\\inf T=0$ attained at $x=0$. $\\sup T=1$ by least-upper-bound, never attained (real-axioms).",
+  "hints": [
+   "Rewrite the fraction as $1$ minus something positive."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv",
+   "t4.seq-limits",
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $a_n=\\dfrac{2n+1}{n+3}$, which converges to $2$. What is the least $N$ such that $|a_n-2|<\\tfrac1{100}$ for every $n\\ge N$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$495$",
+    "$503$",
+    "$498$",
+    "$497$",
+    "$500$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "subtracted $3$ instead of adding it",
+    "added $3$ to $500$",
+    "",
+    "allowed equality: at $n=497$ the gap is exactly $\\tfrac1{100}$",
+    "solved $5/n<\\tfrac1{100}$, ignoring the $+3$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gap simplified: $|a_n-2|=\\frac{5}{n+3}$",
+    "weight": 2
+   },
+   {
+    "text": "Inequality $\\frac5{n+3}<\\frac1{100}$ solved to $n>497$",
+    "weight": 1
+   },
+   {
+    "text": "Strict inequality gives least integer $N=498$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$a_n-2=\\frac{2n+1-2n-6}{n+3}=\\frac{-5}{n+3}$ (limit-algebra), so $|a_n-2|=\\frac5{n+3}$.\n$\\frac5{n+3}<\\frac1{100}\\iff n+3>500\\iff n>497$ (seq-conv).\nThe gap decreases in $n$, so all $n\\ge498$ work and $n=497$ gives exactly $\\tfrac1{100}$.",
+  "hints": [
+   "Compute $a_n-2$ as a single fraction first."
+  ],
+  "check": "min(n for n in range(1,10000) if Fraction(5,n+3)<Fraction(1,100))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv",
+   "t8.real-axioms",
+   "t4.seq-limits"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $a_1=1$ and $a_{n+1}=\\sqrt{6+a_n}$. The sequence converges. What is $\\lim_{n\\to\\infty}a_n^{\\,2}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9$",
+    "$4$",
+    "$6$",
+    "$7$",
+    "$3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the rejected root $L=-2$",
+    "set $L=\\sqrt6$ by dropping $a_n$ from the radicand",
+    "gave $a_2^2$ (first iterate)",
+    "gave $L$ rather than $L^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Show $a_n$ increasing and bounded above by $3$ (induction)",
+    "weight": 2
+   },
+   {
+    "text": "Conclude convergence by monotone/completeness",
+    "weight": 1
+   },
+   {
+    "text": "Solve $L^2=6+L$, reject $L=-2$, so $L=3$ and $L^2=9$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Induction: $a_n<3\\Rightarrow a_{n+1}<\\sqrt9=3$, and $a_n<3\\Rightarrow a_n^2<6+a_n$, so $a_{n+1}>a_n$.\nBounded monotone sequences converge (real-axioms, seq-conv).\nTake limits in $a_{n+1}^2=6+a_n$: $L^2=6+L$, so $L=3$ (terms positive, $L\\ne-2$). Then $L^2=9$.",
+  "hints": [
+   "Prove monotone and bounded, then take limits in the squared recursion."
+  ],
+  "check": "3**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw",
+   "t4.alt-series",
+   "t2.seq-series"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which of the following sequences is a Cauchy sequence in $\\mathbb R$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a_n=\\ln n$",
+    "$a_n=(-1)^n$",
+    "$a_n=\\sin n$",
+    "$a_n=\\displaystyle\\sum_{k=1}^n \\frac{(-1)^k}{k}$",
+    "$a_n=\\displaystyle\\sum_{k=1}^n \\frac1k$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "$|a_{n+1}-a_n|\\to0$ but $|a_{n^2}-a_n|\\to\\infty$",
+    "consecutive terms differ by $2$",
+    "oscillates densely in $[-1,1]$ and has no limit",
+    "",
+    "$|a_{2n}-a_n|\\ge\\tfrac12$ for all $n$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Link: in $\\mathbb R$ Cauchy $\\iff$ convergent",
+    "weight": 2
+   },
+   {
+    "text": "Alternating series test shows the first sequence converges",
+    "weight": 1
+   },
+   {
+    "text": "Reject the others (harmonic and log are unbounded; the last two have no limit)",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "In $\\mathbb R$ a sequence is Cauchy iff it converges (cauchy-bw, completeness).\nThe first sequence is the partial sums of an alternating series with terms $\\frac1k\\downarrow0$, so it converges (alt-series).\nThe harmonic partial sums and $\\ln n$ are unbounded; $(-1)^n$ and $\\sin n$ have no limit. Small consecutive gaps do not suffice.",
+  "hints": [
+   "Cauchy and convergent coincide in $\\mathbb R$; test each for a limit."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw",
+   "t8.seq-conv",
+   "t2.unit-circle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $a_n=\\cos\\!\\left(\\dfrac{2\\pi n}{3}\\right)+(-1)^n$. The sequence is bounded, so by Bolzano-Weierstrass it has convergent subsequences. What is $\\limsup a_n-\\liminf a_n$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$\\tfrac72$",
+    "$3$",
+    "$\\tfrac52$",
+    "$4$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used the spread of a single residue class",
+    "",
+    "took $\\liminf=-1$ by ignoring the cosine term",
+    "took $\\liminf=-\\tfrac12$ by dropping $(-1)^n$ at the low end",
+    "used the crude bounds $\\pm2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Period $6$: list $a_n$ for $n=0,\\dots,5$",
+    "weight": 2
+   },
+   {
+    "text": "Values $2,-\\tfrac32,\\tfrac12,0,\\tfrac12,-\\tfrac32$ are the subsequential limits",
+    "weight": 1
+   },
+   {
+    "text": "limsup $=2$, liminf $=-\\tfrac32$, difference $\\tfrac72$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The sequence has period $6$ (unit-circle values of $\\cos$ and sign of $(-1)^n$).\n$n=0,\\dots,5$: $2,\\,-\\frac32,\\,\\frac12,\\,0,\\,\\frac12,\\,-\\frac32$.\nEach value recurs infinitely often, so these are exactly the subsequential limits (cauchy-bw).\n$\\limsup=2$, $\\liminf=-\\frac32$, difference $\\frac72$.",
+  "hints": [
+   "The sequence is periodic; list one full period."
+  ],
+  "check": "Fraction(2)-Fraction(-3,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps",
+   "t3.continuity",
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For $f(x)=x^2$ at $a=2$ with $\\varepsilon=0.1$, what is the largest $\\delta$ such that $|x-2|<\\delta$ implies $|x^2-4|<0.1$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2-\\sqrt{3.9}$",
+    "$0.025$",
+    "$0.02$",
+    "$0.05$",
+    "$\\sqrt{4.1}-2$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "the left endpoint distance is larger; the right side $x>2$ fails first",
+    "linearization $\\varepsilon/|f'(2)|$ is too large because of curvature",
+    "valid but not the largest",
+    "divided $\\varepsilon$ by $2$ instead of $4$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rewrite as $3.9<x^2<4.1$, i.e. $x\\in(\\sqrt{3.9},\\sqrt{4.1})$",
+    "weight": 2
+   },
+   {
+    "text": "Compute both distances from $2$ to the endpoints",
+    "weight": 1
+   },
+   {
+    "text": "Take the smaller one, $\\sqrt{4.1}-2\\approx0.0248$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|x^2-4|<0.1\\iff\\sqrt{3.9}<x<\\sqrt{4.1}$ (cont-eps).\nDistances from $2$: left $2-\\sqrt{3.9}\\approx0.02516$, right $\\sqrt{4.1}-2\\approx0.02485$.\nThe largest symmetric $\\delta$ is the smaller, $\\sqrt{4.1}-2$. Note $0.025$ is too big: $x=2.0249$ has $x^2>4.1$.",
+  "hints": [
+   "A symmetric $\\delta$-window must fit inside the interval of allowed $x$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps",
+   "t8.seq-conv",
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Define $f(x)=x$ if $x$ is rational and $f(x)=x^3$ if $x$ is irrational. At how many points is $f$ continuous?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "every real $x$",
+    "$3$",
+    "$1$",
+    "$0$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "missed one of $\\pm1$ or $0$",
+    "ignored that the two formulas disagree",
+    "",
+    "kept only $x=0$ and missed $\\pm1$",
+    "thought density of both types forces discontinuity everywhere"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Sequential criterion with a rational and an irrational sequence to $a$ forces $a=a^3$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $a^3=a$: $a\\in\\{-1,0,1\\}$",
+    "weight": 1
+   },
+   {
+    "text": "Verify continuity at those points (both branches within $|x-a|$ scale)",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "If $f$ is continuous at $a$, take rationals $q_n\\to a$ and irrationals $r_n\\to a$ (seq-conv): $f(q_n)\\to a$ and $f(r_n)\\to a^3$, so $a=a^3$.\n$a^3=a\\iff a\\in\\{-1,0,1\\}$.\nAt each such $a$, $|f(x)-a|\\le\\max(|x-a|,|x^3-a^3|)\\to0$ (cont-eps), so $f$ is continuous there: $3$ points.",
+  "hints": [
+   "Compare limits along rational and irrational sequences."
+  ],
+  "check": "len([x for x in range(-5,6) if x**3==x])",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont",
+   "t8.cont-eps",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which of these functions is uniformly continuous on the stated domain?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f(x)=\\sqrt x$ on $[0,\\infty)$",
+    "$f(x)=x^2$ on $\\mathbb R$",
+    "$f(x)=\\dfrac1x$ on $(0,1]$",
+    "$f(x)=\\sin\\!\\left(\\dfrac1x\\right)$ on $(0,1)$",
+    "$f(x)=\\sin(x^2)$ on $\\mathbb R$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "$x_n=n+\\frac1n$, $y_n=n$ gives gaps $\\to0$ but $f$-gaps $\\to2$",
+    "$f$ is unbounded near $0$",
+    "oscillates infinitely often near $0$",
+    "oscillation speeds up: $\\sqrt{n\\pi}$ and $\\sqrt{n\\pi+\\pi/2}$ get close but $f$ differs by $1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Show $|\\sqrt x-\\sqrt y|\\le\\sqrt{|x-y|}$ so $\\delta=\\varepsilon^2$ works",
+    "weight": 2
+   },
+   {
+    "text": "Exhibit pair sequences breaking uniform continuity for each other option",
+    "weight": 1
+   },
+   {
+    "text": "Conclude only the square root qualifies",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "For $x,y\\ge0$: $|\\sqrt x-\\sqrt y|\\le\\sqrt{|x-y|}$, so $\\delta=\\varepsilon^2$ works for all points (unif-cont).\n$x^2$: pairs $n,\\,n+\\frac1n$ stay $\\frac1n$ apart but $f$-values differ by $\\approx2$.\n$\\frac1x$ and $\\sin\\frac1x$ fail near $0$ (non-extendable to $[0,1]$). $\\sin x^2$ fails by the pairs $\\sqrt{n\\pi},\\sqrt{n\\pi+\\pi/2}$.",
+  "hints": [
+   "Look for pairs of points getting closer while values stay apart."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont",
+   "t8.cont-eps",
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "For $f(x)=\\sqrt x$ on $[0,\\infty)$ and $\\varepsilon=0.3$, what is the largest $\\delta$ that works for every pair $x,y\\ge0$ with $|x-y|<\\delta\\Rightarrow|f(x)-f(y)|<0.3$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.6$",
+    "$0.045$",
+    "$0.15$",
+    "$0.09$",
+    "$0.3$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "took $\\delta=2\\varepsilon$",
+    "halved the correct value",
+    "halved $\\varepsilon$",
+    "",
+    "took $\\delta=\\varepsilon$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Bound $\\sqrt y-\\sqrt x\\le\\sqrt{y-x}$ so $\\delta=\\varepsilon^2$ suffices",
+    "weight": 2
+   },
+   {
+    "text": "Sharpness at $x=0$: $f(\\delta)-f(0)=\\sqrt\\delta$",
+    "weight": 1
+   },
+   {
+    "text": "Largest $\\delta=0.3^2=0.09$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "For $y\\ge x\\ge0$: $\\sqrt y-\\sqrt x\\le\\sqrt{y-x}$, because $(\\sqrt x+\\sqrt{y-x})^2\\ge y$ (unif-cont).\nSo $\\delta=\\varepsilon^2$ works for all pairs.\nAt $x=0$, $y=\\delta$ gives $f(y)-f(x)=\\sqrt\\delta$, which reaches $\\varepsilon$ exactly when $\\delta=\\varepsilon^2$, so nothing larger works (cont-eps).\n$\\delta=0.09$.",
+  "hints": [
+   "The worst pair is at the origin, where $\\sqrt{}$ is steepest."
+  ],
+  "check": "Fraction(3,10)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms",
+   "t3.curve-shape",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many real solutions does $x^3-3x+1=0$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$3$",
+    "$1$",
+    "$2$",
+    "$0$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "a cubic has at most $3$ real roots",
+    "",
+    "checked only one sign change",
+    "counted a double root that does not occur",
+    "treated the cubic as having no sign change"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Sign changes of $f$ at $-2,-1,0,1,2$ give three intervals by IVT",
+    "weight": 2
+   },
+   {
+    "text": "Cubic has at most three roots, so exactly $3$",
+    "weight": 1
+   },
+   {
+    "text": "Optional check using $f'=3x^2-3$ with local max $3$ and min $-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f(x)=x^3-3x+1$: $f(-2)=-1,\\ f(-1)=3,\\ f(0)=1,\\ f(1)=-1,\\ f(2)=3$.\nSign changes on $(-2,-1)$, $(0,1)$, $(1,2)$: three roots by IVT (cont-thms).\nA cubic has at most $3$ real roots, so exactly $3$. Consistent with $f'=3x^2-3$: local max $f(-1)=3>0$, local min $f(1)=-1<0$ (curve-shape).",
+  "hints": [
+   "Evaluate at integer points and count sign changes."
+  ],
+  "check": "sum(1 for i in range(-400,400) if (i**3/1e6-3*i/100+1)*((i+1)**3/1e6-3*(i+1)/100+1)<0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms",
+   "t3.optimize",
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "What is the range of $f(x)=x\\,e^{-x}$ on $[0,\\infty)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\left[0,\\tfrac1e\\right)$",
+    "$\\left(0,\\tfrac1e\\right]$",
+    "$[0,\\infty)$",
+    "$[0,1]$",
+    "$\\left[0,\\tfrac1e\\right]$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "the maximum $f(1)=\\tfrac1e$ is attained",
+    "excluded $0$ because $f\\to0$ at infinity, but $f(0)=0$ is attained",
+    "ignored decay of $e^{-x}$",
+    "used $\\max x$ over $[0,1]$ without the exponential",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Locate maximum: $f'=(1-x)e^{-x}$, $x=1$, $f(1)=\\tfrac1e$",
+    "weight": 2
+   },
+   {
+    "text": "Limits: $f(0)=0$ and $f(x)\\to0$ as $x\\to\\infty$ (l'Hopital)",
+    "weight": 1
+   },
+   {
+    "text": "IVT: continuous image is an interval, so $[0,\\tfrac1e]$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f'(x)=(1-x)e^{-x}$, so $f$ rises to $f(1)=\\frac1e$ then decreases (optimize).\n$f(0)=0$ and $\\lim_{x\\to\\infty}xe^{-x}=0$ by l'Hopital.\nBy IVT the image of the connected set $[0,\\infty)$ is an interval (cont-thms): minimum $0$ attained at $x=0$, maximum $\\frac1e$ attained at $x=1$. Range $[0,\\frac1e]$.",
+  "hints": [
+   "Find the max with calculus; use IVT for everything between."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms",
+   "t3.deriv-def",
+   "t3.chain-rule",
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(x)=x^2\\sin(1/x)$ for $x\\ne0$ and $f(0)=0$. Which statement is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f$ is differentiable at $0$ with $f'(0)=1$",
+    "$f'(0)=0$ and $f'$ is continuous at $0$, since $f'(x)\\to0$",
+    "$f$ is differentiable on $\\mathbb R$ with $f'(0)=0$, but $f'$ is not continuous at $0$",
+    "$f$ is differentiable on $\\mathbb R$ and $f'$ is continuous on $\\mathbb R$",
+    "$f$ is not differentiable at $0$, since $\\sin(1/x)$ has no limit at $0$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "the difference quotient tends to $0$, not $1$",
+    "$f'(x)=2x\\sin\\frac1x-\\cos\\frac1x$ does not tend to $0$",
+    "",
+    "$f'(x)$ contains $-\\cos(1/x)$, which has no limit at $0$",
+    "the difference quotient is $x\\sin(1/x)\\to0$, so the derivative exists"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Difference quotient $x\\sin(1/x)\\to0$ so $f'(0)=0$",
+    "weight": 2
+   },
+   {
+    "text": "Chain/product rule for $x\\ne0$: $f'(x)=2x\\sin\\frac1x-\\cos\\frac1x$",
+    "weight": 1
+   },
+   {
+    "text": "$\\cos(1/x)$ has no limit at $0$, so $f'$ is discontinuous at $0$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "At $0$: $\\frac{f(h)-f(0)}{h}=h\\sin\\frac1h\\to0$, so $f'(0)=0$ (deriv-def).\nFor $x\\ne0$, product and chain rules: $f'(x)=2x\\sin\\frac1x-\\cos\\frac1x$ (chain-rule).\nAs $x\\to0$ the first term $\\to0$ but $\\cos\\frac1x$ oscillates in $[-1,1]$, so $f'$ has no limit at $0$.\nThus $f$ is differentiable everywhere but $f'$ is discontinuous at $0$ (diff-thms).",
+  "hints": [
+   "Compute the derivative at $0$ from the definition, then away from $0$ by rules."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms",
+   "t3.mvt-rolle",
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A differentiable function $f:\\mathbb R\\to\\mathbb R$ satisfies $f(0)=1$, $f(3)=7$, and $f'(x)\\le2$ for all $x$. What is $f(2)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$\\tfrac{14}{3}$",
+    "$6$",
+    "$4$",
+    "$3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "scaled $f(3)=7$ by $\\tfrac23$",
+    "subtracted $1$ from $f(3)$ with no slope argument",
+    "guessed an intermediate value without using the bound",
+    "used one step of slope $2$ from $f(0)=1$ over $1$ unit"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Let $g(x)=f(x)-2x$; then $g'\\le0$ so $g$ is nonincreasing (MVT)",
+    "weight": 2
+   },
+   {
+    "text": "$g(0)=1=g(3)$ forces $g$ constant on $[0,3]$",
+    "weight": 1
+   },
+   {
+    "text": "Hence $f(2)=1+4=5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Set $g(x)=f(x)-2x$. Then $g'(x)\\le0$, so $g$ is nonincreasing by MVT (mvt-rolle).\n$g(0)=1$ and $g(3)=7-6=1$. A nonincreasing function with equal endpoint values is constant on $[0,3]$ (curve-shape).\nSo $f(x)=2x+1$ on $[0,3]$ and $f(2)=5$ (diff-thms).",
+  "hints": [
+   "Subtract the maximal slope line and look at the sign of the derivative."
+  ],
+  "check": "1+2*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.riemann",
+   "t4.improper-int",
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Exactly one of the following functions on $[0,1]$ is Riemann integrable. Which one?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f(x)=\\tfrac1x$ for $x>0$ and $f(0)=0$",
+    "$f(x)=\\tfrac1{\\sqrt x}$ for $x>0$ and $f(0)=0$",
+    "$f(x)=x$ for rational $x$ and $0$ for irrational $x$",
+    "$f(p/q)=\\tfrac1q$ for rational $p/q$ in lowest terms (with $f(0)=1$) and $f(x)=0$ for irrational $x$",
+    "$f(x)=1$ for rational $x$ and $0$ for irrational $x$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "unbounded, hence not Riemann integrable",
+    "unbounded; the improper integral exists but the Riemann integral does not",
+    "continuous only at $0$, so the discontinuity set has positive measure",
+    "",
+    "discontinuous at every point, so the upper and lower sums never meet"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Riemann integrable requires bounded and discontinuities of measure zero",
+    "weight": 2
+   },
+   {
+    "text": "Thomae's function is bounded and discontinuous only at rationals (countable)",
+    "weight": 1
+   },
+   {
+    "text": "Eliminate the other four: two unbounded, two with discontinuity sets of full measure",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Riemann integrable $\\iff$ bounded and the set of discontinuities has measure zero (riemann).\nThomae-type function: bounded, continuous at every irrational, discontinuous exactly on the countable set $\\mathbb Q\\cap[0,1]$. So it is integrable (value $0$).\n$\\frac1x$ and $\\frac1{\\sqrt x}$ are unbounded; the latter has only an improper integral (improper-int).\nThe two rational-indicator types are discontinuous on a set of positive measure (counterexamples).",
+  "hints": [
+   "Use the Lebesgue criterion: bounded plus few discontinuities."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.riemann",
+   "t4.ftc",
+   "t4.trig-sub"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\lim_{n\\to\\infty}\\sum_{k=1}^{n}\\frac{n}{n^2+k^2}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac\\pi2$",
+    "$\\tfrac\\pi4$",
+    "$\\tfrac12\\ln2$",
+    "$\\ln2$",
+    "$1$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "integrated $\\frac1{1+x^2}$ over $[0,\\infty)$",
+    "",
+    "integrated $\\frac{x}{1+x^2}$, mismatching the summand",
+    "integrated $\\frac1{1+x}$",
+    "bounded each term by $\\frac1n$ and stopped at $1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Factor $\\frac1n$: summand $=\\frac1n\\cdot\\frac{1}{1+(k/n)^2}$",
+    "weight": 2
+   },
+   {
+    "text": "Recognize a Riemann sum of $\\frac1{1+x^2}$ on $[0,1]$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $\\arctan 1=\\frac\\pi4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\frac{n}{n^2+k^2}=\\frac1n\\cdot\\frac1{1+(k/n)^2}$.\nThe sum is a right-endpoint Riemann sum for $\\frac1{1+x^2}$ on $[0,1]$ (riemann).\nLimit $=\\int_0^1\\frac{dx}{1+x^2}=\\arctan1-\\arctan0=\\frac\\pi4$ (ftc, trig-sub).",
+  "hints": [
+   "Pull out $\\frac1n$ and read off the function of $k/n$."
+  ],
+  "check": "math.atan(1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal",
+   "t4.series-tests",
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which of the following series converges?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\displaystyle\\sum_{n=2}^\\infty\\frac1{n\\ln n}$",
+    "$\\displaystyle\\sum_{n=1}^\\infty\\sin\\frac1n$",
+    "$\\displaystyle\\sum_{n=1}^\\infty\\frac{(1+1/n)^{n^2}}{2^n}$",
+    "$\\displaystyle\\sum_{n=1}^\\infty\\frac{n+1}{n^2+1}$",
+    "$\\displaystyle\\sum_{n=1}^\\infty\\left(1-\\frac1n\\right)^{n^2}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "integral test: $\\int\\frac{dx}{x\\ln x}=\\ln\\ln x$ diverges",
+    "limit comparison with $\\sum\\frac1n$ diverges",
+    "root test limit is $e/2>1$, so terms grow",
+    "limit comparison with $\\sum\\frac1n$ diverges",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Apply the root test: $\\sqrt[n]{a_n}=(1-\\frac1n)^n\\to\\frac1e<1$",
+    "weight": 2
+   },
+   {
+    "text": "Show each other option diverges by a named test",
+    "weight": 1
+   },
+   {
+    "text": "Select the first series",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Root test on the first series: $a_n^{1/n}=(1-\\frac1n)^n\\to e^{-1}<1$ (limit-special), so it converges (series-formal).\n$\\sum\\frac1{n\\ln n}$ diverges by the integral test. $\\sin\\frac1n\\sim\\frac1n$ and $\\frac{n+1}{n^2+1}\\sim\\frac1n$ diverge by limit comparison.\nFourth: $a_n^{1/n}=\\frac{(1+1/n)^n}{2}\\to\\frac e2>1$, diverges (series-tests).",
+  "hints": [
+   "Try the root test on the terms with exponent $n^2$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal",
+   "t4.alt-series",
+   "t2.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The alternating harmonic series $1-\\tfrac12+\\tfrac13-\\tfrac14+\\cdots$ sums to $\\ln 2$. Rearranging so that two positive terms are followed by one negative term gives $1+\\tfrac13-\\tfrac12+\\tfrac15+\\tfrac17-\\tfrac14+\\cdots$. What does the rearranged series sum to?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac12\\ln2$",
+    "it diverges to $+\\infty$",
+    "$\\tfrac32\\ln2$",
+    "$\\ln2$",
+    "$2\\ln2$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "halved the sum by mixing up the grouping",
+    "thought more positives than negatives force divergence",
+    "",
+    "assumed rearrangement preserves the sum (valid only for absolute convergence)",
+    "doubled the sum because of two positives per negative"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Series is conditionally convergent, so rearrangement can change the sum",
+    "weight": 2
+   },
+   {
+    "text": "Partial sum $S_{3m}=H_{4m}-\\tfrac12H_{2m}-\\tfrac12H_m$",
+    "weight": 1
+   },
+   {
+    "text": "Use $H_n=\\ln n+\\gamma+o(1)$ to get $\\ln4-\\tfrac12\\ln2=\\tfrac32\\ln2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The series is conditionally convergent, so rearrangements may change the sum (series-formal).\nAfter $m$ blocks: odd terms up to $\\frac1{4m-1}$ minus even terms up to $\\frac1{2m}$: $S_{3m}=H_{4m}-\\frac12H_{2m}-\\frac12H_m$ (alt-series bookkeeping).\nWith $H_n=\\ln n+\\gamma+o(1)$ (exp-log): $S_{3m}\\to\\ln4-\\frac12\\ln2=\\frac32\\ln2$.\nThe remaining partial sums differ by terms $\\to0$.",
+  "hints": [
+   "Write the partial sum after $m$ blocks with harmonic numbers $H_n$."
+  ],
+  "check": "1.5*math.log(2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv",
+   "t3.optimize",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f_n(x)=\\dfrac{nx}{1+n^2x^2}$ on $[0,\\infty)$. Each $f_n\\to0$ pointwise. What is $\\displaystyle\\lim_{n\\to\\infty}\\sup_{x\\ge0}|f_n(x)|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac12$",
+    "$0$",
+    "$1$",
+    "$\\tfrac14$",
+    "$2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed pointwise convergence to $0$ gives uniform convergence",
+    "evaluated at $x=1/n$ and forgot to divide by the denominator $2$",
+    "mis-simplified $f_n(1/n)$ as $\\tfrac14$",
+    "mis-simplified $f_n(1/n)$ as $\\tfrac{1}{1/2}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Differentiate $f_n$ and find the maximizer $x=1/n$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $f_n(1/n)=\\tfrac12$ for every $n$",
+    "weight": 1
+   },
+   {
+    "text": "Sup does not tend to $0$, so the convergence is not uniform; limit of sups is $\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f_n'(x)=\\frac{n(1-n^2x^2)}{(1+n^2x^2)^2}$ (deriv-rules), zero at $x=\\frac1n$.\n$f_n(\\frac1n)=\\frac{1}{1+1}=\\frac12$ for all $n$ (optimize).\nSo $\\sup|f_n|=\\frac12$ for each $n$, the limit is $\\frac12\\ne0$, and $f_n\\to0$ is pointwise but not uniform (unif-conv).",
+  "hints": [
+   "Locate the peak of each $f_n$ by differentiating."
+  ],
+  "check": "Fraction(1,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv",
+   "t4.trig-int",
+   "t4.series-tests"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $F(x)=\\displaystyle\\sum_{n=1}^\\infty\\frac{\\sin nx}{n^2}$. Which value equals $\\displaystyle\\int_0^\\pi F(x)\\,dx$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\,\\zeta(3)$",
+    "$\\tfrac78\\,\\zeta(3)$",
+    "$0$",
+    "$\\tfrac74\\,\\zeta(3)$",
+    "$\\zeta(3)$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "replaced $1-(-1)^n$ by $2$ for every $n$",
+    "summed odd terms only but lost the factor $2$",
+    "used $\\sin n\\pi=0$ instead of integrating $\\sin nx$",
+    "",
+    "dropped the parity factor $1-(-1)^n$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Weierstrass M-test with $M_n=\\frac1{n^2}$ gives uniform convergence, so integrate termwise",
+    "weight": 2
+   },
+   {
+    "text": "$\\int_0^\\pi\\sin nx\\,dx=\\frac{1-(-1)^n}{n}$, giving terms $\\frac{1-(-1)^n}{n^3}$",
+    "weight": 1
+   },
+   {
+    "text": "Only odd $n$ contribute $\\frac2{n^3}$; $\\sum_{\\text{odd}}n^{-3}=\\frac78\\zeta(3)$, total $\\frac74\\zeta(3)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|\\sin nx/n^2|\\le1/n^2$, so the series converges uniformly by the M-test and may be integrated termwise (unif-conv).\n$\\int_0^\\pi\\sin nx\\,dx=\\frac{1-\\cos n\\pi}{n}=\\frac{1-(-1)^n}{n}$ (trig-int).\nSum $\\sum\\frac{1-(-1)^n}{n^3}=2\\sum_{n\\text{ odd}}\\frac1{n^3}=2\\cdot\\left(1-\\frac18\\right)\\zeta(3)=\\frac74\\zeta(3)$ (series-tests).",
+  "hints": [
+   "Justify termwise integration, then integrate $\\sin nx$ over $[0,\\pi]$."
+  ],
+  "check": "7*sum(1/k**3 for k in range(1,100000))/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open",
+   "t8.cont-eps",
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In $\\mathbb R^2$ with the usual metric, which of the following sets is open?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\{(x,y): x^2+y^2=1\\}$",
+    "$\\{(x,y): xy>1\\}$",
+    "$\\{(x,y): xy\\ge1\\}$",
+    "$\\{(x,0): x\\in\\mathbb R\\}$",
+    "$\\{(x,y): x,y\\in\\mathbb Q\\}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "closed circle, no open ball fits inside",
+    "",
+    "closed: preimage of the closed set $[1,\\infty)$",
+    "closed and has empty interior",
+    "neither open nor closed; every ball contains irrational points"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identify the set as the preimage of $(1,\\infty)$ under the continuous map $(x,y)\\mapsto xy$",
+    "weight": 2
+   },
+   {
+    "text": "Preimages of open sets under continuous maps are open",
+    "weight": 1
+   },
+   {
+    "text": "Reject the others by exhibiting a boundary point or a ball escaping the set",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$g(x,y)=xy$ is continuous (continuity), so $g^{-1}((1,\\infty))=\\{xy>1\\}$ is open (metric-open).\n$\\{xy\\ge1\\}$ is the preimage of a closed set and contains boundary points such as $(1,1)$.\nThe $x$-axis and the circle contain no open ball. $\\mathbb Q^2$ is dense with empty interior.",
+  "hints": [
+   "Write the set as a preimage under a continuous function."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open",
+   "t8.cardinality",
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In $\\mathbb R$, let $S=(0,1)\\cup\\{2\\}\\cup\\big(\\mathbb Q\\cap(3,4)\\big)$. What is the closure $\\overline S$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$[0,1]\\cup[3,4]$",
+    "$(0,1)\\cup\\{2\\}\\cup(3,4)$",
+    "$[0,1]\\cup\\{2\\}$",
+    "$[0,1]\\cup\\{2\\}\\cup(\\mathbb Q\\cap[3,4])$",
+    "$[0,1]\\cup\\{2\\}\\cup[3,4]$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "dropped the isolated point $2$, which is in $S$ and so in the closure",
+    "gave the interior-like open pieces, forgetting the limit points",
+    "dropped the closure of the rational part",
+    "kept only rationals, forgetting that closure adds the irrationals",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Closure of $(0,1)$ is $[0,1]$",
+    "weight": 2
+   },
+   {
+    "text": "Isolated point $2$ stays; rationals are dense in $(3,4)$ so closure is $[3,4]$",
+    "weight": 1
+   },
+   {
+    "text": "Union gives $[0,1]\\cup\\{2\\}\\cup[3,4]$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Closure distributes over finite unions: $\\overline S=\\overline{(0,1)}\\cup\\overline{\\{2\\}}\\cup\\overline{\\mathbb Q\\cap(3,4)}$ (metric-open).\n$\\overline{(0,1)}=[0,1]$. A single point is closed.\n$\\mathbb Q$ is dense (cardinality/real-axioms: every interval contains rationals), so the closure of $\\mathbb Q\\cap(3,4)$ is $[3,4]$.",
+  "hints": [
+   "Closure of a finite union is the union of closures."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn",
+   "t8.metric-open",
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which of the following subsets of $\\mathbb R^2$ is compact?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\{(x,\\sin(1/x)): 0<x\\le1\\}$",
+    "$\\{(x,y): |x|+|y|\\le1,\\ x\\in\\mathbb Q\\}$",
+    "$\\{(x,y): x^4+y^4\\le1\\}$",
+    "$\\{(x,y): x^2+y^2<1\\}$",
+    "$\\{(x,y): xy=1\\}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "bounded but not closed: the segment $\\{0\\}\\times[-1,1]$ is missing",
+    "bounded but not closed: irrational-$x$ limit points are missing",
+    "",
+    "bounded but not closed (open disc)",
+    "closed but unbounded"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Heine-Borel in $\\mathbb R^2$: compact $\\iff$ closed and bounded",
+    "weight": 2
+   },
+   {
+    "text": "Check boundedness and closedness of each option",
+    "weight": 1
+   },
+   {
+    "text": "Select the closed bounded set $x^4+y^4\\le1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Heine-Borel: a subset of $\\mathbb R^n$ is compact iff closed and bounded (compact-conn).\n$x^4+y^4\\le1$ is the preimage of $(-\\infty,1]$ under a continuous map (closed) and lies in $[-1,1]^2$ (bounded).\nThe open disc, the graph of $\\sin\\frac1x$ (limit points on the $y$-axis missing, seq-conv) and the rational slice are not closed. The hyperbola is unbounded.",
+  "hints": [
+   "Heine-Borel: closed and bounded."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn",
+   "t2.trig-eq",
+   "t2.unit-circle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many connected components does $\\{x\\in[0,4\\pi]:\\cos x>\\tfrac12\\}$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$2$",
+    "$4$",
+    "$1$",
+    "$5$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counted only full periods in the interior, missing the partial bump at an endpoint",
+    "counted a gap interval as a component",
+    "treated the set as one interval",
+    "double counted the endpoint pieces"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Solve $\\cos x>\\tfrac12$: $x\\in(-\\frac\\pi3,\\frac\\pi3)+2\\pi k$",
+    "weight": 2
+   },
+   {
+    "text": "Intersect with $[0,4\\pi]$: $[0,\\frac\\pi3)$, $(\\frac{5\\pi}3,\\frac{7\\pi}3)$, $(\\frac{11\\pi}3,4\\pi]$",
+    "weight": 1
+   },
+   {
+    "text": "Components are these three intervals",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\cos x>\\frac12\\iff x\\in(2\\pi k-\\frac\\pi3,2\\pi k+\\frac\\pi3)$ (trig-eq, unit-circle).\nWithin $[0,4\\pi]$: $[0,\\frac\\pi3)$, $(\\frac{5\\pi}3,\\frac{7\\pi}3)$, $(\\frac{11\\pi}3,4\\pi]$.\nThe pieces at $0$ and $4\\pi$ are half-bumps but still components. They are separated by gaps, so there are $3$ components (compact-conn).",
+  "hints": [
+   "Intersect each bump $(2\\pi k-\\pi/3,2\\pi k+\\pi/3)$ with the interval."
+  ],
+  "check": "sum(1 for i in range(0,100001) if math.cos(4*math.pi*i/100000)>.5 and (i==0 or not math.cos(4*math.pi*(i-1)/100000)>.5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.top-general",
+   "t2.logic-sets",
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "On $X=\\{a,b,c\\}$, which of the following families of subsets is a topology?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\{\\varnothing,X,\\{a,b\\},\\{b,c\\}\\}$",
+    "$\\{\\varnothing,\\{a\\},\\{b\\},\\{a,b\\}\\}$",
+    "$\\{X,\\{a\\},\\{a,b\\}\\}$",
+    "$\\{\\varnothing,X,\\{a\\},\\{a,b\\}\\}$",
+    "$\\{\\varnothing,X,\\{a\\},\\{b\\}\\}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "$\\{a,b\\}\\cap\\{b,c\\}=\\{b\\}$ is missing",
+    "$X$ is missing",
+    "$\\varnothing$ is missing",
+    "",
+    "$\\{a\\}\\cup\\{b\\}=\\{a,b\\}$ is missing"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Axioms: contains $\\varnothing$ and $X$, closed under unions and finite intersections",
+    "weight": 2
+   },
+   {
+    "text": "Test each family for a missing union, intersection, $\\varnothing$ or $X$",
+    "weight": 1
+   },
+   {
+    "text": "Only the nested chain passes",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A topology contains $\\varnothing$ and $X$ and is closed under unions and finite intersections (top-general).\nFamily 2 misses $\\{a,b\\}=\\{a\\}\\cup\\{b\\}$; family 3 misses $\\{b\\}=\\{a,b\\}\\cap\\{b,c\\}$ (logic-sets).\nFamily 4 lacks $X$; family 5 lacks $\\varnothing$.\nThe chain $\\varnothing\\subset\\{a\\}\\subset\\{a,b\\}\\subset X$ is closed under union and intersection.",
+  "hints": [
+   "Check the two closure axioms and the two required sets."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.top-general",
+   "t8.compact-conn",
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Give $\\mathbb R$ the cofinite topology: the open sets are $\\varnothing$ and the complements of finite sets. Which statement is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It is not compact and not connected",
+    "It is compact but not Hausdorff",
+    "It is compact and Hausdorff",
+    "It is Hausdorff but not compact",
+    "It is neither compact nor Hausdorff"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "no two nonempty open sets are disjoint, so $\\mathbb R$ is connected",
+    "",
+    "two nonempty open sets always intersect, so points cannot be separated",
+    "every open cover has a finite subcover",
+    "a nonempty open set already covers all but finitely many points"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Compactness: fix one nonempty member of a cover; finitely many points remain",
+    "weight": 2
+   },
+   {
+    "text": "Hausdorff fails: two nonempty open sets are cofinite and so intersect",
+    "weight": 1
+   },
+   {
+    "text": "Conclude compact and not Hausdorff",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Take an open cover and one nonempty member $U$. Its complement is finite, so finitely many other members cover the rest. Hence compact (compact-conn).\nTwo nonempty open sets are cofinite in an infinite set, so they intersect; points cannot be separated, and the space is not Hausdorff (top-general).\nIt is also connected, since no two nonempty open sets are disjoint (metric-open).",
+  "hints": [
+   "Complements of finite sets in $\\mathbb R$ are huge; two of them meet."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality",
+   "t2.logic-sets",
+   "t2.proof-methods"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which of the following sets is uncountable?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The set of all finite subsets of $\\mathbb N$",
+    "The set of real roots of nonzero polynomials with integer coefficients",
+    "$\\mathbb Q\\times\\mathbb Z$",
+    "The set of open intervals with rational endpoints",
+    "The set of all functions $f:\\mathbb N\\to\\{0,1\\}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "countable: a union over $n$ of finite sets $\\mathcal P(\\{1..n\\})$",
+    "countable: countably many polynomials, finitely many roots each",
+    "countable: product of two countable sets",
+    "countable: injects into $\\mathbb Q\\times\\mathbb Q$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Cantor diagonal argument shows binary sequences are uncountable",
+    "weight": 2
+   },
+   {
+    "text": "Each other set is a countable union of finite sets or an image of $\\mathbb Q^k$",
+    "weight": 1
+   },
+   {
+    "text": "Select the set of binary sequences",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Suppose binary sequences $s_1,s_2,\\dots$ were a complete list. Flip the diagonal: $t(n)=1-s_n(n)$ differs from every $s_n$ (proof-methods, cardinality).\nThe finite subsets of $\\mathbb N$ form a countable union over $n$ of the finite sets $\\mathcal P(\\{1,\\dots,n\\})$.\nInteger polynomials are countable, each has finitely many roots. $\\mathbb Q\\times\\mathbb Z$ and rational intervals inject into $\\mathbb Q^2$ (logic-sets).",
+  "hints": [
+   "Use the diagonal argument for one set; the others are countable unions."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality",
+   "t8.real-axioms",
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "How many of the following six sets are countable? (i) $\\mathbb Z\\times\\mathbb Q$. (ii) The real roots of nonzero polynomials with rational coefficients. (iii) The finite subsets of $\\mathbb N$. (iv) The infinite subsets of $\\mathbb N$. (v) The open intervals with rational endpoints. (vi) The set of points where a monotone function $f:\\mathbb R\\to\\mathbb R$ is discontinuous.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$2$",
+    "$5$",
+    "$4$",
+    "$6$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "miscounted two of the countable sets",
+    "miscounted three of the countable sets",
+    "",
+    "counted (vi) as uncountable; the jumps are disjoint intervals each holding a rational",
+    "counted (iv) as countable although it has the cardinality of the continuum"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Classify (i), (ii), (iii), (v) as countable by enumeration or countable unions",
+    "weight": 2
+   },
+   {
+    "text": "(iv) uncountable by diagonal argument",
+    "weight": 1
+   },
+   {
+    "text": "(vi) countable: each jump contains a distinct rational; total $5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "(i) product of countable sets. (ii) countable union of finite root sets. (iii) countable union of finite families. (v) injects into $\\mathbb Q^2$. All countable (cardinality).\n(iv) is uncountable: it contains an injective copy of binary sequences with infinitely many $1$s.\n(vi) At each jump $(f(x^-),f(x^+))$ is a nonempty open interval; these are pairwise disjoint (monotone), each contains a rational, giving an injection into $\\mathbb Q$ (cont-thms). Count: $5$.",
+  "hints": [
+   "Count (iv) separately; for (vi) assign a rational to each jump."
+  ],
+  "check": "5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples",
+   "t8.unif-conv",
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Which of the following statements is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A continuous periodic function $f:\\mathbb R\\to\\mathbb R$ is uniformly continuous",
+    "A pointwise limit of continuous functions on $[0,1]$ is continuous",
+    "If $f_n\\to f$ uniformly and each $f_n$ is differentiable, then $f$ is differentiable",
+    "If $\\sum a_n$ converges, then $\\sum a_n^2$ converges",
+    "A bounded continuous function on $\\mathbb R$ is uniformly continuous"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counterexample $x^n$ on $[0,1]$ has a discontinuous limit",
+    "counterexample $\\sqrt{x^2+1/n^2}\\to|x|$ is not differentiable at $0$",
+    "counterexample $a_n=(-1)^n/\\sqrt n$",
+    "counterexample $\\sin(x^2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Prove the periodic case: uniformly continuous on a compact period, then translate",
+    "weight": 2
+   },
+   {
+    "text": "Give a named counterexample for each false statement",
+    "weight": 1
+   },
+   {
+    "text": "Select the periodic statement",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Periodic and continuous: $f$ is uniformly continuous on the compact interval $[0,2T]$ (unif-cont). Any two points within $\\delta<T$ lie in a common translate of that interval, so one $\\delta$ works everywhere.\nFalse: $x^n$ (pointwise limit discontinuous); $\\sqrt{x^2+1/n^2}\\to|x|$ uniformly (unif-conv); $(-1)^n/\\sqrt n$ (square series diverges); $\\sin x^2$ (bounded, not uniformly continuous).",
+  "hints": [
+   "Name a standard counterexample for each tempting statement."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples",
+   "t8.compact-conn",
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "How many of the following eight statements are false? (i) Every bounded real sequence has a convergent subsequence. (ii) Every continuous function on $(0,1)$ is bounded. (iii) If $f$ is differentiable on $\\mathbb R$ with $f'$ bounded, then $f$ is uniformly continuous. (iv) If $\\sum a_n$ converges, then $a_n\\to0$. (v) If $a_n\\to0$, then $\\sum a_n$ converges. (vi) If $\\sum|a_n|$ diverges, then $\\sum a_n$ diverges. (vii) A decreasing sequence of nonempty open intervals has nonempty intersection. (viii) A decreasing sequence of nonempty compact subsets of $\\mathbb R$ has nonempty intersection.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$2$",
+    "$6$",
+    "$4$",
+    "$3$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "counted one true statement as false",
+    "missed several counterexamples",
+    "counted several true statements as false",
+    "",
+    "treated one of the false statements as true"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identify true statements: (i), (iii), (iv), (viii) by theorem (BW, MVT, divergence test, Cantor)",
+    "weight": 2
+   },
+   {
+    "text": "Identify false: (ii) $1/x$, (v) $1/n$, (vi) $(-1)^n/n$, (vii) $(0,1/n)$",
+    "weight": 1
+   },
+   {
+    "text": "Count false $=4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "True: (i) Bolzano-Weierstrass; (iii) MVT gives a Lipschitz bound; (iv) terms of a convergent series tend to $0$; (viii) nested nonempty compacta intersect (cauchy-bw, compact-conn).\nFalse: (ii) $f=1/x$; (v) $a_n=1/n$; (vi) $a_n=(-1)^n/n$ (series-formal); (vii) $(0,1/n)$ has empty intersection.\nFour false statements.",
+  "hints": [
+   "Decide each by a theorem or one standard counterexample."
+  ],
+  "check": "4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

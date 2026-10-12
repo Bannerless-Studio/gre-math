@@ -1,0 +1,1740 @@
+[
+ {
+  "id": "t6-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.matrix-ops",
+   "t2.seq-series",
+   "t2.unit-circle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$. Find the sum of all four entries of the matrix $I+A+A^2+\\cdots+A^{2025}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$-2$",
+    "$4$",
+    "$2$",
+    "$506$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "assumed the 2026 terms split into whole cycles of four, ignoring the two leftover terms",
+    "took the leftover terms as $A^2+A^3=-I-A$ instead of $A^{2024}+A^{2025}$",
+    "summed absolute values of the entries of $I+A$",
+    "",
+    "reported the number of full four-term cycles"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Find $A^2=-I$ and $A^4=I$, so powers repeat with period $4$",
+    "weight": 2
+   },
+   {
+    "text": "Group the $2026$ terms: $506$ full cycles each summing to $0$, plus two leftover terms",
+    "weight": 2
+   },
+   {
+    "text": "Leftover $=A^{2024}+A^{2025}=I+A$, whose entries sum to $2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$A^2=-I$, so $A^4=I$ and $I+A+A^2+A^3=0$ (matrix-ops, periodicity as in a rotation by $90^\\circ$).\nThere are $2026=4\\cdot506+2$ terms, so $506$ complete cycles contribute $0$.\nThe leftover terms are $A^{2024}+A^{2025}=I+A=\\begin{pmatrix}1&1\\\\-1&1\\end{pmatrix}$.\nEntry sum $=1+1-1+1=2$.",
+  "hints": [
+   "Find the smallest $n$ with $A^n=I$ and group terms into blocks of that length."
+  ],
+  "check": "sum((2,0,-2,0)[k%4] for k in range(2026))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.matrix-ops",
+   "t2.sigma-binom",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $P=\\begin{pmatrix}2&-2\\\\1&-1\\end{pmatrix}$. Find $\\operatorname{tr}\\big((I+P)^6\\big)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$65$",
+    "$63$",
+    "$66$",
+    "$8$",
+    "$128$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "dropped the identity term and took the trace of $(2^6-1)P$ only",
+    "wrote $(I+P)^6=I+2^6P$, using $2^6$ instead of $2^6-1$",
+    "linearised: $(I+P)^6\\approx I+6P$",
+    "treated $I+P$ as $2I$ and took the trace of $2^6I$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Verify $P^2=P$ by direct multiplication",
+    "weight": 2
+   },
+   {
+    "text": "Binomial expansion with all $P^k=P$: $(I+P)^6=I+(2^6-1)P$",
+    "weight": 2
+   },
+   {
+    "text": "$\\operatorname{tr}I=2$ and $\\operatorname{tr}P=1$ give $2+63=65$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$P^2=\\begin{pmatrix}4-2&-4+2\\\\2-1&-2+1\\end{pmatrix}=P$, so $P$ is idempotent (matrix-ops).\n$I$ and $P$ commute, so the binomial theorem applies: $(I+P)^6=\\sum_k\\binom6kP^k$ (sigma-binom).\nEvery $P^k=P$ for $k\\ge1$, so $(I+P)^6=I+(2^6-1)P=I+63P$ (exp-rules for $2^6$).\n$\\operatorname{tr}=2+63\\cdot(2-1)=65$.",
+  "hints": [
+   "Compute $P^2$ first; if it equals $P$, every higher power collapses."
+  ],
+  "check": "2+(2**6-1)*(2-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.gauss",
+   "t1.sys-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For real $k,m$ the system $x+y+z=1,\\ x+2y+3z=3,\\ 2x+3y+kz=m$ has infinitely many solutions for exactly one pair $(k,m)$. Find $k+m$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$6$",
+    "$8$",
+    "$16$",
+    "$9$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "stopped after clearing only the first column, reading off $k-2=0$ and $m-2=0$",
+    "found $k=4$ but forgot the second-row constant became $2$, so got $m=2$",
+    "",
+    "reported $km$ instead of $k+m$",
+    "used constant $1$ rather than $2$ when subtracting row 2, giving $m=5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Eliminate $x$: rows $y+2z=2$ and $y+(k-2)z=m-2$",
+    "weight": 2
+   },
+   {
+    "text": "Eliminate $y$: $(k-4)z=m-4$",
+    "weight": 2
+   },
+   {
+    "text": "Free variable iff $k=4$ and $m=4$, so $k+m=8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Row ops (gauss): $R_2-R_1$ gives $y+2z=2$; $R_3-2R_1$ gives $y+(k-2)z=m-2$.\nSubtract again: $(k-4)z=m-4$.\nA free variable (infinitely many solutions) needs $0\\cdot z=0$, so $k=4$, $m=4$.\nIf $k=4$ and $m\\ne4$ there is no solution, which is why the pair is unique.",
+  "hints": [
+   "Eliminate one variable at a time and look at the last row."
+  ],
+  "check": "4+4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.gauss",
+   "t6.rank-nullity"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $A_k=\\begin{pmatrix}1&1&1&1\\\\1&2&3&4\\\\2&3&4&k\\\\0&1&2&3\\end{pmatrix}$ and let $\\nu(k)$ be the nullity of $A_k$. Find $\\sum_{k=1}^{10}\\nu(k)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$29$",
+    "$12$",
+    "$9$",
+    "$11$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "assumed nullity $1$ for every $k$",
+    "summed the ranks instead of the nullities",
+    "took nullity $3$ at the special value of $k$",
+    "left out the special value of $k$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Row reduce and notice row 4 equals row 2 minus row 1",
+    "weight": 2
+   },
+   {
+    "text": "Reduce row 3 to $(0,0,0,k-5)$: rank $3$ unless $k=5$, where rank is $2$",
+    "weight": 2
+   },
+   {
+    "text": "Nullity $=4-$rank: nine values give $1$, $k=5$ gives $2$; total $11$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$R_2-R_1=(0,1,2,3)=R_4$, so $R_4$ is redundant (gauss).\n$R_3-2R_1=(0,1,2,k-2)$; subtracting $(0,1,2,3)$ leaves $(0,0,0,k-5)$.\nRank $=3$ for $k\\ne5$ and $2$ for $k=5$.\nRank-nullity: $\\nu=4-\\operatorname{rank}$, so $\\nu=1$ for nine values and $2$ once: $9+2=11$.",
+  "hints": [
+   "Look for a row that is a difference of two others before eliminating."
+  ],
+  "check": "sum(4-(3 if k!=5 else 2) for k in range(1,11))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.determinant",
+   "t1.factor",
+   "t6.inverse"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $V$ be the $4\\times4$ matrix with entries $V_{ij}=x_i^{\\,j-1}$ for $(x_1,x_2,x_3,x_4)=(1,2,3,5)$. Find $\\det\\!\\big(-2V^{-1}\\big)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\frac{1}{24}$",
+    "$\\frac{1}{3}$",
+    "$768$",
+    "$\\frac{1}{48}$",
+    "$16$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "pulled out the scalar $-2$ once instead of raising it to the fourth power",
+    "",
+    "used $\\det V$ instead of $\\det V^{-1}$, giving $(-2)^4\\cdot48$",
+    "dropped the scalar factor",
+    "kept the scalar factor $(-2)^4$ and forgot the determinant"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Recognise a Vandermonde matrix: $\\det V=\\prod_{i<j}(x_j-x_i)=48$",
+    "weight": 2
+   },
+   {
+    "text": "$\\det(cM)=c^n\\det M$ with $n=4$ gives $(-2)^4=16$",
+    "weight": 1
+   },
+   {
+    "text": "$\\det V^{-1}=\\tfrac1{48}$, so the answer is $\\tfrac{16}{48}=\\tfrac13$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$V$ is a Vandermonde matrix, so $\\det V=\\prod_{i<j}(x_j-x_i)=1\\cdot2\\cdot4\\cdot1\\cdot3\\cdot2=48$ (determinant, factored differences).\n$\\det(-2V^{-1})=(-2)^4\\det(V^{-1})$ because the matrix is $4\\times4$.\n$\\det(V^{-1})=1/\\det V$ (inverse), so the result is $16/48=1/3$.",
+  "hints": [
+   "Pull a scalar out of every row, not once."
+  ],
+  "check": "(lambda xs: Fraction((-2)**4)/math.prod(xs[j]-xs[i] for i in range(4) for j in range(i+1,4)))((1,2,3,5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.determinant",
+   "t2.seq-series",
+   "t2.induction"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $T$ be the $5\\times5$ matrix with $3$ on the diagonal, $1$ on the sub- and superdiagonals, and $0$ elsewhere. Find $\\det T$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$243$",
+    "$360$",
+    "$89$",
+    "$144$",
+    "$233$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "took the product of the diagonal entries",
+    "used $D_n=3D_{n-1}+D_{n-2}$, a sign error in the recurrence",
+    "stopped one step early in the recurrence",
+    "",
+    "ran the recurrence one step too far"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Expand along the first row to get $D_n=3D_{n-1}-D_{n-2}$",
+    "weight": 2
+   },
+   {
+    "text": "Initial values $D_1=3$, $D_2=8$",
+    "weight": 1
+   },
+   {
+    "text": "Iterate $D_3=21$, $D_4=55$, $D_5=144$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Expand along the first row: $D_n=3D_{n-1}-1\\cdot1\\cdot D_{n-2}$ (determinant; the minor is again tridiagonal).\n$D_1=3$, $D_2=9-1=8$.\n$D_3=24-3=21$, $D_4=63-8=55$, $D_5=165-21=144$ (sequence recurrence).",
+  "hints": [
+   "Expand along the first row and recognise a smaller matrix of the same shape."
+  ],
+  "check": "(lambda f: f(f,5))(lambda f,n: 1 if n==0 else 3 if n==1 else 3*f(f,n-1)-f(f,n-2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.inverse",
+   "t6.gauss",
+   "t6.determinant"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=\\begin{pmatrix}1&0&1\\\\1&1&0\\\\0&1&1\\end{pmatrix}$. Find the sum of all nine entries of $A^{-1}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{3}{2}$",
+    "$3$",
+    "$2$",
+    "$\\frac{1}{2}$",
+    "$\\frac{9}{2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "summed the adjugate entries and did not divide by $\\det A$",
+    "reported $\\det A$",
+    "summed a single row of the inverse instead of all nine entries",
+    "dropped the checkerboard cofactor signs"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "The entry sum equals $\\mathbf 1^{T}A^{-1}\\mathbf 1$",
+    "weight": 1
+   },
+   {
+    "text": "$A\\mathbf 1=2\\cdot\\mathbf 1$, so $A^{-1}\\mathbf 1=\\tfrac12\\mathbf 1$",
+    "weight": 2
+   },
+   {
+    "text": "Sum $=3\\cdot\\tfrac12=\\tfrac32$ (cross-check with $\\det A=2$ and adjugate)",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Sum of entries of $A^{-1}$ is $\\mathbf 1^TA^{-1}\\mathbf 1$ (inverse acting on the all-ones vector).\nEvery row of $A$ sums to $2$, so $A\\mathbf 1=2\\cdot\\mathbf 1$ and hence $A^{-1}\\mathbf 1=\\tfrac12\\mathbf 1$ (gauss: one-line solve).\nThen $\\mathbf 1^TA^{-1}\\mathbf 1=\\tfrac12\\cdot3=\\tfrac32$.\nCheck: $\\det A=2$, signed adjugate entries sum to $3$, and $3/2$ agrees.",
+  "hints": [
+   "Apply $A$ to the all-ones vector."
+  ],
+  "check": "3*Fraction(1,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.inverse",
+   "t6.determinant",
+   "t6.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $A=\\begin{pmatrix}2&-1&0\\\\-1&2&-1\\\\0&-1&2\\end{pmatrix}$. Find the $(1,2)$ entry of $A^{-1}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\frac{1}{2}$",
+    "$2$",
+    "$\\frac{1}{2}$",
+    "$\\frac{1}{4}$",
+    "$\\frac{3}{4}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "omitted the cofactor sign $(-1)^{1+2}$",
+    "took the cofactor and forgot to divide by $\\det A$",
+    "",
+    "read off the $(1,3)$ entry",
+    "read off the $(1,1)$ entry"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\det A=4$",
+    "weight": 1
+   },
+   {
+    "text": "Cofactor $C_{21}=(-1)^{2+1}\\det\\begin{pmatrix}-1&0\\\\-1&2\\end{pmatrix}=2$",
+    "weight": 2
+   },
+   {
+    "text": "$(A^{-1})_{12}=C_{21}/\\det A=\\tfrac12$ (note the transposed index)",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\det A=2(4-1)+1\\cdot(-2)=4$ (determinant).\n$(A^{-1})_{ij}=C_{ji}/\\det A$ (adjugate is the transposed cofactor matrix), so use $C_{21}$.\n$C_{21}=-\\det\\begin{pmatrix}-1&0\\\\-1&2\\end{pmatrix}=-(-2)=2$.\n$(A^{-1})_{12}=2/4=\\tfrac12$.",
+  "hints": [
+   "Entry $(i,j)$ of the inverse uses the cofactor at $(j,i)$."
+  ],
+  "check": "Fraction(-((-1)*2-0*(-1)),2*(2*2-(-1)*(-1))-(-1)*((-1)*2-(-1)*0)+0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.vector-spaces",
+   "t6.basis-dim",
+   "t6.rank-nullity"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In $\\mathbb R^6$ let $U=\\{x:\\ x_1+x_2+x_3=0,\\ x_4=x_5\\}$ and $V=\\{x:\\ x_1=x_2=x_3,\\ x_5=x_6\\}$. Find $\\dim(U\\cap V)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$2$",
+    "$3$",
+    "$4$",
+    "$1$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "also forced $x_4=0$",
+    "used $\\dim U+\\dim V-5$",
+    "reported $\\dim V$",
+    "reported $\\dim U$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Count constraints: $\\dim U=6-2=4$ and $\\dim V=6-3=3$",
+    "weight": 1
+   },
+   {
+    "text": "Combine: $x_1=x_2=x_3=a$ and $3a=0$ force $x_1=x_2=x_3=0$",
+    "weight": 2
+   },
+   {
+    "text": "Remaining $x_4=x_5=x_6$: one free parameter, so dimension $1$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$U$ has two independent constraints, so $\\dim U=4$; $V$ has three, so $\\dim V=3$ (basis-dim).\nOn $U\\cap V$: $x_1=x_2=x_3=a$ and $3a=0$, so $a=0$.\nThen $x_4=x_5$ (from $U$) and $x_5=x_6$ (from $V$): one free parameter.\nCheck by $\\dim(U+V)=4+3-1=6=\\dim\\mathbb R^6$ (rank-nullity).",
+  "hints": [
+   "Write both subspaces as constraints on one vector and count free parameters."
+  ],
+  "check": "4+3-6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.vector-spaces",
+   "t2.logic-sets",
+   "t2.proof-methods"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many of these five subsets of $\\mathbb R^3$ are subspaces? $S_1=\\{x+y+z=0\\}$, $S_2=\\{x+y+z=1\\}$, $S_3=\\{xy=0\\}$, $S_4=\\{x^2+y^2+z^2=0\\}$, $S_5=\\{x=z,\\ y=2x\\}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$3$",
+    "$4$",
+    "$1$",
+    "$5$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "rejected $S_4$ because it is a single point",
+    "",
+    "accepted $S_3$ because it is closed under scalar multiplication",
+    "accepted only $S_1$",
+    "accepted $S_2$ without checking that it contains the origin"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$S_1$ and $S_5$ are solution sets of homogeneous linear equations, so subspaces",
+    "weight": 1
+   },
+   {
+    "text": "$S_2$ lacks $0$; $S_3$ fails addition: $e_1+e_2\\notin S_3$",
+    "weight": 2
+   },
+   {
+    "text": "$S_4=\\{0\\}$ over $\\mathbb R$, the trivial subspace; total $3$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$S_1,S_5$ are kernels of linear maps, hence subspaces (vector-spaces).\n$S_2$ excludes the origin, so it fails the zero-vector test.\n$S_3$: $(1,0,0)+(0,1,0)=(1,1,0)$ has $xy=1\\ne0$, so addition fails (a counterexample proof).\n$S_4=\\{(0,0,0)\\}$ is a subspace. Count: $S_1,S_4,S_5$, so $3$.",
+  "hints": [
+   "Test the zero vector, then addition and scaling, on each set."
+  ],
+  "check": "sum((True,False,False,True,True))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.basis-dim",
+   "t6.determinant",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $v_1=(1,2,3)$, $v_2=(2,k,6)$, $v_3=(1,1,k)$ in $\\mathbb R^3$. Let $K$ be the set of real $k$ for which $v_1,v_2,v_3$ do not span $\\mathbb R^3$. Find the sum of the elements of $K$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$3$",
+    "$-7$",
+    "$7$",
+    "$4$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "reported the product of the roots",
+    "found only the root $k=3$",
+    "took the sign of the linear coefficient as the sum of roots",
+    "",
+    "found only the root $k=4$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Three vectors fail to span exactly when the determinant vanishes",
+    "weight": 1
+   },
+   {
+    "text": "$\\det=1(k^2-6)-2(2k-6)+3(2-k)=k^2-7k+12$",
+    "weight": 2
+   },
+   {
+    "text": "Factor $(k-3)(k-4)$: $K=\\{3,4\\}$, sum $7$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Three vectors in $\\mathbb R^3$ span iff the determinant is nonzero (basis-dim).\n$\\det=1\\cdot(k\\cdot k-6)-2(2k-6)+3(2-k)=k^2-7k+12$.\nFactor (factor): $(k-3)(k-4)=0$, so $K=\\{3,4\\}$ and the sum is $7$.",
+  "hints": [
+   "A square set of vectors spans exactly when its determinant is nonzero."
+  ],
+  "check": "sum(k for k in range(-20,21) if 1*(k*k-6)-2*(2*k-6)+3*(2-k)==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.basis-dim",
+   "t6.vector-spaces",
+   "t1.func-basics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In the space $P_3$ of real polynomials of degree at most $3$, let $S=\\operatorname{span}\\{1+x,\\ x+x^2,\\ x^2+x^3,\\ 1+x^3\\}$ and $W=\\{p\\in P_3:\\ p(1)=0\\}$. Find $\\dim(S\\cap W)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$3$",
+    "$1$",
+    "$4$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "found $\\dim S=3$ but forgot to impose $p(1)=0$",
+    "imposed $p(1)=0$ and also removed a second dimension for the redundant generator",
+    "counted four independent generators",
+    "assumed no nonzero element of $S$ vanishes at $1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Coordinates $(1,x,x^2,x^3)$: $(1+x)-(x+x^2)+(x^2+x^3)=1+x^3$, so $\\dim S=3$",
+    "weight": 2
+   },
+   {
+    "text": "$p(1)$ is a nonzero linear functional on $S$: each generator gives $p(1)=2$",
+    "weight": 2
+   },
+   {
+    "text": "Kernel of a nonzero functional drops dimension by one: $3-1=2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Let $a=1+x$, $b=x+x^2$, $c=x^2+x^3$, $d=1+x^3$. Then $a-b+c=d$, so $\\dim S=3$ with basis $a,b,c$ (basis-dim).\nEvaluation at $1$ sends $a,b,c$ to $2,2,2$, so $\\alpha a+\\beta b+\\gamma c\\in W$ iff $\\alpha+\\beta+\\gamma=0$ (func-basics).\nThat is one independent linear condition on a $3$-dimensional space, so $\\dim(S\\cap W)=2$.",
+  "hints": [
+   "Look for a dependency among the four generators before imposing the condition."
+  ],
+  "check": "3-1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rank-nullity",
+   "t6.lin-maps",
+   "t6.vector-spaces"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$A$ is a real $5\\times7$ matrix of rank $3$, and $B$ is a real $7\\times6$ matrix with $AB=0$. What is the largest possible rank of $B$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$6$",
+    "$4$",
+    "$2$",
+    "$7$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "capped the rank of $B$ by the rank of $A$",
+    "used the number of columns of $B$",
+    "",
+    "computed $7-5$ from the row count",
+    "used the number of rows of $B$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$AB=0$ means every column of $B$ lies in $\\ker A$, so $\\operatorname{col}B\\subseteq\\ker A$",
+    "weight": 2
+   },
+   {
+    "text": "Rank-nullity: $\\dim\\ker A=7-3=4$",
+    "weight": 2
+   },
+   {
+    "text": "So $\\operatorname{rank}B\\le\\min(6,4)=4$, attained with columns spanning $\\ker A$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$AB=0$ forces $\\operatorname{col}(B)\\subseteq\\ker A$ (linear map view).\nRank-nullity for $A:\\mathbb R^7\\to\\mathbb R^5$: $\\dim\\ker A=7-3=4$.\nSo $\\operatorname{rank}B\\le 4$; $B$ has $6$ columns, enough to span $\\ker A$, so $4$ is attained.",
+  "hints": [
+   "Where must the columns of $B$ live?"
+  ],
+  "check": "min(6,7-3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rank-nullity",
+   "t6.jordan-nilpotent",
+   "t6.lin-maps"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A real $7\\times7$ matrix $N$ satisfies $N^3=0$. What is the largest possible value of $\\operatorname{rank}N$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$5$",
+    "$6$",
+    "$2$",
+    "$4$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "solved the $N^2=0$ case",
+    "assumed two Jordan blocks are enough",
+    "allowed a single Jordan block of size $7$",
+    "computed $7-5$ with a guessed nullity",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Let $k=\\dim\\ker N$; each step of $N$ adds at most $k$ to the kernel: $\\dim\\ker N^3\\le3k$",
+    "weight": 2
+   },
+   {
+    "text": "$N^3=0$ means $\\dim\\ker N^3=7$, so $3k\\ge7$ and $k\\ge3$",
+    "weight": 2
+   },
+   {
+    "text": "$\\operatorname{rank}N=7-k\\le4$, attained by blocks of sizes $3,3,1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Let $k=\\dim\\ker N$. The kernels grow by at most $k$ each step: $\\dim\\ker N^{j+1}\\le\\dim\\ker N^j+k$ (rank-nullity on $N$ restricted to $\\ker N^{j+1}$).\n$N^3=0$ gives $7=\\dim\\ker N^3\\le3k$, so $k\\ge3$.\nHence $\\operatorname{rank}N=7-k\\le4$.\nJordan blocks of sizes $3,3,1$ give $N^3=0$ with rank $2+2+0=4$ (nilpotent structure).",
+  "hints": [
+   "Bound how fast $\\dim\\ker N^j$ can grow."
+  ],
+  "check": "7-(-(-7//3))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.lin-maps",
+   "t3.deriv-def",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $P_4$ be the real polynomials of degree at most $4$, and define $T:P_4\\to P_4$ by $(Tp)(x)=p(x+1)-p(x)$. Find $\\operatorname{rank}(T^2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$3$",
+    "$2$",
+    "$1$",
+    "$5$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used $\\operatorname{rank}T$ in place of $\\operatorname{rank}T^2$",
+    "",
+    "reported the nullity of $T^2$",
+    "assumed each application removes two dimensions",
+    "assumed $T$ is invertible"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$T$ lowers the degree by exactly one: leading term $ax^n\\mapsto nax^{n-1}+\\cdots$",
+    "weight": 2
+   },
+   {
+    "text": "$\\ker T=$ constants, so $\\operatorname{im}T=P_3$, and $\\ker T^2=P_1$ (dimension $2$)",
+    "weight": 2
+   },
+   {
+    "text": "Rank-nullity on $P_4$: $\\operatorname{rank}T^2=5-2=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "By the binomial theorem, $(x+1)^n-x^n=nx^{n-1}+\\cdots$, so $T$ lowers degree by exactly one (difference quotient idea).\n$\\ker T=P_0$; $T^2$ lowers degree by two, so $\\ker T^2=P_1$ with $\\dim=2$.\nRank-nullity on the $5$-dimensional $P_4$: $\\operatorname{rank}T^2=5-2=3$.",
+  "hints": [
+   "Track what $T$ does to the degree of a polynomial."
+  ],
+  "check": "5-2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.lin-maps",
+   "t5.vec-ops",
+   "t6.inner-product"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $n=(1,2,2)$ and define $T(v)=v-\\dfrac{v\\cdot n}{n\\cdot n}\\,n$ on $\\mathbb R^3$. Find $\\|T(3,0,0)\\|^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9$",
+    "$1$",
+    "$10$",
+    "$8$",
+    "$3$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "reported $\\|v\\|^2$",
+    "reported the squared length of the removed component",
+    "added the squared lengths instead of subtracting",
+    "",
+    "reported $\\|v\\|$ and not the squared norm of $T(v)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Recognise $T$ as the orthogonal projection onto $n^{\\perp}$",
+    "weight": 1
+   },
+   {
+    "text": "$v\\cdot n=3$, $n\\cdot n=9$, so subtract $\\tfrac13n=(\\tfrac13,\\tfrac23,\\tfrac23)$",
+    "weight": 2
+   },
+   {
+    "text": "$T(v)=(\\tfrac83,-\\tfrac23,-\\tfrac23)$, squared norm $\\tfrac{72}{9}=8$ (or $9-1$)",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$T$ removes the component along $n$, so it is the projection onto $n^{\\perp}$ (linear map).\n$v=(3,0,0)$: $v\\cdot n=3$, $n\\cdot n=9$, so subtract $\\tfrac13(1,2,2)$ (dot product).\n$T(v)=(\\tfrac83,-\\tfrac23,-\\tfrac23)$ and $\\|T(v)\\|^2=\\tfrac{64+4+4}{9}=8$.\nCheck by Pythagoras: $\\|v\\|^2-\\|\\text{removed part}\\|^2=9-1=8$.",
+  "hints": [
+   "Use Pythagoras: the squared length splits into projection and remainder."
+  ],
+  "check": "Fraction(64+4+4,9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.change-basis",
+   "t6.inverse",
+   "t6.lin-maps"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$ be the matrix of a linear map $T$ in the standard basis of $\\mathbb R^2$, and let $\\mathcal B=\\{(1,1),(1,2)\\}$. What is the $(1,1)$ entry of $[T]_{\\mathcal B}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-1$",
+    "$2$",
+    "$-2$",
+    "$3$",
+    "$1$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "computed $PAP^{-1}$ instead of $P^{-1}AP$",
+    "computed $P^{-1}AP^{-1}$",
+    "read the first standard coordinate of $T(b_1)=(3,7)$ without converting basis",
+    "kept the standard-basis entry $A_{11}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$[T]_{\\mathcal B}=P^{-1}AP$ with $P$ having the basis vectors as columns",
+    "weight": 2
+   },
+   {
+    "text": "$P^{-1}=\\begin{pmatrix}2&-1\\\\-1&1\\end{pmatrix}$",
+    "weight": 1
+   },
+   {
+    "text": "$[T]_{\\mathcal B}=\\begin{pmatrix}-1&-1\\\\4&6\\end{pmatrix}$, so the entry is $-1$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$P=\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix}$, $[T]_{\\mathcal B}=P^{-1}AP$ (change of basis).\n$P^{-1}=\\begin{pmatrix}2&-1\\\\-1&1\\end{pmatrix}$ (inverse of a $2\\times2$).\n$AP=\\begin{pmatrix}3&5\\\\7&11\\end{pmatrix}$ and $P^{-1}AP=\\begin{pmatrix}-1&-1\\\\4&6\\end{pmatrix}$.\nDirect check: $T(b_1)=(3,7)=-1\\cdot b_1+4\\cdot b_2$.",
+  "hints": [
+   "The first column of $[T]_{\\mathcal B}$ is $T(b_1)$ written in the basis $\\mathcal B$."
+  ],
+  "check": "3-(7-3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.change-basis",
+   "t6.eigen-2x2",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The real $2\\times2$ matrix $A$ is similar to $B=\\begin{pmatrix}5&-6\\\\2&-2\\end{pmatrix}$. Find $\\det(A^2+I)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$6$",
+    "$10$",
+    "$9$",
+    "$4$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "used additivity: $\\det(A^2)+\\det I=4+1$",
+    "computed $\\det(A+I)$ and forgot to square",
+    "",
+    "computed $\\operatorname{tr}(A^3)$",
+    "computed $\\det(A^2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Similar matrices share the characteristic polynomial: $\\lambda^2-3\\lambda+2$, eigenvalues $1,2$",
+    "weight": 2
+   },
+   {
+    "text": "$A^2+I$ has eigenvalues $1^2+1=2$ and $2^2+1=5$",
+    "weight": 2
+   },
+   {
+    "text": "Determinant is the product of eigenvalues: $10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Trace $3$, determinant $-10+12=2$, so $\\lambda^2-3\\lambda+2=(\\lambda-1)(\\lambda-2)$ (quadratic).\nSimilarity preserves eigenvalues, so $A$ has eigenvalues $1,2$ (change of basis).\nPolynomials act on eigenvalues: $A^2+I$ has eigenvalues $2,5$.\n$\\det(A^2+I)=2\\cdot5=10$.",
+  "hints": [
+   "Similar matrices have the same eigenvalues."
+  ],
+  "check": "(1**2+1)*(2**2+1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.eigen-2x2",
+   "t6.determinant",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=\\begin{pmatrix}1&4\\\\2&3\\end{pmatrix}$. Find $\\det(A^2-2A)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$18$",
+    "$15$",
+    "$35$",
+    "$9$",
+    "$45$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "reported the trace of $A^2-2A$",
+    "reported the larger eigenvalue of $A^2-2A$",
+    "used $(\\det A-2)\\det A$, subtracting $2$ from the determinant",
+    "reported only $|\\det(A-2I)|$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Factor $A^2-2A=A(A-2I)$, so the determinant is $\\det A\\cdot\\det(A-2I)$",
+    "weight": 2
+   },
+   {
+    "text": "$\\det A=3-8=-5$ and $\\det(A-2I)=-1-8=-9$",
+    "weight": 2
+   },
+   {
+    "text": "Product $=45$ (eigenvalues $5,-1$ give $15\\cdot3$)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$A^2-2A=A(A-2I)$ (factor), and $\\det$ is multiplicative.\n$\\det A=1\\cdot3-4\\cdot2=-5$.\n$A-2I=\\begin{pmatrix}-1&4\\\\2&1\\end{pmatrix}$, $\\det=-1-8=-9$.\nProduct: $(-5)(-9)=45$. Eigenvalue check: $\\lambda=5,-1$ give $\\lambda(\\lambda-2)=15,3$, product $45$.",
+  "hints": [
+   "Factor out $A$ before taking the determinant."
+  ],
+  "check": "(1*3-4*2)*((1-2)*(3-2)-4*2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.eigen-2x2",
+   "t1.quad",
+   "t1.abs-ineq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For each integer $k$ with $-10\\le k\\le20$, consider $M_k=\\begin{pmatrix}1&k\\\\2&4\\end{pmatrix}$. For how many such $k$ does $M_k$ have non-real eigenvalues?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$9$",
+    "$19$",
+    "$22$",
+    "$12$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "included $k=-1$, miscomputing its discriminant as negative",
+    "",
+    "used $\\det=4+2k$, flipping the sign, and counted $k\\ge2$",
+    "counted the real-eigenvalue cases",
+    "counted the real cases under the flipped-sign discriminant"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Characteristic polynomial $\\lambda^2-5\\lambda+(4-2k)$",
+    "weight": 1
+   },
+   {
+    "text": "Discriminant $25-4(4-2k)=9+8k$",
+    "weight": 2
+   },
+   {
+    "text": "Non-real iff $9+8k<0$, i.e. $k\\le-2$: $k=-10,\\dots,-2$ gives $9$ values",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\operatorname{tr}M_k=5$, $\\det M_k=4-2k$, so the discriminant is $25-4(4-2k)=9+8k$ (quadratic discriminant).\nNon-real eigenvalues need $9+8k<0$, i.e. $k<-\\tfrac98$ (inequality).\nIntegers $-10\\le k\\le-2$: $9$ values. At $k=-1$ the discriminant is $1>0$.",
+  "hints": [
+   "Compute the discriminant of the characteristic polynomial."
+  ],
+  "check": "sum(1 for k in range(-10,21) if (1+4)**2-4*(1*4-k*2)<0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.diagonalize",
+   "t6.eigen-2x2",
+   "t2.seq-series"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$. Find the $(1,1)$ entry of $A^5$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1024$",
+    "$3125$",
+    "$1063$",
+    "$2094$",
+    "$3157$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "raised the entry $A_{11}=4$ to the fifth power",
+    "used only the dominant eigenvalue, $5^5$",
+    "swapped the eigenvalue weights, using $(5^5+2\\cdot2^5)/3$",
+    "",
+    "used $5^5+2^5$ without the projector weights"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Eigenvalues $5$ and $2$ (trace $7$, determinant $10$) with eigenvectors $(1,1)$ and $(1,-2)$",
+    "weight": 2
+   },
+   {
+    "text": "$A^n=PD^nP^{-1}$, i.e. $A^n=5^n E_1+2^n E_2$ with the spectral projectors",
+    "weight": 1
+   },
+   {
+    "text": "$(A^5)_{11}=\\dfrac{2\\cdot5^5+2^5}{3}=2094$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Trace $7$, determinant $10$, so eigenvalues $5,2$; eigenvectors $(1,1)$ and $(1,-2)$ (diagonalize).\n$P=\\begin{pmatrix}1&1\\\\1&-2\\end{pmatrix}$, $P^{-1}=\\tfrac13\\begin{pmatrix}2&1\\\\1&-1\\end{pmatrix}$.\n$(A^n)_{11}=\\tfrac13(2\\cdot5^n+2^n)$ (closed form of the sequence).\n$n=5$: $(6250+32)/3=2094$.",
+  "hints": [
+   "Write $A^n$ as $PD^nP^{-1}$."
+  ],
+  "check": "(lambda f: f(f,5))(lambda f,n: (1,0,0,1) if n==0 else (lambda m: (4*m[0]+1*m[2],4*m[1]+1*m[3],2*m[0]+3*m[2],2*m[1]+3*m[3]))(f(f,n-1)))[0]",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.diagonalize",
+   "t6.rank-nullity",
+   "t6.jordan-nilpotent"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For $a\\in\\{0,1,2\\}$ and $b\\in\\{0,1,2,3\\}$ let $M_{a,b}=\\begin{pmatrix}2&a&0&0\\\\0&2&0&0\\\\0&0&2&b\\\\0&0&0&3\\end{pmatrix}$. For how many of the $12$ pairs $(a,b)$ is $M_{a,b}$ diagonalizable?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$3$",
+    "$1$",
+    "$6$",
+    "$12$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "required $b=0$ rather than $a=0$",
+    "demanded $a=b=0$",
+    "accepted the pairs with $a=0$ or $b=0$",
+    "assumed distinct-looking eigenvalue structure always diagonalizes"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Eigenvalue $2$ has algebraic multiplicity $3$, eigenvalue $3$ has multiplicity $1$",
+    "weight": 1
+   },
+   {
+    "text": "Diagonalizable iff $\\dim\\ker(M-2I)=3$, i.e. $\\operatorname{rank}(M-2I)=1$",
+    "weight": 2
+   },
+   {
+    "text": "$\\operatorname{rank}(M-2I)=1+[a\\neq0]$ independent of $b$ (the $b$ row is a multiple of $(0,0,0,1)$): $a=0$, so $4$ pairs",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Eigenvalues $2,2,2,3$ (upper triangular).\nDiagonalizable iff the eigenvalue $2$ has a $3$-dimensional eigenspace, i.e. $\\operatorname{rank}(M-2I)=1$ (rank-nullity).\nRows of $M-2I$: $(0,a,0,0)$, $0$, $(0,0,0,b)$, $(0,0,0,1)$. The $b$ row is a multiple of the last row, so rank $=1+[a\\ne0]$.\nNeed $a=0$ (a nilpotent $2\\times2$ block otherwise); $b$ is free. Count $=4$.",
+  "hints": [
+   "Only the eigenspace for the repeated eigenvalue can fail to be large enough."
+  ],
+  "check": "sum(1 for a in range(3) for b in range(4) if 1+(a!=0)==1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.cayley-ham",
+   "t6.eigen-2x2",
+   "t2.seq-series"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=\\begin{pmatrix}1&2\\\\3&0\\end{pmatrix}$. Find $\\operatorname{tr}(A^6)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$729$",
+    "$665$",
+    "$793$",
+    "$-143$",
+    "$64$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "used only the dominant eigenvalue, $3^6$",
+    "computed $3^6-2^6$, taking the second eigenvalue as $+2$ with a sign slip",
+    "",
+    "used $t_n=t_{n-1}-6t_{n-2}$, a sign error in the recurrence",
+    "used only the other eigenvalue, $(-2)^6$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Characteristic polynomial $\\lambda^2-\\lambda-6$, so $A^2=A+6I$ by Cayley--Hamilton",
+    "weight": 2
+   },
+   {
+    "text": "Traces $t_n=\\operatorname{tr}A^n$ satisfy $t_n=t_{n-1}+6t_{n-2}$, $t_0=2$, $t_1=1$",
+    "weight": 1
+   },
+   {
+    "text": "Iterate to $t_6=793$; cross-check with eigenvalues $3,-2$: $729+64$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\operatorname{tr}A=1$, $\\det A=-6$, so $A^2=A+6I$ (Cayley-Hamilton).\nMultiply by $A^{n-2}$ and take traces: $t_n=t_{n-1}+6t_{n-2}$ with $t_0=2$, $t_1=1$.\n$t_2=13$, $t_3=19$, $t_4=97$, $t_5=211$, $t_6=793$.\nEigenvalues $3,-2$: $3^6+(-2)^6=729+64=793$.",
+  "hints": [
+   "Use $A^2=A+6I$ to build a recurrence for the traces."
+  ],
+  "check": "(lambda f: f(f,6))(lambda f,n: 2 if n==0 else 1 if n==1 else f(f,n-1)+6*f(f,n-2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.cayley-ham",
+   "t6.jordan-nilpotent",
+   "t6.diagonalize"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $M=\\begin{pmatrix}3&1&0&0\\\\0&3&0&0\\\\0&0&3&0\\\\0&0&0&5\\end{pmatrix}$ and let $p$ be the monic minimal polynomial of $M$. Find $p(0)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$135$",
+    "$15$",
+    "$45$",
+    "$-27$",
+    "$-45$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "evaluated the characteristic polynomial $(x-3)^3(x-5)$ instead",
+    "assumed diagonalizable, giving $p=(x-3)(x-5)$",
+    "dropped the sign of the factor $(0-5)$",
+    "left out the eigenvalue $5$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Eigenvalues $3,3,3,5$",
+    "weight": 1
+   },
+   {
+    "text": "Largest Jordan block for $3$ has size $2$: $M-3I\\ne0$ but $(M-3I)^2$ kills that block",
+    "weight": 2
+   },
+   {
+    "text": "$p(x)=(x-3)^2(x-5)$, so $p(0)=9\\cdot(-5)=-45$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$M$ is block diagonal: $J_2(3)\\oplus[3]\\oplus[5]$.\nThe minimal polynomial exponent for each eigenvalue is its largest Jordan block (Cayley-Hamilton refinement): $2$ for $3$, $1$ for $5$.\nCheck: $(M-3I)(M-5I)\\ne0$ because of the $J_2(3)$ block, while $(M-3I)^2(M-5I)=0$.\n$p(0)=(0-3)^2(0-5)=-45$.",
+  "hints": [
+   "The minimal polynomial exponent equals the largest Jordan block size."
+  ],
+  "check": "(0-3)**2*(0-5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.inner-product",
+   "t6.determinant",
+   "t5.vec-ops"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Apply Gram--Schmidt, without normalizing, to $v_1=(1,1,0)$, $v_2=(1,0,1)$, $v_3=(0,1,1)$ in $\\mathbb R^3$ with the standard inner product, producing orthogonal vectors $w_1,w_2,w_3$. Find $\\|w_3\\|^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{11}{6}$",
+    "$\\frac{4}{3}$",
+    "$\\frac{3}{2}$",
+    "$2$",
+    "$1$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "subtracted only the projection onto $w_2$",
+    "",
+    "subtracted only the projection onto $w_1$",
+    "reported $\\|v_3\\|^2$",
+    "reported the squared norm of a normalized vector"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$w_1=v_1$ and $w_2=v_2-\\tfrac12v_1=(\\tfrac12,-\\tfrac12,1)$, $\\|w_2\\|^2=\\tfrac32$",
+    "weight": 2
+   },
+   {
+    "text": "$w_3=v_3-\\tfrac12w_1-\\tfrac13w_2=(-\\tfrac23,\\tfrac23,\\tfrac23)$",
+    "weight": 2
+   },
+   {
+    "text": "$\\|w_3\\|^2=\\tfrac43$ (check: $\\det[v]^2=4=2\\cdot\\tfrac32\\cdot\\tfrac43$)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$w_1=(1,1,0)$, $\\|w_1\\|^2=2$ (dot product).\n$w_2=v_2-\\tfrac{v_2\\cdot w_1}{2}w_1=(\\tfrac12,-\\tfrac12,1)$, $\\|w_2\\|^2=\\tfrac32$.\n$w_3=v_3-\\tfrac12w_1-\\tfrac{1/2}{3/2}w_2=(-\\tfrac23,\\tfrac23,\\tfrac23)$ (subtract both projections).\n$\\|w_3\\|^2=\\tfrac43$. Check: Gram determinant $=\\det[v_1v_2v_3]^2=(-2)^2=4=2\\cdot\\tfrac32\\cdot\\tfrac43$.",
+  "hints": [
+   "Subtract the projections onto both earlier orthogonal vectors."
+  ],
+  "check": "Fraction(4)/(2*Fraction(3,2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.inner-product",
+   "t4.antideriv",
+   "t4.ftc"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "On $C[-1,1]$ use $\\langle f,g\\rangle=\\int_{-1}^{1}f(x)g(x)\\,dx$ and let $W=\\operatorname{span}\\{1,x\\}$. Find $\\min_{w\\in W}\\|x^2-w\\|^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{2}{5}$",
+    "$\\frac{2}{9}$",
+    "$\\frac{28}{45}$",
+    "$\\frac{8}{45}$",
+    "$\\frac{13}{45}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "reported $\\|x^2\\|^2$ with no projection removed",
+    "reported the squared norm of the projection",
+    "added instead of subtracting",
+    "",
+    "computed $\\|1/3\\|^2$ as $1/9$, forgetting $\\int_{-1}^1 1\\,dx=2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$1$ and $x$ are orthogonal; $x^2\\perp x$ by oddness, so only the constant term matters",
+    "weight": 2
+   },
+   {
+    "text": "Projection coefficient $\\langle x^2,1\\rangle/\\langle1,1\\rangle=\\tfrac{2/3}{2}=\\tfrac13$, so $\\|\\text{proj}\\|^2=\\tfrac19\\cdot2$",
+    "weight": 1
+   },
+   {
+    "text": "$\\|x^2\\|^2=\\tfrac25$ and minimum $=\\tfrac25-\\tfrac29=\\tfrac8{45}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\{1,x\\}$ is orthogonal in this inner product. $\\langle x^2,x\\rangle=\\int x^3=0$ and $\\langle x^2,1\\rangle=\\tfrac23$ (antiderivatives, FTC).\nBest approximation: $w=\\tfrac{2/3}{2}\\cdot1=\\tfrac13$, $\\|w\\|^2=\\tfrac19\\cdot2=\\tfrac29$.\nPythagoras: $\\min\\|x^2-w\\|^2=\\|x^2\\|^2-\\|w\\|^2=\\tfrac25-\\tfrac29=\\tfrac{8}{45}$.",
+  "hints": [
+   "The minimiser is the orthogonal projection onto $W$."
+  ],
+  "check": "Fraction(2,5)-Fraction(1,9)*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.spectral",
+   "t5.lagrange",
+   "t6.eigen-2x2"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $Q(x,y,z)=2x^2+2y^2+2z^2+2xy+2yz+2zx$. Find the maximum value of $Q$ on the set $x^2+y^2+z^2=1,\\ x+y+z=0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1$",
+    "$4$",
+    "$2$",
+    "$6$",
+    "$3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored the constraint and took the top eigenvalue",
+    "read off the diagonal coefficient",
+    "reported the trace of the matrix",
+    "averaged the eigenvalues"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$Q=x^TAx$ with $A=I+J$, where $J$ is the all-ones matrix",
+    "weight": 1
+   },
+   {
+    "text": "Eigenvalues: $4$ on $(1,1,1)$ and $1$ on the plane $x+y+z=0$",
+    "weight": 2
+   },
+   {
+    "text": "The constraint plane is the eigenvalue-$1$ eigenspace, so $Q=1$ on the unit circle there",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$A=I+J$ with eigenvalues $4$ (eigenvector $(1,1,1)$) and $1,1$ (spectral theorem, symmetric matrix).\nThe constraint $x+y+z=0$ means $x\\perp(1,1,1)$, i.e. $x$ lies in the eigenvalue-$1$ eigenspace.\nDirect: $Q=(x^2+y^2+z^2)+(x+y+z)^2=1+0=1$, so the maximum is $1$ (consistent with the Lagrange multiplier $\\lambda=1$).",
+  "hints": [
+   "Rewrite $Q$ as $\\|x\\|^2+(x+y+z)^2$."
+  ],
+  "check": "Fraction(1)+0**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.spectral",
+   "t6.determinant",
+   "t1.abs-ineq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For an integer $k$, let $M_k=\\begin{pmatrix}4&k&0\\\\k&4&k\\\\0&k&4\\end{pmatrix}$. For how many integers $k$ is the quadratic form $x^TM_kx$ positive definite?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7$",
+    "$3$",
+    "$5$",
+    "$9$",
+    "$1$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "checked only the leading $2\\times2$ minor, giving $|k|\\le3$",
+    "used strict diagonal dominance as if it were necessary, giving $|k|\\le1$",
+    "",
+    "required only $|k|\\le4$ from the diagonal entries",
+    "concluded that only $k=0$ passes"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Positive definite iff all leading principal minors are positive",
+    "weight": 1
+   },
+   {
+    "text": "Minors: $4$, $16-k^2$, $64-8k^2$",
+    "weight": 2
+   },
+   {
+    "text": "$k^2<8$ gives $|k|\\le2$, so $5$ integers",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Sylvester's criterion (spectral/definiteness test): all leading principal minors must be positive.\n$D_1=4$, $D_2=16-k^2$, $D_3=4(16-k^2)-k\\cdot4k=64-8k^2$.\n$D_3>0$ gives $k^2<8$, which also implies $D_2>0$. Integers $-2,\\dots,2$: $5$.\nEigenvalue check: $4,\\ 4\\pm k\\sqrt2$, positive iff $|k|<2\\sqrt2$.",
+  "hints": [
+   "Use leading principal minors, or find the eigenvalues directly."
+  ],
+  "check": "sum(1 for k in range(-10,11) if 4>0 and 16-k*k>0 and 4*(16-k*k)-k*(k*4)>0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.jordan-nilpotent",
+   "t6.rank-nullity",
+   "t6.basis-dim"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A real $5\\times5$ matrix $N$ satisfies $N^3=0$ and $\\operatorname{rank}N=3$. Find $\\dim\\ker(N^2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$5$",
+    "$2$",
+    "$1$",
+    "$4$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "guessed that the kernel grows by one at each step",
+    "assumed $N^2=0$",
+    "reported $\\dim\\ker N$",
+    "reported $\\operatorname{rank}N^2$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rank $3$ means nullity $2$, so $N$ has $2$ Jordan blocks",
+    "weight": 2
+   },
+   {
+    "text": "$N^3=0$ bounds block sizes by $3$ and the sizes sum to $5$, forcing sizes $3,2$",
+    "weight": 2
+   },
+   {
+    "text": "$\\dim\\ker N^2=\\sum\\min(s,2)=2+2=4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Nullity of $N$ is $5-3=2$, which equals the number of Jordan blocks (nilpotent structure).\n$N^3=0$ means block sizes are at most $3$; two blocks summing to $5$ must be $3$ and $2$.\n$\\dim\\ker N^j=\\sum_{\\text{blocks}}\\min(s,j)$, so $\\dim\\ker N^2=\\min(3,2)+\\min(2,2)=4$.\nCheck: $\\operatorname{rank}N^2=1$ (only the size-$3$ block survives), $5-1=4$.",
+  "hints": [
+   "The nullity of a nilpotent matrix counts its Jordan blocks."
+  ],
+  "check": "sum(min(s,2) for s in (3,2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.jordan-nilpotent",
+   "t2.sigma-binom",
+   "t6.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $N$ be the $3\\times3$ matrix with ones on the superdiagonal and zeros elsewhere, and let $A=2I+N$. Find the $(1,3)$ entry of $A^{10}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5120$",
+    "$11520$",
+    "$46080$",
+    "$1024$",
+    "$15360$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "reported the $(1,2)$ entry, $\\binom{10}{1}2^9$",
+    "",
+    "used $\\binom{10}{2}2^{10}$, the wrong power of $2$",
+    "used $2^{10}$ and ignored $N$",
+    "used $\\binom{10}{3}2^7$, a term that vanishes since $N^3=0$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$2I$ and $N$ commute and $N^3=0$, so the binomial series stops at $N^2$",
+    "weight": 2
+   },
+   {
+    "text": "$A^{10}=2^{10}I+10\\cdot2^9N+45\\cdot2^8N^2$",
+    "weight": 2
+   },
+   {
+    "text": "$N^2$ has a single $1$ in position $(1,3)$, so the entry is $45\\cdot256=11520$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$A=2I+N$ with $N^3=0$ and $2I$ central (matrix-ops, nilpotent shift).\nBinomial: $A^{10}=\\sum_k\\binom{10}{k}2^{10-k}N^k=2^{10}I+10\\cdot2^9N+45\\cdot2^8N^2$.\n$N^2=E_{13}$, so the $(1,3)$ entry is $45\\cdot256=11520$.",
+  "hints": [
+   "Expand $(2I+N)^{10}$ binomially and use $N^3=0$."
+  ],
+  "check": "10*9//2*2**8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

@@ -86,7 +86,7 @@
     "reported $f^{\\prime}(2)$ instead of $f(2)$",
     "",
     "omitted the linear term $2x$ that comes from the first constant",
-    "sign error: integrated $-2x^{-2}$ as $+2x^{-1}$ when finding $f$"
+    "sign error: integrated $-2x^{-2}$ as $-2x^{-1}$ when finding $f$"
    ]
   },
   "rubric": [
@@ -431,7 +431,7 @@
    "shuffle": true,
    "why": [
     "used $\\sin x\\cos x=\\sin2x$ (lost the $\\tfrac12$)",
-    "squared the factor $\\tfrac12$ as $\\tfrac12$",
+    "kept $\\tfrac12$ instead of $\\tfrac14$ as the constant in front of $\\sin^22x$",
     "averaged over half a period incorrectly (extra factor $\\tfrac12$)",
     "argued $\\int\\sin x\\cos x=0$ and squared the integral instead of the integrand",
     ""
@@ -1308,7 +1308,7 @@
     "assumed any decaying power of the log suffices",
     "",
     "reversed the direction of the inequality",
-    "confused with a $p$-series on $n$, where $p>1$ is needed for $n^{-p}$ with a stronger exponent"
+    "demanded a larger exponent than the integral test needs; the threshold is $p>1$"
    ]
   },
   "rubric": [

@@ -247,6 +247,15 @@ def main():
             check_multi(item, errors)
         else:
             errors.append(f"unsupported answer kind {kind!r} in this batch")
+        # Category guards found in T4 review: options are shuffled at play time, so text must never cite a position;
+        # "an antiderivative" prompts admit any +C, so expression answers must pin the constant.
+        pos = re.compile(r"\b(option|choice|answer)\s*[1-5A-E]\b|\b(first|second|third|fourth|last) (option|choice)\b", re.I)
+        for fld in ("solution", "prompt"):
+            if pos.search(str(item.get(fld, ""))):
+                errors.append(f"{fld} cites an option by position (options are shuffled)")
+        if kind == "expression" and re.search(r"\ban antiderivative\b|\bindefinite integral\b", item.get("prompt", ""), re.I) \
+                and not re.search(r"C\s*=\s*0|constant|tends to|\bF\(|such that", item.get("prompt", ""), re.I):
+            errors.append("expression antiderivative prompt must pin the constant of integration")
         if not item.get("hints") or not isinstance(item.get("hints"), list):
             errors.append("hints must be a non-empty list")
         if errors:

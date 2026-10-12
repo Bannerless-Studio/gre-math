@@ -490,7 +490,7 @@
   ],
   "order": 1,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a sum of powers, exponentials or standard trig terms with no hidden composition. **Move:** raise each power by one and divide by the new power. Use $\\int e^{kx}\\,dx=\\frac{e^{kx}}{k}$ and $\\int\\cos(kx)\\,dx=\\frac{\\sin(kx)}{k}$. **Example:** $\\int(3x^2+1)\\,dx=x^3+x+C$. **Trap:** dividing by the old power, or forgetting the $\\frac{1}{k}$ when the inside is $kx$."
  },
  {
   "id": "t4.u-sub",
@@ -502,7 +502,7 @@
   ],
   "order": 2,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the integrand is $f(g(x))\\,g'(x)$, up to a constant. **Move:** set $u=g(x)$, write $du=g'(x)\\,dx$, and rewrite everything in $u$. For definite integrals, convert the limits with $g$. **Example:** $\\int 2x\\,e^{x^2}\\,dx=e^{x^2}+C$, since $u=x^2$ turns the integrand into $e^u\\,du$. **Trap:** leaving an $x$ in the integrand, or keeping the $x$-limits after substituting."
  },
  {
   "id": "t4.by-parts",
@@ -514,7 +514,7 @@
   ],
   "order": 3,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a product of unlike types, such as $xe^x$, $x\\ln x$ or $x\\cos x$. **Move:** pick $u$ by LIATE (log, inverse trig, algebraic, trig, exponential), let $dv$ be the rest, then use $\\int u\\,dv=uv-\\int v\\,du$. **Example:** $\\int xe^x\\,dx=xe^x-e^x+C$. **Trap:** choosing $u$ so the new integral is no simpler, or dropping the minus sign before $\\int v\\,du$."
  },
  {
   "id": "t4.trig-int",
@@ -527,7 +527,7 @@
   ],
   "order": 4,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** powers of sine and cosine, or products like $\\tan^m x\\sec^n x$. **Move:** if an odd power appears, save one factor and convert the rest with $\\sin^2x+\\cos^2x=1$. If both powers are even, use $\\sin^2x=\\frac{1-\\cos 2x}{2}$ and $\\cos^2x=\\frac{1+\\cos 2x}{2}$. **Example:** $\\int\\sin^3x\\,dx=-\\cos x+\\frac{\\cos^3x}{3}+C$. **Trap:** using the half-angle form on an odd power, which makes the integral harder."
  },
  {
   "id": "t4.trig-sub",
@@ -539,7 +539,7 @@
   ],
   "order": 5,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a radical $\\sqrt{a^2-x^2}$, $\\sqrt{a^2+x^2}$ or $\\sqrt{x^2-a^2}$ that substitution cannot clear. **Move:** use $x=a\\sin\\theta$, $x=a\\tan\\theta$ or $x=a\\sec\\theta$ respectively, simplify the root with a Pythagorean identity, and convert back to $x$ at the end. **Example:** with $x=3\\sin\\theta$, $\\sqrt{9-x^2}$ becomes $3\\cos\\theta$. **Trap:** forgetting to substitute $dx$ (for sine it is $a\\cos\\theta\\,d\\theta$), or leaving the answer in $\\theta$."
  },
  {
   "id": "t4.partial-frac",
@@ -552,7 +552,7 @@
   ],
   "order": 6,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a rational function $\\frac{p(x)}{q(x)}$ with $\\deg p<\\deg q$ and $q$ factorable. **Move:** factor $q$. Give each distinct linear factor one constant over it, each repeated power its own term, and each irreducible quadratic a term $\\frac{Ax+B}{\\cdots}$. Solve for constants by cover-up. **Example:** $\\frac{1}{x^2-1}=\\frac{1/2}{x-1}-\\frac{1/2}{x+1}$. **Trap:** skipping the polynomial division when $\\deg p\\ge\\deg q$."
  },
  {
   "id": "t4.ftc",
@@ -564,7 +564,7 @@
   ],
   "order": 7,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a definite integral with a known antiderivative, or a derivative of an integral with a variable limit. **Move:** if $F'=f$, then $\\int_a^b f=F(b)-F(a)$. If $G(x)=\\int_0^{h(x)}f$, then $G'(x)=f(h(x))\\,h'(x)$. **Example:** $\\frac{d}{dx}\\int_0^{x^2}\\sin t\\,dt=2x\\sin(x^2)$. **Trap:** evaluating $F$ at the limits in the wrong order, or forgetting the $h'(x)$ factor."
  },
  {
   "id": "t4.improper-int",
@@ -577,7 +577,7 @@
   ],
   "order": 8,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** an infinite limit of integration, or an integrand that blows up at a point. **Move:** replace the bad endpoint with a variable $t$, integrate, then take the limit as $t$ goes to the bad value. Split at a bad point inside the interval. **Example:** $\\int_1^\\infty x^{-2}\\,dx=\\lim_{t\\to\\infty}\\left(1-\\frac{1}{t}\\right)=1$. **Trap:** applying the FTC directly to a divergent case like $\\int_1^\\infty\\frac{dx}{x}$, or treating $\\infty$ as a number."
  },
  {
   "id": "t4.area-volume",
@@ -589,7 +589,7 @@
   ],
   "order": 9,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** area between curves, or a solid of revolution. **Move:** find the intersections first. Area is top minus bottom, integrated in $x$. Volume uses disks $\\pi\\int r^2\\,dx$ if the region touches the axis, washers $\\pi\\int(R^2-r^2)\\,dx$ if it leaves a hole, or shells $2\\pi\\int r\\,h\\,dx$. **Example:** disks for $y=x$ on $[0,b]$ give $\\frac{\\pi b^3}{3}$. **Trap:** using the wrong radius, or squaring the wrong function."
  },
  {
   "id": "t4.arc-avg",
@@ -601,7 +601,7 @@
   ],
   "order": 10,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the length of a curve, the area of a surface of revolution, or the mean value of a function. **Move:** arc length integrates $\\sqrt{1+(f')^2}$. Surface area about the $x$-axis integrates $2\\pi f\\sqrt{1+(f')^2}$. The average value is $\\frac{1}{b-a}\\int_a^b f$. **Example:** the average of $3x^2$ on $[0,2]$ is $\\frac{1}{2}\\cdot 8=4$. **Trap:** forgetting to square $f'$ or the $2\\pi$ factor, and forgetting the $\\frac{1}{b-a}$ in the average."
  },
  {
   "id": "t4.seq-limits",
@@ -614,7 +614,7 @@
   ],
   "order": 11,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the limit of a sequence $a_n$ as $n\\to\\infty$. **Move:** for rational expressions, divide by the highest power of $n$. Compare growth rates: exponentials beat powers, and factorials beat exponentials. For $\\left(1+\\frac{x}{n}\\right)^n$, the limit is $e^x$. Use squeezing when unsure. **Example:** $\\lim\\frac{3n^2+n}{n^2-5}=3$. **Trap:** stopping at an indeterminate form without dividing out the growth."
  },
  {
   "id": "t4.series-tests",
@@ -627,7 +627,7 @@
   ],
   "order": 12,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding whether $\\sum a_n$ converges. **Move:** check the $n$th term first: if $a_n\\not\\to 0$, the series diverges. Then use a p-series, a geometric series, comparison or limit comparison, the ratio test for factorials and powers, or the integral test for a decreasing positive $f$. **Example:** $\\sum\\frac{1}{n^2+1}$ converges by limit comparison with $\\sum\\frac{1}{n^2}$. **Trap:** concluding convergence from $a_n\\to 0$ alone."
  },
  {
   "id": "t4.alt-series",
@@ -639,7 +639,7 @@
   ],
   "order": 13,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the terms alternate in sign. **Move:** if $|a_n|$ decreases to $0$, the series converges. Its error after $N$ terms is at most $|a_{N+1}|$. Conditional convergence means the series converges but $\\sum|a_n|$ diverges. **Example:** $\\sum\\frac{(-1)^{n+1}}{n}$ converges conditionally, and its error after 3 terms is at most $\\frac{1}{4}$. **Trap:** claiming absolute convergence when only the alternating form was checked."
  },
  {
   "id": "t4.power-series",
@@ -651,7 +651,7 @@
   ],
   "order": 14,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a series $\\sum c_n(x-a)^n$ with $x$ as a variable. **Move:** use the ratio test $L=\\lim\\left|\\frac{c_{n+1}}{c_n}\\right|$ to get the radius $R=\\frac{1}{L}$. Then check each endpoint separately with a number test. For geometric forms, use $\\frac{1}{1-x}$. **Example:** $\\sum\\frac{x^n}{n}$ has $R=1$ and interval $[-1,1)$. **Trap:** stopping at $|x-a|<R$ and forgetting to test the endpoints."
  },
  {
   "id": "t4.taylor",
@@ -664,7 +664,7 @@
   ],
   "order": 15,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** writing a function as a power series, or approximating near a point. **Move:** the coefficient of $(x-a)^n$ is $\\frac{f^{(n)}(a)}{n!}$. Memorize $e^x$, $\\sin x$, $\\cos x$, $\\frac{1}{1-x}$ and $\\ln(1+x)$, then substitute, integrate or differentiate them. **Example:** $\\cos x=1-\\frac{x^2}{2}+\\frac{x^4}{24}-\\cdots$. **Trap:** dropping the factorial, or the alternating sign in the sine, cosine and log series."
  },
  {
   "id": "t4.param-polar",
@@ -677,7 +677,7 @@
   ],
   "order": 16,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a curve given by $x(t),y(t)$ or by $r(\\theta)$. **Move:** parametric slope is $\\frac{dy/dt}{dx/dt}$, and length is $\\int\\sqrt{x'^2+y'^2}\\,dt$. Polar area is $\\frac{1}{2}\\int r^2\\,d\\theta$. Convert with $x=r\\cos\\theta$ and $y=r\\sin\\theta$. **Example:** the cardioid $r=1+\\cos\\theta$ encloses area $\\frac{3\\pi}{2}$. **Trap:** dropping the $\\frac{1}{2}$ in polar area, or using $\\frac{dx/dt}{dy/dt}$ for the slope."
  },
  {
   "id": "t5.vec-ops",

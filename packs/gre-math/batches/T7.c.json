@@ -1,0 +1,1828 @@
+[
+ {
+  "id": "t7-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.nt-gcd",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many ordered pairs $(a,b)$ of positive integers satisfy $\\gcd(a,b)=6$ and $\\operatorname{lcm}(a,b)=360$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$12$",
+    "$16$",
+    "$8$",
+    "$6$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "counted unordered pairs",
+    "counted all divisors of $60$ instead of coprime splittings",
+    "used $2^4$ from the four prime factors of $60$ counted with multiplicity",
+    "",
+    "reused the gcd as the count"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Write $a=6a'$, $b=6b'$ with $\\gcd(a',b')=1$ and use $ab=\\gcd\\cdot\\operatorname{lcm}$",
+    "weight": 2
+   },
+   {
+    "text": "Reduce to $a'b'=60$",
+    "weight": 1
+   },
+   {
+    "text": "Count coprime ordered splittings, one choice per prime power of $60$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Put $a=6a'$, $b=6b'$ with $\\gcd(a',b')=1$ (nt-gcd).\nThen $ab=\\gcd\\cdot\\operatorname{lcm}=2160$ gives $a'b'=60=2^2\\cdot3\\cdot5$ (factor).\nCoprime means each prime power $2^2,3,5$ goes wholly to $a'$ or to $b'$.\nThat is $2^3=8$ ordered pairs.",
+  "hints": [
+   "Divide out the gcd first; what must be true of the cofactors?"
+  ],
+  "check": "sum(1 for a in range(1,361) for b in range(1,361) if math.gcd(a,b)==6 and a*b==2160)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.nt-gcd",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find $\\gcd\\!\\left(2^{36}-1,\\;2^{48}-1\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4095$",
+    "$4096$",
+    "$63$",
+    "$255$",
+    "$1$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "dropped the $-1$ and took $2^{12}$",
+    "used exponent $6$, half of $\\gcd(36,48)$",
+    "miscomputed $\\gcd(36,48)$ as $8$",
+    "assumed two odd numbers are coprime"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Euclidean step $2^{n}-1 = 2^{n-m}(2^m-1)+(2^{n-m}-1)$ reduces exponents like Euclid",
+    "weight": 2
+   },
+   {
+    "text": "$\\gcd(36,48)=12$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $2^{12}-1=4095$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "For $n>m$: $2^n-1=2^{n-m}(2^m-1)+(2^{n-m}-1)$ (exp-rules).\nSo $\\gcd(2^n-1,2^m-1)=\\gcd(2^m-1,2^{n-m}-1)$: the exponents follow the Euclidean algorithm (nt-gcd).\nHence $\\gcd=2^{\\gcd(36,48)}-1$.\n$\\gcd(36,48)=12$, so the answer is $2^{12}-1=4095$.",
+  "hints": [
+   "Run the Euclidean algorithm on the exponents."
+  ],
+  "check": "math.gcd(2**36-1,2**48-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.nt-mod",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many $x\\in\\{0,1,\\dots,59\\}$ satisfy $x^2\\equiv1\\pmod{60}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$4$",
+    "$8$",
+    "$16$",
+    "$6$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "only $x\\equiv\\pm1\\pmod{60}$",
+    "took one solution mod $4$",
+    "",
+    "counted four solutions mod $4$, as for mod $8$",
+    "added the counts $2+2+2$ instead of multiplying"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Split $60=4\\cdot3\\cdot5$ and apply the Chinese remainder theorem",
+    "weight": 2
+   },
+   {
+    "text": "Two solutions $\\pm1$ for each modulus",
+    "weight": 1
+   },
+   {
+    "text": "Multiply: $2\\cdot2\\cdot2=8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$60=4\\cdot3\\cdot5$ with pairwise coprime factors, so CRT turns one congruence into three (nt-mod).\nMod $4$: $x\\in\\{1,3\\}$. Mod $3$: $x\\in\\{1,2\\}$. Mod $5$: $x\\in\\{1,4\\}$ (primes give exactly $\\pm1$).\nAny choice of residues lifts to a unique $x$ mod $60$ (nt-gcd: coprime moduli).\nTotal $2\\cdot2\\cdot2=8$.",
+  "hints": [
+   "Chinese remainder theorem on $60=4\\cdot3\\cdot5$."
+  ],
+  "check": "sum(1 for x in range(60) if x*x%60==1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.nt-mod",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find the least positive integer $x$ with $x\\equiv2\\pmod5$, $x\\equiv3\\pmod7$, and $x\\equiv4\\pmod9$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$17$",
+    "$22$",
+    "$31$",
+    "$472$",
+    "$157$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "satisfies only the mod $5$ and mod $7$ conditions",
+    "satisfies only the mod $5$ and mod $9$ conditions",
+    "satisfies only the mod $7$ and mod $9$ conditions",
+    "correct residue plus $315$, not reduced",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Write $x=2+5k$ and impose the next congruence",
+    "weight": 2
+   },
+   {
+    "text": "Solve the linear congruences in $k$ and $m$ correctly",
+    "weight": 1
+   },
+   {
+    "text": "Combine mod $315$ and verify all three",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Start with $x=4+9a$ (largest modulus).\nMod $7$: $4+2a\\equiv3$, so $2a\\equiv-1\\equiv6$ and $a\\equiv3\\pmod7$, giving $x\\equiv31\\pmod{63}$ (lin-eq).\nWrite $x=31+63b$; mod $5$: $1+3b\\equiv2$, so $3b\\equiv1$ and $b\\equiv2\\pmod5$.\n$x=31+126=157$, unique mod $315$. Check: $157=5\\cdot31+2=7\\cdot22+3=9\\cdot17+4$.",
+  "hints": [
+   "Substitute one congruence into the next, solving a linear congruence at each step."
+  ],
+  "check": "min(x for x in range(1,316) if x%5==2 and x%7==3 and x%9==4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.nt-euler",
+   "t7.nt-mod"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "What is the remainder when $7^{2026}$ is divided by $100$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$43$",
+    "$49$",
+    "$1$",
+    "$9$",
+    "$7$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used exponent $\\equiv3\\pmod4$",
+    "",
+    "applied Euler as if $40\\mid2026$",
+    "reported the last digit of $7^2$ only",
+    "assumed exponent $\\equiv1\\pmod4$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Use $\\varphi(100)=40$ or find the order of $7$ mod $100$",
+    "weight": 2
+   },
+   {
+    "text": "Observe $7^4=2401\\equiv1$",
+    "weight": 1
+   },
+   {
+    "text": "Reduce $2026\\equiv2\\pmod4$ and get $7^2=49$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\gcd(7,100)=1$ and $\\varphi(100)=40$, so exponents reduce mod $40$ (nt-euler).\nBetter: $7^2=49$, $7^4=2401\\equiv1\\pmod{100}$ (nt-mod), so the order is $4$.\n$2026=4\\cdot506+2$.\n$7^{2026}\\equiv7^2=49$.",
+  "hints": [
+   "Look for a small power of $7$ that is $1$ mod $100$."
+  ],
+  "check": "7**2026%100",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.nt-euler",
+   "t7.nt-mod"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "What is the remainder when $28!$ is divided by $31$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$16$",
+    "$30$",
+    "$29$",
+    "$15$",
+    "$1$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "computed $1/2$ but dropped the sign",
+    "claimed $28!\\equiv30!\\equiv-1$",
+    "multiplied by $2$ instead of dividing by $2$",
+    "",
+    "assumed factorials below $p-1$ vanish to $1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Wilson: $30!\\equiv-1\\pmod{31}$",
+    "weight": 1
+   },
+   {
+    "text": "Rewrite $30\\equiv-1$, $29\\equiv-2$ so $2\\cdot28!\\equiv-1$",
+    "weight": 2
+   },
+   {
+    "text": "Divide by $2$ modulo $31$ to get $15$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Wilson's theorem: $30!\\equiv-1\\pmod{31}$ (nt-euler).\n$30!=30\\cdot29\\cdot28!\\equiv(-1)(-2)\\,28!=2\\cdot28!$.\nSo $2\\cdot28!\\equiv-1\\equiv30$, hence $28!\\equiv15$ (nt-mod: divide by $2$).\nCheck: $2\\cdot15=30$.",
+  "hints": [
+   "Express $30$ and $29$ as small negative residues."
+  ],
+  "check": "math.factorial(28)%31",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.group-axioms",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "On $G=\\mathbb R\\setminus\\{-1\\}$ define $a*b=a+b+ab$. This makes $(G,*)$ a group. Let $a^{-1}$ be the inverse of $a$. Compute $3^{-1}*5$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac12$",
+    "$\\frac{17}4$",
+    "$7$",
+    "$-13$",
+    "$\\frac32$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "dropped the $ab$ term in the product",
+    "used the reciprocal $\\frac13$ as the inverse",
+    "used the additive inverse $-3$",
+    "forgot to subtract $1$ after multiplying the shifted values"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identity is $0$ and the inverse satisfies $a+x+ax=0$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $x=-\\frac{a}{1+a}$, so $3^{-1}=-\\frac34$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $-\\frac34*5$ correctly",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Identity $e$: $a+e+ae=a$ gives $e=0$ (group-axioms).\nInverse: $a+x+ax=0\\Rightarrow x=-\\dfrac{a}{1+a}$, so $3^{-1}=-\\dfrac34$ (rational-expr).\n$-\\tfrac34*5=-\\tfrac34+5-\\tfrac{15}{4}=5-\\tfrac{18}{4}=\\tfrac12$.\nCheck via $a*b+1=(a+1)(b+1)$: $\\tfrac14\\cdot6-1=\\tfrac12$.",
+  "hints": [
+   "Find the identity first, then solve $a*x=e$."
+  ],
+  "check": "Fraction(-3,4)+5+Fraction(-3,4)*5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.group-axioms",
+   "t7.dihedral-small"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Fix a set $\\{e,a,b,c\\}$ and fix $e$ as the identity. How many binary operations on this set make it a group?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$3$",
+    "$4$",
+    "$7$",
+    "$6$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "one table per isomorphism type",
+    "counted only the cyclic tables and missed the Klein group",
+    "",
+    "counted six labelings of the cyclic group plus the Klein group",
+    "counted six labelings of the cyclic group, no Klein group"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Groups of order $4$ are $\\mathbb Z_4$ or $\\mathbb Z_2^2$",
+    "weight": 1
+   },
+   {
+    "text": "Klein group: table forced, count $1$",
+    "weight": 1
+   },
+   {
+    "text": "$\\mathbb Z_4$: the table is determined by which non-identity element is the involution, count $3$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "Every group of order $4$ is $\\mathbb Z_4$ or the Klein group (small groups).\nKlein: every non-identity element squares to $e$ and the product of two distinct ones is the third. One table.\n$\\mathbb Z_4$: exactly one non-identity element is an involution ($3$ choices); the other two are mutual inverses and the table is then forced.\nTotal $1+3=4$.",
+  "hints": [
+   "Count tables, not isomorphism classes; ask which element is the involution."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.subgroup-cyclic",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many subgroups of the cyclic group $\\mathbb Z_{72}$ have order divisible by $6$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$9$",
+    "$4$",
+    "$2$",
+    "$6$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "counted all subgroups",
+    "counted subgroups of even order",
+    "counted divisors of $12$ only",
+    "counted elements of order $6$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "One subgroup for each divisor of $72$ (cyclic group)",
+    "weight": 2
+   },
+   {
+    "text": "Order must be a divisor of $72$ that is a multiple of $6$",
+    "weight": 1
+   },
+   {
+    "text": "List $6,12,18,24,36,72$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A cyclic group of order $n$ has exactly one subgroup for each $d\\mid n$ (subgroup-cyclic).\nNeed $d\\mid72$ and $6\\mid d$: write $d=6k$ with $k\\mid12$ (nt-gcd).\n$k\\in\\{1,2,3,4,6,12\\}$, so $d\\in\\{6,12,18,24,36,72\\}$.\nCount $6$.",
+  "hints": [
+   "Subgroups of a cyclic group correspond to divisors of its order."
+  ],
+  "check": "sum(1 for d in range(1,73) if 72%d==0 and d%6==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.subgroup-cyclic",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In $\\mathbb Z_{60}$ let $H=\\langle18,24\\rangle$ be the subgroup generated by $18$ and $24$. What is $|H|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$10$",
+    "$5$",
+    "$15$",
+    "$60$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "reported the gcd as the order",
+    "",
+    "took the order of $\\langle24\\rangle$ only",
+    "added the orders $10+5$",
+    "assumed $18$ and $24$ generate the whole group"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\langle a,b\\rangle=\\langle\\gcd(a,b,60)\\rangle$ in $\\mathbb Z_{60}$",
+    "weight": 2
+   },
+   {
+    "text": "$\\gcd(18,24,60)=6$",
+    "weight": 1
+   },
+   {
+    "text": "Order $60/6=10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "In $\\mathbb Z_n$, $\\langle a,b\\rangle=\\langle\\gcd(a,b,n)\\rangle$ (subgroup-cyclic).\n$\\gcd(18,24)=6$ and $6\\mid60$, so $\\gcd(18,24,60)=6$ (nt-gcd).\n$H=\\langle6\\rangle$ has order $60/6=10$.",
+  "hints": [
+   "A subgroup of a cyclic group is generated by one element: a gcd."
+  ],
+  "check": "60//math.gcd(math.gcd(18,24),60)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.order-lagrange",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "What is the largest order of an element of $\\mathbb Z_{12}\\times\\mathbb Z_{18}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$216$",
+    "$18$",
+    "$72$",
+    "$36$",
+    "$6$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "took the group order",
+    "took the larger factor order",
+    "miscomputed $\\operatorname{lcm}(12,18)$",
+    "",
+    "used $\\gcd(12,18)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Order of $(a,b)$ is $\\operatorname{lcm}$ of component orders",
+    "weight": 2
+   },
+   {
+    "text": "Component orders divide $12$ and $18$ (Lagrange)",
+    "weight": 1
+   },
+   {
+    "text": "Max is $\\operatorname{lcm}(12,18)=36$, attained at $(1,1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|(a,b)|=\\operatorname{lcm}(|a|,|b|)$ (order-lagrange).\n$|a|$ divides $12$ and $|b|$ divides $18$ by Lagrange.\nSo the order is at most $\\operatorname{lcm}(12,18)=36$ (nt-gcd: $\\tfrac{12\\cdot18}{6}$).\n$(1,1)$ has order $\\operatorname{lcm}(12,18)=36$.",
+  "hints": [
+   "Order of a pair is an lcm of the component orders."
+  ],
+  "check": "max(((12//math.gcd(a,12))*(18//math.gcd(b,18)))//math.gcd(12//math.gcd(a,12),18//math.gcd(b,18)) for a in range(12) for b in range(18))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.order-lagrange",
+   "t7.subgroup-cyclic"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many elements of order $5$ does $\\mathbb Z_5\\times\\mathbb Z_{25}$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$24$",
+    "$25$",
+    "$4$",
+    "$20$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counted the identity as well",
+    "assumed the group is cyclic and used $\\varphi(5)$",
+    "dropped the elements with second coordinate $0$",
+    "counted subgroups of order $5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Order $5$ iff $5x=0$ and $x\\neq0$",
+    "weight": 2
+   },
+   {
+    "text": "Solutions of $5x=0$: all of $\\mathbb Z_5$ times the order-$5$ subgroup of $\\mathbb Z_{25}$, so $25$",
+    "weight": 1
+   },
+   {
+    "text": "Subtract the identity: $24$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "An element has order $5$ iff $5x=0$ and $x\\neq0$ (order-lagrange).\nIn $\\mathbb Z_5$ all $5$ elements satisfy it; in $\\mathbb Z_{25}$ the solutions form $\\langle5\\rangle$, $5$ elements (subgroup-cyclic).\nPairs: $5\\cdot5=25$; remove the identity.\n$24$ elements (forming $24/4=6$ subgroups of order $5$).",
+  "hints": [
+   "Count solutions of $5x=0$, then remove the identity."
+  ],
+  "check": "sum(1 for a in range(5) for b in range(25) if (a,b)!=(0,0) and 5*b%25==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.perm-groups",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What is the largest possible order of an element of the symmetric group $S_8$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$20$",
+    "$15$",
+    "$30$",
+    "$8$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "chose cycle type $4+3+1$",
+    "used $4+5$, which needs $9$ points",
+    "",
+    "used $2+3+5$, which needs $10$ points",
+    "took the longest cycle"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Order is the lcm of the cycle lengths",
+    "weight": 2
+   },
+   {
+    "text": "Cycle lengths must sum to at most $8$",
+    "weight": 1
+   },
+   {
+    "text": "Compare candidates: $3+5\\to15$ beats $4+3\\to12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Order of a permutation is the lcm of its cycle lengths (perm-groups).\nMaximize $\\operatorname{lcm}$ subject to lengths summing to at most $8$ (nt-gcd: coprime lengths multiply).\nCandidates: $5+3\\to15$, $4+3\\to12$, $4+2+\\ldots\\to4$, $7\\to7$.\nMaximum $15$.",
+  "hints": [
+   "Use coprime cycle lengths; the lengths must fit in 8 points."
+  ],
+  "check": "max(math.lcm(a,b or 1,c or 1) for a in range(1,9) for b in range(9) for c in range(9) if a+b+c<=8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.perm-groups",
+   "t7.order-lagrange"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many elements of the symmetric group $S_5$ have order $6$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$40$",
+    "$30$",
+    "$60$",
+    "$20$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "forgot the two orientations of the $3$-cycle",
+    "counted the $2$-cycle in both orientations",
+    "used $\\binom52\\cdot3$",
+    "used $5!/2$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Order $6$ in $S_5$ forces cycle type $3+2$",
+    "weight": 2
+   },
+   {
+    "text": "Choose the $3$ points, then orient the $3$-cycle",
+    "weight": 1
+   },
+   {
+    "text": "Remaining $2$ points form the $2$-cycle: $10\\cdot2=20$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Order is an lcm of cycle lengths on $5$ points; $6$ needs lengths $3$ and $2$, so type $3+2$ (perm-groups).\nChoose which $3$ points: $\\binom53=10$.\nNumber of $3$-cycles on them: $2$; the remaining pair is one transposition.\n$10\\cdot2=20$ elements. Check by class size: centralizer order $6$, so class size $120/6=20$.",
+  "hints": [
+   "Which cycle types in $S_5$ have lcm $6$?"
+  ],
+  "check": "10*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.dihedral-small",
+   "t7.order-lagrange"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $D_{12}$ be the symmetry group of a regular $12$-gon, of order $24$. How many elements of $D_{12}$ have order $2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$13$",
+    "$14$",
+    "$7$",
+    "$23$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "counted only reflections",
+    "",
+    "counted the half-turn twice",
+    "used the odd-$n$ pattern of $\\tfrac n2+1$",
+    "counted every non-identity element"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Elements are rotations $r^k$ and reflections $sr^k$",
+    "weight": 1
+   },
+   {
+    "text": "All $12$ reflections have order $2$",
+    "weight": 1
+   },
+   {
+    "text": "Among rotations only $r^6$ has order $2$, using order $12/\\gcd(k,12)$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "$D_{12}=\\{r^k\\}\\cup\\{sr^k\\}$ with $|r|=12$ (dihedral-small).\nEvery reflection has order $2$: $12$ elements.\n$|r^k|=12/\\gcd(k,12)$ equals $2$ only for $k=6$ (order-lagrange: order divides $12$).\nTotal $12+1=13$.",
+  "hints": [
+   "Split into rotations and reflections."
+  ],
+  "check": "sum(1 for k in range(12) if 12//math.gcd(k,12)==2)+12",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.dihedral-small",
+   "t7.sylow-action"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $D_6$ be the symmetry group of a regular hexagon, of order $12$. How many conjugacy classes does $D_6$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$4$",
+    "$12$",
+    "$6$",
+    "$7$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "treated all six reflections as one class",
+    "lumped all non-identity rotations together",
+    "assumed the group is abelian",
+    "",
+    "used the pattern $n+1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Class sizes divide $12$ and sum to $12$",
+    "weight": 1
+   },
+   {
+    "text": "Rotations: $r^k\\sim r^{-k}$, giving $\\{e\\},\\{r^3\\},\\{r,r^5\\},\\{r^2,r^4\\}$",
+    "weight": 2
+   },
+   {
+    "text": "Reflections split into two classes of $3$: total $6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Conjugating $r^k$ by a reflection gives $r^{-k}$; by a rotation it is unchanged (dihedral-small).\nRotation classes: $\\{e\\},\\{r^3\\},\\{r,r^5\\},\\{r^2,r^4\\}$.\nFor $n$ even the reflections form two classes of size $n/2=3$ (orbits of conjugation, sizes via orbit-stabilizer: sylow-action).\nCheck $1+1+2+2+3+3=12$, so $6$ classes.",
+  "hints": [
+   "How do rotations and reflections conjugate each other?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.cosets-normal",
+   "t7.perm-groups"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $H=\\langle(1\\,2)\\rangle\\le S_4$. How many elements $g\\in S_4$ satisfy $gHg^{-1}=H$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$2$",
+    "$6$",
+    "$8$",
+    "$24$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took only $H$ itself",
+    "used the index of the Klein four-group",
+    "used the normalizer of $\\langle(1\\,2)(3\\,4)\\rangle$",
+    "assumed $H$ is normal"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$gHg^{-1}=H$ iff $g(1\\,2)g^{-1}=(1\\,2)$",
+    "weight": 1
+   },
+   {
+    "text": "Conjugation relabels the cycle: $g\\{1,2\\}=\\{1,2\\}$",
+    "weight": 2
+   },
+   {
+    "text": "Count: $2!\\cdot2!=4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$H$ has one non-identity element, so $gHg^{-1}=H$ iff $g(1\\,2)g^{-1}=(1\\,2)$ (cosets-normal).\nConjugation relabels: $g(1\\,2)g^{-1}=(g1\\;g2)$ (perm-groups).\nNeed $g\\{1,2\\}=\\{1,2\\}$, hence $g\\{3,4\\}=\\{3,4\\}$.\n$2\\cdot2=4$ elements: $e,(1\\,2),(3\\,4),(1\\,2)(3\\,4)$.",
+  "hints": [
+   "A transposition is conjugated to the transposition on the relabelled points."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.cosets-normal",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $H$ and $K$ be subgroups of a finite group with $|H|=12$, $|K|=18$, and $|H\\cap K|=3$. How many elements does the set $HK=\\{hk:h\\in H,k\\in K\\}$ contain?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$216$",
+    "$36$",
+    "$72$",
+    "$108$",
+    "$27$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "ignored the overlap",
+    "divided by $6=\\gcd(12,18)$ instead of $|H\\cap K|$",
+    "",
+    "divided by $2$",
+    "counted the union $H\\cup K$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Counting formula $|HK|=|H||K|/|H\\cap K|$",
+    "weight": 2
+   },
+   {
+    "text": "Justify by cosets: each element of $HK$ arises $|H\\cap K|$ times",
+    "weight": 1
+   },
+   {
+    "text": "Substitute: $12\\cdot18/3=72$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Map $H\\times K\\to HK$, $(h,k)\\mapsto hk$ (cosets-normal).\nThe fibre over $hk$ is $\\{(hx,x^{-1}k):x\\in H\\cap K\\}$, of size $|H\\cap K|$.\nSo $|HK|=|H||K|/|H\\cap K|$ (the intersection order divides $\\gcd(12,18)=6$: nt-gcd, and $3$ qualifies).\n$12\\cdot18/3=72$.",
+  "hints": [
+   "Each product hk can be written in |H∩K| different ways."
+  ],
+  "check": "12*18//3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.quotient-hom",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many group homomorphisms $\\mathbb Z_{12}\\to\\mathbb Z_{18}$ are there?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$18$",
+    "$3$",
+    "$1$",
+    "$6$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "used the domain order",
+    "allowed any image of $1$ with no constraint",
+    "counted only elements of order $3$",
+    "assumed only the trivial map",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "A homomorphism is determined by the image $a$ of $1$",
+    "weight": 1
+   },
+   {
+    "text": "Condition: $12a\\equiv0\\pmod{18}$",
+    "weight": 2
+   },
+   {
+    "text": "Count solutions: $\\gcd(12,18)=6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A homomorphism out of a cyclic group is determined by the image $a$ of the generator (quotient-hom).\nWell-defined iff $12a=0$ in $\\mathbb Z_{18}$, i.e. $18\\mid12a$.\nThat means $3\\mid a$ (nt-gcd: $\\gcd(12,18)=6$ and $18/6=3$).\n$a\\in\\{0,3,\\dots,15\\}$: $6$ homomorphisms.",
+  "hints": [
+   "Where can the generator go so that 12 copies of it sum to zero?"
+  ],
+  "check": "sum(1 for a in range(18) if 12*a%18==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.quotient-hom",
+   "t7.order-lagrange",
+   "t7.cosets-normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $G=\\mathbb Z_{12}\\times\\mathbb Z_{18}$ and $N=\\langle(3,6)\\rangle$. What is $|G/N|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$18$",
+    "$54$",
+    "$72$",
+    "$36$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "reported $|N|$",
+    "",
+    "divided by $4$ only",
+    "divided by $3$ only",
+    "divided by $6$, the gcd of the factor orders"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$|G/N|=|G|/|N|$ (normal as $G$ is abelian)",
+    "weight": 1
+   },
+   {
+    "text": "Order of $(3,6)$: orders $4$ and $3$ give lcm $12$",
+    "weight": 2
+   },
+   {
+    "text": "$216/12=18$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$G$ is abelian so $N$ is normal and $|G/N|=|G|/|N|$ (cosets-normal, Lagrange).\n$3$ has order $12/\\gcd(3,12)=4$ in $\\mathbb Z_{12}$; $6$ has order $18/6=3$ in $\\mathbb Z_{18}$.\n$|N|=\\operatorname{lcm}(4,3)=12$ (order-lagrange).\n$|G/N|=216/12=18$.",
+  "hints": [
+   "Index = |G|/|N|, and |N| is an lcm of two orders."
+  ],
+  "check": "12*18//(4*3//math.gcd(4,3))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.abelian-class",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many abelian groups of order $720$ are there, up to isomorphism?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$7$",
+    "$20$",
+    "$10$",
+    "$4$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "counted only the $2$-part",
+    "added $5+2$ instead of multiplying",
+    "used $5\\cdot2\\cdot2$ counting two types for $5^1$",
+    "",
+    "counted prime factors of $720$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Factor $720=2^4\\cdot3^2\\cdot5$",
+    "weight": 1
+   },
+   {
+    "text": "Count by partitions of each exponent: $p(4)=5$, $p(2)=2$, $p(1)=1$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply: $10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$720=2^4\\cdot3^2\\cdot5$ (factor).\nAbelian groups of order $p^k$ correspond to partitions of $k$ (abelian-class).\n$p(4)=5$, $p(2)=2$, $p(1)=1$.\nProduct by the Sylow decomposition: $5\\cdot2\\cdot1=10$.",
+  "hints": [
+   "Classify prime by prime; each prime power contributes a partition count."
+  ],
+  "check": "5*2*1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.abelian-class",
+   "t7.order-lagrange"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many elements of order $2$ does $\\mathbb Z_4\\times\\mathbb Z_6\\times\\mathbb Z_{10}$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7$",
+    "$8$",
+    "$3$",
+    "$15$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot to remove the identity",
+    "counted one per factor",
+    "treated $\\mathbb Z_4$ as $\\mathbb Z_2^2$ and counted $2^4-1$",
+    "added $2+2+2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Order $2$ iff $2x=0$ and $x\\neq0$",
+    "weight": 1
+   },
+   {
+    "text": "Each factor has exactly $2$ solutions of $2x=0$",
+    "weight": 2
+   },
+   {
+    "text": "$2^3-1=7$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Order $2$ means $2x=0$, $x\\neq0$ (order-lagrange).\nIn each cyclic factor of even order, $2x=0$ has exactly $2$ solutions (abelian-class: the $2$-torsion has rank $3$).\nSolutions in the product: $2\\cdot2\\cdot2=8$.\nRemove the identity: $7$.",
+  "hints": [
+   "Count the solutions of 2x = 0 factor by factor."
+  ],
+  "check": "sum(1 for a in range(4) for b in range(6) for c in range(10) if (2*a%4,2*b%6,2*c%10)==(0,0,0) and (a,b,c)!=(0,0,0))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.sylow-action",
+   "t7.nt-mod"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many elements of order $11$ must a group of order $55$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1$",
+    "$44$",
+    "$10$",
+    "$4$",
+    "$20$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "counted the subgroup, not the elements",
+    "counted elements of order $5$ assuming $n_5=11$",
+    "",
+    "used $\\varphi(5)$",
+    "assumed $n_{11}=2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Sylow: $n_{11}\\equiv1\\pmod{11}$ and $n_{11}\\mid5$",
+    "weight": 2
+   },
+   {
+    "text": "So $n_{11}=1$, a unique normal subgroup of order $11$",
+    "weight": 1
+   },
+   {
+    "text": "Its $10$ non-identity elements all have order $11$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Sylow's theorem: $n_{11}\\equiv1\\pmod{11}$ and $n_{11}$ divides $5$ (sylow-action).\nCongruence mod $11$ with $n_{11}\\le5$ forces $n_{11}=1$ (nt-mod).\nThe unique Sylow $11$-subgroup is cyclic of order $11$.\nIt has $10$ elements of order $11$, and no others exist.",
+  "hints": [
+   "How many Sylow 11-subgroups are allowed?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.sylow-action",
+   "t7.order-lagrange"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A non-abelian group $G$ has order $21$. How many elements of order $3$ does $G$ have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$7$",
+    "$6$",
+    "$20$",
+    "$14$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "counted one Sylow $3$-subgroup only",
+    "counted the Sylow $3$-subgroups instead of elements",
+    "counted the elements of order $7$",
+    "counted all non-identity elements",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$n_7=1$ from $n_7\\equiv1\\pmod7$, $n_7\\mid3$",
+    "weight": 1
+   },
+   {
+    "text": "If $n_3=1$ both Sylow subgroups are normal and $G$ is abelian, so $n_3=7$",
+    "weight": 2
+   },
+   {
+    "text": "$7$ subgroups, each with $2$ elements of order $3$: $14$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$n_7\\equiv1\\pmod7$, $n_7\\mid3$, so $n_7=1$ (sylow-action).\n$n_3\\in\\{1,7\\}$. If $n_3=1$, two normal subgroups of coprime orders give $G\\cong\\mathbb Z_7\\times\\mathbb Z_3$, abelian: excluded.\nSo $n_3=7$; subgroups of order $3$ meet trivially (prime order).\nEach has $2$ generators (order-lagrange), giving $7\\cdot2=14$ elements.",
+  "hints": [
+   "Non-abelian rules out one Sylow count."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.ring-basics",
+   "t7.nt-gcd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many nilpotent elements does the ring $\\mathbb Z_{72}$ have (including $0$)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$11$",
+    "$12$",
+    "$6$",
+    "$9$",
+    "$24$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "excluded $0$",
+    "",
+    "took only multiples of $12$",
+    "took only multiples of $8$",
+    "took multiples of $3$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Nilpotent iff every prime of $72=2^3\\cdot3^2$ divides $x$",
+    "weight": 2
+   },
+   {
+    "text": "Equivalent to $6\\mid x$",
+    "weight": 1
+   },
+   {
+    "text": "Count multiples of $6$ in $\\mathbb Z_{72}$: $12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$x$ is nilpotent in $\\mathbb Z_{72}$ iff $x^k\\equiv0$, i.e. $72\\mid x^k$ (ring-basics).\nThat holds for some $k$ iff each prime dividing $72$ divides $x$: $2\\mid x$ and $3\\mid x$ (nt-gcd).\nSo $x$ is a multiple of $6$.\n$72/6=12$ elements, including $0$.",
+  "hints": [
+   "Which primes must divide x for some power to be divisible by 72?"
+  ],
+  "check": "sum(1 for x in range(72) if x**6%72==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.ring-basics",
+   "t7.quotient-hom",
+   "t7.nt-mod"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A ring homomorphism $\\varphi$ satisfies $\\varphi(a+b)=\\varphi(a)+\\varphi(b)$ and $\\varphi(ab)=\\varphi(a)\\varphi(b)$; it need not satisfy $\\varphi(1)=1$. How many such maps $\\mathbb Z_{12}\\to\\mathbb Z_{18}$ exist?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$1$",
+    "$4$",
+    "$2$",
+    "$12$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "counted additive homomorphisms",
+    "kept only the zero map",
+    "counted idempotents of $\\mathbb Z_{18}$ without the additive condition",
+    "",
+    "used the domain size $12$ as the count"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\varphi$ is determined by $e=\\varphi(1)$",
+    "weight": 1
+   },
+   {
+    "text": "Need $e^2=e$ and $12e=0$ in $\\mathbb Z_{18}$",
+    "weight": 2
+   },
+   {
+    "text": "Idempotents $0,1,9,10$; only $0,9$ satisfy $12e=0$: $2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\varphi$ is determined by $e=\\varphi(1)$ (quotient-hom).\nMultiplicativity gives $e^2=e$; additivity gives $12e=0$ in $\\mathbb Z_{18}$ (ring-basics).\nIdempotents of $\\mathbb Z_{18}\\cong\\mathbb Z_2\\times\\mathbb Z_9$ by CRT (nt-mod): $0,1,9,10$.\n$12e\\equiv0\\pmod{18}$ needs $3\\mid e$: $e\\in\\{0,9\\}$. Answer $2$ (none sends $1\\mapsto1$).",
+  "hints": [
+   "Image of 1 must be idempotent and killed by 12."
+  ],
+  "check": "sum(1 for e in range(18) if e*e%18==e and 12*e%18==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.domain-ufd",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many Gaussian integers $z=x+yi$ with $x,y\\in\\mathbb Z$ satisfy $|z|^2=25$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$8$",
+    "$4$",
+    "$16$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot the points on the axes",
+    "counted only the units times one element",
+    "doubled the $8$ off-axis points",
+    "counted the three associate classes twice"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Norm is multiplicative and units have norm $1$ (4 units)",
+    "weight": 1
+   },
+   {
+    "text": "Factor $5=(2+i)(2-i)$, so norm-$25$ elements are $5$, $(2+i)^2$, $(2-i)^2$ up to units",
+    "weight": 2
+   },
+   {
+    "text": "$3\\cdot4=12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\mathbb Z[i]$ is a UFD with $N(z)=x^2+y^2$ multiplicative and $4$ units (domain-ufd).\n$5=(2+i)(2-i)$ with both factors prime of norm $5$ (factor).\nNorm $25$: $5\\cdot$unit, $(2+i)^2\\cdot$unit, $(2-i)^2\\cdot$unit; these are non-associate.\n$3\\cdot4=12$; direct count: $(\\pm5,0),(0,\\pm5),(\\pm3,\\pm4),(\\pm4,\\pm3)$.",
+  "hints": [
+   "Factor 25 in Z[i] and count associates."
+  ],
+  "check": "sum(1 for x in range(-5,6) for y in range(-5,6) if x*x+y*y==25)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.domain-ufd",
+   "t7.poly-irred"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many of the five rings $\\mathbb Z[i]$, $\\mathbb Z[\\sqrt{-3}]$, $\\mathbb Z[\\sqrt{-5}]$, $\\mathbb Z[x]$, $\\mathbb Q[x]$ are principal ideal domains?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$1$",
+    "$2$",
+    "$4$",
+    "$5$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "counted $\\mathbb Z[\\sqrt{-3}]$, which fails unique factorization of $4$",
+    "counted only $\\mathbb Q[x]$",
+    "",
+    "counted every ring except $\\mathbb Z[\\sqrt{-5}]$",
+    "counted all, confusing UFD with PID"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\mathbb Z[i]$ is Euclidean via the norm, $\\mathbb Q[x]$ via degree",
+    "weight": 1
+   },
+   {
+    "text": "$\\mathbb Z[x]$ fails: $(2,x)$ is not principal",
+    "weight": 1
+   },
+   {
+    "text": "$\\mathbb Z[\\sqrt{-3}]$ and $\\mathbb Z[\\sqrt{-5}]$ fail unique factorization ($4=2\\cdot2=(1+\\sqrt{-3})(1-\\sqrt{-3})$, $6$ similarly)",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "PID implies UFD; test each ring (domain-ufd).\n$\\mathbb Z[i]$ and $\\mathbb Q[x]$ are Euclidean, hence PIDs.\n$\\mathbb Z[x]$ is a UFD but $(2,x)$ needs two generators (poly-irred: $x$ and $2$ irreducible, neither generates).\n$\\mathbb Z[\\sqrt{-3}]$: $4=2\\cdot2=(1+\\sqrt{-3})(1-\\sqrt{-3})$; $\\mathbb Z[\\sqrt{-5}]$: $6=2\\cdot3=(1+\\sqrt{-5})(1-\\sqrt{-5})$. Not UFDs. Answer $2$.",
+  "hints": [
+   "PID implies UFD; look for failed factorizations or non-principal ideals."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.poly-irred",
+   "t7.nt-mod"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many monic irreducible polynomials of degree $2$ are there over $\\mathbb F_5$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$20$",
+    "$15$",
+    "$5$",
+    "$25$",
+    "$10$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "counted reducible ones",
+    "counted reducible monic quadratics",
+    "counted irreducibles with zero linear term only",
+    "counted all monic quadratics",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "A quadratic is reducible iff it has a root in $\\mathbb F_5$",
+    "weight": 1
+   },
+   {
+    "text": "Reducible monic quadratics: pairs of roots with repetition, $\\binom52+5=15$",
+    "weight": 2
+   },
+   {
+    "text": "$25-15=10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A degree-$2$ polynomial over a field is irreducible iff it has no root (poly-irred).\nTotal monic quadratics over $\\mathbb F_5$: $5^2=25$.\nReducible ones are $(x-a)(x-b)$ with unordered $\\{a,b\\}$: $\\binom52+5=15$ (nt-mod: arithmetic mod $5$).\nIrreducible: $25-15=10$.",
+  "hints": [
+   "Count all monic quadratics, subtract the products of linear factors."
+  ],
+  "check": "(25-5)//2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.poly-irred",
+   "t7.nt-mod"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $a$ be the number of irreducible factors of $x^4+4$ over $\\mathbb Q$ and $b$ the number over $\\mathbb F_5$, each counted with multiplicity. What is $a+b$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$6$",
+    "$3$",
+    "$8$",
+    "$2$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "took $a=1$ (thought it irreducible over $\\mathbb Q$)",
+    "",
+    "took $a=1$ and stopped at $(x^2-1)(x^2+1)$ over $\\mathbb F_5$",
+    "counted complex linear factors for $a$",
+    "took $a=2$ and $b=0$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Factor $x^4+4=(x^2+2x+2)(x^2-2x+2)$ over $\\mathbb Z$",
+    "weight": 2
+   },
+   {
+    "text": "Both quadratics have negative discriminant, so $a=2$",
+    "weight": 1
+   },
+   {
+    "text": "Mod $5$: $x^4+4=x^4-1$ has roots $1,2,3,4$, so $b=4$ and $a+b=6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Add and subtract $4x^2$: $x^4+4=(x^2+2)^2-(2x)^2=(x^2+2x+2)(x^2-2x+2)$ (poly-irred).\nDiscriminants $4-8<0$: no rational roots, so each quadratic is irreducible over $\\mathbb Q$; $a=2$.\nMod $5$ (nt-mod): $4\\equiv-1$, so $x^4-1$ with all of $1,2,3,4$ as roots (Fermat: $r^4=1$).\n$b=4$ distinct linear factors; $a+b=6$.",
+  "hints": [
+   "Try the Sophie Germain identity over Q; reduce mod 5 and test roots."
+  ],
+  "check": "2+sum(1 for r in range(5) if (r**4+4)%5==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f031",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.field-ext",
+   "t7.poly-irred"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "What is the degree $[\\mathbb Q(\\sqrt2,\\sqrt[3]{2}):\\mathbb Q]$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$12$",
+    "$4$",
+    "$6$",
+    "$3$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "added the degrees $2+3$",
+    "multiplied by an extra factor of $2$",
+    "used degree $2$ for $\\sqrt[3]{2}$",
+    "",
+    "ignored $\\sqrt2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$x^3-2$ is irreducible over $\\mathbb Q$ (Eisenstein at $2$), so $[\\mathbb Q(\\sqrt[3]2):\\mathbb Q]=3$",
+    "weight": 2
+   },
+   {
+    "text": "$x^2-2$ is irreducible, degree $2$",
+    "weight": 1
+   },
+   {
+    "text": "Tower law with $2,3$ both dividing the degree: $6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$x^3-2$ is Eisenstein at $2$, so $[\\mathbb Q(\\sqrt[3]2):\\mathbb Q]=3$ (poly-irred).\n$x^2-2$ is Eisenstein at $2$, so $[\\mathbb Q(\\sqrt2):\\mathbb Q]=2$.\nBy the tower law (field-ext) both $2$ and $3$ divide the degree of the compositum, so $6\\mid d$.\n$d\\le2\\cdot3=6$ (adjoin $\\sqrt2$ then $\\sqrt[3]2$ with degree at most $3$), hence $d=6$.",
+  "hints": [
+   "Use the tower law; both 2 and 3 must divide the degree."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-f032",
+  "tier": "c",
+  "type": "full",
+  "level": "T7",
+  "tags": [
+   "t7.field-ext",
+   "t7.subgroup-cyclic"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "In the field $\\mathbb F_{81}$, how many elements $\\alpha$ satisfy $\\mathbb F_3(\\alpha)=\\mathbb F_{81}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$72$",
+    "$78$",
+    "$80$",
+    "$54$",
+    "$69$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "excluded only the $3$ elements of $\\mathbb F_3$",
+    "excluded only $0$",
+    "took two thirds of $81$",
+    "subtracted $|\\mathbb F_3|+|\\mathbb F_9|$, double-counting $\\mathbb F_3$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Subfields of $\\mathbb F_{3^4}$ correspond to divisors of $4$: $\\mathbb F_3\\subset\\mathbb F_9\\subset\\mathbb F_{81}$",
+    "weight": 2
+   },
+   {
+    "text": "$\\mathbb F_3(\\alpha)\\neq\\mathbb F_{81}$ iff $\\alpha\\in\\mathbb F_9$ (which already contains $\\mathbb F_3$)",
+    "weight": 1
+   },
+   {
+    "text": "$81-9=72$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Subfields of $\\mathbb F_{3^4}$ match divisors $1,2,4$ of $4$: $\\mathbb F_3,\\mathbb F_9,\\mathbb F_{81}$ (field-ext).\n$\\mathbb F_3(\\alpha)$ is a subfield, so it is proper iff $\\alpha$ lies in the maximal proper subfield $\\mathbb F_9$ (9 elements; it contains $\\mathbb F_3$).\nConsistent with the cyclic multiplicative group of order $80$: elements of $\\mathbb F_9^\\times$ form its subgroup of order $8$ (subgroup-cyclic).\nGenerators of the extension: $81-9=72$.",
+  "hints": [
+   "Which subfield of F_81 is the largest proper one?"
+  ],
+  "check": "81-9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

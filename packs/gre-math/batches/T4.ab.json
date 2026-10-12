@@ -201,7 +201,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "Find an antiderivative of $x^{-3}$ on $x>0$.",
+    "prompt": "Find the antiderivative of $x^{-3}$ on $x>0$ that tends to $0$ as $x\\to\\infty$.",
     "answer": {
       "kind": "expression",
       "value": "-1/(2*x^2)",
@@ -217,7 +217,7 @@
       ]
     },
     "check": null,
-    "solution": "Use the power rule with $n=-3$: $\\frac{x^{-2}}{-2}=-\\frac{1}{2x^2}$.",
+    "solution": "Use the power rule with $n=-3$: $\\frac{x^{-2}}{-2}=-\\frac{1}{2x^2}$. The constant is $0$ because $-\\frac{1}{2x^2}\\to 0$.",
     "hints": [
       "Raise the exponent by one, then divide by the new exponent."
     ],
@@ -462,7 +462,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -559,7 +559,7 @@
         1
       ]
     },
-    "solution": "Option 1 gives $\\frac{1}{2}\\int\\sqrt{u}\\,du$. Option 2 gives $\\int u^2\\,du$. The other two leave $x$ in the integrand.",
+    "solution": "$u=1+x^2$ gives $\\frac{1}{2}\\int\\sqrt{u}\\,du$. $u=\\sqrt{1+x^2}$ gives $\\int u^2\\,du$. The other two leave $x$ in the integrand.",
     "hints": [
       "Check that every $x$ and $dx$ is replaced."
     ],
@@ -771,7 +771,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -827,7 +827,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "Find an antiderivative of $x\\cos x$.",
+    "prompt": "Find the antiderivative $F$ of $x\\cos x$ with $F(0)=1$.",
     "answer": {
       "kind": "expression",
       "value": "x*sin(x)+cos(x)",
@@ -843,7 +843,7 @@
       ]
     },
     "check": null,
-    "solution": "Let $u=x$ and $dv=\\cos x\\,dx$, so $v=\\sin x$. Then $\\int x\\cos x\\,dx=x\\sin x-\\int\\sin x\\,dx=x\\sin x+\\cos x$.",
+    "solution": "Let $u=x$ and $dv=\\cos x\\,dx$, so $v=\\sin x$. Then $\\int x\\cos x\\,dx=x\\sin x-\\int\\sin x\\,dx=x\\sin x+\\cos x$. Since $F(0)=\\cos 0=1$, the constant is $0$.",
     "hints": [
       "Let $u=x$; $v$ is an antiderivative of $\\cos x$."
     ],
@@ -1027,7 +1027,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -1118,7 +1118,7 @@
         "x"
       ],
       "domain": [
-        0.1,
+        -1.2,
         1.2
       ],
       "also": [
@@ -1311,7 +1311,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -1403,7 +1403,7 @@
         "x"
       ],
       "domain": [
-        0.1,
+        -0.8,
         0.8
       ],
       "also": [
@@ -1588,7 +1588,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "One antiderivative of $\\frac{1}{x(x+1)}$ on $x>0$ is:",
+    "prompt": "Find the antiderivative of $\\frac{1}{x(x+1)}$ on $x>0$ that tends to $0$ as $x\\to\\infty$.",
     "answer": {
       "kind": "expression",
       "value": "ln(x/(x+1))",
@@ -1604,7 +1604,7 @@
       ]
     },
     "check": null,
-    "solution": "Split as $\\frac{1}{x}-\\frac{1}{x+1}$. Integrating gives $\\ln x-\\ln(x+1)=\\ln\\frac{x}{x+1}$.",
+    "solution": "Split as $\\frac{1}{x}-\\frac{1}{x+1}$. Integrating gives $\\ln x-\\ln(x+1)=\\ln\\frac{x}{x+1}$. As $x\\to\\infty$, $\\ln\\frac{x}{x+1}\\to\\ln 1=0$, so the constant is $0$.",
     "hints": [
       "Split the fraction as $\\frac{A}{x}+\\frac{B}{x+1}$."
     ],
@@ -1694,7 +1694,7 @@
         3
       ]
     },
-    "solution": "Each power of $x$ up to $2$ needs its own term, and $x+1$ needs one term. The first and last forms match.",
+    "solution": "Each power of $x$ up to $2$ needs its own term, and $x+1$ needs one term. The two forms with $\\frac{A}{x}$, $\\frac{B}{x^2}$ and $\\frac{C}{x+1}$ match. The others drop the $\\frac{1}{x}$ term or use $(x+1)^2$ instead of $x+1$.",
     "hints": [
       "Give $x$ a term for each power up to $x^2$."
     ],
@@ -1907,7 +1907,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -1976,7 +1976,7 @@
         2
       ]
     },
-    "solution": "Part 2 gives the first statement. Part 1 gives the third. The second reverses the sign, and the fourth returns $F(x)$ instead of $f(x)$.",
+    "solution": "Part 2 gives $\\int_a^b f=F(b)-F(a)$. Part 1 gives $\\frac{d}{dx}\\int_a^x f=f(x)$. The reversed sign is wrong, and so is the result $F(x)$ in place of $f(x)$.",
     "hints": [
       "Recall the two parts of the FTC."
     ],
@@ -2814,7 +2814,7 @@
         4
       ]
     },
-    "solution": "Arc length uses the square of the derivative: $\\sqrt{1+(f')^2}$. The last form is the same expression reordered.",
+    "solution": "Arc length uses the square of the derivative: $\\sqrt{1+(f')^2}$. The form with $f'(x)^2+1$ is the same expression reordered.",
     "hints": [
       "The integrand contains the square of the derivative, not of the function."
     ],
@@ -3052,7 +3052,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -3334,7 +3334,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -2.7,
         2.7
       ],
       "also": [
@@ -3378,7 +3378,7 @@
         4
       ]
     },
-    "solution": "$p=\\frac{3}{2}$ converges, $\\frac{1}{n(\\ln n)^2}$ converges by the integral test, and $\\frac{2^n}{n!}$ converges by the ratio test. The first diverges as a $p$-series, and the third has terms not tending to $0$.",
+    "solution": "$\\sum n^{-3/2}$ converges ($p=\\frac{3}{2}$), $\\sum\\frac{1}{n(\\ln n)^2}$ converges by the integral test, and $\\sum\\frac{2^n}{n!}$ converges by the ratio test. $\\sum\\frac{1}{\\sqrt n}$ diverges as a $p$-series, and $\\sum\\frac{n}{n+1}$ has terms not tending to $0$.",
     "hints": [
       "Pick the test that matches each form."
     ],
@@ -3588,7 +3588,7 @@
         "x"
       ],
       "domain": [
-        0.3,
+        -0.8,
         0.8
       ],
       "also": [
@@ -3659,7 +3659,7 @@
         3
       ]
     },
-    "solution": "Alternating terms with $|a_n|$ decreasing to $0$ converge. Their absolute series diverge for the first, third, and fourth. The second converges absolutely, and the last is not alternating.",
+    "solution": "Alternating terms with $|a_n|$ decreasing to $0$ converge. The absolute series $\\sum\\frac{1}{n}$, $\\sum\\frac{1}{\\sqrt n}$ and $\\sum\\frac{n}{n^2+1}$ diverge, so those three converge conditionally. $\\sum\\frac{(-1)^n}{n^2}$ converges absolutely, and $\\sum\\frac{1}{n^2}$ is not alternating.",
     "hints": [
       "Check the absolute series for each alternating one."
     ],
@@ -4221,7 +4221,7 @@
         4
       ]
     },
-    "solution": "The first, second, and fifth are standard. The third needs $(2n+1)!$ in the denominator. The fourth needs $(-1)^n$ in front of $x^n$.",
+    "solution": "The $e^x$, $\\cos x$ and $\\ln(1+x)$ series are standard. The sine series needs $(2n+1)!$ in the denominator. The series for $\\frac{1}{1+x}$ needs $(-1)^n$ in front of $x^n$.",
     "hints": [
       "Check the factorial and the sign pattern."
     ],
@@ -4504,7 +4504,7 @@
         1
       ]
     },
-    "solution": "The first two are standard. The third omits division by $\\frac{dx}{dt}$, and the fourth is inverted.",
+    "solution": "The $\\frac{y'}{x'}$ rule and the arc-length formula are standard. The second-derivative statement omits division by $x'(t)$, and the inverted ratio is wrong.",
     "hints": [
       "Compare the ratio with the chain rule."
     ],

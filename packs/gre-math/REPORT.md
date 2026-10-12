@@ -98,3 +98,37 @@ Author-flagged ids checked: t2-0032 (closed interval, 5 intercepts, correct), t2
 - No MCQ with two defensible options, no distractor equal to key, no non-core LaTeX font (validator passes).
 
 Checks: `check_items.py --batch=T2.ab.json` OK 117 items; `--batch=T2.c.json` OK 26 items; all 41 expression forms (value plus `also`) check ok:true.
+
+## T4 review (sonnet-5.5)
+
+Blind-solve of every item, then compared to the key.
+
+| File | Items | Key agreement (blind) |
+|---|---|---|
+| T4.ab.json | 144 (48 recall, 96 micro) | 144/144 (100%) |
+| T4.c.json | 32 | 32/32 (100%) |
+| T4.teach.json | 16 cards | no errors; all at most 65 words |
+
+Author-flagged ids checked: t4-0030 (key 2 correct, others fail), t4-0102 (limit comparison, key right), t4-0018 (key [0,1] correct; u=sqrt(1+x^2) works, x dm = u du), t4-0054 (key [0,3] correct), t4-0081 (key [0,1] correct), t4-f024 (key 0<c<e correct, c=e diverges since terms ~ sqrt(2 pi n)), t4-f026 (2 conditional: I and II), t4-f012 (key 2 ln(3/4)+3/2 correct, A=-2 B=3 C=2), t4-f031 (key 2pi/3 - sqrt3/2 re-derived, correct).
+
+### Changed items
+
+| id | class | change |
+|---|---|---|
+| t4-0007, t4-0027, t4-0051 | ill-posed (constant of integration) | "an antiderivative" accepted only C=0 under sample equality. Prompts now fix the constant: tends to 0 at infinity (0007, 0051), F(0)=1 (0027). Keys unchanged; solution gains one sentence. Verified +1 variants now rejected. |
+| t4-0107 | domain | key abs(x) but domain [0.3,2.7] accepted plain x. Domain now [-2.7,2.7]; x rejected. |
+| t4-0015, 0025, 0033, 0036, 0042, 0045, 0061, 0098, 0115 | domain (natural domain excluded) | expression domains widened to include negatives where the function is defined there (0036 to [-1.2,1.2], 0045 and 0115 to [-0.8,0.8], rest [-2.7,2.7]). All value and also forms re-checked ok:true. |
+| t4-0018, 0054, 0063, 0090, 0108, 0117, 0135, 0144 | solution refers to shuffled options by position | solutions cited "Option 1", "first", "third", "last" while options shuffle. Rewritten to cite the content. |
+| t4-f002 | distractor note | why[4] called the correct step (-2x^-2 to +2x^-1) the error; now "-2x^-2 as -2x^-1", which gives 12. |
+| t4-f008 | distractor note | why[1] garbled; now "kept 1/2 instead of 1/4 in front of sin^2 2x" (gives pi/4). |
+| t4-f023 | distractor note | why[4] was incoherent; rewritten. |
+| t4.trig-sub teach | teach card | trap named only the sine dx; now general with the sine case in brackets. |
+
+### Left as is
+- Pass ratio: 3 of 4 (75%) on 22 full items, 4 of 6 (67%) on 10; integer weights cannot hit 70% exactly. Within 5 points either way, kept.
+- t4-f025 and t4-f005: secondary techniques are thin (alt-series is the whole problem; by-parts dominates f005). Kept, as for T2 f018.
+- t4-0102: direct comparison also works, but it is not offered, so one defensible option.
+- Probes: exactly one per technique in the T4 list (u-sub t4-0017, by-parts t4-0022, partial-frac t4-0049, improper-int t4-0067, series-tests t4-0103, taylor t4-0130); all tier b numeric.
+- No MCQ with two defensible options, no distractor equal to key, no micro prompt over 2 sentences, no non-core LaTeX font (all 1888 math spans render under KaTeX strict).
+
+Checks: `check_items.py --batch=T4.ab.json` OK 144 items; `--batch=T4.c.json` OK 32 items; all 38 expression forms (value plus also) check ok:true.

@@ -1,0 +1,3978 @@
+[
+  {
+    "id": "t5-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\mathbf u=\\langle u_1,u_2,u_3\\rangle$ and $\\mathbf v=\\langle v_1,v_2,v_3\\rangle$, which vector is $\\mathbf u\\times\\mathbf v$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\langle u_2v_3-u_3v_2,\\ u_3v_1-u_1v_3,\\ u_1v_2-u_2v_1\\rangle$",
+        "$\\langle u_1v_1,\\ u_2v_2,\\ u_3v_3\\rangle$",
+        "$\\langle u_2v_3-u_3v_2,\\ u_1v_3-u_3v_1,\\ u_1v_2-u_2v_1\\rangle$",
+        "$u_1v_1+u_2v_2+u_3v_3$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "componentwise product, not the cross product",
+        "sign error in the middle component",
+        "dot product is a scalar, not a vector"
+      ]
+    },
+    "solution": "The $x$-component is $u_2v_3-u_3v_2$. The middle component is $u_3v_1-u_1v_3$, the opposite of the usual dot-pattern guess.",
+    "hints": [
+      "Use the $2\\times2$ minors with signs $+,-,+$ along the top row."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement is true for nonzero vectors $\\mathbf u$ and $\\mathbf v$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathbf u\\cdot\\mathbf v=0$ exactly when $\\mathbf u\\perp\\mathbf v$",
+        "$\\mathbf u\\times\\mathbf v=\\mathbf 0$ exactly when $\\mathbf u\\perp\\mathbf v$",
+        "$\\mathbf u\\cdot\\mathbf v=0$ exactly when $\\mathbf u\\parallel\\mathbf v$",
+        "$\\mathbf u\\times\\mathbf v$ is a scalar"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the cross product vanishes for parallel vectors",
+        "the dot product vanishes for perpendicular vectors",
+        "the cross product is a vector"
+      ]
+    },
+    "solution": "The dot product vanishes exactly when the vectors are perpendicular. The cross product vanishes exactly when they are parallel.",
+    "hints": [
+      "Match each product to the geometric condition it detects."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $\\lVert\\mathbf u\\times\\mathbf v\\rVert$ as an expression in $a=\\lVert\\mathbf u\\rVert$, $b=\\lVert\\mathbf v\\rVert$, and the angle $t$ between them.",
+    "answer": {
+      "kind": "expression",
+      "value": "a*b*sin(t)",
+      "vars": [
+        "a",
+        "b",
+        "t"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "sin(t)*a*b",
+        "a*sin(t)*b"
+      ]
+    },
+    "check": null,
+    "solution": "$\\lVert\\mathbf u\\times\\mathbf v\\rVert=\\lVert\\mathbf u\\rVert\\,\\lVert\\mathbf v\\rVert\\sin t$. The magnitude is the area of the parallelogram.",
+    "hints": [
+      "The cross product measures a parallelogram area."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $\\mathbf u=\\langle 1,-2,3\\rangle$ and $\\mathbf v=\\langle 4,0,-1\\rangle$. Find $\\mathbf u\\cdot\\mathbf v$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "1*4+(-2)*0+3*(-1)",
+    "solution": "$\\mathbf u\\cdot\\mathbf v=4+0-3=1$.",
+    "hints": [
+      "Multiply matching components and add."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\mathbf u=\\langle 1,2,0\\rangle$ and $\\mathbf v=\\langle 0,1,3\\rangle$. Find the $x$-component of $\\mathbf u\\times\\mathbf v$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "2*3-0*1",
+    "solution": "The $x$-component is $u_2v_3-u_3v_2=2\\cdot3-0\\cdot1=6$.",
+    "hints": [
+      "Use $u_2v_3-u_3v_2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\|\\langle 2,3,6\\rangle\\|$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "7",
+      "form": "exact"
+    },
+    "check": "math.sqrt(2**2+3**2+6**2)",
+    "solution": "$\\sqrt{4+9+36}=\\sqrt{49}=7$.",
+    "hints": [
+      "Square each component, add, then take the root."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the scalar projection of $\\mathbf u=\\langle 3,4,0\\rangle$ onto $\\mathbf v=\\langle 1,0,0\\rangle$, which is $\\dfrac{\\mathbf u\\cdot\\mathbf v}{\\|\\mathbf v\\|}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "(3*1+4*0+0*0)/math.sqrt(1)",
+    "solution": "$\\mathbf u\\cdot\\mathbf v=3$ and $\\|\\mathbf v\\|=1$, so the projection is $3$.",
+    "hints": [
+      "Divide the dot product by the length of $\\mathbf v$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\mathbf u=\\langle x,2,1\\rangle$ and $\\mathbf v=\\langle 3,y,-1\\rangle$. Write $\\mathbf u\\cdot\\mathbf v$ as an expression in $x$ and $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "3*x+2*y-1",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "2*y+3*x-1",
+        "-1+3*x+2*y"
+      ]
+    },
+    "check": null,
+    "solution": "$\\mathbf u\\cdot\\mathbf v=3x+2y-1$. Pair the components in order and add.",
+    "hints": [
+      "Pair components in order."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.vec-ops"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which pairs of vectors are orthogonal? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\langle 1,2,3\\rangle$ and $\\langle 2,-1,0\\rangle$",
+        "$\\langle 1,1,1\\rangle$ and $\\langle 1,1,-1\\rangle$",
+        "$\\langle 2,0,1\\rangle$ and $\\langle 0,5,0\\rangle$",
+        "$\\langle 2,1,0\\rangle$ and $\\langle 1,1,1\\rangle$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "The dot products are $2-2+0=0$ and $0+0+0=0$. The other two give $1$ and $3$.",
+    "hints": [
+      "Compute each dot product and check for zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which vector is normal to the plane $2x-y+3z=6$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\langle 2,-1,3\\rangle$",
+        "$\\langle 2,-1,6\\rangle$",
+        "$\\langle 2,1,3\\rangle$",
+        "$\\langle -1,2,3\\rangle$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "used the constant $6$ as a coefficient",
+        "sign error on the $y$-coefficient",
+        "swapped the $x$- and $y$-coefficients"
+      ]
+    },
+    "solution": "For $ax+by+cz=d$ the normal is $\\langle a,b,c\\rangle$. The constant $d$ does not enter.",
+    "hints": [
+      "Read the coefficients of $x$, $y$, and $z$ directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A line passes through $P(1,0,2)$ and $Q(4,3,-1)$. Which vector is parallel to the line?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\langle 3,3,-3\\rangle$",
+        "$\\langle 5,3,1\\rangle$",
+        "$\\langle 3,3,3\\rangle$",
+        "$\\langle 1,0,2\\rangle$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "added the points instead of subtracting",
+        "sign error in the $z$-component",
+        "used a point, not a direction"
+      ]
+    },
+    "solution": "A direction is $Q-P=\\langle 3,3,-3\\rangle$.",
+    "hints": [
+      "Subtract the coordinates of the two points."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The plane $2x+3y+4z=12$ meets the $z$-axis at $z=c$. Find $c$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "12/4",
+    "solution": "Set $x=y=0$. Then $4z=12$, so $c=3$.",
+    "hints": [
+      "Set the other two variables to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The plane $2x-y+4z=d$ passes through $(1,2,3)$. Find $d$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "2*1-2+4*3",
+    "solution": "$d=2(1)-2+4(3)=12$.",
+    "hints": [
+      "Substitute the point into the left side."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the distance from the origin to the plane $2x+2y+z=9$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "9/math.sqrt(2**2+2**2+1**2)",
+    "solution": "Distance $=\\dfrac{|9|}{\\sqrt{4+4+1}}=\\dfrac{9}{3}=3$.",
+    "hints": [
+      "Use $\\dfrac{|d|}{\\|\\langle a,b,c\\rangle\\|}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The line $\\mathbf r(t)=\\langle 1+2t,\\,-t,\\,3+t\\rangle$ meets the plane $x+y+z=10$ at $t=t_0$. Find $t_0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "(10-4)/2",
+    "solution": "$(1+2t)+(-t)+(3+t)=4+2t=10$, so $t_0=3$.",
+    "hints": [
+      "Substitute the line's coordinates into the plane equation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A line through $(1,2,3)$ has direction $\\langle 4,-1,5\\rangle$. Write its $y$-coordinate at parameter $t$ as an expression in $t$.",
+    "answer": {
+      "kind": "expression",
+      "value": "2-t",
+      "vars": [
+        "t"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "-t+2",
+        "2-1*t"
+      ]
+    },
+    "check": null,
+    "solution": "$y(t)=2+t\\cdot(-1)=2-t$.",
+    "hints": [
+      "Add the direction times $t$ to the point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the $y$-intercept of the plane $3x+4y+6z=24$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "24/4",
+    "solution": "Set $x=z=0$. Then $4y=24$, so $y=6$.",
+    "hints": [
+      "Set $x$ and $z$ to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lines-planes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which of these points lie on the plane $2x-3y+z=4$? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$(1,0,2)$",
+        "$(0,0,0)$",
+        "$(2,2,2)$",
+        "$(2,2,6)$"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "solution": "$(1,0,2)$ gives $4$ and $(2,2,6)$ gives $4$. The others give $0$.",
+    "hints": [
+      "Substitute each point into the left side."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does $\\dfrac{\\partial f}{\\partial x}(a,b)$ measure?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The rate of change of $f$ as $x$ varies, with $y$ held at $b$",
+        "The rate of change of $f$ as $y$ varies, with $x$ held at $a$",
+        "The average value of $f$ over $x$",
+        "The rate of change of $f$ along the line $y=x$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "swapped which variable is held fixed",
+        "averages instead of differentiating",
+        "a directional derivative, not a partial"
+      ]
+    },
+    "solution": "A partial derivative differentiates in one variable and treats the others as constants.",
+    "hints": [
+      "The variable you differentiate is the only one that moves."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $f_{xy}$ and $f_{yx}$ are continuous near a point, which equation holds there?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$f_{xy}=f_{yx}$",
+        "$f_{xx}=f_{yy}$",
+        "$f_{xy}=-f_{yx}$",
+        "$f_{xy}=f_x+f_y$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "confuses mixed partials with equal second partials",
+        "mixed partials are equal, not opposite",
+        "adds first partials instead of differentiating"
+      ]
+    },
+    "solution": "Clairaut's theorem: continuous mixed partials agree.",
+    "hints": [
+      "Order of differentiation does not matter here."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $f(x,y)=x^3$, what is $\\dfrac{\\partial f}{\\partial y}$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "0",
+      "form": "exact"
+    },
+    "check": "0",
+    "solution": "$f$ does not depend on $y$, so $f_y=0$.",
+    "hints": [
+      "Treat $x$ as a constant when differentiating with respect to $y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $f(x,y)=x^2y^3$. Find $f_x(2,1)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "2*2*1**3",
+    "solution": "$f_x=2xy^3$, so $f_x(2,1)=2\\cdot2\\cdot1=4$.",
+    "hints": [
+      "Differentiate in $x$ with $y$ constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t5-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f(x,y)=xe^{xy}$. Find $f_y(1,0)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "1*1*math.exp(0)",
+    "solution": "$f_y=x\\cdot xe^{xy}=x^2e^{xy}$. At $(1,0)$ this is $1$.",
+    "hints": [
+      "Differentiate $e^{xy}$ with the chain rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f(x,y)=\\sin(xy)+x^2$. Write $f_x$ as an expression in $x$ and $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "y*cos(x*y)+2*x",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "2*x+y*cos(x*y)",
+        "cos(x*y)*y+2*x"
+      ]
+    },
+    "check": null,
+    "solution": "$f_x=y\\cos(xy)+2x$. The chain rule gives the factor $y$.",
+    "hints": [
+      "Differentiate $\\sin(xy)$ with respect to $x$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $z=\\dfrac{x}{y}$. Find $\\dfrac{\\partial z}{\\partial y}$ at $(4,2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1",
+      "form": "exact"
+    },
+    "check": "-4/2**2",
+    "solution": "$z_y=-x/y^2=-4/4=-1$.",
+    "hints": [
+      "Write $x/y$ as $xy^{-1}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f(x,y)=x^3y^2$. Find $f_{xy}(1,2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "6*1**2*2",
+    "solution": "$f_x=3x^2y^2$, then $f_{xy}=6x^2y$. At $(1,2)$ this is $12$.",
+    "hints": [
+      "Differentiate in $y$ after $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.partials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which functions satisfy $f_x=0$ everywhere? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$f=y^2$",
+        "$f=x^2$",
+        "$f=x+y$",
+        "$f=\\sin y$"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "solution": "$f=y^2$ and $f=\\sin y$ do not depend on $x$. The others change with $x$.",
+    "hints": [
+      "Ask whether $x$ appears in the formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $z=f(x(t),y(t))$, which formula gives $\\dfrac{dz}{dt}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$f_x\\,x'(t)+f_y\\,y'(t)$",
+        "$f_x\\,x(t)+f_y\\,y(t)$",
+        "$f_x+f_y$",
+        "$f_x\\,x'(t)\\cdot f_y\\,y'(t)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "used $x$ and $y$ instead of their derivatives",
+        "dropped the derivatives of $x$ and $y$",
+        "multiplied the terms instead of adding"
+      ]
+    },
+    "solution": "Each intermediate variable contributes a partial times a derivative. The contributions add.",
+    "hints": [
+      "Sum one term for each intermediate variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $w=g(u)$ and $u=h(x,y)$, which equals $\\dfrac{\\partial w}{\\partial x}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$g'(u)\\,\\dfrac{\\partial u}{\\partial x}$",
+        "$g(u)\\,\\dfrac{\\partial u}{\\partial x}$",
+        "$g'(u)$",
+        "$\\dfrac{\\partial u}{\\partial x}+g'(u)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "left $g$ instead of $g'$ on the outer function",
+        "forgot the inner derivative factor",
+        "added the factors instead of multiplying"
+      ]
+    },
+    "solution": "The outer derivative is evaluated at $u$, then multiplied by the inner partial.",
+    "hints": [
+      "Multiply the outer derivative by the inner derivative."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $z=f(x,y)$ with $x=x(t)$ and $y=y(t)$. Suppose $f_x(1,2)=3$, $x'(0)=2$, $y'(0)=0$, $x(0)=1$, and $y(0)=2$. Find $\\dfrac{dz}{dt}$ at $t=0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "3*2+0",
+    "solution": "$\\dfrac{dz}{dt}=f_x\\,x'+f_y\\,y'=3\\cdot2+f_y\\cdot0=6$.",
+    "hints": [
+      "The $y$ term vanishes because $y'(0)=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $z=x^2+xy$, $x=t^2$, and $y=t$. Find $\\dfrac{dz}{dt}$ at $t=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "7",
+      "form": "exact"
+    },
+    "check": "(2*1+1)*(2*1)+1*1",
+    "solution": "At $t=1$: $x=1$, $y=1$, $z_x=2x+y=3$, $z_y=x=1$, $x'=2$, $y'=1$. So $dz/dt=3\\cdot2+1\\cdot1=7$.",
+    "hints": [
+      "Evaluate partials and derivatives at $t=1$ before combining."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $w=xyz$ with $x=t$, $y=t^2$, and $z=t^3$. Find $\\dfrac{dw}{dt}$ at $t=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "6*1**5",
+    "solution": "$w=t^6$, so $dw/dt=6t^5$, which is $6$ at $t=1$.",
+    "hints": [
+      "Write $w$ in terms of $t$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $z=e^{x-y}$, $x=2s$, and $y=s$. Write $\\dfrac{dz}{ds}$ as an expression in $s$.",
+    "answer": {
+      "kind": "expression",
+      "value": "exp(s)",
+      "vars": [
+        "s"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "e^s",
+        "e^(s)"
+      ]
+    },
+    "check": null,
+    "solution": "$z_x=e^{x-y}$, $z_y=-e^{x-y}$, $x'=2$, $y'=1$. So $dz/ds=2e^{s}-e^{s}=e^{s}$.",
+    "hints": [
+      "Write $x-y$ in terms of $s$ before differentiating."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\dfrac{dy}{dx}$ at $(3,4)$ on the circle $x^2+y^2=25$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-3/4",
+      "form": "exact"
+    },
+    "check": "-Fraction(3,4)",
+    "solution": "Implicitly, $2x+2y\\,y'=0$, so $y'=-x/y=-3/4$.",
+    "hints": [
+      "Treat $y$ as a function of $x$ and use the chain rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $z=x^2+y^2$ with $x=r$ and $y=2r$. Find $\\dfrac{dz}{dr}$ at $r=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "10",
+      "form": "exact"
+    },
+    "check": "2*1*1+2*2*2",
+    "solution": "At $r=1$: $x=1$, $y=2$, $z_x=2$, $z_y=4$, $x'=1$, $y'=2$. So $dz/dr=2+8=10$.",
+    "hints": [
+      "Evaluate $y$ at $r=1$, not at $r=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-chain"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $w=u^3$ with $u=s^2t$. Write $\\dfrac{\\partial w}{\\partial s}$ as an expression in $s$ and $t$.",
+    "answer": {
+      "kind": "expression",
+      "value": "6*s^5*t^3",
+      "vars": [
+        "s",
+        "t"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "6*t^3*s^5",
+        "3*2*s^5*t^3"
+      ]
+    },
+    "check": null,
+    "solution": "$w=s^6t^3$, so $\\partial w/\\partial s=6s^5t^3$. The chain rule gives $3u^2\\cdot2st$, the same thing.",
+    "hints": [
+      "Use $\\partial w/\\partial s=3u^2\\,\\partial u/\\partial s$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In which direction does $\\nabla f$ point, where $\\nabla f\\neq\\mathbf 0$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Direction of steepest increase of $f$",
+        "Direction of steepest decrease of $f$",
+        "Tangent to the level curve through the point",
+        "Direction in which $f$ stays constant"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign reversed, which is $-\\nabla f$",
+        "the gradient is perpendicular to level curves, not tangent",
+        "zero rate of change, which is the level-curve direction"
+      ]
+    },
+    "solution": "The gradient gives the direction of fastest increase. Its length is that rate.",
+    "hints": [
+      "Compare with the one-variable slope."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression gives the directional derivative of $f$ in the direction of a unit vector $\\mathbf u$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\nabla f\\cdot\\mathbf u$",
+        "$\\nabla f\\times\\mathbf u$",
+        "$f_x+f_y$, whatever $\\mathbf u$ is",
+        "$\\nabla f+\\mathbf u$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "cross product gives a vector, not a rate",
+        "ignores the direction $\\mathbf u$",
+        "adds vectors and gives no rate"
+      ]
+    },
+    "solution": "$D_{\\mathbf u}f=\\nabla f\\cdot\\mathbf u$ when $\\mathbf u$ is a unit vector.",
+    "hints": [
+      "Dot the gradient with the direction."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "At a point where $\\nabla f=\\langle 6,8\\rangle$, what is the maximum value of the directional derivative?",
+    "answer": {
+      "kind": "numeric",
+      "value": "10",
+      "form": "exact"
+    },
+    "check": "math.sqrt(6**2+8**2)",
+    "solution": "The maximum is $\\|\\nabla f\\|=\\sqrt{36+64}=10$.",
+    "hints": [
+      "The maximum is the length of the gradient."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f=x^2y$. Find $D_{\\mathbf u}f(1,2)$ where $\\mathbf u=\\langle 3,4\\rangle/5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "16/5",
+      "form": "exact"
+    },
+    "check": "Fraction(4*3+1*4,5)",
+    "solution": "$\\nabla f=\\langle 2xy,x^2\\rangle=\\langle4,1\\rangle$ at $(1,2)$. Then $\\nabla f\\cdot\\mathbf u=\\frac{12+4}{5}=\\frac{16}{5}$.",
+    "hints": [
+      "Compute the gradient at the point first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $f=x^2+3xy$. Find the sum of the components of $\\nabla f$ at $(1,2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "11",
+      "form": "exact"
+    },
+    "check": "(2*1+3*2)+3*1",
+    "solution": "$\\nabla f=\\langle 2x+3y,\\,3x\\rangle$. At $(1,2)$ it is $\\langle 8,3\\rangle$, and $8+3=11$.",
+    "hints": [
+      "Differentiate in each variable separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t5-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $f=x^2+y^2$. Find $\\|\\nabla f\\|$ at $(3,4)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "10",
+      "form": "exact"
+    },
+    "check": "math.sqrt(6**2+8**2)",
+    "solution": "$\\nabla f=\\langle 2x,2y\\rangle=\\langle 6,8\\rangle$, whose length is $10$.",
+    "hints": [
+      "Find the gradient at the point, then take its length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f=xy$. Write $D_{\\mathbf u}f$ for $\\mathbf u=\\langle 1,1\\rangle/\\sqrt2$ as an expression in $x$ and $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(x+y)/sqrt(2)",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "(y+x)/sqrt(2)",
+        "(x+y)*sqrt(2)/2"
+      ]
+    },
+    "check": null,
+    "solution": "$\\nabla f=\\langle y,x\\rangle$. Dot with $\\langle1,1\\rangle/\\sqrt2$ to get $(x+y)/\\sqrt2$.",
+    "hints": [
+      "Dot the gradient with the unit vector."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f=x^2y+y^3$. Find $D_{\\mathbf v}f(2,1)$ for $\\mathbf v=\\langle 0,-2\\rangle$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-7",
+      "form": "exact"
+    },
+    "check": "-(4*0+7*2)/2",
+    "solution": "$\\nabla f=\\langle 2xy,\\,x^2+3y^2\\rangle=\\langle4,7\\rangle$ at $(2,1)$. The unit vector is $\\langle0,-1\\rangle$, so $D_{\\mathbf v}f=-7$.",
+    "hints": [
+      "Normalize $\\mathbf v$ before the dot product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.gradient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about $\\nabla f$ are true when $f$ is differentiable? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "It points in the direction of greatest increase of $f$",
+        "Its length equals the smallest rate of change of $f$",
+        "It is perpendicular to level curves of $f$",
+        "It is the zero vector at every critical point of $f$"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ]
+    },
+    "solution": "The gradient points uphill, is normal to level curves, and vanishes at critical points. Its length is the largest rate, not the smallest.",
+    "hints": [
+      "Test each claim with $f=x^2+y^2$ at a point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "At a critical point, $D=f_{xx}f_{yy}-f_{xy}^2>0$ and $f_{xx}>0$. What is the point?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Local minimum",
+        "Local maximum",
+        "Saddle point",
+        "Test is inconclusive"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a maximum needs $f_{xx}<0$",
+        "saddles have $D<0$",
+        "the test is inconclusive only when $D=0$"
+      ]
+    },
+    "solution": "A positive $D$ with $f_{xx}>0$ means $f$ curves up in every direction.",
+    "hints": [
+      "Check the sign of $f_{xx}$ after $D$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "At a critical point with $D<0$, the point is a:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Saddle point",
+        "Local maximum",
+        "Local minimum",
+        "Test is inconclusive"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a maximum needs $D>0$ and $f_{xx}<0$",
+        "a minimum needs $D>0$ and $f_{xx}>0$",
+        "the test decides whenever $D\\neq0$"
+      ]
+    },
+    "solution": "When $D<0$, $f$ rises in one direction and falls in another.",
+    "hints": [
+      "Compare with $x^2-y^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "At a critical point, $f_{xx}=4$, $f_{yy}=9$, and $f_{xy}=6$. Find $D$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "0",
+      "form": "exact"
+    },
+    "check": "4*9-6**2",
+    "solution": "$D=36-36=0$, so the second derivative test is inconclusive.",
+    "hints": [
+      "Compute $f_{xx}f_{yy}-f_{xy}^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the value $f$ takes at the critical point of $f=x^2+y^2-4x+6y$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-13",
+      "form": "exact"
+    },
+    "check": "2**2+(-3)**2-4*2+6*(-3)",
+    "solution": "$f_x=2x-4=0$ and $f_y=2y+6=0$, so the point is $(2,-3)$. Then $f=4+9-8-18=-13$.",
+    "hints": [
+      "Set both partials to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f=x^3-3x+y^2$. How many of its critical points are saddle points?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "len([x for x in [1,-1] if 12*x<0])",
+    "solution": "Critical points are $(1,0)$ and $(-1,0)$. There $D=12x$, which is $12$ at $(1,0)$ (minimum) and $-12$ at $(-1,0)$ (saddle).",
+    "hints": [
+      "Compute $D=f_{xx}f_{yy}-f_{xy}^2$ at each critical point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the maximum of $f=xy$ on the triangle $x\\ge0$, $y\\ge0$, $x+y\\le 6$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "9",
+      "form": "exact"
+    },
+    "check": "max(x*(6-x) for x in range(0,7))",
+    "solution": "The only interior critical point is the origin, where $f=0$. On $x+y=6$, $f=x(6-x)$, which is largest at $x=3$, giving $9$.",
+    "hints": [
+      "Check the edges, since the interior has no useful critical point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $f=x^2y+y^2$. Write $D=f_{xx}f_{yy}-f_{xy}^2$ as an expression in $x$ and $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "4*y-4*x^2",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "4*(y-x^2)",
+        "-4*x^2+4*y"
+      ]
+    },
+    "check": null,
+    "solution": "$f_{xx}=2y$, $f_{yy}=2$, $f_{xy}=2x$. So $D=4y-4x^2$.",
+    "hints": [
+      "Compute the three second partials first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the critical value of $f=x^2-2xy+3y^2-2x$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-3/2",
+      "form": "exact"
+    },
+    "check": "Fraction(9,4)-2*Fraction(3,4)+Fraction(3,4)-3",
+    "solution": "$f_x=2x-2y-2=0$ and $f_y=-2x+6y=0$ give $(3/2,\\,1/2)$. Then $f=-3/2$.",
+    "hints": [
+      "Solve the two linear equations."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mv-extrema"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $f=x^2+4y^2$, which statements are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$(0,0)$ is a critical point",
+        "$(0,0)$ is a local maximum",
+        "$(0,0)$ is a local minimum",
+        "$(0,0)$ is a saddle point"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Both partials vanish at the origin. Since $f\\ge0$ with $f=0$ only there, the origin is a local and global minimum.",
+    "hints": [
+      "Compare $f$ with its value at the origin."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "To extremize $f$ subject to $g(x,y)=c$, which system holds at the optimum, where $\\nabla g\\neq\\mathbf 0$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\nabla f=\\lambda\\nabla g$ and $g=c$",
+        "$\\nabla f=\\lambda g$ and $g=c$",
+        "$\\nabla f=\\nabla g$ alone",
+        "$f=\\lambda g$ and $\\nabla f=\\mathbf 0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "$\\lambda$ multiplies the gradient, not the value of $g$",
+        "no multiplier and no constraint",
+        "$\\nabla f$ need not vanish at a constrained extremum"
+      ]
+    },
+    "solution": "At a constrained extremum, $\\nabla f$ is parallel to $\\nabla g$, and the constraint holds.",
+    "hints": [
+      "The gradients line up at the optimum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a Lagrange problem, what does the multiplier $\\lambda$ measure?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Rate of change of the optimal value of $f$ as $c$ changes",
+        "The value of $f$ at the optimum",
+        "The gradient of $g$",
+        "Always zero at an optimum"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is $f$ itself, not its sensitivity",
+        "$\\nabla g$ is a vector, and $\\lambda$ is a scalar",
+        "$\\lambda$ is zero only when the constraint is inactive"
+      ]
+    },
+    "solution": "$\\lambda$ is the sensitivity of the optimal value to the constraint level.",
+    "hints": [
+      "Change $c$ slightly and see what happens to the optimum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Maximize $xy$ subject to $x+y=10$. At the optimum, what is $x$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "10/2",
+    "solution": "$\\nabla f=\\langle y,x\\rangle=\\lambda\\langle1,1\\rangle$ gives $x=y$. With $x+y=10$, $x=5$.",
+    "hints": [
+      "Set the gradient components equal."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Minimize $x^2+y^2$ subject to $x+y=4$. Find the minimum value.",
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "2**2+2**2",
+    "solution": "$2x=\\lambda$ and $2y=\\lambda$, so $x=y=2$. The minimum is $4+4=8$.",
+    "hints": [
+      "Set $\\nabla f=\\lambda\\nabla g$ and use the constraint."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t5-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Maximize $xy$ subject to $x+2y=8$. Find the maximum value.",
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "4*2",
+    "solution": "$\\nabla f=\\langle y,x\\rangle=\\lambda\\langle1,2\\rangle$, so $x=2y$. Then $4y=8$, giving $y=2$, $x=4$, and $xy=8$.",
+    "hints": [
+      "Match the gradient of $f$ to the gradient of $g$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Maximize $x+y$ on the circle $x^2+y^2=8$. Find the maximum value.",
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "2+2",
+    "solution": "The gradient condition gives $x=y$. Then $2x^2=8$ and $x=2$, so $x+y=4$.",
+    "hints": [
+      "Use $x=y$ from the gradient condition."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Minimize $x^2+y^2$ subject to $x+y=4$. Find the multiplier $\\lambda$ at the optimum.",
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "2*2",
+    "solution": "From $2x=\\lambda$ and $x=2$, we get $\\lambda=4$.",
+    "hints": [
+      "Use the first component of $\\nabla f=\\lambda\\nabla g$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Minimize $x^2+y^2$ subject to $x+y=c$. Write the optimal $x$ as an expression in $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "c/2",
+      "vars": [
+        "c"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "(1/2)*c",
+        "c*(1/2)"
+      ]
+    },
+    "check": null,
+    "solution": "$x=y$ and $2x=c$. So $x=c/2$.",
+    "hints": [
+      "Use the constraint to solve for $x$ after finding $x=y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements are necessary at a constrained extremum of $f$ on $g=0$, when $\\nabla g\\neq\\mathbf 0$? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\nabla f=\\lambda\\nabla g$ for some scalar $\\lambda$",
+        "$\\nabla f=\\mathbf 0$",
+        "$g=0$",
+        "$\\nabla f=\\lambda g$ for some scalar $\\lambda$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "The constraint must hold, and $\\nabla f$ must be parallel to $\\nabla g$. $\\nabla f$ need not vanish.",
+    "hints": [
+      "Test whether each condition is required at every constrained extremum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a continuous $f$ on a rectangle $R$, Fubini's theorem says $\\iint_R f\\,dA$:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Can be computed as an iterated integral in either order",
+        "Always equals the product of two single integrals",
+        "Equals $\\int f\\,dx$ alone",
+        "Equals the average of $f$ at the corners times the area"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "true only for separable integrands",
+        "one order alone does not give the double integral",
+        "corner values do not give the integral"
+      ]
+    },
+    "solution": "For continuous integrands on rectangles, the order of integration can be chosen freely.",
+    "hints": [
+      "The order can change, but the answer cannot."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which iterated integral gives the area of $\\{a\\le x\\le b,\\ g_1(x)\\le y\\le g_2(x)\\}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\displaystyle\\int_a^b\\int_{g_1(x)}^{g_2(x)} dy\\,dx$",
+        "$\\displaystyle\\int_a^b\\int_{g_1(x)}^{g_2(x)} dx\\,dy$",
+        "$\\displaystyle\\int_a^b\\int_{g_1(x)}^{g_2(x)} x\\,dy\\,dx$",
+        "$\\displaystyle\\int_a^b\\big(g_1(x)+g_2(x)\\big)\\,dx$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inner variable does not match the $y$-bounds",
+        "integrand $x$ is not the area element",
+        "omits the height $g_2-g_1$"
+      ]
+    },
+    "solution": "The inner bounds are in $y$, so the inner integral is $dy$. Its integrand is $1$.",
+    "hints": [
+      "Match the inner variable to the bounds."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the area of the rectangle $[0,3]\\times[0,2]$ using a double integral.",
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "3*2",
+    "solution": "$\\int_0^3\\int_0^2 dy\\,dx=3\\cdot2=6$.",
+    "hints": [
+      "Integrate $1$ over the rectangle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\displaystyle\\int_0^1\\int_0^2 xy\\,dy\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)*2",
+    "solution": "$\\int_0^2 xy\\,dy=2x$. Then $\\int_0^1 2x\\,dx=1$.",
+    "hints": [
+      "Integrate in $y$ first, treating $x$ as a constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t5-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\displaystyle\\int_0^1\\int_x^1 dy\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "The inner integral is $1-x$. Then $\\int_0^1(1-x)\\,dx=\\frac12$, the area of the triangle.",
+    "hints": [
+      "Sketch the region first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\displaystyle\\int_0^1\\int_0^x y\\,dy\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/6",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)*Fraction(1,3)",
+    "solution": "$\\int_0^x y\\,dy=\\frac{x^2}{2}$. Then $\\int_0^1 \\frac{x^2}{2}\\,dx=\\frac16$.",
+    "hints": [
+      "Integrate in $y$ first, then use the bounds for $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate the inner integral $\\displaystyle\\int_0^x (x+y)\\,dy$ as an expression in $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "3*x^2/2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "(3/2)*x^2",
+        "x^2*3/2"
+      ]
+    },
+    "check": null,
+    "solution": "$\\int_0^x(x+y)\\,dy=x^2+\\frac{x^2}{2}=\\frac{3x^2}{2}$.",
+    "hints": [
+      "Treat $x$ as a constant in the inner integral."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\displaystyle\\iint_T 2\\,dA$, where $T$ is the triangle with vertices $(0,0)$, $(3,0)$, and $(0,3)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "9",
+      "form": "exact"
+    },
+    "check": "2*Fraction(9,2)",
+    "solution": "The area of $T$ is $\\frac92$. Multiply by the constant $2$ to get $9$.",
+    "hints": [
+      "Compute the area, then multiply by the integrand."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.double-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which expressions give the area of the region between $y=x$ and $y=x^2$ for $0\\le x\\le 1$? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\displaystyle\\int_0^1\\int_{x^2}^{x} dy\\,dx$",
+        "$\\displaystyle\\int_0^1\\int_{x}^{x^2} dy\\,dx$",
+        "$\\displaystyle\\int_0^1 (x-x^2)\\,dx$",
+        "$\\displaystyle\\int_0^1 x\\,dx$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "On $[0,1]$ the top curve is $y=x$ and the bottom is $y=x^2$. The area is $\\int_0^1(x-x^2)\\,dx=\\frac16$.",
+    "hints": [
+      "The upper bound must be the larger function."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the Jacobian $\\dfrac{\\partial(x,y)}{\\partial(r,\\theta)}$ for $x=r\\cos\\theta$ and $y=r\\sin\\theta$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$r$",
+        "$1$",
+        "$r^2$",
+        "$\\cos\\theta$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgot the factor $r$",
+        "squared $r$ instead of taking the determinant",
+        "used one partial derivative only"
+      ]
+    },
+    "solution": "The determinant is $r\\cos^2\\theta+r\\sin^2\\theta=r$.",
+    "hints": [
+      "Compute the $2\\times2$ determinant of partials."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the volume element $dV$ in spherical coordinates $(\\rho,\\phi,\\theta)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta$",
+        "$\\rho\\,d\\rho\\,d\\phi\\,d\\theta$",
+        "$\\rho^2\\,d\\rho\\,d\\phi\\,d\\theta$",
+        "$r\\,dr\\,d\\theta\\,dz$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "wrong power of $\\rho$ in the Jacobian",
+        "dropped the factor $\\sin\\phi$",
+        "cylindrical element, not spherical"
+      ]
+    },
+    "solution": "The spherical Jacobian is $\\rho^2\\sin\\phi$.",
+    "hints": [
+      "Include the $\\sin\\phi$ factor from the spherical shell."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In cylindrical coordinates, $dV=F(r)\\,dr\\,d\\theta\\,dz$. Write $F(r)$ as an expression in $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "r",
+      "vars": [
+        "r"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "r^1",
+        "1*r"
+      ]
+    },
+    "check": null,
+    "solution": "The cylindrical Jacobian is $r$, the same as the polar Jacobian.",
+    "hints": [
+      "It equals the polar Jacobian."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write $x^2+y^2$ in polar coordinates as an expression in $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "r^2",
+      "vars": [
+        "r"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "r*r",
+        "r^(2)"
+      ]
+    },
+    "check": null,
+    "solution": "$x^2+y^2=r^2(\\cos^2\\theta+\\sin^2\\theta)=r^2$.",
+    "hints": [
+      "Use $\\cos^2+\\sin^2=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\displaystyle\\iint_D x\\,dA$, where $D=\\{x^2+y^2\\le1,\\ x\\ge0\\}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/3",
+      "form": "exact"
+    },
+    "check": "2*Fraction(1,3)",
+    "solution": "In polar form, $\\int_{-\\pi/2}^{\\pi/2}\\int_0^1 (r\\cos\\theta)\\,r\\,dr\\,d\\theta=2\\cdot\\frac13=\\frac23$.",
+    "hints": [
+      "Convert $x$ and $dA$ to polar before integrating."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\displaystyle\\int_0^{\\pi/2}\\int_0^1\\int_0^2 z\\,r\\,dz\\,dr\\,d\\theta$. Give a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1.570796327",
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/2",
+    "solution": "The integral separates into $\\frac{\\pi}{2}\\cdot\\frac12\\cdot2=\\frac{\\pi}{2}$.",
+    "hints": [
+      "Integrate each variable separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write $x^2+y^2+z^2$ in cylindrical coordinates as an expression in $r$ and $z$.",
+    "answer": {
+      "kind": "expression",
+      "value": "r^2+z^2",
+      "vars": [
+        "r",
+        "z"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "z^2+r^2",
+        "r*r+z^2"
+      ]
+    },
+    "check": null,
+    "solution": "$x^2+y^2=r^2$, so the sum is $r^2+z^2$.",
+    "hints": [
+      "Replace $x^2+y^2$ by $r^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Use spherical coordinates to find the volume of the unit ball. Give the answer as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": "4.188790205",
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "4*math.pi/3",
+    "solution": "$\\int_0^{2\\pi}\\int_0^{\\pi}\\int_0^1\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta=\\frac{4\\pi}{3}$.",
+    "hints": [
+      "Multiply the three separate integrals."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.coord-change"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which integrals equal the area of the unit disk? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\displaystyle\\int_0^{2\\pi}\\int_0^1 r\\,dr\\,d\\theta$",
+        "$\\displaystyle\\int_0^{2\\pi}\\int_0^1 dr\\,d\\theta$",
+        "$\\displaystyle\\int_{-1}^{1}\\int_{-\\sqrt{1-x^2}}^{\\sqrt{1-x^2}} dy\\,dx$",
+        "$\\displaystyle\\int_{-1}^{1}\\int_{-1}^{1} dy\\,dx$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "The first and third both give $\\pi$. The second omits $r$, and the last integrates over the square $[-1,1]^2$, with area $4$.",
+    "hints": [
+      "Check the Jacobian and the region."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $z=f(x,y)\\ge0$ over a region $D$, which integral gives the volume under the surface?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\displaystyle\\iint_D f(x,y)\\,dA$",
+        "$\\displaystyle\\iint_D f(x,y)^2\\,dA$",
+        "$\\displaystyle\\iint_D 1\\,dA$",
+        "A single line integral $\\displaystyle\\int f(x,y)\\,dx$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "squared the height",
+        "gives the area of $D$, not the volume",
+        "a single line integral, not a volume"
+      ]
+    },
+    "solution": "Each small column has base $dA$ and height $f(x,y)$.",
+    "hints": [
+      "Volume is base area times height."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a box $[a,b]\\times[c,d]\\times[e,f]$ and continuous $g$, how can $\\iiint g\\,dV$ be computed?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "As an iterated integral in any order of $dx$, $dy$, $dz$",
+        "Only in the order $dz\\,dy\\,dx$",
+        "Always as a product of three single integrals",
+        "By averaging $g$ at the eight corners"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "any order works for a box",
+        "product form needs a separable integrand",
+        "corner values do not give the integral"
+      ]
+    },
+    "solution": "Fubini's theorem allows any order of iterated integration on a box.",
+    "hints": [
+      "Order can change for continuous integrands on boxes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the volume of the box $[0,2]\\times[0,3]\\times[0,4]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "24",
+      "form": "exact"
+    },
+    "check": "2*3*4",
+    "solution": "$2\\cdot3\\cdot4=24$.",
+    "hints": [
+      "Multiply the three side lengths."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\displaystyle\\int_0^1\\int_0^1\\int_0^1 (x+y+z)\\,dx\\,dy\\,dz$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/2",
+      "form": "exact"
+    },
+    "check": "Fraction(3,2)",
+    "solution": "Each term integrates to $\\frac12$ over the unit cube, so the total is $\\frac32$.",
+    "hints": [
+      "Integrate one term at a time."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the volume of the tetrahedron $x,y,z\\ge0$ with $x+y+z\\le1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/6",
+      "form": "exact"
+    },
+    "check": "Fraction(1,6)",
+    "solution": "$\\int_0^1\\int_0^{1-x}\\int_0^{1-x-y}dz\\,dy\\,dx=\\frac16$.",
+    "hints": [
+      "Use $z$ from $0$ to $1-x-y$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\displaystyle\\int_0^1\\int_0^1\\int_0^1 xyz\\,dV$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/8",
+      "form": "exact"
+    },
+    "check": "Fraction(1,8)",
+    "solution": "Each variable contributes $\\int_0^1 t\\,dt=\\frac12$, so the product is $\\frac18$.",
+    "hints": [
+      "Each variable separates."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\displaystyle\\int_0^{y} z\\,dz$ as an expression in $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "y^2/2",
+      "vars": [
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "y*y/2",
+        "(y^2)/2"
+      ]
+    },
+    "check": null,
+    "solution": "$\\int_0^y z\\,dz=\\frac{y^2}{2}$.",
+    "hints": [
+      "Integrate $z$ with respect to $z$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $E=\\{0\\le x\\le1,\\ 0\\le y\\le x,\\ 0\\le z\\le2\\}$. Find $\\iiint_E 1\\,dV$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)*2",
+    "solution": "The base triangle has area $\\frac12$ and the height is $2$, so the volume is $1$.",
+    "hints": [
+      "Find the base area first, then multiply by the height."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.triple-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which integrals give the volume of the tetrahedron with vertices $(0,0,0)$, $(1,0,0)$, $(0,1,0)$, $(0,0,1)$? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\displaystyle\\int_0^1\\int_0^{1-x}\\int_0^{1-x-y}dz\\,dy\\,dx$",
+        "$\\displaystyle\\int_0^1\\int_0^1\\int_0^1 dz\\,dy\\,dx$",
+        "$\\displaystyle\\int_0^1\\int_0^{1-y}\\int_0^{1-x-y}dz\\,dx\\,dy$",
+        "$\\displaystyle\\int_0^1\\int_0^{1-x}\\int_0^{x}dz\\,dy\\,dx$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "The region is $x,y,z\\ge0$ with $x+y+z\\le1$. The third integral covers it in another order. The cube and the last integral describe other solids.",
+    "hints": [
+      "Each valid integral has upper limits that sum to $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $\\mathbf F=\\nabla\\varphi$ on a curve $C$ from $A$ to $B$, what is $\\displaystyle\\int_C\\mathbf F\\cdot d\\mathbf r$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\varphi(B)-\\varphi(A)$",
+        "$\\varphi(A)-\\varphi(B)$",
+        "$\\varphi(A)+\\varphi(B)$",
+        "Depends on the particular path"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign reversed",
+        "adds the endpoint values",
+        "conservative fields give path-independent integrals"
+      ]
+    },
+    "solution": "The fundamental theorem for line integrals gives the difference of potential at the endpoints.",
+    "hints": [
+      "Compare with $\\int_a^b f'=f(b)-f(a)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "On a simply connected planar domain, which condition makes $\\mathbf F=\\langle P,Q\\rangle$ conservative?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$Q_x=P_y$",
+        "$P_x+Q_y=0$",
+        "$P_x=Q_y$",
+        "$P=Q$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is divergence-free, not conservative",
+        "pairs the wrong partials",
+        "equal components do not imply conservative"
+      ]
+    },
+    "solution": "The curl test $Q_x=P_y$ characterizes conservative fields on such domains.",
+    "hints": [
+      "Check the mixed partials."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $\\displaystyle\\oint_C\\nabla\\varphi\\cdot d\\mathbf r$ for a closed curve $C$ and smooth $\\varphi$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "0",
+      "form": "exact"
+    },
+    "check": "0",
+    "solution": "The endpoints coincide, so $\\varphi(B)-\\varphi(A)=0$.",
+    "hints": [
+      "A closed loop starts and ends at the same point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $\\mathbf F=\\langle y,x\\rangle$. Evaluate $\\displaystyle\\int_C\\mathbf F\\cdot d\\mathbf r$ along the segment from $(0,0)$ to $(1,1)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "1*1-0*0",
+    "solution": "$\\mathbf F=\\nabla(xy)$, so the integral is $\\varphi(1,1)-\\varphi(0,0)=1$.",
+    "hints": [
+      "Find a potential first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\displaystyle\\int_C 2x\\,dx+y\\,dy$, where $C$ is $y=x^2$ from $(0,0)$ to $(1,1)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/2",
+      "form": "exact"
+    },
+    "check": "Fraction(3,2)",
+    "solution": "Substitute $y=x^2$ and $dy=2x\\,dx$: $\\int_0^1(2x+2x^3)\\,dx=1+\\frac12=\\frac32$.",
+    "hints": [
+      "Parametrize by $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t5-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\displaystyle\\int_C x\\,dy$ along the segment from $(0,0)$ to $(2,4)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "Use $x=2t$, $y=4t$ for $0\\le t\\le1$. Then $\\int_0^1 8t\\,dt=4$.",
+    "hints": [
+      "Parametrize the segment."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Give a potential $\\varphi(x,y)$ with $\\varphi(0,0)=0$ for $\\mathbf F=\\langle 2xy,\\ x^2+3y^2\\rangle$.",
+    "answer": {
+      "kind": "expression",
+      "value": "x^2*y+y^3",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "y^3+x^2*y",
+        "y*x^2+y^3"
+      ]
+    },
+    "check": null,
+    "solution": "$\\varphi_x=2xy$ and $\\varphi_y=x^2+3y^2$ give $\\varphi=x^2y+y^3$.",
+    "hints": [
+      "Integrate $P$ in $x$, then fix the rest from $Q$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\displaystyle\\int_C x^2\\,dx$ along the segment from $(0,0)$ to $(1,2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "exact"
+    },
+    "check": "Fraction(1,3)",
+    "solution": "Parametrize by $x=t$, $y=2t$. Then $\\int_0^1 t^2\\,dt=\\frac13$.",
+    "hints": [
+      "Parametrize the segment."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.line-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which vector fields on $\\mathbb R^2$ are conservative? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\langle y,x\\rangle$",
+        "$\\langle -y,x\\rangle$",
+        "$\\langle 2x,2y\\rangle$",
+        "$\\langle y^2,x^2\\rangle$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "$\\langle y,x\\rangle$ and $\\langle 2x,2y\\rangle$ pass the test $Q_x=P_y$. The other two fail it.",
+    "hints": [
+      "Compare $Q_x$ with $P_y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does Green's theorem state for a positively oriented simple closed curve $C$ bounding $D$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\oint_C P\\,dx+Q\\,dy=\\displaystyle\\iint_D (Q_x-P_y)\\,dA$",
+        "$\\oint_C P\\,dx+Q\\,dy=\\displaystyle\\iint_D (P_x-Q_y)\\,dA$",
+        "$\\oint_C P\\,dx+Q\\,dy=\\displaystyle\\iint_D (P_y+Q_x)\\,dA$",
+        "$\\oint_C P\\,dx+Q\\,dy=\\displaystyle\\iint_D (P_x+Q_y)\\,dA$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "signs of the partials reversed",
+        "adds mixed partials instead of subtracting",
+        "divergence belongs to the flux form"
+      ]
+    },
+    "solution": "The line integral equals the double integral of $Q_x-P_y$ over the enclosed region.",
+    "hints": [
+      "Check the derivative on $Q$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which hypothesis is required for Green's theorem on a region $D$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$C$ is positively oriented, simple, closed, piecewise smooth, and $P$, $Q$ have continuous partials on $D$",
+        "$C$ must be a circle",
+        "$\\mathbf F$ must be conservative",
+        "$D$ must be a rectangle"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "any simple closed curve needs no extra condition",
+        "conservative fields give zero, not a general rule",
+        "any region with a boundary works"
+      ]
+    },
+    "solution": "Green's theorem covers any such region, not only circles and rectangles.",
+    "hints": [
+      "Check which hypothesis the theorem needs, not which shape it prefers."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Suppose $Q_x-P_y=4$ on a region $D$ of area $3$. What is $\\oint_C P\\,dx+Q\\,dy$ for the boundary $C$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "4*3",
+    "solution": "By Green's theorem, the integral equals $\\iint_D 4\\,dA=4\\cdot3=12$.",
+    "hints": [
+      "Multiply the integrand by the area."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $C$ be the boundary of $[0,1]^2$, counterclockwise. Evaluate $\\oint_C -y\\,dx+x\\,dy$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "2*1",
+    "solution": "$Q_x-P_y=1-(-1)=2$. The area is $1$, so the integral is $2$.",
+    "hints": [
+      "Compute $Q_x-P_y$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t5-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $C$ be the boundary of the triangle with vertices $(0,0)$, $(1,0)$, $(0,1)$, counterclockwise. Evaluate $\\oint_C x^2\\,dy$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "exact"
+    },
+    "check": "2*Fraction(1,6)",
+    "solution": "$Q_x=2x$, so the double integral is $\\int_0^1\\int_0^{1-x}2x\\,dy\\,dx=\\int_0^1 2x(1-x)\\,dx=\\frac13$.",
+    "hints": [
+      "Integrate $Q_x$ over the triangle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Use Green's theorem on the boundary of the unit disk, counterclockwise, to find the area of the disk from $\\oint_C x\\,dy$. Give a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3.141592654",
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi",
+    "solution": "$Q_x-P_y=1$, so the integral equals the area $\\pi$.",
+    "hints": [
+      "Find $Q_x-P_y$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $P=x^2y$ and $Q=xy^2$, write $Q_x-P_y$ as an expression in $x$ and $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "y^2-x^2",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "-x^2+y^2",
+        "y*y-x*x"
+      ]
+    },
+    "check": null,
+    "solution": "$Q_x=y^2$ and $P_y=x^2$.",
+    "hints": [
+      "Differentiate $Q$ in $x$ and $P$ in $y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $C$ be the boundary of the triangle with vertices $(0,0)$, $(2,0)$, $(0,2)$, counterclockwise. Evaluate $\\oint_C y\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-2",
+      "form": "exact"
+    },
+    "check": "(0-1)*2",
+    "solution": "$Q_x-P_y=0-1=-1$, and the area is $2$. The integral is $-2$.",
+    "hints": [
+      "Compute $Q_x-P_y$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.green"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about Green's theorem are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "It needs $C$ oriented counterclockwise",
+        "It applies only when $P_y=Q_x$",
+        "It converts a line integral over $C$ into a double integral over the region inside $C$",
+        "It applies to curves that cross themselves"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Positive orientation is needed. The theorem turns the boundary integral into a double integral. It applies to simple curves, not self-crossing ones, and does not require $P_y=Q_x$.",
+    "hints": [
+      "Check each claim against the hypotheses."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\mathbf F=\\langle P,Q,R\\rangle$, what is $\\nabla\\cdot\\mathbf F$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$P_x+Q_y+R_z$",
+        "$P_x+Q_x+R_x$",
+        "$P_y+Q_z+R_x$",
+        "$P+Q+R$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "only $x$-derivatives used",
+        "pairs the components with the wrong variables",
+        "sums the components, not their derivatives"
+      ]
+    },
+    "solution": "Divergence sums each component's derivative in its own variable.",
+    "hints": [
+      "Each component is paired with its own variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the curl of a conservative field $\\mathbf F=\\nabla\\varphi$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The zero vector",
+        "The divergence of $\\mathbf F$",
+        "A nonzero constant vector",
+        "The field $\\mathbf F$ itself"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "swapped curl for divergence",
+        "curl of a gradient is zero, not a constant",
+        "curl of a gradient is zero, not $\\mathbf F$"
+      ]
+    },
+    "solution": "The curl of any gradient is the zero vector.",
+    "hints": [
+      "Curl of a gradient vanishes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $\\nabla\\cdot(\\nabla\\times\\mathbf F)$ for a smooth field $\\mathbf F$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "0",
+      "form": "exact"
+    },
+    "check": "0",
+    "solution": "The divergence of a curl is always zero for smooth fields.",
+    "hints": [
+      "Expand both operators and compare mixed partials."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\nabla\\cdot\\mathbf F$ at $(1,2,3)$ for $\\mathbf F=\\langle x^2,y^2,z^2\\rangle$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "2*1+2*2+2*3",
+    "solution": "$\\nabla\\cdot\\mathbf F=2x+2y+2z$, which is $12$ at $(1,2,3)$.",
+    "hints": [
+      "Differentiate each component in its own variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\mathbf F=\\langle -y,x,0\\rangle$, find the $z$-component of $\\nabla\\times\\mathbf F$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "1-(-1)",
+    "solution": "The $z$-component is $Q_x-P_y=1-(-1)=2$.",
+    "hints": [
+      "Use $Q_x-P_y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $\\nabla\\cdot\\mathbf F$ as an expression in $x,y,z$ for $\\mathbf F=\\langle xy,\\ yz,\\ zx\\rangle$.",
+    "answer": {
+      "kind": "expression",
+      "value": "x+y+z",
+      "vars": [
+        "x",
+        "y",
+        "z"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "y+z+x",
+        "z+x+y"
+      ]
+    },
+    "check": null,
+    "solution": "$P_x=y$, $Q_y=z$, $R_z=x$. The sum is $x+y+z$.",
+    "hints": [
+      "Differentiate each component in its own variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the flux of $\\mathbf F=\\langle x,0,0\\rangle$ outward through the face $x=1$ of the cube $[0,1]^3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "1*1",
+    "solution": "On $x=1$, $\\mathbf F\\cdot\\mathbf n=1$. The face has area $1$, so the flux is $1$.",
+    "hints": [
+      "Dot $\\mathbf F$ with the outward normal."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the $z$-component of $\\nabla\\times\\mathbf F$ at $(1,2)$ for $\\mathbf F=\\langle x^2y,\\ xy^2,\\ 0\\rangle$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "2**2-1**2",
+    "solution": "$Q_x-P_y=y^2-x^2$, which is $4-1=3$ at $(1,2)$.",
+    "hints": [
+      "Compute $Q_x-P_y$ and then substitute."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.div-curl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements are true for smooth fields and functions? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\nabla\\cdot(\\nabla\\times\\mathbf F)=0$",
+        "$\\nabla\\times(\\nabla f)=\\mathbf 0$",
+        "$\\nabla\\cdot(\\nabla f)=0$ for every $f$",
+        "$\\nabla\\times\\mathbf F$ is always a scalar"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Both identities hold for smooth functions. The Laplacian of $f$ is generally nonzero. The curl of a field in space is a vector.",
+    "hints": [
+      "Test each identity on a simple example."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does Stokes' theorem relate?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Circulation of $\\mathbf F$ around $\\partial S$ to the flux of $\\nabla\\times\\mathbf F$ through $S$",
+        "Flux through a closed surface to a triple integral of $\\nabla\\times\\mathbf F$",
+        "$\\oint_C\\mathbf F\\cdot d\\mathbf r$ to $\\iint_S \\nabla\\cdot\\mathbf F\\,dS$",
+        "Two line integrals over the same curve"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "mixes up the divergence theorem with the curl",
+        "divergence, not curl, belongs in this surface integral",
+        "involves no surface"
+      ]
+    },
+    "solution": "Stokes' theorem equates circulation around a boundary with the flux of the curl through the surface.",
+    "hints": [
+      "Match the curve integral to the surface integral."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does the divergence theorem state for a closed surface $S$ bounding a solid $E$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Outward flux of $\\mathbf F$ through $S$ equals $\\displaystyle\\iiint_E \\nabla\\cdot\\mathbf F\\,dV$",
+        "Outward flux equals $\\displaystyle\\iiint_E \\nabla\\times\\mathbf F\\,dV$",
+        "Outward flux equals $\\displaystyle\\iint_S \\nabla\\times\\mathbf F\\,dS$",
+        "Outward flux equals $\\displaystyle\\oint_C \\mathbf F\\cdot d\\mathbf r$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "curl is a vector and does not integrate to flux",
+        "Stokes' form, which needs a boundary curve",
+        "a line integral, which needs a curve"
+      ]
+    },
+    "solution": "Outward flux equals the triple integral of the divergence over the enclosed solid.",
+    "hints": [
+      "Divergence goes with solids, curl goes with surfaces."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A solid $E$ has volume $2$, and $\\nabla\\cdot\\mathbf F=5$ throughout. What is the outward flux through its boundary?",
+    "answer": {
+      "kind": "numeric",
+      "value": "10",
+      "form": "exact"
+    },
+    "check": "5*2",
+    "solution": "The divergence theorem gives $\\iiint_E 5\\,dV=5\\cdot2=10$.",
+    "hints": [
+      "Multiply the divergence by the volume."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the outward flux of $\\mathbf F=\\langle x^2,y^2,z^2\\rangle$ through the boundary of $[0,1]^3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "$\\nabla\\cdot\\mathbf F=2x+2y+2z$. Its integral over the cube is $1+1+1=3$.",
+    "hints": [
+      "Integrate the divergence over the cube."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $C$ be the boundary of $[0,1]^2$ in the plane $z=0$, counterclockwise. For $\\mathbf F=\\langle y,0,0\\rangle$, find $\\oint_C\\mathbf F\\cdot d\\mathbf r$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1",
+      "form": "exact"
+    },
+    "check": "0-1",
+    "solution": "The curl's $z$-component is $0-1=-1$. The square has area $1$, so Stokes gives $-1$.",
+    "hints": [
+      "Use the $z$-component of the curl."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the outward flux of $\\mathbf F=\\langle 0,0,z^3\\rangle$ through the boundary of $[0,1]^3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "3*Fraction(1,3)",
+    "solution": "$\\nabla\\cdot\\mathbf F=3z^2$. Integrating over the cube gives $\\int_0^1 3z^2\\,dz=1$.",
+    "hints": [
+      "Only $z$ matters in the divergence."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $\\nabla\\cdot\\mathbf F$ as an expression in $x$ and $z$ for $\\mathbf F=\\langle x^2z,\\ y,\\ 0\\rangle$.",
+    "answer": {
+      "kind": "expression",
+      "value": "2*x*z+1",
+      "vars": [
+        "x",
+        "z"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "1+2*x*z",
+        "2*z*x+1"
+      ]
+    },
+    "check": null,
+    "solution": "$P_x=2xz$, $Q_y=1$, and $R_z=0$. The sum is $2xz+1$.",
+    "hints": [
+      "Differentiate each component in its own variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $C$ be the boundary of $[0,1]^2$ in the plane $z=0$, counterclockwise. For $\\mathbf F=\\langle -y,x,0\\rangle$, find $\\oint_C\\mathbf F\\cdot d\\mathbf r$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "2*1",
+    "solution": "The $z$-component of the curl is $2$. Over a unit square, Stokes gives $2$.",
+    "hints": [
+      "Compute the $z$-component of the curl first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.stokes-gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Stokes' theorem needs the surface orientation to match the boundary orientation",
+        "The divergence theorem needs $S$ to be a closed surface",
+        "Stokes' theorem on a closed surface gives a nonzero result in general",
+        "The divergence theorem computes a circulation around a curve"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Stokes needs a boundary with matching orientation. A closed surface has no boundary, so its Stokes integral is zero. The divergence theorem gives flux, not circulation.",
+    "hints": [
+      "Check each claim against the hypotheses."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]
