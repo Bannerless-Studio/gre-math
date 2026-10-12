@@ -1,4 +1,4 @@
-// build.sh fills 3797178041-1462187 (cksum of the built page sources) and index.html (the page's file name),
+// build.sh fills 1252871093-1952829 (cksum of the built page sources) and index.html (the page's file name),
 // so every rebuild that changes the page also changes sw.js and the browser installs it.
 //
 // - Cache-first for the page only (the pack is inlined into it). No other URL is stored.
@@ -14,7 +14,7 @@
 //   already loaded (the page is self-contained); the next load gets the new build.
 // Kill switch / rollback: README "Offline use"; never delete a published sw.js.
 "use strict";
-const BUILD = "3797178041-1462187";
+const BUILD = "1252871093-1952829";
 const PAGE = "index.html";
 const MARK = "<!--pe-build:" + BUILD + "-->";
 const SCOPE = self.registration ? self.registration.scope : new URL("./", self.location.href).href;

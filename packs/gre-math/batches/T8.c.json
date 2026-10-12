@@ -272,7 +272,7 @@
     "weight": 1
    },
    {
-    "text": "Reject the others (harmonic and log are unbounded; the last two have no limit)",
+    "text": "Reject the others (harmonic partial sums and $\\ln n$ are unbounded; $(-1)^n$ and $\\sin n$ have no limit)",
     "weight": 1
    }
   ],
@@ -969,12 +969,12 @@
     "weight": 1
    },
    {
-    "text": "Select the first series",
+    "text": "Select $\\sum\\left(1-\\frac1n\\right)^{n^2}$",
     "weight": 1
    }
   ],
   "pass": 3,
-  "solution": "Root test on the first series: $a_n^{1/n}=(1-\\frac1n)^n\\to e^{-1}<1$ (limit-special), so it converges (series-formal).\n$\\sum\\frac1{n\\ln n}$ diverges by the integral test. $\\sin\\frac1n\\sim\\frac1n$ and $\\frac{n+1}{n^2+1}\\sim\\frac1n$ diverge by limit comparison.\nFourth: $a_n^{1/n}=\\frac{(1+1/n)^n}{2}\\to\\frac e2>1$, diverges (series-tests).",
+  "solution": "Root test on $\\sum(1-\\frac1n)^{n^2}$: $a_n^{1/n}=(1-\\frac1n)^n\\to e^{-1}<1$ (limit-special), so it converges (series-formal). $\\sum\\frac1{n\\ln n}$ diverges by the integral test. $\\sin\\frac1n\\sim\\frac1n$ and $\\frac{n+1}{n^2+1}\\sim\\frac1n$ diverge by limit comparison. For $\\sum\\frac{(1+1/n)^{n^2}}{2^n}$: $a_n^{1/n}=\\frac{(1+1/n)^n}{2}\\to\\frac e2>1$, diverges (series-tests).",
   "hints": [
    "Try the root test on the terms with exponent $n^2$."
   ],

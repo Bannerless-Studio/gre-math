@@ -881,7 +881,7 @@
   ],
   "critical": [],
   "difficulty": 1,
-  "prompt": "For $f(x)=3x$ and $\\varepsilon=0.6$, which $\\delta$ works at every point $c$?",
+  "prompt": "For $f(x)=3x$ and $\\varepsilon=0.6$, what is the largest $\\delta$ that works at every point $c$?",
   "answer": {
    "kind": "numeric",
    "value": "1/5",
@@ -985,7 +985,7 @@
   ],
   "critical": [],
   "difficulty": 2,
-  "prompt": "For $f(x)=x^2$ at $c=1$, use the bound $|x^2-1|<3|x-1|$ valid for $|x-1|<1$. Find the $\\delta\\le1$ this bound yields for $\\varepsilon=0.3$.",
+  "prompt": "For $f(x)=x^2$ at $c=1$, use the bound $|x^2-1|<3|x-1|$ valid for $|x-1|<1$. What is the largest $\\delta\\le1$ for which this bound guarantees $|x^2-1|<0.3$?",
   "answer": {
    "kind": "numeric",
    "value": "1/10",
@@ -1042,7 +1042,7 @@
   ],
   "critical": [],
   "difficulty": 2,
-  "prompt": "For $f(x)=ax+b$ with $a\\neq0$, find a $\\delta$ depending on $\\varepsilon$ and $a$ that works at every $c$. Write $t$ for $\\varepsilon$.",
+  "prompt": "For $f(x)=ax+b$ with $a>0$, find the largest $\\delta$ that works at every $c$ for the tolerance $\\varepsilon$. Write $t$ for $\\varepsilon$.",
   "answer": {
    "kind": "expression",
    "value": "t/abs(a)",
@@ -1433,7 +1433,7 @@
   ],
   "critical": [],
   "difficulty": 2,
-  "prompt": "Find the Lipschitz constant of $f(x)=x^2$ on $[0,3]$.",
+  "prompt": "Find the least Lipschitz constant of $f(x)=x^2$ on $[0,3]$.",
   "answer": {
    "kind": "numeric",
    "value": 6,
@@ -2071,7 +2071,7 @@
   "answer": {
    "kind": "mcq",
    "options": [
-    "All functions with a derivative",
+    "All bounded functions",
     "Bounded functions whose set of discontinuities has measure zero",
     "Functions continuous at $a$ only",
     "All unbounded functions"
@@ -3282,7 +3282,7 @@
    ]
   },
   "check": null,
-  "solution": "Intervals are connected. The other sets split into pieces with no connecting path.",
+  "solution": "Intervals are connected. $[0,1]\\cup[2,3]$ and $(0,1)\\cup\\{2\\}$ split into two separated pieces, and $\\mathbb{Q}$ splits around any irrational.",
   "hints": [
    "A gap or isolated point disconnects."
   ],
@@ -4134,7 +4134,7 @@
   ],
   "critical": [],
   "difficulty": 1,
-  "prompt": "Which function is differentiable at $0$ but has a discontinuous derivative there?",
+  "prompt": "Define each candidate by its formula for $x\\ne0$ and by $f(0)=0$. Which is differentiable at $0$ but has a discontinuous derivative there?",
   "answer": {
    "kind": "mcq",
    "options": [

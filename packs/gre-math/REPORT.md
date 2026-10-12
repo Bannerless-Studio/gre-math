@@ -219,3 +219,73 @@ Every countable claim was recomputed by brute force in Python (gcd/lcm counts, Z
 - No distractor equals the key, no non-core LaTeX font, expression domains admit no wrong-but-sample-equal answer (all 17 expression items are polynomial or rational identities).
 
 Checks: `check_items.py --batch=T7.ab.json` OK 144 items; `--batch=T7.c.json` OK 32 items; all 38 expression forms (value plus `also`) check ok:true.
+
+## T8 review (sonnet-5.5)
+
+| File | Items | Key agreement (blind) |
+|---|---|---|
+| T8.ab.json | 135 (45 recall, 90 micro) | 135/135 (100%) |
+| T8.c.json | 30 | 30/30 (100%) |
+| T8.teach.json | 15 cards | 3 edited |
+
+Every multi-select statement was justified individually (theorem or counterexample) before comparing with the key. Author-flagged ids t8-0071, 0043, 0052, 0125, 0134 all match. Full items f007, f018 (rubric partial sum recomputed: H_4m - H_2m/2 - H_m/2 gives (3/2)ln2), f028 (five countable sets) and the 16 proof-type items all match their keys.
+
+### Changed items
+
+| id | class | change |
+|---|---|---|
+| t8-0028 | ill-posed | "which delta works" (any smaller works) now "the largest delta" |
+| t8-0031 | ill-posed | "the delta this bound yields" now "largest delta <= 1 for which the bound guarantees < 0.3" |
+| t8-0033 | ill-posed | "a delta" (expression, smaller ones valid) now "the largest delta", with a > 0 so t/abs(a) equals t/a on the domain |
+| t8-0045 | ill-posed | "the Lipschitz constant" now "the least Lipschitz constant" |
+| t8-0065 | two defensible options | "All functions with a derivative" is integrable (differentiable implies continuous); now "All bounded functions" |
+| t8-0102 | solution wording | "no connecting path" conflated path-connected and connected; now separation wording |
+| t8-0129 | ill-posed | x sin(1/x) and x^2 sin(1/x) undefined at 0; prompt now fixes f(0)=0 |
+| t8-f005 | rubric mismatch | "last two have no limit" pointed at the wrong options; now names (-1)^n and sin n |
+| t8-f017 | positional reference | solution and rubric cited options by position ("first", "Fourth", "last"); options shuffle, now named by formula |
+| teach cardinality | missing dependency | added algebraic numbers countable and monotone jumps countable (used by 0125, f027, f028); 69 words, math counted |
+| teach riemann | missing dependency | added "countable sets have measure zero" (used by 0071, f015); 70 words |
+| teach compact-conn | missing dependency | added open-cover definition (used by f026); 60 words |
+
+### Left as is
+- All 30 full items: total weight 4, pass 3 (75%), same convention as T3 to T7.
+- t8-f025 and f021 lean on one technique with a thin secondary; kept.
+- Probes: one per CURRICULUM list technique (seq-conv 0013, cont-eps 0031, unif-conv 0085, metric-open 0094, compact-conn 0104, cardinality 0121); all tier b numeric.
+- No distractor equals key, all LaTeX is KaTeX core, expression domains admit no wrong-but-sample-equal answer, every `why` array aligns with its options.
+
+Checks: `check_items.py --batch=T8.ab.json` OK 135 items; `--batch=T8.c.json` OK 30 items; all 36 expression forms (value plus `also`) ok:true.
+
+## T9 review (sonnet-5.5)
+
+Counts: `T9.ab.json` 171 items (57 recall, 114 micro; 104 numeric, 40 mcq, 14 multi, 13 expression), `T9.c.json` 38 full, `T9.teach.json` 19 cards.
+
+Blind-solve agreement (key vs my independent answer; countable and probabilistic claims brute-forced by script: MISSISSIPPI gaps, stars-and-bars with bounds, onto functions, no-111 strings, C5 colorings, loop counts, Euler-circuit edge deletion; Simpson, Newton, residue and eigenvalue items recomputed by hand):
+
+| file | items | agree | rate |
+|---|---|---|---|
+| T9.ab | 171 (13 expression items checked by hand and by `engine/answer.js`) | 171 | 100% |
+| T9.c | 38 | 38 | 100% |
+| T9.teach | 19 cards | no errors found | n/a |
+
+No wrong keys. All defects were wording, distractor or domain issues.
+
+Changed items (`T9.ab.json`; ids kept):
+
+| id | class | change |
+|---|---|---|
+| t9-0011 | distractor true | "no more than $n$ objects" was a true statement (author's own why said so); replaced by "at least $n$ objects" (false for $n\ge3$) |
+| t9-0018 | trivial option, solution wording | option "There are 11 pigeons" restated the prompt; replaced by "Some hole holds at most one pigeon" (guaranteed, since $11<20$). Key `[0,4]` unchanged. Solution rewritten (old text was garbled) |
+| t9-0089 | convention | prompt now states symmetric about center, finite mean, single mode (Cauchy has no mean; flat-top shapes have no unique mode). Key unchanged. Solution covers the shift option |
+| t9-0099 | notation hazard | option "$2\sqrt{-1}$" depends on the $\sqrt{-1}=i$ convention; replaced by "$2e^{i\pi/2}$" (still equal to $2i$, key unchanged) |
+| t9-0080 | expression domain | sampling domain $[0.3,2.7]$ left the stated range $0\le x\le1$ (true $F$ is 1 beyond it); domain now $[0.1,0.95]$ |
+| t9-0004, 0054, 0063, 0139, 0140 | micro prompt length | 3-sentence prompts merged to 2 sentences, content unchanged |
+
+Checks: `python3 -I tools/check_items.py --batch=.../T9.ab.json` gives `OK 171 items`; `.../T9.c.json` gives `OK 38 items`. Every expression `value` and `also` form in T9.ab passes `check(spec, form)` with ok:true (13 items, 35 forms); `value+0.001` is rejected for all.
+
+Left as is:
+- Probes: exactly one `probe: true` per list technique (counting t9-0004, prob-basics t9-0058, rand-var t9-0067, complex-arith t9-0094, ode-linear t9-0139); all tier b, micro, numeric.
+- Full items: rubric lines match solution steps in all 38. `pass` is 3 of 4 (75%) or 4 of 5 (80%); no integer weights give exactly 70% at those totals, left alone. Distractor `why` fields spot-verified numerically for f001 to f006, f013, f020, f022, f027 (each wrong option maps to the stated mistake).
+- Borderline two-technique items kept: t9-f007 (handshake plus tree edge count plus one linear equation), t9-f011 (binary search plus log floor). Both still need the second step to reach the key.
+- t9-f017, f021 to f027 (except f024), f030 to f032, f034, f037, f038 have `check: null`; accepted by the checker, keys verified by hand here.
+- Author-flagged items checked and correct: t9-0099 (reworded), 0162 ($\{0,1,3\}$: Euler global error is $O(h)$, left-endpoint $O(h)$), 0048 (10), 0089 (reworded), 0043 (1; $K_{3,3}$ minus an edge is planar), f034 (period $\pi\sqrt2$), f024 ($a=-3$, $v(1,1)=3$), f011 (10).
+- Teach cards: all 19 are at most 70 words, each states a move and a trap, no mathematical errors found; no edits.

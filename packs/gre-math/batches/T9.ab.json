@@ -114,7 +114,7 @@
     ],
     "critical": [],
     "difficulty": 1,
-    "prompt": "Five people sit in a row. Two specific people must sit next to each other. How many seatings are possible?",
+    "prompt": "Five people sit in a row, and two specific people must sit next to each other. How many seatings are possible?",
     "answer": {
       "kind": "numeric",
       "value": 48,
@@ -336,14 +336,14 @@
         "at most one object",
         "at least two objects",
         "exactly two objects",
-        "no more than $n$ objects"
+        "at least $n$ objects"
       ],
       "correct": 1,
       "why": [
         "says nothing about a crowded box",
         "",
         "claims more than the principle gives",
-        "true but says nothing about crowding"
+        "confuses the number of boxes with the load of one box"
       ]
     },
     "check": null,
@@ -543,7 +543,7 @@
         "Some hole is empty",
         "No hole holds more than one pigeon",
         "Every hole holds at least one pigeon",
-        "There are $11$ pigeons"
+        "Some hole holds at most one pigeon"
       ],
       "correct": [
         0,
@@ -551,7 +551,7 @@
       ]
     },
     "check": null,
-    "solution": "Pigeonhole forces a crowded hole. But the pigeons can fill every hole with $2$ in one, so emptiness is not forced. The pigeon count is $11$ by hypothesis.",
+    "solution": "Pigeonhole forces a hole with at least two pigeons. Nothing forces an empty hole or a full one: one hole with two pigeons and nine holes with one each is allowed. If every hole held at least two pigeons there would be at least $20>11$, so some hole holds at most one.",
     "hints": [
       "Try to fill every hole with at most one pigeon."
     ],
@@ -1669,7 +1669,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "A loop runs $i$ from $1$ to $n$. For each $i$, an inner loop runs $j$ from $1$ to $i$ and does one step. Give the total number of inner steps as a function of $n$.",
+    "prompt": "A loop runs $i$ from $1$ to $n$, and for each $i$ an inner loop runs $j$ from $1$ to $i$ doing one step. Give the total number of inner steps as a function of $n$.",
     "answer": {
       "kind": "expression",
       "value": "(n^2+n)/2",
@@ -1959,7 +1959,7 @@
     ],
     "critical": [],
     "difficulty": 1,
-    "prompt": "A bag has $3$ red and $2$ blue balls. Two are drawn without replacement. What is the probability both are red?",
+    "prompt": "A bag has $3$ red and $2$ blue balls, and two are drawn without replacement. What is the probability both are red?",
     "answer": {
       "kind": "numeric",
       "value": "3/10",
@@ -2494,8 +2494,8 @@
         "x"
       ],
       "domain": [
-        0.3,
-        2.7
+        0.1,
+        0.95
       ],
       "also": [
         "x*x",
@@ -2776,7 +2776,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "For a symmetric unimodal distribution, which statements are true?",
+    "prompt": "A distribution is symmetric about its center, has a finite mean, and has a single mode. Which statements are true?",
     "answer": {
       "kind": "multi",
       "options": [
@@ -2793,7 +2793,7 @@
       ]
     },
     "check": null,
-    "solution": "Symmetry makes the mean and median coincide, and unimodal symmetry puts the mode there too. The mean is not always above the median, and spread is not the range.",
+    "solution": "Symmetry puts the mean and median at the center, and a single mode on a symmetric shape sits at the center too. The mean is not always above the median, and spread is not the range. Shifting every value by a constant shifts the mean by it.",
     "hints": [
       "Think about a symmetric bell shape."
     ],
@@ -3101,7 +3101,7 @@
       "options": [
         "$2i$",
         "$-2i$",
-        "$2\\sqrt{-1}$",
+        "$2e^{i\\pi/2}$",
         "$4i$"
       ],
       "correct": [
@@ -3110,7 +3110,7 @@
       ]
     },
     "check": null,
-    "solution": "Principal square root has positive imaginary part, so $2i$ and $2\\sqrt{-1}=2i$ are correct. $-2i$ is the other root, and $4i$ squares to $-16$.",
+    "solution": "Principal square root has positive imaginary part, so $2i$ and $2e^{i\\pi/2}=2i$ are correct. $-2i$ is the other root, and $4i$ squares to $-16$.",
     "hints": [
       "Square each candidate and compare with $-4$."
     ],
@@ -4386,7 +4386,7 @@
     ],
     "critical": [],
     "difficulty": 1,
-    "prompt": "Solve $y''-5y'+6y=0$ with $y(0)=3$ and $y'(0)=8$. Write $y=c_1e^{2x}+c_2e^{3x}$. Find $c_1$.",
+    "prompt": "Solve $y''-5y'+6y=0$ with $y(0)=3$ and $y'(0)=8$, written $y=c_1e^{2x}+c_2e^{3x}$. Find $c_1$.",
     "answer": {
       "kind": "numeric",
       "value": 1,
@@ -4414,7 +4414,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "Solve $y''-y=0$ with $y(0)=4$ and $y'(0)=2$. Write $y=Ae^x+Be^{-x}$. Find $A$.",
+    "prompt": "Solve $y''-y=0$ with $y(0)=4$ and $y'(0)=2$, written $y=Ae^x+Be^{-x}$. Find $A$.",
     "answer": {
       "kind": "numeric",
       "value": 3,

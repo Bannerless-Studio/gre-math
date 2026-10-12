@@ -10,8 +10,10 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 - [x] M5 full problems + self-grade (core grade rules and wk/fp, Full stage 4, timed card with rubric grade, validator, tests/full_checks.js 64 checks, browser proof 18 checks at 360x780)
 - [x] M6 gate exam rule, placement, Progress v2, UI brevity, SPEC §5 leftovers (tests/m6_checks.js 87 checks, browser proof 27 checks at 360x780, 2026-10-12)
 - [x] M7 session resume (M1-review F2; tests/session_resume_checks.js 53 checks, browser proof 25 checks at 360x780 on the fixture, 2026-10-12)
-- [ ] M8 content T2–T10 (owner go/no-go per batch)
-- [ ] M9 ETA calibration, deploy
+- [x] M8 content T1–T9 live 2026-10-13: 1,485 items (135 techniques × 3 recall + 6 micro + 2 full, 5–6 probes/tier), every tier Haiku/Sonnet-authored, code-checked, Sonnet blind-solved (0 wrong keys across 9 tiers; ~60 wording/distractor/domain fixes). T10 (test mode, 5 techniques) has no items yet: it is a separate milestone (timed mixed sets + full-length practice), teach cards TODO.
+- [ ] M9 ETA calibration (needs ~14 real owner sessions); deploy done (Pages)
+- [ ] T10 test mode: timed mixed sets drawn across tiers, 66-question full-length practice, T10 teach cards
+- [ ] Owner spot-check 10% of items (DECISIONS 2): REPORT.md lists each tier's least-sure ids
 
 ## Open defects / carry-overs from M1 review
 - [x] F1 (med): `in` set at startSession, teach card comes after Review → End during Review leaves tech started but never taught. Fixed in M2: `in` set when the teach card is advanced; teach re-offered for in>0 && r+w==0.

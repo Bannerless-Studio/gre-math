@@ -1050,7 +1050,7 @@
   ],
   "order": 1,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** finding a common divisor, reducing a fraction, or testing whether two integers share a factor. **Move:** run the Euclidean algorithm, replacing $(a,b)$ by $(b,\\, a \\bmod b)$ until the remainder is $0$. The last nonzero remainder is the gcd. Get the lcm from $\\gcd(a,b)\\cdot\\operatorname{lcm}(a,b)=ab$. **Example:** $\\gcd(252,198)=18$, so $\\operatorname{lcm}=2772$. **Trap:** assuming two numbers are coprime without checking for a shared prime."
  },
  {
   "id": "t7.nt-mod",
@@ -1062,7 +1062,7 @@
   ],
   "order": 2,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** reducing large sums, products, or powers, or solving $ax\\equiv b\\pmod n$. **Move:** reduce each step modulo $n$. Congruences add and multiply, but you cannot divide unless the divisor is invertible. **Example:** $37\\cdot 58\\equiv 4\\cdot 3=12\\equiv 1\\pmod{11}$. **Trap:** dividing both sides by $d$ without also dividing the modulus by $\\gcd(d,n)$."
  },
  {
   "id": "t7.nt-euler",
@@ -1074,7 +1074,7 @@
   ],
   "order": 3,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a power is taken modulo a prime $p$, or modulo $n$ with a base coprime to $n$. **Move:** reduce the exponent modulo $p-1$, or $\\varphi(n)$ in general. Fermat: $a^{p-1}\\equiv 1\\pmod p$ when $p\\nmid a$. Wilson: $(p-1)!\\equiv -1\\pmod p$. **Example:** $2^{50}\\equiv 2^{2}=4\\pmod 7$, since $50\\equiv 2\\pmod 6$. **Trap:** using exponent $p$ instead of $p-1$, or applying Fermat when the base is a multiple of $p$."
  },
  {
   "id": "t7.group-axioms",
@@ -1086,7 +1086,7 @@
   ],
   "order": 4,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding whether a set with an operation is a group, or finding its identity or inverses. **Move:** check closure, associativity, an identity $e$, and inverses for every element. Solve $a*e=a$ for the identity, then $a*b=e$ for the inverse. **Example:** on $\\mathbb{Z}$ with $a*b=a+b+1$, the identity is $-1$ and the inverse of $a$ is $-2-a$. **Trap:** assuming the usual identity $0$ still works after the operation changed."
  },
  {
   "id": "t7.subgroup-cyclic",
@@ -1099,7 +1099,7 @@
   ],
   "order": 5,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** testing whether a subset is a subgroup, or finding the order of an element of $\\mathbb{Z}_{n}$. **Move:** check that the subset contains the identity and is closed under the operation and inverses. In $\\mathbb{Z}_{n}$, the order of $a$ is $n/\\gcd(a,n)$. **Example:** in $\\mathbb{Z}_{12}$, $8$ has order $12/4=3$. **Trap:** forgetting that the identity and negatives must lie in the subset, so $\\{n\\ge 0\\}$ fails."
  },
  {
   "id": "t7.order-lagrange",
@@ -1111,7 +1111,7 @@
   ],
   "order": 6,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a question about subgroup orders, element orders, or divisibility of $|G|$. **Move:** Lagrange says $|H|$ divides $|G|$. Since $\\langle g\\rangle$ is a subgroup, $\\operatorname{ord}(g)$ divides $|G|$ too. If $k\\mid n$, then $g^{k}$ has order $n/k$. **Example:** in $\\mathbb{Z}_{7}^{\\times}$, $2$ has order $3$, which divides $6$. **Trap:** claiming a subgroup exists for every divisor of $|G|$."
  },
  {
   "id": "t7.perm-groups",
@@ -1123,7 +1123,7 @@
   ],
   "order": 7,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** cycle structure, sign, order, or counting in $S_{n}$ or $A_{n}$. **Move:** write a permutation as disjoint cycles. Its order is the lcm of the cycle lengths. A $k$-cycle is a product of $k-1$ transpositions, so its sign is $(-1)^{k-1}$. **Example:** $(1\\,2\\,3\\,4)$ has sign $-1$, and $(1\\,2)(3\\,4\\,5)$ has order $6$. **Trap:** counting transpositions where you should count cycles, or taking the lcm of all points instead of the cycle lengths."
  },
  {
   "id": "t7.dihedral-small",
@@ -1135,7 +1135,7 @@
   ],
   "order": 8,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** symmetries of a regular polygon, or classifying groups of order $4$, $6$, or $8$. **Move:** $D_{n}$ has $n$ rotations $r^{k}$ and $n$ reflections $sr^{k}$, with $srs^{-1}=r^{-1}$. So $|D_{n}|=2n$. Count elements by order before naming the group. **Example:** $D_{5}$ has $5$ reflections, each of order $2$. **Trap:** calling $D_{n}$ abelian because rotations commute, or confusing $D_{4}$ with the cyclic group of order $8$."
  },
  {
   "id": "t7.cosets-normal",
@@ -1147,7 +1147,7 @@
   ],
   "order": 9,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** splitting a group into cosets, counting cosets, or checking normality. **Move:** the left cosets $gH$ partition $G$ into $[G:H]=|G|/|H|$ pieces. $N$ is normal when $gN=Ng$ for every $g$, equivalently $gNg^{-1}=N$. Index-$2$ subgroups are always normal. **Example:** for $H=\\langle 6\\rangle$ in $\\mathbb{Z}_{24}$, $|H|=4$, so $[G:H]=6$. **Trap:** assuming normal means abelian."
  },
  {
   "id": "t7.quotient-hom",
@@ -1159,7 +1159,7 @@
   ],
   "order": 10,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a map between groups preserves the operation, or a quotient group appears. **Move:** check $\\varphi(xy)=\\varphi(x)\\varphi(y)$. The kernel is the preimage of the identity, and $\\varphi$ is injective exactly when $\\ker\\varphi$ is trivial. The first isomorphism theorem gives $G/\\ker\\varphi\\cong\\operatorname{im}\\varphi$. **Example:** $x\\mapsto 3x$ on $\\mathbb{Z}_{12}$ has kernel of size $3$ and image of size $4$. **Trap:** testing a map on one input, or forgetting that the identity must map to the identity."
  },
  {
   "id": "t7.abelian-class",
@@ -1172,7 +1172,7 @@
   ],
   "order": 11,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** listing the abelian groups of a given order, or deciding whether two abelian groups are isomorphic. **Move:** for each prime $p$ with $p^{a}$ exactly dividing the order, count partitions of $a$. Multiply those counts over the primes. **Example:** order $16=2^{4}$ has $p(4)=5$ types. **Trap:** counting only cyclic groups, or assuming $\\mathbb{Z}_{2}\\times\\mathbb{Z}_{6}$ is cyclic because $2\\cdot 6=12$."
  },
  {
   "id": "t7.sylow-action",
@@ -1185,7 +1185,7 @@
   ],
   "order": 12,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** counting Sylow $p$-subgroups, or counting orbits of a group acting on a set. **Move:** Sylow says $n_{p}\\equiv 1\\pmod p$ and $n_{p}$ divides the $p'$-part of $|G|$. Orbit–stabilizer says $|G|=|\\text{orbit}|\\cdot|\\text{stab}|$. **Example:** a group of order $15$ has $n_{5}$ dividing $3$ with $n_{5}\\equiv 1\\pmod 5$, so $n_{5}=1$. **Trap:** claiming Sylow gives uniqueness of every subgroup of order $p^{a}$."
  },
  {
   "id": "t7.ring-basics",
@@ -1197,7 +1197,7 @@
   ],
   "order": 13,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding whether a set is an ideal, finding units, or spotting zero divisors. **Move:** an ideal must be closed under addition and absorb multiplication by every ring element, and it must contain $0$. In $\\mathbb{Z}_{n}$, the units are the residues coprime to $n$. **Example:** $\\mathbb{Z}_{6}$ has $2\\cdot 3=0$, so it is not a domain. **Trap:** testing closure only under addition."
  },
  {
   "id": "t7.domain-ufd",
@@ -1209,7 +1209,7 @@
   ],
   "order": 14,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding whether a ring is a domain, PID, or UFD, or counting factorizations. **Move:** a domain has no zero divisors. Every PID is a UFD. In a UFD, nonzero nonunits factor into irreducibles uniquely up to order and units. In $\\mathbb{Z}$, $p^{i}q^{j}$ has $(i+1)(j+1)$ positive divisors. **Example:** $360=2^{3}\\cdot 3^{2}\\cdot 5$ has $24$ positive divisors. **Trap:** assuming every UFD is a PID, which $\\mathbb{Z}[x]$ disproves."
  },
  {
   "id": "t7.poly-irred",
@@ -1222,7 +1222,7 @@
   ],
   "order": 15,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** factoring a polynomial over a field such as $\\mathbb{Q}$ or $\\mathbb{Z}_{p}$. **Move:** a polynomial of degree $2$ or $3$ is reducible exactly when it has a root in the field. Evaluate it at every element of a finite field. A root $a$ gives the factor $(x-a)$. **Example:** over $\\mathbb{Z}_{3}$, $f(1)=1+1+1=0$, so $x^{2}+x+1$ is reducible. **Trap:** forgetting to test every residue, or treating a repeated root as the only way to factor."
  },
  {
   "id": "t7.field-ext",
@@ -1234,7 +1234,7 @@
   ],
   "order": 16,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** finding the degree of an extension, or identifying a quotient $F[x]/(f)$. **Move:** the degree of $F(\\alpha)$ over $F$ equals the degree of the minimal polynomial of $\\alpha$. Multiply degrees along a tower: $[K:F]=[K:E][E:F]$. **Example:** $[\\mathbb{Q}(\\sqrt[3]{2}):\\mathbb{Q}]=3$, because $x^{3}-2$ is irreducible. **Trap:** using a polynomial's degree without first checking that it is irreducible."
  },
  {
   "id": "t8.real-axioms",
@@ -1246,7 +1246,7 @@
   ],
   "order": 1,
   "exam": false,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a set of reals is bounded above or below and you need its least upper bound or greatest lower bound. **Move:** the supremum is the least upper bound. It need not belong to the set. Test it with the approximation property: for every $\\varepsilon>0$, some element exceeds $s-\\varepsilon$. **Example:** $\\sup\\{1-\\frac1n\\}=1$, not attained. **Trap:** assuming the supremum is a maximum, or that every set of reals has one."
  },
  {
   "id": "t8.seq-conv",
@@ -1259,7 +1259,7 @@
   ],
   "order": 2,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** proving $a_n\\to L$ from the definition, or finding a limit. **Move:** given $\\varepsilon>0$, solve $|a_n-L|<\\varepsilon$ for $n$ and take $N$ beyond that threshold. For limits, divide by the dominant power of $n$. **Example:** $\\frac{3n^2+n}{2n^2-5}\\to\\frac32$. **Trap:** choosing $N$ before $\\varepsilon$ is fixed, or treating $\\varepsilon$ as a specific number instead of an arbitrary one."
  },
  {
   "id": "t8.cauchy-bw",
@@ -1271,7 +1271,7 @@
   ],
   "order": 3,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a sequence must converge without its limit being named, or a bounded sequence needs a convergent subsequence. **Move:** in $\\mathbb{R}$, Cauchy means convergent, by completeness. Bolzano-Weierstrass gives a convergent subsequence from boundedness. To find subsequential limits, split the sequence by parity or residue. **Example:** $(-1)^n$ has subsequential limits $\\pm1$. **Trap:** claiming a bounded sequence converges when only a subsequence does."
  },
  {
   "id": "t8.cont-eps",
@@ -1284,7 +1284,7 @@
   ],
   "order": 4,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** proving continuity at a point, or finding a $\\delta$ for a given $\\varepsilon$. **Move:** bound $|f(x)-f(c)|$ by a multiple of $|x-c|$, using $|x-c|<1$ to control other factors. Then choose $\\delta$ so the bound falls below $\\varepsilon$. **Example:** for $f(x)=3x$, $\\delta=\\varepsilon/3$ works at every point. **Trap:** forgetting to cap $\\delta$ at $1$ when a factor such as $|x+1|$ needs control."
  },
  {
   "id": "t8.unif-cont",
@@ -1296,7 +1296,7 @@
   ],
   "order": 5,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** asked whether one $\\delta$ works for every point of a set. **Move:** a bounded derivative gives a Lipschitz bound, and a Lipschitz bound gives uniform continuity. On a closed bounded interval, continuity already implies it. **Example:** $\\sin x$ is uniformly continuous on $\\mathbb{R}$, since $|\\cos x|\\le1$. **Trap:** calling $x^2$ uniformly continuous on $\\mathbb{R}$ because it is continuous, when its derivative grows without bound."
  },
  {
   "id": "t8.cont-thms",
@@ -1308,7 +1308,7 @@
   ],
   "order": 6,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a continuous function on $[a,b]$ needs a maximum, a minimum, or a root. **Move:** the extreme value theorem needs a closed bounded interval and continuity. The intermediate value theorem attains every value between $f(a)$ and $f(b)$. **Example:** $x^3+x-1$ has exactly one root, since it is strictly increasing. **Trap:** applying the extreme value theorem on an open interval such as $(0,1)$."
  },
  {
   "id": "t8.diff-thms",
@@ -1321,7 +1321,7 @@
   ],
   "order": 7,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a mean value point or a zero of $f'$ is needed. **Move:** Rolle needs equal endpoint values, continuity, and differentiability. The mean value theorem sets $f'(c)$ equal to the average slope. **Example:** $f(x)=x^2$ on $[0,2]$ has average slope $2$, so $c=1$. **Trap:** assuming $f'(c)=0$ forces a local extremum at $c$, which $x^3$ at $0$ disproves."
  },
  {
   "id": "t8.riemann",
@@ -1334,7 +1334,7 @@
   ],
   "order": 8,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** testing integrability or computing upper and lower sums. **Move:** for an increasing $f$, the supremum on each piece sits at the right endpoint and the infimum at the left. Lebesgue's criterion says a bounded function is integrable when its discontinuities have measure zero; countable sets do. **Example:** for $f(x)=x^2$ with partition $\\{0,\\frac12,1\\}$, the upper sum is $\\frac58$. **Trap:** taking the infimum of an increasing function at its right endpoint."
  },
  {
   "id": "t8.series-formal",
@@ -1347,7 +1347,7 @@
   ],
   "order": 9,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding convergence or evaluating a series. **Move:** the terms must tend to $0$ for convergence. Telescope when the terms split into partial fractions. Use the geometric sum $\\frac{a}{1-r}$ when $|r|<1$. **Example:** $\\sum_{n\\ge1}\\frac{1}{n(n+1)}=1$. **Trap:** concluding that $\\sum a_n$ converges from $a_n\\to0$ alone, as the harmonic series shows."
  },
  {
   "id": "t8.unif-conv",
@@ -1360,7 +1360,7 @@
   ],
   "order": 10,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding whether convergence is uniform, or whether a limit inherits continuity. **Move:** compute $\\sup_x|f_n(x)-f(x)|$ and check that it tends to $0$. The M-test gives uniform convergence of a series from summable bounds. **Example:** $\\sup_{[0,1)}x^n=1$ for every $n$, so $x^n\\to0$ is not uniform. **Trap:** checking only pointwise limits, which can hide a supremum that never shrinks."
  },
  {
   "id": "t8.metric-open",
@@ -1372,7 +1372,7 @@
   ],
   "order": 11,
   "exam": false,
-  "teach": "TODO: teach card"
+  "teach": "**When:** deciding whether a subset of a metric space is open or closed, or whether a point is a boundary point. **Move:** a set is open when every point has a ball inside it. A set is closed when its complement is open. The boundary is the closure minus the interior. **Example:** $(0,1)$ is open, while $(0,1]$ has boundary $\\{0,1\\}$. **Trap:** calling a half-open interval open or closed, when it is neither."
  },
  {
   "id": "t8.compact-conn",
@@ -1385,7 +1385,7 @@
   ],
   "order": 12,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a claim uses compactness or connectedness. **Move:** compact means every open cover has a finite subcover. In $\\mathbb{R}$, compact means closed and bounded (Heine-Borel). Continuous images of compact sets are compact. Connected subsets of $\\mathbb{R}$ are intervals. **Example:** the nested intersection $\\bigcap_n[0,\\frac1n]$ equals $\\{0\\}$. **Trap:** calling $(0,1]$ compact because it is bounded, or $\\mathbb{R}$ compact because it is closed."
  },
  {
   "id": "t8.top-general",
@@ -1397,7 +1397,7 @@
   ],
   "order": 13,
   "exam": false,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a family of sets is claimed to be a topology, or a property is claimed to hold in every topological space. **Move:** a topology contains $\\emptyset$ and $X$, and is closed under arbitrary unions and finite intersections. Check unions first. **Example:** $\\{\\emptyset,\\{1\\},X\\}$ is a topology on $\\{1,2\\}$. **Trap:** forgetting $\\emptyset$ or $X$, or assuming points are closed in every topology, which holds for metric spaces only."
  },
  {
   "id": "t8.cardinality",
@@ -1409,7 +1409,7 @@
   ],
   "order": 14,
   "exam": false,
-  "teach": "TODO: teach card"
+  "teach": "**When:** comparing sizes of sets, or deciding whether a set is countable. **Move:** a finite set with $n$ elements has $2^n$ subsets. Countable unions and products of countable sets are countable. So algebraic numbers are countable: countably many polynomials, finitely many roots each. A monotone function has countably many jumps, each holding a distinct rational. $\\mathbb{R}$ and $\\{0,1\\}^{\\mathbb{N}}$ are uncountable by diagonalisation. **Trap:** assuming every infinite set is uncountable."
  },
  {
   "id": "t8.counterexamples",
@@ -1422,7 +1422,7 @@
   ],
   "order": 15,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a claim asks whether a property passes through a limit. **Move:** match the claim to a standard example. $|x|$ is continuous but not differentiable at $0$. The functions $n\\mathbf{1}_{[0,1/n]}$ break the interchange of integral and limit. The Dirichlet function is discontinuous everywhere. **Example:** $n\\mathbf{1}_{[0,1/n]}$ has integral $1$ for every $n$, but its pointwise limit is $0$. **Trap:** reading a pointwise limit as a uniform one."
  },
  {
   "id": "t9.counting",
@@ -1434,7 +1434,7 @@
   ],
   "order": 1,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a problem asks how many outcomes, arrangements or selections there are. **Move:** ask first whether order matters and whether repeats are allowed. Ordered picks of $k$ from $n$ give $\\frac{n!}{(n-k)!}$. Unordered picks give $\\binom nk$. Independent stages multiply. **Example:** pick a president and a treasurer from $5$ people: $5\\cdot4=20$. **Trap:** dividing by $k!$ when the roles are distinct, or counting one arrangement twice."
  },
  {
   "id": "t9.incl-excl",
@@ -1447,7 +1447,7 @@
   ],
   "order": 2,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a count takes a union of overlapping sets, or a guaranteed outcome is needed. **Move:** $|A\\cup B|=|A|+|B|-|A\\cap B|$. With three sets, add the singles, subtract the pairs, then add the triple. Pigeonhole: $kn+1$ objects in $n$ boxes force a box with at least $k+1$ objects. **Example:** multiples of $2$ or $3$ up to $12$: $6+4-2=8$. **Trap:** stopping after subtracting the pairs and forgetting the triple term."
  },
  {
   "id": "t9.recurrence",
@@ -1460,7 +1460,7 @@
   ],
   "order": 3,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a count or sequence is defined from earlier terms. **Move:** for $a_n=c_1a_{n-1}+c_2a_{n-2}$, solve $r^2=c_1r+c_2$ for its roots, then fit the constants to the initial values. For $a_n=ca_{n-1}$ the answer is $a_0c^n$. **Example:** $a_n=3a_{n-1}$ with $a_0=5$ gives $a_n=5\\cdot3^n$. **Trap:** an off-by-one index on the initial term."
  },
  {
   "id": "t9.graph-basics",
@@ -1472,7 +1472,7 @@
   ],
   "order": 4,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a problem involves vertices, edges, degrees, or complete and bipartite graphs. **Move:** the degree sum is $2|E|$. $K_n$ has $\\binom n2$ edges and $K_{m,n}$ has $mn$. A tree on $v$ vertices has $v-1$ edges. **Example:** $K_{3,5}$ has $15$ edges. **Trap:** using $n(n-1)$ for the edge count of $K_n$, which counts each edge twice."
  },
  {
   "id": "t9.graph-structure",
@@ -1484,7 +1484,7 @@
   ],
   "order": 5,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a question asks about Euler circuits, Hamilton cycles, colorings, or planarity. **Move:** a connected graph has an Euler circuit exactly when every degree is even. Bipartite graphs need two colors. A connected planar graph satisfies $v-e+f=2$, and a simple planar graph with $v\\ge3$ has $e\\le3v-6$. **Example:** $C_7$ needs three colors. **Trap:** confusing an Euler circuit, which uses every edge once, with a Hamilton cycle, which visits every vertex once."
  },
  {
   "id": "t9.algorithms",
@@ -1497,7 +1497,7 @@
   ],
   "order": 6,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a question asks for the running time of a loop, a divide-and-conquer method, a search, or a shortest-path routine. **Move:** write the recurrence $T(n)=aT(n/b)+f(n)$, or sum the loop counts. Halving reaches $1$ in $\\log_2 n$ steps. Nested loops with $i<j$ give $\\binom n2$ steps. Dijkstra needs nonnegative weights. **Example:** $T(n)=T(n/2)+1$ with $T(1)=5$ gives $T(16)=9$. **Trap:** treating $\\log n$ as a cost per element."
  },
  {
   "id": "t9.prob-basics",
@@ -1509,7 +1509,7 @@
   ],
   "order": 7,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a question assigns probabilities to equally likely outcomes or to events built from given events. **Move:** for equally likely outcomes, count favorable over total. $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. Independence means $P(A\\cap B)=P(A)P(B)$. Conditioning gives $P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$. **Example:** exactly $2$ heads in $3$ fair flips has probability $\\frac38$. **Trap:** multiplying probabilities of events that are not independent, or calling disjoint events independent."
  },
  {
   "id": "t9.rand-var",
@@ -1522,7 +1522,7 @@
   ],
   "order": 8,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a random quantity takes numeric values with a known distribution. **Move:** $E[X]=\\sum x\\,P(X=x)$, and $E[g(X)]$ weights $g(x)$ the same way. Expectation is linear. Variance is $E[X^2]-E[X]^2$, and $\\operatorname{Var}(aX+b)=a^2\\operatorname{Var}(X)$. **Example:** a fair die has $E[X]=\\frac72$. **Trap:** writing $E[X]^2$ for $E[X^2]$, or shifting the variance by $b$."
  },
  {
   "id": "t9.distributions",
@@ -1535,7 +1535,7 @@
   ],
   "order": 9,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the problem names a standard model: binomial, geometric, Poisson, uniform, or exponential. **Move:** match the parameters and use the known mean and variance. $B(n,p)$ has mean $np$ and variance $np(1-p)$. A geometric variable counting trials has mean $\\frac1p$. Uniform on $[a,b]$ has mean $\\frac{a+b}{2}$. **Example:** $B(10,\\frac14)$ has variance $\\frac{15}{8}$. **Trap:** using the failure count when the geometric mean is asked for."
  },
  {
   "id": "t9.stats-basics",
@@ -1547,7 +1547,7 @@
   ],
   "order": 10,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a question asks about means, medians, spread, or a fitted line from data. **Move:** sample variance divides the squared deviations by $n-1$. The median is the middle value, or the average of the middle two. The least-squares slope is $S_{xy}/S_{xx}$, and the line passes through $(\\bar x,\\bar y)$. **Example:** the data $1,3,5,7$ have sample variance $\\frac{20}{3}$. **Trap:** dividing by $n$ when the sample variance is asked for."
  },
  {
   "id": "t9.complex-arith",
@@ -1559,7 +1559,7 @@
   ],
   "order": 11,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a problem uses $a+bi$, moduli, conjugates, or polar form. **Move:** multiply out and use $i^2=-1$. The modulus is $\\sqrt{a^2+b^2}$. To divide, multiply top and bottom by the conjugate. Polar form is $re^{i\\theta}$ with $r=|z|$. **Example:** $\\frac{1}{1+i}=\\frac{1-i}{2}$ has imaginary part $-\\frac12$. **Trap:** taking $\\sqrt a+\\sqrt b$ as a modulus, or dropping the sign when $i^2=-1$."
  },
  {
   "id": "t9.complex-analytic",
@@ -1572,7 +1572,7 @@
   ],
   "order": 12,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** $f=u+iv$ is given and you must test differentiability or recover a missing part. **Move:** Cauchy-Riemann says $u_x=v_y$ and $u_y=-v_x$. Polynomials in $z$ are analytic everywhere. $\\bar z$ is nowhere analytic. Real and imaginary parts of an analytic function are harmonic. **Example:** for $f=z^2$, $u=x^2-y^2$ and $v=2xy$. **Trap:** checking only one Cauchy-Riemann equation, or assuming any formula in $x$ and $y$ is analytic."
  },
  {
   "id": "t9.contour-residue",
@@ -1585,7 +1585,7 @@
   ],
   "order": 13,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a closed-contour integral of a function with isolated poles. **Move:** if $f$ is analytic inside the contour, the integral is $0$. Otherwise it equals $2\\pi i$ times the sum of the residues inside. At a simple pole of $g/h$, the residue is $\\frac{g(z_0)}{h'(z_0)}$. **Example:** $\\frac{z}{(z-1)(z-2)}$ has residue $-1$ at $z=1$. **Trap:** counting a pole outside the contour, or dropping the factor $2\\pi i$."
  },
  {
   "id": "t9.complex-maps",
@@ -1597,7 +1597,7 @@
   ],
   "order": 14,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a map $f(z)=\\frac{az+b}{cz+d}$, or a question about the zeros of a polynomial. **Move:** a Möbius map needs $ad-bc\\ne0$ and is a bijection of the Riemann sphere. Fixed points solve $cz^2+(d-a)z-b=0$. A polynomial of degree $n$ has $n$ zeros in $\\mathbb C$ counted with multiplicity. **Example:** $f(z)=\\frac{z+1}{z-2}$ sends $0$ to $-\\frac12$. **Trap:** accepting a map with $ad-bc=0$ as Möbius."
  },
  {
   "id": "t9.ode-first",
@@ -1609,7 +1609,7 @@
   ],
   "order": 15,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a first-order equation in $x$ and $y$. **Move:** a separable $y'=g(x)h(y)$ gives $\\int\\frac{dy}{h(y)}=\\int g(x)\\,dx$. A linear $y'+p(x)y=q(x)$ uses the integrating factor $e^{\\int p}$, so $(\\mu y)'=\\mu q$. Keep the constant, then apply the initial value. **Example:** $y'=2x$ with $y(0)=3$ gives $y=x^2+3$. **Trap:** dropping the exponential in the integrating factor, or losing the constant before using the initial value."
  },
  {
   "id": "t9.ode-linear",
@@ -1622,7 +1622,7 @@
   ],
   "order": 16,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a constant-coefficient equation $ay''+by'+cy=0$. **Move:** solve $ar^2+br+c=0$. Distinct real roots $r_1,r_2$ give $c_1e^{r_1x}+c_2e^{r_2x}$. Roots $\\alpha\\pm\\beta i$ give $e^{\\alpha x}\\cos\\beta x$ and $e^{\\alpha x}\\sin\\beta x$. Fit the constants to the initial values. **Example:** $y''+4y=0$ has roots $\\pm2i$, so its frequency is $2$. **Trap:** putting the imaginary part $\\beta$ in the exponent where $\\alpha$ belongs."
  },
  {
   "id": "t9.ode-systems",
@@ -1635,7 +1635,7 @@
   ],
   "order": 17,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a linear system $\\mathbf x'=A\\mathbf x$ with a $2\\times2$ matrix $A$. **Move:** read the eigenvalues. Real eigenvalues of opposite sign give a saddle. Both negative give a sink, and both positive give a source. Purely imaginary eigenvalues give a center. Complex eigenvalues with nonzero real part give a spiral. **Example:** eigenvalues $\\pm2i$ give a center. **Trap:** calling a repeated eigenvalue a saddle, or ignoring whether the eigenvalues are real."
  },
  {
   "id": "t9.numerical",
@@ -1648,7 +1648,7 @@
   ],
   "order": 18,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** an exact integral or root is out of reach and a formula must approximate it. **Move:** the trapezoid rule is $\\frac h2(f_0+2f_1+\\cdots+f_n)$, with error of order $h^2$. Simpson's rule $\\frac h3(f_0+4f_1+2f_2+\\cdots)$ needs an even number of intervals and has error of order $h^4$. Newton's update is $x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}$. **Example:** one Newton step for $x^2-2$ from $1$ gives $\\frac32$. **Trap:** dividing by $f$ instead of $f'$."
  },
  {
   "id": "t9.geometry-misc",
@@ -1660,7 +1660,7 @@
   ],
   "order": 19,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** points, lines, planes, rotations, reflections, or shears. **Move:** the distance from a point to a plane is $\\frac{|ax_0+by_0+cz_0-d|}{\\sqrt{a^2+b^2+c^2}}$. A rotation by $\\theta$ has columns $(\\cos\\theta,\\sin\\theta)$ and $(-\\sin\\theta,\\cos\\theta)$. The determinant gives area scaling, and a negative determinant marks a reflection. **Example:** scaling $x$ by $2$ and $y$ by $3$ has determinant $6$. **Trap:** omitting the square root in the normal length, or the absolute value in the distance."
  },
  {
   "id": "t10.triage",
