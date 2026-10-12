@@ -1,0 +1,4503 @@
+[
+  {
+    "id": "t5-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the magnetic part of the Lorentz force on a charge $q$ moving with velocity $\\vec v$ in a magnetic field $\\vec B$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$q\\vec B\\times\\vec v$",
+        "$q\\vec v\\cdot\\vec B$",
+        "$q\\vec v\\times\\vec B$",
+        "$q\\,vB$"
+      ],
+      "correct": 2,
+      "why": [
+        "order reversed flips the sign of the force",
+        "a dot product gives a scalar, zero when perpendicular",
+        "",
+        "magnitude only; drops the direction"
+      ]
+    },
+    "solution": "The magnetic force is $q\\vec v\\times\\vec B$, perpendicular to both $\\vec v$ and $\\vec B$.",
+    "hints": [
+      "Force is a cross product, so it is a vector."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle of mass $m$ and charge magnitude $q$ moves at speed $v$ perpendicular to a uniform field of magnitude $B$. Write its orbit radius $r$ in terms of $m$, $v$, $q$, $B$.",
+    "answer": {
+      "kind": "expression",
+      "value": "m*v/(q*B)",
+      "vars": [
+        "m",
+        "v",
+        "q",
+        "B"
+      ],
+      "also": [
+        "m*v/q/B",
+        "v*m/(B*q)"
+      ]
+    },
+    "check": null,
+    "solution": "The magnetic force supplies the centripetal force: $qvB=mv^2/r$, so $r=mv/(qB)$.",
+    "hints": [
+      "Set the magnetic force equal to mv squared over r."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A charged particle moves parallel to a uniform magnetic field. What is the magnetic force on it?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|q|vB$ along the field",
+        "Zero, because $\\vec v\\times\\vec B=0$ for parallel vectors",
+        "$|q|vB$ perpendicular to the motion, which curves the path",
+        "Its kinetic energy grows at rate $|q|vB$"
+      ],
+      "correct": 1,
+      "why": [
+        "forgot the sine factor; the magnitude is $|q|vB\\sin\\theta$, zero at $\\theta=0$",
+        "",
+        "uses the perpendicular-motion result, which needs the angle to be $90^\\circ$",
+        "treats the force as doing work, but a magnetic force is perpendicular to velocity"
+      ]
+    },
+    "solution": "The force is $q\\vec v\\times\\vec B$. Parallel vectors have zero cross product, so the force vanishes.",
+    "hints": [
+      "Check the angle between v and B."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0004",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An electron ($|q|=1.60\\times10^{-19}\\ \\mathrm C$, $m=9.11\\times10^{-31}\\ \\mathrm{kg}$) moves at $2.00\\times10^{6}\\ \\mathrm{m/s}$ perpendicular to a uniform field of $0.500\\ \\mathrm T$. Find the radius of its circular path in $\\mathrm m$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.000022775,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "9.11e-31*2.00e6/(1.60e-19*0.500)",
+    "solution": "Magnetic force gives the centripetal force: $r=mv/(|q|B)=2.28\\times10^{-5}\\ \\mathrm m$.",
+    "hints": [
+      "Set $|q|vB=mv^2/r$ and solve for $r$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A proton ($|q|=1.60\\times10^{-19}\\ \\mathrm C$, $m_p=1.67\\times10^{-27}\\ \\mathrm{kg}$) moves at $3.00\\times10^{5}\\ \\mathrm{m/s}$ perpendicular to a uniform field of $0.200\\ \\mathrm T$. Find its orbital period in $\\mathrm{ns}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 327.903733218435,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2*math.pi*1.67e-27/(1.60e-19*0.200)*1e9",
+    "solution": "$T=2\\pi r/v=2\\pi m/(|q|B)$. The speed cancels, so $T=328\\ \\mathrm{ns}$.",
+    "hints": [
+      "Period is circumference over speed, and the radius is mv over qB."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A charge $q>0$ moves with speed $v$ at angle $\\theta$ to a uniform magnetic field of magnitude $B$. Write the magnitude of the magnetic force $F$ in terms of $q$, $v$, $B$, $\\theta$.",
+    "answer": {
+      "kind": "expression",
+      "value": "q*v*B*sin(theta)",
+      "vars": [
+        "q",
+        "v",
+        "B",
+        "theta"
+      ],
+      "also": [
+        "q*B*v*sin(theta)",
+        "sin(theta)*v*q*B"
+      ]
+    },
+    "check": null,
+    "solution": "$F=|q|vB\\sin\\theta$. The sine is zero for parallel motion and one for perpendicular motion.",
+    "hints": [
+      "Only the component of velocity perpendicular to B produces force."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all statements that hold for a charged particle moving in a uniform magnetic field, with no electric field present.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Its speed stays constant",
+        "Its kinetic energy stays constant",
+        "Its velocity direction stays constant",
+        "Its momentum magnitude changes when it moves across field lines"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "The force is perpendicular to velocity, so it changes direction but does no work. Speed and kinetic energy stay fixed.",
+    "hints": [
+      "Ask what the force does to the speed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Axes: east is $+x$, north is $+y$, and up is $+z$. A positive charge moves east in a uniform magnetic field that points north. Which way is the magnetic force on the charge?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Down, along $-\\hat z$",
+        "Up, along $+\\hat z$",
+        "North, along $+\\hat y$",
+        "West, along $-\\hat x$"
+      ],
+      "correct": 1,
+      "why": [
+        "reversed the cross product order, which flips the sign",
+        "",
+        "a force along B is a parallel-field result, which the cross product rules out",
+        "opposite to the velocity, as in drag"
+      ]
+    },
+    "solution": "$\\vec v\\times\\vec B\\propto\\hat x\\times\\hat y=\\hat z$, so the force points up.",
+    "hints": [
+      "Use the cross product, velocity first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Crossed uniform fields: $\\vec E$ points along $+y$ and $\\vec B$ along $+z$. A proton moves along $+x$ and is undeflected. Given $E=2.00\\times10^{3}\\ \\mathrm{V/m}$ and $B=0.0400\\ \\mathrm T$, find its speed in $\\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 50000,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.00e3/0.0400",
+    "solution": "Balance $qE=qvB$, so $v=E/B=5.00\\times10^{4}\\ \\mathrm{m/s}$.",
+    "hints": [
+      "Forces from E and from v cross B must cancel."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A current element $I\\,d\\vec\\ell$ sits at the origin. Let $\\hat r$ be the unit vector from the element to a field point. Which expression gives the field $d\\vec B$ at that point?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec\\ell\\cdot\\hat r}{r^2}$",
+        "$\\frac{\\mu_0}{2\\pi}\\frac{I\\,d\\vec\\ell\\times\\hat r}{r^2}$",
+        "$\\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec\\ell\\times\\hat r}{r}$",
+        "$\\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec\\ell\\times\\hat r}{r^2}$"
+      ],
+      "correct": 3,
+      "why": [
+        "dot product where the cross product belongs; the result would be a scalar",
+        "uses the long-wire prefactor, which applies only after integrating",
+        "wrong distance power; the field of one element falls as $1/r^2$",
+        ""
+      ]
+    },
+    "solution": "Biot-Savart: $d\\vec B=\\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec\\ell\\times\\hat r}{r^2}$.",
+    "hints": [
+      "The field is a cross product with a $1/r^2$ falloff."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the magnitude $B$ at distance $r$ from a long straight wire carrying current $I$, in terms of $\\mu_0$, $I$, $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu0*I/(2*pi*r)",
+      "vars": [
+        "mu0",
+        "I",
+        "r"
+      ],
+      "also": [
+        "mu0*I/r/(2*pi)",
+        "I*mu0/(2*pi*r)"
+      ]
+    },
+    "check": null,
+    "solution": "Integrating Biot-Savart along an infinite wire gives $B=\\mu_0 I/(2\\pi r)$.",
+    "hints": [
+      "Use the long-wire result."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement describes the magnetic field of a long straight wire carrying steady current?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Magnitude falls as $1/r$, and field lines circle the wire",
+        "Magnitude falls as $1/r^2$, and the field points radially outward",
+        "Magnitude is uniform, and the field points along the wire",
+        "Magnitude falls as $1/r$, and the field points along the current"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "point-charge pattern applied to a current",
+        "that is the field of a uniform sheet, not a wire",
+        "the field is perpendicular to the current, never along it"
+      ]
+    },
+    "solution": "A wire's field circulates around it with magnitude $\\mu_0 I/(2\\pi r)$.",
+    "hints": [
+      "Think about the shape of the field lines."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A long straight wire carries a steady current of $12\\ \\mathrm A$. Find the field magnitude in $\\mathrm T$ at $0.30\\ \\mathrm m$ from the wire. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.000008,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*12/(2*math.pi*0.30)",
+    "solution": "$B=\\mu_0 I/(2\\pi r)=8.0\\times10^{-6}\\ \\mathrm T$.",
+    "hints": [
+      "Use the long-wire result."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two long parallel wires are $0.10\\ \\mathrm m$ apart. Each carries $5.0\\ \\mathrm A$, and the currents run in opposite directions. Find the field magnitude in $\\mathrm T$ at the midpoint between the wires. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.00004,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2*(4*math.pi*1e-7*5.0)/(2*math.pi*0.05)",
+    "solution": "Each wire is $0.050\\ \\mathrm m$ away and gives $2.0\\times10^{-5}\\ \\mathrm T$. Opposite currents make the two fields point the same way at the midpoint, so they add to $4.0\\times10^{-5}\\ \\mathrm T$.",
+    "hints": [
+      "Check the direction of each field at the midpoint before adding."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A flat circular coil of $N$ closely wound turns, radius $R$, carries current $I$ in each turn. Write the field magnitude $B$ at its centre in terms of $\\mu_0$, $N$, $I$, $R$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu0*N*I/(2*R)",
+      "vars": [
+        "mu0",
+        "N",
+        "I",
+        "R"
+      ],
+      "also": [
+        "mu0*N*I/R/2",
+        "N*I*mu0/(2*R)"
+      ]
+    },
+    "check": null,
+    "solution": "Every element is the same distance $R$ from the centre and contributes in the same direction. One turn gives $\\mu_0I/(2R)$, and $N$ turns multiply it: $B=\\mu_0NI/(2R)$.",
+    "hints": [
+      "Every element sits the same distance from the centre, and the turns add."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A circular loop carries current $I$. Select all changes that increase the magnitude of the field at its centre.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Doubling the current",
+        "Doubling the radius",
+        "Halving the radius",
+        "Reversing the current direction"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "$B\\propto I/R$, so doubling $I$ or halving $R$ raises $B$. Doubling $R$ lowers it. Reversing $I$ flips the direction, not the magnitude.",
+    "hints": [
+      "Which quantity sits in the numerator?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A long straight wire lies along the $x$-axis and carries current in the $+x$ direction. At a point on the $+y$ axis, which way does the magnetic field point? Use the right-hand rule with $+z$ as the third axis.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$+\\hat z$",
+        "$-\\hat z$",
+        "$+\\hat y$",
+        "$+\\hat x$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reversed cross product order, reading $\\hat x\\times\\hat y$ backwards",
+        "the field circles the wire, so it is never radial",
+        "the field is perpendicular to the current, so it cannot lie along $x$"
+      ]
+    },
+    "solution": "$d\\vec\\ell\\times\\hat r\\propto\\hat x\\times\\hat y=\\hat z$, so the field points along $+\\hat z$.",
+    "hints": [
+      "Take the current direction crossed into the vector from the wire to the point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A thin wire bent into a semicircle of radius $0.20\\ \\mathrm m$ carries $3.0\\ \\mathrm A$. Find the field magnitude in $\\mathrm T$ at the centre of the semicircle. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.0000047123889803846896,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*3.0/(4*0.20)",
+    "solution": "A semicircle is half a loop, so $B=\\mu_0 I/(4R)=4.7\\times10^{-6}\\ \\mathrm T$.",
+    "hints": [
+      "Compare with the full-loop result."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State Ampère's law in its static form for a closed loop $C$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\oint_C \\vec B\\cdot d\\vec\\ell=\\mu_0 I_{\\rm total}$, counting currents outside $C$",
+        "$\\oint_C \\vec B\\cdot d\\vec\\ell=\\mu_0 I_{\\rm enc}$, counting only currents through the loop's surface",
+        "$\\oint_C \\vec B\\,dA=\\mu_0 I_{\\rm enc}$",
+        "$\\oint_C \\vec B\\cdot d\\vec\\ell=0$ for every closed loop"
+      ],
+      "correct": 1,
+      "why": [
+        "currents outside the loop do not enter the law",
+        "",
+        "wrong integral: a line integral of B along the loop, not a surface integral",
+        "a zero line integral would mean no circulation, but B circulates around currents"
+      ]
+    },
+    "solution": "Ampère's law: $\\oint\\vec B\\cdot d\\vec\\ell=\\mu_0 I_{\\rm enc}$, with only the enclosed current on the right.",
+    "hints": [
+      "Only enclosed current counts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Inside a long ideal solenoid, $B=\\mu_0 n I$, with $n$ turns per metre. Find $B$ in $\\mathrm T$ for $n=1.00\\times10^{3}\\ \\mathrm{turns/m}$ and $I=2.0\\ \\mathrm A$. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.0025132741228718345,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*1.00e3*2.0",
+    "solution": "$B=\\mu_0 nI=4\\pi\\times10^{-7}\\times10^{3}\\times2.0=2.51\\times10^{-3}\\ \\mathrm T$.",
+    "hints": [
+      "Plug in n and I."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A long solid cylinder of radius $R$ carries uniform current $I$ along its axis. Which statement about its field magnitude is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Inside it grows linearly with distance $r$ from the axis; outside it falls as $1/r$",
+        "Inside it is zero; outside it falls as $1/r$",
+        "Inside it falls as $1/r$; outside it grows linearly",
+        "Inside and outside it both fall as $1/r^2$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "treats the interior as if it carried no current; ignores the enclosed fraction $r^2/R^2$",
+        "inverts the two regimes",
+        "point-charge pattern applied to a current"
+      ]
+    },
+    "solution": "Inside, $I_{\\rm enc}=I r^2/R^2$, so $B\\propto r$. Outside, $B=\\mu_0 I/(2\\pi r)$.",
+    "hints": [
+      "How much current does a loop at radius r enclose?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0022",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A long solid wire of radius $2.0\\ \\mathrm{mm}$ carries a uniform current of $4.0\\ \\mathrm A$. Find the field magnitude in $\\mathrm T$ at radius $1.0\\ \\mathrm{mm}$ from the axis, inside the wire. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.00020000000000000004,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*4.0*(1.0e-3)/(2*math.pi*(2.0e-3)**2)",
+    "solution": "Enclosed current is $I(r^2/R^2)=1.0\\ \\mathrm A$, so $B=\\mu_0 I_{\\rm enc}/(2\\pi r)=2.0\\times10^{-4}\\ \\mathrm T$.",
+    "hints": [
+      "Find the enclosed current first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An ideal solenoid is $0.50\\ \\mathrm m$ long and has $400$ turns. It carries $3.0\\ \\mathrm A$. Find the field magnitude in $\\mathrm T$ near its centre. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.0030159289474462015,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*(400/0.50)*3.0",
+    "solution": "$n=400/0.50=800\\ \\mathrm{turns/m}$, so $B=\\mu_0 nI=3.0\\times10^{-3}\\ \\mathrm T$.",
+    "hints": [
+      "Convert turns to turns per metre first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A coaxial cable has a solid inner conductor of radius $a$ carrying current $I$ along $+z$. A thin outer shell of radius $b>a$ carries the return current $I$ along $-z$. Write the field magnitude $B$ for $a<r<b$, where $r$ is the distance from the common axis, in terms of $\\mu_0$, $I$, $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu0*I/(2*pi*r)",
+      "vars": [
+        "mu0",
+        "I",
+        "r"
+      ],
+      "also": [
+        "mu0*I/r/(2*pi)",
+        "I*mu0/(2*pi*r)"
+      ]
+    },
+    "check": null,
+    "solution": "An Ampère loop of radius $r$ encloses only the inner current $I$, so $B=\\mu_0 I/(2\\pi r)$. The outer shell lies outside this loop.",
+    "hints": [
+      "Which conductors does the loop enclose?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A long straight wire carries current $I$ into the page. Select all closed loops that enclose the wire, so Ampère's law gives $\\oint\\vec B\\cdot d\\vec\\ell$ of magnitude $\\mu_0 I$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "A circle centred on the wire",
+        "A square that surrounds the wire",
+        "A circle that lies entirely to one side of the wire",
+        "A rectangle that lies entirely outside the wire"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Any loop enclosing the wire encloses $I$, whatever its shape. Loops that miss the wire enclose zero current.",
+    "hints": [
+      "Ask whether the wire passes through the loop's surface."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Viewed from the front of the page, a loop is traversed counterclockwise. A wire passes through the loop's interior carrying $2.0\\ \\mathrm A$ into the page. What is $\\oint\\vec B\\cdot d\\vec\\ell$ over the loop, in $\\mathrm{T\\,m}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$+2.0\\,\\mu_0\\ \\mathrm{T\\,m}$",
+        "$-2.0\\,\\mu_0\\ \\mathrm{T\\,m}$",
+        "$0$",
+        "$-2.0\\,\\mu_0/\\varepsilon_0\\ \\mathrm{T\\,m}$"
+      ],
+      "correct": 1,
+      "why": [
+        "ignores that the current runs against the loop's right-hand sense",
+        "",
+        "treats the loop as enclosing no current",
+        "divides by $\\varepsilon_0$, a units slip borrowed from Gauss's law"
+      ]
+    },
+    "solution": "Counterclockwise from the front means the right-hand normal points out of the page. Current into the page is therefore $-I_{\\rm enc}$, giving $-2.0\\,\\mu_0$.",
+    "hints": [
+      "Compare the current direction with the loop's normal."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A long hollow tube has inner radius $2.0\\ \\mathrm{cm}$ and outer radius $4.0\\ \\mathrm{cm}$. It carries a uniform current of $10\\ \\mathrm A$ across its cross-section. Find the field magnitude in $\\mathrm T$ at radius $3.0\\ \\mathrm{cm}$. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.00002777777777777778,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*10.0*((0.030**2-0.020**2)/(0.040**2-0.020**2))/(2*math.pi*0.030)",
+    "solution": "Enclosed current is $I(r^2-a^2)/(b^2-a^2)=10\\times5/12\\ \\mathrm A$. Then $B=\\mu_0 I_{\\rm enc}/(2\\pi r)=2.8\\times10^{-5}\\ \\mathrm T$.",
+    "hints": [
+      "The enclosed fraction is the area inside r over the tube's area."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the relation between $\\vec B$, $\\vec H$ and the magnetization $\\vec M$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\vec B=\\mu_0\\vec H+\\vec M$",
+        "$\\vec H=\\mu_0(\\vec B+\\vec M)$",
+        "$\\vec B=\\mu_0\\vec H/\\vec M$",
+        "$\\vec B=\\mu_0(\\vec H+\\vec M)$"
+      ],
+      "correct": 3,
+      "why": [
+        "$\\vec M$ is in A/m, so it needs a factor of $\\mu_0$ to add to a field in T",
+        "sign and placement reversed",
+        "divides where the relation adds",
+        ""
+      ]
+    },
+    "solution": "In linear media, $\\vec B=\\mu_0(\\vec H+\\vec M)$, with $\\vec M$ in A/m.",
+    "hints": [
+      "Check units: M must carry a factor of mu0 to match B."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the relative permeability $\\mu_r$ in terms of the magnetic susceptibility $\\chi$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1+chi",
+      "vars": [
+        "chi"
+      ],
+      "also": [
+        "chi+1"
+      ]
+    },
+    "check": null,
+    "solution": "In linear media $\\mu_r=1+\\chi$, since $\\vec M=\\chi\\vec H$ and $\\vec B=\\mu_0(1+\\chi)\\vec H$.",
+    "hints": [
+      "Start from M equals chi times H."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What are the typical sign and size of $\\chi$ for a diamagnetic material?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Large and positive",
+        "Small and positive",
+        "Small and negative",
+        "Large and negative"
+      ],
+      "correct": 2,
+      "why": [
+        "ferromagnet-like sign and size",
+        "paramagnetic sign; diamagnets oppose the applied field",
+        "",
+        "a diamagnet's magnitude is tiny, of order $-10^{-5}$"
+      ]
+    },
+    "solution": "Diamagnets have tiny negative susceptibilities, so $\\mu_r$ is just below one.",
+    "hints": [
+      "Diamagnets push against the applied field."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A solenoid has $2.0\\times10^{3}$ turns per metre and carries $0.50\\ \\mathrm A$. Its core is filled with a material of relative permeability $\\mu_r=200$. Find $B$ in $\\mathrm T$ inside. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25132741228718347,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*200*2.0e3*0.50",
+    "solution": "$B=\\mu_0\\mu_r nI=4\\pi\\times10^{-7}\\times200\\times2.0\\times10^{3}\\times0.50=0.25\\ \\mathrm T$.",
+    "hints": [
+      "Multiply the vacuum result by mu_r."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A solenoid has $2.0\\times10^{3}$ turns per metre and carries $0.50\\ \\mathrm A$. Its core is iron with relative permeability $\\mu_r=200$. Find the magnetic field strength $H$ inside, in $\\mathrm{A/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1000,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(2000)*Fraction(1,2)",
+    "solution": "$H=nI$ depends only on free current, not on the core, so $H=1.0\\times10^{3}\\ \\mathrm{A/m}$.",
+    "hints": [
+      "Which quantity does the core change?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A solenoid with $n$ turns per metre carries current $I$ and is filled with a material of absolute permeability $\\mu$. Write the field $B$ inside in terms of $\\mu$, $n$, $I$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu*n*I",
+      "vars": [
+        "mu",
+        "n",
+        "I"
+      ],
+      "also": [
+        "n*I*mu",
+        "mu*I*n"
+      ]
+    },
+    "check": null,
+    "solution": "Ampère's law gives $H=nI$, so $B=\\mu H=\\mu nI$.",
+    "hints": [
+      "Ampère's law fixes H before the material enters."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about magnetic materials placed in a field.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "In diamagnets, induced dipoles oppose the applied field, so $\\chi$ is small and negative",
+        "In paramagnets, atomic dipoles tend to align with the field, so $\\chi$ is small and positive",
+        "In ferromagnets, $\\chi$ is small, of order $10^{-5}$",
+        "In ferromagnets, $\\chi$ is small and negative"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Diamagnets and paramagnets have tiny susceptibilities of opposite sign. Ferromagnets have large positive susceptibilities.",
+    "hints": [
+      "Compare the size and sign of chi for each class."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A paramagnetic material fills a solenoid. Compared with the same solenoid in vacuum at the same current, which statement is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$B$ is larger and $H$ is unchanged",
+        "$B$ is smaller and $H$ is larger",
+        "$B$ and $H$ are both larger",
+        "$B$ is unchanged and $M$ is zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "$H=nI$ depends only on free current, so $H$ cannot change",
+        "$H$ is fixed by the free current, so it cannot rise",
+        "a paramagnet has nonzero magnetization, so $M\\neq 0$"
+      ]
+    },
+    "solution": "$H$ is fixed by free current. The material adds $M$, so $B=\\mu_0(H+M)$ rises.",
+    "hints": [
+      "H is set by the free current alone."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In the linear regime, a ferromagnetic core has relative permeability $\\mu_r=500$. The field strength inside is $H=800\\ \\mathrm{A/m}$. Find $B$ in $\\mathrm T$. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5026548245743669,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*500*800",
+    "solution": "$B=\\mu_0\\mu_r H\\approx0.50\\ \\mathrm T$.",
+    "hints": [
+      "Use B equals mu0 times mu_r times H."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State Faraday's law for a closed loop, including the sign.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathcal E=+\\,d\\Phi_B/dt$ in every case",
+        "$\\mathcal E=-\\Phi_B/t$ for the total flux at any moment",
+        "$\\mathcal E=-d\\Phi_B/dt$, so the induced sense opposes the change in flux",
+        "$\\mathcal E=-B\\,dA/dt$, with no angle between $B$ and the normal"
+      ],
+      "correct": 2,
+      "why": [
+        "drops the sign that encodes Lenz's law",
+        "uses total flux divided by time, not its rate of change",
+        "",
+        "drops the angle and the integral over the loop"
+      ]
+    },
+    "solution": "Faraday's law: $\\mathcal E=-d\\Phi_B/dt$. The minus sign is Lenz's law.",
+    "hints": [
+      "Which sign encodes Lenz's law?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A flat loop of area $A$ lies in a uniform field of magnitude $B$. The normal to the loop makes angle $\\theta$ with the field. Write the flux $\\Phi_B$ through the loop.",
+    "answer": {
+      "kind": "expression",
+      "value": "B*A*cos(theta)",
+      "vars": [
+        "B",
+        "A",
+        "theta"
+      ],
+      "also": [
+        "A*B*cos(theta)",
+        "B*cos(theta)*A"
+      ]
+    },
+    "check": null,
+    "solution": "$\\Phi_B=\\int\\vec B\\cdot d\\vec A=BA\\cos\\theta$ for uniform $B$.",
+    "hints": [
+      "Flux is the field dotted with the normal, times the area."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Lenz's law states which of the following about an induced current?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The induced current produces a field that adds to the change in flux",
+        "The induced current produces a field that opposes the change in flux",
+        "The induced current always flows clockwise as seen from above",
+        "The induced EMF is proportional to the flux itself, not its rate of change"
+      ],
+      "correct": 1,
+      "why": [
+        "reinforcing the change would create energy from nothing",
+        "",
+        "the sense depends on how the flux changes; there is no fixed direction",
+        "that describes a static relation, not induction"
+      ]
+    },
+    "solution": "The induced current opposes the change in flux that produces it.",
+    "hints": [
+      "Think about energy conservation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0040",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A circular loop of radius $0.050\\ \\mathrm m$ lies flat in a plane perpendicular to a uniform field. The field magnitude rises uniformly from $0$ to $0.40\\ \\mathrm T$ in $0.20\\ \\mathrm s$. Find the magnitude of the induced EMF in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.015707963267948967,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.pi*0.050**2*0.40/0.20",
+    "solution": "$|\\mathcal E|=A\\,|dB/dt|=\\pi(0.050)^2(0.40/0.20)=1.6\\times10^{-2}\\ \\mathrm V$.",
+    "hints": [
+      "The loop is perpendicular to B, so the cosine is one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $200$-turn coil has area $4.0\\times10^{-3}\\ \\mathrm m^2$ in a uniform field of $0.50\\ \\mathrm T$. The angle between the coil's normal and the field goes from $0^\\circ$ to $60^\\circ$ in $0.10\\ \\mathrm s$. Find the magnitude of the average EMF in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.9999999999999996,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "200*0.50*4.0e-3*(1-math.cos(math.radians(60)))/0.10",
+    "solution": "$|\\Delta\\Phi|=NBA(\\cos0^\\circ-\\cos60^\\circ)=0.20\\ \\mathrm{Wb}$, so $|\\mathcal E|=2.0\\ \\mathrm V$.",
+    "hints": [
+      "Field strength alone does not set the flux change."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A straight rod of length $L$ slides at speed $v$ along two parallel rails. The rod stays perpendicular to the rails and to a uniform field $B$ that is perpendicular to the plane of the rails. Write the magnitude of the EMF across the rod in terms of $B$, $L$, $v$.",
+    "answer": {
+      "kind": "expression",
+      "value": "B*L*v",
+      "vars": [
+        "B",
+        "L",
+        "v"
+      ],
+      "also": [
+        "L*v*B",
+        "v*L*B"
+      ]
+    },
+    "check": null,
+    "solution": "Charges in the rod feel $vB$ across its length, so $\\mathcal E=BLv$.",
+    "hints": [
+      "Use the motional EMF for a rod crossing a field."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A loop rotates at constant angular speed $\\omega$ in a uniform magnetic field. Select all changes that increase the peak EMF.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Increasing the number of turns",
+        "Increasing the rotation rate $\\omega$",
+        "Increasing the loop area",
+        "Replacing the field with a weaker one"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Peak EMF is $N B A\\omega$, so it grows with each of the first three and falls with a weaker field.",
+    "hints": [
+      "Write the peak EMF as a product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bar magnet's north pole moves straight toward a loop, with its north face facing the loop. Looking from the magnet's side toward the loop, which way does the induced current circulate?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Counterclockwise",
+        "Clockwise",
+        "No current, since the flux is static",
+        "Counterclockwise as seen from the far side of the loop"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reverses the sense; that current would reinforce the approaching pole",
+        "the flux through the loop is changing, so a current flows",
+        "viewed from the far side the sense is clockwise, so this reverses the answer"
+      ]
+    },
+    "solution": "The flux through the loop grows, so the induced field must oppose it, pointing back toward the magnet. That needs counterclockwise current as seen from the magnet's side.",
+    "hints": [
+      "Induced field opposes the increase in flux."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Magnetic flux through a loop is $\\Phi_B=6.0t^2-2.0t$ in $\\mathrm{Wb}$, with $t$ in $\\mathrm s$. Find the magnitude of the induced EMF in $\\mathrm V$ at $t=0.50\\ \\mathrm s$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(12)*Fraction(1,2)-2",
+    "solution": "$\\mathcal E=|d\\Phi_B/dt|=|12t-2|=|6-2|=4\\ \\mathrm V$.",
+    "hints": [
+      "Differentiate the flux, then substitute t."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the defining relation for the self-inductance $L$ of a coil with $N$ turns, where $\\Phi_B$ is the flux through one turn and $I$ is the current.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$L=I\\,\\Phi_B/N$",
+        "$L=N\\Phi_B/I$",
+        "$L=\\Phi_B/(NI)$",
+        "$L=I/(N\\Phi_B)$"
+      ],
+      "correct": 1,
+      "why": [
+        "inverts the flux and current roles",
+        "",
+        "flux per turn, not flux linkage; N belongs in the numerator",
+        "inverts the whole ratio"
+      ]
+    },
+    "solution": "Flux linkage is $N\\Phi_B$, and $L$ is flux linkage per unit current.",
+    "hints": [
+      "Flux linkage counts every turn."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the self-inductance $L$ of an ideal solenoid in vacuum with $N$ turns, cross-sectional area $A$ and length $l$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu0*N^2*A/l",
+      "vars": [
+        "mu0",
+        "N",
+        "A",
+        "l"
+      ],
+      "also": [
+        "mu0*N*N*A/l",
+        "mu0*A*N^2/l"
+      ]
+    },
+    "check": null,
+    "solution": "Field $B=\\mu_0 NI/l$, so flux per turn is $BA$ and $L=N(BA)/I=\\mu_0N^2A/l$.",
+    "hints": [
+      "Find the field first, then the flux linkage."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A coil with self-inductance $L$ carries current $I$. Which expression gives the magnetic energy stored in it?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{1}{2}LI$",
+        "$\\frac{1}{2}LI^2$",
+        "$LI^2$",
+        "$\\frac{1}{2}L^2I$"
+      ],
+      "correct": 1,
+      "why": [
+        "linear in current, but the energy is quadratic",
+        "",
+        "twice the stored energy; a missing factor of one half",
+        "wrong powers of L and I"
+      ]
+    },
+    "solution": "Stored energy is $U=\\frac{1}{2}LI^2$, the work done against the induced EMF.",
+    "hints": [
+      "Energy goes as current squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A coil has self-inductance $0.50\\ \\mathrm H$. Its current changes at $4.0\\ \\mathrm{A/s}$. Find the magnitude of the self-induced EMF in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)*4",
+    "solution": "$|\\mathcal E|=L\\,|dI/dt|=0.50\\times4.0=2.0\\ \\mathrm V$.",
+    "hints": [
+      "EMF is inductance times the rate of current change."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A solenoid has $1000$ turns, length $0.50\\ \\mathrm m$ and cross-section $2.0\\times10^{-4}\\ \\mathrm m^2$. It is in vacuum. Find its inductance in $\\mathrm H$. Use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.000502654824574367,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*1000**2*2.0e-4/0.50",
+    "solution": "$L=\\mu_0 N^2A/\\ell=5.0\\times10^{-4}\\ \\mathrm H$.",
+    "hints": [
+      "Use the solenoid result and watch the N squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two coils are connected in series. Their self-inductances are $L_1$ and $L_2$, and their mutual inductance is $M$. Their fluxes add, so each coil's flux links the other. Write the total inductance in terms of $L_1$, $L_2$, $M$.",
+    "answer": {
+      "kind": "expression",
+      "value": "L1+L2+2*M",
+      "vars": [
+        "L1",
+        "L2",
+        "M"
+      ],
+      "also": [
+        "L2+L1+2*M",
+        "2*M+L1+L2"
+      ]
+    },
+    "check": null,
+    "solution": "With fluxes adding, the total is $L=L_1+L_2+2M$. The sign of $M$ depends on the winding sense.",
+    "hints": [
+      "Mutual flux counts twice in series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about an inductor carrying a current that is increasing.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The induced EMF opposes the increase in current",
+        "Stored magnetic energy is $\\frac{1}{2}LI^2$",
+        "The voltage across it is $L\\,dI/dt$",
+        "The induced EMF drives the current up faster"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Lenz's law makes the EMF oppose the increase. Energy and voltage follow from $L$. An EMF that aids the increase would create energy from nothing.",
+    "hints": [
+      "Check the sign convention of Lenz's law."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The current through an inductor is decreasing. Which statement describes the induced EMF?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It acts in the same sense as the current, trying to keep it flowing",
+        "It opposes the current, trying to stop it",
+        "It is zero, because the current changes only slowly",
+        "It reverses the current direction permanently"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that describes an increasing current; the decreasing case reverses the sense",
+        "an EMF needs a changing current, not a slow one",
+        "an induced EMF cannot reverse a current on its own"
+      ]
+    },
+    "solution": "Lenz's law: the EMF opposes the change in current, so it pushes in the same direction as a falling current.",
+    "hints": [
+      "Opposing a change means resisting a decrease too."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.inductance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $2.0\\ \\mathrm H$ inductor carries current $I(t)=3.0t\\ \\mathrm A$, with $t$ in $\\mathrm s$. Find the magnitude of the voltage across it at $t=2.0\\ \\mathrm s$, in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.0*3.0",
+    "solution": "$|V|=L\\,|dI/dt|=2.0\\times3.0=6.0\\ \\mathrm V$, constant in time.",
+    "hints": [
+      "The current is linear, so its rate is constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the time constant $\\tau$ of a series resistor $R$ and inductor $L$ driven by a steady source.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\tau=RL$",
+        "$\\tau=R/L$",
+        "$\\tau=L/R$",
+        "$\\tau=\\sqrt{LR}$"
+      ],
+      "correct": 2,
+      "why": [
+        "a product, not a ratio; $\\Omega^2\\cdot$s is not a time",
+        "inverts the ratio; gives a rate, not a time",
+        "",
+        "a square root of a product, not a ratio"
+      ]
+    },
+    "solution": "For an RL circuit $\\tau=L/R$, in seconds since henries over ohms is seconds.",
+    "hints": [
+      "Check the units of L over R."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the angular frequency $\\omega_0$ of an ideal LC circuit with no resistance, in terms of $L$ and $C$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/sqrt(L*C)",
+      "vars": [
+        "L",
+        "C"
+      ],
+      "also": [
+        "(L*C)^(-1/2)",
+        "1/(sqrt(L)*sqrt(C))"
+      ]
+    },
+    "check": null,
+    "solution": "Energy alternates between the inductor and capacitor at $\\omega_0=1/\\sqrt{LC}$.",
+    "hints": [
+      "Frequency comes from the product LC."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A switch closes at $t=0$, connecting a steady source of EMF $\\mathcal E$ to a series resistor and inductor. What does the current approach as $t\\to\\infty$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathcal E/R$, set by the resistor alone",
+        "It grows without limit",
+        "It falls back to zero",
+        "$\\mathcal E L$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ignores the resistor, which limits the steady current",
+        "a decay pattern, which applies only after the source is removed",
+        "units mismatch: $\\mathcal E L$ is not a current"
+      ]
+    },
+    "solution": "At steady state the inductor has no EMF, so the current is $\\mathcal E/R$.",
+    "hints": [
+      "At steady state the inductor drops no voltage."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An RL circuit has $L=0.40\\ \\mathrm H$ and $R=8.0\\ \\Omega$. A $12\\ \\mathrm V$ source is switched on at $t=0$ with zero initial current. Find the current in $\\mathrm A$ at $t=0.050\\ \\mathrm s$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.9481808382428365,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "12.0/8.0*(1-math.exp(-0.050*8.0/0.40))",
+    "solution": "$I=(\\mathcal E/R)(1-e^{-t/\\tau})$ with $\\tau=L/R=0.050\\ \\mathrm s$. At $t=\\tau$, $I=1.5(1-e^{-1})=0.95\\ \\mathrm A$.",
+    "hints": [
+      "Compute tau first, then t over tau."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An RL circuit has $L=0.40\\ \\mathrm H$ and $R=8.0\\ \\Omega$. A $12\\ \\mathrm V$ source is switched on at $t=0$ with zero initial current. Find the time in $\\mathrm s$ at which the current first reaches half its final value.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.03465735902799726,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(0.40/8.0)*math.log(2)",
+    "solution": "Half the final value needs $1-e^{-t/\\tau}=1/2$, so $t=\\tau\\ln2=0.035\\ \\mathrm s$.",
+    "hints": [
+      "Solve the rise equation for t."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An ideal LC circuit has a capacitor with charge $Q$ at $t=0$ and no current. The capacitor discharges through an inductor $L$ with no resistance. Write the energy in the inductor when its current is at a maximum, in terms of $Q$ and $C$.",
+    "answer": {
+      "kind": "expression",
+      "value": "Q^2/(2*C)",
+      "vars": [
+        "Q",
+        "C"
+      ],
+      "also": [
+        "Q^2/C/2",
+        "Q*Q/(2*C)"
+      ]
+    },
+    "check": null,
+    "solution": "At maximum current all the energy is magnetic. It equals the initial capacitor energy $Q^2/(2C)$.",
+    "hints": [
+      "Track where the energy is at the current peak."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about an ideal LC circuit with no resistance.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Total energy, electric plus magnetic, stays constant",
+        "Capacitor charge is zero at the instant the current is maximum",
+        "Angular frequency is $1/\\sqrt{LC}$",
+        "Capacitor energy is largest when the current is largest"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Energy moves between capacitor and inductor with no loss. The capacitor is empty when the current peaks.",
+    "hints": [
+      "Where is the energy when the current peaks?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In a series RL circuit with the source removed, the current decays from $I_0$. What fraction of $I_0$ remains after one time constant?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "About 37%",
+        "50%",
+        "0%",
+        "About 63%"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "half-life, which is $\\tau\\ln2$, not one time constant",
+        "treats the decay as complete in one time constant",
+        "$1-e^{-1}$ is the rise fraction, used wrongly on a decay"
+      ]
+    },
+    "solution": "Decay is $I=I_0e^{-t/\\tau}$, and $e^{-1}\\approx0.37$.",
+    "hints": [
+      "Use the exponential decay form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An LC circuit has $L=2.0\\ \\mathrm{mH}$ and $C=5.0\\ \\mu\\mathrm F$. Find its natural frequency in $\\mathrm{Hz}$ (cycles per second, not rad/s).",
+    "answer": {
+      "kind": "numeric",
+      "value": 1591.5494309189535,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1/(2*math.pi*math.sqrt(2.0e-3*5.0e-6))",
+    "solution": "$\\omega_0=1/\\sqrt{LC}=1.0\\times10^{4}\\ \\mathrm{rad/s}$, so $f=\\omega_0/2\\pi=1.6\\times10^{3}\\ \\mathrm{Hz}$.",
+    "hints": [
+      "Convert from angular frequency."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which phase relation holds between voltage and current in an ideal inductor driven by a sinusoidal source?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Current leads voltage by $90^\\circ$",
+        "Voltage and current are in phase",
+        "Voltage leads current by $90^\\circ$",
+        "Voltage lags current by $180^\\circ$"
+      ],
+      "correct": 2,
+      "why": [
+        "capacitor pattern: current leads in a capacitor, not an inductor",
+        "resistor pattern, with no phase shift",
+        "",
+        "a $180^\\circ$ shift is an inverted sign, not an inductor's phase"
+      ]
+    },
+    "solution": "For an inductor $V=L\\,dI/dt$, so voltage peaks a quarter cycle before current.",
+    "hints": [
+      "Differentiate the current."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the capacitive reactance $X_C$ of a capacitor $C$ at angular frequency $\\omega$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/(omega*C)",
+      "vars": [
+        "omega",
+        "C"
+      ],
+      "also": [
+        "1/omega/C",
+        "1/(C*omega)"
+      ]
+    },
+    "check": null,
+    "solution": "Capacitor current is $C\\,dV/dt$, so $X_C=1/(\\omega C)$.",
+    "hints": [
+      "Reactance is the voltage amplitude over the current amplitude."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A sinusoidal voltage has peak value $V_0$. Which expression gives its rms value?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$V_0/2$",
+        "$V_0/\\sqrt{2}$",
+        "$V_0\\sqrt{2}$",
+        "$V_0$"
+      ],
+      "correct": 1,
+      "why": [
+        "half the peak, which is not the rms",
+        "",
+        "scales up; rms is smaller than peak",
+        "the rms is not the peak"
+      ]
+    },
+    "solution": "For a sinusoid, $V_{\\rm rms}=V_0/\\sqrt{2}$.",
+    "hints": [
+      "Average the square over a cycle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0067",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A series circuit has $R=40\\ \\Omega$, $L=0.20\\ \\mathrm H$ and $C=50\\ \\mu\\mathrm F$, driven at $60\\ \\mathrm{Hz}$. Find the impedance magnitude in $\\Omega$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 45.81887666045232,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(40.0**2+(2*math.pi*60*0.20-1/(2*math.pi*60*50e-6))**2)",
+    "solution": "$X_L=\\omega L=75.4\\ \\Omega$ and $X_C=1/(\\omega C)=53.1\\ \\Omega$. Then $|Z|=\\sqrt{R^2+(X_L-X_C)^2}=45.8\\ \\Omega$.",
+    "hints": [
+      "Compute both reactances, then combine with R."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An AC source has peak voltage $120\\ \\mathrm V$ and drives a $30\\ \\Omega$ resistor. Find the average power in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 240,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(120**2,2*30)",
+    "solution": "$P_{\\rm avg}=V_{\\rm rms}^2/R=(V_0^2/2)/R=(14400/2)/30=240\\ \\mathrm W$.",
+    "hints": [
+      "Use the rms voltage, not the peak."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series RC circuit has resistance $R$ and capacitance $C$, driven at angular frequency $\\omega$. Write the impedance magnitude $|Z|$ in terms of $R$, $C$, $\\omega$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sqrt(R^2+1/(omega*C)^2)",
+      "vars": [
+        "R",
+        "C",
+        "omega"
+      ],
+      "also": [
+        "sqrt(R^2+(1/(omega*C))^2)",
+        "sqrt(R^2+1/((omega*C)^2))"
+      ]
+    },
+    "check": null,
+    "solution": "Resistance and capacitive reactance add in quadrature: $|Z|=\\sqrt{R^2+X_C^2}$.",
+    "hints": [
+      "Reactances combine in quadrature, not directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about a series RLC circuit at its resonance frequency.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$X_L = X_C$",
+        "The impedance is purely resistive, $|Z|=R$",
+        "The current is in phase with the source voltage",
+        "The voltage across the capacitor is zero"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "At resonance the reactances cancel, so $Z=R$ and current is in phase. The capacitor still has voltage $IX_C$, which is not zero.",
+    "hints": [
+      "What does the capacitor voltage equal at resonance?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series RC circuit has fixed $R$ and $C$ and a sinusoidal source of fixed amplitude. As the frequency becomes very large, what happens to the current amplitude?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It approaches $V_0/R$",
+        "It goes to zero",
+        "It grows in proportion to frequency",
+        "It stays at its low-frequency value"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "treats the capacitor as open at high frequency, but its reactance vanishes",
+        "forgot the reactance sits in the denominator",
+        "ignores that the reactance changes with frequency"
+      ]
+    },
+    "solution": "As $\\omega\\to\\infty$, $X_C\\to0$, so $|Z|\\to R$ and $I_0\\to V_0/R$.",
+    "hints": [
+      "What does the reactance do as frequency rises?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series RL circuit has $R=30\\ \\Omega$ and $X_L=40\\ \\Omega$. Find the phase angle $\\varphi$ by which voltage leads current, in degrees.",
+    "answer": {
+      "kind": "numeric",
+      "value": 53.13010235415598,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.degrees(math.atan2(40,30))",
+    "solution": "$\\tan\\varphi=X_L/R=4/3$, so $\\varphi\\approx53^\\circ$.",
+    "hints": [
+      "Use the arctangent of reactance over resistance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the condition for resonance in a series RLC circuit.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$R=X_L$",
+        "$\\omega L=R$",
+        "$X_L=X_C$, so the reactances cancel",
+        "$Z=0$ at every frequency"
+      ],
+      "correct": 2,
+      "why": [
+        "equal resistance and reactance is not the condition",
+        "compares one reactance with R, not the two reactances with each other",
+        "",
+        "a series RLC impedance cannot be zero, since $R>0$"
+      ]
+    },
+    "solution": "Resonance is $X_L=X_C$, which makes the reactances cancel and leaves $Z=R$.",
+    "hints": [
+      "Which two quantities must cancel?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the quality factor $Q$ of a series RLC circuit in terms of $L$, $R$, $C$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sqrt(L/C)/R",
+      "vars": [
+        "L",
+        "R",
+        "C"
+      ],
+      "also": [
+        "(1/R)*sqrt(L/C)"
+      ]
+    },
+    "check": null,
+    "solution": "$Q=\\omega_0 L/R$. With $\\omega_0=1/\\sqrt{LC}$ this is $Q=\\sqrt{L/C}/R$.",
+    "hints": [
+      "Substitute the resonant frequency into omega L over R."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A series RLC circuit at resonance has a larger resistance $R$. What happens to its bandwidth?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It increases, because $\\Delta\\omega=R/L$",
+        "It decreases",
+        "It stays the same",
+        "It is zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reversed the dependence; bandwidth grows with R",
+        "bandwidth depends on R, so it changes",
+        "a zero bandwidth would mean no current at any frequency"
+      ]
+    },
+    "solution": "Bandwidth is $\\Delta\\omega=R/L$, so larger R gives a wider band.",
+    "hints": [
+      "Use the bandwidth formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series RLC circuit has $L=0.20\\ \\mathrm H$ and $C=5.0\\ \\mu\\mathrm F$. Find its resonant frequency in $\\mathrm{Hz}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 159.15494309189532,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1/(2*math.pi*math.sqrt(0.20*5.0e-6))",
+    "solution": "$\\omega_0=1/\\sqrt{LC}=1000\\ \\mathrm{rad/s}$, so $f_0=\\omega_0/2\\pi=159\\ \\mathrm{Hz}$.",
+    "hints": [
+      "Resonance depends only on L and C."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series RLC circuit has $R=10\\ \\Omega$, $L=0.50\\ \\mathrm H$ and $C=2.0\\ \\mu\\mathrm F$. Find its quality factor $Q$ (dimensionless).",
+    "answer": {
+      "kind": "numeric",
+      "value": 50,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(1/10.0)*math.sqrt(0.50/2.0e-6)",
+    "solution": "$Q=\\frac{1}{R}\\sqrt{L/C}=\\frac{1}{10}\\sqrt{2.5\\times10^{5}}=50$.",
+    "hints": [
+      "Q is set by L, C and R together."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A low-pass RC filter takes its input across the series resistor $R$ and its output across the capacitor $C$, at angular frequency $\\omega$. Write the gain magnitude $|H|=|V_{\\rm out}/V_{\\rm in}|$ in terms of $R$, $C$, $\\omega$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/sqrt(1+(omega*R*C)^2)",
+      "vars": [
+        "R",
+        "C",
+        "omega"
+      ],
+      "also": [
+        "(1+(omega*R*C)^2)^(-1/2)",
+        "1/sqrt(1+omega^2*R^2*C^2)"
+      ]
+    },
+    "check": null,
+    "solution": "Divider with $Z_C=1/(j\\omega C)$ gives $|H|=1/\\sqrt{1+(\\omega RC)^2}$.",
+    "hints": [
+      "Use the voltage divider with impedances."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about a series RLC circuit at resonance with a small resistance.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Current amplitude is at its maximum",
+        "Voltage across $L$ or $C$ can exceed the source amplitude",
+        "Power delivered to the circuit is at its maximum",
+        "Voltage across $R$ exceeds the source amplitude"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "At resonance $Z=R$ is smallest, so current and power peak. The inductor and capacitor voltages reach $QV_0$, which exceeds $V_0$ when $Q>1$. The resistor voltage equals $V_0$, never more.",
+    "hints": [
+      "Compare the resistor voltage with the source amplitude."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A low-pass RC filter has its output across $C$. At a frequency much higher than $1/(RC)$, how does the output compare with the input?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Much smaller than the input, falling roughly as $1/\\omega$",
+        "Equal to the input",
+        "Larger than the input, and it grows with frequency",
+        "Exactly zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "treats the filter as flat at all frequencies; forgot the capacitor's reactance",
+        "high-pass pattern; a low-pass output falls with frequency",
+        "a finite reactance never gives an exact null"
+      ]
+    },
+    "solution": "Above cutoff $|H|\\approx1/(\\omega RC)$, which falls as $1/\\omega$.",
+    "hints": [
+      "What is the capacitor's reactance at high frequency?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.resonance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A low-pass RC filter has $R=1.0\\ \\mathrm{k\\Omega}$ and $C=0.10\\ \\mu\\mathrm F$, with output across $C$. Find the gain magnitude $|H|$ at the cutoff frequency $\\omega_c=1/(RC)$. Give a dimensionless decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.7071067811865475,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1/math.sqrt(2)",
+    "solution": "At $\\omega_c$ the term $\\omega RC=1$, so $|H|=1/\\sqrt2\\approx0.707$.",
+    "hints": [
+      "At cutoff, omega R C equals one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which of Maxwell's equations is Gauss's law for magnetism?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\nabla\\cdot\\vec E=\\rho/\\varepsilon_0$",
+        "$\\nabla\\times\\vec E=-\\partial\\vec B/\\partial t$",
+        "$\\nabla\\cdot\\vec B=0$",
+        "$\\nabla\\times\\vec B=\\mu_0\\vec J+\\mu_0\\varepsilon_0\\,\\partial\\vec E/\\partial t$"
+      ],
+      "correct": 2,
+      "why": [
+        "Gauss's law for electricity, with charge as the source",
+        "Faraday's law, the curl of E",
+        "",
+        "Ampère-Maxwell law, the curl of B"
+      ]
+    },
+    "solution": "$\\nabla\\cdot\\vec B=0$ says there are no magnetic monopoles.",
+    "hints": [
+      "Which equation has zero on the right side for B?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write Gauss's law for electricity in differential form, $\\nabla\\cdot\\vec E$, in terms of charge density $\\rho$ and $\\varepsilon_0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "rho/eps0",
+      "vars": [
+        "rho",
+        "eps0"
+      ],
+      "also": [
+        "rho*(1/eps0)",
+        "(1/eps0)*rho"
+      ]
+    },
+    "check": null,
+    "solution": "$\\nabla\\cdot\\vec E=\\rho/\\varepsilon_0$, so charge density is the source of E.",
+    "hints": [
+      "Charge is the source of the electric field."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which term appears in the Ampère-Maxwell law but not in the original Ampère's law?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\varepsilon_0\\,\\partial\\vec E/\\partial t$",
+        "$\\partial\\vec B/\\partial t$",
+        "$\\rho/\\varepsilon_0$",
+        "$\\mu_0\\vec M$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a Faraday's law term, a curl of E, not an addition to Ampère's law",
+        "the Gauss's law term for electricity",
+        "a magnetization term, already in the H-field form, not new"
+      ]
+    },
+    "solution": "The displacement current $\\varepsilon_0\\partial\\vec E/\\partial t$ is Maxwell's addition.",
+    "hints": [
+      "Which term involves a changing electric field?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Between the plates of a parallel-plate capacitor, the electric field rises at $2.0\\times10^{5}\\ \\mathrm{V/(m\\,s)}$. The plate area is $0.10\\ \\mathrm m^2$. Find the displacement current in $\\mathrm{nA}$. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 177,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "8.85e-12*0.10*2.0e5*1e9",
+    "solution": "$I_d=\\varepsilon_0 A\\,dE/dt=1.77\\times10^{-7}\\ \\mathrm A=177\\ \\mathrm{nA}$.",
+    "hints": [
+      "Displacement current is epsilon zero times the flux rate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Ampère-Maxwell law is applied to a loop around a wire with current $I$ and a changing electric flux $\\Phi_E$ through the loop's surface. Let $F=d\\Phi_E/dt$. Write $\\oint\\vec B\\cdot d\\vec\\ell$ in terms of $\\mu_0$, $I$, $\\varepsilon_0$ and $F$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu0*(I+eps0*F)",
+      "vars": [
+        "mu0",
+        "I",
+        "eps0",
+        "F"
+      ],
+      "also": [
+        "mu0*I+mu0*eps0*F",
+        "mu0*(eps0*F+I)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\oint\\vec B\\cdot d\\vec\\ell=\\mu_0(I+\\varepsilon_0F)$, with $F=d\\Phi_E/dt$. The second term is the displacement current.",
+    "hints": [
+      "Both conduction and displacement currents thread the loop."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the speed of electromagnetic waves in vacuum in $\\mathrm{m/s}$, from $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$ and $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 299863380.4661277,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1/math.sqrt(8.85e-12*4*math.pi*1e-7)",
+    "solution": "$c=1/\\sqrt{\\mu_0\\varepsilon_0}=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "hints": [
+      "Combine the two constants as one over the root of their product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A parallel-plate capacitor has field between its plates rising at $2.0\\times10^{13}\\ \\mathrm{V/(m\\,s)}$. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$ and $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$. Neglect fringing: the field is uniform and perpendicular to the plates, and the plates are wider than a circle of radius $0.050\\ \\mathrm m$ that lies between them, parallel to the plates and centred on the axis. Find the magnetic field magnitude on this circle in $\\mu\\mathrm T$, from displacement current alone.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5.56061899685394,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4*math.pi*1e-7*8.85e-12*0.050*2.0e13/2*1e6",
+    "solution": "Ampère-Maxwell: $B\\,2\\pi r=\\mu_0\\varepsilon_0\\pi r^2\\,dE/dt$, so $B=\\mu_0\\varepsilon_0 r\\,(dE/dt)/2=5.6\\times10^{-6}\\ \\mathrm T=5.6\\ \\mu\\mathrm T$.",
+    "hints": [
+      "The displacement current through the circle is epsilon zero times the flux rate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor is charged by a constant conduction current $I$. Between the plates the displacement current equals what?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$I$, the conduction current, so Ampère-Maxwell gives the same $B$ for any surface bounded by a given loop",
+        "Zero, since no charge sits between the plates",
+        "$2I$, counting both plates",
+        "$I/\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the field between the plates grows, so the displacement current is not zero",
+        "counts the same current twice",
+        "a units slip: $I/\\varepsilon_0$ is not a current"
+      ]
+    },
+    "solution": "Continuity makes the displacement current between the plates equal the wire current $I$.",
+    "hints": [
+      "Where does the current go across the gap?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all of Maxwell's equations for vacuum with no charges or currents that are true.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\nabla\\cdot\\vec E=0$",
+        "$\\nabla\\cdot\\vec B=0$",
+        "$\\nabla\\times\\vec E=-\\partial\\vec B/\\partial t$",
+        "$\\nabla\\times\\vec E=+\\partial\\vec B/\\partial t$"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "With no sources, $\\nabla\\cdot\\vec E=0$ and $\\nabla\\cdot\\vec B=0$. Faraday's law carries a minus sign.",
+    "hints": [
+      "Check the sign in Faraday's law."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the displacement current density $\\vec J_d$ in vacuum.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\varepsilon_0\\,\\partial\\vec E/\\partial t$",
+        "$\\varepsilon_0\\,\\partial\\vec B/\\partial t$",
+        "$\\mu_0\\,\\partial\\vec E/\\partial t$",
+        "$\\partial\\vec E/\\partial t\\,/\\,\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "swaps E and B; that term belongs to Faraday's law",
+        "wrong constant: $\\mu_0$ replaces $\\varepsilon_0$",
+        "inverts the constant"
+      ]
+    },
+    "solution": "Maxwell's addition is $\\vec J_d=\\varepsilon_0\\,\\partial\\vec E/\\partial t$.",
+    "hints": [
+      "Displacement current is driven by a changing E."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Plates of area $A$ sit in a vacuum gap. The electric field between them changes at rate $G=dE/dt$. Write the displacement current $I_d$ through the gap in terms of $\\varepsilon_0$, $A$, $G$.",
+    "answer": {
+      "kind": "expression",
+      "value": "eps0*A*G",
+      "vars": [
+        "eps0",
+        "A",
+        "G"
+      ],
+      "also": [
+        "A*eps0*G",
+        "eps0*G*A"
+      ]
+    },
+    "check": null,
+    "solution": "$I_d=\\int \\vec J_d\\cdot d\\vec A=\\varepsilon_0 A\\,G$ for uniform field across the plates, with $G=dE/dt$.",
+    "hints": [
+      "Integrate the displacement current density over the plate area."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Why does Ampère's law need displacement current to hold for the gap of a charging capacitor?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "A surface through the gap carries no conduction current, so the law would predict no B there; $\\varepsilon_0\\partial E/\\partial t$ fixes this",
+        "The gap has charge, which by itself produces a magnetic field",
+        "Magnetic monopoles appear in the gap",
+        "Displacement current is the induced EMF that drives the wire"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "charge does not produce a magnetic field at rest",
+        "Gauss's law for magnetism forbids monopoles",
+        "displacement current is not an EMF"
+      ]
+    },
+    "solution": "Ampère's law on a surface through the gap sees zero conduction current, so it needs the changing E term.",
+    "hints": [
+      "Which surface is convenient, and what current crosses it?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor is charged by a steady wire current of $2.0\\ \\mathrm A$. Find the displacement current between its plates, in $\\mathrm A$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.0",
+    "solution": "Current continuity: the displacement current in the gap equals the wire current, so $I_d=2.0\\ \\mathrm A$.",
+    "hints": [
+      "Use continuity between wire and gap."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Plates have area $A$ and carry charge $q$ on each. The field between them is $E=q/(\\varepsilon_0 A)$. The displacement current is $I_d=\\varepsilon_0 A\\,dE/dt$. Let $J=dq/dt$ be the rate of change of plate charge. Write $I_d$ in terms of $J$.",
+    "answer": {
+      "kind": "expression",
+      "value": "J",
+      "vars": [
+        "J"
+      ],
+      "also": [
+        "J*1",
+        "1*J"
+      ]
+    },
+    "check": null,
+    "solution": "Substituting gives $I_d=\\varepsilon_0 A\\cdot\\frac{dq/dt}{\\varepsilon_0 A}=dq/dt=J$.",
+    "hints": [
+      "Substitute the field in terms of charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about displacement current in a capacitor that is being charged.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "It exists between the plates, where there is no conduction current",
+        "Its magnitude equals the conduction current in the connecting wires",
+        "It produces a magnetic field, as a conduction current does",
+        "It flows through the gap, carrying charge across from one plate to the other"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Displacement current is $\\varepsilon_0\\,\\partial E/\\partial t$ in the gap, equal in magnitude to the wire current, and it produces $B$. No charge crosses the vacuum gap.",
+    "hints": [
+      "Does any charge actually cross the gap?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor with plate area $A$ is charged by a constant conduction current $I$. Which expression gives the rate of change of the electric field between the plates?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$I/(\\varepsilon_0 A)$",
+        "$I/A$",
+        "$I\\varepsilon_0/A$",
+        "$IA/\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgot $\\varepsilon_0$: $I/A$ is the current density, not $dE/dt$",
+        "multiplied by $\\varepsilon_0$ instead of dividing",
+        "inverted the area and the permittivity"
+      ]
+    },
+    "solution": "$E=q/(\\varepsilon_0 A)$, so $dE/dt=(dq/dt)/(\\varepsilon_0 A)=I/(\\varepsilon_0 A)$.",
+    "hints": [
+      "Start from E in terms of q."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor's plates have area $0.040\\ \\mathrm m^2$, and the field between them rises at $5.0\\times10^{8}\\ \\mathrm{V/(m\\,s)}$. Find the displacement current in $\\mathrm A$. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.000177,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "8.85e-12*0.040*5.0e8",
+    "solution": "$I_d=\\varepsilon_0 A\\,dE/dt=1.77\\times10^{-4}\\ \\mathrm A$.",
+    "hints": [
+      "Multiply epsilon zero, area and the rate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor's plates have area $0.20\\ \\mathrm m^2$, and the wire current is $1.0\\ \\mathrm{mA}$. Find the rate of change of the electric field between the plates, in $\\mathrm{V/(m\\,s)}$. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 564971751.412429,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1.0e-3/(8.85e-12*0.20)",
+    "solution": "$dE/dt=I/(\\varepsilon_0 A)=5.6\\times10^{8}\\ \\mathrm{V/(m\\,s)}$.",
+    "hints": [
+      "The displacement current equals the wire current: $\\varepsilon_0 A\\,dE/dt=I$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the relation between the amplitudes $E_0$ and $B_0$ of a plane EM wave in vacuum.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$E_0=B_0/c$",
+        "$E_0=\\mu_0 B_0$",
+        "$E_0=cB_0$",
+        "$E_0=c^2B_0$"
+      ],
+      "correct": 2,
+      "why": [
+        "inverts the ratio; $B_0=E_0/c$ instead",
+        "units slip: $\\mu_0 B_0$ is not a field of the same kind",
+        "",
+        "adds a factor of $c$ too many"
+      ]
+    },
+    "solution": "For a vacuum plane wave $E=cB$, so $E_0=cB_0$.",
+    "hints": [
+      "Which field is larger, and by what factor?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the speed $c$ of electromagnetic waves in vacuum in terms of $\\mu_0$ and $\\varepsilon_0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/sqrt(mu0*eps0)",
+      "vars": [
+        "mu0",
+        "eps0"
+      ],
+      "also": [
+        "(mu0*eps0)^(-1/2)",
+        "1/(sqrt(mu0)*sqrt(eps0))"
+      ]
+    },
+    "check": null,
+    "solution": "Maxwell's equations give $c=1/\\sqrt{\\mu_0\\varepsilon_0}$.",
+    "hints": [
+      "Combine the two constants."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $100\\ \\mathrm{MHz}$ radio wave travels in vacuum with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. Find its wavelength in $\\mathrm m$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "3.00e8/100e6",
+    "solution": "$\\lambda=c/f=3.00\\ \\mathrm m$.",
+    "hints": [
+      "Wavelength is speed over frequency."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0103",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A plane EM wave in vacuum has electric field amplitude $6.0\\ \\mathrm{V/m}$. Find the magnetic field amplitude in $\\mathrm{nT}$, with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "6.0/3.00e8*1e9",
+    "solution": "$B_0=E_0/c=2.0\\times10^{-8}\\ \\mathrm T=20\\ \\mathrm{nT}$.",
+    "hints": [
+      "Use E equals c B."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A plane EM wave in vacuum has electric field amplitude $6.0\\ \\mathrm{V/m}$. Find its average intensity in $\\mathrm{W/m^2}$. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$ and $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.047790000000000006,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "8.85e-12*3.00e8*6.0**2/2",
+    "solution": "$I=\\varepsilon_0 c E_0^2/2=4.78\\times10^{-2}\\ \\mathrm{W/m^2}$.",
+    "hints": [
+      "Average over a cycle, where cos squared gives one half."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A plane wave in vacuum travels in $+z$ with its electric field along $+x$. The field equals its maximum value Amp at $z=0$, $t=0$. Write $E_x(z,t)$ for amplitude Amp, angular frequency $\\omega$ and wavenumber $k$.",
+    "answer": {
+      "kind": "expression",
+      "value": "Amp*cos(omega*t-k*z)",
+      "vars": [
+        "Amp",
+        "omega",
+        "t",
+        "k",
+        "z"
+      ],
+      "also": [
+        "Amp*cos(k*z-omega*t)"
+      ]
+    },
+    "check": null,
+    "solution": "A wave moving in $+z$ has phase $\\omega t-kz$, so $E_x=\\mathrm{Amp}\\cos(\\omega t-kz)$.",
+    "hints": [
+      "The phase must advance with time at fixed z."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about a plane EM wave in vacuum.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\vec E\\perp\\vec B$",
+        "$\\vec E$ and $\\vec B$ are both perpendicular to the propagation direction",
+        "$\\vec E$ and $\\vec B$ reach their peaks at the same instant",
+        "$\\vec E$ is parallel to the propagation direction"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "The fields are mutually perpendicular and transverse, and they are in phase. E is never along the propagation direction.",
+    "hints": [
+      "Check the direction of E relative to k."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A plane EM wave travels in $+z$. At one instant its electric field points along $+x$. Which way does the magnetic field point at that instant?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$+\\hat y$",
+        "$-\\hat y$",
+        "$+\\hat x$",
+        "$+\\hat z$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reversed cross product order, reading $\\hat x\\times\\hat y$ backwards",
+        "B is perpendicular to E, not parallel to it",
+        "B is perpendicular to propagation, so it cannot point along z"
+      ]
+    },
+    "solution": "$\\vec E\\times\\vec B$ must point along $+\\hat z$. $\\hat x\\times\\hat y=\\hat z$, so $\\vec B$ points along $+\\hat y$.",
+    "hints": [
+      "E cross B must give the direction of travel."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the frequency in $\\mathrm{THz}$ of an EM wave in vacuum with wavelength $500\\ \\mathrm{nm}$. Use $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 600,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "3.00e8/500e-9/1e12",
+    "solution": "$f=c/\\lambda=6.00\\times10^{14}\\ \\mathrm{Hz}=600\\ \\mathrm{THz}$.",
+    "hints": [
+      "Convert nanometres to metres first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Poynting vector $\\vec S$ in terms of $\\vec E$ and $\\vec B$, for fields in vacuum.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\vec S=\\vec E\\cdot\\vec B/\\mu_0$",
+        "$\\vec S=\\mu_0\\,\\vec E\\times\\vec B$",
+        "$\\vec S=\\vec E\\times\\vec B$",
+        "$\\vec S=\\vec E\\times\\vec B/\\mu_0$"
+      ],
+      "correct": 3,
+      "why": [
+        "a dot product gives a scalar, not a vector",
+        "wrong prefactor: $\\mu_0$ belongs in the denominator",
+        "missing $1/\\mu_0$",
+        ""
+      ]
+    },
+    "solution": "The Poynting vector is $\\vec S=\\vec E\\times\\vec B/\\mu_0$, energy flow per unit area.",
+    "hints": [
+      "Energy flow is a cross product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the energy density $u$ of an EM field in vacuum in terms of $E$ and $B$.",
+    "answer": {
+      "kind": "expression",
+      "value": "eps0*E^2/2+B^2/(2*mu0)",
+      "vars": [
+        "E",
+        "B",
+        "eps0",
+        "mu0"
+      ],
+      "also": [
+        "B^2/(2*mu0)+eps0*E^2/2",
+        "eps0*E^2/2+B^2/mu0/2"
+      ]
+    },
+    "check": null,
+    "solution": "$u=\\frac{1}{2}\\varepsilon_0 E^2+\\frac{1}{2\\mu_0}B^2$, equal parts electric and magnetic in a wave.",
+    "hints": [
+      "Each field contributes its own term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solar radiation at Earth has intensity $1361\\ \\mathrm{W/m^2}$. Find the radiation pressure in $\\mathrm{Pa}$ on a perfect absorber facing the Sun, with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.000004536666666666667,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1361/3.00e8",
+    "solution": "$P=I/c=4.54\\times10^{-6}\\ \\mathrm{Pa}$.",
+    "hints": [
+      "Pressure is intensity over c for an absorber."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A beam of intensity $500\\ \\mathrm{W/m^2}$ hits a perfect mirror at normal incidence and reflects completely. Find the radiation pressure in $\\mathrm{Pa}$, with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.0000033333333333333333,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2*500/3.00e8",
+    "solution": "A reflected wave transfers twice the momentum of an absorbed one, so $P=2I/c=3.33\\times10^{-6}\\ \\mathrm{Pa}$.",
+    "hints": [
+      "Reflection doubles the momentum transfer."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A plane EM wave in vacuum has electric field amplitude $12\\ \\mathrm{V/m}$. Find its average energy density in $\\mathrm{nJ/m^3}$. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.6372,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "8.85e-12*12.0**2/2*1e9",
+    "solution": "Averaging gives $\\langle u\\rangle=\\varepsilon_0E_0^2/2=6.37\\times10^{-10}\\ \\mathrm{J/m^3}=0.637\\ \\mathrm{nJ/m^3}$, with equal electric and magnetic halves.",
+    "hints": [
+      "Average the electric and magnetic terms over a cycle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An isotropic point source radiates total power $P$ equally in all directions in vacuum. Write the intensity at distance $r$ from the source.",
+    "answer": {
+      "kind": "expression",
+      "value": "P/(4*pi*r^2)",
+      "vars": [
+        "P",
+        "r"
+      ],
+      "also": [
+        "P/(4*pi*r*r)",
+        "P/4/pi/r^2"
+      ]
+    },
+    "check": null,
+    "solution": "Power spreads over the sphere of area $4\\pi r^2$, so $I=P/(4\\pi r^2)$.",
+    "hints": [
+      "Spread the power over a sphere."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about the energy flow of a plane EM wave in vacuum.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\vec S$ points along the propagation direction",
+        "Electric and magnetic energy densities are equal on average",
+        "The average intensity is proportional to $E_0^2$",
+        "The Poynting vector averages to zero over a cycle"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Energy flows with the wave, so the average Poynting vector is nonzero. Equal average energies and intensity proportional to $E_0^2$ follow from $E=cB$.",
+    "hints": [
+      "Energy flows with the wave, so the average is nonzero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A laser beam of power $3.0\\ \\mathrm W$ strikes a perfectly absorbing target head-on. Find the radiation force in $\\mathrm N$, with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1.0\\times10^{-8}\\ \\mathrm N$",
+        "$2.0\\times10^{-8}\\ \\mathrm N$",
+        "$9.0\\times10^{8}\\ \\mathrm N$",
+        "$3.3\\times10^{-17}\\ \\mathrm N$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "doubled for a reflecting target; this one absorbs",
+        "multiplied by $c$ instead of dividing",
+        "divided by $c^2$, which gives the momentum density, not total power"
+      ]
+    },
+    "solution": "Force is $F=P/c=3.0/(3.00\\times10^{8})=1.0\\times10^{-8}\\ \\mathrm N$.",
+    "hints": [
+      "Force is power over c for an absorber."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.poynting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A plane wave in vacuum has electric field amplitude $20\\ \\mathrm{V/m}$. Find the radiation pressure in $\\mathrm{nPa}$ on a perfect absorber. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.77,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "8.85e-12*20.0**2/2*1e9",
+    "solution": "$P=I/c=\\varepsilon_0E_0^2/2=1.77\\times10^{-9}\\ \\mathrm{Pa}=1.77\\ \\mathrm{nPa}$.",
+    "hints": [
+      "Combine I over c with the intensity formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "When light crosses from one medium into another, which quantities stay the same?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Frequency stays the same; wavelength and speed change",
+        "Wavelength stays the same; frequency changes",
+        "Frequency and speed both stay the same",
+        "Speed stays the same; wavelength changes"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "frequency is set by the source, so it is fixed; wavelength is what changes",
+        "speed changes with the refractive index",
+        "speed changes too; only frequency is fixed"
+      ]
+    },
+    "solution": "The source fixes frequency. Speed $c/n$ and wavelength $\\lambda_0/n$ change.",
+    "hints": [
+      "Which quantity does the source set?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the refractive index $n$ of a medium in terms of the speed of light $c$ in vacuum and the speed $v$ in the medium.",
+    "answer": {
+      "kind": "expression",
+      "value": "c/v",
+      "vars": [
+        "c",
+        "v"
+      ],
+      "also": [
+        "1/(v/c)",
+        "c*(1/v)"
+      ]
+    },
+    "check": null,
+    "solution": "$n=c/v$ by definition.",
+    "hints": [
+      "Refractive index is a ratio of speeds."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a transparent medium, light travels at $2.00\\times10^{8}\\ \\mathrm{m/s}$. Find the refractive index (dimensionless), with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "3.00e8/2.00e8",
+    "solution": "$n=c/v=1.50$.",
+    "hints": [
+      "Divide c by the medium speed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Light in air ($n=1.00$) hits a flat water surface ($n=1.33$) at normal incidence. Find the fraction of intensity reflected, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.020059312199524774,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "((1.00-1.33)/(1.00+1.33))**2",
+    "solution": "$R=\\left(\\frac{n_1-n_2}{n_1+n_2}\\right)^2=0.0201$.",
+    "hints": [
+      "Use the normal-incidence reflectance formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Light travels from air into glass with $n=1.50$. Find Brewster's angle in degrees, measured from the normal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 56.309932474020215,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.degrees(math.atan(1.50))",
+    "solution": "$\\tan\\theta_B=n_2/n_1=1.50$, so $\\theta_B=56.3^\\circ$.",
+    "hints": [
+      "Brewster's angle satisfies tan equals the index ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A medium has permittivity $\\varepsilon$ and permeability $\\mu$. Write the speed of light in it.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/sqrt(eps*mu)",
+      "vars": [
+        "eps",
+        "mu"
+      ],
+      "also": [
+        "(eps*mu)^(-1/2)",
+        "1/(sqrt(eps)*sqrt(mu))"
+      ]
+    },
+    "check": null,
+    "solution": "In a medium $v=1/\\sqrt{\\varepsilon\\mu}$, and vacuum gives $c$.",
+    "hints": [
+      "Use the medium's permittivity and permeability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Light crosses from air into glass at an oblique angle. Select all true statements.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Its frequency is unchanged",
+        "Its wavelength decreases",
+        "Its speed decreases",
+        "The angle to the normal increases in the glass"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Frequency is set by the source. Speed is $c/n$ and wavelength is $\\lambda_0/n$, both smaller in glass. Snell's law bends the ray toward the normal.",
+    "hints": [
+      "Snell's law governs the angle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Unpolarized light reflects from glass ($n=1.50$) at Brewster's angle. What is the state of the reflected light?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Linearly polarized, with $\\vec E$ perpendicular to the plane of incidence",
+        "Linearly polarized, with $\\vec E$ parallel to the plane of incidence",
+        "Still unpolarized",
+        "Circularly polarized"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the parallel component vanishes at Brewster's angle, so this cannot survive",
+        "reflection at Brewster's angle selects one polarization",
+        "circular polarization needs a phase shift, not a Brewster reflection"
+      ]
+    },
+    "solution": "At Brewster's angle the parallel component reflects with zero amplitude, leaving only the perpendicular component.",
+    "hints": [
+      "Which polarization component reflects at Brewster's angle?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Light in glass ($n=1.50$) strikes an air interface at $30^\\circ$ from the normal, below the critical angle. Find the refraction angle in air in degrees.",
+    "answer": {
+      "kind": "numeric",
+      "value": 48.59037789072913,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.degrees(math.asin(1.50*math.sin(math.radians(30))))",
+    "solution": "Snell's law: $\\sin\\theta_2=1.50\\sin30^\\circ=0.750$, so $\\theta_2=48.6^\\circ$.",
+    "hints": [
+      "Snell's law goes in both directions."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0127",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which condition must hold for a point charge to radiate electromagnetic power?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It must have nonzero acceleration",
+        "It must be at rest",
+        "It must move at constant velocity",
+        "It must move at a speed close to $c$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a charge at rest has only a static field and radiates nothing",
+        "uniform motion produces a steady field, with no radiation",
+        "speed alone does not radiate; acceleration is required"
+      ]
+    },
+    "solution": "Radiation requires acceleration. Uniform motion, however fast, radiates nothing.",
+    "hints": [
+      "What does the Larmor formula depend on?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0128",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the Larmor power $P$ radiated by a point charge $q$ with acceleration $a$ in vacuum, in terms of $q$, $a$, $\\varepsilon_0$, $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "q^2*a^2/(6*pi*eps0*c^3)",
+      "vars": [
+        "q",
+        "a",
+        "eps0",
+        "c"
+      ],
+      "also": [
+        "q*q*a*a/(6*pi*eps0*c^3)"
+      ]
+    },
+    "check": null,
+    "solution": "Larmor's formula is $P=q^2a^2/(6\\pi\\varepsilon_0c^3)$.",
+    "hints": [
+      "Power scales with acceleration squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0129",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a charge oscillating along a straight line (a dipole), where is the radiated intensity zero?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Along the dipole axis",
+        "Perpendicular to the dipole axis",
+        "At $45^\\circ$ to the axis",
+        "Nowhere; it is isotropic"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the maximum is perpendicular to the axis, so this reverses the pattern",
+        "the pattern is $\\sin^2\\theta$, which is not zero at $45^\\circ$",
+        "dipole radiation is not isotropic"
+      ]
+    },
+    "solution": "The dipole pattern is $\\propto\\sin^2\\theta$, which vanishes along the axis.",
+    "hints": [
+      "What is the sine squared of the angle along the axis?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0130",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An electron ($q=1.60\\times10^{-19}\\ \\mathrm C$) has instantaneous acceleration $1.00\\times10^{15}\\ \\mathrm{m/s^2}$. Find its Larmor power in units of $10^{-24}\\ \\mathrm W$. Use $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$ and $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5.68370864637305,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(1.60e-19)**2*(1.00e15)**2/(6*math.pi*8.85e-12*(3.00e8)**3)*1e24",
+    "solution": "$P=q^2a^2/(6\\pi\\varepsilon_0c^3)=5.68\\times10^{-24}\\ \\mathrm W$, which is $5.68$ in units of $10^{-24}\\ \\mathrm W$.",
+    "hints": [
+      "Plug q and a into the Larmor formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0131",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The charge on a particle is doubled and its acceleration is doubled. Find the ratio of the new Larmor power to the old (dimensionless).",
+    "answer": {
+      "kind": "numeric",
+      "value": 16,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(2)**2*Fraction(2)**2",
+    "solution": "Power goes as $q^2a^2$, so doubling each gives $2^2\\cdot2^2=16$.",
+    "hints": [
+      "Power depends on q squared and a squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0132",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A dipole radiates with intensity $I_{\\max}$ along directions perpendicular to its axis. For an observation direction at angle $\\theta$ from the axis, write the ratio $I(\\theta)/I_{\\max}$ in terms of $\\theta$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sin(theta)^2",
+      "vars": [
+        "theta"
+      ],
+      "also": [
+        "sin(theta)*sin(theta)",
+        "(sin(theta))^2"
+      ]
+    },
+    "check": null,
+    "solution": "The dipole pattern is $\\sin^2\\theta$, equal to one at $\\theta=90^\\circ$.",
+    "hints": [
+      "Which angle gives the maximum?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0133",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about radiation from a charge that oscillates along a straight line.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Radiation is emitted because the charge accelerates",
+        "The radiated power scales with the acceleration squared",
+        "Radiation is zero along the axis of oscillation",
+        "A charge moving at constant velocity radiates strongly"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Acceleration is the source. Larmor power is proportional to $a^2$, and the dipole pattern vanishes along the axis. Uniform motion radiates nothing.",
+    "hints": [
+      "What is the source of radiation?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0134",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An electron moves at constant velocity in a straight line, far from any forces. What is its radiated power?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Zero, because its acceleration is zero",
+        "Proportional to $v^2$, like its kinetic energy",
+        "Nonzero and set by its charge alone",
+        "$q^2v^2/(6\\pi\\varepsilon_0c^3)$, with speed in place of acceleration"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "kinetic energy does not set radiated power",
+        "Larmor power depends on acceleration, so charge alone gives nothing",
+        "the formula uses acceleration, so speed cannot replace it"
+      ]
+    },
+    "solution": "Larmor power is $\\propto a^2$. With $a=0$ the power is zero.",
+    "hints": [
+      "Which quantity appears in the Larmor formula?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0135",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.radiation"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An electron and a proton each have charge magnitude $q$ and the same acceleration $a$. Find the ratio of the proton's Larmor power to the electron's (dimensionless).",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1)",
+    "solution": "Larmor power depends on $q$ and $a$, not on mass. Equal charge magnitudes and accelerations give equal power, a ratio of 1.",
+    "hints": [
+      "Mass does not appear in the Larmor formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

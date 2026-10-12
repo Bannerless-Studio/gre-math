@@ -35,6 +35,7 @@ Array of technique objects.
 | `teach` | yes | none | Markdown card shown once, at introduction. |
 | `order` | yes | none | Integer. Teach order inside a level. |
 | `exam` | no | `true` | Exam rule flag. Enforced from M6: the gate counts a technique as known only when mastered and `fp`. `false` exempts a recall-only technique (mastery alone counts). |
+| `figure` | no | none | One inline SVG string shown above the Learn card. Rules in "Figures" below. |
 
 ## items.json
 
@@ -55,6 +56,7 @@ Array of item objects.
 | `hints` | no | `[]` | Markdown strings. Math is rendered by the page (see Rendering). Not shown in the page yet. |
 | `answer` | yes | none | See below. |
 | `source` | yes | none | `{type, ...}`. `type` is `original`, `adapted` or `public-domain`. |
+| `figure` | no | none | One inline SVG string shown above the prompt on every card tier (drill, timed full problem). Rules in "Figures" below. |
 
 Every technique that has items must have at least one tier `b` item, because Learn draws its micro problems from tier `b`. At least one of them must have answer kind `numeric` or `expression`, or the production gate (streak 2 and up, typed answers only) can never be met.
 
@@ -62,7 +64,9 @@ Every technique that has items must have at least one tier `b` item, because Lea
 
 | `answer.kind` | Fields | Engine behaviour in M1 |
 |---|---|---|
-| `numeric` | `value` (number, `"p/q"`, or decimal string), `tol` (abs, default 0), `rel` (default 0), `form` (`exact` default, `decimal`, `fraction`), `display` (optional text shown as the answer) | Typed input. Accepts integers, decimals and `p/q`. `exact` compares rationals exactly (number values compare within 1e-9). `decimal` uses `tol` and `rel`. `fraction` also requires the typed value in lowest terms. Input that does not parse is not counted. |
+| `numeric` | `value` (number, `"p/q"`, decimal or scientific string such as `"1.6e-19"`), `tol` (abs, default 0), `rel` (default 0, from 0 to 0.1), `form` (`exact` default, `decimal`, `fraction`), `display` (optional text shown as the answer) | Typed input. Accepts integers, decimals, `p/q` and scientific literals (`3e8`, `1.6e-19`). `exact` compares rationals exactly (number values compare within the tolerance below). `decimal` uses `tol` and `rel`. `fraction` also requires the typed value in lowest terms. Input that does not parse is not counted. |
+
+Numeric tolerance is `max(tol, rel * |value|)`, relative to the target and never an absolute floor, so a value near 1e-19 is checked at its own scale. An exact-zero target typed as an expression (`cos(pi/2)`, `0.1+0.2-0.3`) gets a `1e-12` absolute slack; a typed literal is compared exactly. `rel` applies to `decimal` and to float-valued targets; an exact rational target under `exact` compares exactly and ignores `tol` and `rel`. `tools/check_items.py` uses the same rule.
 | `mcq` | `options` (>= 2 Markdown strings), `correct` (index into `options`), `shuffle` (default `true`) | Shown as buttons. Display order is a seeded shuffle, fixed per card. |
 | `expression` | `value` (ASCII, see Answer checker), `vars` (names, required for variables), `domain`, `also`, `points` | Typed input with a live "Read as" line (the parsed form, fully parenthesised) and an inline message on a parse error. A parse error counts no attempt and keeps the input. Playable since M4. |
 | `multi` | `options` (>= 2 Markdown strings), `correct` (non-empty list of distinct indexes into `options`), `shuffle` (default `true`) | Checkboxes and a Check button. Set equality, no partial credit. Playable since M4. |
@@ -143,13 +147,17 @@ API: `check(spec, typed)`, `parseExpr(src, vars)`, `evalExpr(ast, env)`, `toLate
 
 `check` returns `{ok, parsed, attempt, error?, detail?}`. `attempt: false` on every parse, spec, or domain failure, so no attempt is counted. `error` codes: `unparsable`, `bad-spec`, `unsupported-kind`, `too-few-points`, `out-of-range`, `lowest-terms`, `fraction-form`, `literal-required`.
 
-- `numeric`: `value` (number or `"p/q"` or decimal string), `form` (default `exact`), `tol`, `rel`. Literals (`3`, `-6/2`, `0.5`, `2/4`) go through the core rules. `form: fraction` needs lowest terms and a `p/q` or integer literal, so `0.5` is rejected. Other typed input goes to the expression parser with no variables (`sqrt(2)`, `pi/4`) and is compared at 1e-9. Under `form: exact` with a rational target, or under `form: fraction`, expression input is rejected (`literal-required`): a float cannot prove exactness.
+- `numeric`: `value` (number, `"p/q"`, decimal or scientific string), `form` (default `exact`), `tol`, `rel` (tolerance rule in "Answers" above). Literals (`3`, `-6/2`, `0.5`, `2/4`) go through the core rules. `form: fraction` needs lowest terms and a `p/q` or integer literal, so `0.5` is rejected. Other typed input goes to the expression parser with no variables (`sqrt(2)`, `pi/4`) and is compared at 1e-9. Under `form: exact` with a rational target, or under `form: fraction`, expression input is rejected (`literal-required`): a float cannot prove exactness.
 - `expression`: `value` (ASCII), `vars`, `domain` (map `var: [lo, hi]`, or one `[lo, hi]` for all vars; default `[0.3, 2.7]`), `points` (default 12, minimum 8), `also` (extra accepted forms). Points come from a seeded RNG keyed on `value` and `vars`, so results are deterministic. Points where either side is non-finite are skipped. At least 8 valid points are required. Tolerance `1e-9 * max(1, |a|, |b|)` at every valid point.
 - `mcq`: `correct` (0-based index), `options` (optional, bounds the typed index).
 - `multi`: `correct` (index array), `options` (optional). Set equality, duplicates collapse, no partial credit.
 - `self` is not handled here. `check` returns `unsupported-kind`.
 
-Expression grammar: numbers, declared vars, `pi`, `e`, `+ - * / ^`, unary minus (binds looser than `^`), parentheses, implicit `*` (`2x`, `2(3)`, `x(x+1)`, `xsin(x)`). Two adjacent variables multiply only when both are single letters. Functions need parentheses: `sin cos tan asin acos atan sinh cosh tanh exp ln log sqrt abs`. `ln` is natural log. `log` is base 10. Scientific notation (`1e5`) is rejected. Any undeclared letter is an unknown identifier. `^` is right-associative.
+Expression grammar: numbers, declared vars, `pi`, `e`, `+ - * / ^`, unary minus (binds looser than `^`), parentheses, implicit `*` (`2x`, `2(3)`, `x(x+1)`, `xsin(x)`). Two adjacent variables multiply only when both are single letters, so write `hbar*omega`, not `hbaromega`. Functions need parentheses: `sin cos tan asin acos atan sinh cosh tanh exp ln log sqrt abs`. `ln` is natural log. `log` is base 10. Scientific notation (`1e5`) is rejected inside expressions, because `2e-1` would be ambiguous (`2*e-1` or `0.2`); numeric answers accept it. Any undeclared letter is an unknown identifier. `^` is right-associative.
+
+Names in `vars` may be longer than one letter and may contain digits or underscores (`hbar`, `eps0`, `mu0`, `k_B`). A declared name is matched whole, longest first, so `expo` and `exp` both resolve correctly. An undeclared name is an error. `e` is a variable when `vars` lists it, and Euler's number otherwise. `pi` is always the constant (`π` is accepted as a typed alias). Negative and fractional exponents evaluate on the reals (`2^-1` is `1/2`, `x^(1/2)` is `sqrt(x)`); a negative base with a fractional exponent gives no value at that point and is skipped.
+
+Expression comparison tolerance is `1e-9 * max(|a|, |b|)` at each sample point, relative to the values being compared. The one exception is a side that is exactly 0 at every valid sample point (`value: "0"`, `x-x`): the other side then gets a `1e-12` absolute slack, so `sin(x)^2+cos(x)^2-1` or `sin(2x)-2sin(x)cos(x)` match it despite float cancellation. Two non-zero tiny sides (`1.05e-34*w` against `2.1e-34*w`) stay purely relative.
 
 ## Rendering (M2)
 
@@ -170,6 +178,27 @@ The build validates the same fields with `throwOnError` and strict warnings on. 
 Core subset (the only fonts in the page; the list is `CORE_FONTS` in `tools/render.js`): KaTeX Main Regular, Bold, Italic; Math Italic; AMS Regular; Size1 to Size4; Caligraphic Regular. Not in the subset, so these fail the pack: `\mathfrak` (Fraktur), `\mathscr` (Script), `\mathsf` (SansSerif), `\mathtt` (Typewriter), `\boldsymbol` and bold-italic math letters (Math BoldItalic). Use `\mathbf` for bold Latin letters and `\mathbb` for blackboard bold. Adding a face is a rule change: vendor the woff2, add it to `CORE_FONTS`, and update this section in the same commit.
 
 The page carries the KaTeX JavaScript once, and the KaTeX CSS with the core faces as base64 woff2. Typed learner answers are shown as typed, escaped, and never reach KaTeX.
+
+## Figures
+
+An item or technique may carry `figure`: one inline SVG string. The page inserts it above the prompt (drill and timed full cards) or above the Learn card, inside `<div class="figure">`. The page inserts it as HTML, so the build is the only gate: `tools/figure.js` checks every figure and the build fails on any rejection (`validate_pack.js` and `render_pack.js` both run it).
+
+| Rule | Value |
+|---|---|
+| size | at most 8 KB (UTF-8) |
+| root | exactly one `<svg>` with a `viewBox` of four numbers; nothing but whitespace outside it |
+| elements | `svg g line polyline polygon rect circle ellipse path text tspan marker defs title` (lowercase) |
+| attributes | `x y x1 y1 x2 y2 cx cy r rx ry d points width height viewBox fill stroke stroke-width stroke-dasharray stroke-linecap font-size font-family text-anchor transform opacity marker-end marker-start id refX refY markerWidth markerHeight orient xmlns`; `xmlns` only with the SVG namespace |
+| ids | must start with `fig-`, so a figure cannot shadow a page id such as `ans` |
+| characters | tag whitespace is ASCII only; control, NBSP-like and bidi characters are refused anywhere (the HTML parser does not split attributes on them, which would let an attribute hide inside a quoted value); duplicate attributes and `URL(` in any case are refused |
+| url() | only `url(#fig-...)`, for markers |
+| rejected | `script`, `foreignObject`, `a`, `image`, `use`, `style` and `class` (element or attribute), `on*`, `href`, `xlink:*`, comments, CDATA, doctype, processing instructions, a bare `&` in text, and the characters `< > & backtick { } backslash ; :` inside an attribute value |
+
+Sizing and colour come from the page: `.figure svg` is 100% wide up to 360px, and `currentColor` is the default stroke and fill. An element with its own `stroke` or `fill` keeps it, so open shapes should set `fill="none"`.
+
+```json
+{ "figure": "<svg viewBox=\"0 0 120 80\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"70\" x2=\"110\" y2=\"70\"/><path d=\"M10 70 Q60 0 110 70\" fill=\"none\"/><text x=\"60\" y=\"12\" text-anchor=\"middle\" font-size=\"10\">parabola</text></svg>" }
+```
 
 ## Warnings (not errors)
 

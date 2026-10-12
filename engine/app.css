@@ -56,6 +56,10 @@ button:focus-visible, input:focus-visible, .file-btn:focus-within { outline: 3px
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 16px; }
 .kicker { margin: 0 0 4px; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .card h2 { font-size: 1.3rem; margin: 0 0 10px; }
+.figure { margin: 0 0 12px; text-align: center; }
+/* Figure SVGs come from the build allowlist (tools/figure.js). Colour is currentColor, so both themes read.
+ * An element with its own stroke or fill attribute keeps it; these are only the defaults. */
+.figure svg { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; color: var(--ink); stroke: currentColor; fill: currentColor; overflow: visible; }
 .prose p { margin: 0 0 .8em; overflow-wrap: anywhere; }
 .prose p:last-child { margin-bottom: 0; }
 .prose code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .92em; background: var(--bg); padding: 1px 4px; border-radius: 4px; }

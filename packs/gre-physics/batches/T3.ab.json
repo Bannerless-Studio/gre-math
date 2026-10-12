@@ -1,0 +1,3994 @@
+[
+ {
+  "id": "t3-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A wave has frequency $f$ and wavelength $\\lambda$. Which expression gives its speed?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f\\lambda$",
+    "$f/\\lambda$",
+    "$\\lambda/f$",
+    "$2\\pi f\\lambda$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$f/\\lambda$ has units $\\mathrm{1/(m\\,s)}$, not a speed",
+    "$\\lambda/f$ has units $\\mathrm{m\\,s}$, not a speed",
+    "added a factor $2\\pi$ from $\\omega$ that does not belong in $v=f\\lambda$"
+   ]
+  },
+  "solution": "$v=f\\lambda$: distance covered in one period is one wavelength.",
+  "hints": [
+   "One period covers one wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A wave has period $T$. Write its frequency $f$ in terms of $T$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/T",
+   "vars": [
+    "T"
+   ],
+   "also": [
+    "T^(-1)",
+    "1*T^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$f=1/T$, since frequency counts cycles per second.",
+  "hints": [
+   "Frequency is the reciprocal of period."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which expression gives the angular wave number $k$ for wavelength $\\lambda$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\pi/\\lambda$",
+    "$\\lambda/2\\pi$",
+    "$2\\pi\\lambda$",
+    "$1/\\lambda$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "inverted the ratio, giving $\\lambda/2\\pi$",
+    "multiplied by $\\lambda$ instead of dividing",
+    "kept only the inverse wavelength and dropped the $2\\pi$"
+   ]
+  },
+  "solution": "$k=2\\pi/\\lambda$: one wavelength spans $2\\pi$ radians of phase.",
+  "hints": [
+   "One wavelength spans $2\\pi$ radians of phase."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A rope wave has frequency $5.0\\ \\mathrm{Hz}$ and wavelength $0.80\\ \\mathrm m$. Find its speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "5.0*0.80",
+  "solution": "$v=f\\lambda=5.0\\times0.80=4.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Speed is frequency times wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A transverse wave on a string has period $0.040\\ \\mathrm s$ and crests spaced $0.25\\ \\mathrm m$ apart. Find its speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.25,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "0.25/0.040",
+  "solution": "$f=1/T=25\\ \\mathrm{Hz}$, so $v=f\\lambda=25\\times0.25=6.25\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Convert the period to frequency first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A wave of frequency $60\\ \\mathrm{Hz}$ travels at $18\\ \\mathrm{m/s}$. Find the phase difference, in radians, between two points $0.075\\ \\mathrm m$ apart along the direction of travel.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.57079632679,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*math.pi*0.075/(18/60)",
+  "solution": "$\\lambda=v/f=0.30\\ \\mathrm m$, so $\\Delta\\phi=2\\pi(0.075)/0.30=\\pi/2$.",
+  "hints": [
+   "Phase difference is $2\\pi$ times path over wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A string of mass per unit length $2.0\\times10^{-3}\\ \\mathrm{kg/m}$ is under tension $80\\ \\mathrm N$. Find the wave speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 200,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(80/2.0e-3)**0.5",
+  "solution": "$v=\\sqrt{F/\\mu}=\\sqrt{80/0.0020}=200\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Wave speed on a string depends on tension and mass per length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A wave has angular frequency $\\omega$ and speed $v$. Write its wavelength $\\lambda$ in terms of $\\omega$ and $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*pi*v/omega",
+   "vars": [
+    "omega",
+    "v"
+   ],
+   "also": [
+    "2*pi*v*omega^(-1)",
+    "(2*pi*v)/omega"
+   ]
+  },
+  "check": null,
+  "solution": "$\\omega=2\\pi v/\\lambda$, so $\\lambda=2\\pi v/\\omega$.",
+  "hints": [
+   "Use $\\omega=2\\pi f$ and $v=f\\lambda$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A pulse moves $12\\ \\mathrm m$ along a rope in $0.60\\ \\mathrm s$. A sinusoidal wave on the same rope has period $0.20\\ \\mathrm s$. Find its wavelength in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(12/0.60)*0.20",
+  "solution": "$v=12/0.60=20\\ \\mathrm{m/s}$, so $\\lambda=vT=20\\times0.20=4.0\\ \\mathrm m$.",
+  "hints": [
+   "Get the wave speed from the pulse, then multiply by the period."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two identical waves of amplitude $A$ are exactly in phase. What is the resultant amplitude?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2A$",
+    "$A$",
+    "$0$",
+    "$\\sqrt2\\,A$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot that the two waves add, so one copy is kept",
+    "assumed the waves are exactly out of phase",
+    "added in quadrature, which is the rule for perpendicular phasors"
+   ]
+  },
+  "solution": "In phase, displacements add: $A+A=2A$.",
+  "hints": [
+   "Add displacements point by point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A string of length $L$ is fixed at both ends and vibrates in mode $n$. Write its wavelength $\\lambda_n$ in terms of $L$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*L/n",
+   "vars": [
+    "L",
+    "n"
+   ],
+   "also": [
+    "2*(L/n)",
+    "L*2*n^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$n$ half-wavelengths fit in $L$, so $\\lambda_n=2L/n$.",
+  "hints": [
+   "Count half-wavelength loops between the fixed ends."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A string of length $L$, fixed at both ends, carries waves of speed $v$. Which expression is its fundamental frequency?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$v/2L$",
+    "$v/L$",
+    "$2v/L$",
+    "$v/4L$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "used $\\lambda=L$, but the fundamental has $\\lambda=2L$",
+    "used $\\lambda=L/2$",
+    "used $\\lambda=4L$"
+   ]
+  },
+  "solution": "Fundamental has $\\lambda_1=2L$, so $f_1=v/2L$.",
+  "hints": [
+   "The fundamental fits half a wavelength in the string."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A string $0.90\\ \\mathrm m$ long is fixed at both ends. Its wave speed is $60\\ \\mathrm{m/s}$. Find the fundamental frequency in $\\mathrm{Hz}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 33.3333333333,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "60/(2*0.90)",
+  "solution": "$\\lambda_1=2L=1.8\\ \\mathrm m$, so $f_1=v/\\lambda_1\\approx33.3\\ \\mathrm{Hz}$.",
+  "hints": [
+   "The fundamental wavelength is twice the length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two waves of equal amplitude $2.0\\ \\mathrm{cm}$ superpose with a phase difference of $90^\\circ$. Find the resultant amplitude in $\\mathrm{cm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.82842712475,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*2.0*math.cos(math.radians(45))",
+  "solution": "$A_{\\rm res}=2A\\cos(\\varphi/2)=4\\cos45^\\circ\\approx2.83\\ \\mathrm{cm}$.",
+  "hints": [
+   "Add the two phasor arrows, with half the phase difference as the angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A string $1.2\\ \\mathrm m$ long, fixed at both ends, vibrates in its third harmonic at $150\\ \\mathrm{Hz}$. Find the wave speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 120,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*1.2*150/3",
+  "solution": "$f_3=3v/2L$, so $v=2Lf_3/3=120\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Solve the harmonic formula for $v$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A string fixed at both ends carries a standing wave. Which statements are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Adjacent nodes are $\\lambda/2$ apart.",
+    "Adjacent antinodes are $\\lambda/4$ apart.",
+    "Both ends of the string are nodes.",
+    "The $n$th harmonic has $n$ nodes including both ends."
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Adjacent nodes and adjacent antinodes are both $\\lambda/2$ apart. The $n$th harmonic has $n+1$ nodes including the ends.",
+  "hints": [
+   "Nodes and antinodes alternate every quarter wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two pulses of amplitude $+3.0\\ \\mathrm{cm}$ and $-1.5\\ \\mathrm{cm}$ overlap exactly at one point. Take upward displacement as positive. Give the resultant displacement at that point in $\\mathrm{cm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "3.0-1.5",
+  "solution": "Displacements add with sign: $3.0+(-1.5)=1.5\\ \\mathrm{cm}$, upward.",
+  "hints": [
+   "Superposition adds displacements with their signs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two waves of equal amplitude $A$ and phase difference $\\varphi$ superpose. Write the resultant amplitude in terms of $A$ and $\\varphi$. Take $0\\le\\varphi\\le\\pi$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*A*cos(phi/2)",
+   "vars": [
+    "A",
+    "phi"
+   ],
+   "also": [
+    "2*cos(phi/2)*A",
+    "A*(2*cos(phi/2))"
+   ]
+  },
+  "check": null,
+  "solution": "Phasor sum: $A_{\\rm res}=2A\\cos(\\varphi/2)$, which gives $2A$ at $\\varphi=0$.",
+  "hints": [
+   "Add the two arrows and use the half-angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A source moves toward a stationary listener. How does the frequency heard compare with the emitted frequency?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "higher than the emitted frequency",
+    "lower than the emitted frequency",
+    "the same as the emitted frequency",
+    "set by the loudness of the source"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reversed the approach direction",
+    "forgot that the Doppler effect applies to a moving source",
+    "confused loudness with pitch"
+   ]
+  },
+  "solution": "Approach compresses the wavefronts, so the frequency rises.",
+  "hints": [
+   "Approach shortens the wavelength heard."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sound of frequency $f$ travels in air at speed $v$. Write its wavelength in terms of $v$ and $f$.",
+  "answer": {
+   "kind": "expression",
+   "value": "v/f",
+   "vars": [
+    "v",
+    "f"
+   ],
+   "also": [
+    "v*f^(-1)",
+    "(1/f)*v"
+   ]
+  },
+  "check": null,
+  "solution": "$\\lambda=v/f$, the distance covered in one period.",
+  "hints": [
+   "Speed equals frequency times wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which harmonics can a pipe that is closed at one end and open at the other sound?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "odd harmonics only",
+    "all integer harmonics",
+    "even harmonics only",
+    "the fundamental only"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the open-open pipe, which has antinodes at both ends",
+    "wrongly kept even harmonics, as if the closed end were an antinode at both ends",
+    "dropped the higher modes, which also fit"
+   ]
+  },
+  "solution": "Closed end is a displacement node, open end an antinode, so only odd quarter-wave modes fit.",
+  "hints": [
+   "A closed end must be a node."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A siren at $1000\\ \\mathrm{Hz}$ moves toward a stationary listener at $30\\ \\mathrm{m/s}$. Air is still and the sound speed is $340\\ \\mathrm{m/s}$. Find the frequency heard in $\\mathrm{Hz}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1096.77419355,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1000*340/(340-30)",
+  "solution": "$f'=f\\,v/(v-v_s)=1000\\times340/310\\approx1097\\ \\mathrm{Hz}$.",
+  "hints": [
+   "An approaching source shortens the wavelength heard."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A stationary siren emits $800\\ \\mathrm{Hz}$. A listener moves toward it at $20\\ \\mathrm{m/s}$. Air is still and the sound speed is $340\\ \\mathrm{m/s}$. Find the frequency heard in $\\mathrm{Hz}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 847.058823529,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "800*(340+20)/340",
+  "solution": "$f'=f(v+v_L)/v=800\\times360/340\\approx847\\ \\mathrm{Hz}$.",
+  "hints": [
+   "A moving listener changes the rate at which wavefronts arrive."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $440\\ \\mathrm{Hz}$ tuning fork sounded with an organ pipe gives 3 beats per second. Which pipe frequencies, in $\\mathrm{Hz}$, are possible? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$437$",
+    "$443$",
+    "$440$",
+    "$445$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Beat frequency is $|f_1-f_2|=3$, so the pipe is at $437$ or $443$ Hz. Equal frequencies give no beats.",
+  "hints": [
+   "Beat frequency is the absolute difference of the two frequencies."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An open-open pipe is $0.50\\ \\mathrm m$ long in air where the sound speed is $340\\ \\mathrm{m/s}$. Find the frequency of its second harmonic in $\\mathrm{Hz}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 680,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*340/(2*0.50)",
+  "solution": "$f_2=2v/2L=2\\times340/1.0=680\\ \\mathrm{Hz}$.",
+  "hints": [
+   "For open pipes, $f_n=nv/2L$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A pipe closed at one end has third-harmonic frequency $510\\ \\mathrm{Hz}$ in air with sound speed $340\\ \\mathrm{m/s}$. Find its length in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "3*340/(4*510)",
+  "solution": "The third harmonic of a closed pipe is $f=3v/4L$, so $L=3v/4f=0.50\\ \\mathrm m$.",
+  "hints": [
+   "A closed pipe's third harmonic is its second odd mode."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sound"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A source of frequency $f$ moves directly away from a stationary listener at speed $u<v$, where $v$ is the sound speed in air. Write the frequency heard.",
+  "answer": {
+   "kind": "expression",
+   "value": "f*v/(v+u)",
+   "vars": [
+    "f",
+    "v",
+    "u"
+   ],
+   "also": [
+    "f/(1+u/v)",
+    "v*f/(u+v)"
+   ]
+  },
+  "check": null,
+  "solution": "A receding source stretches the wavelength to $\\lambda'=(v+u)/f$, so $f'=fv/(v+u)$.",
+  "hints": [
+   "A receding source lengthens the wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A point source emits sound with intensity $I$ at distance $r$. What is the intensity at distance $2r$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$I/4$",
+    "$I/2$",
+    "$I/8$",
+    "$2I$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "used $1/r$ instead of $1/r^2$",
+    "used $1/r^3$",
+    "assumed intensity grows in proportion to distance"
+   ]
+  },
+  "solution": "$I\\propto1/r^2$, so doubling $r$ quarters $I$.",
+  "hints": [
+   "Sound spreads over a sphere of area $4\\pi r^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Give the reference intensity $I_0$ used for sound levels, in $\\mathrm{W/m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1e-12,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1e-12",
+  "solution": "$I_0=10^{-12}\\ \\mathrm{W/m^2}$ is the threshold of hearing.",
+  "hints": [
+   "Sound levels are measured from the threshold of hearing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sound level rises by $10\\ \\mathrm{dB}$. By what factor does the intensity increase?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$3$",
+    "$100$",
+    "$\\sqrt{10}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treated 10 dB as a 3 dB doubling",
+    "applied 10 dB as 20 dB, squaring the ratio",
+    "used the pressure ratio instead of the intensity ratio"
+   ]
+  },
+  "solution": "$\\Delta\\beta=10\\log(I_2/I_1)=10$ gives $I_2/I_1=10$.",
+  "hints": [
+   "Decibels are ten times the base-10 log of an intensity ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A point source emits $40\\ \\mathrm W$ of sound power uniformly. Find the intensity $2.0\\ \\mathrm m$ from it, in $\\mathrm{W/m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.795774715459,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "40/(4*math.pi*2.0**2)",
+  "solution": "$I=P/4\\pi r^2=40/(4\\pi\\cdot4.0)\\approx0.796\\ \\mathrm{W/m^2}$.",
+  "hints": [
+   "Spread the power over a sphere."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sound has intensity $1.0\\times10^{-5}\\ \\mathrm{W/m^2}$. Take $I_0=10^{-12}\\ \\mathrm{W/m^2}$ and find the sound level in $\\mathrm{dB}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 70,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "10*math.log10(1e-5/1e-12)",
+  "solution": "$\\beta=10\\log(10^{-5}/10^{-12})=10\\log(10^{7})=70\\ \\mathrm{dB}$.",
+  "hints": [
+   "Compare with $I_0$ before taking the log."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two identical, incoherent sources each give a sound level of $60\\ \\mathrm{dB}$ at a point. Find the combined level in $\\mathrm{dB}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 63.0102999566,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "60+10*math.log10(2)",
+  "solution": "Intensities add to $2I$, so the level rises by $10\\log2\\approx3.0\\ \\mathrm{dB}$ to $63.0\\ \\mathrm{dB}$.",
+  "hints": [
+   "Add intensities, not decibel values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A point source gives $80\\ \\mathrm{dB}$ at $3.0\\ \\mathrm m$. Find the level at $12.0\\ \\mathrm m$ in $\\mathrm{dB}$, ignoring absorption.",
+  "answer": {
+   "kind": "numeric",
+   "value": 67.9588001734,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "80+20*math.log10(3.0/12.0)",
+  "solution": "Intensity falls as $1/r^2$, so $\\Delta\\beta=20\\log(3/12)\\approx-12.0\\ \\mathrm{dB}$.",
+  "hints": [
+   "A fourfold distance is a sixteenfold drop in intensity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A loudspeaker gives a sound level of $90\\ \\mathrm{dB}$ at $1.0\\ \\mathrm m$. Take $I_0=10^{-12}\\ \\mathrm{W/m^2}$ and find the intensity there in $\\mathrm{W/m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.001,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1e-12*10**(90/10)",
+  "solution": "$I=I_0\\,10^{\\beta/10}=10^{-12}\\times10^{9}=10^{-3}\\ \\mathrm{W/m^2}$.",
+  "hints": [
+   "Invert the decibel formula."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.intensity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sound has intensity $I$ and reference intensity $I_0$. Write its sound level $\\beta$ in decibels in terms of $I$ and $I_0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "10*log(I/I0)",
+   "vars": [
+    "I",
+    "I0"
+   ],
+   "also": [
+    "10*log(I)-10*log(I0)",
+    "10*log(I*I0^(-1))"
+   ]
+  },
+  "check": null,
+  "solution": "$\\beta=10\\log_{10}(I/I_0)$.",
+  "hints": [
+   "Decibels are ten times the base-10 log of an intensity ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Light travels from a denser to a rarer medium at a non-normal angle. Which description is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "bends away from the normal and speeds up",
+    "bends toward the normal and speeds up",
+    "does not bend, since its frequency is unchanged",
+    "bends toward the normal and slows down"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reversed the bending direction",
+    "confused constant frequency with constant direction",
+    "reversed both the bending and the speed change"
+   ]
+  },
+  "solution": "Rarer means lower index, so the ray speeds up and bends away from the normal.",
+  "hints": [
+   "Lower index means higher speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light goes from index $n_1$ into index $n_2<n_1$. Write the critical angle $\\theta_c$, in radians, in terms of $n_1$ and $n_2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "asin(n2/n1)",
+   "vars": [
+    "n1",
+    "n2"
+   ],
+   "also": [
+    "asin(n2*n1^(-1))"
+   ],
+   "domain": {
+    "n1": [
+     1.2,
+     2.7
+    ],
+    "n2": [
+     0.3,
+     1.1
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Total internal reflection starts when $\\sin\\theta_c=n_2/n_1$.",
+  "hints": [
+   "The refraction angle reaches $90^\\circ$ at the critical angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the law of reflection for angles measured from the normal.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\theta_r=\\theta_i$",
+    "$\\theta_r=180^\\circ-\\theta_i$",
+    "$\\theta_r=2\\theta_i$",
+    "$\\theta_r=\\theta_i/n$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "took the angle between the two rays, not the angle to the normal",
+    "doubled the angle, mixing reflection with a mirror's total deviation",
+    "applied the refraction factor to reflection"
+   ]
+  },
+  "solution": "Reflected angle equals incident angle, both measured from the normal.",
+  "hints": [
+   "Reflection does not depend on the index."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Light in air ($n=1.00$) strikes water ($n=1.33$) at $45^\\circ$ from the normal. Find the refraction angle in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 32.117631278,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.asin(math.sin(math.radians(45))/1.33))",
+  "solution": "$\\sin\\theta_2=\\sin45^\\circ/1.33=0.532$, so $\\theta_2\\approx32.1^\\circ$.",
+  "hints": [
+   "Apply Snell's law with angles from the normal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the critical angle, in degrees, for light going from glass ($n=1.50$) into air ($n=1.00$).",
+  "answer": {
+   "kind": "numeric",
+   "value": 41.8103148958,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.asin(1.00/1.50))",
+  "solution": "$\\sin\\theta_c=1.00/1.50$, so $\\theta_c\\approx41.8^\\circ$.",
+  "hints": [
+   "The refraction angle in air is $90^\\circ$ at the critical angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A coin lies $2.0\\ \\mathrm m$ below the surface of water ($n=1.33$). Viewed from directly above, find its apparent depth in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5037593985,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2.0/1.33",
+  "solution": "Near-normal rays give apparent depth $d/n=2.0/1.33\\approx1.50\\ \\mathrm m$.",
+  "hints": [
+   "Apparent depth uses rays close to the normal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the speed of light in glass of refractive index $1.50$, in $\\mathrm{m/s}$, with $c=3.00\\times10^{8}\\ \\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 200000000,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "3.00e8/1.50",
+  "solution": "$n=c/v$, so $v=c/n=2.00\\times10^{8}\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Refractive index is the ratio of vacuum speed to medium speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ray travels in water ($n=1.33$) toward an air boundary. Which statements are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "For incidence below the critical angle, the refracted ray bends away from the normal.",
+    "Total internal reflection can occur beyond the critical angle.",
+    "The critical angle is $\\arcsin(1.33)$.",
+    "The frequency of the light falls in air."
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Going into the rarer medium, the refracted ray bends away from the normal. Total internal reflection needs incidence beyond $\\arcsin(1/1.33)$.",
+  "hints": [
+   "Compare the bending direction with the index ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ray in medium $n_1$ hits an interface at angle $\\theta_1$ from the normal and enters medium $n_2$. Write $\\sin\\theta_2$ in terms of $n_1$, $\\theta_1$ and $n_2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n1*sin(theta1)/n2",
+   "vars": [
+    "n1",
+    "theta1",
+    "n2"
+   ],
+   "also": [
+    "n1*sin(theta1)*n2^(-1)",
+    "(n1/n2)*sin(theta1)"
+   ]
+  },
+  "check": null,
+  "solution": "Snell's law gives $\\sin\\theta_2=(n_1/n_2)\\sin\\theta_1$.",
+  "hints": [
+   "$n\\sin\\theta$ is the same on both sides of the boundary."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A converging lens forms an image of an object placed beyond $2f$. Which describes the image?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "real, inverted, smaller, between $f$ and $2f$",
+    "virtual, upright, larger",
+    "real, upright, larger",
+    "real, inverted, larger"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the magnifier image, with the object inside $f$",
+    "a real image from a converging lens is always inverted",
+    "that is the image for an object between $f$ and $2f$"
+   ]
+  },
+  "solution": "Beyond $2f$, the image forms between $f$ and $2f$, real and inverted, smaller.",
+  "hints": [
+   "Place the object, then find where the image forms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A spherical mirror has radius of curvature $R$. Write its focal length in terms of $R$.",
+  "answer": {
+   "kind": "expression",
+   "value": "R/2",
+   "vars": [
+    "R"
+   ],
+   "also": [
+    "R*0.5",
+    "R*2^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$f=R/2$ for a spherical mirror.",
+  "hints": [
+   "The focal point lies halfway to the centre of curvature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A converging lens has focal length $0.25\\ \\mathrm m$. Give its power in dioptres ($\\mathrm{m^{-1}}$).",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact",
+   "rel": 0
+  },
+  "check": "1/0.25",
+  "solution": "$P=1/f=1/0.25=4\\ \\mathrm D$.",
+  "hints": [
+   "Power is the reciprocal of focal length in metres."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A converging lens of focal length $10.0\\ \\mathrm{cm}$ images an object $30.0\\ \\mathrm{cm}$ in front of it. Give the image distance in $\\mathrm{cm}$, positive for a real image.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1/(1/10.0-1/30.0)",
+  "solution": "$1/d_i=1/10-1/30=1/15$, so $d_i=15.0\\ \\mathrm{cm}$, real.",
+  "hints": [
+   "Use $1/f=1/d_o+1/d_i$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A converging lens of focal length $10.0\\ \\mathrm{cm}$ images an object $30.0\\ \\mathrm{cm}$ away. Find the magnitude of the magnification.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(1/(1/10.0-1/30.0))/30.0",
+  "solution": "$|m|=d_i/d_o=15/30=0.5$.",
+  "hints": [
+   "Magnification is image distance over object distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A diverging lens has focal length $-20\\ \\mathrm{cm}$. An object stands $30.0\\ \\mathrm{cm}$ in front. Give the image distance in $\\mathrm{cm}$, with real images positive.",
+  "answer": {
+   "kind": "numeric",
+   "value": -12,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1/(1/(-20.0)-1/30.0)",
+  "solution": "$1/d_i=1/f-1/d_o=-1/20-1/30=-1/12$, so $d_i=-12\\ \\mathrm{cm}$, virtual.",
+  "hints": [
+   "Keep the sign of $f$ when you substitute."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A concave mirror has radius of curvature $40\\ \\mathrm{cm}$. An object stands $30\\ \\mathrm{cm}$ in front. Give the image distance in $\\mathrm{cm}$, as a magnitude.",
+  "answer": {
+   "kind": "numeric",
+   "value": 60,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1/(1/20.0-1/30.0)",
+  "solution": "$f=R/2=20\\ \\mathrm{cm}$, so $1/d_i=1/20-1/30=1/60$.",
+  "hints": [
+   "Halve the radius before using the mirror equation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A converging lens has focal length $12\\ \\mathrm{cm}$. An object stands $8.0\\ \\mathrm{cm}$ in front. Find the magnitude of the magnification.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "abs(-(1/(1/12.0-1/8.0))/8.0)",
+  "solution": "$1/d_i=1/12-1/8=-1/24$, so $d_i=-24\\ \\mathrm{cm}$ and $|m|=24/8=3.0$.",
+  "hints": [
+   "The image is virtual here, so $d_i$ is negative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A concave mirror of focal length $f$ forms an image of an object a distance $d_o>f$ in front of it. Write the image distance $d_i$ in terms of $f$ and $d_o$.",
+  "answer": {
+   "kind": "expression",
+   "value": "f*d_o/(d_o-f)",
+   "vars": [
+    "f",
+    "d_o"
+   ],
+   "also": [
+    "f*d_o*(d_o-f)^(-1)",
+    "d_o*f/(d_o-f)"
+   ],
+   "domain": {
+    "f": [
+     0.5,
+     1.5
+    ],
+    "d_o": [
+     2,
+     3
+    ]
+   }
+  },
+  "check": null,
+  "solution": "$1/d_i=1/f-1/d_o$ gives $d_i=fd_o/(d_o-f)$.",
+  "hints": [
+   "Combine the two fractions over a common denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two coherent in-phase sources meet at a point. Which path difference $\\Delta$ gives constructive interference?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\Delta=m\\lambda$ for integer $m$",
+    "$\\Delta=(m+\\tfrac12)\\lambda$ for integer $m$",
+    "$\\Delta=2m\\lambda$ only",
+    "$\\Delta=m/\\lambda$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the destructive condition",
+    "forgot that odd multiples of the wavelength also reinforce",
+    "inverted $\\lambda$, which is dimensionally wrong"
+   ]
+  },
+  "solution": "Constructive interference needs a whole number of wavelengths of path difference.",
+  "hints": [
+   "Path difference in whole wavelengths reinforces."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Double slits are separated by $d$, with a screen at distance $L$ and wavelength $\\lambda$. Using small angles, write the fringe spacing $\\Delta y$ in terms of $\\lambda$, $L$ and $d$.",
+  "answer": {
+   "kind": "expression",
+   "value": "lambda*L/d",
+   "vars": [
+    "lambda",
+    "L",
+    "d"
+   ],
+   "also": [
+    "lambda*L*d^(-1)",
+    "L*lambda/d"
+   ]
+  },
+  "check": null,
+  "solution": "$\\Delta y=\\lambda L/d$ for small angles.",
+  "hints": [
+   "The path difference is $d\\sin\\theta$ and $\\sin\\theta\\approx y/L$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two in-phase sources give a path difference of $2.5\\lambda$ at a point. What is the interference there?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "destructive",
+    "constructive",
+    "partly constructive and partly destructive",
+    "cannot be determined without the amplitudes"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "rounded $2.5\\lambda$ to a whole number of wavelengths",
+    "treated the half-wavelength as a full one",
+    "amplitudes do not affect whether the phases align"
+   ]
+  },
+  "solution": "$2.5\\lambda=(m+\\tfrac12)\\lambda$ with $m=2$, which is destructive.",
+  "hints": [
+   "Dark bands sit at half-integer path differences."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two in-phase sources have wavelength $0.40\\ \\mathrm m$. Find the smallest positive path difference that gives destructive interference, in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "0.40/2",
+  "solution": "Destructive interference needs $\\Delta=\\lambda/2=0.20\\ \\mathrm m$.",
+  "hints": [
+   "Dark bands sit half a wavelength out of step."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Double slits are $0.20\\ \\mathrm{mm}$ apart. The screen is $2.0\\ \\mathrm m$ away and the light has $\\lambda=600\\ \\mathrm{nm}$. Find the fringe spacing in $\\mathrm{mm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "600e-9*2.0/0.20e-3*1000",
+  "solution": "$\\Delta y=\\lambda L/d=(600\\times10^{-9})(2.0)/(0.20\\times10^{-3})=6.0\\ \\mathrm{mm}$.",
+  "hints": [
+   "Keep every quantity in SI before converting the answer."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two in-phase sources have wavelength $0.50\\ \\mathrm m$. A point is $5.0\\ \\mathrm m$ from one source and $3.5\\ \\mathrm m$ from the other. Find the phase difference at that point in radians.",
+  "answer": {
+   "kind": "numeric",
+   "value": 18.8495559215,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*math.pi*(5.0-3.5)/0.50",
+  "solution": "Path difference $1.5\\ \\mathrm m=3\\lambda$, so $\\Delta\\phi=6\\pi\\approx18.85$ rad.",
+  "hints": [
+   "Phase difference is $2\\pi$ times path difference over wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two coherent sources of equal amplitude give maximum intensity $I_{\\max}$ where they are in phase. At a point where their phase difference is $2\\pi/3$ rad, find the intensity as a fraction of $I_{\\max}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.25,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.cos(math.pi/3)**2",
+  "solution": "$I\\propto\\cos^2(\\varphi/2)=\\cos^2(\\pi/3)=\\tfrac14$.",
+  "hints": [
+   "Intensity is proportional to the squared resultant amplitude."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In a double-slit pattern, the second dark fringe, counting outward with the first dark fringe nearest the central maximum, lies $1.8\\ \\mathrm{mm}$ from the central maximum. Find the fringe spacing in $\\mathrm{mm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.2,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.8/1.5",
+  "solution": "Dark fringes sit at $(m+\\tfrac12)\\Delta y$, so the second dark fringe is at $1.5\\,\\Delta y$, giving $\\Delta y=1.2\\ \\mathrm{mm}$.",
+  "hints": [
+   "The first dark fringe sits at half a spacing from the centre."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.interference"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two in-phase point sources are separated by $d$. Far away, in a direction $\\theta$ from the axis, their waves have wavelength $\\lambda$. Write the phase difference between the two waves.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*pi*d*sin(theta)/lambda",
+   "vars": [
+    "d",
+    "theta",
+    "lambda"
+   ],
+   "also": [
+    "2*pi*d*sin(theta)*lambda^(-1)",
+    "(2*pi/lambda)*d*sin(theta)"
+   ]
+  },
+  "check": null,
+  "solution": "Path difference $d\\sin\\theta$ gives phase $2\\pi d\\sin\\theta/\\lambda$.",
+  "hints": [
+   "Phase is $2\\pi$ times path over wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A soap film of index $n$ and thickness $t$ sits in air. For constructive reflection at vacuum wavelength $\\lambda$, which condition holds for integer $m$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2nt=(m+\\tfrac12)\\lambda$",
+    "$2nt=m\\lambda$",
+    "$nt=m\\lambda$",
+    "$2t=m\\lambda$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "ignored the half-wave shift at the top surface",
+    "forgot the double pass through the film",
+    "dropped the index from the path"
+   ]
+  },
+  "solution": "The top reflection flips phase and the bottom does not, so one flip shifts the condition by half a wavelength.",
+  "hints": [
+   "Count the phase flips before the path."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Light reflected from a surface of higher refractive index is shifted in phase. Give the shift in radians.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.14159265359,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.pi",
+  "solution": "Reflection from a higher-index medium adds a phase shift of $\\pi$.",
+  "hints": [
+   "A half-wavelength shift is a phase change of $\\pi$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Light of vacuum wavelength $\\lambda$ travels inside a film of refractive index $n$. Write its wavelength in the film in terms of $\\lambda$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "lambda/n",
+   "vars": [
+    "lambda",
+    "n"
+   ],
+   "also": [
+    "lambda*n^(-1)",
+    "lambda*(1/n)"
+   ]
+  },
+  "check": null,
+  "solution": "Speed falls by $n$ and frequency is fixed, so $\\lambda_f=\\lambda/n$.",
+  "hints": [
+   "Frequency stays fixed while speed changes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A soap film with $n=1.33$ sits in air. Find the smallest thickness that gives constructive reflection for light of vacuum wavelength $500\\ \\mathrm{nm}$, in $\\mathrm{nm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 93.984962406,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "500/(4*1.33)",
+  "solution": "One flip gives $2nt=\\lambda/2$, so $t=\\lambda/4n\\approx94.0\\ \\mathrm{nm}$.",
+  "hints": [
+   "Only one of the two reflections flips phase."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An oil film with $n=1.50$ sits in air. Find the smallest nonzero thickness that gives destructive reflection for light of vacuum wavelength $600\\ \\mathrm{nm}$, in $\\mathrm{nm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 200,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "600/(2*1.5)",
+  "solution": "With one flip, destructive needs $2nt=m\\lambda$. $m=1$ gives $t=\\lambda/2n=200\\ \\mathrm{nm}$.",
+  "hints": [
+   "With one flip, the dark condition is a whole number of wavelengths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $250\\ \\mathrm{nm}$ film of index $1.50$ sits in air. Find the longest vacuum wavelength, in $\\mathrm{nm}$, that is transmitted most strongly.",
+  "answer": {
+   "kind": "numeric",
+   "value": 750,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*1.5*250/1",
+  "solution": "Transmitted light has no phase flip, so $2nt=m\\lambda$ gives, for the longest wavelength ($m=1$), $\\lambda=2(1.50)(250)=750\\ \\mathrm{nm}$.",
+  "hints": [
+   "Transmitted rays pick up no half-wave shift."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An anti-reflection coating of index $1.38$ lies on glass ($n=1.52$) in air. Find the smallest thickness for minimum reflection at $550\\ \\mathrm{nm}$, in $\\mathrm{nm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 99.6376811594,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "550/(4*1.38)",
+  "solution": "Both reflections flip, so they cancel. Dark needs $2nt=\\lambda/2$, giving $t=\\lambda/4n\\approx99.6\\ \\mathrm{nm}$.",
+  "hints": [
+   "Count the flips at both interfaces."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A film of index $1.20$ and thickness $300\\ \\mathrm{nm}$ sits in air. Reflection is strongest at several vacuum wavelengths. Find the second longest of them, in $\\mathrm{nm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 480,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*1.2*300/1.5",
+  "solution": "One flip: $2nt=(m+\\tfrac12)\\lambda$. The second maximum has $m=1$, so $\\lambda=720/1.5=480\\ \\mathrm{nm}$.",
+  "hints": [
+   "The second maximum uses $m=1$ with one flip."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about the colours of a soap bubble are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Colours shift as the film thickness changes, since the path difference changes.",
+    "A film much thinner than the wavelength always reflects constructively.",
+    "Colours appear because the two reflected rays interfere.",
+    "Colours appear because the film disperses light like a prism."
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Colours come from interference between the two reflected rays, so they shift with thickness. A very thin film is dark because of the phase flip.",
+  "hints": [
+   "A thin film with one phase flip is dark when much thinner than the wavelength."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A single slit of width $a$ is lit by wavelength $\\lambda$. Which condition gives the first dark fringe at angle $\\theta$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a\\sin\\theta=\\lambda$",
+    "$a\\sin\\theta=\\lambda/2$",
+    "$a\\sin\\theta=2\\lambda$",
+    "$\\sin\\theta=a\\lambda$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "halved the wavelength",
+    "that is the second dark fringe, $m=2$",
+    "inverted the ratio, which is not dimensionless"
+   ]
+  },
+  "solution": "Single-slit minima satisfy $a\\sin\\theta=m\\lambda$ with $m=1$ for the first.",
+  "hints": [
+   "Single-slit minima use the slit width."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A grating has $N$ lines per metre. Write the slit spacing $d$ in metres in terms of $N$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/N",
+   "vars": [
+    "N"
+   ],
+   "also": [
+    "N^(-1)",
+    "1*N^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$d=1/N$ metres per line.",
+  "hints": [
+   "Spacing is the reciprocal of lines per unit length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A grating has spacing $d$ and is lit by light of wavelength $\\lambda<d$ at normal incidence. What is the largest order $m$ that appears?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "the largest integer below $d/\\lambda$",
+    "the largest integer below $\\lambda/d$",
+    "$2\\pi d/\\lambda$",
+    "$\\lambda/(2d)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "inverted the ratio, which gives $m=0$ for every $\\lambda<d$",
+    "confused the order count with the phase $kd$",
+    "halved the ratio, which does not count orders"
+   ]
+  },
+  "solution": "Maxima need $m\\lambda/d<1$, so $m<d/\\lambda$.",
+  "hints": [
+   "The sine of an angle cannot exceed one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A single slit of width $0.10\\ \\mathrm{mm}$ is lit by $500\\ \\mathrm{nm}$ light. Find the angle of the first dark fringe, in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.286480091241,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.asin(500e-9/0.10e-3))",
+  "solution": "$\\sin\\theta=\\lambda/a=5.0\\times10^{-3}$, so $\\theta\\approx0.287^\\circ$.",
+  "hints": [
+   "Use $a\\sin\\theta=\\lambda$ with the width in metres."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A grating has $500$ lines per millimetre. Light of wavelength $600\\ \\mathrm{nm}$ falls at normal incidence. Find the angle of the first-order maximum, in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 17.4576031237,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.asin(600e-9/(1/500000)))",
+  "solution": "$d=1\\ \\mathrm{mm}/500=2.0\\ \\mu\\mathrm m$, so $\\sin\\theta=0.30$ and $\\theta\\approx17.5^\\circ$.",
+  "hints": [
+   "Convert lines per millimetre to spacing in metres."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A grating has spacing $2.0\\ \\mu\\mathrm m$. Light of wavelength $600\\ \\mathrm{nm}$ falls on it at normal incidence. Give the largest order $m$ that appears.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact",
+   "rel": 0
+  },
+  "check": "math.floor(2.0/0.6)",
+  "solution": "Need $m\\lambda/d\\le1$, so $m\\le d/\\lambda=3.33$. The largest order is $3$.",
+  "hints": [
+   "The sine of the angle cannot exceed one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A single slit of width $0.20\\ \\mathrm{mm}$ is lit by $0.50\\ \\mu\\mathrm m$ light. The screen is $2.0\\ \\mathrm m$ away. Find the full width of the central maximum in $\\mathrm{mm}$, for small angles.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*2.0*0.5e-6/0.2e-3*1000",
+  "solution": "Half-width $y=L\\lambda/a=5.0\\ \\mathrm{mm}$, so the full width is $10\\ \\mathrm{mm}$.",
+  "hints": [
+   "The central maximum is twice the half-width."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A double slit has spacing $0.30\\ \\mathrm{mm}$ and is lit by $600\\ \\mathrm{nm}$ light. Find the angle of the first bright fringe off the central maximum, in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.114591635421,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.asin(600e-9/0.30e-3))",
+  "solution": "$\\sin\\theta=\\lambda/d=2.0\\times10^{-3}$, so $\\theta\\approx0.115^\\circ$.",
+  "hints": [
+   "Bright fringes of a double slit satisfy $d\\sin\\theta=m\\lambda$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A single slit of width $a$ is lit by wavelength $\\lambda$. Write $\\sin\\theta$ for the first dark fringe in terms of $\\lambda$ and $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "lambda/a",
+   "vars": [
+    "lambda",
+    "a"
+   ],
+   "also": [
+    "lambda*a^(-1)",
+    "1*lambda/a"
+   ]
+  },
+  "check": null,
+  "solution": "$a\\sin\\theta=\\lambda$ gives $\\sin\\theta=\\lambda/a$.",
+  "hints": [
+   "Single-slit minima use the slit width, not the spacing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Unpolarized light passes through one ideal polarizer. The fraction of its intensity transmitted is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1/2$",
+    "$1$",
+    "$1/4$",
+    "$0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot that a polarizer removes half of unpolarized light",
+    "applied the $1/2$ factor twice",
+    "assumed the axis is crossed, so nothing passes"
+   ]
+  },
+  "solution": "A polarizer passes half of unpolarized light, whatever its axis.",
+  "hints": [
+   "Unpolarized light is an equal mix of two polarizations."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light of intensity $I_0$, already polarized, passes an analyser whose axis is at angle $\\theta$ to the light's polarization. Write the transmitted intensity.",
+  "answer": {
+   "kind": "expression",
+   "value": "I0*cos(theta)^2",
+   "vars": [
+    "I0",
+    "theta"
+   ],
+   "also": [
+    "I0*cos(theta)*cos(theta)",
+    "I0*(cos(theta))^2"
+   ]
+  },
+  "check": null,
+  "solution": "Malus's law: $I=I_0\\cos^2\\theta$.",
+  "hints": [
+   "The field projects as $\\cos\\theta$, and intensity goes as its square."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light in air strikes glass of refractive index $1.5$ at Brewster's angle. Give that angle in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 56.309932474,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.atan(1.5))",
+  "solution": "$\\tan\\theta_B=n_2/n_1=1.5$, so $\\theta_B\\approx56.3^\\circ$.",
+  "hints": [
+   "Brewster's law uses the tangent of the angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Polarized light of intensity $80\\ \\mathrm{W/m^2}$ meets an analyser at $60^\\circ$ to its axis. Find the transmitted intensity in $\\mathrm{W/m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "80*math.cos(math.radians(60))**2",
+  "solution": "$I=80\\cos^2 60^\\circ=80(0.25)=20\\ \\mathrm{W/m^2}$.",
+  "hints": [
+   "Malus's law: the transmitted fraction is $\\cos^2\\theta$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Unpolarized light of intensity $100\\ \\mathrm{W/m^2}$ passes polarizer A, then polarizer B set $30^\\circ$ from A. Find the output intensity in $\\mathrm{W/m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 37.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "100/2*math.cos(math.radians(30))**2",
+  "solution": "A passes half: $50\\ \\mathrm{W/m^2}$. Then B gives $50\\cos^2 30^\\circ=37.5\\ \\mathrm{W/m^2}$.",
+  "hints": [
+   "Unpolarized light loses half at the first polarizer."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Unpolarized light of intensity $120\\ \\mathrm{W/m^2}$ passes three ideal polarizers with axes at $0^\\circ$, $45^\\circ$ and $90^\\circ$, in that order. Find the output intensity in $\\mathrm{W/m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "120/2*math.cos(math.radians(45))**2*math.cos(math.radians(45))**2",
+  "solution": "$60\\to60\\cos^2 45^\\circ=30\\to30\\cos^2 45^\\circ=15\\ \\mathrm{W/m^2}$.",
+  "hints": [
+   "Apply each polarizer to the output of the one before."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light from air strikes water ($n=1.33$) at Brewster's angle. Find the angle of refraction in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 36.9387627323,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "90-math.degrees(math.atan(1.33))",
+  "solution": "At Brewster's angle the reflected and refracted rays are perpendicular, so $\\theta_r=90^\\circ-\\theta_B\\approx36.9^\\circ$.",
+  "hints": [
+   "Use $\\theta_B+\\theta_r=90^\\circ$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Unpolarized light of intensity $90\\ \\mathrm{W/m^2}$ passes a polarizer and then an analyser. The output is $22.5\\ \\mathrm{W/m^2}$. Find the angle between the two axes in degrees, between $0^\\circ$ and $90^\\circ$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.acos(math.sqrt(22.5/45)))",
+  "solution": "After the polarizer: $45\\ \\mathrm{W/m^2}$. Then $\\cos^2\\theta=0.5$, so $\\theta=45^\\circ$.",
+  "hints": [
+   "Halve first, then invert Malus's law."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.polarization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A polarized beam of intensity $200\\ \\mathrm{W/m^2}$ is reduced to $50\\ \\mathrm{W/m^2}$ by an analyser. Find the angle between the axes, in degrees, between $0^\\circ$ and $90^\\circ$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 60,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.degrees(math.acos(math.sqrt(50/200)))",
+  "solution": "$\\cos^2\\theta=50/200=0.25$, so $\\theta=60^\\circ$.",
+  "hints": [
+   "Solve Malus's law for the angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A simple magnifier has focal length $f$. With the eye relaxed and the image at infinity, the angular magnification is (near point $N=25\\ \\mathrm{cm}$):",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$N/f$",
+    "$f/N$",
+    "$N/f+1$",
+    "$2N/f$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "inverted the ratio",
+    "that is the magnification with the image at the near point",
+    "doubled the magnification"
+   ]
+  },
+  "solution": "Relaxed eye: $M=N/f$.",
+  "hints": [
+   "Relaxed eye means the image is at infinity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A refracting telescope in normal adjustment has objective focal length $f_o$ and eyepiece focal length $f_e$. Write its angular magnification in terms of $f_o$ and $f_e$.",
+  "answer": {
+   "kind": "expression",
+   "value": "fo/fe",
+   "vars": [
+    "fo",
+    "fe"
+   ],
+   "also": [
+    "fo*fe^(-1)",
+    "fo*(1/fe)"
+   ]
+  },
+  "check": null,
+  "solution": "$M=f_o/f_e$.",
+  "hints": [
+   "The objective and eyepiece focal lengths set the ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The circular-aperture Rayleigh criterion gives $\\theta=c\\,\\lambda/D$. Give the coefficient $c$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.22,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.22",
+  "solution": "The first zero of the Airy pattern gives $c=1.22$.",
+  "hints": [
+   "The coefficient comes from the first zero of a Bessel function."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A simple magnifier has focal length $5.0\\ \\mathrm{cm}$. Using the relaxed eye with near point $25\\ \\mathrm{cm}$, find the angular magnification.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "25/5.0",
+  "solution": "$M=N/f=25/5.0=5.0$.",
+  "hints": [
+   "Relaxed eye uses the near point divided by focal length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A microscope has an objective of magnification $40$ and an eyepiece of focal length $2.5\\ \\mathrm{cm}$. Take the eye relaxed, with the final image at infinity, and near point $25\\ \\mathrm{cm}$. Find the total magnification.",
+  "answer": {
+   "kind": "numeric",
+   "value": 400,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "40*25/2.5",
+  "solution": "Eyepiece gives $25/2.5=10$, so the total is $40\\times10=400$.",
+  "hints": [
+   "Total magnification is objective times eyepiece."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A refracting telescope in normal adjustment has objective focal length $1.20\\ \\mathrm m$ and eyepiece focal length $0.040\\ \\mathrm m$. Find the angular magnification.",
+  "answer": {
+   "kind": "numeric",
+   "value": 30,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.20/0.040",
+  "solution": "$M=f_o/f_e=1.20/0.040=30$.",
+  "hints": [
+   "The ratio of focal lengths, not their sum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A circular aperture of diameter $2.0\\ \\mathrm{mm}$ is used with light of wavelength $500\\ \\mathrm{nm}$. Find the minimum resolvable angle, in radians.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.000305,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.22*500e-9/2.0e-3",
+  "solution": "$\\theta=1.22\\lambda/D=1.22(5.00\\times10^{-7})/(2.0\\times10^{-3})\\approx3.05\\times10^{-4}$ rad.",
+  "hints": [
+   "Use the Rayleigh criterion with the diameter in metres."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A simple magnifier has focal length $4.0\\ \\mathrm{cm}$. The image is at the near point, $25\\ \\mathrm{cm}$. Find the angular magnification.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7.25,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1+25/4.0",
+  "solution": "$M=1+N/f=1+25/4.0=7.25$.",
+  "hints": [
+   "The image at the near point adds one to the relaxed-eye value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A telescope in normal adjustment has objective focal length $f_o$ and eyepiece focal length $f_e$. Write the tube length between the lenses.",
+  "answer": {
+   "kind": "expression",
+   "value": "fo+fe",
+   "vars": [
+    "fo",
+    "fe"
+   ],
+   "also": [
+    "fe+fo",
+    "fo+1*fe"
+   ]
+  },
+  "check": null,
+  "solution": "In normal adjustment the lenses are separated by $f_o+f_e$.",
+  "hints": [
+   "Focal points of the two lenses meet between them."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a static fluid of density $\\rho$, the pressure difference between two points a vertical distance $h$ apart is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\rho g h$",
+    "$\\rho g h/2$",
+    "$\\rho h/g$",
+    "$\\rho g$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "averaged the depth, which applies to the force on a wall and not the pressure difference",
+    "inverted $g$",
+    "dropped the height $h$"
+   ]
+  },
+  "solution": "Hydrostatic pressure increases by $\\rho g$ per unit depth, so $\\Delta p=\\rho g h$.",
+  "hints": [
+   "Pressure grows linearly with depth."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A body is submerged with displaced fluid volume $V$ in a fluid of density $\\rho$. Write the buoyant force in terms of $\\rho$, $V$ and $g$.",
+  "answer": {
+   "kind": "expression",
+   "value": "rho*V*g",
+   "vars": [
+    "rho",
+    "V",
+    "g"
+   ],
+   "also": [
+    "rho*g*V",
+    "V*g*rho"
+   ]
+  },
+  "check": null,
+  "solution": "Archimedes: $F_b=\\rho V g$, the weight of displaced fluid.",
+  "hints": [
+   "Buoyancy equals the weight of the displaced fluid."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Give standard atmospheric pressure in pascals.",
+  "answer": {
+   "kind": "numeric",
+   "value": 101000,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.01e5",
+  "solution": "Atmospheric pressure is $1.01\\times10^{5}\\ \\mathrm{Pa}$.",
+  "hints": [
+   "About $10^5$ Pa is one atmosphere."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the gauge pressure, in $\\mathrm{kPa}$, at $12\\ \\mathrm m$ depth in fresh water of density $1.00\\times10^{3}\\ \\mathrm{kg/m^3}$, with $g=9.8\\ \\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 117.6,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1000*9.8*12/1000",
+  "solution": "$p=\\rho g h=1000(9.8)(12)=1.176\\times10^{5}\\ \\mathrm{Pa}=117.6\\ \\mathrm{kPa}$.",
+  "hints": [
+   "Gauge pressure is the rho g h part alone."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the absolute pressure, in $\\mathrm{kPa}$, at $12\\ \\mathrm m$ depth in fresh water. Take atmospheric pressure as $1.01\\times10^{5}\\ \\mathrm{Pa}$ and $g=9.8\\ \\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 218.6,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(1000*9.8*12+1.01e5)/1000",
+  "solution": "$p=p_0+\\rho g h=101\\ \\mathrm{kPa}+117.6\\ \\mathrm{kPa}=218.6\\ \\mathrm{kPa}$.",
+  "hints": [
+   "Add atmospheric pressure to the gauge part."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A solid cube of side $0.10\\ \\mathrm m$ floats half-submerged in water of density $1.00\\times10^{3}\\ \\mathrm{kg/m^3}$. Find its mass in $\\mathrm{kg}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1000*0.10**3/2",
+  "solution": "Submerged volume $5\\times10^{-4}\\ \\mathrm m^3$ displaces $0.5\\ \\mathrm{kg}$ of water, so the cube has mass $0.5\\ \\mathrm{kg}$.",
+  "hints": [
+   "Floating means buoyancy equals weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A hydraulic lift has pistons of area $2.0\\times10^{-3}\\ \\mathrm m^2$ and $0.10\\ \\mathrm m^2$. Find the force on the small piston, in $\\mathrm N$, needed to hold a $9.0\\ \\mathrm{kN}$ load on the large piston.",
+  "answer": {
+   "kind": "numeric",
+   "value": 180,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "9000*2.0e-3/0.10",
+  "solution": "$F_{\\rm small}=F_{\\rm large}A_{\\rm small}/A_{\\rm large}=9000(0.0020)/0.10=180\\ \\mathrm N$.",
+  "hints": [
+   "Pressure is equal across the fluid."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A U-tube manometer shows a mercury column difference of $0.20\\ \\mathrm m$, with mercury density $1.36\\times10^{4}\\ \\mathrm{kg/m^3}$ and $g=9.8\\ \\mathrm{m/s^2}$. Find the pressure difference in $\\mathrm{kPa}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 26.656,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "13600*9.8*0.20/1000",
+  "solution": "$\\Delta p=\\rho g h=13600(9.8)(0.20)\\approx2.67\\times10^{4}\\ \\mathrm{Pa}=26.7\\ \\mathrm{kPa}$.",
+  "hints": [
+   "The manometer reading is a height difference of a dense fluid."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Ice of density $920\\ \\mathrm{kg/m^3}$ floats in fresh water of density $1000\\ \\mathrm{kg/m^3}$. Find the fraction of its volume that is submerged, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.92,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "920/1000",
+  "solution": "Floating: $\\rho_{\\rm ice}Vg=\\rho_w V_{\\rm sub}g$, so the fraction is $920/1000=0.92$.",
+  "hints": [
+   "Weight of the body equals buoyancy when it floats."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In steady incompressible flow through a pipe of varying cross-section, the continuity equation is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$A_1v_1=A_2v_2$",
+    "$A_1v_1^2=A_2v_2^2$",
+    "$p_1=p_2$",
+    "$A_1/v_1=A_2/v_2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "squared the speeds, which mixes in a kinetic-energy term",
+    "that states pressure balance, not conservation of flow",
+    "inverted the speeds"
+   ]
+  },
+  "solution": "Volume flow rate $Av$ is the same at every section.",
+  "hints": [
+   "Volume flow is conserved for an incompressible fluid."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Water leaves a small hole at depth $h$ below the free surface of a large tank. Neglect the surface speed. Write the exit speed in terms of $g$ and $h$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(2*g*h)",
+   "vars": [
+    "g",
+    "h"
+   ],
+   "also": [
+    "(2*g*h)^(1/2)",
+    "sqrt(g*h*2)"
+   ]
+  },
+  "check": null,
+  "solution": "Torricelli: $v=\\sqrt{2gh}$.",
+  "hints": [
+   "Bernoulli between the surface and the hole."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In Bernoulli's equation for horizontal flow, where the speed of the fluid increases, the pressure:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "decreases",
+    "increases",
+    "stays the same",
+    "rises only at the narrowest point"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "assumed pressure rises with speed, the reverse of the trade-off",
+    "assumed speed does not enter the equation",
+    "placed the effect at a single point"
+   ]
+  },
+  "solution": "Bernoulli: $p+\\tfrac12\\rho v^2$ is constant, so higher $v$ means lower $p$.",
+  "hints": [
+   "Speed and pressure trade off along a streamline."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Water flows at $2.0\\ \\mathrm{m/s}$ in a pipe of diameter $4.0\\ \\mathrm{cm}$. It narrows to $2.0\\ \\mathrm{cm}$. Find the speed in the narrow part, in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2.0*(4.0/2.0)**2",
+  "solution": "$A\\propto d^2$, so $v_2=v_1(d_1/d_2)^2=2.0\\times4=8.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Continuity uses area, which scales with diameter squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Water leaves a hole $5.0\\ \\mathrm m$ below the free surface. Find the exit speed, in $\\mathrm{m/s}$, neglecting surface speed and with $g=9.8\\ \\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.89949493661,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.sqrt(2*9.8*5.0)",
+  "solution": "$v=\\sqrt{2gh}=\\sqrt{98}\\approx9.90\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Use Torricelli's result."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A horizontal pipe carries water of density $1.0\\times10^{3}\\ \\mathrm{kg/m^3}$. In the wide part the speed is $2.0\\ \\mathrm{m/s}$ and the pressure is $1.2\\times10^{5}\\ \\mathrm{Pa}$. In the narrow part the speed is $6.0\\ \\mathrm{m/s}$. Find the pressure there in $\\mathrm{Pa}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 104000,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.2e5-0.5*1000*(6.0**2-2.0**2)",
+  "solution": "Bernoulli with equal heights: $p_2=p_1-\\tfrac12\\rho(v_2^2-v_1^2)=1.04\\times10^{5}\\ \\mathrm{Pa}$.",
+  "hints": [
+   "Bernoulli with equal heights drops the potential term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Water flows at $3.0\\ \\mathrm{m/s}$ through a pipe of radius $1.5\\ \\mathrm{cm}$. Find the volume flow rate in $\\mathrm{L/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.12057504117,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.pi*0.015**2*3.0*1000",
+  "solution": "$Q=Av=\\pi(0.015)^2(3.0)=2.12\\times10^{-3}\\ \\mathrm{m^3/s}=2.12\\ \\mathrm{L/s}$.",
+  "hints": [
+   "Area is pi times radius squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Water flows at $2.0\\ \\mathrm{m/s}$ in a pipe that rises $5.0\\ \\mathrm m$. The speed stays $2.0\\ \\mathrm{m/s}$ and the pressure at the bottom is $2.0\\times10^{5}\\ \\mathrm{Pa}$. Find the pressure at the top in $\\mathrm{Pa}$, with density $1000\\ \\mathrm{kg/m^3}$ and $g=9.8\\ \\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 151000,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2.0e5-1000*9.8*5.0",
+  "solution": "Equal speeds: $p_2=p_1-\\rho g h=2.0\\times10^{5}-4.9\\times10^{4}=1.51\\times10^{5}\\ \\mathrm{Pa}$.",
+  "hints": [
+   "With equal speeds, only the height term changes pressure."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Water flows steadily and incompressibly from a section of area $A_1$ and speed $v_1$ into a section of area $A_2$. Write the downstream speed $v_2$ in terms of $A_1$, $v_1$ and $A_2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "A1*v1/A2",
+   "vars": [
+    "A1",
+    "v1",
+    "A2"
+   ],
+   "also": [
+    "A1*v1*A2^(-1)",
+    "v1*(A1/A2)"
+   ]
+  },
+  "check": null,
+  "solution": "Continuity: $A_1v_1=A_2v_2$.",
+  "hints": [
+   "Flow rate is area times speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a fixed amount of ideal gas at constant volume, the pressure is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "proportional to temperature",
+    "inversely proportional to temperature",
+    "proportional to temperature squared",
+    "independent of temperature"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is Boyle's law, which needs constant temperature",
+    "squared the temperature",
+    "assumed pressure depends only on volume"
+   ]
+  },
+  "solution": "At constant $V$ and $n$, $p/T$ is constant, so $p\\propto T$.",
+  "hints": [
+   "Use $pV=nRT$ with $V$ and $n$ fixed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the mean translational kinetic energy per molecule of an ideal gas at temperature $T$, using $k_B$.",
+  "answer": {
+   "kind": "expression",
+   "value": "3/2*kB*T",
+   "vars": [
+    "kB",
+    "T"
+   ],
+   "also": [
+    "(3/2)*kB*T",
+    "1.5*kB*T"
+   ]
+  },
+  "check": null,
+  "solution": "Equipartition gives $\\tfrac32k_BT$ per molecule.",
+  "hints": [
+   "Three translational degrees of freedom each carry $\\tfrac12k_BT$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Give absolute zero in degrees Celsius.",
+  "answer": {
+   "kind": "numeric",
+   "value": -273.15,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.002
+  },
+  "check": "-273.15",
+  "solution": "Absolute zero is $0\\ \\mathrm K=-273.15^\\circ\\mathrm C$.",
+  "hints": [
+   "Kelvin is Celsius shifted by 273.15."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A gas at $1.0\\times10^{5}\\ \\mathrm{Pa}$ and $300\\ \\mathrm K$ occupies $0.025\\ \\mathrm m^3$. Find the amount in $\\mathrm{mol}$, with $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.00280786201,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1e5*0.025/(8.31*300)",
+  "solution": "$n=pV/RT=2500/2493\\approx1.00\\ \\mathrm{mol}$.",
+  "hints": [
+   "Use absolute temperature in the gas law."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A fixed amount of ideal gas at constant volume has pressure $1.0\\times10^{5}\\ \\mathrm{Pa}$ at $300\\ \\mathrm K$. Find its pressure in $\\mathrm{Pa}$ at $450\\ \\mathrm K$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 150000,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1e5*450/300",
+  "solution": "$p\\propto T$ at fixed $V$ and $n$, so $p_2=1.0\\times10^5\\times1.5=1.5\\times10^{5}\\ \\mathrm{Pa}$.",
+  "hints": [
+   "At constant volume the pressure ratio equals the temperature ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Molecules of a gas have mass $4.65\\times10^{-26}\\ \\mathrm{kg}$ at $300\\ \\mathrm K$. Find the rms speed in $\\mathrm{m/s}$, with $k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 516.814061528,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.sqrt(3*1.38e-23*300/4.65e-26)",
+  "solution": "$\\tfrac12mv_{\\rm rms}^2=\\tfrac32k_BT$, so $v_{\\rm rms}=\\sqrt{3k_BT/m}\\approx517\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Set mean kinetic energy equal to $\\tfrac32k_BT$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{mol}$ sample of ideal gas is at $300\\ \\mathrm K$ and $1.0\\times10^{5}\\ \\mathrm{Pa}$. Find its volume in $\\mathrm m^3$, with $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.04986,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2*8.31*300/1e5",
+  "solution": "$V=nRT/p=2(8.31)(300)/10^{5}\\approx0.0499\\ \\mathrm m^3$.",
+  "hints": [
+   "Rearrange $pV=nRT$ for $V$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A gas expands at constant pressure $2.0\\times10^{5}\\ \\mathrm{Pa}$ from $0.010\\ \\mathrm m^3$ to $0.030\\ \\mathrm m^3$. Find the work done by the gas in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4000,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "2.0e5*(0.030-0.010)",
+  "solution": "$W=p\\,\\Delta V=2.0\\times10^{5}\\times0.020=4000\\ \\mathrm J$.",
+  "hints": [
+   "Work at constant pressure is pressure times volume change."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the mean translational kinetic energy per molecule of an ideal gas at $300\\ \\mathrm K$, in $\\mathrm J$, with $k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.21e-21,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1.5*1.38e-23*300",
+  "solution": "$\\bar K=\\tfrac32k_BT=1.5(1.38\\times10^{-23})(300)=6.21\\times10^{-21}\\ \\mathrm J$.",
+  "hints": [
+   "Use $\\tfrac32k_BT$ per molecule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

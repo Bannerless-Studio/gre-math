@@ -1,0 +1,4656 @@
+[
+ {
+  "id": "t2-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State Newton's second law for one object.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sum \\vec F = m\\vec v$",
+    "$\\sum \\vec F = 0$ while it speeds up",
+    "$\\sum \\vec F = \\frac{1}{2}mv^2$",
+    "$\\sum \\vec F = m\\vec a$"
+   ],
+   "correct": 3,
+   "why": [
+    "uses velocity where acceleration belongs",
+    "applies equilibrium to an accelerating object",
+    "kinetic energy, not force",
+    ""
+   ]
+  },
+  "solution": "Net force equals mass times acceleration, as vectors. Velocity and energy are not forces.",
+  "hints": [
+   "The net force is the sum of all forces on one object."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A book rests on a table. Which pair is an action-reaction pair?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The table pushes the book up and Earth pulls the book down",
+    "Earth pulls the book down and the book pulls Earth up",
+    "The book pushes the table down and Earth pulls the book down",
+    "The table pushes the book up and the table pulls Earth up"
+   ],
+   "correct": 1,
+   "why": [
+    "both forces act on the book, so they cannot be a pair",
+    "",
+    "both point down, but a pair must point in opposite directions",
+    "the table does not exert that force on Earth"
+   ]
+  },
+  "solution": "Action-reaction forces act on two different objects. The book and Earth pull on each other.",
+  "hints": [
+   "Check which object each force acts on."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the acceleration of a mass $m$ under net force $F$, in terms of $F$ and $m$.",
+  "answer": {
+   "kind": "expression",
+   "value": "F/m",
+   "vars": [
+    "F",
+    "m"
+   ],
+   "also": [
+    "F*m^(-1)",
+    "1/(m/F)"
+   ]
+  },
+  "check": null,
+  "solution": "Newton's second law gives $a=F/m$. Acceleration is net force divided by mass.",
+  "hints": [
+   "Divide the net force by the mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t2-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two horizontal forces act on a $4.0\\ \\mathrm{kg}$ cart: $20\\ \\mathrm N$ east and $8.0\\ \\mathrm N$ west. Find the acceleration in $\\mathrm{m/s^2}$, east positive.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(20-8,4)",
+  "solution": "Net force is $20-8=12\\ \\mathrm N$ east, so $a=12/4=3.0\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Add the forces with signs before dividing by mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $60\\ \\mathrm{kg}$ person stands on a scale in an elevator accelerating upward at $2.0\\ \\mathrm{m/s^2}$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the scale reading in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 708,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "60*(Fraction(98,10)+2)",
+  "solution": "The scale pushes up with $N$. Then $N-mg=ma$, so $N=m(g+a)=60(11.8)=708\\ \\mathrm N$.",
+  "hints": [
+   "The scale reads the normal force, not the weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Blocks $M$ and $m$ touch on a frictionless table. A horizontal force $F$ pushes $M$, which pushes $m$. Find the contact force on $m$ in terms of $F$, $m$ and $M$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*F/(M+m)",
+   "vars": [
+    "F",
+    "m",
+    "M"
+   ],
+   "also": [
+    "m*F/(m+M)",
+    "F/(1+M/m)"
+   ]
+  },
+  "check": null,
+  "solution": "The whole system has $a=F/(M+m)$. The force on $m$ is $ma=mF/(M+m)$.",
+  "hints": [
+   "Treat both blocks as one system first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ ball moving at $4.0\\ \\mathrm{m/s}$ forward reverses to $8.0\\ \\mathrm{m/s}$ backward in $1.2\\ \\mathrm s$. Forward is positive. Find the average net force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*(-8-4)/Fraction(12,10)",
+  "solution": "$F=m\\,\\Delta v/\\Delta t=0.50(-8.0-4.0)/1.2=-5.0\\ \\mathrm N$.",
+  "hints": [
+   "Take the initial direction as positive."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A horse pulls a cart forward. The cart pulls the horse back with an equal force. Why does the cart still accelerate?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The reaction force acts on the cart, so the cart's net force is zero",
+    "Equal forces cancel only at rest, so motion needs another cause",
+    "The horse pushes harder than the cart pushes back",
+    "The reaction force acts on the horse, so the cart's net force is the rope pull minus friction"
+   ],
+   "correct": 3,
+   "why": [
+    "puts the reaction force on the same object",
+    "conflates equilibrium with the third law; forces on different objects never cancel",
+    "claims the action force is larger, which breaks the third law",
+    ""
+   ]
+  },
+  "solution": "Third-law forces act on different objects. The cart's acceleration depends only on forces on the cart.",
+  "hints": [
+   "Ask which object each force acts on."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ object feels a $3.0\\ \\mathrm N$ force east and a $4.0\\ \\mathrm N$ force north. Find the magnitude of its acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.sqrt(3**2+4**2)/2",
+  "solution": "Net force magnitude is $\\sqrt{3^2+4^2}=5.0\\ \\mathrm N$, so $a=5.0/2.0=2.5\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Combine perpendicular forces with Pythagoras."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A free-body diagram shows:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Every force in the problem, including forces the object exerts on others",
+    "Only the forces acting on the chosen object, drawn as arrows from it",
+    "The object's velocity and acceleration vectors",
+    "The third-law partner of each force, drawn on the same object"
+   ],
+   "correct": 1,
+   "why": [
+    "forces the object exerts act on other objects, not on it",
+    "",
+    "kinematic vectors, not forces",
+    "third-law partners act on other objects"
+   ]
+  },
+  "solution": "Include only external forces acting on the chosen object. Forces it exerts on others are excluded.",
+  "hints": [
+   "Pick one object and list what touches it."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A block rests on a horizontal table. Which way does the normal force point?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Straight down, equal to the weight",
+    "Straight up, perpendicular to the surface",
+    "Along the table, opposing sliding",
+    "Straight up, always equal to $mg$"
+   ],
+   "correct": 1,
+   "why": [
+    "the normal force pushes away from the surface, so it points up",
+    "",
+    "that is friction, which is parallel to the surface",
+    "the normal equals $mg$ only when no other vertical force acts"
+   ]
+  },
+  "solution": "The normal force is perpendicular to the contact surface and pushes the block away from it.",
+  "hints": [
+   "Normal means perpendicular."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A block of mass $m$ on a level table has a downward push $P$ applied on top. Write the normal force in terms of $m$, $g$ and $P$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*g+P",
+   "vars": [
+    "m",
+    "g",
+    "P"
+   ],
+   "also": [
+    "P+m*g",
+    "g*m+P"
+   ]
+  },
+  "check": null,
+  "solution": "Vertical balance gives $N-mg-P=0$, so $N=mg+P$.",
+  "hints": [
+   "Add every downward force to the weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $5.0\\ \\mathrm{kg}$ block hangs at rest from a vertical rope. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the tension in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 49,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "5*Fraction(98,10)",
+  "solution": "Tension balances weight: $T=mg=5.0(9.8)=49\\ \\mathrm N$.",
+  "hints": [
+   "At rest, the net force is zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $3.0\\ \\mathrm{kg}$ box rests on a level floor while a $10\\ \\mathrm N$ force pushes it straight down. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the normal force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "197/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3*Fraction(98,10)+10",
+  "solution": "Vertical balance: $N=mg+P=29.4+10=39.4\\ \\mathrm N$.",
+  "hints": [
+   "The push adds to the normal force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ block rests on a level floor. A rope pulls it up and to the right at $30^\\circ$ above horizontal with tension $10\\ \\mathrm N$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the normal force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "73/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*Fraction(98,10)-10*Fraction(1,2)",
+  "solution": "Vertical balance: $N+T\\sin 30^\\circ=mg$, so $N=19.6-5.0=14.6\\ \\mathrm N$.",
+  "hints": [
+   "Only the vertical part of the rope tension matters here."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $1.5\\ \\mathrm{kg}$ ball hangs from a string and is held at equilibrium by a horizontal $9.0\\ \\mathrm N$ force. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the string tension in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 17.236,
+   "tol": 0.34472,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt((1.5*9.8)**2+81)",
+  "solution": "Tension balances weight and side force: $T=\\sqrt{(mg)^2+F^2}=\\sqrt{14.7^2+9.0^2}\\approx17.2\\ \\mathrm N$.",
+  "hints": [
+   "Add the two perpendicular components as vectors."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ball is thrown straight up. Air drag is negligible. During flight, its free-body diagram shows:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Weight down, plus an upward force that keeps it rising",
+    "Weight down and a force in the direction of motion",
+    "Weight only, drawn downward",
+    "Weight down and a normal force from the air"
+   ],
+   "correct": 2,
+   "why": [
+    "the throw's push ends at release, so no upward force remains",
+    "invented force; forces do not follow the velocity",
+    "",
+    "air exerts no contact normal force on a free ball"
+   ]
+  },
+  "solution": "Once released, only gravity acts on the ball when drag is neglected.",
+  "hints": [
+   "List contact forces and fields only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A block of mass $m$ on a level table is pulled by a rope with tension $T$ at angle $\\theta$ above horizontal. Write the normal force in terms of $m$, $g$, $T$ and $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*g-T*sin(theta)",
+   "vars": [
+    "m",
+    "g",
+    "T",
+    "theta"
+   ],
+   "also": [
+    "g*m-T*sin(theta)",
+    "m*g-sin(theta)*T"
+   ]
+  },
+  "check": null,
+  "solution": "Vertical balance: $N+T\\sin\\theta=mg$, so $N=mg-T\\sin\\theta$.",
+  "hints": [
+   "Only the vertical component of the rope pulls up."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Static friction obeys which condition?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f_s=\\mu_s N$ at all times",
+    "$f_s=\\mu_k N$ at all times",
+    "$f_s\\le \\mu_s N$, with $f_s$ set by the other forces",
+    "$f_s$ always points along the velocity"
+   ],
+   "correct": 2,
+   "why": [
+    "gives the maximum value as if it held at all times",
+    "kinetic coefficient, valid only while sliding",
+    "",
+    "static friction opposes impending motion, so it need not follow the velocity"
+   ]
+  },
+  "solution": "Static friction takes whatever value keeps the object at rest, up to $\\mu_s N$.",
+  "hints": [
+   "Static friction matches the other forces up to a limit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A block slides across a floor. The kinetic friction force on it is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Proportional to its speed",
+    "$\\mu_k mg$ even on a tilted surface",
+    "$\\mu_k N$, opposing the relative motion",
+    "Larger than the maximum static friction for the same surfaces"
+   ],
+   "correct": 2,
+   "why": [
+    "the simple model makes friction independent of speed",
+    "uses weight instead of the normal force",
+    "",
+    "kinetic friction is smaller than maximum static friction for the same pair"
+   ]
+  },
+  "solution": "Kinetic friction has magnitude $\\mu_k N$ and opposes the relative sliding.",
+  "hints": [
+   "Friction is set by the normal force, not the weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A falling object has weight $mg$ and drag $bv$ at speed $v$. Write its terminal speed in terms of $m$, $g$ and $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*g/b",
+   "vars": [
+    "m",
+    "g",
+    "b"
+   ],
+   "also": [
+    "g*m/b",
+    "m/(b/g)"
+   ]
+  },
+  "check": null,
+  "solution": "At terminal speed the net force is zero: $mg=bv$, so $v=mg/b$.",
+  "hints": [
+   "Set the drag equal to the weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $10\\ \\mathrm{kg}$ crate on a level floor has $\\mu_s=0.40$ and $\\mu_k=0.30$. A horizontal push of $25\\ \\mathrm N$ is applied. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the friction force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "25",
+  "solution": "Maximum static friction is $0.40(10)(9.8)=39.2\\ \\mathrm N$, which exceeds $25\\ \\mathrm N$. The crate stays at rest, so friction equals $25\\ \\mathrm N$.",
+  "hints": [
+   "Compare the push with the maximum static friction first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $10\\ \\mathrm{kg}$ crate slides on a level floor with $\\mu_k=0.30$ under a $50\\ \\mathrm N$ horizontal push. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "103/50",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(50-Fraction(3,10)*10*Fraction(98,10))/10",
+  "solution": "Kinetic friction is $0.30(10)(9.8)=29.4\\ \\mathrm N$. Then $a=(50-29.4)/10=2.06\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Use kinetic friction once the crate slides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.80\\ \\mathrm{kg}$ ball falls with weight $mg$ and linear drag $bv$, where $b=0.040\\ \\mathrm{kg/s}$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the terminal speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 196,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(8,10)*Fraction(98,10)/Fraction(4,100)",
+  "solution": "At terminal speed $v=mg/b=(0.80)(9.8)/0.040=196\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Drag grows with speed until it equals the weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $3.0\\ \\mathrm{kg}$ block slides on a level floor with $\\mu_k=0.25$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the magnitude of its deceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "49/20",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(25,100)*Fraction(98,10)",
+  "solution": "Friction is the only horizontal force: $ma=\\mu_k mg$, so $a=\\mu_k g=2.45\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "The mass cancels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A car accelerates forward while its driven tires do not slip. Which friction force pushes the car forward?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Kinetic friction from the road, opposing motion",
+    "Air drag pointing forward",
+    "Static friction from the road on the tires, pointing forward",
+    "Static friction on the tires pointing backward"
+   ],
+   "correct": 2,
+   "why": [
+    "rolling without slipping has no sliding contact at the tire",
+    "air drag opposes motion; it does not push forward",
+    "",
+    "sign error: the tire pushes the road backward, and the road pushes the car forward"
+   ]
+  },
+  "solution": "The tire pushes the road backward, so the road pushes the tire, and the car, forward.",
+  "hints": [
+   "Ask which way the road pushes the tire."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $1.5\\ \\mathrm{kg}$ puck slides on ice with $\\mu_k=0.10$ and initial speed $4.0\\ \\mathrm{m/s}$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the stopping distance in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8.1633,
+   "tol": 0.16327,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "Fraction(400,49)",
+  "solution": "Work-energy: $\\mu_k mgd=\\frac12 mv^2$, so $d=v^2/(2\\mu_k g)=16/1.96\\approx8.16\\ \\mathrm m$.",
+  "hints": [
+   "The mass cancels, so the mass is not needed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "An Atwood machine has masses $m_1>m_2$ on a light rope over a frictionless pulley. The acceleration magnitude is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{(m_1+m_2)g}{m_1-m_2}$",
+    "$(m_1-m_2)g$",
+    "$\\frac{(m_1-m_2)g}{m_1+m_2}$",
+    "$\\frac{(m_1-m_2)g}{m_1}$"
+   ],
+   "correct": 2,
+   "why": [
+    "inverted fraction; the acceleration would exceed $g$",
+    "forgot to divide by the total mass",
+    "",
+    "uses only one mass as the inertia"
+   ]
+  },
+  "solution": "Net force is $(m_1-m_2)g$ acting on total mass $m_1+m_2$, so $a=\\frac{(m_1-m_2)g}{m_1+m_2}$.",
+  "hints": [
+   "Divide the net driving force by the total mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A light rope passes over a massless, frictionless pulley. The tension is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Different on the two sides when the masses differ",
+    "Zero, because the pulley is frictionless",
+    "Equal to the heavier mass's weight",
+    "The same on both sides, and the pulley does not change it"
+   ],
+   "correct": 3,
+   "why": [
+    "a massless frictionless pulley transmits the same tension on both sides",
+    "a frictionless pulley can still transmit tension",
+    "a moving mass does not carry its full weight as tension",
+    ""
+   ]
+  },
+  "solution": "A massless, frictionless pulley changes the direction of the rope tension but not its size.",
+  "hints": [
+   "Look at the pulley's mass and friction first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A block of mass $m$ slides down a frictionless incline at angle $\\theta$. Write its acceleration along the incline in terms of $g$ and $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "g*sin(theta)",
+   "vars": [
+    "g",
+    "theta"
+   ],
+   "also": [
+    "sin(theta)*g",
+    "g/(1/sin(theta))"
+   ]
+  },
+  "check": null,
+  "solution": "Along the incline, $ma=mg\\sin\\theta$, so $a=g\\sin\\theta$.",
+  "hints": [
+   "Only the component of weight along the incline matters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $4.0\\ \\mathrm{kg}$ block slides on a frictionless $30^\\circ$ incline. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its acceleration along the incline in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "49/10",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(98,10)/2",
+  "solution": "$a=g\\sin30^\\circ=9.8(0.5)=4.9\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "The mass cancels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Masses of $5.0\\ \\mathrm{kg}$ and $3.0\\ \\mathrm{kg}$ hang on opposite ends of a light rope over a frictionless pulley. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the acceleration magnitude in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "49/20",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(5-3)*Fraction(98,10)/(5+3)",
+  "solution": "$a=\\frac{(m_1-m_2)g}{m_1+m_2}=\\frac{2(9.8)}{8}=2.45\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Use the difference over the sum of the masses."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Masses of $5.0\\ \\mathrm{kg}$ and $3.0\\ \\mathrm{kg}$ hang on opposite ends of a light rope over a frictionless pulley. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the rope tension in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "147/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*5*3*Fraction(98,10)/(5+3)",
+  "solution": "$T=\\frac{2m_1m_2g}{m_1+m_2}=\\frac{2(5)(3)(9.8)}{8}=36.75\\ \\mathrm N$.",
+  "hints": [
+   "Use the acceleration to find the tension on one mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A block of mass $m$ rests on a frictionless incline at angle $\\theta$. A horizontal force of magnitude $F$ pushes it toward the incline and holds it still. Write $F$ in terms of $m$, $g$ and $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*g*tan(theta)",
+   "vars": [
+    "m",
+    "g",
+    "theta"
+   ],
+   "also": [
+    "m*g*sin(theta)/cos(theta)",
+    "g*m*tan(theta)"
+   ],
+   "domain": {
+    "m": [
+     0.3,
+     2.7
+    ],
+    "g": [
+     0.3,
+     2.7
+    ],
+    "theta": [
+     0.1,
+     1.4
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Along the incline, $F\\cos\\theta=mg\\sin\\theta$, so $F=mg\\tan\\theta$.",
+  "hints": [
+   "Resolve the horizontal force along the incline."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ block rests on a frictionless $30^\\circ$ incline. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the normal force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16.974,
+   "tol": 0.33948,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*9.8*math.cos(math.pi/6)",
+  "solution": "Perpendicular to the incline: $N=mg\\cos30^\\circ=2(9.8)(0.866)\\approx17.0\\ \\mathrm N$.",
+  "hints": [
+   "Only the component of weight perpendicular to the surface is balanced by N."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A block rests on a frictionless incline. A rope parallel to the incline holds it in place. Which equation gives the rope tension?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$T=mg\\cos\\theta$",
+    "$T=mg$",
+    "$T=mg\\sin\\theta$",
+    "$T=mg\\tan\\theta$"
+   ],
+   "correct": 2,
+   "why": [
+    "uses the normal component of weight, which the normal force balances, not the rope",
+    "ignores the incline; the rope holds only part of the weight",
+    "",
+    "tan comes from horizontal balance, not a rope parallel to the incline"
+   ]
+  },
+  "solution": "The rope balances the component of weight along the incline: $T=mg\\sin\\theta$.",
+  "hints": [
+   "Only the along-the-slope part of weight needs a force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In uniform circular motion, the centripetal acceleration points:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Along the velocity, magnitude $v^2/r$",
+    "Toward the center, magnitude $v^2/r$",
+    "Outward, magnitude $v^2/r$",
+    "Toward the center, magnitude $v/r$"
+   ],
+   "correct": 1,
+   "why": [
+    "the velocity direction changes speed, not direction",
+    "",
+    "outward is the fictitious direction in a rotating frame, not the acceleration",
+    "missed one factor of speed; dimensions are wrong"
+   ]
+  },
+  "solution": "Centripetal acceleration points to the center with magnitude $v^2/r$.",
+  "hints": [
+   "Use the speed squared divided by the radius."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "On a flat curve of radius $r$ with static friction coefficient $\\mu_s$, the maximum speed without slipping is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mu_s g r$",
+    "$\\sqrt{\\mu_s g r}$",
+    "$\\sqrt{g r/\\mu_s}$",
+    "$\\sqrt{2\\mu_s g r}$"
+   ],
+   "correct": 1,
+   "why": [
+    "missed the square root; dimensions are wrong",
+    "",
+    "inverted the coefficient",
+    "extra factor of 2 borrowed from the energy formula"
+   ]
+  },
+  "solution": "Friction supplies the centripetal force: $\\mu_s mg=mv^2/r$, so $v=\\sqrt{\\mu_s g r}$.",
+  "hints": [
+   "Set friction equal to the required centripetal force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the period of uniform circular motion of radius $r$ and speed $v$, in terms of $r$ and $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*pi*r/v",
+   "vars": [
+    "r",
+    "v"
+   ],
+   "also": [
+    "2*pi*r*v^(-1)",
+    "pi*2*r/v"
+   ]
+  },
+  "check": null,
+  "solution": "One revolution covers $2\\pi r$ at speed $v$, so $T=2\\pi r/v$.",
+  "hints": [
+   "Distance per revolution divided by speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ ball on a horizontal string of length $1.2\\ \\mathrm m$ moves in a circle at $3.0\\ \\mathrm{m/s}$. Find the string tension in $\\mathrm N$. Ignore gravity.",
+  "answer": {
+   "kind": "numeric",
+   "value": "15/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*9/Fraction(12,10)",
+  "solution": "Tension supplies the centripetal force: $T=mv^2/r=(0.50)(9.0)/1.2=3.75\\ \\mathrm N$.",
+  "hints": [
+   "The tension is the centripetal force here."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A car rounds a flat curve of radius $40\\ \\mathrm m$. The static friction coefficient is $0.50$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the maximum speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14,
+   "tol": 0.28,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(0.5*9.8*40)",
+  "solution": "$v_{\\max}=\\sqrt{\\mu_s g r}=\\sqrt{0.50(9.8)(40)}=14\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Friction is the only force toward the center."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ball on a $1.5\\ \\mathrm m$ string moves in a horizontal circle with period $2.0\\ \\mathrm s$. Find its centripetal acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14.804,
+   "tol": 0.29608,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "4*math.pi**2*1.5/2.0**2",
+  "solution": "Speed $v=2\\pi r/T=1.5\\pi\\ \\mathrm{m/s}$, so $a=v^2/r=1.5\\pi^2\\approx14.8\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Find the speed from the period first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A conical pendulum has a bob on a string of length $L$, swinging in a horizontal circle while the string makes angle $\\theta$ with the vertical. Write the speed $v$ in terms of $g$, $L$ and $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(g*L*sin(theta)*tan(theta))",
+   "vars": [
+    "g",
+    "L",
+    "theta"
+   ],
+   "also": [
+    "sqrt(g*L*sin(theta)^2/cos(theta))",
+    "sqrt(g*L*tan(theta)*sin(theta))"
+   ],
+   "domain": {
+    "g": [
+     0.3,
+     2.7
+    ],
+    "L": [
+     0.3,
+     2.7
+    ],
+    "theta": [
+     0.1,
+     1.2
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Radius $r=L\\sin\\theta$. Then $\\tan\\theta=v^2/(gr)$, so $v^2=gL\\sin\\theta\\tan\\theta$.",
+  "hints": [
+   "Balance vertical forces, then radial forces."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A frictionless road is banked at $30^\\circ$ on a curve of radius $100\\ \\mathrm m$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the speed at which no friction is needed, in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 23.787,
+   "tol": 0.47574,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(9.8*100*math.tan(math.pi/6))",
+  "solution": "$v^2=gr\\tan\\theta$, so $v=\\sqrt{9.8(100)\\tan30^\\circ}\\approx23.8\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Normal force supplies the centripetal force on a banked curve."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A ball on a string moves in a horizontal circle at constant speed. Its tangential acceleration is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$v^2/r$ toward the center",
+    "$g$ downward",
+    "$2v/r$ along the path",
+    "Zero, since the speed is constant"
+   ],
+   "correct": 3,
+   "why": [
+    "the radial term placed in the tangential direction",
+    "gravity is perpendicular to the tangent in a horizontal circle",
+    "invented formula",
+    ""
+   ]
+  },
+  "solution": "Constant speed means no change in speed, so the tangential component is zero.",
+  "hints": [
+   "Tangential means along the path."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Work done by a force on an object along a path equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\vec F\\times\\vec r$",
+    "$\\int \\vec F\\cdot d\\vec r$ along the path",
+    "$F\\,t$",
+    "$\\frac{1}{2}mv^2$"
+   ],
+   "correct": 1,
+   "why": [
+    "cross product gives torque, not work",
+    "",
+    "impulse, not work",
+    "kinetic energy, not work"
+   ]
+  },
+  "solution": "Work is the path integral of the force component along the displacement.",
+  "hints": [
+   "Work uses the dot product with displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The work-energy theorem states:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$W_{\\text{net}}=\\Delta p$",
+    "$W_{\\text{net}}=\\Delta U$ for every force",
+    "$W_{\\text{net}}=\\Delta K$",
+    "$W_{\\text{net}}=F\\,\\Delta x$ regardless of angle"
+   ],
+   "correct": 2,
+   "why": [
+    "momentum change equals impulse, not work",
+    "U changes only for conservative forces",
+    "",
+    "assumes the force is parallel to the displacement"
+   ]
+  },
+  "solution": "The net work on an object equals its change in kinetic energy.",
+  "hints": [
+   "Net work, not one force's work, sets the change in K."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the kinetic energy of a mass $m$ moving at speed $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*v^2/2",
+   "vars": [
+    "m",
+    "v"
+   ],
+   "also": [
+    "(1/2)*m*v^2",
+    "v^2*m/2"
+   ]
+  },
+  "check": null,
+  "solution": "$K=\\frac{1}{2}mv^2$.",
+  "hints": [
+   "Square the speed and halve."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $20\\ \\mathrm N$ force acts on a box at $60^\\circ$ to its displacement. The box moves $3.0\\ \\mathrm m$. Find the work done in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 30,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "20*3*Fraction(1,2)",
+  "solution": "$W=Fd\\cos\\theta=20(3.0)(0.5)=30\\ \\mathrm J$.",
+  "hints": [
+   "Use only the component of force along the displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t2-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ block speeds up from $3.0\\ \\mathrm{m/s}$ to $7.0\\ \\mathrm{m/s}$. Find the net work on it in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 40,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*2*(7**2-3**2)",
+  "solution": "$W_{\\text{net}}=\\Delta K=\\frac{1}{2}(2.0)(49-9)=40\\ \\mathrm J$.",
+  "hints": [
+   "Work equals the change in kinetic energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.40\\ \\mathrm{kg}$ ball starts from rest. Net work of $18\\ \\mathrm J$ is done on it. Find its speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.4868,
+   "tol": 0.18974,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*18/0.4)",
+  "solution": "$\\frac{1}{2}mv^2=W$, so $v=\\sqrt{2W/m}=\\sqrt{90}\\approx9.49\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Solve the work-energy equation for v."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $5.0\\ \\mathrm{kg}$ crate slides $4.0\\ \\mathrm m$ across a floor with $\\mu_k=0.20$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the work done by friction in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-196/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-Fraction(2,10)*5*Fraction(98,10)*4",
+  "solution": "Friction is $\\mu_k mg=9.8\\ \\mathrm N$ opposite the motion, so $W=-(9.8)(4.0)=-39.2\\ \\mathrm J$.",
+  "hints": [
+   "Friction removes energy, so its work is negative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A force $F(x)=6x\\ \\mathrm N$, with $x$ in $\\mathrm m$, acts on an object as it moves from $x=0$ to $x=2.0\\ \\mathrm m$. Find the work done in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3*2**2",
+  "solution": "$W=\\int_0^2 6x\\,dx=3x^2\\big|_0^2=12\\ \\mathrm J$.",
+  "hints": [
+   "Integrate force over displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A constant force of magnitude $F$ acts at angle $\\theta$ to a displacement of length $d$. Write the work in terms of $F$, $d$ and $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "F*d*cos(theta)",
+   "vars": [
+    "F",
+    "d",
+    "theta"
+   ],
+   "also": [
+    "d*F*cos(theta)",
+    "cos(theta)*F*d"
+   ]
+  },
+  "check": null,
+  "solution": "$W=Fd\\cos\\theta$, using the component of force along the displacement.",
+  "hints": [
+   "The angle goes into the cosine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A force is conservative when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Its magnitude is constant",
+    "It does no work on the object",
+    "Its work depends only on the starting and ending points",
+    "It is always gravitational"
+   ],
+   "correct": 2,
+   "why": [
+    "constant magnitude does not make the work path independent; friction can be constant",
+    "zero work on one path says nothing about other paths",
+    "",
+    "springs and electrostatic forces are conservative too"
+   ]
+  },
+  "solution": "A conservative force's work depends only on endpoints, so it defines a potential.",
+  "hints": [
+   "Ask whether the path matters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In one dimension, a conservative force relates to potential energy by:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$F=\\frac{dU}{dx}$",
+    "$F=U\\,dx$",
+    "$F=-\\frac{dU}{dx}$",
+    "$F=-U$"
+   ],
+   "correct": 2,
+   "why": [
+    "sign error: the force points down the potential slope",
+    "not a derivative; units do not match",
+    "",
+    "potential is not the force; the derivative is needed"
+   ]
+  },
+  "solution": "The force is minus the slope of the potential: $F=-dU/dx$.",
+  "hints": [
+   "The force points downhill on the potential curve."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the elastic potential energy of a spring of constant $k$ stretched by $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "k*x^2/2",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "also": [
+    "(1/2)*k*x^2",
+    "x*k*x/2"
+   ]
+  },
+  "check": null,
+  "solution": "$U=\\frac{1}{2}kx^2$.",
+  "hints": [
+   "Half the constant times the displacement squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $3.0\\ \\mathrm{kg}$ block starts from rest at height $5.0\\ \\mathrm m$ on a frictionless track. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its speed at the bottom in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.8995,
+   "tol": 0.19799,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*9.8*5)",
+  "solution": "Energy conservation: $\\frac12 mv^2=mgh$, so $v=\\sqrt{2gh}=\\sqrt{98}\\approx9.9\\ \\mathrm{m/s}$.",
+  "hints": [
+   "The mass cancels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A spring with $k=200\\ \\mathrm{N/m}$ is compressed $0.10\\ \\mathrm m$. Find the stored energy in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*200*Fraction(1,100)",
+  "solution": "$U=\\frac{1}{2}kx^2=\\frac{1}{2}(200)(0.10)^2=1.0\\ \\mathrm J$.",
+  "hints": [
+   "Use the compression, not the force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A block slides from rest down a frictionless track, dropping from height $2.0\\ \\mathrm m$ to height $0.50\\ \\mathrm m$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its speed at the lower height in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.4222,
+   "tol": 0.10844,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*9.8*1.5)",
+  "solution": "Energy: $v=\\sqrt{2g\\,\\Delta h}=\\sqrt{2(9.8)(1.5)}\\approx5.42\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Only the height drop matters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle has potential energy $U(x)=x^3-3x$, with $U$ in $\\mathrm J$ and $x$ in $\\mathrm m$. Find the force $F=-dU/dx$ at $x=2.0\\ \\mathrm m$, in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-(3*2**2-3)",
+  "solution": "$dU/dx=3x^2-3=9$ at $x=2$, so $F=-9\\ \\mathrm N$.",
+  "hints": [
+   "The force is minus the slope, so the sign matters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle has potential energy $U(x)=A/x^2$ for $x>0$. Write the force $F(x)$ in terms of $A$ and $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*A/x^3",
+   "vars": [
+    "A",
+    "x"
+   ],
+   "also": [
+    "2*A*x^(-3)",
+    "2*A/(x*x*x)"
+   ]
+  },
+  "check": null,
+  "solution": "$F=-dU/dx=-(-2A/x^3)=2A/x^3$, which points away from the center.",
+  "hints": [
+   "Differentiate $x^{-2}$ carefully and keep the sign."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all forces that are conservative.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Gravity near Earth's surface",
+    "Force of an ideal spring",
+    "Kinetic friction",
+    "Air drag"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Gravity and ideal spring forces depend only on endpoints. Friction and drag remove energy along the path.",
+  "hints": [
+   "Ask whether the work depends on the path."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Impulse on an object equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\int \\vec F\\,dx$",
+    "$\\Delta K$",
+    "$\\Delta\\vec p=\\int \\vec F\\,dt$",
+    "$m\\,\\Delta(v^2)$"
+   ],
+   "correct": 2,
+   "why": [
+    "that is work, not impulse",
+    "energy change, not impulse",
+    "",
+    "impulse is linear in velocity, not in speed squared"
+   ]
+  },
+  "solution": "Impulse is the time integral of force, and it equals the change in momentum.",
+  "hints": [
+   "Impulse pairs force with time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Momentum of an isolated system is conserved because:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Kinetic energy is conserved",
+    "The net external force on the system is zero",
+    "Internal forces are zero",
+    "All objects move with equal speed"
+   ],
+   "correct": 1,
+   "why": [
+    "energy conservation is not required",
+    "",
+    "internal forces are present but cancel in pairs",
+    "equal speeds are not required"
+   ]
+  },
+  "solution": "With no net external force, the total momentum of the system stays fixed.",
+  "hints": [
+   "External forces are the only ones that change total momentum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the momentum of a particle of mass $m$ moving with velocity $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*v",
+   "vars": [
+    "m",
+    "v"
+   ],
+   "also": [
+    "v*m",
+    "m*v^1"
+   ]
+  },
+  "check": null,
+  "solution": "$\\vec p=m\\vec v$.",
+  "hints": [
+   "Momentum is mass times velocity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.15\\ \\mathrm{kg}$ ball hits a wall at $20\\ \\mathrm{m/s}$ and rebounds at $16\\ \\mathrm{m/s}$. Find the impulse magnitude in $\\mathrm{N\\,s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "27/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(15,100)*(20+16)",
+  "solution": "Rebound reverses direction: $|\\Delta p|=0.15(20+16)=5.4\\ \\mathrm{N\\,s}$.",
+  "hints": [
+   "The velocity reverses, so add the speeds."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ object's speed rises from $4.0\\ \\mathrm{m/s}$ to $10.0\\ \\mathrm{m/s}$ in $3.0\\ \\mathrm s$ under constant net force. Find the force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*(10-4)/3",
+  "solution": "$F=\\Delta p/\\Delta t=2.0(6.0)/3.0=4.0\\ \\mathrm N$.",
+  "hints": [
+   "Impulse divided by time gives the average force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $30\\ \\mathrm N$ force acts on a $5.0\\ \\mathrm{kg}$ cart, which starts at rest, for $0.40\\ \\mathrm s$. Find its final speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "12/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "30*Fraction(4,10)/5",
+  "solution": "Impulse $=30(0.40)=12\\ \\mathrm{N\\,s}$, so $v=12/5.0=2.4\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Find the impulse before the speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $60\\ \\mathrm{kg}$ person on frictionless ice, starting at rest, throws a $2.0\\ \\mathrm{kg}$ ball at $12\\ \\mathrm{m/s}$ east. Find the person's recoil speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2*12,60)",
+  "solution": "Momentum is conserved: $60v=2.0(12)$, so $v=0.40\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Total momentum starts at zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A light object and a heavy object have equal momentum magnitudes. Which has the larger kinetic energy?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The heavier object, since it has more mass",
+    "The lighter object, since $K=p^2/2m$",
+    "They are equal, since the momenta are equal",
+    "Cannot tell without the speeds"
+   ],
+   "correct": 1,
+   "why": [
+    "at fixed p, K = p^2/2m falls as m rises",
+    "",
+    "K depends on p and m, not on p alone",
+    "p and m already fix K, so the speeds are not needed"
+   ]
+  },
+  "solution": "Since $K=p^2/2m$, at equal momentum the smaller mass has the larger kinetic energy.",
+  "hints": [
+   "Write K in terms of p and m."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A net force $F$ acts on an object of mass $m$ for time $T$. The object starts from rest. Write its final speed in terms of $F$, $T$ and $m$.",
+  "answer": {
+   "kind": "expression",
+   "value": "F*T/m",
+   "vars": [
+    "F",
+    "T",
+    "m"
+   ],
+   "also": [
+    "T*F/m",
+    "F*(T/m)"
+   ]
+  },
+  "check": null,
+  "solution": "Impulse $FT$ equals $mv$, so $v=FT/m$.",
+  "hints": [
+   "Set impulse equal to the momentum change."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a perfectly inelastic collision:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Kinetic energy is conserved but momentum is not",
+    "Both momentum and kinetic energy are conserved",
+    "Momentum is conserved and the bodies stick together",
+    "Neither momentum nor kinetic energy is conserved"
+   ],
+   "correct": 2,
+   "why": [
+    "momentum is conserved in every isolated collision, so this swaps the two quantities",
+    "kinetic energy is lost to deformation",
+    "",
+    "momentum is conserved in every isolated collision"
+   ]
+  },
+  "solution": "Bodies stick and move together. Momentum is conserved and kinetic energy is not.",
+  "hints": [
+   "Ask which quantity survives every isolated collision."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a one-dimensional elastic collision, the coefficient of restitution $e$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$e=0$",
+    "$e=1$",
+    "$e=-1$",
+    "$e=\\tfrac{1}{2}$"
+   ],
+   "correct": 1,
+   "why": [
+    "zero means perfectly inelastic",
+    "",
+    "a sign error: e is a ratio of speeds",
+    "confuses e with a kinetic energy fraction"
+   ]
+  },
+  "solution": "An elastic collision keeps the relative speed unchanged, so $e=1$.",
+  "hints": [
+   "Elastic means no kinetic energy is lost."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two bodies of masses $m$ and $M$ move at velocities $u$ and $w$. Write the velocity of their center of mass.",
+  "answer": {
+   "kind": "expression",
+   "value": "(m*u+M*w)/(m+M)",
+   "vars": [
+    "m",
+    "M",
+    "u",
+    "w"
+   ],
+   "also": [
+    "(M*w+m*u)/(M+m)",
+    "(m*u+M*w)*(m+M)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$v_{cm}=\\frac{mu+Mw}{m+M}$.",
+  "hints": [
+   "Weight each velocity by its mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t2-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ cart moving at $6.0\\ \\mathrm{m/s}$ hits a $4.0\\ \\mathrm{kg}$ cart at rest. They stick together. Find their final speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*6/(2+4)",
+  "solution": "Momentum: $2.0(6.0)=6.0\\,v$, so $v=2.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Use momentum, not energy, for a sticky collision."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ cart moving at $6.0\\ \\mathrm{m/s}$ collides elastically with a $4.0\\ \\mathrm{kg}$ cart at rest. Find the $2.0\\ \\mathrm{kg}$ cart's velocity after the collision in $\\mathrm{m/s}$, initial direction positive.",
+  "answer": {
+   "kind": "numeric",
+   "value": -2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(2-4)*6/(2+4)",
+  "solution": "$v_1=\\frac{m_1-m_2}{m_1+m_2}u=\\frac{-2}{6}(6.0)=-2.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "The lighter cart rebounds."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.010\\ \\mathrm{kg}$ bullet embeds in a $2.0\\ \\mathrm{kg}$ block hanging at rest. The block then rises $0.20\\ \\mathrm m$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the bullet's speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 397.96,
+   "tol": 7.9592,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "201*math.sqrt(2*9.8*0.2)",
+  "solution": "Combined speed $v=\\sqrt{2gh}\\approx1.98\\ \\mathrm{m/s}$. Momentum: $0.010\\,v_0=2.01(1.98)$, so $v_0\\approx398\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Split the problem into a collision and a rise."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $3.0\\ \\mathrm{kg}$ object moving at $4.0\\ \\mathrm{m/s}$ hits a $1.0\\ \\mathrm{kg}$ object at rest in an elastic head-on collision. Find the speed of the $1.0\\ \\mathrm{kg}$ object after the collision in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*3*4/(3+1)",
+  "solution": "$v_2=\\frac{2m_1}{m_1+m_2}u=\\frac{2(3)}{4}(4.0)=6.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Use the elastic formula for the target."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $3.0\\ \\mathrm{kg}$ object moving at $4.0\\ \\mathrm{m/s}$ hits a $1.0\\ \\mathrm{kg}$ object at rest and they stick together. Find the kinetic energy lost in $\\mathrm J$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*3*16-Fraction(1,2)*4*(Fraction(12,4))**2",
+  "solution": "Before: $K=\\frac{1}{2}(3)(16)=24\\ \\mathrm J$. After, $v=3.0$, so $K=\\frac{1}{2}(4)(9)=18\\ \\mathrm J$. Lost $6\\ \\mathrm J$.",
+  "hints": [
+   "Compare kinetic energy before and after."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.collisions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $1.0\\ \\mathrm{kg}$ ball hits a fixed wall elastically at $5.0\\ \\mathrm{m/s}$ and rebounds at the same speed. Find the magnitude of its momentum change in $\\mathrm{kg\\,m/s}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$2.5$",
+    "$5.0$",
+    "$10$"
+   ],
+   "correct": 3,
+   "why": [
+    "the magnitude of the change is not zero; the direction reverses",
+    "halved the momentum; both the before and after values count",
+    "counted only the initial momentum",
+    ""
+   ]
+  },
+  "solution": "$|\\Delta p|=|mv_f-mv_i|=|-5-5|=10\\ \\mathrm{kg\\,m/s}$.",
+  "hints": [
+   "Reversal doubles the change."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The center of mass of two particles on a line is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$x_{cm}=\\frac{x_1+x_2}{2}$ always",
+    "$x_{cm}=\\frac{m_1x_1+m_2x_2}{m_1+m_2}$",
+    "$x_{cm}=\\frac{m_1x_1-m_2x_2}{m_1+m_2}$",
+    "$x_{cm}=\\frac{m_1+m_2}{m_1x_1+m_2x_2}$"
+   ],
+   "correct": 1,
+   "why": [
+    "equal weighting holds only for equal masses",
+    "",
+    "sign error on the second term",
+    "inverted fraction"
+   ]
+  },
+  "solution": "The center of mass is the mass-weighted average position.",
+  "hints": [
+   "Weight each position by its mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For any system, the net external force equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The sum of the internal forces",
+    "The total mass times the center-of-mass velocity",
+    "The total mass times the center-of-mass acceleration",
+    "The sum of the forces on the heaviest part"
+   ],
+   "correct": 2,
+   "why": [
+    "internal forces cancel in pairs by the third law",
+    "that is momentum; a force needs the acceleration",
+    "",
+    "center-of-mass motion depends on all external forces, not one part"
+   ]
+  },
+  "solution": "$\\sum \\vec F_{\\text{ext}}=M\\vec a_{cm}$.",
+  "hints": [
+   "Only external forces move the center of mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the reduced mass of two bodies of masses $m$ and $M$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*M/(m+M)",
+   "vars": [
+    "m",
+    "M"
+   ],
+   "also": [
+    "M*m/(M+m)",
+    "1/(1/m+1/M)"
+   ]
+  },
+  "check": null,
+  "solution": "$\\mu=\\frac{mM}{m+M}$.",
+  "hints": [
+   "Product over sum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ particle is at $x=0$ and a $6.0\\ \\mathrm{kg}$ particle is at $x=4.0\\ \\mathrm m$. Find the center of mass position in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(2*0+6*4)/(2+6)",
+  "solution": "$x_{cm}=\\frac{2(0)+6(4)}{8}=3.0\\ \\mathrm m$.",
+  "hints": [
+   "Use the mass-weighted average."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A system of total mass $10\\ \\mathrm{kg}$ has a net external force of $15\\ \\mathrm N$. Find the acceleration of its center of mass in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(15,10)",
+  "solution": "$a_{cm}=F_{\\text{ext}}/M=15/10=1.5\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Internal forces do not enter."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the reduced mass of $4.0\\ \\mathrm{kg}$ and $12.0\\ \\mathrm{kg}$ bodies, in $\\mathrm{kg}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*12/(4+12)",
+  "solution": "$\\mu=\\frac{(4)(12)}{16}=3.0\\ \\mathrm{kg}$.",
+  "hints": [
+   "Use product over sum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Three particles lie on the $x$-axis: $1.0\\ \\mathrm{kg}$ at $0$, $2.0\\ \\mathrm{kg}$ at $3.0\\ \\mathrm m$, and $3.0\\ \\mathrm{kg}$ at $6.0\\ \\mathrm m$. Find the center of mass position in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(1*0+2*3+3*6)/(1+2+3)",
+  "solution": "$x_{cm}=\\frac{0+6+18}{6}=4.0\\ \\mathrm m$.",
+  "hints": [
+   "Include all three masses in the weighting."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $6.0\\ \\mathrm{kg}$ object at rest explodes into a $2.0\\ \\mathrm{kg}$ piece moving at $9.0\\ \\mathrm{m/s}$ east and a $4.0\\ \\mathrm{kg}$ piece. Find the velocity of the $4.0\\ \\mathrm{kg}$ piece in $\\mathrm{m/s}$, east positive.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-9/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-(2*9)/4",
+  "solution": "The center of mass stays at rest: $2(9.0)+4v=0$, so $v=-4.5\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Momentum of the whole object is zero before the explosion."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Masses $m$ and $2m$ sit at the ends of a light rod of length $L$. The mass $m$ is at $x=0$ and the mass $2m$ is at $x=L$. The center of mass lies:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$L/6$ from the midpoint, toward the heavier mass",
+    "$L/6$ from the midpoint, toward the lighter mass",
+    "$L/3$ from the midpoint, toward the heavier mass",
+    "At the midpoint, since the rod is light"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign error: the center of mass is pulled toward the heavier end",
+    "used the 2:1 ratio directly as the shift",
+    "the masses, not the rod, set the center of mass"
+   ]
+  },
+  "solution": "$x_{cm}=\\frac{m\\cdot 0+2m\\cdot L}{3m}=\\frac{2L}{3}$, which is $L/6$ past the midpoint toward the heavier mass.",
+  "hints": [
+   "Find the center of mass position before comparing with the midpoint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The torque of a force about a pivot is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tau=rF\\cos\\theta$, with $r$ the pivot-to-point distance",
+    "$\\tau=F/r$",
+    "$\\tau=rF\\sin\\theta$, with $\\theta$ between $\\vec r$ and $\\vec F$",
+    "$\\tau=Fr$ always"
+   ],
+   "correct": 2,
+   "why": [
+    "cos gives the component along the lever arm, which produces no torque",
+    "inverts the distance",
+    "",
+    "ignores the angle between the force and the lever arm"
+   ]
+  },
+  "solution": "Torque is the cross product $\\vec r\\times\\vec F$, with magnitude $rF\\sin\\theta$.",
+  "hints": [
+   "Only the component of force perpendicular to the lever arm turns the body."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "An object is in static equilibrium when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Net torque is zero, but net force need not be",
+    "Net force and net torque are both zero",
+    "All forces are parallel to one another",
+    "Its velocity is zero"
+   ],
+   "correct": 1,
+   "why": [
+    "the center of mass would accelerate if the net force were not zero",
+    "",
+    "parallel alignment is not required",
+    "uniform motion also has no net force; rest is not required"
+   ]
+  },
+  "solution": "Static equilibrium needs zero net force and zero net torque.",
+  "hints": [
+   "Equilibrium is both conditions together."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the magnitude of the torque of a force $F$ acting at distance $L$ from the pivot, where $\\theta$ is the angle between the lever arm and the force.",
+  "answer": {
+   "kind": "expression",
+   "value": "F*L*sin(theta)",
+   "vars": [
+    "F",
+    "L",
+    "theta"
+   ],
+   "also": [
+    "L*F*sin(theta)",
+    "sin(theta)*F*L"
+   ]
+  },
+  "check": null,
+  "solution": "$\\tau=FL\\sin\\theta$.",
+  "hints": [
+   "Only the perpendicular component of force gives torque."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $30\\ \\mathrm N$ force acts perpendicular to a lever at $1.5\\ \\mathrm m$ from the pivot. Find the torque in $\\mathrm{N\\,m}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "30*Fraction(15,10)",
+  "solution": "$\\tau=rF\\sin90^\\circ=(1.5)(30)=45\\ \\mathrm{N\\,m}$.",
+  "hints": [
+   "A perpendicular force has the full lever arm."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $40\\ \\mathrm N$ force acts at $30^\\circ$ to a $0.50\\ \\mathrm m$ wrench arm. Find the torque magnitude in $\\mathrm{N\\,m}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "40*Fraction(1,2)*Fraction(1,2)",
+  "solution": "$\\tau=rF\\sin30^\\circ=(0.50)(40)(0.5)=10\\ \\mathrm{N\\,m}$.",
+  "hints": [
+   "Use the sine of the angle between arm and force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A seesaw balances a $300\\ \\mathrm N$ child at $1.5\\ \\mathrm m$ from the pivot against a $200\\ \\mathrm N$ child. Find the balancing distance of the second child in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "300*Fraction(15,10)/200",
+  "solution": "Torques balance: $300(1.5)=200\\,d$, so $d=2.25\\ \\mathrm m$.",
+  "hints": [
+   "Set the two torques equal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A uniform $4.0\\ \\mathrm m$ beam weighing $120\\ \\mathrm N$ is hinged to a wall at its left end and held horizontal. A cable from its right end runs up toward the wall at $30^\\circ$ to the beam. Find the cable tension in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 120,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "120*2/(4*Fraction(1,2))",
+  "solution": "About the hinge: weight torque $=120(2.0)=240\\ \\mathrm{N\\,m}$. Cable torque $=T(4.0)\\sin30^\\circ=2T$. So $T=120\\ \\mathrm N$.",
+  "hints": [
+   "The weight acts at the beam's midpoint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A uniform rod of weight $W$ and length $L$ is hinged at one end and makes angle $\\theta$ with the horizontal. Write the torque of its weight about the hinge in terms of $W$, $L$ and $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "W*L*cos(theta)/2",
+   "vars": [
+    "W",
+    "L",
+    "theta"
+   ],
+   "also": [
+    "(1/2)*W*L*cos(theta)",
+    "L*W*cos(theta)*(1/2)"
+   ]
+  },
+  "check": null,
+  "solution": "The weight acts at $L/2$ along the rod, with horizontal lever arm $(L/2)\\cos\\theta$. So $\\tau=WL\\cos\\theta/2$.",
+  "hints": [
+   "Find the horizontal lever arm of the weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two forces act on a rod along the $x$-axis: $6.0\\ \\mathrm N$ upward at $x=1.0\\ \\mathrm m$ and $4.0\\ \\mathrm N$ downward at $x=4.0\\ \\mathrm m$. Find the net torque about the origin in $\\mathrm{N\\,m}$, counterclockwise positive.",
+  "answer": {
+   "kind": "numeric",
+   "value": -10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1*6-4*4",
+  "solution": "Upward at $x=1$ gives $+6$. Downward at $x=4$ gives $-16$. Net $=-10\\ \\mathrm{N\\,m}$.",
+  "hints": [
+   "Treat the sign of each torque with the right-hand rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The rotational analogue of mass in $\\tau=I\\alpha$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Torque",
+    "Angular velocity",
+    "Moment of inertia $I$",
+    "Angular momentum"
+   ],
+   "correct": 2,
+   "why": [
+    "torque is the analogue of force",
+    "angular velocity is the analogue of velocity",
+    "",
+    "angular momentum is a conserved quantity, not the inertia"
+   ]
+  },
+  "solution": "Moment of inertia measures resistance to angular acceleration, as mass does for linear motion.",
+  "hints": [
+   "Match each rotational quantity to its linear partner."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A wheel rolls without slipping. The velocity of its contact point with the ground is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Twice the center's velocity",
+    "Equal to the center's velocity",
+    "Forward at $\\omega R$, the rim speed",
+    "Zero"
+   ],
+   "correct": 3,
+   "why": [
+    "doubles the speed; there is no such factor",
+    "forgets the spin: the contact point is not moving with the center",
+    "ignores that the spin at the contact point opposes the center's motion",
+    ""
+   ]
+  },
+  "solution": "Contact velocity is $v_{cm}-\\omega R=0$ for rolling without slipping.",
+  "hints": [
+   "Subtract the spin velocity at the bottom."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the moment of inertia of a uniform solid disk of mass $m$ and radius $R$ about its center.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*R^2/2",
+   "vars": [
+    "m",
+    "R"
+   ],
+   "also": [
+    "(1/2)*m*R^2",
+    "R^2*m/2"
+   ]
+  },
+  "check": null,
+  "solution": "$I=\\frac{1}{2}mR^2$.",
+  "hints": [
+   "Half the mass times the radius squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t2-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A uniform solid disk of mass $2.0\\ \\mathrm{kg}$ and radius $0.50\\ \\mathrm m$ spins about its center under a torque of $3.0\\ \\mathrm{N\\,m}$. Find the angular acceleration in $\\mathrm{rad/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3/(Fraction(1,2)*2*Fraction(1,4))",
+  "solution": "$I=\\frac{1}{2}mR^2=0.25\\ \\mathrm{kg\\,m^2}$, so $\\alpha=\\tau/I=3.0/0.25=12\\ \\mathrm{rad/s^2}$.",
+  "hints": [
+   "Find I for a solid disk first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A thin hoop of mass $1.5\\ \\mathrm{kg}$ and radius $0.40\\ \\mathrm m$ spins about its center. Find its moment of inertia in $\\mathrm{kg\\,m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "6/25",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(15,10)*Fraction(4,10)**2",
+  "solution": "A hoop has $I=mR^2=(1.5)(0.16)=0.24\\ \\mathrm{kg\\,m^2}$.",
+  "hints": [
+   "All of the mass sits at the rim."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A uniform solid sphere rolls without slipping. Find the fraction of its kinetic energy that is rotational.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/7",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,5)/(1+Fraction(2,5))",
+  "solution": "Rotational share $=\\frac{\\frac{1}{2}I\\omega^2}{\\frac{1}{2}mv^2+\\frac{1}{2}I\\omega^2}$ with $I=\\frac{2}{5}mR^2$ and $v=\\omega R$, giving $\\frac{2/5}{1+2/5}=\\frac{2}{7}$.",
+  "hints": [
+   "Write both energies with the same factor."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A uniform rod of mass $3.0\\ \\mathrm{kg}$ and length $2.0\\ \\mathrm m$ pivots about one end, where $I=mL^2/3$. A torque of $8.0\\ \\mathrm{N\\,m}$ acts. Find the angular acceleration in $\\mathrm{rad/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "8/(3*Fraction(4,3))",
+  "solution": "$I=\\frac{(3.0)(2.0)^2}{3}=4.0\\ \\mathrm{kg\\,m^2}$, so $\\alpha=8.0/4.0=2.0\\ \\mathrm{rad/s^2}$.",
+  "hints": [
+   "Compute I about the pivot first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A light string is wound on a uniform solid disk pulley of mass $2.0\\ \\mathrm{kg}$ and radius $0.10\\ \\mathrm m$, which turns frictionlessly on a fixed axle. A $4.0\\ \\mathrm{kg}$ block hangs from the free end and the string does not slip. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the block's acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "196/25",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*Fraction(98,10)/(4+Fraction(1,2)*2)",
+  "solution": "Effective inertia $=M+I/R^2=4.0+\\frac{1}{2}(2.0)=5.0\\ \\mathrm{kg}$. Then $a=Mg/5.0=39.2/5.0=7.84\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Add the pulley's I over R squared to the block's mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A uniform solid sphere and a thin hoop have the same mass and radius. Both roll without slipping down the same incline from rest. Which reaches the bottom first?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The hoop, since it has more rotational inertia",
+    "The solid sphere, since less of its energy goes into rotation",
+    "They tie, since mass and radius match",
+    "Cannot tell without the incline angle"
+   ],
+   "correct": 1,
+   "why": [
+    "larger I means more energy goes into rotation, so it is slower, not faster",
+    "",
+    "ignores that the moments of inertia differ",
+    "the incline angle cancels in the comparison"
+   ]
+  },
+  "solution": "Acceleration is $g\\sin\\theta/(1+I/mR^2)$. The sphere has $I/mR^2=2/5$, smaller than the hoop's 1.",
+  "hints": [
+   "Compare I over mR squared for each body."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The angular momentum of a point particle about the origin is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\vec L=\\vec r\\cdot\\vec p$",
+    "$\\vec L=m\\vec v$",
+    "$\\vec L=\\vec F\\times\\vec r$",
+    "$\\vec L=\\vec r\\times\\vec p$"
+   ],
+   "correct": 3,
+   "why": [
+    "a dot product is a scalar with no axis",
+    "that is linear momentum",
+    "that is torque, the rate of change of L",
+    ""
+   ]
+  },
+  "solution": "Angular momentum is the cross product of position and linear momentum.",
+  "hints": [
+   "Angular momentum needs a position and a cross product."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Angular momentum about an axis is conserved when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The net external force is zero",
+    "The kinetic energy is constant",
+    "The net external torque about the axis is zero",
+    "The moment of inertia stays fixed"
+   ],
+   "correct": 2,
+   "why": [
+    "conserves linear momentum, not angular momentum",
+    "energy and angular momentum are separate",
+    "",
+    "a changing I can be compensated by a change in angular velocity"
+   ]
+  },
+  "solution": "With zero net external torque, $\\vec L$ stays constant.",
+  "hints": [
+   "Torque is the rate of change of angular momentum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the angular momentum of a rigid body with moment of inertia $I$ spinning at angular velocity $\\omega$ about its axis.",
+  "answer": {
+   "kind": "expression",
+   "value": "I*omega",
+   "vars": [
+    "I",
+    "omega"
+   ],
+   "also": [
+    "omega*I",
+    "I*omega^1"
+   ]
+  },
+  "check": null,
+  "solution": "$L=I\\omega$.",
+  "hints": [
+   "Angular momentum is moment of inertia times angular velocity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A skater has moment of inertia $4.0\\ \\mathrm{kg\\,m^2}$ and spins at $2.0\\ \\mathrm{rad/s}$. She pulls her arms in until $I=1.0\\ \\mathrm{kg\\,m^2}$. Find the new angular velocity in $\\mathrm{rad/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*2/1",
+  "solution": "$I_1\\omega_1=I_2\\omega_2$, so $\\omega_2=(4.0)(2.0)/1.0=8.0\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Angular momentum is conserved."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $0.20\\ \\mathrm{kg}$ particle moves tangentially at $4.0\\ \\mathrm{m/s}$ on a circle of radius $0.50\\ \\mathrm m$. Find its angular momentum about the center in $\\mathrm{kg\\,m^2/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,10)*4*Fraction(1,2)",
+  "solution": "$L=rmv=(0.50)(0.20)(4.0)=0.40\\ \\mathrm{kg\\,m^2/s}$.",
+  "hints": [
+   "The velocity is perpendicular to the radius."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.30\\ \\mathrm{kg}$ puck slides on frictionless ice at radius $0.60\\ \\mathrm m$ with speed $2.0\\ \\mathrm{m/s}$, tied to a string through a hole. The string is pulled until the radius is $0.20\\ \\mathrm m$. Find the new speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*Fraction(60,100)/Fraction(20,100)",
+  "solution": "The string tension is central, so $L$ is conserved: $v_2=v_1r_1/r_2=2.0(0.60)/0.20=6.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "The string exerts no torque on the puck."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.30\\ \\mathrm{kg}$ puck slides on frictionless ice at speed $2.0\\ \\mathrm{m/s}$ on a circle of radius $0.60\\ \\mathrm m$, held by a string through a hole. Find the string tension in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,10)*2**2/Fraction(6,10)",
+  "solution": "Tension supplies the centripetal force: $T=mv^2/r=(0.30)(4.0)/0.60=2.0\\ \\mathrm N$.",
+  "hints": [
+   "Tension is the only force toward the center."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A disk with moment of inertia $2.0\\ \\mathrm{kg\\,m^2}$ spins at $3.0\\ \\mathrm{rad/s}$ on a frictionless axle. A second disk with moment of inertia $4.0\\ \\mathrm{kg\\,m^2}$, initially at rest, is dropped onto the same axle and the two spin together. Find their common angular velocity in $\\mathrm{rad/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*3/(2+4)",
+  "solution": "$\\omega_f=\\frac{I_1\\omega_1}{I_1+I_2}=\\frac{6}{6}=1.0\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Conserve angular momentum, not angular velocity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle of mass $m$ moves in a circle of radius $r$ with speed $v$. Write its angular momentum about the center in terms of $m$, $r$ and $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*r*v",
+   "vars": [
+    "m",
+    "r",
+    "v"
+   ],
+   "also": [
+    "r*m*v",
+    "v*r*m"
+   ]
+  },
+  "check": null,
+  "solution": "Velocity is perpendicular to the radius, so $L=rmv$.",
+  "hints": [
+   "The velocity is perpendicular to the radius."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The escape speed from a planet of mass $M$ and radius $R$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{GM/R}$",
+    "$\\sqrt{2GM/R}$",
+    "$\\sqrt{GM/R^2}$",
+    "$2GM/R$"
+   ],
+   "correct": 1,
+   "why": [
+    "that is the circular orbit speed at the surface; escape needs a factor of $\\sqrt{2}$ more",
+    "",
+    "mixed powers of R; dimensions are wrong",
+    "missed the square root; dimensions are wrong"
+   ]
+  },
+  "solution": "Escape speed satisfies $\\frac{1}{2}mv^2=GMm/R$, so $v=\\sqrt{2GM/R}$.",
+  "hints": [
+   "Set kinetic energy equal to the potential energy depth."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Kepler's third law for orbits around the same central mass states that:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$T\\propto a^2$",
+    "$T^2\\propto a^3$",
+    "$T^2\\propto a$",
+    "$T\\propto a^3$"
+   ],
+   "correct": 1,
+   "why": [
+    "exponent wrong; the period grows as the 3/2 power of the radius",
+    "",
+    "linear relation mistaken for cubic",
+    "forgot to square T"
+   ]
+  },
+  "solution": "For a given central mass, $T^2$ is proportional to $a^3$.",
+  "hints": [
+   "Square the period, cube the radius."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the gravitational field strength at distance $r$ from a point mass $M$, with gravitational constant $G$.",
+  "answer": {
+   "kind": "expression",
+   "value": "G*M/r^2",
+   "vars": [
+    "G",
+    "M",
+    "r"
+   ],
+   "also": [
+    "G*M*r^(-2)",
+    "M*G/(r*r)"
+   ]
+  },
+  "check": null,
+  "solution": "$g=GM/r^2$.",
+  "hints": [
+   "Inverse square law."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "At Earth's surface $g=9.8\\ \\mathrm{m/s^2}$ and the radius is $R=6.40\\times10^{6}\\ \\mathrm m$. Find the speed of a circular orbit skimming the surface, in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7919.6,
+   "tol": 158.39,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(9.8*6.4e6)",
+  "solution": "Circular orbit: $v^2/R=g$, so $v=\\sqrt{gR}\\approx7.92\\times10^{3}\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Gravity supplies the centripetal force at the surface."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The gravitational field of a planet at some distance from its center is one quarter of its surface value. Find that distance in multiples of the planet's radius $R$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.sqrt(4)",
+  "solution": "$g\\propto 1/r^2$. A factor of $1/4$ needs $r=2R$.",
+  "hints": [
+   "The field falls as the inverse square of distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A satellite has period $2.0$ days at orbital radius $r$. Find its period in days at orbital radius $4r$ around the same planet.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*4**1.5",
+  "solution": "$T^2\\propto r^3$, so $T\\propto r^{3/2}$. With $r\\to4r$, $T\\to2.0\\times8=16$ days.",
+  "hints": [
+   "Scale the period by the radius ratio to the 3/2 power."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the escape speed from Earth's surface in $\\mathrm{m/s}$, taking $g=9.8\\ \\mathrm{m/s^2}$ and $R=6.40\\times10^{6}\\ \\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 11200,
+   "tol": 224,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*9.8*6.4e6)",
+  "solution": "$v_{\\text{esc}}=\\sqrt{2gR}=\\sqrt{2(9.8)(6.4\\times10^6)}=1.12\\times10^{4}\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Escape speed is the circular speed times $\\sqrt{2}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A satellite of mass $m$ circles a mass $M$ at radius $r$. Its kinetic energy is $K=\\frac{GMm}{2r}$ and its potential energy is $U=-\\frac{GMm}{r}$. Write its total energy $E$.",
+  "answer": {
+   "kind": "expression",
+   "value": "-G*M*m/(2*r)",
+   "vars": [
+    "G",
+    "M",
+    "m",
+    "r"
+   ],
+   "also": [
+    "-(G*M*m)/(2*r)",
+    "-G*M*m*(2*r)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$E=K+U=\\frac{GMm}{2r}-\\frac{GMm}{r}=-\\frac{GMm}{2r}$.",
+  "hints": [
+   "Add the kinetic and potential energies."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Compared with a higher circular orbit, a lower circular orbit has:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A smaller speed and a longer period",
+    "A larger speed and a shorter period",
+    "The same speed and a shorter period",
+    "A larger speed and a longer period"
+   ],
+   "correct": 1,
+   "why": [
+    "reversed: lower orbits are faster",
+    "",
+    "speed depends on the radius",
+    "the period grows with radius, so the lower orbit has the shorter period"
+   ]
+  },
+  "solution": "Circular speed $v\\propto r^{-1/2}$ and period $T\\propto r^{3/2}$, so lower orbits are faster and shorter.",
+  "hints": [
+   "Use v proportional to r to the minus half and T proportional to r to the 3/2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0127",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A restoring force for simple harmonic motion is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$F=kx$, pushing away from equilibrium",
+    "$F=-kx$, opposite to the displacement",
+    "Constant in magnitude",
+    "$F=-kx^2$"
+   ],
+   "correct": 1,
+   "why": [
+    "sign wrong: this pushes the mass further away",
+    "",
+    "a constant force does not give SHM",
+    "not linear in displacement"
+   ]
+  },
+  "solution": "A linear restoring force $F=-kx$ gives simple harmonic motion.",
+  "hints": [
+   "Restoring means pointing back toward equilibrium."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0128",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The angular frequency of a mass $m$ on a spring of constant $k$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{m/k}$",
+    "$k/m$",
+    "$\\sqrt{k/m}$",
+    "$\\sqrt{km}$"
+   ],
+   "correct": 2,
+   "why": [
+    "inverted the ratio",
+    "omitted the square root",
+    "",
+    "multiplied the quantities instead of dividing"
+   ]
+  },
+  "solution": "$\\omega=\\sqrt{k/m}$ and the period is $2\\pi/\\omega$.",
+  "hints": [
+   "Stiffer springs oscillate faster."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0129",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the period of a simple pendulum of length $L$ for small swings, with field strength $g$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*pi*sqrt(L/g)",
+   "vars": [
+    "L",
+    "g"
+   ],
+   "also": [
+    "2*pi*(L/g)^(1/2)",
+    "2*pi*sqrt(L*g^(-1))"
+   ]
+  },
+  "check": null,
+  "solution": "Small-angle pendulum: $T=2\\pi\\sqrt{L/g}$.",
+  "hints": [
+   "The period does not depend on the bob's mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t2-0130",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ mass hangs on a spring of constant $200\\ \\mathrm{N/m}$. Find the period of oscillation in $\\mathrm s$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.31416,
+   "tol": 0.0062832,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*math.pi*math.sqrt(0.5/200)",
+  "solution": "$T=2\\pi\\sqrt{m/k}=2\\pi\\sqrt{0.0025}=0.314\\ \\mathrm s$.",
+  "hints": [
+   "Use the period formula, not the frequency."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ mass on a spring with $k=50\\ \\mathrm{N/m}$ oscillates with amplitude $0.10\\ \\mathrm m$. Find its maximum speed in $\\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "0.1*math.sqrt(50/2)",
+  "solution": "$\\omega=\\sqrt{k/m}=5.0\\ \\mathrm{rad/s}$, so $v_{\\max}=A\\omega=0.10(5.0)=0.50\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Find omega before the speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ mass on a $50\\ \\mathrm{N/m}$ spring oscillates with amplitude $0.10\\ \\mathrm m$. Find its maximum acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(50,2)*Fraction(1,10)",
+  "solution": "$a_{\\max}=A\\omega^2=0.10(25)=2.5\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "The acceleration peaks at the turning points."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A simple pendulum of length $1.0\\ \\mathrm m$ swings with small amplitude. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its period in $\\mathrm s$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.0071,
+   "tol": 0.040142,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*math.pi*math.sqrt(1/9.8)",
+  "solution": "$T=2\\pi\\sqrt{L/g}=2\\pi\\sqrt{1.0/9.8}\\approx2.01\\ \\mathrm s$.",
+  "hints": [
+   "Small-angle formula."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A mass on a spring oscillates with amplitude $0.30\\ \\mathrm m$. At what displacement, in $\\mathrm m$, is its kinetic energy equal to its potential energy? Give the magnitude.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.21213,
+   "tol": 0.0042426,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "0.3/math.sqrt(2)",
+  "solution": "$U=\\frac{1}{2}kx^2$ and $E=\\frac{1}{2}kA^2$. Equal split: $x=A/\\sqrt{2}\\approx0.212\\ \\mathrm m$.",
+  "hints": [
+   "Half the energy is kinetic and half is potential at this point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A mass on a spring of constant $k$ oscillates with amplitude $A$. Write its total mechanical energy in terms of $k$ and $A$.",
+  "answer": {
+   "kind": "expression",
+   "value": "k*A^2/2",
+   "vars": [
+    "k",
+    "A"
+   ],
+   "also": [
+    "(1/2)*k*A^2",
+    "A^2*k/2"
+   ]
+  },
+  "check": null,
+  "solution": "Total energy is the maximum potential energy $\\frac{1}{2}kA^2$.",
+  "hints": [
+   "Evaluate the energy at the turning point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0136",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a damped oscillator with damping constant $b$ and mass $m$, the amplitude envelope decays as:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$e^{-bt/m}$",
+    "$e^{-bt/2m}$",
+    "$e^{-kt}$",
+    "$1-bt/2m$"
+   ],
+   "correct": 1,
+   "why": [
+    "missed the factor of 2 in the exponent",
+    "",
+    "uses the spring constant, not the damping",
+    "a linear approximation, not an exponential decay"
+   ]
+  },
+  "solution": "Amplitude decays as $e^{-bt/2m}$, so the time constant is $\\tau=2m/b$.",
+  "hints": [
+   "Damping enters the amplitude with a factor of 2m."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0137",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Amplitude resonance of a driven oscillator occurs when the driving frequency is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Zero",
+    "Twice the natural frequency",
+    "Near the natural frequency $\\omega_0=\\sqrt{k/m}$, when damping is light",
+    "Equal to the energy decay rate $b/m$"
+   ],
+   "correct": 2,
+   "why": [
+    "zero frequency is a static load, with no oscillation",
+    "no special role for twice the natural frequency",
+    "",
+    "treats a decay rate as the drive frequency"
+   ]
+  },
+  "solution": "Resonance is the peak response near the natural frequency.",
+  "hints": [
+   "Resonance is a match between drive and natural frequency."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0138",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the time constant $\\tau$ of the amplitude decay $e^{-t/\\tau}$ for mass $m$ and damping constant $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*m/b",
+   "vars": [
+    "m",
+    "b"
+   ],
+   "also": [
+    "m/(b/2)",
+    "2*m*b^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$e^{-bt/2m}=e^{-t/\\tau}$ gives $\\tau=2m/b$.",
+  "hints": [
+   "Compare exponents."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0139",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ oscillator has damping constant $b=0.20\\ \\mathrm{kg/s}$. Find the amplitude decay time constant in $\\mathrm s$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*Fraction(5,10)/Fraction(2,10)",
+  "solution": "$\\tau=2m/b=2(0.50)/0.20=5.0\\ \\mathrm s$.",
+  "hints": [
+   "Use the amplitude exponent, not the energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0140",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ mass on a $200\\ \\mathrm{N/m}$ spring has damping $b=10\\ \\mathrm{kg/s}$. Find the damped angular frequency in $\\mathrm{rad/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 17.321,
+   "tol": 0.34642,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(200/0.5-(10/(2*0.5))**2)",
+  "solution": "$\\omega_0=\\sqrt{k/m}=20\\ \\mathrm{rad/s}$ and $b/2m=10\\ \\mathrm{s^{-1}}$, so $\\omega_d=\\sqrt{400-100}\\approx17.3\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Subtract the squared decay rate from the natural frequency squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0141",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ mass on a $200\\ \\mathrm{N/m}$ spring has damping $b=0.20\\ \\mathrm{kg/s}$. Find its quality factor $Q$, taken as $\\omega_0$ divided by the energy decay rate $b/m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 50,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(20)*Fraction(1,2)/Fraction(1,5)",
+  "solution": "$\\omega_0=20\\ \\mathrm{rad/s}$ and $Q=\\omega_0 m/b=(20)(0.50)/0.20=50$.",
+  "hints": [
+   "Q is the natural frequency times mass over damping."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0142",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A driven oscillator at resonance is pushed by a force of amplitude $2.0\\ \\mathrm N$. Its damping is $b=0.20\\ \\mathrm{kg/s}$ and natural frequency $\\omega_0=20\\ \\mathrm{rad/s}$. Find the steady-state amplitude in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2/(Fraction(2,10)*20)",
+  "solution": "At resonance $A=F_0/(b\\omega_0)=2.0/(0.20\\times20)=0.50\\ \\mathrm m$.",
+  "hints": [
+   "At resonance the damping limits the amplitude."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0143",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An amplitude decays as $e^{-bt/2m}$ with $m=0.50\\ \\mathrm{kg}$ and $b=0.20\\ \\mathrm{kg/s}$. What fraction of the initial amplitude remains after $10\\ \\mathrm s$? Give the decimal to 3 significant figures.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.13534,
+   "tol": 0.0027068,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.exp(-2)",
+  "solution": "Exponent $=bt/2m=(0.20)(10)/1.0=2$, so the fraction is $e^{-2}\\approx0.135$.",
+  "hints": [
+   "Compute the exponent first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0144",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A mass $m$ with damping $b$ and natural frequency $\\omega_0$ is driven at frequency $\\omega$ by a force of amplitude $F$. Write the steady-state amplitude $A$ in terms of $F$, $m$, $b$, $\\omega_0$ and $\\omega$.",
+  "answer": {
+   "kind": "expression",
+   "value": "F/sqrt(m^2*(omega0^2-omega^2)^2+b^2*omega^2)",
+   "vars": [
+    "F",
+    "m",
+    "b",
+    "omega0",
+    "omega"
+   ],
+   "also": [
+    "F/sqrt((m*(omega0^2-omega^2))^2+(b*omega)^2)",
+    "F*(m^2*(omega0^2-omega^2)^2+b^2*omega^2)^(-1/2)"
+   ]
+  },
+  "check": null,
+  "solution": "Steady state: $m(\\omega_0^2-\\omega^2)A$ and $b\\omega A$ combine in quadrature, so $A=F/\\sqrt{m^2(\\omega_0^2-\\omega^2)^2+b^2\\omega^2}$.",
+  "hints": [
+   "Combine the two in-phase and out-of-phase terms in quadrature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

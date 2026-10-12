@@ -123,5 +123,68 @@ S.eq('paragraphs split on blank lines', T.md('a\n\nb'), '<p>a</p><p>b</p>');
   S.check('no tag dictionary left in the text module', !('unpackData' in T) && !('unpack' in T) && !('packHtml' in R));
 }
 
+// ---- figures (tools/figure.js, wired through render.renderItem and renderTechnique)
+{
+  const F = require('../tools/figure.js');
+  const figErrs = (svg) => F.checkFigure(svg, 'F');
+  const OK = '<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="70" x2="110" y2="70" stroke="currentColor"/>' +
+    '<path d="M10 70 Q60 0 110 70" fill="none"/><text x="60" y="12" text-anchor="middle" font-size="10">a &amp; b &lt; c</text></svg>';
+  S.eq('allowed figure has no errors', figErrs(OK), []);
+  S.eq('marker with url(#fig-...) is allowed', figErrs('<svg viewBox="0 0 10 10"><marker id="fig-arr" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto"><path d="M0 0 L4 2 L0 4 z"/></marker><line x1="0" y1="5" x2="10" y2="5" marker-end="url(#fig-arr)"/></svg>'), []);
+  S.eq('tspan, title, defs, g, rect, circle, ellipse, polygon, polyline are allowed',
+    figErrs('<svg viewBox="0 0 9 9"><defs><title>t</title></defs><g><rect width="1" height="1"/><circle r="1"/><ellipse rx="1" ry="1"/><polygon points="0,0 1,0 1,1"/><polyline points="0,0 1,1"/><text>a<tspan>b</tspan></text></g></svg>'), []);
+  const bad = {
+    'script element': '<svg viewBox="0 0 1 1"><script>alert(1)</script></svg>',
+    'onload attribute': '<svg viewBox="0 0 1 1" onload="alert(1)"><rect/></svg>',
+    'onclick on a shape': '<svg viewBox="0 0 1 1"><rect onclick="x()"/></svg>',
+    'href on a shape': '<svg viewBox="0 0 1 1"><path href="javascript:alert(1)" d="M0 0"/></svg>',
+    'anchor element': '<svg viewBox="0 0 1 1"><a href="http://x"><rect/></a></svg>',
+    'xlink attribute': '<svg viewBox="0 0 1 1"><use xlink:href="#a"/></svg>',
+    'style attribute': '<svg viewBox="0 0 1 1"><rect style="fill:red"/></svg>',
+    'class attribute': '<svg viewBox="0 0 1 1"><rect class="x"/></svg>',
+    'foreignObject': '<svg viewBox="0 0 1 1"><foreignObject><div>x</div></foreignObject></svg>',
+    'image element': '<svg viewBox="0 0 1 1"><image href="http://x/y.png"/></svg>',
+    'comment opener': '<svg viewBox="0 0 1 1"><!-- x --><rect/></svg>',
+    'CDATA': '<svg viewBox="0 0 1 1"><![CDATA[<script>]]></svg>',
+    'closing script tag': '<svg viewBox="0 0 1 1"><rect/></svg></script>',
+    'external url in fill': '<svg viewBox="0 0 1 1"><rect fill="url(http://evil.example/x.svg#a)"/></svg>',
+    'colon in a value': '<svg viewBox="0 0 1 1"><text x="javascript:1">x</text></svg>',
+    'uppercase SCRIPT': '<svg viewBox="0 0 1 1"><SCRIPT>x</SCRIPT></svg>',
+    'id that shadows the answer input': '<svg viewBox="0 0 1 1"><rect id="ans"/></svg>',
+    'bare ampersand in text': '<svg viewBox="0 0 1 1"><text>a & b</text></svg>',
+    'boolean attribute without value': '<svg viewBox="0 0 1 1"><rect hidden/></svg>',
+    'missing viewBox': '<svg><rect/></svg>',
+    'viewBox with a word': '<svg viewBox="0 0 wide 1"><rect/></svg>',
+    'no svg root': '<g><rect/></g>',
+    'two roots': '<svg viewBox="0 0 1 1"></svg><svg viewBox="0 0 1 1"></svg>',
+    'unclosed element': '<svg viewBox="0 0 1 1"><g><rect/></svg>',
+    'text outside the root': 'hello<svg viewBox="0 0 1 1"><rect/></svg>',
+    'xmlns to another namespace': '<svg viewBox="0 0 1 1" xmlns="http://example.org/x"><rect/></svg>',
+  };
+  // Unicode whitespace is not an HTML attribute separator: the scanner and the browser must agree on tag structure.
+  const NB = String.fromCharCode(0xa0), VT = String.fromCharCode(11);
+  Object.assign(bad, {
+    'nbsp attribute injection': '<svg viewBox="0 0 1 1"><rect' + NB + 'x="1 onmouseover=alert(1) y=" fill="red"/></svg>',
+    'vt attribute injection': '<svg viewBox="0 0 1 1"><rect' + VT + 'x="1 onmouseover=alert(1) y=" fill="red"/></svg>',
+    'nbsp in root tag': '<svg' + NB + 'viewBox="0 0 1 1"></svg>',
+    'duplicate attribute': '<svg viewBox="0 0 1 1"><rect x="1" x="2"/></svg>',
+    'NUL in text': '<svg viewBox="0 0 1 1"><text>' + String.fromCharCode(0) + '</text></svg>',
+    'URL( upper case': '<svg viewBox="0 0 1 1"><rect fill="URL(//e.example/a#b)"/></svg>'
+  });
+  Object.keys(bad).forEach((k) => S.check('figure rejects ' + k, figErrs(bad[k]).length > 0, bad[k]));
+  S.check('figure over 8 KB is rejected', figErrs('<svg viewBox="0 0 1 1">' + '<rect/>'.repeat(1200) + '</svg>').some((e) => /limit 8192/.test(e)));
+  const pad = (n) => { const head = '<svg viewBox="0 0 1 1">', tail = '</svg>'; return head + ' '.repeat(n - head.length - tail.length) + tail; };
+  S.eq('figure of exactly 8192 bytes is allowed', figErrs(pad(8192)), []);
+  S.check('figure of 8193 bytes is rejected', figErrs(pad(8193)).length > 0);
+  // wiring: the build gate reaches items and teach cards, and only strings pass
+  const badSvg = '<svg viewBox="0 0 1 1"><script>x</script></svg>';
+  const item = { id: 'x1', prompt: 'p', solution: 's', answer: { kind: 'mcq', options: ['a', 'b'], correct: 0 }, figure: badSvg };
+  S.check('renderItem rejects a script figure on an item', R.renderItem(item, 'I').errors.some((e) => /figure/.test(e)));
+  S.eq('renderItem accepts a good figure on an item', R.renderItem(Object.assign({}, item, { figure: OK }), 'I').errors, []);
+  S.check('renderTechnique rejects a script figure on a teach card', R.renderTechnique({ teach: 'x', figure: badSvg }, 'T').errors.some((e) => /figure/.test(e)));
+  S.eq('renderTechnique accepts a good figure on a teach card', R.renderTechnique({ teach: 'x', figure: OK }, 'T').errors, []);
+  S.check('a non-string figure is rejected', R.renderItem(Object.assign({}, item, { figure: 5 }), 'I').errors.length > 0);
+}
+
 const res = S.done();
 process.exitCode = res.failed ? 1 : 0;

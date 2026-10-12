@@ -173,4 +173,52 @@ gb[0].solution = 'Use $\\mathscr{L}$.';
 fs.writeFileSync(path.join(glyphBad, 'items.json'), JSON.stringify(gb));
 S.check('pack with an out-of-subset glyph refuses to build', build(glyphBad, path.join(OUT_DIR, 'glyphbad.html')).code !== 0);
 
+// figures: a copy of the fixture with a figure on an item and on a technique builds; the page carries both as data,
+// and the page's figure helper wraps them in .figure. A script figure refuses to build.
+const FIG_ITEM = '<svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="70" x2="110" y2="70"/><text x="60" y="12" text-anchor="middle" font-size="10">fig</text></svg>';
+const FIG_TECH = '<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="10" fill="none"/></svg>';
+const makeFigPack = (dir, itemFig, techFig) => {
+  fs.rmSync(dir, { recursive: true, force: true });
+  fs.mkdirSync(dir, { recursive: true });
+  ['pack.json', 'techniques.json', 'items.json'].forEach((f) => fs.copyFileSync(path.join(ROOT, 'packs', '_fixture', f), path.join(dir, f)));
+  const items = JSON.parse(fs.readFileSync(path.join(dir, 'items.json'), 'utf8'));
+  const techs = JSON.parse(fs.readFileSync(path.join(dir, 'techniques.json'), 'utf8'));
+  items[0].figure = itemFig; techs[0].figure = techFig;
+  fs.writeFileSync(path.join(dir, 'items.json'), JSON.stringify(items));
+  fs.writeFileSync(path.join(dir, 'techniques.json'), JSON.stringify(techs));
+  return dir;
+};
+{
+  const vm = require('vm');
+  const figPage = path.join(OUT_DIR, 'figpack.html');
+  const rf = build(makeFigPack(path.join(OUT_DIR, 'figpack'), FIG_ITEM, FIG_TECH), figPage);
+  S.eq('build of a pack with figures exits 0', rf.code, 0);
+  const fh = fs.existsSync(figPage) ? fs.readFileSync(figPage, 'utf8') : '';
+  const data = JSON.parse((fh.match(/window\.PE_DATA=(\{[\s\S]*?\});<\/script>/) || [])[1] || 'null') || {};
+  S.check('page data carries the item figure unchanged', data.items && data.items[0].figure === FIG_ITEM);
+  S.check('page data carries the technique figure unchanged', data.techniques && data.techniques[0].figure === FIG_TECH);
+  const figScripts = [...fh.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  const appSrc = figScripts.find((t) => t.indexOf('PE.itemKind') >= 0 && t.indexOf('viewDrill') >= 0) || '';
+  S.check('page app inserts figures above the prompt on drill, full and teach cards', (appSrc.match(/T\.figure\(/g) || []).length >= 3, (appSrc.match(/T\.figure\(/g) || []).length);
+  const txtSrc = figScripts.find((t) => /root\.PEText\s*=/.test(t));
+  const win = {}; win.window = win;
+  const ctx = vm.createContext(win);
+  let figErr = '';
+  try { vm.runInContext(txtSrc, ctx); } catch (e) { figErr = e.message; }
+  const wrapped = figErr ? '' : win.PEText.figure(data.items[0].figure);
+  S.check('figure helper wraps the item figure in div.figure', wrapped === '<div class="figure">' + FIG_ITEM + '</div>', figErr || wrapped.slice(0, 80));
+  S.eq('figure helper renders nothing for a card without a figure', figErr ? 'err' : win.PEText.figure(undefined), '');
+  S.check('a pack with a script figure refuses to build', build(makeFigPack(path.join(OUT_DIR, 'figbad'), '<svg viewBox="0 0 1 1"><script>alert(1)</script></svg>', FIG_TECH), path.join(OUT_DIR, 'figbad.html')).code !== 0);
+}
+
+// deploy_pack.sh refuses to write any pack other than gre-math into the repo root (refusal happens before any build)
+{
+  const { spawnSync } = require('child_process');
+  const rootIndex = path.join(ROOT, 'index.html');
+  const before = fs.statSync(rootIndex).mtimeMs;
+  const r2 = spawnSync('/bin/sh', [path.join(ROOT, 'tools', 'deploy_pack.sh'), path.join(ROOT, 'packs', '_fixture'), ROOT], { env: Object.assign({}, process.env, { NODE }), encoding: 'utf8' });
+  S.check('deploy_pack refuses a non gre-math pack at the repo root', r2.status === 1 && /refusing/.test(r2.stderr || ''), r2.stderr);
+  S.eq('refusal leaves the root index.html untouched', fs.statSync(rootIndex).mtimeMs, before);
+}
+
 S.done();

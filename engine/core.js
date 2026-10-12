@@ -361,7 +361,7 @@
     if (!picks.length) return { status: 'skip', reason: eligible[0].level + ' has no problems yet', cards: [], techs: [] };
     var cards = [];
     picks.forEach(function (pk) {
-      cards.push({ type: 'teach', stage: 'learn', tech: pk.tech.id, name: pk.tech.name, markdown: pk.tech.teach, item: null, requeued: false });
+      cards.push({ type: 'teach', stage: 'learn', tech: pk.tech.id, name: pk.tech.name, markdown: pk.tech.teach, figure: pk.tech.figure, item: null, requeued: false });
       pk.items.forEach(function (it) { ctx.st.used[it.id] = true; cards.push(makeCard(ctx.ix, it, 'learn', ctx.n)); });
     });
     return { status: 'ready', reason: null, tech: picks[0].tech, techs: picks.map(function (pk) { return pk.tech; }), cards: cards };

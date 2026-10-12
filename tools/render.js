@@ -4,6 +4,7 @@
  *
  * - renderText / renderItem / renderTechnique: Markdown-lite + $...$ / $$...$$ via text.mathSpan with throwOnError;
  *   KaTeX strict warnings are collected as errors, not printed. renderItem and renderTechnique return errors only.
+ * - figure: items and teach cards may carry an inline SVG `figure`; checkFigure (tools/figure.js) gates it here.
  * - glyphIssues(html): flags math spans whose requested font face is not in the vendored core subset.
  *   The face is worked out from KaTeX's own katex.min.css (font-family/style/weight per class rule).
  *   Rules whose selector ends in a child combinator (`.delim-size1>span`) are skipped; they are Size faces, which are core.
@@ -12,6 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 const text = require('../engine/text.js');
+const { checkFigure } = require('./figure.js');
 
 const VENDOR = path.join(__dirname, '..', 'vendor', 'katex');
 const katex = require(path.join(VENDOR, 'katex.min.js'));
@@ -120,11 +122,15 @@ function renderItem(item, where) {
   if (Array.isArray(a.options)) a.options.forEach((o, i) => check(o, true, 'options[' + i + ']'));
   if (a.display !== undefined) check(a.display, true, 'display');
   if (Array.isArray(item.rubric)) item.rubric.forEach((r, i) => check(r && r.text != null ? r.text : '', true, 'rubric[' + i + ']'));
+  if (item.figure !== undefined) errors.push(...checkFigure(item.figure, where + ' figure'));
   return { errors: errors };
 }
 
+// A technique's teach card may carry a figure too (same gate as items).
 function renderTechnique(tech, where) {
-  return { errors: renderText(String(tech.teach == null ? '' : tech.teach), false, where + ' teach').errors };
+  const errors = renderText(String(tech.teach == null ? '' : tech.teach), false, where + ' teach').errors;
+  if (tech.figure !== undefined) errors.push(...checkFigure(tech.figure, where + ' figure'));
+  return { errors: errors };
 }
 
 // Core subset @font-face rules with the woff2 inlined as base64. Non-core faces are dropped.

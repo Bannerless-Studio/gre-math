@@ -1,0 +1,4232 @@
+[
+  {
+    "id": "t6-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A system of $N$ particles has $k$ independent holonomic constraints. How many generalized coordinates describe its configuration?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$3N$",
+        "$3N-k$",
+        "$N-k$",
+        "$3N+k$"
+      ],
+      "correct": 1,
+      "why": [
+        "ignores the constraints",
+        "",
+        "counts particles, not their three coordinates",
+        "adds constraints, which remove freedom"
+      ]
+    },
+    "solution": "Each particle has three coordinates, and each constraint removes one. The count is $3N-k$.",
+    "hints": [
+      "Each constraint removes one degree of freedom."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A rigid body is free to move in a plane. How many independent generalized coordinates describe it?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "Two coordinates fix the position and one angle fixes the orientation, so the count is 3.",
+    "hints": [
+      "Count the position coordinates plus one orientation angle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement about generalized coordinates is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "They must always be Cartesian coordinates",
+        "They may be any set of variables that fixes the configuration, such as an angle",
+        "They must have units of length",
+        "They must be independent of time"
+      ],
+      "correct": 1,
+      "why": [
+        "generalized coordinates need not be Cartesian",
+        "",
+        "angles are allowed and have no length unit",
+        "moving constraints can make them time-dependent"
+      ]
+    },
+    "solution": "Any independent set that fixes the configuration works, such as an angle $\\theta$.",
+    "hints": [
+      "The set only has to fix the configuration."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A block of mass $M=2.0\\ \\mathrm{kg}$ slides on a frictionless table. A bob of mass $m=0.50\\ \\mathrm{kg}$ hangs from it on a rod of length $\\ell=0.80\\ \\mathrm m$. Use the block position $x$ and the rod angle $\\theta$ from the vertical as coordinates. The kinetic energy contains a cross term $c\\,\\dot x\\dot\\theta$. Find $c$ at $\\theta=60^\\circ$ in $\\mathrm{kg\\,m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.20000000000000007,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.50*0.80*math.cos(math.radians(60))",
+    "solution": "The bob velocity is $\\dot x+\\ell\\cos\\theta\\,\\dot\\theta$ horizontally, so the cross term is $m\\ell\\cos\\theta$.",
+    "hints": [
+      "Write the bob velocity in both directions and square it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bead of mass $m$ slides on a hoop of radius $R$ that turns about its vertical diameter at constant rate $\\omega$. Use the angle $\\theta$ from the bottom as the coordinate. Write the kinetic energy $T$ in terms of $m$, $R$, $\\omega$, $\\theta$ and $\\dot\\theta$ (use `w` for $\\omega$, `th` for $\\theta$, `thd` for $\\dot\\theta$).",
+    "answer": {
+      "kind": "expression",
+      "value": "m*R^2*(thd^2+w^2*sin(th)^2)/2",
+      "vars": [
+        "m",
+        "R",
+        "w",
+        "th",
+        "thd"
+      ],
+      "also": [
+        "m*R^2*thd^2/2+m*R^2*w^2*sin(th)^2/2",
+        "(m*R^2/2)*(thd^2+w^2*sin(th)^2)"
+      ]
+    },
+    "check": null,
+    "solution": "The bead distance from the axis is $R\\sin\\theta$ and its height is $-R\\cos\\theta$. Its speed squared is $R^2(\\dot\\theta^2+\\omega^2\\sin^2\\theta)$.",
+    "hints": [
+      "Find the distance from the axis first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bead of mass $m=0.60$ kg slides on a hoop of radius $R=0.50$ m that turns about its vertical diameter at $\\omega=4.0$ rad/s. At $\\theta=30^\\circ$ it is momentarily at rest relative to the hoop, so $\\dot\\theta=0$. Find its kinetic energy in J.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.29999999999999993,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.5*0.60*0.50**2*4.0**2*math.sin(math.radians(30))**2",
+    "solution": "With $\\dot\\theta=0$, $T=\\tfrac12 mR^2\\omega^2\\sin^2\\theta$.",
+    "hints": [
+      "Only the rotation about the axis contributes when $\\dot\\theta=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A pendulum of length $\\ell$ hangs from a pivot fixed at the origin in a vertical plane. Select every choice that is a valid, independent set of generalized coordinates for this system.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\theta$, the angle from the downward vertical",
+        "$(x,y)$, the Cartesian position of the bob",
+        "$y$ alone, the bob height",
+        "$s=\\ell\\theta$, the arc length from the bottom"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "solution": "A single angle works, and so does arc length $s=\\ell\\theta$. Two Cartesian coordinates overcount, and height alone leaves the sign of $x$ undecided.",
+    "hints": [
+      "A valid set fixes the configuration with no extra variables."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m$ moves in the plane with polar coordinates $r$ and $\\varphi$. Write its kinetic energy in terms of $m$, $r$, $\\dot r$ and $\\dot\\varphi$ (use `rd` for $\\dot r$ and `pd` for $\\dot\\varphi$).",
+    "answer": {
+      "kind": "expression",
+      "value": "m*(rd^2+r^2*pd^2)/2",
+      "vars": [
+        "m",
+        "r",
+        "rd",
+        "pd"
+      ],
+      "also": [
+        "m*rd^2/2+m*r^2*pd^2/2",
+        "(m/2)*(rd^2+r^2*pd^2)"
+      ]
+    },
+    "check": null,
+    "solution": "The velocity has a radial part $\\dot r$ and a transverse part $r\\dot\\varphi$.",
+    "hints": [
+      "Split the velocity into radial and transverse parts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.gen-coords"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two blocks are linked by an ideal string over a light frictionless pulley. The masses are $2.0$ kg and $3.0$ kg. Take $x$, how far the $3.0$ kg block has descended, as the only coordinate, so $T=\\tfrac12 M_{\\rm eff}\\dot x^2$. Find $M_{\\rm eff}$ in kg.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.0+3.0",
+    "solution": "The string forces both blocks to move at the same speed, so $M_{\\rm eff}=m_1+m_2$.",
+    "hints": [
+      "Both blocks share one speed because of the string."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Euler-Lagrange equation for a coordinate $q$ with Lagrangian $L(q,\\dot q,t)$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\dfrac{d}{dt}\\dfrac{\\partial L}{\\partial\\dot q}-\\dfrac{\\partial L}{\\partial q}=0$",
+        "$\\dfrac{d}{dt}\\dfrac{\\partial L}{\\partial\\dot q}=0$",
+        "$\\dfrac{d}{dt}\\dfrac{\\partial L}{\\partial q}-\\dfrac{\\partial L}{\\partial\\dot q}=0$",
+        "$\\dfrac{d}{dt}\\dfrac{\\partial L}{\\partial\\dot q}+\\dfrac{\\partial L}{\\partial q}=0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "drops the $\\partial L/\\partial q$ term, which is nonzero whenever $V$ depends on $q$",
+        "swaps the roles of the two derivatives",
+        "sign error on the second term"
+      ]
+    },
+    "solution": "The equation is $\\frac{d}{dt}p=\\frac{\\partial L}{\\partial q}$ with $p=\\partial L/\\partial\\dot q$.",
+    "hints": [
+      "Differentiate the momentum and compare with the coordinate derivative."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle of mass $m$ has speed $v$ and is in a potential energy $V$. Write its Lagrangian $L=T-V$ (use the symbol `V`).",
+    "answer": {
+      "kind": "expression",
+      "value": "m*v^2/2-V",
+      "vars": [
+        "m",
+        "v",
+        "V"
+      ],
+      "also": [
+        "m*v^2/2-V",
+        "v^2*m/2-V",
+        "(m*v*v)/2-V"
+      ]
+    },
+    "check": null,
+    "solution": "Kinetic energy is $\\tfrac12 mv^2$, and $L$ subtracts the potential.",
+    "hints": [
+      "Kinetic minus potential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement about the Euler-Lagrange equations is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "They hold for any valid set of generalized coordinates, not only Cartesian ones",
+        "They require every coordinate to be Cartesian",
+        "They apply only to unconstrained systems, and constraints must be added as extra forces",
+        "They need no Lagrangian, since the forces are read off directly"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "polar and angle coordinates work too",
+        "holonomic constraints are absorbed by the choice of coordinates",
+        "the method starts from $L$, not from forces"
+      ]
+    },
+    "solution": "The equations keep their form in any valid coordinates, so constraints are built into the coordinates.",
+    "hints": [
+      "Think about which coordinates the method allows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle of mass $m$ moves along $x$ with $L=\\tfrac12 m\\dot x^2-\\tfrac12 kx^2$. Write $\\ddot x$ in terms of $m$, $k$ and $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-k*x/m",
+      "vars": [
+        "m",
+        "k",
+        "x"
+      ],
+      "also": [
+        "-(k*x)/m",
+        "-x*k/m"
+      ]
+    },
+    "check": null,
+    "solution": "$\\partial L/\\partial\\dot x=m\\dot x$ and $\\partial L/\\partial x=-kx$, so $m\\ddot x=-kx$.",
+    "hints": [
+      "Apply the equation to $p=m\\dot x$ and the spring force."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0014",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle has $L=\\tfrac12 m\\dot x^2-\\tfrac12 kx^2$ with $m=2.0$ kg and $k=8.0\\ \\mathrm{N/m}$. Find the angular frequency of its oscillation in $\\mathrm{rad/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(8.0/2.0)",
+    "solution": "The equation is $m\\ddot x=-kx$, so $\\omega=\\sqrt{k/m}$.",
+    "hints": [
+      "Read the frequency off the equation of motion."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A simple pendulum has $L=\\tfrac12 m\\ell^2\\dot\\theta^2+mg\\ell\\cos\\theta$, with $\\ell=0.50$ m and $g=9.8\\ \\mathrm{m/s^2}$. At $\\theta=30^\\circ$, find the magnitude of $\\ddot\\theta$ in $\\mathrm{rad/s^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 9.799999999999999,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "9.8/0.50*math.sin(math.radians(30))",
+    "solution": "The equation is $\\ddot\\theta=-(g/\\ell)\\sin\\theta$. Take the magnitude.",
+    "hints": [
+      "Write the equation for $\\ddot\\theta$ and evaluate at 30 degrees."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle has $L=\\tfrac12 m\\dot x^2-\\tfrac12 kx^2+F_0x$, with $k=6.0\\ \\mathrm{N/m}$ and constant $F_0=3.0$ N. Find the equilibrium position $x_{\\rm eq}$ in m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "3.0/6.0",
+    "solution": "The equation is $m\\ddot x=-kx+F_0$. Set $\\ddot x=0$, so $x_{\\rm eq}=F_0/k$.",
+    "hints": [
+      "At equilibrium the acceleration is zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The Lagrangian $L=\\tfrac12 m\\dot x^2-V(x)$ gives $m\\ddot x=-V'(x)$. Select every modification that leaves this equation of motion unchanged.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$L\\to\\lambda L$ for any constant $\\lambda\\neq0$",
+        "$L\\to L+\\dfrac{d}{dt}F(x,t)$ for any function $F$",
+        "$L\\to L+k\\dot x$ for a constant $k$",
+        "$L\\to L+\\alpha\\dot x^2$ for a constant $\\alpha\\neq0$"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Scaling and total time derivatives change nothing, and a term linear in $\\dot x$ with constant coefficient drops out. A $\\dot x^2$ term changes the momentum.",
+    "hints": [
+      "Check what each change does to the Euler-Lagrange terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.euler-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m$ moves along $x$ with $V=\\alpha x^4$. Write $\\ddot x$ in terms of $m$, $\\alpha$ and $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-4*alpha*x^3/m",
+      "vars": [
+        "m",
+        "alpha",
+        "x"
+      ],
+      "also": [
+        "-(4*alpha*x^3)/m",
+        "-4*x^3*alpha/m"
+      ]
+    },
+    "check": null,
+    "solution": "$m\\ddot x=-V'(x)=-4\\alpha x^3$.",
+    "hints": [
+      "Differentiate the potential once."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If a Lagrangian does not depend on a coordinate $q$, which quantity is conserved?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$p=\\partial L/\\partial\\dot q$",
+        "$\\dot q$ itself",
+        "$q$ itself",
+        "$T+V$ always, because $q$ is cyclic"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the velocity changes when the mass or other coordinates change",
+        "position changes with time",
+        "energy needs a time-independent $L$, not a cyclic $q$"
+      ]
+    },
+    "solution": "With $\\partial L/\\partial q=0$, the equation gives $\\dot p=0$.",
+    "hints": [
+      "The Euler-Lagrange equation for $q$ has no coordinate term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A free particle moves in three dimensions. Using Cartesian coordinates, how many of its coordinates are cyclic?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "The Lagrangian $\\tfrac12 m(\\dot x^2+\\dot y^2+\\dot z^2)$ has no $x$, $y$ or $z$.",
+    "hints": [
+      "Look for coordinates that do not appear in $L$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $L=\\tfrac12 m(\\dot r^2+r^2\\dot\\varphi^2)-V(r)$, which coordinate is cyclic?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$r$, which appears in $V(r)$",
+        "$\\varphi$, which appears only through $\\dot\\varphi$",
+        "$\\dot r$, which is a velocity",
+        "Neither, since $V$ depends on $r$ only"
+      ],
+      "correct": 1,
+      "why": [
+        "",
+        "",
+        "a velocity is not a coordinate",
+        "the potential depends on $r$, not $\\varphi$, so $\\varphi$ is cyclic"
+      ]
+    },
+    "solution": "$\\varphi$ never appears undifferentiated, so $p_\\varphi=mr^2\\dot\\varphi$ is conserved.",
+    "hints": [
+      "Ask which coordinate appears without a derivative."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m=0.20$ kg moves in the plane with $L=\\tfrac12 m(\\dot r^2+r^2\\dot\\varphi^2)-V(r)$. At $r=0.50$ m its angular speed is $\\dot\\varphi=4.0$ rad/s. Find the conserved $p_\\varphi$ in $\\mathrm{kg\\,m^2/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.2,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.20*0.50**2*4.0",
+    "solution": "$p_\\varphi=mr^2\\dot\\varphi$, which is constant. Evaluate it now.",
+    "hints": [
+      "Use the momentum conjugate to $\\varphi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m=0.50$ kg has conserved $p_\\varphi=0.40\\ \\mathrm{kg\\,m^2/s}$ for $L=\\tfrac12 m(\\dot r^2+r^2\\dot\\varphi^2)-V(r)$. At $r=0.80$ m, find the tangential speed $r\\dot\\varphi$ in m/s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.40/(0.50*0.80)",
+    "solution": "Tangential speed is $r\\dot\\varphi=p_\\varphi/(mr)$.",
+    "hints": [
+      "Solve $p_\\varphi=mr\\cdot(r\\dot\\varphi)$ for the tangential speed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m$ at radius $r$ moves with $L=\\tfrac12 m(\\dot r^2+r^2\\dot\\varphi^2)-V(r)$. Write the momentum conjugate to $\\varphi$ in terms of $m$, $r$ and $w=\\dot\\varphi$.",
+    "answer": {
+      "kind": "expression",
+      "value": "m*r^2*w",
+      "vars": [
+        "m",
+        "r",
+        "w"
+      ],
+      "also": [
+        "m*r*r*w",
+        "w*m*r^2"
+      ]
+    },
+    "check": null,
+    "solution": "$p_\\varphi=\\partial L/\\partial\\dot\\varphi=mr^2\\dot\\varphi$.",
+    "hints": [
+      "Differentiate $L$ with respect to $\\dot\\varphi$ only."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle in space has $L=\\tfrac12 m(\\dot x^2+\\dot y^2+\\dot z^2)-mgz$. Select every cyclic coordinate.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$x$",
+        "$y$",
+        "$z$",
+        "$\\dot x$"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "$x$ and $y$ are absent from $L$. $z$ appears in the potential, and a velocity is not a coordinate.",
+    "hints": [
+      "A cyclic coordinate is absent from $L$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $0.50$ kg has $L=\\tfrac12 m(\\dot x^2+\\dot y^2)-mgy$. At one instant $\\dot x=3.0$ m/s. Find the conserved $p_x$ in $\\mathrm{kg\\,m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.50*3.0",
+    "solution": "$x$ is cyclic, so $p_x=m\\dot x=1.5$ kg m/s at every time.",
+    "hints": [
+      "Only $x$ is cyclic here."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m=0.80$ kg has $L=\\tfrac12 m(\\dot x^2+\\dot y^2)-V(x)$. Initially $\\dot y=2.0$ m/s. It moves to a place where $V$ has risen by $4.0$ J. Find $p_y$ after the move, in $\\mathrm{kg\\,m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.6,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.80*2.0",
+    "solution": "$y$ is cyclic, so $p_y$ is unchanged by $V(x)$. It stays $m\\dot y=1.6$ kg m/s.",
+    "hints": [
+      "The change in $V$ does not affect $p_y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression defines the Hamiltonian $H$ in terms of $q$, $p$ and $L$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$H=\\sum_i p_i\\dot q_i-L$",
+        "$H=L-\\sum_i p_i\\dot q_i$",
+        "$H=\\sum_i p_i\\dot q_i+L$",
+        "$H=T+V$ for every system"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign reversed",
+        "adds $L$ instead of subtracting it",
+        "true only for natural systems, not in general"
+      ]
+    },
+    "solution": "$H$ is the Legendre transform of $L$: the sum of $p\\dot q$ minus $L$.",
+    "hints": [
+      "Legendre transform: momentum times velocity, minus the Lagrangian."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $H=\\dfrac{p^2}{2m}+V(q)$, write $\\dot q$ in terms of $p$ and $m$.",
+    "answer": {
+      "kind": "expression",
+      "value": "p/m",
+      "vars": [
+        "p",
+        "m"
+      ],
+      "also": [
+        "p*m^(-1)",
+        "1/(m/p)"
+      ]
+    },
+    "check": null,
+    "solution": "Hamilton's equation gives $\\dot q=\\partial H/\\partial p=p/m$.",
+    "hints": [
+      "Differentiate $H$ with respect to $p$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $H$ has no explicit time dependence, which quantity is constant along a trajectory?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$H$",
+        "$L$",
+        "every $p_i$",
+        "$H=0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "$L$ changes along the motion even when $H$ is conserved",
+        "$p$ is conserved only for cyclic coordinates",
+        "$H$ is the energy and is not zero in general"
+      ]
+    },
+    "solution": "$dH/dt=\\partial H/\\partial t=0$ along solutions.",
+    "hints": [
+      "Differentiate $H$ along a trajectory."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle with $L=\\tfrac12 m\\dot x^2-V(x)$ has momentum $p$. Write $H$ in terms of $p$, $m$ and $V$.",
+    "answer": {
+      "kind": "expression",
+      "value": "p^2/(2*m)+V",
+      "vars": [
+        "p",
+        "m",
+        "V"
+      ],
+      "also": [
+        "p*p/(2*m)+V",
+        "(p^2)/(2*m)+V"
+      ]
+    },
+    "check": null,
+    "solution": "$p=m\\dot x$, so $H=p^2/2m+V$.",
+    "hints": [
+      "Kinetic energy in terms of momentum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$H=\\dfrac{p^2}{2m}+\\tfrac12 kx^2$ with $m=2.0$ kg and $k=8.0\\ \\mathrm{N/m}$. At $x=0.50$ m and $p=1.0$ kg m/s, find $H$ in J.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.25,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1.0**2/(2*2.0)+0.5*8.0*0.50**2",
+    "solution": "$H=0.25+1.0=1.25$ J.",
+    "hints": [
+      "Evaluate both terms at the point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $H=\\dfrac{p^2}{2m}+\\tfrac12 kx^2$ with $m=2.0$ kg and $k=8.0\\ \\mathrm{N/m}$, at the point $x=0.50$ m and $p=1.0$ kg m/s, find $\\dot x$ in m/s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1.0/2.0",
+    "solution": "$\\dot x=\\partial H/\\partial p=p/m=0.50$ m/s.",
+    "hints": [
+      "Differentiate $H$ with respect to $p$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $H=\\dfrac{p^2}{2m}+\\tfrac12 kx^2$ with $k=8.0\\ \\mathrm{N/m}$, at $x=0.50$ m, find the magnitude of $\\dot p$ in N.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "8.0*0.50",
+    "solution": "$\\dot p=-\\partial H/\\partial x=-kx$, magnitude $8.0\\times0.50=4.0$ N.",
+    "hints": [
+      "Differentiate $H$ with respect to $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle has $L=\\tfrac12 m(\\dot r^2+r^2\\dot\\varphi^2)-V(r)$. Write $H$ in terms of $p_r$, $p_\\varphi$, $m$, $r$ and $V$ (use `pr` for $p_r$ and `pf` for $p_\\varphi$).",
+    "answer": {
+      "kind": "expression",
+      "value": "pr^2/(2*m)+pf^2/(2*m*r^2)+V",
+      "vars": [
+        "pr",
+        "pf",
+        "m",
+        "r",
+        "V"
+      ],
+      "also": [
+        "pr*pr/(2*m)+pf*pf/(2*m*r^2)+V",
+        "pr^2/(2*m)+pf^2/(2*r^2*m)+V"
+      ]
+    },
+    "check": null,
+    "solution": "$p_r=m\\dot r$ and $p_\\varphi=mr^2\\dot\\varphi$, so $H=p_r^2/2m+p_\\varphi^2/2mr^2+V$.",
+    "hints": [
+      "Each kinetic term squared over twice its inertia."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.hamiltonian"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about a Hamiltonian $H(q,p)$ with no explicit time dependence.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$H$ is constant along every trajectory",
+        "$\\dot H=\\partial H/\\partial t$, which is zero here",
+        "every $p_i$ is constant along every trajectory",
+        "$L$ is constant along every trajectory"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "$H$ is conserved. The momenta and $L$ need not be conserved.",
+    "hints": [
+      "Check each claim against $dH/dt$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a central force in a plane, which two quantities are conserved?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "energy and angular momentum about the centre",
+        "linear momentum and energy",
+        "angular momentum and linear momentum",
+        "velocity and energy"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "linear momentum changes, since the force points toward the centre",
+        "linear momentum changes, and only angular momentum is fixed by a central force",
+        "velocity changes direction, so it is not conserved"
+      ]
+    },
+    "solution": "A central force has no torque about the centre, and it conserves energy.",
+    "hints": [
+      "Torque about the centre is zero for a central force."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle of mass $m$ is at distance $r$ from a force centre with tangential speed $v_t$. Write its angular momentum $\\ell$ about the centre (use `vt` for $v_t$).",
+    "answer": {
+      "kind": "expression",
+      "value": "m*r*vt",
+      "vars": [
+        "m",
+        "r",
+        "vt"
+      ],
+      "also": [
+        "m*vt*r",
+        "r*m*vt"
+      ]
+    },
+    "check": null,
+    "solution": "$\\ell=mr\\,v_t$, the momentum times the lever arm.",
+    "hints": [
+      "Momentum times the lever arm."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression is the effective potential $V_{\\rm eff}(r)$ for radial motion with angular momentum $\\ell$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$V_{\\rm eff}=V(r)+\\dfrac{\\ell^2}{2mr^2}$",
+        "$V_{\\rm eff}=V(r)-\\dfrac{\\ell^2}{2mr^2}$",
+        "$V_{\\rm eff}=V(r)+\\dfrac{\\ell}{2mr}$",
+        "$V_{\\rm eff}=V(r)$, because $\\ell$ is constant"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign reversed; the centrifugal term is repulsive",
+        "wrong power of $r$ and of $\\ell$",
+        "forgets the centrifugal term"
+      ]
+    },
+    "solution": "Radial motion sees the centrifugal term $\\ell^2/2mr^2$ added to $V$.",
+    "hints": [
+      "The centrifugal term is positive and falls as $1/r^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0040",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A satellite moves on a circular orbit of radius $r=2.0\\times10^{7}$ m around a centre with $GM=4.0\\times10^{14}\\ \\mathrm{m^3/s^2}$. Find its orbital speed in m/s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4472.13595499958,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(4.0e14/2.0e7)",
+    "solution": "The radial force balance gives $v^2/r=GM/r^2$, so $v=\\sqrt{GM/r}$.",
+    "hints": [
+      "Set the centripetal acceleration equal to the force per unit mass."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A comet moves under a central attractive force. Its distance from the centre is $r_p=1.0$ at perihelion and $r_a=4.0$ at aphelion, in the same units. Find the ratio $v_p/v_a$ of its speeds, as a pure number.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "4.0/1.0",
+    "solution": "At the apsides the velocity is tangential, so $v_pr_p=v_ar_a$ and $v_p/v_a=r_a/r_p$.",
+    "hints": [
+      "Conserve angular momentum between the two apsides."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $0.50$ kg moves in a plane under a central force. At $r=2.0$ m its velocity is purely tangential with speed $3.0$ m/s. Find its tangential speed in m/s at $r=1.0$ m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.0*3.0/1.0",
+    "solution": "Angular momentum $\\ell=mrv_t$ is conserved, so $v_t\\propto 1/r$ and the speed doubles.",
+    "hints": [
+      "Use conservation of angular momentum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m$ moves in a circular orbit of radius $r$ under a central force, with angular momentum $\\ell$. Write the magnitude of the force in terms of $m$, $\\ell$ and $r$ (use `l` for $\\ell$).",
+    "answer": {
+      "kind": "expression",
+      "value": "l^2/(m*r^3)",
+      "vars": [
+        "m",
+        "l",
+        "r"
+      ],
+      "also": [
+        "l*l/(m*r^3)",
+        "(l/(m*r))^2*m/r"
+      ]
+    },
+    "check": null,
+    "solution": "$v_t=\\ell/(mr)$, and $F=mv_t^2/r=\\ell^2/(mr^3)$.",
+    "hints": [
+      "Find the speed first, then use $F=mv^2/r$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle with zero angular momentum moves in an attractive central force. Which describes its path?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "A straight line through the centre",
+        "A circle centred on the force centre",
+        "A spiral that never reaches the centre",
+        "A parabola with its focus at the centre"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a circle needs nonzero angular momentum",
+        "a spiral needs nonzero angular momentum",
+        "a parabola needs nonzero angular momentum"
+      ]
+    },
+    "solution": "With $\\ell=0$ the motion is purely radial and passes through the centre.",
+    "hints": [
+      "Set $\\ell=0$ and ask which motion is radial."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.central-force"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $4.0$ kg moves in a plane under a central force with angular momentum $\\ell=2.0\\ \\mathrm{kg\\,m^2/s}$. At $r=2.0$ m, find the kinetic energy of its tangential motion in J.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.125,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.0**2/(2*4.0*2.0**2)",
+    "solution": "The tangential speed is $\\ell/(mr)$, so the kinetic energy is $\\ell^2/(2mr^2)=0.125$ J.",
+    "hints": [
+      "Use the tangential speed $\\ell/(mr)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a circular orbit at radius $r_0$ with effective potential $U_{\\rm eff}$, which condition holds?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$U_{\\rm eff}'(r_0)=0$",
+        "$U_{\\rm eff}(r_0)=0$",
+        "$U_{\\rm eff}''(r_0)=0$",
+        "$U_{\\rm eff}'(r_0)=E$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the energy need not be zero on a circular orbit",
+        "this marks marginal stability, not a circular orbit",
+        "mixes the slope with the energy"
+      ]
+    },
+    "solution": "A circular orbit sits where the radial force vanishes, which is a zero slope of $U_{\\rm eff}$.",
+    "hints": [
+      "A circular orbit has no radial acceleration."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For attractive gravity $V=-GMm/r$ and angular momentum $\\ell$, write $U_{\\rm eff}(r)$ in terms of $G$, $M$, $m$, $r$ and $\\ell$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-G*M*m/r+l^2/(2*m*r^2)",
+      "vars": [
+        "G",
+        "M",
+        "m",
+        "r",
+        "l"
+      ],
+      "also": [
+        "l^2/(2*m*r^2)-G*M*m/r",
+        "-(G*M*m)/r+(l*l)/(2*m*r^2)"
+      ]
+    },
+    "check": null,
+    "solution": "Add the centrifugal term $\\ell^2/2mr^2$ to the potential.",
+    "hints": [
+      "Add the centrifugal term to the potential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "With $\\ell\\neq0$, what does the centrifugal term do to $U_{\\rm eff}$ as $r\\to0$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It makes $U_{\\rm eff}\\to+\\infty$, a repulsive barrier",
+        "It makes $U_{\\rm eff}\\to-\\infty$",
+        "It vanishes for every $r$",
+        "It is a constant offset that does not affect the motion"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign reversed",
+        "true only if $\\ell=0$",
+        "it depends on $r$, so it changes the force"
+      ]
+    },
+    "solution": "$\\ell^2/(2mr^2)$ grows without bound as $r\\to0$.",
+    "hints": [
+      "Look at the $1/r^2$ term as $r$ shrinks."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle of mass $m=2.0$ kg has $\\ell=6.0\\ \\mathrm{kg\\,m^2/s}$ and moves in $V=-k/r$ with $k=8.0\\ \\mathrm{J\\,m}$. Find the radius $r_0$ of its circular orbit in m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.25,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "6.0**2/(2.0*8.0)",
+    "solution": "$U'=k/r^2-\\ell^2/(mr^3)=0$ gives $r_0=\\ell^2/(mk)$.",
+    "hints": [
+      "Set the derivative of $U_{\\rm eff}$ to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m$ sits on a circular orbit of radius $r$ in the attractive potential $V=-k/r$. Write its speed $v$ in terms of $k$, $m$ and $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sqrt(k/(m*r))",
+      "vars": [
+        "k",
+        "m",
+        "r"
+      ],
+      "also": [
+        "(k/(m*r))^(1/2)",
+        "sqrt(k/m/r)"
+      ]
+    },
+    "check": null,
+    "solution": "Radial balance: $mv^2/r=k/r^2$, so $v^2=k/(mr)$.",
+    "hints": [
+      "Balance the centripetal acceleration against the force."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle of mass $m=2.0$ kg has $\\ell=6.0\\ \\mathrm{kg\\,m^2/s}$ and moves in $V=-k/r$ with $k=8.0\\ \\mathrm{J\\,m}$. It sits on its circular orbit. Find its total energy $E$ in J, with $V\\to0$ at infinity.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1.7777777777777777,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "-8.0/2.25+6.0**2/(2*2.0*2.25**2)",
+    "solution": "At $r_0=2.25$ m, $E=-k/r_0+\\ell^2/(2mr_0^2)=-16/9$ J.",
+    "hints": [
+      "Evaluate $U_{\\rm eff}$ at the orbit radius."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For attractive gravity with $\\ell\\neq0$, select every true statement about $U_{\\rm eff}(r)$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$U_{\\rm eff}\\to+\\infty$ as $r\\to0$",
+        "$U_{\\rm eff}\\to0^-$ as $r\\to\\infty$",
+        "$U_{\\rm eff}$ has a minimum at every energy $E$",
+        "The bottom of the well corresponds to a circular orbit"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    },
+    "solution": "The barrier and the approach to zero from below hold. A minimum is a single energy, not every energy.",
+    "hints": [
+      "Check each claim at the two ends and at the minimum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $V=-k/r$ at fixed $m$ and $k$, how does the circular-orbit radius $r_0$ change when $\\ell$ doubles?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$r_0$ grows by a factor of 4",
+        "$r_0$ grows by a factor of 2",
+        "$r_0$ shrinks by a factor of 4",
+        "$r_0$ is unchanged"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "used $r_0\\propto\\ell$",
+        "inverted the dependence on $\\ell$",
+        "forgot that $\\ell$ enters the effective potential"
+      ]
+    },
+    "solution": "$r_0=\\ell^2/(mk)$, so doubling $\\ell$ multiplies $r_0$ by 4.",
+    "hints": [
+      "The orbit radius depends on $\\ell$ through a square."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.eff-potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle has $V=\\tfrac12 kr^2$ and angular momentum $\\ell$. Write $U_{\\rm eff}(r)$ in terms of $k$, $r$, $\\ell$ and $m$.",
+    "answer": {
+      "kind": "expression",
+      "value": "k*r^2/2+l^2/(2*m*r^2)",
+      "vars": [
+        "k",
+        "r",
+        "l",
+        "m"
+      ],
+      "also": [
+        "(1/2)*k*r^2+l^2/(2*m*r^2)",
+        "l^2/(2*m*r^2)+k*r^2/2"
+      ]
+    },
+    "check": null,
+    "solution": "Add the centrifugal term to the harmonic potential.",
+    "hints": [
+      "Harmonic potential plus centrifugal term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle rests at a stable equilibrium $x_0$ of $U(x)$. For small displacements, which expression approximates the restoring force $F$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$-U''(x_0)\\,(x-x_0)$",
+        "$-U'(x_0)\\,(x-x_0)$",
+        "$-U(x_0)$",
+        "$-U'''(x_0)\\,(x-x_0)^2$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "$U'$ vanishes at equilibrium, so this gives zero",
+        "the potential value does not push the particle",
+        "a cubic term is second order and the wrong power"
+      ]
+    },
+    "solution": "Expand $U$ to second order. The linear force is $-U''(x_0)(x-x_0)$.",
+    "hints": [
+      "Expand $U$ to second order about $x_0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A mass $m$ has $U''(x_0)=K$ at a stable equilibrium. Write $\\omega^2$ for small oscillations in terms of $K$ and $m$.",
+    "answer": {
+      "kind": "expression",
+      "value": "K/m",
+      "vars": [
+        "K",
+        "m"
+      ],
+      "also": [
+        "K*m^(-1)",
+        "1/(m/K)"
+      ]
+    },
+    "check": null,
+    "solution": "The equation is $m\\ddot\\eta=-K\\eta$, so $\\omega^2=K/m$.",
+    "hints": [
+      "Read $\\omega^2$ from $m\\ddot\\eta=-K\\eta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Two equal masses $m$ sit between two walls and are joined to each other and to the walls by identical springs of stiffness $k$, three springs in a row. For small motion along the line, what is the angular frequency of the in-phase mode, where both masses have equal displacements?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\sqrt{k/m}$",
+        "$\\sqrt{3k/m}$",
+        "$\\sqrt{k/(2m)}$",
+        "$\\sqrt{2k/m}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "this is the out-of-phase mode, where the middle spring stretches",
+        "treated the two outer springs as one in series",
+        "counted the middle spring as extra stiffness on each mass"
+      ]
+    },
+    "solution": "In phase, the middle spring is unstretched, so each mass sees only $k$.",
+    "hints": [
+      "In the in-phase mode, does the middle spring change length?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0058",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A simple pendulum has length $\\ell=0.50$ m in gravity $g=9.8\\ \\mathrm{m/s^2}$. Find its small-amplitude period in s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.4192268951137286,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2*math.pi*math.sqrt(0.50/9.8)",
+    "solution": "For small swings $\\omega=\\sqrt{g/\\ell}$ and $T=2\\pi/\\omega=2\\pi\\sqrt{\\ell/g}\\approx1.42$ s.",
+    "hints": [
+      "Use $\\omega^2=g/\\ell$ and convert to a period."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two masses $m=1.0$ kg sit in a row between two fixed walls, joined to each other and to the walls by three identical springs of stiffness $k=8.0\\ \\mathrm{N/m}$. For small motion along the line, find the angular frequency of the out-of-phase mode, where the displacements are equal and opposite, in $\\mathrm{rad/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.898979485566356,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(3*8.0/1.0)",
+    "solution": "Out of phase, the middle spring stretches by twice the motion, so each mass sees $3k$, and $\\omega=\\sqrt{3k/m}$.",
+    "hints": [
+      "The middle spring is stretched in this mode."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A pendulum of length $\\ell$ in gravity $g$ swings with small amplitude. Write $\\omega^2$ in terms of $g$ and $\\ell$.",
+    "answer": {
+      "kind": "expression",
+      "value": "g/l",
+      "vars": [
+        "g",
+        "l"
+      ],
+      "also": [
+        "g*l^(-1)",
+        "1/(l/g)"
+      ]
+    },
+    "check": null,
+    "solution": "Small swings have $\\ddot\\theta=-(g/\\ell)\\theta$.",
+    "hints": [
+      "Linearize $\\sin\\theta\\approx\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bead of mass $m=0.50$ kg moves along a line with potential $U(x)=2.0x^2+0.5x^4$ in SI units. Find the small-oscillation angular frequency about $x=0$ in $\\mathrm{rad/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.8284271247461903,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(2*2.0/0.50)",
+    "solution": "$U''(0)=4.0$ N/m, so $\\omega^2=4.0/0.50=8$ and $\\omega\\approx2.83$ rad/s.",
+    "hints": [
+      "The quartic term does not contribute at second order."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A pendulum's bob mass is doubled and its length is kept fixed. How does its small-amplitude period change?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It doubles",
+        "It is unchanged",
+        "It becomes $\\sqrt2$ times larger",
+        "It is halved"
+      ],
+      "correct": 1,
+      "why": [
+        "treated the period as proportional to mass",
+        "",
+        "took the square root of the mass ratio",
+        "inverted the mass dependence"
+      ]
+    },
+    "solution": "Mass appears in both the inertia and the weight, so it cancels.",
+    "hints": [
+      "Look at what the mass multiplies in the equation of motion."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.small-osc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which quantities set the small-oscillation angular frequency $\\omega=\\sqrt{K/m}$ about an equilibrium? Select every one.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$K=U''(x_0)$",
+        "$m$, the inertia",
+        "the amplitude of the swing",
+        "$U(x_0)$, the energy at equilibrium"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "The frequency depends on the curvature and the inertia. Amplitude and the constant offset $U(x_0)$ do not enter.",
+    "hints": [
+      "Only the curvature and the inertia appear in $\\omega$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a frame rotating at constant angular velocity $\\vec\\omega$, which term is the Coriolis acceleration, with $\\vec v'$ the velocity in that frame?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$-2\\vec\\omega\\times\\vec v'$",
+        "$-\\vec\\omega\\times(\\vec\\omega\\times\\vec r)$",
+        "$-2\\vec\\omega\\times\\vec r$",
+        "$-\\vec\\omega\\times\\vec v'$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the centrifugal term, which needs no velocity",
+        "uses position where velocity belongs",
+        "missing the factor of 2"
+      ]
+    },
+    "solution": "Coriolis acceleration is $-2\\vec\\omega\\times\\vec v'$, and it needs motion in the frame.",
+    "hints": [
+      "Coriolis needs velocity in the frame, with a factor of 2."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a frame rotating at angular speed $\\omega$, write the centrifugal acceleration magnitude for a point at distance $r$ from the axis, with the point at rest in the frame.",
+    "answer": {
+      "kind": "expression",
+      "value": "w^2*r",
+      "vars": [
+        "w",
+        "r"
+      ],
+      "also": [
+        "w*w*r",
+        "r*w^2"
+      ]
+    },
+    "check": null,
+    "solution": "Centrifugal acceleration is $\\omega^2 r$, directed away from the axis.",
+    "hints": [
+      "Square the angular speed and multiply by the radius."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle moves in a rotating frame. For which motion is the Coriolis acceleration zero?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Motion parallel to the rotation axis",
+        "Motion perpendicular to the rotation axis",
+        "Motion in a circle around the axis, seen in the rotating frame",
+        "Any motion slower than $\\omega r$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a perpendicular velocity gives a nonzero cross product",
+        "a velocity perpendicular to the axis gives a nonzero cross product",
+        "speed does not decide whether the cross product vanishes"
+      ]
+    },
+    "solution": "$\\vec\\omega\\times\\vec v'=0$ when $\\vec v'$ is parallel to $\\vec\\omega$.",
+    "hints": [
+      "Ask when a cross product with the axis vanishes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A turntable turns at $\\omega=0.50$ rad/s. A ball rolls radially outward at $2.0$ m/s relative to the turntable. Find the magnitude of its Coriolis acceleration in $\\mathrm{m/s^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2*0.50*2.0",
+    "solution": "Radial motion is perpendicular to $\\vec\\omega$, so $|a_{\\rm cor}|=2\\omega v'=2.0$ m/s$^2$.",
+    "hints": [
+      "Radial motion is perpendicular to the axis."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A turntable turns at $\\omega=3.0$ rad/s. A bead sits still on it at $r=0.40$ m from the axis. Find the magnitude of its centrifugal acceleration in $\\mathrm{m/s^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.6,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "3.0**2*0.40",
+    "solution": "Centrifugal acceleration is $\\omega^2 r=9.0\\times0.40=3.6$ m/s$^2$.",
+    "hints": [
+      "Use $\\omega^2 r$, which needs no velocity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bead of mass $m$ is at rest on a rod that turns at constant $\\omega$, at distance $r$ from the axis. Write the magnitude of the centrifugal force on the bead in terms of $m$, $\\omega$ and $r$ (use `w` for $\\omega$).",
+    "answer": {
+      "kind": "expression",
+      "value": "m*w^2*r",
+      "vars": [
+        "m",
+        "w",
+        "r"
+      ],
+      "also": [
+        "m*w*w*r",
+        "m*r*w^2"
+      ]
+    },
+    "check": null,
+    "solution": "The centrifugal force is $m\\omega^2 r$.",
+    "hints": [
+      "Multiply the centrifugal acceleration by the mass."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bead of mass $0.30$ kg slides outward on a rod that turns at $\\omega=2.0$ rad/s. Relative to the rod it moves at $1.5$ m/s, perpendicular to the axis of rotation. Find the Coriolis force magnitude in N.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.7999999999999998,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2*0.30*2.0*1.5",
+    "solution": "$F_{\\rm cor}=2m\\omega v'=2\\times0.30\\times2.0\\times1.5=1.8$ N.",
+    "hints": [
+      "Use $2m\\omega v'$ with the velocity in the rotating frame."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A bead sits at rest in a rotating frame at radius $r$ from the axis. Which describes the apparent force from the frame's fictitious terms?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Outward from the axis, with magnitude $m\\omega^2 r$",
+        "Inward toward the axis, with magnitude $m\\omega^2 r$",
+        "Perpendicular to the rod, with magnitude $2m\\omega$",
+        "Zero, because the bead is at rest"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign reversed",
+        "Coriolis force with no velocity in the frame",
+        "forgot the centrifugal term, which does not vanish at rest"
+      ]
+    },
+    "solution": "At rest in the frame the Coriolis term is zero, and the centrifugal term points outward.",
+    "hints": [
+      "Which fictitious term survives when the bead is at rest?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rotating"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about a frame rotating at constant $\\omega$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The Coriolis acceleration vanishes for a particle at rest in the rotating frame",
+        "The centrifugal acceleration points away from the axis",
+        "The Coriolis acceleration is perpendicular to the velocity in the rotating frame",
+        "The centrifugal acceleration depends on the velocity in the frame"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Coriolis needs velocity and is perpendicular to it. Centrifugal depends only on position.",
+    "hints": [
+      "Check each term's dependence on velocity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Frame $S'$ moves at speed $v$ along $+x$ relative to frame $S$. Which pair is the Lorentz transformation from $S$ to $S'$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x'=\\gamma(x-vt)$, $t'=\\gamma\\left(t-\\dfrac{vx}{c^2}\\right)$",
+        "$x'=\\gamma(x+vt)$, $t'=\\gamma\\left(t-\\dfrac{vx}{c^2}\\right)$",
+        "$x'=x-vt$, $t'=t$",
+        "$x'=\\gamma(x-vt)$, $t'=\\gamma\\left(t-\\dfrac{x}{c}\\right)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign of $vt$ wrong, so the boost direction is reversed",
+        "Galilean transform, which fails at high speed",
+        "wrong time factor: $x/c$ instead of $vx/c^2$"
+      ]
+    },
+    "solution": "Boosts mix $x$ with $t$ through $\\gamma$ and the factor $v/c^2$ in the time term.",
+    "hints": [
+      "The time term carries $v/c^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a boost at speed $v$, write $\\gamma=1/\\sqrt{1-v^2/c^2}$ in terms of $v$ and $c$ only.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/sqrt(1-v^2/c^2)",
+      "vars": [
+        "v",
+        "c"
+      ],
+      "domain": {
+        "v": [
+          0.05,
+          0.9
+        ],
+        "c": [
+          1,
+          2
+        ]
+      },
+      "also": [
+        "(1-v^2/c^2)^(-1/2)",
+        "c/sqrt(c^2-v^2)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\gamma$ is the reciprocal of $\\sqrt{1-v^2/c^2}$.",
+    "hints": [
+      "Take the reciprocal of the square root."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Two events are simultaneous in frame $S$ but at different $x$. Which is true in frame $S'$ moving at $v>0$ along $+x$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Not simultaneous: the event at larger $x$ is earlier in $S'$",
+        "Simultaneous in $S'$ too, since both have $t=0$",
+        "Not simultaneous: the event at larger $x$ is later in $S'$",
+        "Simultaneous in $S'$, with $\\Delta t'=\\Delta x/c$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgets the $-vx/c^2$ term in $t'$",
+        "sign error in the time term",
+        "wrong factor: $\\Delta x/c$ instead of $v\\Delta x/c^2$"
+      ]
+    },
+    "solution": "$\\Delta t'=-\\gamma v\\,\\Delta x/c^2$, which is negative for $\\Delta x>0$.",
+    "hints": [
+      "Compute $\\Delta t'$ from the time transformation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Frame $S'$ moves at $v=0.80c$ along $+x$ relative to $S$, with $c=3.00\\times10^{8}$ m/s. In $S$, event A has $x=3.00\\times10^{8}$ m and $t=0$. Find the magnitude of its time $t'$ in $S'$, in s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.3333333333333337,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "abs((0.80*3.00e8)*3.00e8/(3.00e8)**2)/math.sqrt(1-0.80**2)",
+    "solution": "$t'=\\gamma(t-vx/c^2)=-\\gamma v x/c^2$. Here $vx/c^2=0.8$ and $\\gamma=5/3$, so $|t'|=4/3$ s.",
+    "hints": [
+      "Only the $vx/c^2$ term survives, since $t=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Frame $S'$ moves at $0.60c$ along $+x$ relative to $S$, with $c=3.00\\times10^{8}$ m/s. In $S$ an event is at $x=1.5\\times10^{8}$ m and $t=2.0$ s. Find the magnitude of its position $x'$ in $S'$, in m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 262500000,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "abs((1.5e8-0.60*3.00e8*2.0)/math.sqrt(1-0.60**2))",
+    "solution": "$x'=\\gamma(x-vt)=1.25\\,(1.5\\times10^8-3.6\\times10^8)=-2.625\\times10^8$ m.",
+    "hints": [
+      "Use $x'=\\gamma(x-vt)$ with $v t$ in metres."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Frame $S'$ moves at speed $v$ along $+x$ relative to $S$. Write $x'$ in terms of $x$, $t$, $v$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(x-v*t)/sqrt(1-v^2/c^2)",
+      "vars": [
+        "x",
+        "t",
+        "v",
+        "c"
+      ],
+      "domain": {
+        "v": [
+          0.05,
+          0.9
+        ],
+        "c": [
+          1,
+          2
+        ]
+      },
+      "also": [
+        "(x-v*t)*c/sqrt(c^2-v^2)",
+        "(x-v*t)*(1-v^2/c^2)^(-1/2)"
+      ]
+    },
+    "check": null,
+    "solution": "$x'=\\gamma(x-vt)$ with $\\gamma=1/\\sqrt{1-v^2/c^2}$.",
+    "hints": [
+      "Apply $x'=\\gamma(x-vt)$ directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which combination of $x$ and $t$ for an event has the same value in every inertial frame?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x^2-c^2t^2$",
+        "$x^2+c^2t^2$",
+        "$x/t$",
+        "$x-ct$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign error: the invariant is the difference, the Minkowski interval",
+        "a speed, which changes between frames",
+        "not invariant in general"
+      ]
+    },
+    "solution": "The interval $x^2-c^2t^2$ is preserved by boosts.",
+    "hints": [
+      "Check the combination against a boost."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about a boost along $x$ at speed $v$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The transverse coordinates $y$ and $z$ are unchanged",
+        "Simultaneity can depend on the frame",
+        "The speed $v$ must be less than $c$",
+        "Lengths transverse to $v$ are contracted"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Only the component along $v$ changes, and a boost needs $v<c$. Transverse lengths are unchanged.",
+    "hints": [
+      "Only $x$ and $t$ mix in a boost."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.lorentz-tr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Frame $S'$ moves at $0.60c$ along $+x$ relative to $S$, with $c=3.00\\times10^{8}$ m/s. In $S'$ an event is at $x'=0$ and $t'=2.0$ s. Find its position $x$ in $S$, in m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 450000000,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(0.60*3.00e8*2.0)/math.sqrt(1-0.60**2)",
+    "solution": "Inverting, $x=\\gamma(x'+vt')=\\gamma v t'=1.25\\times0.60\\times3.00\\times10^8\\times2.0=4.5\\times10^8$ m.",
+    "hints": [
+      "Invert the boost, so the sign of $v$ is unchanged."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the proper time between two events?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "the time between them measured by one clock at rest where both events occur",
+        "the time between them measured in a frame where the clock moves",
+        "the longest time interval between the events in any frame",
+        "the average of the times measured in all frames"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "this is the dilated time, which is longer",
+        "proper time is the shortest interval, not the longest",
+        "no frame average defines proper time"
+      ]
+    },
+    "solution": "Proper time is the interval on the clock's own worldline, the shortest between the events.",
+    "hints": [
+      "Proper time belongs to the clock at rest with the events."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\gamma=1/\\sqrt{1-v^2/c^2}$ for $v=0.60c$, as a pure number.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.25,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1/math.sqrt(1-0.60**2)",
+    "solution": "$\\gamma=1/\\sqrt{1-0.36}=1/0.8=1.25$.",
+    "hints": [
+      "Evaluate $1-v^2/c^2$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement about proper length is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It is measured in the object's rest frame, and only lengths along the motion contract",
+        "It is measured in a frame where the object moves",
+        "Lengths transverse to the motion contract",
+        "It is always the shortest length measured by anyone"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reverses which frame is the rest frame",
+        "transverse lengths do not contract",
+        "proper length is the longest, not the shortest"
+      ]
+    },
+    "solution": "Proper length is measured at rest. A moving object looks shorter along its motion only.",
+    "hints": [
+      "Identify the rest frame before applying contraction."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0085",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A muon has a rest-frame mean lifetime of $2.2\\ \\mu\\mathrm{s}$. It moves at $0.95c$ relative to the lab. Find its mean lifetime in the lab, in $\\mu\\mathrm{s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7.045638767423833,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "2.2/math.sqrt(1-0.95**2)",
+    "solution": "The lab sees the rest-frame lifetime dilated by $\\gamma$, so $\\tau_{\\rm lab}=\\gamma\\tau_0\\approx7.05\\ \\mu$s.",
+    "hints": [
+      "The lab time is longer than the rest-frame time."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A spaceship is $100$ m long in its rest frame and moves at $0.80c$ relative to Earth along its length. Find its length measured on Earth, in m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 59.999999999999986,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "100*math.sqrt(1-0.80**2)",
+    "solution": "$L=L_0/\\gamma=L_0\\sqrt{1-v^2/c^2}=100\\times0.60=60$ m.",
+    "hints": [
+      "Length contracts by $1/\\gamma$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In the lab, two ticks of a clock moving at speed $v$ are separated by lab time $T$. Write the proper time $\\tau$ elapsed on the moving clock in terms of $T$, $v$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "T*sqrt(1-v^2/c^2)",
+      "vars": [
+        "T",
+        "v",
+        "c"
+      ],
+      "domain": {
+        "v": [
+          0.05,
+          0.9
+        ],
+        "c": [
+          1,
+          2
+        ]
+      },
+      "also": [
+        "T*(1-v^2/c^2)^(1/2)",
+        "T/(1/sqrt(1-v^2/c^2))"
+      ]
+    },
+    "check": null,
+    "solution": "$\\tau=T/\\gamma=T\\sqrt{1-v^2/c^2}$.",
+    "hints": [
+      "Divide the lab time by $\\gamma$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two events occur on a rocket at the same place. In the Earth frame, $10.0$ years pass between them. Find the time between them on the rocket clock, in years, for speed $0.60c$ relative to Earth.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "10.0*math.sqrt(1-0.60**2)",
+    "solution": "The rocket clock is at rest with the events, so this is proper time: $\\tau=10.0\\times0.80=8.0$ years.",
+    "hints": [
+      "Earth time divided by $\\gamma$ gives the rocket time."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A rod has proper length $L_0$ and moves past a lab observer at speed $v$ along its length. Which is the length measured in the lab?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$L_0\\sqrt{1-v^2/c^2}$",
+        "$L_0/\\sqrt{1-v^2/c^2}$",
+        "$L_0$, since length does not change",
+        "$L_0\\sqrt{1+v^2/c^2}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "applied time dilation to a length, so it grew instead of shrinking",
+        "ignores length contraction",
+        "sign error inside the square root"
+      ]
+    },
+    "solution": "The lab sees the rod contracted by $1/\\gamma$.",
+    "hints": [
+      "Length in the lab is shorter than proper length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.dilation-contraction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about a clock moving at constant speed $v$ relative to a lab.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The lab sees the moving clock run slow",
+        "The clock's own time is the proper time",
+        "Its proper time is the shortest interval between the two events",
+        "The lab sees the moving clock run fast"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "The moving clock runs slow in the lab, and its own elapsed time is the shortest interval.",
+    "hints": [
+      "Compare the lab interval with the proper interval."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A frame moves at speed $v$ along $+x$. An object has velocity $u$ along $x$ in the lab. Which is its velocity $u'$ in the moving frame?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$u'=\\dfrac{u-v}{1-uv/c^2}$",
+        "$u'=u-v$",
+        "$u'=\\dfrac{u-v}{1-uv/c}$",
+        "$u'=\\dfrac{u+v}{1+uv/c^2}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "Galilean, which fails near $c$",
+        "wrong power of $c$: the denominator needs $c^2$",
+        "sign error: adds speeds instead of subtracting"
+      ]
+    },
+    "solution": "Relativistic velocity addition, with $c^2$ in the denominator.",
+    "hints": [
+      "The denominator carries $uv/c^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two boosts of $0.5c$ each act one after the other, in the same direction. Give the combined speed in units of $c$ as a fraction in lowest terms.",
+    "answer": {
+      "kind": "numeric",
+      "value": "4/5",
+      "tol": 0,
+      "rel": 0,
+      "form": "fraction"
+    },
+    "check": "(Fraction(1,2)+Fraction(1,2))/(1+Fraction(1,2)*Fraction(1,2))",
+    "solution": "$u'=(0.5+0.5)/(1+0.25)=4/5$ in units of $c$.",
+    "hints": [
+      "Use $(u+v)/(1+uv/c^2)$ with both speeds in units of $c$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement about relativistic velocity addition is true for speeds along one line?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Two speeds below $c$ always combine to a speed below $c$",
+        "Two speeds combine as $u+v$ for every pair below $c$",
+        "The combined speed can exceed $c$ when $u+v>c$",
+        "The combined speed equals $\\max(u,v)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "only approximately true at low speeds",
+        "the formula keeps every result below $c$",
+        "ignores the other speed"
+      ]
+    },
+    "solution": "The denominator grows fast enough to keep the result below $c$.",
+    "hints": [
+      "Test the formula with two speeds near $c$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Spaceship A moves at $0.80c$ relative to Earth. Spaceship B moves at $0.60c$ relative to A, in the same direction. Find B's speed relative to Earth in m/s, with $c=3.00\\times10^{8}$ m/s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 283783783.7837838,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(0.80+0.60)*3.00e8/(1+0.80*0.60)",
+    "solution": "$u'=(0.80+0.60)c/(1+0.48)=1.4c/1.48\\approx0.946c$, or $2.84\\times10^8$ m/s.",
+    "hints": [
+      "Use relativistic velocity addition, not $u+v$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An object has speed $u$ along $x$ in the lab. A frame moves at speed $v$ along $+x$. Write the object's speed $u'$ in that frame in terms of $u$, $v$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(u-v)/(1-u*v/c^2)",
+      "vars": [
+        "u",
+        "v",
+        "c"
+      ],
+      "domain": {
+        "u": [
+          0.05,
+          0.9
+        ],
+        "v": [
+          0.05,
+          0.9
+        ],
+        "c": [
+          1,
+          2
+        ]
+      },
+      "also": [
+        "(u-v)*c^2/(c^2-u*v)",
+        "(u-v)/(1-(u*v)/c^2)"
+      ]
+    },
+    "check": null,
+    "solution": "$u'=(u-v)/(1-uv/c^2)$ with the frame speed subtracted.",
+    "hints": [
+      "Subtract the frame speed in the numerator."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A proton moves at $0.90c$ in the lab. A frame moves at $0.50c$ toward the proton, opposite to its direction. Find the proton's speed in that frame, in m/s, with $c=3.00\\times10^{8}$ m/s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 289655172.4137931,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(0.90+0.50)*3.00e8/(1+0.90*0.50)",
+    "solution": "Relative speed $(0.90+0.50)c/(1+0.45)=0.966c$, or $2.90\\times10^8$ m/s.",
+    "hints": [
+      "The frame moves in the direction opposite to the proton."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A rocket moves at $0.60c$ relative to the lab and emits light forward. What is the light's speed in the lab?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$c$",
+        "$c+0.6c$",
+        "$c-0.6c$",
+        "$c/\\gamma$ at $0.6c$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "Galilean addition, which does not hold for light",
+        "Galilean subtraction",
+        "applied the time-dilation factor to speed"
+      ]
+    },
+    "solution": "The speed of light is $c$ in every inertial frame.",
+    "hints": [
+      "The speed of light does not depend on the source speed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about the velocity-addition formula for speeds along one line.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$u'\\le c$ whenever $u\\le c$ and $v\\le c$",
+        "$u'\\to u+v$ when $u$ and $v$ are much less than $c$",
+        "$u'=c$ whenever $u=c$",
+        "$u'=u+v$ exactly, at every speed"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "The formula keeps results below $c$, reduces to $u+v$ at low speeds, and fixes $c$. Exact Galilean addition fails.",
+    "hints": [
+      "Check the limits and the boundary case."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.vel-addition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A rocket moves at $0.90c$ relative to the lab. It fires a probe backward at $0.50c$ relative to the rocket. Find the probe's velocity in the lab in m/s along $+x$, the rocket's direction, with $c=3.00\\times10^{8}$ m/s.",
+    "answer": {
+      "kind": "numeric",
+      "value": 218181818.18181816,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(-0.50+0.90)*3.00e8/(1-0.50*0.90)",
+    "solution": "$u=(u'+v)/(1+u'v/c^2)$ with $u'=-0.5c$ and $v=0.9c$, giving $0.727c$, or $2.18\\times10^8$ m/s.",
+    "hints": [
+      "The backward fire speed is negative in the rocket direction."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression gives the total energy of a particle of mass $m$ moving at speed $v$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$E=\\gamma mc^2$",
+        "$E=\\tfrac12 mv^2$",
+        "$E=mc^2$ for every moving particle",
+        "$E=\\gamma mvc$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "classical kinetic energy, not total energy",
+        "rest energy only, ignoring motion",
+        "wrong units: energy needs $c^2$, not $vc$"
+      ]
+    },
+    "solution": "Total energy is $\\gamma mc^2$, which reduces to $mc^2+\\tfrac12 mv^2$ at low speed.",
+    "hints": [
+      "Total energy is rest energy times $\\gamma$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a particle with momentum $p$ and mass $m$, write $E^2$ in terms of $p$, $m$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "p^2*c^2+m^2*c^4",
+      "vars": [
+        "p",
+        "m",
+        "c"
+      ],
+      "also": [
+        "c^2*p^2+m^2*c^4",
+        "(p*c)^2+(m*c^2)^2",
+        "p^2*c^2+c^4*m^2"
+      ]
+    },
+    "check": null,
+    "solution": "The energy-momentum relation is $E^2=p^2c^2+m^2c^4$.",
+    "hints": [
+      "Square the energy and add the two rest-energy terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A massless particle has total energy $3.0$ MeV. Find its momentum magnitude in MeV/c.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "3.0",
+    "solution": "For a massless particle $E=pc$, so $p=E/c=3.0$ MeV/c.",
+    "hints": [
+      "For massless particles $E=pc$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0103",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "An electron has rest energy $0.511$ MeV and speed $0.80c$. Find its total energy in MeV.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.8516666666666669,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "0.511/math.sqrt(1-0.80**2)",
+    "solution": "$E=\\gamma mc^2=0.511/0.60=0.852$ MeV.",
+    "hints": [
+      "Use $\\gamma=1/0.6$ at $0.80c$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An electron, with rest energy $0.511$ MeV, moves at $0.80c$. Find its kinetic energy in MeV.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.34066666666666684,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(1/math.sqrt(1-0.80**2)-1)*0.511",
+    "solution": "$K=(\\gamma-1)mc^2=(1.667-1)\\times0.511=0.341$ MeV.",
+    "hints": [
+      "Kinetic energy is total energy minus rest energy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle has mass $m$ and momentum $p$. Write its speed $v$ in terms of $p$, $m$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "p*c/sqrt(p^2+m^2*c^2)",
+      "vars": [
+        "p",
+        "m",
+        "c"
+      ],
+      "also": [
+        "p*c^2/sqrt(p^2*c^2+m^2*c^4)",
+        "p*c/sqrt(p^2+(m*c)^2)"
+      ]
+    },
+    "check": null,
+    "solution": "$v=pc^2/E$, and $E=\\sqrt{p^2c^2+m^2c^4}$, so $v=pc/\\sqrt{p^2+m^2c^2}$.",
+    "hints": [
+      "Use $v=pc^2/E$ with $E^2=p^2c^2+m^2c^4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle has total energy $2.0$ GeV and rest energy $0.50$ GeV. Find its momentum magnitude in GeV/c.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.9364916731037085,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(2.0**2-0.50**2)",
+    "solution": "$pc=\\sqrt{E^2-(mc^2)^2}=\\sqrt{4.0-0.25}\\approx1.94$ GeV, so $p\\approx1.94$ GeV/c.",
+    "hints": [
+      "Use the energy-momentum relation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle's kinetic energy equals its rest energy. What is its speed?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$v\\approx0.87c$",
+        "$v\\approx0.50c$",
+        "$v\\approx0.71c$",
+        "$v\\approx1.41c$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "took $v=c/\\gamma$ with $\\gamma=2$",
+        "took $v=c/\\sqrt{\\gamma}$ with $\\gamma=2$",
+        "classical $v=\\sqrt{2K/m}$, which ignores relativity"
+      ]
+    },
+    "solution": "$K=mc^2$ means $\\gamma=2$, so $v=c\\sqrt{1-1/4}=0.87c$.",
+    "hints": [
+      "Kinetic energy $(\\gamma-1)mc^2$ equal to $mc^2$ fixes $\\gamma$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement for a particle of mass $m$, energy $E$ and momentum $p$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$E^2-p^2c^2=m^2c^4$",
+        "$E\\ge mc^2$",
+        "$p\\ge mc$ always",
+        "$E=pc$ for every massive particle"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "The invariant holds, and energy is at least rest energy. Massive particles have $p<E/c$.",
+    "hints": [
+      "Check the energy-momentum relation and the rest-energy bound."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression gives the invariant mass $M$ of a system with total energy $E_{\\rm tot}$ and total momentum $p_{\\rm tot}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$M^2c^4=E_{\\rm tot}^2-p_{\\rm tot}^2c^2$",
+        "$M^2c^4=E_{\\rm tot}^2+p_{\\rm tot}^2c^2$",
+        "$Mc^2=\\sum_i E_i$",
+        "$M=\\sum_i m_i$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign error: the invariant combination has a minus sign",
+        "adds energies, which is not invariant",
+        "adds rest masses, which ignores kinetic energy"
+      ]
+    },
+    "solution": "The combination $E^2-p^2c^2$ is the same in every frame.",
+    "hints": [
+      "The minus sign makes the combination invariant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A photon has momentum $p$. Write its energy $E$ in terms of $p$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "p*c",
+      "vars": [
+        "p",
+        "c"
+      ],
+      "also": [
+        "c*p",
+        "p*c^1"
+      ]
+    },
+    "check": null,
+    "solution": "For a massless particle $E^2=p^2c^2$, so $E=pc$.",
+    "hints": [
+      "Use $E^2=p^2c^2+m^2c^4$ with $m=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A particle has energy $5.0$ GeV and momentum $3.0$ GeV/c. Find its mass in GeV/c$^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(5.0**2-3.0**2)",
+    "solution": "$m^2c^4=E^2-p^2c^2=25-9=16$, so $m=4.0$ GeV/c$^2$.",
+    "hints": [
+      "Apply $m^2c^4=E^2-p^2c^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two photons each have energy $1.0$ MeV. Their momenta are perpendicular. Find the invariant mass of the pair in MeV/c$^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.4142135623730951,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt((1.0+1.0)**2-(1.0**2+1.0**2))",
+    "solution": "$M^2c^4=(E_1+E_2)^2-(p_1^2+p_2^2)c^2=4-2=2$, so $M=\\sqrt2\\approx1.41$ MeV/c$^2$.",
+    "hints": [
+      "Add the energies, and the momenta as vectors."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two identical particles, each with energy $E$ and momentum $p$, move in the same direction. Write $M^2c^4$ of the pair in terms of $E$, $p$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "4*(E^2-p^2*c^2)",
+      "vars": [
+        "E",
+        "p",
+        "c"
+      ],
+      "also": [
+        "4*E^2-4*p^2*c^2",
+        "4*(E^2-(p*c)^2)"
+      ]
+    },
+    "check": null,
+    "solution": "The pair has total energy $2E$ and momentum $2p$, so $M^2c^4=4E^2-4p^2c^2$.",
+    "hints": [
+      "Total energy and momentum are twice the single-particle values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particle at rest with mass $1.0$ GeV/c$^2$ decays into two identical particles. Find the energy of each daughter in GeV.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "1.0/2",
+    "solution": "With the parent at rest, each daughter has $E=M c^2/2=0.5$ GeV.",
+    "hints": [
+      "Energy is shared equally when the parent is at rest and daughters are identical."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which quantity is the same in every inertial frame for a particle?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$E^2-(pc)^2$",
+        "$E$",
+        "$p$",
+        "$\\gamma$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "energy changes between frames",
+        "momentum changes between frames",
+        "gamma depends on the frame"
+      ]
+    },
+    "solution": "The combination $E^2-(pc)^2$ gives $m^2c^4$, which all frames agree on.",
+    "hints": [
+      "The mass does not depend on the frame."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about the invariant mass of a two-particle system.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$M\\ge m_1+m_2$ always",
+        "$M$ depends on the frame",
+        "$M=0$ for two photons moving in the same direction",
+        "$M=E_{\\rm tot}$ always"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Invariant mass is at least the sum of the masses, and it vanishes for collinear photons. It is not the total energy.",
+    "hints": [
+      "Check the bound and the collinear photon case."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.invariants"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two photons each have energy $2.0$ MeV. The angle between their directions is $60^\\circ$. Find the invariant mass of the pair in MeV/c$^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt((2.0+2.0)**2-(2.0**2+2.0**2+2*2.0*2.0*math.cos(math.radians(60))))",
+    "solution": "$M^2c^4=(E_1+E_2)^2-|\\vec p_1+\\vec p_2|^2c^2=16-(4+4+4)=4$, so $M=2.0$ MeV/c$^2$.",
+    "hints": [
+      "Use the cosine of the angle in the momentum sum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a collision to create new particles, the invariant energy $\\sqrt{s}$ must reach what value?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "the sum of the final-state rest masses",
+        "the initial rest mass of the projectile",
+        "the largest final-state mass",
+        "zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ignores the target and the final masses",
+        "one final particle is not enough",
+        "zero threshold means no energy is needed"
+      ]
+    },
+    "solution": "The threshold is $\\sqrt{s}$ equal to the sum of final rest masses.",
+    "hints": [
+      "The invariant energy must cover the final masses."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A source recedes from an observer at speed $0.80c$. Find the ratio of observed to emitted frequency, as a pure number.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.33333333333333326,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt((1-0.80)/(1+0.80))",
+    "solution": "Receding Doppler factor $\\sqrt{(1-\\beta)/(1+\\beta)}=\\sqrt{0.2/1.8}=1/3$.",
+    "hints": [
+      "Receding sources lower the frequency."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A source approaches an observer at speed $b\\,c$. Write the ratio of observed to emitted frequency in terms of $b$ (use $b$ for $v/c$).",
+    "answer": {
+      "kind": "expression",
+      "value": "sqrt((1+b)/(1-b))",
+      "vars": [
+        "b"
+      ],
+      "domain": {
+        "b": [
+          0.05,
+          0.9
+        ]
+      },
+      "also": [
+        "(1+b)^(1/2)*(1-b)^(-1/2)",
+        "sqrt((1+b)/(1-b))"
+      ]
+    },
+    "check": null,
+    "solution": "Approaching Doppler factor $\\sqrt{(1+\\beta)/(1-\\beta)}$.",
+    "hints": [
+      "Approaching sources raise the frequency."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A pion at rest, mass $140$ MeV/c$^2$, decays into a muon (mass $106$ MeV/c$^2$) and a massless neutrino. Find the muon's kinetic energy in MeV.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.128571428571433,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(140.0**2+106.0**2)/(2*140.0)-106.0",
+    "solution": "$E_\\mu=(M^2+m^2)c^2/2M\\approx110.13$ MeV, so $K\\approx4.13$ MeV.",
+    "hints": [
+      "Use two-body decay kinematics at rest."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A projectile of rest mass $1.0$ GeV/c$^2$ hits a stationary target of mass $1.0$ GeV/c$^2$ and produces the two original particles plus a new particle $X$ of mass $1.0$ GeV/c$^2$. At threshold all three are at rest in the centre-of-momentum frame. Find the projectile kinetic energy at threshold in GeV.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.5,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "(3.0**2-1.0**2-1.0**2)/(2*1.0)-1.0",
+    "solution": "At threshold $\\sqrt s=3.0$ GeV, the sum of the three final masses. $s=m_1^2+m_2^2+2m_2E_1=9$ gives $E_1=3.5$ GeV, so $K=E_1-m_1=2.5$ GeV.",
+    "hints": [
+      "Set $\\sqrt s$ equal to the sum of the final masses."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A projectile of mass $m_1$ and energy $E$ hits a target of mass $m_2$ at rest (use $c=1$). Write $s$ in terms of $m_1$, $m_2$ and $E$.",
+    "answer": {
+      "kind": "expression",
+      "value": "m1^2+m2^2+2*m2*E",
+      "vars": [
+        "m1",
+        "m2",
+        "E"
+      ],
+      "also": [
+        "m2^2+m1^2+2*E*m2",
+        "m1^2+m2^2+2*E*m2"
+      ]
+    },
+    "check": null,
+    "solution": "$s=(E_1+m_2)^2-p_1^2=m_1^2+m_2^2+2m_2E$.",
+    "hints": [
+      "Expand $(E+m_2)^2-p^2$ with $E^2-p^2=m_1^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A proton with total energy $4.0$ GeV hits a stationary proton of rest mass $1.0$ GeV/c$^2$. Find $\\sqrt{s}$ in GeV.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.1622776601683795,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(1.0**2+1.0**2+2*1.0*4.0)",
+    "solution": "$s=m_1^2+m_2^2+2m_2E_1=1+1+8=10$, so $\\sqrt s=3.16$ GeV.",
+    "hints": [
+      "Use the fixed-target invariant energy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A source approaches an observer at $0.60c$. What is the observed frequency $f'$ in terms of the emitted frequency $f$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$f'=2f$",
+        "$f'=f/2$",
+        "$f'=1.6f$",
+        "$f'=f\\sqrt{1.6}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "receding factor, which lowers the frequency",
+        "used the Galilean factor $1+\\beta$",
+        "dropped the denominator $1-\\beta$"
+      ]
+    },
+    "solution": "$f'=f\\sqrt{(1+0.6)/(1-0.6)}=2f$.",
+    "hints": [
+      "Use $\\sqrt{(1+\\beta)/(1-\\beta)}$ for an approaching source."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t6-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.rel-collisions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select every true statement about relativistic two-body collisions.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The total momentum vanishes in the centre-of-momentum frame",
+        "$\\sqrt s$ has the same value in every inertial frame",
+        "The final rest masses sum to at most $\\sqrt s$",
+        "Threshold occurs when $\\sqrt s$ equals the initial rest mass"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "$\\sqrt s$ is invariant, and the CM frame has zero total momentum. Threshold needs the final masses, not the initial one.",
+    "hints": [
+      "Check each claim against the invariant energy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

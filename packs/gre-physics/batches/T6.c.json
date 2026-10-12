@@ -1,0 +1,1383 @@
+[
+ {
+  "id": "t6-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.gen-coords",
+   "t2.com"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Three point particles move in 3D. Particle 1 is joined to particle 2, and particle 2 to particle 3, by rigid massless rods. Particle 1 is also confined to the plane $z=0$. How many generalized coordinates describe the system?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9$",
+    "$7$",
+    "$8$",
+    "$5$",
+    "$6$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "no constraints counted",
+    "only the two rods counted; plane forgotten",
+    "only one rod counted; plane forgotten",
+    "plane constraint counted as removing two coordinates",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Count $3\\times3=9$ Cartesian coordinates",
+    "weight": 1
+   },
+   {
+    "text": "Each rod is one holonomic constraint ($-2$)",
+    "weight": 1
+   },
+   {
+    "text": "Plane removes one coordinate of particle 1 ($-1$)",
+    "weight": 1
+   },
+   {
+    "text": "Result $9-2-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Generalized coordinates = Cartesian coordinates minus holonomic constraints (gen-coords).\nStart: $3\\times3=9$.\nTwo rod-length constraints: $9-2=7$.\n$z_1=0$ is one more constraint: $7-1=6$.",
+  "hints": [
+   "Subtract one per independent constraint equation."
+  ],
+  "check": "9-2-1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.gen-coords",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A bead of mass $0.20\\ \\mathrm{kg}$ slides on a frictionless helical wire $x=R\\cos\\theta,\\ y=R\\sin\\theta,\\ z=b\\theta$ with $R=0.50\\ \\mathrm m$ and $b=0.12\\ \\mathrm{m/rad}$. At an instant $\\dot\\theta=4.0\\ \\mathrm{rad/s}$. Find the kinetic energy in J.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4230400000000001,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Velocity components $\\dot x,\\dot y,\\dot z$ in terms of $\\dot\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "Sum of squares gives $(R^2+b^2)\\dot\\theta^2$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical $T$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "One coordinate $\\theta$ describes the bead (gen-coords).\n$\\dot x=-R\\dot\\theta\\sin\\theta,\\ \\dot y=R\\dot\\theta\\cos\\theta,\\ \\dot z=b\\dot\\theta$ (vec-comp).\n$T=\\tfrac12 m(R^2+b^2)\\dot\\theta^2$.\n$=\\tfrac12(0.20)(0.2500+0.0144)(16)\\approx0.423\\ \\mathrm J$.",
+  "hints": [
+   "Differentiate each Cartesian coordinate with respect to time."
+  ],
+  "check": "0.5*0.20*(0.50**2+0.12**2)*4.0**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.euler-lagrange",
+   "t2.rot-dynamics",
+   "t6.gen-coords"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An Atwood machine has masses $3.0\\ \\mathrm{kg}$ and $1.0\\ \\mathrm{kg}$ on a rope over a pulley, a uniform-disc-like wheel of moment of inertia $0.50\\ \\mathrm{kg\\,m^2}$ and radius $0.50\\ \\mathrm m$. The rope does not slip. Use $g=9.8\\ \\mathrm{m/s^2}$. Find the magnitude of the mass acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.266666666666667,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Single coordinate $x$; $T=\\tfrac12(m_1+m_2+I/R^2)\\dot x^2$",
+    "weight": 2
+   },
+   {
+    "text": "$V=-(m_1-m_2)gx$ and Lagrange equation",
+    "weight": 2
+   },
+   {
+    "text": "Numerical $a$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Choose $x$ = descent of the heavy mass; the pulley turns at $\\dot x/R$ (gen-coords).\n$L=\\tfrac12(m_1+m_2+I/R^2)\\dot x^2+(m_1-m_2)gx$.\nLagrange: $(m_1+m_2+I/R^2)\\ddot x=(m_1-m_2)g$ (euler-lagrange).\n$I/R^2=2.0\\ \\mathrm{kg}$, so $\\ddot x=19.6/6.0\\approx3.27\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "The wheel adds an effective mass $I/R^2$ to the kinetic term."
+  ],
+  "check": "(3.0-1.0)*9.8/(3.0+1.0+0.50/0.50**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.euler-lagrange",
+   "t2.shm",
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A bead of mass $0.50\\ \\mathrm{kg}$ slides on a smooth horizontal rod that rotates about one end at constant $\\omega=3.0\\ \\mathrm{rad/s}$. A spring ($k=20\\ \\mathrm{N/m}$, zero natural length) joins the bead to the pivot. Small radial motion obeys $\\ddot r=-\\Omega^2 r$. Find $\\Omega$ in rad/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.5677643628300215,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Lagrangian $L=\\tfrac12m(\\dot r^2+r^2\\omega^2)-\\tfrac12kr^2$ with $\\theta=\\omega t$",
+    "weight": 2
+   },
+   {
+    "text": "Lagrange equation $m\\ddot r=(m\\omega^2-k)r$",
+    "weight": 1
+   },
+   {
+    "text": "$\\Omega^2=k/m-\\omega^2$ and number",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "One free coordinate $r$; $\\theta=\\omega t$ is imposed (gen-coords).\n$L=\\tfrac12m(\\dot r^2+\\omega^2r^2)-\\tfrac12kr^2$.\nLagrange: $m\\ddot r=m\\omega^2r-kr$ (euler-lagrange).\n$\\Omega^2=k/m-\\omega^2=40-9=31$, $\\Omega\\approx5.57\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Centrifugal term lowers the effective spring constant."
+  ],
+  "check": "(20/0.50-3.0**2)**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.cyclic",
+   "t6.gen-coords"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A particle has Lagrangian $L=\\tfrac12m(\\dot r^2+r^2\\dot\\theta^2+\\dot z^2)-V(r,\\,z-b\\theta)$ with constant $b$. Neither $\\theta$ nor $z$ is cyclic. Which quantity is conserved?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$mr^2\\dot\\theta$",
+    "$m\\dot z$",
+    "$mr^2\\dot\\theta-b\\,m\\dot z$",
+    "$mr^2\\dot\\theta+m\\dot z/b$",
+    "$mr^2\\dot\\theta+b\\,m\\dot z$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "only valid if $V$ ignored $\\theta$",
+    "only valid if $V$ ignored $z$",
+    "wrong relative sign of the two momenta",
+    "wrong weight: $b$ divides instead of multiplying",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identify symmetry $\\theta\\to\\theta+\\epsilon,\\ z\\to z+b\\epsilon$ leaves $z-b\\theta$ fixed",
+    "weight": 2
+   },
+   {
+    "text": "Conserved charge $p_\\theta+b\\,p_z$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $p_\\theta=mr^2\\dot\\theta,\\ p_z=m\\dot z$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Shift $\\theta$ by $\\epsilon$ and $z$ by $b\\epsilon$: $z-b\\theta$ is unchanged, so $L$ is invariant (cyclic).\nConserved charge $=p_\\theta\\cdot1+p_z\\cdot b$ (gen-coords).\nCheck: $\\dot p_\\theta=-\\partial V/\\partial\\theta=bV_2$ and $\\dot p_z=-V_2$, so $\\dot p_\\theta+b\\dot p_z=0$.\nSo $mr^2\\dot\\theta+b\\,m\\dot z$.",
+  "hints": [
+   "Find the combined shift of $\\theta$ and $z$ that leaves $L$ unchanged."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.cyclic",
+   "t2.ang-mom",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A spherical pendulum has a point mass on a massless rigid rod of length $1.0\\ \\mathrm m$. It is released at the horizontal position ($90^\\circ$ from the downward vertical) with purely azimuthal (horizontal, tangential) speed $2.0\\ \\mathrm{m/s}$. Use $g=9.8\\ \\mathrm{m/s^2}$. Find the smallest polar angle from the downward vertical it reaches, in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25.424072293427624,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Azimuth $\\phi$ cyclic: $l_z=ml^2\\sin^2\\theta\\,\\dot\\phi$ conserved",
+    "weight": 2
+   },
+   {
+    "text": "Energy conservation with $l_z$ eliminated at the turning point",
+    "weight": 2
+   },
+   {
+    "text": "Solve for $\\cos\\theta$ and convert",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$\\phi$ is cyclic, so $l_z=ml^2\\sin^2\\theta\\,\\dot\\phi=m l v_0$ (cyclic).\nAt turning points $\\dot\\theta=0$: $E=\\frac{l_z^2}{2ml^2\\sin^2\\theta}-mgl\\cos\\theta$ (energy).\nWith $m=l=1$: $\\frac{v_0^2}{2\\sin^2\\theta}-g\\cos\\theta=\\frac{v_0^2}{2}$.\nLet $c=\\cos\\theta$: $9.8c^2+2c-9.8=0$, so $c\\approx0.903$.\n$\\theta\\approx25.4^\\circ$.",
+  "hints": [
+   "Eliminate $\\dot\\phi$ using the conserved azimuthal angular momentum."
+  ],
+  "check": "math.degrees(math.acos((-2+math.sqrt(4+4*9.8*9.8))/(2*9.8)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.hamiltonian",
+   "t6.euler-lagrange",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A particle has $L=\\tfrac12m\\,D(x)\\,\\dot x^2-\\tfrac12kx^2$ with $D=1+x^2/a^2$. Which expression gives Hamilton's equation for $\\dot p$ in terms of $x$ and $p$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-kx$",
+    "$-\\dfrac{p^2x}{ma^2D^2}-kx$",
+    "$\\dfrac{p^2x}{ma^2D}-kx$",
+    "$\\dfrac{p^2x}{2ma^2D^2}-kx$",
+    "$\\dfrac{p^2x}{ma^2D^2}-kx$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "treated the mass as constant",
+    "sign of the kinetic term flipped",
+    "$D$ to the first power instead of squared",
+    "dropped the 2 in $dD/dx=2x/a^2$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$p=mD\\dot x$ and $H=p^2/(2mD)+\\tfrac12kx^2$",
+    "weight": 2
+   },
+   {
+    "text": "$\\dot p=-\\partial H/\\partial x$ at fixed $p$",
+    "weight": 1
+   },
+   {
+    "text": "Derivative of $1/D$ gives $-D'/D^2$ with $D'=2x/a^2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$p=\\partial L/\\partial\\dot x=mD\\dot x$ (hamiltonian).\n$H=\\dfrac{p^2}{2mD}+\\tfrac12kx^2$.\n$\\dot p=-\\partial H/\\partial x$ at fixed $p$.\n$\\partial_x(1/D)=-D'/D^2=-2x/(a^2D^2)$.\nSo $\\dot p=\\dfrac{p^2x}{ma^2D^2}-kx$.",
+  "hints": [
+   "Write $H(x,p)$ first, then differentiate at fixed $p$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.hamiltonian",
+   "t6.rotating",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A bead is threaded on a smooth hoop of radius $0.50\\ \\mathrm m$ that rotates at constant $\\omega=6.0\\ \\mathrm{rad/s}$ about its vertical diameter. Let $\\theta$ be the polar angle of the bead measured from the top of the hoop. The bead is released from rest relative to the hoop at $\\theta=90^\\circ$. Use $g=9.8\\ \\mathrm{m/s^2}$. Find $|\\dot\\theta|$ when $\\theta=120^\\circ$, in rad/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.255764119219941,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$L=\\tfrac12mR^2(\\dot\\theta^2+\\omega^2\\sin^2\\theta)-mgR\\cos\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "$H=\\tfrac12mR^2\\dot\\theta^2-\\tfrac12mR^2\\omega^2\\sin^2\\theta+mgR\\cos\\theta$ conserved (not $E$)",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate at the two angles",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$L$ has no explicit time dependence, so $H$ is conserved; $H\\ne T+V$ here (hamiltonian).\n$H/m=\\tfrac12R^2\\dot\\theta^2-\\tfrac12R^2\\omega^2\\sin^2\\theta+gR\\cos\\theta$ (rotating).\nStart: $-\\tfrac12(0.25)(36)=-4.5$.\nAt $120^\\circ$: $\\tfrac12R^2\\dot\\theta^2=-4.5+3.375+2.45=1.325$.\n$\\dot\\theta^2=10.6$, $|\\dot\\theta|\\approx3.26\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Kinetic plus gravitational energy alone is not conserved in the lab; $H$ is."
+  ],
+  "check": "(2*(-0.5*0.25*36+0.5*0.25*36*0.75+9.8*0.5*0.5)/0.25)**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.central-force",
+   "t2.gravitation",
+   "t2.ang-mom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A satellite orbits Earth with perigee distance $7.0\\times10^{6}\\ \\mathrm m$ and apogee distance $2.1\\times10^{7}\\ \\mathrm m$ from Earth's centre. Take $GM=3.99\\times10^{14}\\ \\mathrm{m^3/s^2}$. Find its speed at apogee in km/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.0822070014844885,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Energy conservation between apsides",
+    "weight": 2
+   },
+   {
+    "text": "Angular momentum $r_pv_p=r_av_a$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $v_a$ in km/s",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "At apsides the velocity is perpendicular to $\\vec r$, so $r_pv_p=r_av_a$ (central-force).\nEnergy: $\\tfrac12v_p^2-GM/r_p=\\tfrac12v_a^2-GM/r_a$ (gravitation).\nSubstitute $v_p=v_ar_a/r_p$: $v_a^2=\\dfrac{2GM\\,r_p}{r_a(r_a+r_p)}$.\n$v_a\\approx3.08\\ \\mathrm{km/s}$.",
+  "hints": [
+   "Two conserved quantities, two unknown speeds."
+  ],
+  "check": "((2*3.99e14*7.0e6)/(2.1e7*(2.1e7+7.0e6)))**0.5/1000",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.central-force",
+   "t2.potential",
+   "t2.circular"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle of mass $m$ moves under the attractive central force $F(r)=-k/r^3$ with $k>0$ and potential energy zero at infinity. It moves in a circular orbit of radius $r$. What is its total energy?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\dfrac{k}{2r^2}$",
+    "$\\dfrac{k}{2r^2}$",
+    "$-\\dfrac{k}{r^2}$",
+    "$\\dfrac{k}{r^2}$",
+    "$0$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took only the potential energy",
+    "took only the kinetic energy",
+    "used $V=-k/r^2$ (forgot the factor $\\tfrac12$) with no kinetic energy",
+    "used $V=-k/r^2$ and $T=2k/r^2$ wrongly",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Potential $V=-k/(2r^2)$ from $F=-dV/dr$",
+    "weight": 1
+   },
+   {
+    "text": "Circular orbit: $mv^2/r=k/r^3$ so $T=k/(2r^2)$",
+    "weight": 2
+   },
+   {
+    "text": "$E=T+V=0$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$V(r)=-\\dfrac{k}{2r^2}$, since $F=-dV/dr=-k/r^3$ (potential).\nCircular orbit: $mv^2/r=k/r^3$, so $T=\\tfrac12mv^2=\\dfrac{k}{2r^2}$ (central-force).\n$E=T+V=0$.\nThe circular orbit is marginal and unstable.",
+  "hints": [
+   "Find $V$ first, then get $T$ from the centripetal condition."
+  ],
+  "check": "0",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.eff-potential",
+   "t6.central-force",
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A particle of mass $0.50\\ \\mathrm{kg}$ moves in the plane under the central force $F=-\\lambda r^3$ (potential $\\tfrac14\\lambda r^4$) with $\\lambda=2.0\\ \\mathrm{N/m^3}$. It is in a circular orbit of radius $1.5\\ \\mathrm m$ and receives a tiny radial kick. Find the angular frequency of the radial oscillation in rad/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7.3484692283495345,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Effective potential $U=\\ell^2/(2mr^2)+\\tfrac14\\lambda r^4$",
+    "weight": 1
+   },
+   {
+    "text": "Circular orbit fixes $\\ell^2=m\\lambda r_0^6$",
+    "weight": 1
+   },
+   {
+    "text": "$U''(r_0)=6\\lambda r_0^2$",
+    "weight": 2
+   },
+   {
+    "text": "$\\omega_r=\\sqrt{U''/m}$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$U_{\\rm eff}=\\dfrac{\\ell^2}{2mr^2}+\\tfrac14\\lambda r^4$ (eff-potential).\n$U'=0$ at $r_0$ gives $\\ell^2=m\\lambda r_0^6$.\n$U''=\\dfrac{3\\ell^2}{mr_0^4}+3\\lambda r_0^2=6\\lambda r_0^2$ (linearize).\n$\\omega_r^2=U''/m=6(2.0)(2.25)/0.50=54$.\n$\\omega_r\\approx7.35\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "The radial equation is $m\\ddot r=-U_{\\rm eff}'$; expand about $r_0$."
+  ],
+  "check": "(6*2.0*1.5**2/0.50)**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.eff-potential",
+   "t2.gravitation",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A comet is at distance $2.0\\times10^{11}\\ \\mathrm m$ from the Sun, moving at $1.0\\times10^{4}\\ \\mathrm{m/s}$ perpendicular to the radius. Take $GM_\\odot=1.33\\times10^{20}\\ \\mathrm{m^3/s^2}$. Find its closest approach to the Sun in units of $10^{10}\\ \\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.6260162601626016,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$E$ and $\\ell$ per unit mass from the initial state",
+    "weight": 2
+   },
+   {
+    "text": "Turning points: $E=\\ell^2/(2r^2)-GM/r$",
+    "weight": 1
+   },
+   {
+    "text": "Quadratic in $r$; pick the other root",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Per unit mass: $\\ell=rv=2.0\\times10^{15}$, $E=\\tfrac12v^2-GM/r=-6.15\\times10^{8}$ (work-energy).\nTurning points solve $E=\\dfrac{\\ell^2}{2r^2}-\\dfrac{GM}{r}$ (eff-potential).\n$6.15\\times10^8r^2-1.33\\times10^{20}r+2.0\\times10^{30}=0$.\nRoots $2.0\\times10^{11}$ (start, apoapsis) and $1.63\\times10^{10}\\ \\mathrm m$.\nAnswer $\\approx1.63$.",
+  "hints": [
+   "The starting point is itself a turning point."
+  ],
+  "check": "((1.33e20-(1.33e20**2-4*6.15e8*2.0e30)**0.5)/(2*6.15e8))/1e10",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.small-osc",
+   "t6.euler-lagrange"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A mass $m_1=2.0\\ \\mathrm{kg}$ is joined to a wall by a spring $k=12\\ \\mathrm{N/m}$ and to a mass $m_2=1.0\\ \\mathrm{kg}$ by a second identical spring. The masses slide on a frictionless line and the far side of $m_2$ is free. Find the higher normal-mode angular frequency in rad/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.526066876907429,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Lagrangian with coordinates $x_1,x_2$ and matrices $M,K$",
+    "weight": 1
+   },
+   {
+    "text": "$K=\\begin{pmatrix}2k&-k\\\\-k&k\\end{pmatrix}$",
+    "weight": 1
+   },
+   {
+    "text": "Secular equation $\\det(K-\\omega^2M)=0$",
+    "weight": 2
+   },
+   {
+    "text": "Larger root and square root",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$L=\\tfrac12m_1\\dot x_1^2+\\tfrac12m_2\\dot x_2^2-\\tfrac12kx_1^2-\\tfrac12k(x_2-x_1)^2$ (euler-lagrange).\n$K=\\begin{pmatrix}24&-12\\\\-12&12\\end{pmatrix}$, $M=\\mathrm{diag}(2,1)$.\n$\\det(K-\\omega^2M)=0\\Rightarrow\\omega^4-24\\omega^2+72=0$ (small-osc).\n$\\omega^2=12\\pm\\sqrt{72}$, larger $=20.49$.\n$\\omega\\approx4.53\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Write $K$ and $M$, then solve the eigenproblem."
+  ],
+  "check": "((24+(24**2-4*72)**0.5)/2)**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.small-osc",
+   "t1.linearize",
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle of mass $0.50\\ \\mathrm{kg}$ moves in the horizontal plane in the potential $V=4x^2+y^2+2xy$ (joules, with $x,y$ in metres). For small motion about the origin, find the lower normal-mode angular frequency in rad/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.6699992362489338,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Hessian $\\begin{pmatrix}8&2\\\\2&2\\end{pmatrix}$ from second derivatives",
+    "weight": 2
+   },
+   {
+    "text": "Eigenvalues $5\\pm\\sqrt{13}$",
+    "weight": 1
+   },
+   {
+    "text": "$\\omega^2=\\lambda/m$, lower root",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Equations of motion $m\\ddot{\\vec r}=-H\\vec r$, with $H_{ij}=\\partial_i\\partial_jV$ (small-osc).\n$H=\\begin{pmatrix}8&2\\\\2&2\\end{pmatrix}$ (linearize).\nEigenvalues: $\\lambda=5\\pm\\sqrt{13}$, lower $1.394$.\n$\\omega^2=\\lambda/m=2.789$, $\\omega\\approx1.67\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Find the second-derivative matrix of $V$ at the origin."
+  ],
+  "check": "((5-13**0.5)/0.50)**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rotating",
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An object is dropped from rest from a $100\\ \\mathrm m$ tower at latitude $60^\\circ$ N. Ignore air resistance. Take $g=9.8\\ \\mathrm{m/s^2}$ and Earth's angular speed $7.29\\times10^{-5}\\ \\mathrm{rad/s}$. Find the eastward deflection at the ground in cm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.0977621020298807,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Coriolis acceleration $-2\\vec\\Omega\\times\\vec v$ with $v=-gt$ downward",
+    "weight": 2
+   },
+   {
+    "text": "Eastward component $2\\Omega g t\\cos\\lambda$, integrate twice",
+    "weight": 1
+   },
+   {
+    "text": "Fall time $t=\\sqrt{2h/g}$ and number in cm",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Falling velocity $v=-gt$; Coriolis acceleration $-2\\vec\\Omega\\times\\vec v$ has an eastward part $2\\Omega gt\\cos\\lambda$ (rotating).\nIntegrate twice: $x=\\tfrac13\\Omega g t^3\\cos\\lambda$ (kin-1d).\n$t=\\sqrt{200/9.8}=4.52\\ \\mathrm s$.\n$x=\\tfrac13(7.29\\times10^{-5})(9.8)(92.2)(0.5)\\approx1.1\\times10^{-2}\\ \\mathrm m=1.10\\ \\mathrm{cm}$.",
+  "hints": [
+   "Only the horizontal-tangential component of $\\vec\\Omega$ matters."
+  ],
+  "check": "(7.29e-5*9.8*(2*100/9.8)**1.5*0.5/3)*100",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rotating",
+   "t2.shm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "At latitude $40^\\circ$ N, a Foucault pendulum's plane of swing rotates uniformly. Take Earth's angular speed $7.29\\times10^{-5}\\ \\mathrm{rad/s}$. How long, in hours, does the plane take to turn through $90^\\circ$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.311557966543345,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Only the local vertical component of $\\vec\\Omega$ rotates the plane: $\\Omega\\sin\\lambda$",
+    "weight": 2
+   },
+   {
+    "text": "Time $=(\\pi/2)/(\\Omega\\sin\\lambda)$",
+    "weight": 1
+   },
+   {
+    "text": "Convert to hours",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The horizontal pendulum plane precesses at the vertical part of $\\vec\\Omega$ (rotating).\nRate $=\\Omega\\sin\\lambda=7.29\\times10^{-5}\\times0.643=4.69\\times10^{-5}\\ \\mathrm{rad/s}$ (shm).\n$t=(\\pi/2)/4.69\\times10^{-5}=3.35\\times10^{4}\\ \\mathrm s$.\n$\\approx9.3\\ \\mathrm h$.",
+  "hints": [
+   "Which component of $\\vec\\Omega$ is along the local vertical?"
+  ],
+  "check": "(math.pi/2)/(7.29e-5*math.sin(math.radians(40)))/3600",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.lorentz-tr",
+   "t6.invariants"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In frame S two events are separated by $\\Delta x=360\\ \\mathrm m$ along $x$ and $\\Delta t=0.50\\ \\mu\\mathrm s$. Frame S$'$ moves at $0.80c$ in the $+x$ direction relative to S. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. Find $|\\Delta t'|$ in ns.",
+  "answer": {
+   "kind": "numeric",
+   "value": 766.6666666666666,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\gamma=5/3$ for $\\beta=0.8$",
+    "weight": 1
+   },
+   {
+    "text": "$\\Delta t'=\\gamma(\\Delta t-v\\Delta x/c^2)$",
+    "weight": 2
+   },
+   {
+    "text": "Number in ns, magnitude",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\gamma=1/\\sqrt{1-0.64}=5/3$ (lorentz-tr).\n$v\\Delta x/c^2=0.8(360)/(3.00\\times10^{8})=0.96\\ \\mu\\mathrm s$.\n$\\Delta t'=\\tfrac53(0.50-0.96)\\ \\mu\\mathrm s=-0.767\\ \\mu\\mathrm s$.\nSpacelike interval ($c\\Delta t=150\\ \\mathrm m<360\\ \\mathrm m$), so the order flips (invariants).\n$|\\Delta t'|\\approx767\\ \\mathrm{ns}$.",
+  "hints": [
+   "Mind the sign of $v\\Delta x$ for a boost along $+x$."
+  ],
+  "check": "abs(5/3*(0.5e-6-0.8*360/3.00e8))*1e9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.lorentz-tr",
+   "t6.dilation-contraction"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In frame S$'$, two events occur simultaneously and $5.0\\ \\mathrm m$ apart along $x'$. S$'$ moves at $0.60c$ along $+x$ relative to frame S. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. Find the magnitude of the time between the events in S, in ns.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12.5,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Use inverse transform: $\\Delta t=\\gamma(\\Delta t'+v\\Delta x'/c^2)$",
+    "weight": 2
+   },
+   {
+    "text": "$\\Delta t'=0$ and $\\gamma=1.25$",
+    "weight": 1
+   },
+   {
+    "text": "Number in ns",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Events simultaneous in S$'$ are not simultaneous in S (lorentz-tr).\nInverse boost with $\\Delta t'=0$: $\\Delta t=\\gamma v\\Delta x'/c^2$.\n$\\gamma=1.25$, $v\\Delta x'/c^2=0.6(5.0)/(3.00\\times10^{8})=10\\ \\mathrm{ns}$.\n$\\Delta t=12.5\\ \\mathrm{ns}$ (dilation-contraction: not dilation, since the events are not at one place).",
+  "hints": [
+   "Transform from S$'$ back to S."
+  ],
+  "check": "1.25*0.6*5.0/3.00e8*1e9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.dilation-contraction",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Muons are created at an altitude of $10.0\\ \\mathrm{km}$ and move straight down at $0.995c$. Their proper mean lifetime is $2.2\\ \\mu\\mathrm s$. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. What fraction survives to reach the ground? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.21852372392303793,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\gamma\\approx10.0$ for $\\beta=0.995$",
+    "weight": 1
+   },
+   {
+    "text": "Lifetime in Earth frame $\\gamma\\tau$ (or contract the path to $h/\\gamma$)",
+    "weight": 2
+   },
+   {
+    "text": "Survival $e^{-t/\\gamma\\tau}$ and number",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\gamma=1/\\sqrt{1-0.995^2}=10.01$ (dilation-contraction).\nMean decay length in the Earth frame: $\\gamma\\beta c\\tau=10.01(0.995)(3.00\\times10^8)(2.2\\times10^{-6})=6.57\\ \\mathrm{km}$.\nSurvival $=e^{-10.0/6.57}$ (estimate).\n$\\approx0.218$.",
+  "hints": [
+   "In the muon frame the path is contracted instead; both views agree."
+  ],
+  "check": "math.exp(-10000/(0.995*3.00e8*2.2e-6/(1-0.995**2)**0.5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.dilation-contraction",
+   "t6.lorentz-tr",
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A spaceship of proper length $100\\ \\mathrm m$ passes a station at $0.80c$ relative to the station. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. Observers on the ship time how long a single marker on the station takes to go from the ship's nose to its tail. In ns, this time is closest to:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$250$",
+    "$150$",
+    "$694$",
+    "$333$",
+    "$417$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "station-frame time $60/(0.8c)$, the wrong frame",
+    "station time divided by $\\gamma$ again",
+    "ship time multiplied by $\\gamma$ again",
+    "ignored the speed: $L_0/c$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Ship frame: ship is at rest with length $100\\ \\mathrm m$",
+    "weight": 1
+   },
+   {
+    "text": "Marker moves at $0.80c$ in the ship frame",
+    "weight": 2
+   },
+   {
+    "text": "$t=L_0/(0.8c)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "In the ship frame the ship has its proper length $100\\ \\mathrm m$ and the station marker moves past at $0.80c$ (dilation-contraction).\n$t=100/(0.80\\times3.00\\times10^{8})=4.17\\times10^{-7}\\ \\mathrm s$.\nCheck from the station: $t_0=60/0.8c=250\\ \\mathrm{ns}$ is the proper time, and the ship frame sees $\\gamma t_0=417\\ \\mathrm{ns}$ (lorentz-tr).",
+  "hints": [
+   "Work in the frame where the ship is at rest."
+  ],
+  "check": "round(100/(0.8*3.00e8)*1e9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.vel-addition",
+   "t6.lorentz-tr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In Earth's frame, spaceship A moves at $+0.80c$ and spaceship B at $-0.60c$ along the same line. Find the speed of B as measured by A, in units of $c$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.9459459459459459,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Boost to A's frame: $u'=(u-v)/(1-uv/c^2)$ with $u=-0.6c,\\ v=0.8c$",
+    "weight": 2
+   },
+   {
+    "text": "Substitute numbers",
+    "weight": 1
+   },
+   {
+    "text": "Magnitude",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A's frame moves at $v=0.80c$ (lorentz-tr).\n$u'=\\dfrac{-0.60-0.80}{1-(-0.60)(0.80)}c=\\dfrac{-1.40}{1.48}c$ (vel-addition).\nSpeed $=0.946c$, below $c$ as required.",
+  "hints": [
+   "Subtract velocities in the numerator and divide by $1-uv/c^2$."
+  ],
+  "check": "(0.8+0.6)/(1+0.8*0.6)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.vel-addition",
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Light travels through water of refractive index $1.33$ that flows at $10.0\\ \\mathrm{m/s}$ in the same direction as the light, as seen in the lab. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. By how much, in m/s, does the lab speed of the light exceed $c/n$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.346769064664841,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "In the water frame the light speed is $c/n$",
+    "weight": 1
+   },
+   {
+    "text": "Relativistic velocity addition $(c/n+u)/(1+u/(nc))$",
+    "weight": 2
+   },
+   {
+    "text": "Expand to first order: $u(1-1/n^2)$ and number",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "In the water frame light moves at $c/n$ (refraction).\nLab speed $=\\dfrac{c/n+u}{1+u/(nc)}$ (vel-addition).\nFirst order in $u/c$: $\\approx c/n+u(1-1/n^2)$.\nExcess $=10.0(1-0.565)\\approx4.35\\ \\mathrm{m/s}$, not the Galilean $10.0$.",
+  "hints": [
+   "Expand to first order in $u/c$."
+  ],
+  "check": "(3.00e8/1.33+10.0)/(1+10.0/(1.33*3.00e8))-3.00e8/1.33",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rel-energy",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An electron, rest energy $0.511\\ \\mathrm{MeV}$, is accelerated from rest through a potential difference of $2.0\\ \\mathrm{MV}$. Find its momentum times $c$, $pc$, in MeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.4584547992590795,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Kinetic energy $K=qV=2.0\\ \\mathrm{MeV}$",
+    "weight": 1
+   },
+   {
+    "text": "$E=K+mc^2=2.511\\ \\mathrm{MeV}$",
+    "weight": 1
+   },
+   {
+    "text": "$pc=\\sqrt{E^2-(mc^2)^2}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "$K=qV=2.0\\ \\mathrm{MeV}$ (potential).\n$E=K+mc^2=2.511\\ \\mathrm{MeV}$.\n$(pc)^2=E^2-(mc^2)^2=6.305-0.261=6.044$ (rel-energy).\n$pc\\approx2.46\\ \\mathrm{MeV}$, larger than the non-relativistic $\\sqrt{2mc^2K}=1.43$.",
+  "hints": [
+   "Use $E^2=(pc)^2+(mc^2)^2$."
+  ],
+  "check": "(2.511**2-0.511**2)**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rel-energy",
+   "t6.invariants"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle's total energy equals three times its rest energy. Its momentum in units of $mc$ is closest to:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.00$",
+    "$2.00$",
+    "$1.41$",
+    "$8.00$",
+    "$2.83$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took $p=E/c$",
+    "took $p=K/c$",
+    "$\\sqrt2$ from $\\sqrt{3-1}$",
+    "forgot the square root of $E^2-m^2c^4$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$E=3mc^2$",
+    "weight": 1
+   },
+   {
+    "text": "$(pc)^2=E^2-(mc^2)^2=8(mc^2)^2$",
+    "weight": 2
+   },
+   {
+    "text": "$p=2\\sqrt2\\,mc$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$E=3mc^2$.\n$(pc)^2=E^2-(mc^2)^2=9(mc^2)^2-(mc^2)^2=8(mc^2)^2$ (invariants).\n$p=\\sqrt8\\,mc\\approx2.83\\,mc$ (rel-energy).",
+  "hints": [
+   "$E^2-(pc)^2$ is the invariant $(mc^2)^2$."
+  ],
+  "check": "round((9-1)**0.5,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.invariants",
+   "t6.rel-energy",
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two photons with energies $3.0\\ \\mathrm{GeV}$ and $1.0\\ \\mathrm{GeV}$ move in directions $60^\\circ$ apart. Find the invariant mass of the pair in GeV$/c^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.732050807568877,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Total four-momentum $(E_1+E_2,\\ \\vec p_1c+\\vec p_2c)$",
+    "weight": 1
+   },
+   {
+    "text": "$(pc)_{tot}^2=E_1^2+E_2^2+2E_1E_2\\cos60^\\circ$",
+    "weight": 2
+   },
+   {
+    "text": "$M^2c^4=E^2-(pc)^2$ and number",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Photons have $p_ic=E_i$; add four-vectors (invariants).\n$E=4.0$, $(pc)^2=9+1+2(3)(1)(0.5)=13$ (vec-prod).\n$M^2c^4=16-13=3\\ \\mathrm{GeV^2}$ (rel-energy).\n$M=\\sqrt3\\approx1.73\\ \\mathrm{GeV}/c^2$.",
+  "hints": [
+   "$M^2=2E_1E_2(1-\\cos\\theta)$ for two photons."
+  ],
+  "check": "(2*3.0*1.0*(1-math.cos(math.radians(60))))**0.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.invariants",
+   "t6.lorentz-tr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In frame S a particle has total energy $5.0\\ \\mathrm{GeV}$ and momentum $pc=3.0\\ \\mathrm{GeV}$ along $+x$. Frame S$'$ moves at $\\beta=0.60$ along $+x$ relative to S. The particle's total energy in S$'$, in GeV, is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.0$",
+    "$3.2$",
+    "$8.5$",
+    "$3.0$",
+    "$4.0$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took $E$ as invariant",
+    "dropped the factor $\\gamma$",
+    "wrong sign in $E'=\\gamma(E+\\beta pc)$",
+    "took $pc$ as unchanged",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\gamma=1.25$ for $\\beta=0.6$",
+    "weight": 1
+   },
+   {
+    "text": "$E'=\\gamma(E-\\beta pc)$",
+    "weight": 2
+   },
+   {
+    "text": "Number, consistent with $m=4$ GeV",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Energy and momentum form a four-vector (invariants).\n$\\gamma=1.25$.\n$E'=\\gamma(E-\\beta pc)=1.25(5.0-0.6\\times3.0)=4.0\\ \\mathrm{GeV}$ (lorentz-tr).\nCheck: $p'c=1.25(3.0-0.6\\times5.0)=0$, so S$'$ is the rest frame with $m=\\sqrt{25-9}=4$ GeV.",
+  "hints": [
+   "Boost the $(E,\\,pc)$ pair like $(ct,x)$."
+  ],
+  "check": "1.25*(5.0-0.6*3.0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rel-collisions",
+   "t6.invariants",
+   "t6.rel-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A photon strikes a proton at rest and produces a proton and a neutral pion: $\\gamma+p\\to p+\\pi^0$. Take $m_pc^2=938.3\\ \\mathrm{MeV}$ and $m_{\\pi}c^2=135.0\\ \\mathrm{MeV}$. Find the threshold photon energy in MeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 144.71171267185335,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$s=(E+m_pc^2)^2-(pc)^2=m_p^2+2Em_p$ (invariant)",
+    "weight": 2
+   },
+   {
+    "text": "Threshold: products at rest, $s=(m_p+m_\\pi)^2$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $E$ and number",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Invariant: $s=m_p^2+2Em_p$ (units $c=1$), using $p_\\gamma=E$ (invariants).\nAt threshold $s=(m_p+m_\\pi)^2$ (rel-collisions).\n$E=\\dfrac{m_\\pi(2m_p+m_\\pi)}{2m_p}=\\dfrac{135.0(2011.6)}{1876.6}$.\n$E\\approx144.7\\ \\mathrm{MeV}$, slightly above $m_\\pi$.",
+  "hints": [
+   "Evaluate $s$ in the lab and at threshold."
+  ],
+  "check": "135.0*(2*938.3+135.0)/(2*938.3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.rel-collisions",
+   "t6.rel-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle of rest mass $m$ moving at $0.60c$ collides and sticks to an identical particle at rest. The rest mass of the combined object, in units of $m$, is closest to:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2.00$",
+    "$2.25$",
+    "$2.50$",
+    "$1.50$",
+    "$2.12$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "assumed rest mass is conserved",
+    "used total energy $/c^2=(1+\\gamma)m$ as rest mass",
+    "used $2\\gamma m$",
+    "took $M=(E-pc)/c^2$ without squaring",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\gamma=1.25$, $E=(1+\\gamma)mc^2=2.25mc^2$",
+    "weight": 1
+   },
+   {
+    "text": "$p=\\gamma\\beta mc=0.75\\,mc$ conserved",
+    "weight": 1
+   },
+   {
+    "text": "$M^2c^4=E^2-(pc)^2$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "Conserve four-momentum: $E=(1+\\gamma)mc^2=2.25mc^2$, $pc=\\gamma\\beta mc^2=0.75mc^2$ (rel-collisions).\n$M^2c^4=E^2-(pc)^2=5.0625-0.5625=4.5\\,m^2c^4$ (rel-energy).\n$M=\\sqrt{4.5}\\,m\\approx2.12m$.\nKinetic energy became rest mass, so $M>2m$.",
+  "hints": [
+   "Use $E^2-(pc)^2$ for the composite."
+  ],
+  "check": "round((2*(1+1/(1-0.6**2)**0.5))**0.5,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

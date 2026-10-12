@@ -1,0 +1,1573 @@
+[
+ {
+  "id": "t8-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.born",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle on the half-line has $\\psi(x)=A\\,x\\,e^{-x/a}$ for $x\\ge0$ and $\\psi=0$ for $x<0$, with $a>0$ and $A$ real. Find the probability of finding it at $x>2a$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$13e^{-4}$",
+    "$5e^{-2}$",
+    "$26e^{-4}$",
+    "$5e^{-4}$",
+    "$1-13e^{-4}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $e^{-x/a}$ instead of $e^{-2x/a}$ in $|\\psi|^2$",
+    "dropped the factor $\\tfrac12$ from normalisation",
+    "lost the $u^2$ term when integrating by parts",
+    "probability of $x<2a$ instead"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Normalise: $\\int_0^\\infty |\\psi|^2dx=1$ fixes $A^2=4/a^3$",
+    "weight": 2
+   },
+   {
+    "text": "Integrate $|\\psi|^2$ from $2a$ to $\\infty$ with $u=2x/a$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $\\tfrac12(u^2+2u+2)e^{-u}$ at $u=4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|\\psi|^2=A^2x^2e^{-2x/a}$ (born).\n$\\int_0^\\infty x^2e^{-2x/a}dx=2!\\,(a/2)^3=a^3/4$, so $A^2=4/a^3$ (born).\nSet $u=2x/a$: $P=\\tfrac12\\int_{4}^\\infty u^2e^{-u}du$ (calc-rates).\n$\\int_4^\\infty u^2e^{-u}du=(u^2+2u+2)e^{-u}\\big|_{u=4}=26e^{-4}$.\n$P=13e^{-4}\\approx0.24$.",
+  "hints": [
+   "Normalise first, then integrate $|\\psi|^2$ with the substitution $u=2x/a$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.born",
+   "t8.inf-well"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle is in the $n=3$ stationary state of an infinite well $0<x<L$. Find the probability of finding it in $0<x<L/4$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.303051647697,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Write $|\\psi_3|^2=\\tfrac2L\\sin^2(3\\pi x/L)$",
+    "weight": 1
+   },
+   {
+    "text": "Integrate with $\\sin^2=\\tfrac12(1-\\cos2\\theta)$ over $0$ to $L/4$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate the sine at $3\\pi/2$ and combine",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\psi_3=\\sqrt{2/L}\\,\\sin(3\\pi x/L)$ (inf-well).\n$P=\\int_0^{L/4}\\tfrac2L\\sin^2\\!\\tfrac{3\\pi x}{L}dx$ (born).\n$=\\tfrac1L\\int_0^{L/4}\\!\\big(1-\\cos\\tfrac{6\\pi x}{L}\\big)dx=\\tfrac14-\\tfrac{1}{6\\pi}\\sin\\tfrac{3\\pi}{2}$.\n$\\sin(3\\pi/2)=-1$, so $P=\\tfrac14+\\tfrac1{6\\pi}\\approx0.303$.",
+  "hints": [
+   "Use the half-angle identity; the sine at $3\\pi/2$ is $-1$, not $0$."
+  ],
+  "check": "0.25-math.sin(3*math.pi/2)/(6*math.pi)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.tise",
+   "t8.qho"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$, $q=1.60\\times10^{-19}\\ \\mathrm C$) has the stationary state $\\psi=Ae^{-x^2/2b^2}$ with energy $E=\\hbar^2/(2mb^2)$, where $b=0.50\\ \\mathrm{nm}$, in an even potential that is a pure parabola $V=\\tfrac12m\\omega^2x^2$. Find $\\hbar\\omega$ in eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.302552140505,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Compute $\\psi''/\\psi$ for the Gaussian",
+    "weight": 1
+   },
+   {
+    "text": "Solve the Schrodinger equation for $V(x)$",
+    "weight": 2
+   },
+   {
+    "text": "Match to $\\tfrac12m\\omega^2x^2$ and convert to eV",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\psi''/\\psi=x^2/b^4-1/b^2$ (tise).\n$V=E+\\tfrac{\\hbar^2}{2m}\\psi''/\\psi=\\dfrac{\\hbar^2x^2}{2mb^4}$ (tise).\nCompare with $\\tfrac12m\\omega^2x^2$: $\\omega=\\hbar/(mb^2)$ (qho).\n$\\hbar\\omega=\\hbar^2/(mb^2)=4.84\\times10^{-20}\\ \\mathrm J\\approx0.30\\ \\mathrm{eV}$.",
+  "hints": [
+   "Insert $\\psi$ into $-\\tfrac{\\hbar^2}{2m}\\psi''+V\\psi=E\\psi$ and solve for $V$."
+  ],
+  "check": "(1.05e-34)**2/(9.11e-31*(0.50e-9)**2)/1.60e-19",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.tise",
+   "t8.born"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$, $q=1.60\\times10^{-19}\\ \\mathrm C$) sits in $V(x)=-\\alpha\\,\\delta(x)$ with $\\alpha=0.20\\ \\mathrm{eV\\,nm}$. Its single bound state is $\\psi\\propto e^{-\\kappa|x|}$. Find the rms position $\\sqrt{\\langle x^2\\rangle}$ in nm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.267420837767,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Derivative jump at the delta gives $\\kappa=m\\alpha/\\hbar^2$",
+    "weight": 2
+   },
+   {
+    "text": "Normalise $e^{-\\kappa|x|}$ and compute $\\langle x^2\\rangle=1/(2\\kappa^2)$",
+    "weight": 2
+   },
+   {
+    "text": "Numbers: $\\alpha$ in J m, then nm",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Integrate the Schrodinger equation across $x=0$: $\\Delta\\psi'=-\\tfrac{2m\\alpha}{\\hbar^2}\\psi(0)$ (tise).\nWith $\\psi'$ jumping by $-2\\kappa\\psi(0)$: $\\kappa=m\\alpha/\\hbar^2$.\n$|\\psi|^2=\\kappa e^{-2\\kappa|x|}$; $\\langle x^2\\rangle=2\\kappa\\!\\int_0^\\infty x^2e^{-2\\kappa x}dx=1/(2\\kappa^2)$ (born).\n$\\alpha=3.2\\times10^{-29}\\ \\mathrm{J\\,m}$, $\\kappa=2.64\\times10^{9}\\ \\mathrm{m^{-1}}$.\n$x_{rms}=1/(\\sqrt2\\kappa)\\approx0.27\\ \\mathrm{nm}$.",
+  "hints": [
+   "The jump in $\\psi'$ across the delta fixes $\\kappa$."
+  ],
+  "check": "1/(math.sqrt(2)*(9.11e-31*0.20*1.60e-19*1e-9/(1.05e-34)**2))*1e9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.inf-well",
+   "t8.dirac"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A particle is in the ground state of an infinite well $0<x<L$. The right wall is moved instantly to $x=2L$. Find the probability that the particle is then in the ground state of the enlarged well.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{32}{9\\pi^2}$",
+    "$\\dfrac12$",
+    "$\\dfrac{4\\sqrt2}{3\\pi}$",
+    "$\\dfrac{64}{9\\pi^2}$",
+    "$\\dfrac{16}{9\\pi^2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "guessed from the width ratio",
+    "overlap amplitude, not squared",
+    "new ground state normalised with $2/L$ instead of $1/L$",
+    "dropped the $\\sqrt2$ from the two normalisations"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Sudden change: wavefunction unchanged, so probability is $|\\langle\\phi_1|\\psi_1\\rangle|^2$",
+    "weight": 2
+   },
+   {
+    "text": "Correct normalisations $\\sqrt{2/L}$ and $\\sqrt{1/L}$",
+    "weight": 1
+   },
+   {
+    "text": "Overlap integral over $0<x<L$",
+    "weight": 1
+   },
+   {
+    "text": "Square it",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Instant move leaves $\\psi_1=\\sqrt{2/L}\\sin(\\pi x/L)$ on $[0,L]$ (inf-well).\nNew ground state $\\phi_1=\\sqrt{1/L}\\sin(\\pi x/2L)$ on $[0,2L]$.\nOverlap $=\\tfrac{\\sqrt2}{L}\\int_0^L\\sin\\tfrac{\\pi x}{L}\\sin\\tfrac{\\pi x}{2L}dx$ (dirac).\nIntegral $=\\tfrac12\\big[\\tfrac{2L}\\pi+\\tfrac{2L}{3\\pi}\\big]=\\tfrac{4L}{3\\pi}$.\nOverlap $=\\dfrac{4\\sqrt2}{3\\pi}$; probability $=\\dfrac{32}{9\\pi^2}\\approx0.36$.",
+  "hints": [
+   "The state does not change in a sudden move; project it onto the new ground state."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.inf-well",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $h=6.63\\times10^{-34}\\ \\mathrm{J\\,s}$, $c=3.00\\times10^8\\ \\mathrm{m/s}$) in an infinite well absorbs a photon of wavelength $620\\ \\mathrm{nm}$ and goes from $n=2$ to $n=3$ exactly. Find the well width $L$ in nm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.969555784532,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Photon energy $hc/\\lambda$",
+    "weight": 1
+   },
+   {
+    "text": "$E_3-E_2=5E_1$ with $E_n=n^2h^2/8mL^2$",
+    "weight": 2
+   },
+   {
+    "text": "Solve for $L$ and convert",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$E_\\gamma=hc/\\lambda=3.21\\times10^{-19}\\ \\mathrm J\\approx2.0\\ \\mathrm{eV}$ (units).\n$E_n=n^2h^2/(8mL^2)$, so $E_3-E_2=5E_1$ (inf-well).\n$E_1=E_\\gamma/5=6.42\\times10^{-20}\\ \\mathrm J$.\n$L=h/\\sqrt{8mE_1}\\approx9.7\\times10^{-10}\\ \\mathrm m=0.97\\ \\mathrm{nm}$.",
+  "hints": [
+   "Energy gap between $n=2$ and $n=3$ is $5E_1$."
+  ],
+  "check": "math.sqrt((6.63e-34)**2/(8*9.11e-31*(6.63e-34*3.00e8/620e-9)/5))*1e9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.step-tunnel",
+   "t8.tise"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Particles of energy $E=2V_0$ move in from $x<0$ where $V=0$ and meet a step $V=V_0$ for $x>0$. Find the transmission probability, defined by probability flux.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12\\sqrt2-16$",
+    "$2\\sqrt2-2$",
+    "$24-16\\sqrt2$",
+    "$\\dfrac12$",
+    "$\\dfrac89$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the reflection amplitude, not its square, in $T=1-R$",
+    "squared the transmitted amplitude and forgot the flux factor $k_2/k_1$ (exceeds 1)",
+    "naive equal split",
+    "took $k_2=k_1/2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Wavenumbers: $k_2/k_1=\\sqrt{(E-V_0)/E}=1/\\sqrt2$",
+    "weight": 1
+   },
+   {
+    "text": "Match $\\psi,\\psi'$ at the step to get $r=(k_1-k_2)/(k_1+k_2)$",
+    "weight": 2
+   },
+   {
+    "text": "$R=r^2$ and $T=1-R$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$k_1\\propto\\sqrt{E}$, $k_2\\propto\\sqrt{E-V_0}$, so $k_2/k_1=1/\\sqrt2$ (step-tunnel).\nContinuity of $\\psi$ and $\\psi'$: $r=(k_1-k_2)/(k_1+k_2)=(\\sqrt2-1)/(\\sqrt2+1)=3-2\\sqrt2$ (tise).\n$R=r^2=17-12\\sqrt2\\approx0.029$.\n$T=1-R=12\\sqrt2-16\\approx0.97$ (flux conservation).",
+  "hints": [
+   "Match $\\psi$ and $\\psi'$; transmission is $1-R$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.step-tunnel",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$, $q=1.60\\times10^{-19}\\ \\mathrm C$) tunnels through a rectangular barrier whose top is $2.0\\ \\mathrm{eV}$ above its energy. In the thick-barrier limit $T\\propto e^{-2\\kappa a}$. By what factor does $T$ fall when the width $a$ goes from $0.20\\ \\mathrm{nm}$ to $0.40\\ \\mathrm{nm}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 18.3355212128,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Decay constant $\\kappa=\\sqrt{2m(V_0-E)}/\\hbar$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio $T_1/T_2=e^{2\\kappa\\Delta a}$ (prefactor cancels)",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\kappa=\\sqrt{2m(V_0-E)}/\\hbar$ with $V_0-E=3.2\\times10^{-19}\\ \\mathrm J$ (step-tunnel).\n$\\kappa\\approx7.27\\times10^{9}\\ \\mathrm{m^{-1}}$.\nSame prefactor, so $T_1/T_2=e^{2\\kappa(0.20\\ \\mathrm{nm})}$ (scaling).\nExponent $=2.91$; factor $\\approx18$.",
+  "hints": [
+   "The prefactor cancels in the ratio; only the exponent difference matters."
+  ],
+  "check": "math.exp(2*math.sqrt(2*9.11e-31*2.0*1.60e-19)/1.05e-34*0.20e-9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.qho",
+   "t8.born"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In the oscillator ground state $\\psi_0\\propto e^{-\\xi^2/2}$ with $\\xi=x\\sqrt{m\\omega/\\hbar}$, find the probability of finding the particle outside the classical turning points. Give the dimensionless number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.15729920705,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Turning point at $\\tfrac12\\hbar\\omega=\\tfrac12m\\omega^2x^2$ gives $\\xi=\\pm1$",
+    "weight": 2
+   },
+   {
+    "text": "$|\\psi_0|^2=\\pi^{-1/2}e^{-\\xi^2}$",
+    "weight": 1
+   },
+   {
+    "text": "Tail integral equals $\\mathrm{erfc}(1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$E_0=\\tfrac12\\hbar\\omega=\\tfrac12 m\\omega^2x_t^2$ gives $\\xi_t=1$ (qho).\n$|\\psi_0|^2=\\pi^{-1/2}e^{-\\xi^2}$ (born).\n$P=2\\int_1^\\infty\\pi^{-1/2}e^{-\\xi^2}d\\xi=\\mathrm{erfc}(1)$.\n$P\\approx0.157$.",
+  "hints": [
+   "Find $\\xi$ at which $E_0=V$; then integrate the Gaussian tails."
+  ],
+  "check": "math.erfc(1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.qho",
+   "t8.dirac",
+   "t8.operators"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An oscillator is in $|\\psi\\rangle=(|0\\rangle+|2\\rangle)/\\sqrt2$ with real standard $|n\\rangle$ ($a|n\\rangle=\\sqrt n|n-1\\rangle$). Find $\\langle x^2\\rangle$ in units of $\\hbar/(m\\omega)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{3+\\sqrt2}{2}$",
+    "$\\dfrac32$",
+    "$\\dfrac{3-\\sqrt2}{2}$",
+    "$\\dfrac{3+2\\sqrt2}{2}$",
+    "$\\dfrac52$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "incoherent mixture, cross term dropped",
+    "sign error on the cross term",
+    "cross term counted twice over",
+    "only $\\langle2|x^2|2\\rangle$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$x^2=\\tfrac{\\hbar}{2m\\omega}(a+a^\\dagger)^2$",
+    "weight": 1
+   },
+   {
+    "text": "Diagonal elements $\\tfrac12$ and $\\tfrac52$",
+    "weight": 2
+   },
+   {
+    "text": "Cross element $\\langle0|x^2|2\\rangle=\\tfrac{\\sqrt2}{2}$",
+    "weight": 2
+   },
+   {
+    "text": "Combine with weights $\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$x^2=\\tfrac{\\hbar}{2m\\omega}(a^2+a^{\\dagger2}+2a^\\dagger a+1)$ (operators).\n$\\langle0|x^2|0\\rangle=\\tfrac12$, $\\langle2|x^2|2\\rangle=\\tfrac52$ (qho).\n$\\langle0|x^2|2\\rangle=\\tfrac12\\langle0|a^2|2\\rangle=\\tfrac{\\sqrt2}{2}$ (dirac).\n$\\langle x^2\\rangle=\\tfrac12\\big(\\tfrac12+\\tfrac52\\big)+2\\cdot\\tfrac12\\cdot\\tfrac{\\sqrt2}2=\\tfrac{3+\\sqrt2}{2}$.",
+  "hints": [
+   "Interference between $|0\\rangle$ and $|2\\rangle$ enters through $a^2$ and $a^{\\dagger2}$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.operators",
+   "t6.hamiltonian"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle with $H=p^2/2m+\\lambda x^4$ ($\\lambda>0$) is in a stationary state. Find $\\langle T\\rangle/\\langle V\\rangle$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$1$",
+    "$4$",
+    "$\\tfrac12$",
+    "$\\tfrac14$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "harmonic-oscillator result",
+    "dropped the factor 2 in $2\\langle T\\rangle=\\langle xV'\\rangle$",
+    "ratio inverted",
+    "inverted and dropped the 2"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Consider $A=(xp+px)/2$ and Ehrenfest: $d\\langle A\\rangle/dt=\\tfrac i\\hbar\\langle[H,A]\\rangle$",
+    "weight": 2
+   },
+   {
+    "text": "$[H,A]\\propto 2T-xV'$",
+    "weight": 2
+   },
+   {
+    "text": "Stationary: zero, so $2\\langle T\\rangle=\\langle xV'\\rangle=4\\langle V\\rangle$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$d\\langle xp\\rangle/dt=\\langle 2T-xV'\\rangle$ (operators).\nA stationary state has $d\\langle A\\rangle/dt=0$, so $2\\langle T\\rangle=\\langle x\\,dV/dx\\rangle$ (hamiltonian).\n$x\\,dV/dx=4\\lambda x^4=4V$.\n$\\langle T\\rangle=2\\langle V\\rangle$; ratio $2$.",
+  "hints": [
+   "Use the time derivative of $\\langle xp\\rangle$ in a stationary state."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.operators",
+   "t8.qho",
+   "t8.dirac"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "For $H=p^2/2m+V(x)$ and ground state $|0\\rangle$, expand $\\langle0|[x,[x,H]]|0\\rangle$ over energy eigenstates. For a harmonic oscillator only $|1\\rangle$ has $\\langle n|x|0\\rangle\\ne0$. Find $|\\langle1|x|0\\rangle|^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{\\hbar}{2m\\omega}$",
+    "$\\dfrac{\\hbar}{m\\omega}$",
+    "$\\dfrac{\\hbar}{4m\\omega}$",
+    "$\\dfrac{2\\hbar}{m\\omega}$",
+    "$\\dfrac{\\hbar}{\\sqrt2\\,m\\omega}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "missed the factor $\\tfrac12$ in the sum rule",
+    "extra factor $\\tfrac12$",
+    "factor 2 slip in the double commutator",
+    "gave the amplitude $|\\langle1|x|0\\rangle|$ shape, not its square"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$[x,[x,H]]=[x,\\,i\\hbar p/m]=-\\hbar^2/m$",
+    "weight": 2
+   },
+   {
+    "text": "Expand: $\\langle0|[x,[x,H]]|0\\rangle=-2\\sum_n(E_n-E_0)|x_{n0}|^2$",
+    "weight": 2
+   },
+   {
+    "text": "Single term with $E_1-E_0=\\hbar\\omega$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$[x,H]=i\\hbar p/m$, so $[x,[x,H]]=(i\\hbar/m)(i\\hbar)=-\\hbar^2/m$ (operators).\nInsert $\\sum|n\\rangle\\langle n|$: $\\langle0|[x,[x,H]]|0\\rangle=-2\\sum_n(E_n-E_0)|\\langle n|x|0\\rangle|^2$ (dirac).\nSo $\\sum_n(E_n-E_0)|x_{n0}|^2=\\hbar^2/2m$.\nOnly $n=1$, gap $\\hbar\\omega$ (qho): $|x_{10}|^2=\\dfrac{\\hbar}{2m\\omega}$.",
+  "hints": [
+   "Expand the double commutator in a complete set; all $n\\ne1$ drop out."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.uncertainty",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$, $q=1.60\\times10^{-19}\\ \\mathrm C$) has $\\langle p\\rangle=0$ and position spread $\\Delta x=0.10\\ \\mathrm{nm}$. Using $\\Delta x\\,\\Delta p\\ge\\hbar/2$, find the smallest possible $\\langle p^2\\rangle/2m$ in eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.945475439078,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\langle p^2\\rangle=(\\Delta p)^2$ because $\\langle p\\rangle=0$",
+    "weight": 1
+   },
+   {
+    "text": "Minimum $\\Delta p=\\hbar/(2\\Delta x)$",
+    "weight": 2
+   },
+   {
+    "text": "Kinetic energy and eV conversion",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\langle p\\rangle=0$ gives $\\langle p^2\\rangle=(\\Delta p)^2$ (uncertainty).\n$\\Delta p\\ge\\hbar/(2\\Delta x)$.\n$K_{min}=\\hbar^2/(8m\\,\\Delta x^2)=1.51\\times10^{-19}\\ \\mathrm J$ (estimate).\n$\\approx0.95\\ \\mathrm{eV}$.",
+  "hints": [
+   "Remember the $\\hbar/2$ bound, not $\\hbar$."
+  ],
+  "check": "(1.05e-34)**2/(8*9.11e-31*(0.10e-9)**2)/1.60e-19",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.uncertainty",
+   "t8.spin-half"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A spin-$\\tfrac12$ particle is in the eigenstate of $S_x$ with eigenvalue $+\\hbar/2$. Find $\\Delta S_y\\,\\Delta S_z$ in units of $\\hbar^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac14$",
+    "$0$",
+    "$\\tfrac18$",
+    "$\\tfrac12$",
+    "$\\tfrac1{16}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed an $S_x$ eigenstate has no spread in any component",
+    "used $\\tfrac12\\hbar\\cdot\\hbar/4$",
+    "forgot the $\\tfrac12$ in the Robertson bound and took $\\hbar^2/2$",
+    "squared an extra $\\tfrac12$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$[S_y,S_z]=i\\hbar S_x$ and $\\langle S_x\\rangle=\\hbar/2$",
+    "weight": 1
+   },
+   {
+    "text": "Each $\\Delta S_i^2=\\hbar^2/4-\\langle S_i\\rangle^2=\\hbar^2/4$",
+    "weight": 2
+   },
+   {
+    "text": "Product, check against the bound $\\tfrac12|\\langle[S_y,S_z]\\rangle|$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\langle S_y\\rangle=\\langle S_z\\rangle=0$ in $|{+x}\\rangle$ (spin-half).\n$S_i^2=\\hbar^2/4$, so $\\Delta S_y=\\Delta S_z=\\hbar/2$.\nProduct $=\\hbar^2/4$.\nBound: $\\tfrac12\\hbar|\\langle S_x\\rangle|=\\hbar^2/4$ (uncertainty), so it saturates.",
+  "hints": [
+   "Each component squared is $\\hbar^2/4$; subtract the squared mean."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.dirac",
+   "t8.born"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A system with orthonormal energy eigenstates $|1\\rangle,|2\\rangle,|3\\rangle$ of energies $E,2E,3E$ is in $|\\psi\\rangle=(|1\\rangle+i|2\\rangle+2|3\\rangle)/\\sqrt6$. Find the energy spread $\\Delta E=\\sqrt{\\langle H^2\\rangle-\\langle H\\rangle^2}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{7/12}\\,E$",
+    "$\\sqrt{41/6}\\,E$",
+    "$\\tfrac52E$",
+    "$\\sqrt{7/6}\\,E$",
+    "$\\tfrac7{12}E$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "quoted $\\sqrt{\\langle H^2\\rangle}$",
+    "quoted $\\langle H\\rangle$",
+    "factor $\\sqrt2$ slip in the variance",
+    "forgot the square root"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Probabilities $\\tfrac16,\\tfrac16,\\tfrac46$ (phase $i$ drops out)",
+    "weight": 1
+   },
+   {
+    "text": "$\\langle H\\rangle=\\tfrac52E$",
+    "weight": 1
+   },
+   {
+    "text": "$\\langle H^2\\rangle=\\tfrac{41}6E^2$",
+    "weight": 1
+   },
+   {
+    "text": "Variance $\\tfrac7{12}E^2$ and square root",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|c_n|^2=\\tfrac16,\\tfrac16,\\tfrac23$ (born); the phase $i$ drops out.\n$\\langle H\\rangle=\\tfrac16(1)+\\tfrac16(2)+\\tfrac46(3)=\\tfrac52$ in units of $E$ (dirac).\n$\\langle H^2\\rangle=\\tfrac16(1)+\\tfrac16(4)+\\tfrac46(9)=\\tfrac{41}6$.\n$\\mathrm{Var}=\\tfrac{41}6-\\tfrac{25}4=\\tfrac7{12}$; $\\Delta E=\\sqrt{7/12}\\,E$.",
+  "hints": [
+   "Use the squared amplitudes as weights for $E$ and $E^2$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.dirac",
+   "t8.qho",
+   "t8.time-evol"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "At $t=0$ an oscillator is in $(|0\\rangle+|1\\rangle)/\\sqrt2$, with real standard $|n\\rangle$ so $\\langle0|x|1\\rangle=+\\sqrt{\\hbar/2m\\omega}$. Let $\\ell=\\sqrt{\\hbar/m\\omega}$ and period $T=2\\pi/\\omega$. Find $\\langle x\\rangle$ at $t=T/6$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{\\ell}{2\\sqrt2}$",
+    "$\\dfrac{\\ell}{4}$",
+    "$\\dfrac{\\ell}{\\sqrt2}$",
+    "$\\dfrac{\\ell}{2}$",
+    "$\\dfrac{\\sqrt3\\,\\ell}{2\\sqrt2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "extra factor $\\tfrac12$ in the cross term",
+    "the $t=0$ value",
+    "dropped $1/\\sqrt2$ from $\\langle0|x|1\\rangle$ shape",
+    "used $\\sin(\\pi/3)$ for $\\cos(\\pi/3)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\langle x\\rangle=2\\,\\mathrm{Re}\\,[c_0^*c_1\\,x_{01}e^{-i\\omega t}]$",
+    "weight": 2
+   },
+   {
+    "text": "$c_0c_1=\\tfrac12$, $x_{01}=\\ell/\\sqrt2$",
+    "weight": 1
+   },
+   {
+    "text": "$\\omega t=\\pi/3$, $\\cos=\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|\\psi(t)\\rangle=(|0\\rangle+e^{-i\\omega t}|1\\rangle)/\\sqrt2$ (time-evol).\n$\\langle x\\rangle=2\\cdot\\tfrac12\\cdot\\tfrac{\\ell}{\\sqrt2}\\cos\\omega t=\\tfrac{\\ell}{\\sqrt2}\\cos\\omega t$ (dirac).\nAt $t=T/6$, $\\omega t=\\pi/3$, $\\cos=\\tfrac12$.\n$\\langle x\\rangle=\\ell/(2\\sqrt2)$.",
+  "hints": [
+   "Only the relative phase $e^{-i\\omega t}$ between $|0\\rangle$ and $|1\\rangle$ matters."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.spin-half",
+   "t8.born"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Spin-$\\tfrac12$ particles prepared in $S_z=+\\hbar/2$ pass first an analyser along $\\hat n$, lying in the $xz$-plane at $60^\\circ$ to $+z$, keeping the $+$ output. They then meet an analyser along $z$ that keeps the $-$ output. Find the probability that a particle entering the first analyser leaves the second.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac3{16}$",
+    "$\\tfrac14$",
+    "$\\tfrac38$",
+    "$\\tfrac18$",
+    "$\\tfrac9{16}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "second stage only",
+    "assumed the intermediate stage randomises (so $\\tfrac12$) times $\\cos^2$",
+    "used $\\sin^2 30^\\circ\\cdot\\tfrac12$",
+    "used $\\cos^2 30^\\circ$ twice"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Stage 1 probability $\\cos^2(\\theta/2)=\\cos^230^\\circ=\\tfrac34$",
+    "weight": 2
+   },
+   {
+    "text": "Stage 2: from $|{+n}\\rangle$ to $|{-z}\\rangle$ is $\\sin^2(\\theta/2)=\\tfrac14$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply the sequential probabilities",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Angle between spin axes is $\\theta$; overlap probability for same sign is $\\cos^2(\\theta/2)$ (spin-half).\nStage 1: $\\cos^2 30^\\circ=\\tfrac34$.\nStage 2: $|{+n}\\rangle\\to|{-z}\\rangle$ has $\\sin^2 30^\\circ=\\tfrac14$ (born).\nProduct $=\\tfrac3{16}$.",
+  "hints": [
+   "Use half the angle between axes: $\\cos^2(\\theta/2)$ for the same sign, $\\sin^2$ for opposite."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.spin-half",
+   "t5.lorentz"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An electron ($g=2$, so the Larmor angular frequency is $\\omega_L=qB/m_e$; $q=1.60\\times10^{-19}\\ \\mathrm C$, $m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$) has spin along $+x$ at $t=0$ in $B=0.50\\ \\mathrm T$ along $z$. Find the first time at which $\\langle S_x\\rangle=-\\hbar/2$, in ps.",
+  "answer": {
+   "kind": "numeric",
+   "value": 35.7748863428,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Spin precesses about $\\vec B$ at $\\omega_L=qB/m$",
+    "weight": 1
+   },
+   {
+    "text": "Reversal of $\\langle S_x\\rangle$ requires a rotation of $\\pi$",
+    "weight": 2
+   },
+   {
+    "text": "$t=\\pi/\\omega_L$ in ps",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\omega_L=qB/m=8.78\\times10^{10}\\ \\mathrm{rad/s}$ (spin-half, lorentz).\n$\\langle\\vec S\\rangle$ precesses about $z$ at $\\omega_L$.\n$\\langle S_x\\rangle=\\tfrac\\hbar2\\cos\\omega_Lt$ reaches $-\\hbar/2$ at $\\omega_Lt=\\pi$.\n$t=\\pi/\\omega_L\\approx3.6\\times10^{-11}\\ \\mathrm s=36\\ \\mathrm{ps}$.",
+  "hints": [
+   "A half turn of precession is needed, not a quarter turn."
+  ],
+  "check": "math.pi/(1.60e-19*0.50/9.11e-31)*1e12",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.ang-mom-qm",
+   "t8.operators"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle is in $|l=2,m=1\\rangle$. Find $\\langle L_x^2\\rangle$ in units of $\\hbar^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac52$",
+    "$\\tfrac32$",
+    "$5$",
+    "$3$",
+    "$\\tfrac72$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $l^2$ instead of $l(l+1)$",
+    "forgot the $\\tfrac12$ symmetry split",
+    "took $L^2/2$, ignoring $L_z^2$",
+    "added $m^2$ instead of subtracting"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$L^2=6\\hbar^2$, $L_z^2=\\hbar^2$",
+    "weight": 1
+   },
+   {
+    "text": "$L_x^2+L_y^2=L^2-L_z^2$",
+    "weight": 1
+   },
+   {
+    "text": "Symmetry $\\langle L_x^2\\rangle=\\langle L_y^2\\rangle$ in an $L_z$ eigenstate",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\langle L^2\\rangle=l(l+1)\\hbar^2=6\\hbar^2$ (ang-mom-qm).\n$\\langle L_z^2\\rangle=m^2\\hbar^2=\\hbar^2$.\n$\\langle L_x^2\\rangle=\\langle L_y^2\\rangle$ by rotation symmetry about $z$ (operators).\n$\\langle L_x^2\\rangle=\\tfrac12(6-1)\\hbar^2=\\tfrac52\\hbar^2$.",
+  "hints": [
+   "Split $L^2-L_z^2$ equally between $x$ and $y$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.ang-mom-qm",
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A diatomic molecule is a rigid rotor with $I=1.45\\times10^{-46}\\ \\mathrm{kg\\,m^2}$ and $E_l=\\hbar^2l(l+1)/2I$. Using $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$, $h=6.63\\times10^{-34}\\ \\mathrm{J\\,s}$ and $c=3.00\\times10^8\\ \\mathrm{m/s}$, find the wavelength in mm of the photon emitted in the $l=2\\to l=1$ transition.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.30795918367,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$E_2-E_1=\\hbar^2(6-2)/2I=2\\hbar^2/I$",
+    "weight": 2
+   },
+   {
+    "text": "Numerical energy",
+    "weight": 1
+   },
+   {
+    "text": "$\\lambda=hc/\\Delta E$ in mm",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$E_l=\\hbar^2l(l+1)/2I$ gives $E_2=3\\hbar^2/I$, $E_1=\\hbar^2/I$ (ang-mom-qm).\n$\\Delta E=2\\hbar^2/I=1.52\\times10^{-22}\\ \\mathrm J$ (rot-dynamics).\n$\\lambda=hc/\\Delta E=1.31\\times10^{-3}\\ \\mathrm m$.\n$\\lambda\\approx1.3\\ \\mathrm{mm}$.",
+  "hints": [
+   "Use $l(l+1)$ for both levels before subtracting."
+  ],
+  "check": "6.63e-34*3.00e8/(2*(1.05e-34)**2/1.45e-46)*1e3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.time-evol",
+   "t8.inf-well"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$) in an infinite well of width $L=1.0\\ \\mathrm{nm}$ starts in $(\\phi_1+\\phi_2)/\\sqrt2$. Find the period of the oscillation of $\\langle x\\rangle$ in fs.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.68228960398,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Only the $\\phi_1$--$\\phi_2$ beat survives in $\\langle x\\rangle$",
+    "weight": 1
+   },
+   {
+    "text": "$E_2-E_1=3E_1$ with $E_1=\\pi^2\\hbar^2/2mL^2$",
+    "weight": 2
+   },
+   {
+    "text": "$T=2\\pi\\hbar/(E_2-E_1)$ in fs",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\langle x\\rangle$ contains the cross term $\\propto\\cos[(E_2-E_1)t/\\hbar]$ (time-evol).\n$E_n=n^2\\pi^2\\hbar^2/(2mL^2)$, so $E_2-E_1=3E_1$ (inf-well).\n$T=2\\pi\\hbar/(3E_1)=4mL^2/(3\\pi\\hbar)$.\n$T\\approx3.7\\times10^{-15}\\ \\mathrm s=3.7\\ \\mathrm{fs}$.",
+  "hints": [
+   "The oscillation frequency is the energy gap over $\\hbar$."
+  ],
+  "check": "4*9.11e-31*(1.0e-9)**2/(3*math.pi*1.05e-34)*1e15",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.time-evol",
+   "t8.uncertainty"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A free electron ($m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$) starts as a minimum-uncertainty Gaussian packet with $\\Delta x_0=1.0\\ \\mathrm{nm}$. Its width obeys $\\Delta x(t)=\\Delta x_0\\sqrt{1+(\\hbar t/2m\\Delta x_0^2)^2}$. Find the time in fs at which $\\Delta x=2\\Delta x_0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 30.0552054418,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Set $\\sqrt{1+u^2}=2$, so $u=\\sqrt3$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $t=u\\cdot2m\\Delta x_0^2/\\hbar$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value in fs",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Doubling needs $1+u^2=4$ with $u=\\hbar t/2m\\Delta x_0^2$ (time-evol).\n$u=\\sqrt3$.\nSpread comes from $\\Delta p=\\hbar/2\\Delta x_0$ (uncertainty); scale $2m\\Delta x_0^2/\\hbar=1.74\\times10^{-14}\\ \\mathrm s$.\n$t=\\sqrt3\\times17.4\\ \\mathrm{fs}\\approx30\\ \\mathrm{fs}$.",
+  "hints": [
+   "Doubling means the square root equals 2, not that the bracket equals 2."
+  ],
+  "check": "math.sqrt(3)*2*9.11e-31*(1.0e-9)**2/1.05e-34*1e15",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.two-level",
+   "t8.time-evol"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A two-level system has $H=\\begin{pmatrix}E_0&A\\\\A&E_0\\end{pmatrix}$ in the basis $(|1\\rangle,|2\\rangle)$ with $A=0.020\\ \\mathrm{eV}$. It starts in $|1\\rangle$. Using $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$ and $q=1.60\\times10^{-19}\\ \\mathrm C$, find the first time in fs at which the probability of $|2\\rangle$ is $\\tfrac12$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25.7708772365,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Eigenstates $(|1\\rangle\\pm|2\\rangle)/\\sqrt2$ with energies $E_0\\pm A$",
+    "weight": 2
+   },
+   {
+    "text": "$P_2(t)=\\sin^2(At/\\hbar)$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $At/\\hbar=\\pi/4$ and convert",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Eigenstates $(|1\\rangle\\pm|2\\rangle)/\\sqrt2$, $E=E_0\\pm A$ (two-level).\n$|\\psi(t)\\rangle\\propto\\cos(At/\\hbar)|1\\rangle-i\\sin(At/\\hbar)|2\\rangle$ (time-evol).\n$P_2=\\sin^2(At/\\hbar)=\\tfrac12$ gives $At/\\hbar=\\pi/4$.\n$t=\\pi\\hbar/4A=2.58\\times10^{-14}\\ \\mathrm s\\approx26\\ \\mathrm{fs}$.",
+  "hints": [
+   "Splitting between eigenvalues is $2A$, so the oscillation is $\\sin^2(At/\\hbar)$."
+  ],
+  "check": "math.pi*1.05e-34/(4*0.020*1.60e-19)*1e15",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.two-level",
+   "t8.dirac"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A two-level system has $H=\\begin{pmatrix}0&\\Delta\\\\\\Delta&\\varepsilon\\end{pmatrix}$ with $\\varepsilon=3\\Delta$ and starts in the first basis state. Find the maximum probability of ever finding it in the second basis state.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac4{13}$",
+    "$\\tfrac9{13}$",
+    "$\\tfrac1{10}$",
+    "$\\tfrac49$",
+    "$\\tfrac23$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "probability of staying, not of transferring",
+    "used $\\Delta^2/(\\Delta^2+\\varepsilon^2)$, missing the factor 4",
+    "dropped $4\\Delta^2$ from the denominator",
+    "amplitude $2\\Delta/\\varepsilon$, not squared"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Mixing angle: $\\tan2\\theta=2\\Delta/(-\\varepsilon)$ magnitude $2\\Delta/\\varepsilon$",
+    "weight": 2
+   },
+   {
+    "text": "$P_{max}=\\sin^22\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate for $\\varepsilon=3\\Delta$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$P_2(t)=\\sin^22\\theta\\,\\sin^2(\\Omega t/2)$ with $\\tan2\\theta=2\\Delta/\\varepsilon$ (two-level).\n$\\sin^22\\theta=\\dfrac{4\\Delta^2}{4\\Delta^2+\\varepsilon^2}$ (dirac).\nThe sine factor reaches 1 at some time, so $P_{max}=\\sin^22\\theta$.\n$\\varepsilon=3\\Delta$: $P_{max}=4/13$.",
+  "hints": [
+   "Maximum transfer equals $\\sin^2$ of the mixing angle $2\\theta$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.perturbation",
+   "t8.inf-well"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An infinite well of width $L=1.5\\ \\mathrm{nm}$ ($0<x<L$) gets the perturbation $H'=\\alpha\\,\\delta(x-L/3)$ with $\\alpha=0.60\\ \\mathrm{eV\\,nm}$. Find the first-order energy shift of the $n=2$ state in eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "First-order shift is $\\langle\\psi_2|H'|\\psi_2\\rangle$",
+    "weight": 2
+   },
+   {
+    "text": "Delta picks $|\\psi_2(L/3)|^2=\\tfrac2L\\sin^2(2\\pi/3)$",
+    "weight": 2
+   },
+   {
+    "text": "Numerical value in eV",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$E^{(1)}=\\langle\\psi_2|H'|\\psi_2\\rangle$ (perturbation).\n$=\\alpha|\\psi_2(L/3)|^2$ (inf-well).\n$|\\psi_2(L/3)|^2=\\tfrac2L\\sin^2(2\\pi/3)=\\tfrac2L\\cdot\\tfrac34$.\n$E^{(1)}=0.60\\times\\tfrac{3}{2\\times1.5}=0.60\\ \\mathrm{eV}$.",
+  "hints": [
+   "A delta perturbation samples $|\\psi|^2$ at one point."
+  ],
+  "check": "0.60*2/1.5*math.sin(2*math.pi/3)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.perturbation",
+   "t8.qho",
+   "t8.operators"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An oscillator has the perturbation $H'=bx^4$. With $\\ell^2=\\hbar/(m\\omega)$ and $x=\\tfrac{\\ell}{\\sqrt2}(a+a^\\dagger)$, find the first-order shift of the $n=1$ level in units of $b\\ell^4$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac{15}{4}$",
+    "$\\tfrac34$",
+    "$\\tfrac{15}{16}$",
+    "$\\tfrac{15}{2}$",
+    "$\\tfrac94$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ground-state value (used $n=0$)",
+    "prefactor $\\ell^4/16$ from $x=\\tfrac\\ell2(a+a^\\dagger)$",
+    "prefactor $\\ell^4/2$ from a dropped square",
+    "$\\langle x^2\\rangle^2$ factorisation"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$x^4=\\tfrac{\\ell^4}{4}(a+a^\\dagger)^4$",
+    "weight": 1
+   },
+   {
+    "text": "$\\langle n|(a+a^\\dagger)^4|n\\rangle=6n^2+6n+3$",
+    "weight": 2
+   },
+   {
+    "text": "$n=1$ gives $15$",
+    "weight": 1
+   },
+   {
+    "text": "$E^{(1)}=\\tfrac{15}{4}b\\ell^4$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$E^{(1)}_n=b\\langle n|x^4|n\\rangle$ (perturbation).\n$x^4=\\tfrac{\\ell^4}{4}(a+a^\\dagger)^4$ (operators).\nKeep terms with equal numbers of $a$ and $a^\\dagger$: $\\langle n|\\cdot|n\\rangle=6n^2+6n+3$ (qho).\n$n=1$: $15$; $E^{(1)}=\\tfrac{15}{4}b\\ell^4$.",
+  "hints": [
+   "Only terms with two $a$ and two $a^\\dagger$ contribute; count them via $6n^2+6n+3$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.variational",
+   "t8.tise"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Use the trial function $\\psi=e^{-\\alpha x^2}$ to bound the ground-state energy of $H=p^2/2m+\\lambda x^4$. Take $\\langle p^2\\rangle/2m=\\hbar^2\\alpha/2m$ and $\\langle x^4\\rangle=3/(16\\alpha^2)$. The optimum $E$ equals $c\\,(\\hbar^4\\lambda/m^2)^{1/3}$. Find $c$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.68$",
+    "$0.47$",
+    "$1.08$",
+    "$0.72$",
+    "$0.75$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $\\langle x^4\\rangle=\\langle x^2\\rangle^2$",
+    "used $\\langle x^2\\rangle=1/2\\alpha$ error giving $\\langle x^4\\rangle=3/4\\alpha^2$",
+    "set $\\langle T\\rangle=\\langle V\\rangle$ instead of minimising",
+    "doubled kinetic term and used $\\langle x^4\\rangle=1/16\\alpha^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$E(\\alpha)=\\hbar^2\\alpha/2m+3\\lambda/16\\alpha^2$",
+    "weight": 1
+   },
+   {
+    "text": "Minimise: $\\alpha^3=3m\\lambda/4\\hbar^2$",
+    "weight": 2
+   },
+   {
+    "text": "Insert and simplify: $E=\\tfrac34\\hbar^2\\alpha/m$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical coefficient",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$E(\\alpha)=\\dfrac{\\hbar^2\\alpha}{2m}+\\dfrac{3\\lambda}{16\\alpha^2}$ (variational).\n$dE/d\\alpha=0$: $\\dfrac{\\hbar^2}{2m}=\\dfrac{3\\lambda}{8\\alpha^3}$, so $\\alpha^3=\\dfrac{3m\\lambda}{4\\hbar^2}$.\nThen $\\dfrac{3\\lambda}{16\\alpha^2}=\\dfrac{\\hbar^2\\alpha}{4m}$ and $E=\\dfrac{3\\hbar^2\\alpha}{4m}$ (tise).\n$E=\\tfrac34(\\tfrac34)^{1/3}(\\hbar^4\\lambda/m^2)^{1/3}\\approx0.68\\,(\\hbar^4\\lambda/m^2)^{1/3}$.",
+  "hints": [
+   "Minimise over $\\alpha$; do not set $T=V$."
+  ],
+  "check": "round(0.75*0.75**(1/3), 2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.variational",
+   "t8.tise"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A particle moves in $V=F|x|$ with $F>0$. Using WKB with $\\oint p\\,dx=(n+\\tfrac12)\\,2\\pi\\hbar$ for $n=0,1,2,\\dots$, find $E_2/E_0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5^{2/3}\\approx2.92$",
+    "$5$",
+    "$5^{3/2}\\approx11.2$",
+    "$3^{2/3}\\approx2.08$",
+    "$25$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "oscillator scaling $E\\propto n+\\tfrac12$",
+    "inverted exponent",
+    "used $n+1$ in place of $n+\\tfrac12$",
+    "infinite-well scaling $E\\propto(n+\\tfrac12)^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Turning points $\\pm E/F$; $p=\\sqrt{2m(E-F|x|)}$",
+    "weight": 1
+   },
+   {
+    "text": "$\\oint p\\,dx\\propto E^{3/2}/F$",
+    "weight": 2
+   },
+   {
+    "text": "So $E\\propto(n+\\tfrac12)^{2/3}$",
+    "weight": 1
+   },
+   {
+    "text": "Ratio $(2.5/0.5)^{2/3}$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$\\oint p\\,dx=4\\int_0^{E/F}\\sqrt{2m(E-Fx)}\\,dx=\\dfrac{8\\sqrt{2m}}{3F}E^{3/2}$ (variational/WKB).\nSet equal to $(n+\\tfrac12)2\\pi\\hbar$: $E\\propto(n+\\tfrac12)^{2/3}$ (tise).\n$E_2/E_0=(2.5/0.5)^{2/3}=5^{2/3}$.\n$\\approx2.92$.",
+  "hints": [
+   "Phase-space area scales as $E^{3/2}$ for a linear potential."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.identical",
+   "t8.inf-well"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Five non-interacting electrons (spin-$\\tfrac12$) fill an infinite well of width $L=1.0\\ \\mathrm{nm}$. The ground state occupies $n=1,1,2,2,3$. Find the lowest nonzero excitation energy of the system in eV (spin flips cost nothing and are ignored), using $m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$, $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$, $q=1.60\\times10^{-19}\\ \\mathrm C$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.86629371093,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Pauli: at most two electrons per level",
+    "weight": 1
+   },
+   {
+    "text": "Compare lowest excitations: $n=2\\to3$ costs $5E_1$, $n=3\\to4$ costs $7E_1$",
+    "weight": 2
+   },
+   {
+    "text": "$E_1=\\pi^2\\hbar^2/2mL^2$ and eV",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Pauli limits each $n$ to two electrons (identical).\nLevel $n=3$ has one electron, so it can accept one more.\nOptions: $2\\to3$ costs $(9-4)E_1=5E_1$; $3\\to4$ costs $7E_1$; $1\\to3$ costs $8E_1$ (inf-well).\nLowest is $5E_1$ with $E_1=\\pi^2\\hbar^2/2mL^2=0.373\\ \\mathrm{eV}$; answer $1.87\\ \\mathrm{eV}$.",
+  "hints": [
+   "A promotion needs an empty slot; level $n=3$ still has one."
+  ],
+  "check": "5*math.pi**2*(1.05e-34)**2/(2*9.11e-31*(1.0e-9)**2)/1.60e-19",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.identical",
+   "t8.inf-well",
+   "t8.dirac"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two identical spin-0 bosons in an infinite well $0<x<L$ occupy $\\phi_1$ and $\\phi_2$ in the symmetric state $[\\phi_1(x_1)\\phi_2(x_2)+\\phi_2(x_1)\\phi_1(x_2)]/\\sqrt2$. Find the probability that both lie in $0<x<L/2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac14+\\dfrac{16}{9\\pi^2}$",
+    "$\\tfrac14$",
+    "$\\tfrac14-\\dfrac{16}{9\\pi^2}$",
+    "$\\tfrac14+\\dfrac{4}{3\\pi}$",
+    "$\\tfrac14+\\dfrac{32}{9\\pi^2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "distinguishable-particle result, exchange term dropped",
+    "antisymmetric (fermion) sign",
+    "exchange overlap not squared",
+    "exchange term doubled"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Each of $\\phi_1,\\phi_2$ has probability $\\tfrac12$ in the left half",
+    "weight": 1
+   },
+   {
+    "text": "Exchange overlap $I=\\int_0^{L/2}\\phi_1\\phi_2dx=\\tfrac{4}{3\\pi}$",
+    "weight": 2
+   },
+   {
+    "text": "Symmetric state: $P=P_1P_2+I^2$",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "$P=\\tfrac12\\iint_{\\text{left}}|\\phi_1\\phi_2'+\\phi_2\\phi_1'|^2$ expands to direct plus exchange (identical).\nDirect: $P_1P_2=\\tfrac12\\cdot\\tfrac12=\\tfrac14$ (inf-well).\nExchange: $I=\\tfrac2L\\int_0^{L/2}\\sin\\tfrac{\\pi x}{L}\\sin\\tfrac{2\\pi x}{L}dx=\\tfrac{4}{3\\pi}$ (dirac).\nBosons add $I^2$: $P=\\tfrac14+\\tfrac{16}{9\\pi^2}\\approx0.43$.",
+  "hints": [
+   "The symmetric state adds an exchange term $I^2$ to the product of single-particle probabilities."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

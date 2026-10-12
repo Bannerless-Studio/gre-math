@@ -13,6 +13,26 @@ NODE=/path/to/node ./build.sh packs/_fixture .cache/fixture/fixture.html   # one
 
 The build runs the pack validator first, then validates the math (`tools/render_pack.js`), then writes one page and `sw.js` beside it. Set `NODE` when `node` is not on PATH. Open the output file in a browser. Nothing is loaded from the network.
 
+### Two sites from one engine
+
+Each pack is its own GitHub Pages site. The engine lives in this repo; a second pack is published from its own git checkout.
+
+| Site | Pack | Output | Where |
+|---|---|---|---|
+| GRE mathematics | `packs/gre-math` | `index.html`, `sw.js` at the repo root | this repo, GitHub Pages from `main` |
+| GRE physics | `packs/gre-physics` | `index.html`, `sw.js` in the site checkout | separate repo, e.g. `../gre-physics-site` |
+
+```sh
+NODE=/path/to/node tools/deploy_pack.sh packs/gre-math .
+NODE=/path/to/node tools/deploy_pack.sh packs/gre-physics ../gre-physics-site
+```
+
+`tools/deploy_pack.sh <packdir> <site-dir>` builds the pack into `<site-dir>` and then runs `tools/check_site.sh` on the page. That check fails until the page and `sw.js` are committed in the site's own repo, and the script never commits. The script refuses to write any pack other than `gre-math` into this repo's root. To build a scratch copy without the guard, use `build.sh` into `.cache/`.
+
+### Figures
+
+A pack item or technique may carry a `figure` field: one inline SVG string shown above the prompt. The build allowlist in `tools/figure.js` decides what is accepted. See `docs/PACK_SCHEMA.md`, "Figures".
+
 ## Math rendering (M2)
 
 KaTeX 0.16.11 is vendored in `vendor/katex/` (version, file list and licence in `vendor/katex/VERSION`). The build inlines KaTeX's JavaScript and its CSS with the core font subset, and the page renders math at run time from the pack source. Rendering rules and the font subset are in `docs/PACK_SCHEMA.md` under Rendering (M2). Why runtime rendering: `docs/SPEC.md` section 4.

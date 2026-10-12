@@ -1,0 +1,4248 @@
+[
+  {
+    "id": "t7-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a gas, $Q$ is heat into the gas and $W$ is work done by the gas. Which expression gives the change in internal energy $\\Delta U$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\Delta U = Q + W$",
+        "$\\Delta U = Q - W$",
+        "$\\Delta U = W - Q$",
+        "$\\Delta U = Q$"
+      ],
+      "correct": 1,
+      "why": [
+        "flips the sign of work, so work done by the gas would raise U",
+        "",
+        "reverses both signs",
+        "drops the work term, as if work never changes energy"
+      ]
+    },
+    "solution": "The first law is $\\Delta U=Q-W$ with work done by the gas positive.",
+    "hints": [
+      "Work done by the gas takes energy out of it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which state variables fix the internal energy of a fixed amount of ideal gas?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Pressure and volume",
+        "Temperature only",
+        "Temperature and volume",
+        "Pressure only"
+      ],
+      "correct": 1,
+      "why": [
+        "$PV$ fixes $T$, but $U$ depends on $T$ alone",
+        "",
+        "ideal gas $U$ has no volume dependence",
+        "pressure alone does not fix the energy"
+      ]
+    },
+    "solution": "For an ideal gas, $U$ depends only on $T$. Volume and pressure do not enter.",
+    "hints": [
+      "Think about Joule's free expansion."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $n$ moles of monatomic ideal gas, write $\\Delta U$ in terms of $n$, the gas constant $R$, and the temperature change $\\Delta T$. Use dT for $\\Delta T$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1.5*n*R*dT",
+      "vars": [
+        "n",
+        "R",
+        "dT"
+      ],
+      "also": [
+        "3/2*n*R*dT",
+        "(3*n*R*dT)/2"
+      ]
+    },
+    "check": null,
+    "solution": "For a monatomic gas $U=\\tfrac32 nRT$, so $\\Delta U=\\tfrac32 nR\\,\\Delta T$.",
+    "hints": [
+      "Only translation counts for a monatomic gas."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t7-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A gas is compressed. The surroundings do $200\\ \\mathrm J$ of work on the gas, and the gas releases $150\\ \\mathrm J$ of heat. Take heat into the gas and work done by the gas as positive. Find $\\Delta U$ in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 50,
+      "form": "exact"
+    },
+    "check": "-150-(-200)",
+    "solution": "Here $Q=-150\\ \\mathrm J$ and $W=-200\\ \\mathrm J$. Then $\\Delta U=Q-W=-150+200=50\\ \\mathrm J$.",
+    "hints": [
+      "Work done on the gas enters $W$ with a negative sign."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$1.00$ mol of monatomic ideal gas is heated at constant volume from $300\\ \\mathrm K$ to $400\\ \\mathrm K$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the heat absorbed in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1246.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1.5*8.31*(400-300)",
+    "solution": "At constant volume $W=0$, so $Q=\\Delta U=\\tfrac32 nR\\,\\Delta T=1.5(8.31)(100)\\approx1.25\\times10^{3}\\ \\mathrm J$.",
+    "hints": [
+      "Constant volume means no work."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A gas absorbs heat $Q$. Work $W$ is done on the gas. Write $\\Delta U$ in terms of $Q$ and $W$.",
+    "answer": {
+      "kind": "expression",
+      "value": "Q+W",
+      "vars": [
+        "Q",
+        "W"
+      ],
+      "also": [
+        "W+Q",
+        "Q-(-W)"
+      ]
+    },
+    "check": null,
+    "solution": "Work done on the gas adds to its internal energy, so $\\Delta U=Q+W$.",
+    "hints": [
+      "Work done on the gas has the opposite sign to work done by it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A gas in an insulated cylinder is compressed quickly by a piston. Which statement is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Internal energy falls, because the gas does work on the piston",
+        "Internal energy rises, because work is done on the gas and no heat leaves",
+        "Internal energy is unchanged, since no heat enters the gas",
+        "Internal energy falls, because heat flows out of the gas"
+      ],
+      "correct": 1,
+      "why": [
+        "reverses the sign of the work term",
+        "",
+        "no heat exchange ignores the work term",
+        "insulation means no heat flows, so Q is not negative"
+      ]
+    },
+    "solution": "Insulated means $Q=0$. Work done on the gas gives $\\Delta U=W>0$, so the energy rises.",
+    "hints": [
+      "Insulated means no heat flows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A gas has internal energy $2.0\\ \\mathrm{kJ}$. It absorbs $1.2\\ \\mathrm{kJ}$ of heat and does $0.5\\ \\mathrm{kJ}$ of work. Find its final internal energy in $\\mathrm{kJ}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.7,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2)+Fraction(12,10)-Fraction(5,10)",
+    "solution": "$\\Delta U=Q-W=1.2-0.5=0.7\\ \\mathrm{kJ}$, so $U_f=2.0+0.7=2.7\\ \\mathrm{kJ}$.",
+    "hints": [
+      "Add the change in internal energy to the starting value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.first-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about a gas that undergoes a cycle and returns to its starting state.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The net change in internal energy is zero.",
+        "The net work done by the gas equals the net heat absorbed.",
+        "The net heat absorbed is zero.",
+        "The net work done by the gas is zero."
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Internal energy is a state function, so $\\oint dU=0$ and $\\oint Q=\\oint W$. Neither net heat nor net work need vanish.",
+    "hints": [
+      "Use $\\oint dU=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the condition that defines an isothermal process of an ideal gas.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$T$ is constant, so $\\Delta U=0$",
+        "$P$ is constant",
+        "$Q=0$",
+        "$V$ is constant"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the isobaric condition",
+        "that is the adiabatic condition",
+        "that is the isochoric condition"
+      ]
+    },
+    "solution": "Isothermal means constant $T$. For an ideal gas $\\Delta U=0$ then.",
+    "hints": [
+      "Isothermal refers to temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For an ideal gas undergoing a reversible adiabatic process, which relation holds?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$PV^{\\gamma}=\\text{constant}$",
+        "$PV=\\text{constant}$",
+        "$P/T=\\text{constant}$",
+        "$V/T=\\text{constant}$"
+      ],
+      "correct": 0,
+      "why": [
+        "the isothermal relation, which needs $T$ constant",
+        "the isothermal relation, which needs $T$ constant",
+        "the isochoric relation, which needs $V$ constant",
+        "the isobaric relation, which needs $P$ constant"
+      ]
+    },
+    "solution": "With $Q=0$, $PV^\\gamma$ is constant. The exponent is $\\gamma=C_P/C_V$.",
+    "hints": [
+      "Adiabatic uses the heat capacity ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the work done by $n$ moles of ideal gas in an isothermal expansion at temperature $T$ from $V_1$ to $V_2$, in terms of $n$, $R$, $T$, $V_1$, $V_2$. Use ln for natural log.",
+    "answer": {
+      "kind": "expression",
+      "value": "n*R*T*ln(V2/V1)",
+      "vars": [
+        "n",
+        "R",
+        "T",
+        "V1",
+        "V2"
+      ],
+      "also": [
+        "n*R*T*ln(V2)-n*R*T*ln(V1)"
+      ]
+    },
+    "check": null,
+    "solution": "$W=\\int P\\,dV=\\int nRT\\,dV/V=nRT\\ln(V_2/V_1)$.",
+    "hints": [
+      "Integrate $P\\,dV$ with $P=nRT/V$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $2.0$ mol ideal gas at $300\\ \\mathrm K$ doubles its volume in an isothermal reversible expansion. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the work done by the gas in $\\mathrm{kJ}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.4560318,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2*8.31*300*math.log(2)/1000",
+    "solution": "$W=nRT\\ln 2=2(8.31)(300)(0.693)\\approx3.46\\times10^{3}\\ \\mathrm J$.",
+    "hints": [
+      "Integrate $P\\,dV$ with $P=nRT/V$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A monatomic ideal gas expands at constant pressure $1.0\\times10^{5}\\ \\mathrm{Pa}$. Its volume rises from $0.020\\ \\mathrm{m^3}$ to $0.030\\ \\mathrm{m^3}$. Find the heat absorbed by the gas in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2500,
+      "form": "exact"
+    },
+    "check": "Fraction(5,2)*100000*(Fraction(30,1000)-Fraction(20,1000))",
+    "solution": "Isobaric heat is $Q=nC_P\\Delta T=\\tfrac52 P\\Delta V=2.5\\times10^{5}\\times0.010\\ \\mathrm{J}=2500\\ \\mathrm J$.",
+    "hints": [
+      "Use $C_P=\\tfrac52 R$ for a monatomic gas."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A monatomic ideal gas at $300\\ \\mathrm K$ is compressed reversibly and adiabatically until its volume halves. Find the final temperature in $\\mathrm K$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 476.22032,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "300*2**(2/3)",
+    "solution": "Adiabatic: $TV^{\\gamma-1}$ is constant with $\\gamma=\\tfrac53$. So $T_f=300\\,(V_i/V_f)^{2/3}=300\\cdot2^{2/3}\\approx476\\ \\mathrm K$.",
+    "hints": [
+      "Use $TV^{\\gamma-1}$ const."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A monatomic ideal gas is expanded isothermally, then adiabatically from the same starting state. Which statement about the two paths is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The isothermal path has $\\Delta U=0$, while the adiabatic path has $Q=0$ and $\\Delta U\\ne0$",
+        "Both paths have $\\Delta U=0$ since the gas expands",
+        "The isothermal path has $Q=0$ because $\\Delta T=0$",
+        "The adiabatic path has $\\Delta U=0$ because $Q=0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "adiabatic expansion cools the gas, so its internal energy changes",
+        "$\\Delta T=0$ gives $\\Delta U=0$, not $Q=0$",
+        "$Q=0$ does not force $\\Delta U=0$; work changes it"
+      ]
+    },
+    "solution": "Isothermal: $\\Delta U=0$, $Q=W$. Adiabatic: $Q=0$, $\\Delta U=-W\\ne0$.",
+    "hints": [
+      "Track $\\Delta U$ and $Q$ separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A monatomic ideal gas, $n=1.5$ mol, undergoes a reversible adiabatic expansion. Its temperature falls from $400\\ \\mathrm K$ to $300\\ \\mathrm K$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the work done by the gas in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1869.75,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "-1.5*1.5*8.31*(300-400)",
+    "solution": "With $Q=0$, $W=-\\Delta U=-nC_V\\Delta T=-(1.5)(1.5R)(-100)\\approx1870\\ \\mathrm J$.",
+    "hints": [
+      "Use $W=-\\Delta U$ when $Q=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.gas-processes"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about ideal gas processes.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "An isothermal process has $\\Delta U=0$.",
+        "An isochoric process has zero work done by the gas.",
+        "An adiabatic process has $Q=0$ and therefore zero work.",
+        "An isobaric process has $Q=\\Delta U$."
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Isothermal: $\\Delta U=0$. Isochoric: $W=0$. Adiabatic work is $-\\Delta U\\ne0$. Isobaric $Q=\\Delta U+W$.",
+    "hints": [
+      "Adiabatic work equals minus the change in internal energy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Carnot efficiency of an engine between reservoirs at $T_h$ and $T_c$, both in kelvin.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1-T_c/T_h$",
+        "$1-T_h/T_c$",
+        "$T_c/T_h$",
+        "$T_c/(T_h-T_c)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts the ratio, giving a negative efficiency",
+        "gives the heat ratio $Q_c/Q_h$, not the efficiency",
+        "is the Carnot coefficient of performance of a refrigerator"
+      ]
+    },
+    "solution": "$\\eta_C=1-T_c/T_h$ with absolute temperatures.",
+    "hints": [
+      "Efficiency is work over heat in."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement holds for any heat engine that runs between two reservoirs?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\eta\\le 1-T_c/T_h$",
+        "$\\eta=W/Q_c$",
+        "$\\eta=1$ is possible for any reservoir temperatures",
+        "$\\eta\\ge 1-T_c/T_h$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "uses heat rejected in the denominator, which gives a value above one",
+        "ignores the Kelvin statement, which forbids this",
+        "reverses the inequality"
+      ]
+    },
+    "solution": "No engine exceeds the Carnot efficiency. Only $T_c=0$ would give one, and that is not reachable.",
+    "hints": [
+      "Compare with the Carnot bound."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A Carnot refrigerator runs between $T_c$ and $T_h$, both in kelvin. Write its coefficient of performance $Q_c/W$ in terms of $T_c$ and $T_h$.",
+    "answer": {
+      "kind": "expression",
+      "value": "Tc/(Th-Tc)",
+      "vars": [
+        "Tc",
+        "Th"
+      ],
+      "also": [
+        "Tc/(-Tc+Th)",
+        "1/(Th/Tc-1)"
+      ],
+      "domain": {
+        "Tc": [
+          200,
+          300
+        ],
+        "Th": [
+          400,
+          600
+        ]
+      }
+    },
+    "check": null,
+    "solution": "For a Carnot refrigerator $Q_c/W=T_c/(T_h-T_c)$.",
+    "hints": [
+      "The refrigerator COP uses the cold reservoir in the numerator."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A Carnot engine absorbs $1200\\ \\mathrm J$ per cycle from a reservoir at $600\\ \\mathrm K$ and rejects heat to one at $300\\ \\mathrm K$. Find the work done per cycle in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 600,
+      "form": "exact"
+    },
+    "check": "1200*(1-Fraction(300,600))",
+    "solution": "$\\eta_C=1-300/600=0.50$, so $W=0.50\\times1200=600\\ \\mathrm J$.",
+    "hints": [
+      "Multiply the Carnot efficiency by the heat input."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t7-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A heat engine absorbs $2.0\\ \\mathrm{kJ}$ per cycle and does $0.50\\ \\mathrm{kJ}$ of work. Find the heat rejected per cycle in $\\mathrm{kJ}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2.0-0.5",
+    "solution": "Per cycle $\\Delta U=0$, so $Q_c=Q_h-W=2.0-0.5=1.5\\ \\mathrm{kJ}$.",
+    "hints": [
+      "Use the first law over a full cycle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A Carnot refrigerator runs between reservoirs at $270\\ \\mathrm K$ and $300\\ \\mathrm K$. Find its coefficient of performance $Q_c/W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 9,
+      "form": "exact"
+    },
+    "check": "Fraction(270)/(300-270)",
+    "solution": "$\\mathrm{COP}=T_c/(T_h-T_c)=270/30=9$.",
+    "hints": [
+      "Use the refrigerator form of the Carnot ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A real engine operates between $500\\ \\mathrm K$ and $300\\ \\mathrm K$ with efficiency $0.30$. Which statement is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Impossible, since the limit is $T_c/T_h=0.60$",
+        "Possible, because $0.30$ is below the Carnot limit of $0.40$",
+        "Impossible, since the limit is $1-0.30=0.70$",
+        "Possible, because any efficiency below one is allowed"
+      ],
+      "correct": 1,
+      "why": [
+        "uses the ratio instead of one minus the ratio",
+        "",
+        "takes the complement of the efficiency, not the Carnot bound",
+        "ignores the bound set by the reservoir temperatures"
+      ]
+    },
+    "solution": "Carnot: $\\eta_C=1-300/500=0.40$. Since $0.30<0.40$ the engine is allowed.",
+    "hints": [
+      "Compute the Carnot bound first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "An engine absorbs $800\\ \\mathrm J$ from a reservoir at $500\\ \\mathrm K$, does $300\\ \\mathrm J$ of work, and rejects heat to a reservoir at $300\\ \\mathrm K$. Find the ratio of its efficiency to the Carnot efficiency between those reservoirs.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.9375,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(800-500,800)/(1-Fraction(300,500))",
+    "solution": "$\\eta=300/800=0.375$ and $\\eta_C=1-300/500=0.40$, so the ratio is $0.375/0.40=0.9375$.",
+    "hints": [
+      "Compare the two efficiencies directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.engines"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A Carnot engine absorbs heat $Q_h$ from a hot reservoir at $T_h$ and rejects heat to one at $T_c$. Write its work per cycle $W$ in terms of $Q_h$, $T_c$, $T_h$.",
+    "answer": {
+      "kind": "expression",
+      "value": "Qh*(1-Tc/Th)",
+      "vars": [
+        "Qh",
+        "Tc",
+        "Th"
+      ],
+      "also": [
+        "Qh*(Th-Tc)/Th",
+        "Qh-Qh*Tc/Th"
+      ],
+      "domain": {
+        "Qh": [
+          1,
+          5
+        ],
+        "Tc": [
+          200,
+          400
+        ],
+        "Th": [
+          500,
+          800
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$W=\\eta_C Q_h=Q_h(1-T_c/T_h)$.",
+    "hints": [
+      "Multiply the heat input by the Carnot efficiency."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the entropy change of a system that absorbs heat $dQ$ reversibly at temperature $T$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$dS=dQ/T$",
+        "$dS=T\\,dQ$",
+        "$dS=dQ$",
+        "$dS=dQ/T^{2}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "multiplies by $T$ instead of dividing",
+        "drops the temperature",
+        "squares the temperature"
+      ]
+    },
+    "solution": "For reversible heat $dS=dQ_{\\rm rev}/T$.",
+    "hints": [
+      "Entropy change is heat over temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For an isolated system, what does the second law say about its entropy?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Entropy never decreases",
+        "Entropy is conserved in every process",
+        "Entropy must decrease in every spontaneous process",
+        "The entropy of the surroundings must decrease"
+      ],
+      "correct": 0,
+      "why": [
+        "confuses the second law with energy conservation",
+        "",
+        "reverses the inequality",
+        "reverses the sign for the surroundings"
+      ]
+    },
+    "solution": "For an isolated system $\\Delta S\\ge0$, with equality only for reversible processes.",
+    "hints": [
+      "Think about irreversibility."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the entropy change of $n$ moles of ideal gas expanding isothermally from $V_1$ to $V_2$, in terms of $n$, $R$, $V_1$, $V_2$. Use ln for natural log.",
+    "answer": {
+      "kind": "expression",
+      "value": "n*R*ln(V2/V1)",
+      "vars": [
+        "n",
+        "R",
+        "V1",
+        "V2"
+      ],
+      "also": [
+        "n*R*(ln(V2)-ln(V1))"
+      ]
+    },
+    "check": null,
+    "solution": "$\\Delta S=Q_{\\rm rev}/T=nR\\ln(V_2/V_1)$ for an isothermal ideal gas.",
+    "hints": [
+      "Isothermal reversible heat is $W$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A system absorbs $2.0\\ \\mathrm{kJ}$ of heat reversibly at $400\\ \\mathrm K$. Find its entropy change in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact"
+    },
+    "check": "Fraction(2000,400)",
+    "solution": "$\\Delta S=Q/T=2000/400=5.0\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Use the reversible heat over the temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t7-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$500\\ \\mathrm J$ of heat flows directly from a reservoir at $400\\ \\mathrm K$ to a reservoir at $300\\ \\mathrm K$. Find the total entropy change in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.41666667,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(500,300)-Fraction(500,400)",
+    "solution": "$\\Delta S_{\\rm tot}=500/300-500/400=1.667-1.250=0.417\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Add the entropy changes of both reservoirs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$2.0$ mol of ideal gas expands isothermally at $300\\ \\mathrm K$ from $10\\ \\mathrm L$ to $20\\ \\mathrm L$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the entropy change in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 11.520106,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2*8.31*math.log(2)",
+    "solution": "$\\Delta S=nR\\ln(V_2/V_1)=2(8.31)\\ln2\\approx11.5\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Use the isothermal ideal gas formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A thermally isolated gas is compressed by a piston with friction, so the process is irreversible. Which statement about the entropy of the gas is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Unchanged, because $Q=0$",
+        "Rises, because the irreversible process generates entropy inside the gas",
+        "Falls, because the gas is compressed",
+        "Falls, because the temperature rises"
+      ],
+      "correct": 1,
+      "why": [
+        "adiabatic alone does not fix entropy, irreversibility generates it",
+        "",
+        "compression lowers entropy, which reverses the volume effect",
+        "a hotter gas does not have lower entropy"
+      ]
+    },
+    "solution": "Irreversibility makes $\\Delta S>0$ even though $Q=0$.",
+    "hints": [
+      "Adiabatic and reversible are different."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "$1.0\\ \\mathrm{kg}$ of water with specific heat $c=4.19\\times10^{3}\\ \\mathrm{J/(kg\\,K)}$ is heated reversibly from $300\\ \\mathrm K$ to $350\\ \\mathrm K$. Find its entropy change in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 645.89135,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "4190*math.log(350/300)",
+    "solution": "$\\Delta S=mc\\ln(T_2/T_1)=4190\\ln(350/300)\\approx646\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Integrate $dQ/T$ with $dQ=mc\\,dT$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.entropy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A gas with constant molar heat capacity at constant volume is heated reversibly from $T_1$ to $T_2$. Use $C$ for that heat capacity. Write the entropy change per mole in terms of $C$, $T_1$, $T_2$.",
+    "answer": {
+      "kind": "expression",
+      "value": "C*ln(T2/T1)",
+      "vars": [
+        "C",
+        "T1",
+        "T2"
+      ],
+      "also": [
+        "C*(ln(T2)-ln(T1))"
+      ],
+      "domain": {
+        "C": [
+          1,
+          3
+        ],
+        "T1": [
+          200,
+          400
+        ],
+        "T2": [
+          400,
+          800
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$\\Delta S=\\int C\\,dT/T=C\\ln(T_2/T_1)$.",
+    "hints": [
+      "Integrate $dQ/T$ with $dQ=C\\,dT$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the condition for a process at constant $T$ and $P$ to be spontaneous, in terms of the Gibbs free energy.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\Delta G<0$",
+        "$\\Delta G>0$",
+        "$\\Delta S_{\\rm sys}>0$ only",
+        "$\\Delta H<0$ only"
+      ],
+      "correct": 0,
+      "why": [
+        "reverses the inequality",
+        "",
+        "ignores the surroundings",
+        "ignores the entropy term"
+      ]
+    },
+    "solution": "At constant $T$ and $P$ a process runs on its own when $\\Delta G<0$.",
+    "hints": [
+      "Gibbs energy covers the system and the surroundings."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression defines the Gibbs free energy $G$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$G=H-TS$",
+        "$G=U+PV$",
+        "$G=U-TS$",
+        "$G=U+TS$"
+      ],
+      "correct": 0,
+      "why": [
+        "that is the enthalpy $H$",
+        "drops the pressure term, which gives the Helmholtz function",
+        "the Helmholtz function is $F=U-TS$",
+        "sign error on the entropy term"
+      ]
+    },
+    "solution": "$G=H-TS=U+PV-TS$.",
+    "hints": [
+      "Gibbs uses enthalpy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the Gibbs free energy change at constant $T$ in terms of $\\Delta H$, $\\Delta S$, $T$. Use dH for $\\Delta H$ and dS for $\\Delta S$.",
+    "answer": {
+      "kind": "expression",
+      "value": "dH-T*dS",
+      "vars": [
+        "dH",
+        "T",
+        "dS"
+      ],
+      "also": [
+        "dH-dS*T",
+        "-T*dS+dH"
+      ]
+    },
+    "check": null,
+    "solution": "$\\Delta G=\\Delta H-T\\,\\Delta S$ at constant $T$.",
+    "hints": [
+      "Start from $G=H-TS$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A reaction at $300\\ \\mathrm K$ has $\\Delta H=-100\\ \\mathrm{kJ/mol}$ and $\\Delta S=-0.20\\ \\mathrm{kJ/(mol\\,K)}$. Find $\\Delta G$ in $\\mathrm{kJ/mol}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -40,
+      "form": "exact"
+    },
+    "check": "Fraction(-100)-300*Fraction(-20,100)",
+    "solution": "$\\Delta G=\\Delta H-T\\Delta S=-100-300(-0.20)=-40\\ \\mathrm{kJ/mol}$.",
+    "hints": [
+      "Use $\\Delta G=\\Delta H-T\\Delta S$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A process has $\\Delta H=+50\\ \\mathrm{kJ}$ and $\\Delta S=+0.10\\ \\mathrm{kJ/K}$. Find the temperature in $\\mathrm K$ at which $\\Delta G=0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 500,
+      "form": "exact"
+    },
+    "check": "Fraction(50)/Fraction(1,10)",
+    "solution": "$\\Delta G=0$ gives $T=\\Delta H/\\Delta S=50/0.10=500\\ \\mathrm K$.",
+    "hints": [
+      "Set $\\Delta G=0$ and solve for $T$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A process has $\\Delta H<0$ and $\\Delta S<0$. At which temperatures is it spontaneous?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "At all temperatures",
+        "Only at low temperatures",
+        "Only at high temperatures",
+        "At no temperature"
+      ],
+      "correct": 1,
+      "why": [
+        "treats the entropy term as always favorable",
+        "",
+        "reverses the sign of the $T\\Delta S$ term",
+        "ignores that the negative enthalpy term can dominate"
+      ]
+    },
+    "solution": "$\\Delta G=\\Delta H-T\\Delta S$. A negative $\\Delta H$ dominates at low $T$, so the process runs only there.",
+    "hints": [
+      "Compare the size of the two terms as $T$ changes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A reaction at $300\\ \\mathrm K$ releases $600\\ \\mathrm J$ of heat to surroundings at $300\\ \\mathrm K$. Find the entropy change of the surroundings in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "Fraction(600,300)",
+    "solution": "$\\Delta S_{\\rm surr}=+Q/T=600/300=2.0\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Surroundings gain the heat released by the system."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "At $350\\ \\mathrm K$, a process has $\\Delta H=+20\\ \\mathrm{kJ}$ and $\\Delta S=+0.050\\ \\mathrm{kJ/K}$. Find $\\Delta G$ in $\\mathrm{kJ}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "20-350*Fraction(50,1000)",
+    "solution": "$\\Delta G=20-350(0.050)=20-17.5=+2.5\\ \\mathrm{kJ}$, so the process is not spontaneous.",
+    "hints": [
+      "Use the sign of $\\Delta G$ at this temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.second-law"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about spontaneity.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "At equilibrium at fixed $T$ and $P$, $\\Delta G=0$.",
+        "At fixed $T$ and $P$, a process is spontaneous only if $\\Delta G<0$.",
+        "An isolated system's entropy can decrease in a spontaneous process.",
+        "A spontaneous process can have $\\Delta S_{\\rm univ}<0$."
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Equilibrium gives $\\Delta G=0$ and spontaneity needs $\\Delta G<0$. Spontaneous processes raise $S_{\\rm univ}$.",
+    "hints": [
+      "Entropy of the universe never falls in a spontaneous process."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which differential is correct for the Helmholtz free energy $F=U-TS$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$dF=-S\\,dT-P\\,dV$",
+        "$dF=T\\,dS-P\\,dV$",
+        "$dF=S\\,dT+V\\,dP$",
+        "$dF=-S\\,dT+V\\,dP$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is $dU$, not $dF$",
+        "sign error and wrong variables",
+        "that is $dG$, not $dF$"
+      ]
+    },
+    "solution": "$dF=dU-T\\,dS-S\\,dT=-S\\,dT-P\\,dV$.",
+    "hints": [
+      "Differentiate $U-TS$ directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which pair of variables is natural for the enthalpy $H$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$S$ and $P$",
+        "$S$ and $V$",
+        "$T$ and $V$",
+        "$T$ and $P$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that pair is natural for $U$",
+        "that pair is natural for $F$",
+        "that pair is natural for $G$"
+      ]
+    },
+    "solution": "$dH=T\\,dS+V\\,dP$, so $H(S,P)$.",
+    "hints": [
+      "Use $dH=T\\,dS+V\\,dP$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write $dU$ in terms of $T$, $P$, $dS$ and $dV$, where $dS$ and $dV$ are the differentials of $S$ and $V$.",
+    "answer": {
+      "kind": "expression",
+      "value": "T*dS-P*dV",
+      "vars": [
+        "T",
+        "dS",
+        "P",
+        "dV"
+      ],
+      "also": [
+        "T*dS+(-P)*dV",
+        "dS*T-dV*P"
+      ]
+    },
+    "check": null,
+    "solution": "$dU=T\\,dS-P\\,dV$ for a simple system.",
+    "hints": [
+      "The first and second laws combine to give $dU$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A system has enthalpy $500\\ \\mathrm J$ and Gibbs energy $200\\ \\mathrm J$ at $300\\ \\mathrm K$. Find its entropy in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "Fraction(500-200,300)",
+    "solution": "$G=H-TS$, so $S=(H-G)/T=(500-200)/300=1.0\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Solve $G=H-TS$ for $S$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "An ideal gas expands isothermally from $V_1$ to $V_2$ at temperature $T$, with $n$ moles. Which is $\\Delta F$, the change in Helmholtz free energy?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\Delta F=+nRT\\ln(V_2/V_1)$",
+        "$\\Delta F=-nRT\\ln(V_2/V_1)$",
+        "$\\Delta F=0$, since $T$ is constant",
+        "$\\Delta F=-nR\\ln(V_2/V_1)$"
+      ],
+      "correct": 1,
+      "why": [
+        "sign error: $F$ falls as the gas expands at fixed $T$",
+        "",
+        "constant $T$ kills $dF=-S\\,dT$ but not $-P\\,dV$",
+        "drops the factor $T$ from $P\\,dV$"
+      ]
+    },
+    "solution": "$dF=-P\\,dV$ with $P=nRT/V$, so $\\Delta F=-nRT\\ln(V_2/V_1)$.",
+    "hints": [
+      "Use $dF=-P\\,dV$ at fixed $T$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For an ideal gas at fixed $T$, $F=-nRT\\ln V+f(T)$. Write $\\partial F/\\partial V$ at fixed $T$ in terms of $n$, $R$, $T$, $V$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-n*R*T/V",
+      "vars": [
+        "n",
+        "R",
+        "T",
+        "V"
+      ],
+      "also": [
+        "-(n*R*T)/V",
+        "-n*R*T*V^(-1)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\partial F/\\partial V|_T=-P=-nRT/V$.",
+    "hints": [
+      "The derivative of $F$ with respect to $V$ is $-P$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A system at constant pressure $2.0\\times10^{3}\\ \\mathrm{Pa}$ has $\\Delta U=300\\ \\mathrm J$, while its volume increases by $0.50\\ \\mathrm{m^3}$. Find $\\Delta H$ in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1300,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "300+2000*0.5",
+    "solution": "$\\Delta H=\\Delta U+P\\Delta V=300+2000(0.50)=1300\\ \\mathrm J$.",
+    "hints": [
+      "Enthalpy adds $P\\,V$ to internal energy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "For $2.0$ mol of ideal gas at $V=0.50\\ \\mathrm{m^3}$, the Maxwell relation $(\\partial S/\\partial V)_T=(\\partial P/\\partial T)_V$ holds. Find $(\\partial S/\\partial V)_T$ in $\\mathrm{J/(m^3\\,K)}$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 33.24,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2*8.31/0.5",
+    "solution": "$(\\partial P/\\partial T)_V=nR/V=2(8.31)/0.50=33.24\\ \\mathrm{J/(m^3\\,K)}$.",
+    "hints": [
+      "Use the Maxwell relation from $F$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.potentials"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about thermodynamic potentials.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$U(S,V)$ is the natural energy for $dU=T\\,dS-P\\,dV$.",
+        "$H$ is naturally a function of $S$ and $P$.",
+        "$F$ is naturally a function of $T$ and $P$.",
+        "$dG=-S\\,dT+V\\,dP$."
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    },
+    "solution": "$F$ is natural in $T$ and $V$, not $P$. The other three are standard forms.",
+    "hints": [
+      "Each potential has its own pair of natural variables."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Clapeyron equation for a phase boundary, in terms of latent heat $L$, temperature $T$ and molar volume change $\\Delta V$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$dP/dT=L/(T\\,\\Delta V)$",
+        "$dP/dT=T\\,\\Delta V/L$",
+        "$dP/dT=L\\,\\Delta V/T$",
+        "$dP/dT=\\Delta V/(T\\,L)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts the ratio",
+        "drops $T$ from the denominator",
+        "swaps $L$ and $\\Delta V$ roles"
+      ]
+    },
+    "solution": "Equal Gibbs energies on both sides give $dP/dT=\\Delta S/\\Delta V=L/(T\\Delta V)$.",
+    "hints": [
+      "Use $\\Delta S=L/T$ on the boundary."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is special about the triple point on a $P$–$T$ diagram?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Three phases coexist at one unique $P$ and $T$",
+        "Two phases coexist over a continuous range of $P$",
+        "Only the liquid phase is stable",
+        "Only the gas phase is stable"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a boundary curve is a two-phase line, not a point",
+        "the liquid is not stable everywhere",
+        "the gas is not stable everywhere"
+      ]
+    },
+    "solution": "The triple point is the single $(P,T)$ where solid, liquid and vapor coexist.",
+    "hints": [
+      "Count the phases that can coexist."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a vapor treated as ideal, with latent heat $L$ per mole, write $\\ln(P_2/P_1)$ in terms of $L$, $R$, $T_1$, $T_2$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-(L/R)*(1/T2-1/T1)",
+      "vars": [
+        "L",
+        "R",
+        "T1",
+        "T2"
+      ],
+      "also": [
+        "(L/R)*(1/T1-1/T2)"
+      ],
+      "domain": {
+        "L": [
+          1,
+          3
+        ],
+        "R": [
+          1,
+          3
+        ],
+        "T1": [
+          200,
+          300
+        ],
+        "T2": [
+          300,
+          400
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$d\\ln P/dT=L/(RT^2)$, which integrates to $\\ln(P_2/P_1)=(L/R)(1/T_1-1/T_2)$.",
+    "hints": [
+      "Integrate $L/(RT^2)$ between the two temperatures."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A liquid has latent heat $4.00\\times10^{4}\\ \\mathrm{J/mol}$. Its vapor pressure is $P_1$ at $373\\ \\mathrm K$. Treat the vapor as ideal and take $L$ as constant. Find $P_2/P_1$ at $383\\ \\mathrm K$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.4006537,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.exp(40000/8.31*(1/373-1/383))",
+    "solution": "$\\ln(P_2/P_1)=(L/R)(1/T_1-1/T_2)=0.337$, so $P_2/P_1=e^{0.337}\\approx1.40$.",
+    "hints": [
+      "Integrate the Clausius–Clapeyron equation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a phase boundary at $300\\ \\mathrm K$, the latent heat is $4.0\\times10^{4}\\ \\mathrm{J/mol}$ and the molar volume change on the transition is $0.020\\ \\mathrm{m^3/mol}$. Find $dP/dT$ in $\\mathrm{Pa/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6666.6667,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "40000/(300*0.02)",
+    "solution": "$dP/dT=L/(T\\,\\Delta V)=40000/(300\\times0.020)\\approx6.67\\times10^{3}\\ \\mathrm{Pa/K}$.",
+    "hints": [
+      "Use the Clapeyron equation directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Why does increasing pressure lower the melting point of ice?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Ice is denser, so $\\Delta V>0$ and the melting slope is positive",
+        "Melting absorbs heat, so $L<0$ and the slope flips",
+        "Liquid water is denser than ice, so $\\Delta V<0$ and the melting slope is negative",
+        "The slope is zero because $\\Delta V$ is small"
+      ],
+      "correct": 2,
+      "why": [
+        "ice is less dense than water, so $\\Delta V$ has the opposite sign",
+        "melting absorbs heat, so $L$ is positive",
+        "",
+        "a small $\\Delta V$ lowers the slope but never sets it to zero"
+      ]
+    },
+    "solution": "Water is denser than ice, so $\\Delta V<0$ on melting. The Clapeyron slope is then negative.",
+    "hints": [
+      "Check the sign of the volume change."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two moles of ice melt reversibly at $273\\ \\mathrm K$ with latent heat $6.0\\ \\mathrm{kJ/mol}$. Find the entropy change of the sample in $\\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 43.956044,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2*6000/273",
+    "solution": "$\\Delta S=nL/T=2(6000)/273\\approx44.0\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Entropy of a reversible transition is heat over temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A liquid's vapor pressure is $1.00$ atm at $373\\ \\mathrm K$. Its latent heat is $4.00\\times10^{4}\\ \\mathrm{J/mol}$. Treat the vapor as ideal and take $L$ as constant. Find the temperature in $\\mathrm K$ at which the vapor pressure is $2.00$ atm. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 394.17196,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1/(1/373-8.31*math.log(2)/40000)",
+    "solution": "$1/T_2=1/T_1-R\\ln2/L=2.6810\\times10^{-3}-1.4401\\times10^{-4}$, so $T_2\\approx394\\ \\mathrm K$.",
+    "hints": [
+      "Invert the integrated Clausius–Clapeyron equation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.phase"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Starting from the Clapeyron equation with $\\Delta V\\approx RT/P$ for vapor, write $dP/dT$ in terms of $P$, $L$, $R$, $T$. Here $L$ is per mole.",
+    "answer": {
+      "kind": "expression",
+      "value": "P*L/(R*T^2)",
+      "vars": [
+        "P",
+        "L",
+        "R",
+        "T"
+      ],
+      "also": [
+        "P*L/R/T^2",
+        "L*P/(R*T*T)"
+      ],
+      "domain": {
+        "P": [
+          1,
+          3
+        ],
+        "L": [
+          1,
+          3
+        ],
+        "R": [
+          1,
+          3
+        ],
+        "T": [
+          200,
+          400
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$dP/dT=L/(T\\Delta V)=LP/(RT^2)$.",
+    "hints": [
+      "Substitute $\\Delta V=RT/P$ into the Clapeyron equation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the mean translational kinetic energy per molecule of an ideal gas at absolute temperature $T$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\tfrac32 k_BT$",
+        "$\\tfrac12 k_BT$",
+        "$k_BT$",
+        "$\\tfrac32 Nk_BT$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "counts one quadratic term, not three",
+        "forgets the factor for three translational degrees",
+        "gives the total energy of $N$ molecules, not one molecule"
+      ]
+    },
+    "solution": "Three translational quadratic terms each give $\\tfrac12 k_BT$.",
+    "hints": [
+      "Count the translational degrees of freedom."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which proportionality holds for the rms speed of molecules in an ideal gas?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$v_{\\rm rms}\\propto\\sqrt{T/m}$",
+        "$v_{\\rm rms}\\propto T/m$",
+        "$v_{\\rm rms}\\propto\\sqrt{m/T}$",
+        "$v_{\\rm rms}\\propto\\sqrt{T}$, with no dependence on $m$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "assumes speed is linear in temperature over mass",
+        "inverts both the temperature and mass dependence",
+        "drops the mass dependence"
+      ]
+    },
+    "solution": "$\\tfrac12 m v_{\\rm rms}^2=\\tfrac32 k_BT$ gives $v_{\\rm rms}=\\sqrt{3k_BT/m}$.",
+    "hints": [
+      "Use the energy per molecule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Kinetic theory gives the pressure of $N$ molecules of mass $m$ in volume $V$. Write $P$ in terms of $N$, $m$, $V$ and vsq, where vsq is the mean square speed.",
+    "answer": {
+      "kind": "expression",
+      "value": "N*m*vsq/(3*V)",
+      "vars": [
+        "N",
+        "m",
+        "vsq",
+        "V"
+      ],
+      "also": [
+        "N*m*vsq/3/V"
+      ]
+    },
+    "check": null,
+    "solution": "$P=\\tfrac13 Nm\\langle v^2\\rangle/V$.",
+    "hints": [
+      "Use the momentum transfer at the walls."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the rms speed of $\\mathrm N_2$ molecules at $300\\ \\mathrm K$, in $\\mathrm{m/s}$. The molar mass is $0.028\\ \\mathrm{kg/mol}$ and $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 516.82409,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.sqrt(3*8.31*300/0.028)",
+    "solution": "$v_{\\rm rms}=\\sqrt{3RT/M}=\\sqrt{3(8.31)(300)/0.028}\\approx517\\ \\mathrm{m/s}$.",
+    "hints": [
+      "Use the molar mass, not the molecular mass."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the total translational kinetic energy of $2.0$ mol of monatomic ideal gas at $300\\ \\mathrm K$, in $\\mathrm{kJ}$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7.479,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1.5*2*8.31*300/1000",
+    "solution": "$E=\\tfrac32 nRT=1.5(2)(8.31)(300)=7.48\\times10^{3}\\ \\mathrm J$.",
+    "hints": [
+      "Multiply the energy per molecule by the number of molecules."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The absolute temperature of an ideal gas doubles at fixed molecular mass. How does the rms molecular speed change?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Doubles",
+        "Increases by a factor of $\\sqrt2$",
+        "Quadruples",
+        "Does not change, since speed depends on mass alone"
+      ],
+      "correct": 1,
+      "why": [
+        "assumes speed is linear in temperature",
+        "",
+        "squares the temperature ratio, but speed squared is linear in $T$",
+        "speed depends on temperature"
+      ]
+    },
+    "solution": "$v_{\\rm rms}\\propto\\sqrt T$, so doubling $T$ gives a factor $\\sqrt2$.",
+    "hints": [
+      "Speed scales with the square root of $T$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A gas has $N=1.0\\times10^{23}$ molecules, each of mass $4.0\\times10^{-27}\\ \\mathrm{kg}$, with rms speed $600\\ \\mathrm{m/s}$, in a volume $0.0020\\ \\mathrm{m^3}$. Find the pressure in $\\mathrm{Pa}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 24000.0,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1e23*4e-27*600**2/(3*0.002)",
+    "solution": "$P=Nm\\,v_{\\rm rms}^2/(3V)=(4\\times10^{-4})(3.6\\times10^{5})/(0.0060)=2.4\\times10^{4}\\ \\mathrm{Pa}$.",
+    "hints": [
+      "Use the kinetic-theory pressure formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A wall is hit by molecules of an ideal gas at pressure $1.0\\times10^{5}\\ \\mathrm{Pa}$ and $300\\ \\mathrm K$. Use the wall-flux rule $\\Phi=n\\bar v/4$, where $\\Phi$ is molecules striking each square meter per second, $n$ is number density and $\\bar v$ is the mean speed. Molecules have mass $4.65\\times10^{-26}\\ \\mathrm{kg}$. Take $k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$ and $\\bar v=\\sqrt{8k_BT/(\\pi m)}$. Find $\\Phi$ in units of $10^{27}\\ \\mathrm{m^{-2}\\,s^{-1}}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.8753017,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(1e5/(1.38e-23*300))*math.sqrt(8*1.38e-23*300/(math.pi*4.65e-26))/4/1e27",
+    "solution": "$n=P/(k_BT)\\approx2.42\\times10^{25}\\ \\mathrm{m^{-3}}$ and $\\bar v\\approx476\\ \\mathrm{m/s}$, so $\\Phi\\approx2.88\\times10^{27}\\ \\mathrm{m^{-2}\\,s^{-1}}$, which is $2.88$ in the stated units.",
+    "hints": [
+      "Find $n$ from the ideal gas law first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.kinetic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the rms speed of molecules of mass $m$ at absolute temperature $T$ in terms of $k_B$, $T$, $m$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sqrt(3*kB*T/m)",
+      "vars": [
+        "kB",
+        "T",
+        "m"
+      ],
+      "also": [
+        "(3*kB*T/m)^(1/2)"
+      ],
+      "domain": {
+        "kB": [
+          1,
+          2
+        ],
+        "T": [
+          100,
+          500
+        ],
+        "m": [
+          1,
+          5
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$v_{\\rm rms}=\\sqrt{3k_BT/m}$.",
+    "hints": [
+      "Use $\\tfrac12 mv^2=\\tfrac32 k_BT$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Use $C$ for the molar heat capacity at constant volume. Using Mayer's relation $C_P=C_V+R$, write $\\gamma=C_P/C_V$ in terms of $C$ and $R$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(C+R)/C",
+      "vars": [
+        "C",
+        "R"
+      ],
+      "also": [
+        "1+R/C"
+      ],
+      "domain": {
+        "C": [
+          1,
+          3
+        ],
+        "R": [
+          1,
+          3
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$\\gamma=(C_V+R)/C_V=1+R/C_V$.",
+    "hints": [
+      "Use Mayer's relation for $C_P$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the molar heat capacity at constant volume for a monatomic ideal gas.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\tfrac32 R$",
+        "$\\tfrac52 R$",
+        "$R$",
+        "$3R$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is $C_P$ for a monatomic gas",
+        "forgets the translational degrees",
+        "the solid value, not a gas"
+      ]
+    },
+    "solution": "Three translational quadratic terms give $C_V=\\tfrac32 R$.",
+    "hints": [
+      "Translation contributes $\\tfrac12 R$ per degree of freedom."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is true for a diatomic ideal gas near room temperature?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Translation and rotation count, so $C_V=\\tfrac52 R$",
+        "Vibration adds, so $C_V=\\tfrac72 R$",
+        "Only translation counts, so $C_V=\\tfrac32 R$",
+        "Each atom adds three terms, so $C_V=3R$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "vibration is frozen out at room temperature",
+        "ignores rotation",
+        "counts three per atom as if solid"
+      ]
+    },
+    "solution": "Translation gives $\\tfrac32 R$ and rotation $R$, so $C_V=\\tfrac52 R$ with vibration frozen.",
+    "hints": [
+      "Vibration is frozen at room temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A diatomic ideal gas near room temperature has $C_V=\\tfrac52 R$. Find $\\gamma=C_P/C_V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.4,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1+Fraction(2,5)",
+    "solution": "$\\gamma=1+R/C_V=1+2/5=7/5=1.4$.",
+    "hints": [
+      "Use Mayer's relation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$2.0$ mol of diatomic ideal gas is heated at constant volume from $300\\ \\mathrm K$ to $350\\ \\mathrm K$, with vibration frozen. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the heat absorbed in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2077.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2*2.5*8.31*50",
+    "solution": "$Q=nC_V\\Delta T=2(2.5)(8.31)(50)\\approx2078\\ \\mathrm J$.",
+    "hints": [
+      "At constant volume $Q=\\Delta U$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Why does the molar heat capacity of a solid approach $3R$ at high temperature?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Three kinetic terms, each giving $R$",
+        "Six quadratic terms, three kinetic and three potential, each giving $R/2$",
+        "Three translational terms, each giving $R/2$",
+        "Six terms, each giving $R$"
+      ],
+      "correct": 1,
+      "why": [
+        "counts only kinetic terms and gives each $R$ instead of $R/2$; no potential terms",
+        "",
+        "omits the potential energy terms",
+        "uses $R$ per term instead of $R/2$"
+      ]
+    },
+    "solution": "Each atom has six quadratic terms, each giving $\\tfrac12 k_B$. That gives $3R$ per mole.",
+    "hints": [
+      "Count kinetic and potential terms per atom."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$1.5$ mol of monatomic ideal gas is heated at constant pressure through $40\\ \\mathrm K$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the heat absorbed in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1246.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1.5*2.5*8.31*40",
+    "solution": "$Q=nC_P\\Delta T=1.5(\\tfrac52 R)(40)\\approx1.25\\times10^{3}\\ \\mathrm J$.",
+    "hints": [
+      "Use $C_P=\\tfrac52 R$ for a monatomic gas."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$2.0$ mol of a solid is heated by $50\\ \\mathrm K$ at constant volume, where each mole has heat capacity $3R$ (Dulong–Petit). Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$. Find the heat absorbed in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2493,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "3*8.31*2*50",
+    "solution": "$Q=nC_V\\Delta T=2(3R)(50)=2493\\ \\mathrm J$.",
+    "hints": [
+      "Use $Q=nC\\,\\Delta T$ with $C=3R$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.equipartition"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about heat capacities of ideal gases.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\gamma=5/3$ for a monatomic ideal gas.",
+        "$\\gamma\\approx1.4$ for a diatomic gas near room temperature.",
+        "$\\gamma=1.4$ for every ideal gas.",
+        "$C_P=C_V-R$."
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Monatomic: $\\gamma=5/3$. Diatomic at room $T$: $\\gamma=7/5$. Only these two hold, since $\\gamma$ depends on the modes and $C_P=C_V+R$.",
+    "hints": [
+      "Check $\\gamma$ for each gas type."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Boltzmann entropy formula, with $\\Omega$ the number of microstates.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$S=k_B\\ln\\Omega$",
+        "$S=k_B\\,\\Omega$",
+        "$S=-k_B\\ln\\Omega$",
+        "$S=k_B/\\ln\\Omega$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "drops the logarithm",
+        "sign error",
+        "inverts the logarithm"
+      ]
+    },
+    "solution": "$S=k_B\\ln\\Omega$, which is additive for independent systems.",
+    "hints": [
+      "Entropy is a log of a count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Two independent subsystems have multiplicities $\\Omega_1$ and $\\Omega_2$. What is the multiplicity of the combined system?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\Omega_1\\Omega_2$",
+        "$\\Omega_1+\\Omega_2$",
+        "$\\ln\\Omega_1+\\ln\\Omega_2$",
+        "$\\max(\\Omega_1,\\Omega_2)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "adds the counts instead of multiplying",
+        "that is the entropy, not the multiplicity",
+        "takes the larger count, which ignores the other system"
+      ]
+    },
+    "solution": "Independent states combine by multiplication of counts, so entropies add.",
+    "hints": [
+      "Multiplicities multiply."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A system of $N$ independent two-state units has $\\Omega=2^N$ microstates. Write its entropy in terms of $k_B$ and $N$.",
+    "answer": {
+      "kind": "expression",
+      "value": "N*kB*ln(2)",
+      "vars": [
+        "N",
+        "kB"
+      ],
+      "also": [
+        "kB*N*ln(2)"
+      ]
+    },
+    "check": null,
+    "solution": "$S=k_B\\ln 2^N=Nk_B\\ln2$.",
+    "hints": [
+      "Use the power rule for logs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Four independent two-state spins are constrained to have exactly two pointing up. Find $S/k_B$ for this macrostate.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.7917595,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.log(6)",
+    "solution": "$\\Omega=\\binom42=6$, so $S/k_B=\\ln6\\approx1.79$.",
+    "hints": [
+      "Count the arrangements first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Ten independent two-state particles have exactly three in the excited state. How many microstates $\\Omega$ does this macrostate have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 120,
+      "form": "exact"
+    },
+    "check": "math.comb(10,3)",
+    "solution": "$\\Omega=\\binom{10}{3}=120$.",
+    "hints": [
+      "Choose which three are excited."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two identical, independent systems each have multiplicity $\\Omega$. What is the entropy of the combined system?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$k_B\\ln(2\\Omega)$",
+        "$2k_B\\ln\\Omega$",
+        "$k_B\\,\\Omega^2$",
+        "$k_B\\ln\\Omega/2$"
+      ],
+      "correct": 1,
+      "why": [
+        "adds the multiplicities instead of multiplying",
+        "",
+        "drops the logarithm",
+        "halves instead of doubles the entropy"
+      ]
+    },
+    "solution": "Combined $\\Omega=\\Omega^2$, so $S=k_B\\ln\\Omega^2=2k_B\\ln\\Omega$.",
+    "hints": [
+      "Multiply the multiplicities first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A system's multiplicity changes from $\\Omega_1$ to $\\Omega_2$. Write its entropy change in terms of $k_B$, $\\Omega_1$, $\\Omega_2$.",
+    "answer": {
+      "kind": "expression",
+      "value": "kB*ln(Omega2/Omega1)",
+      "vars": [
+        "kB",
+        "Omega1",
+        "Omega2"
+      ],
+      "also": [
+        "kB*ln(Omega2)-kB*ln(Omega1)"
+      ],
+      "domain": {
+        "kB": [
+          1,
+          2
+        ],
+        "Omega1": [
+          1,
+          5
+        ],
+        "Omega2": [
+          5,
+          10
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$\\Delta S=k_B\\ln\\Omega_2-k_B\\ln\\Omega_1=k_B\\ln(\\Omega_2/\\Omega_1)$.",
+    "hints": [
+      "Subtract the two entropies."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "One mole of gas A and one mole of gas B, distinct and at equal $T$ and $P$, are mixed by removing a partition. Find $\\Delta S_{\\rm mix}$ in $\\mathrm{J/K}$. Take $R=8.31\\ \\mathrm{J/(mol\\,K)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 11.520106,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2*8.31*math.log(2)",
+    "solution": "Each gas gains volume doubling, so $\\Delta S=2R\\ln2\\approx11.5\\ \\mathrm{J/K}$.",
+    "hints": [
+      "Each gas's count grows with its available volume."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about entropy as a count of microstates.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Larger $\\Omega$ means larger $S$ for a fixed $k_B$.",
+        "Entropy is additive for independent systems.",
+        "$S$ is proportional to $\\Omega$.",
+        "$\\ln\\Omega$ is dimensionless."
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    },
+    "solution": "$S=k_B\\ln\\Omega$ grows with $\\Omega$, adds for independent systems, and $\\ln\\Omega$ is a pure number. $S$ is not proportional to $\\Omega$.",
+    "hints": [
+      "Entropy is a logarithm of the count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "One oscillator has level spacing $\\hbar\\omega$, with levels $n=0,1,2,\\dots$ measured from the ground state. Write its partition function $Z$ in terms of $x=\\hbar\\omega/(k_BT)$. Use x for this ratio.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/(1-exp(-x))",
+      "vars": [
+        "x"
+      ],
+      "also": [
+        "1/(1-1/exp(x))"
+      ]
+    },
+    "check": null,
+    "solution": "$Z=\\sum_n e^{-nx}=1/(1-e^{-x})$.",
+    "hints": [
+      "Sum the geometric series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A system is in contact with a heat bath at temperature $T$. Which expression gives the probability of a state of energy $E$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$p=e^{-E/k_BT}/Z$",
+        "$p=e^{-E\\,k_BT}/Z$",
+        "$p=Z\\,e^{-E/k_BT}$",
+        "$p=e^{+E/k_BT}/Z$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "misplaces the factor $k_BT$",
+        "multiplies by $Z$ instead of dividing",
+        "sign error in the exponent"
+      ]
+    },
+    "solution": "The Boltzmann factor is divided by $Z$ so probabilities sum to one.",
+    "hints": [
+      "Divide each Boltzmann factor by the sum of all of them."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is the partition function $Z$ for two levels at energies $0$ and $\\varepsilon$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1+e^{-\\varepsilon/k_BT}$",
+        "$e^{-\\varepsilon/k_BT}$",
+        "$1+e^{+\\varepsilon/k_BT}$",
+        "$1+\\varepsilon/k_BT$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgets the ground state term",
+        "sign error in the exponent",
+        "linearizes the exponential"
+      ]
+    },
+    "solution": "$Z=\\sum_i e^{-E_i/k_BT}=1+e^{-\\varepsilon/k_BT}$.",
+    "hints": [
+      "Sum over both levels, including the zero-energy one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t7-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A two-level system has energies $0$ and $\\varepsilon$, with $\\varepsilon=k_BT$. Find the probability of the upper state.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.26894142,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.exp(-1)/(1+math.exp(-1))",
+    "solution": "$p_{\\rm up}=e^{-1}/(1+e^{-1})\\approx0.269$.",
+    "hints": [
+      "Use the Boltzmann factor for the upper level over $Z$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A two-level system has energies $0$ and $\\varepsilon$, with $\\varepsilon=2k_BT$. Find the mean energy in units of $\\varepsilon$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.11920292,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.exp(-2)/(1+math.exp(-2))",
+    "solution": "$\\langle E\\rangle/\\varepsilon=p_{\\rm up}=e^{-2}/(1+e^{-2})\\approx0.119$.",
+    "hints": [
+      "The mean energy is $\\varepsilon$ times the upper probability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A system has three nondegenerate levels at $0$, $\\varepsilon$ and $2\\varepsilon$. For $k_BT\\gg\\varepsilon$, what are the occupation probabilities?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "All probability in the ground state",
+        "Equal probability $1/3$ for each level",
+        "Most probable at the top level $2\\varepsilon$",
+        "Half in the ground state, the rest shared"
+      ],
+      "correct": 1,
+      "why": [
+        "that is the low-temperature limit",
+        "",
+        "reverses the sign of the energy in the exponential",
+        "treats the top two levels as degenerate and ignores the spacing"
+      ]
+    },
+    "solution": "For $k_BT\\gg\\varepsilon$ every Boltzmann factor tends to 1, so each level gets $1/3$.",
+    "hints": [
+      "Let the Boltzmann factors go to one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a two-level system with energies $0$ and $\\varepsilon=0.10\\ \\mathrm{eV}$ at $T=300\\ \\mathrm K$, find the ratio $N_{\\rm upper}/N_{\\rm lower}$. Take $1\\ \\mathrm{eV}=1.60\\times10^{-19}\\ \\mathrm J$ and $k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.020968493,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.exp(-0.10*1.60e-19/(1.38e-23*300))",
+    "solution": "$\\varepsilon=1.60\\times10^{-20}\\ \\mathrm J$ and $k_BT=4.14\\times10^{-21}\\ \\mathrm J$, so the ratio is $e^{-3.86}\\approx0.0210$.",
+    "hints": [
+      "Convert the energy to joules before the exponent."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A two-level system has energies $0$ and $\\varepsilon$. With $x=\\varepsilon/(k_BT)$, write its mean energy in terms of eps for $\\varepsilon$ and x.",
+    "answer": {
+      "kind": "expression",
+      "value": "eps*exp(-x)/(1+exp(-x))",
+      "vars": [
+        "eps",
+        "x"
+      ],
+      "also": [
+        "eps/(1+exp(x))",
+        "eps*(1/(exp(x)+1))"
+      ]
+    },
+    "check": null,
+    "solution": "$\\langle E\\rangle=\\varepsilon e^{-x}/(1+e^{-x})=\\varepsilon/(e^{x}+1)$.",
+    "hints": [
+      "Use the upper-state probability times $\\varepsilon$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.canonical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about the canonical distribution.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$p_i=e^{-E_i/k_BT}/Z$ are probabilities that sum to one.",
+        "$Z$ is dimensionless.",
+        "Raising $T$ makes the ground state more probable.",
+        "$Z=\\sum_i e^{+E_i/k_BT}$."
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Probabilities sum to one and $Z$ is a pure number. Raising $T$ spreads population up, and the exponent has the minus sign.",
+    "hints": [
+      "Check the sign in the exponent."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Fermi–Dirac occupancy of a state at energy $E$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1/(e^{(E-\\mu)/k_BT}+1)$",
+        "$1/(e^{(E-\\mu)/k_BT}-1)$",
+        "$e^{-(E-\\mu)/k_BT}$",
+        "$1/(e^{(\\mu-E)/k_BT}+1)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the Bose–Einstein form, which has the minus sign",
+        "that is the Boltzmann form, which has no $\\pm1$",
+        "that is the probability of an empty state"
+      ]
+    },
+    "solution": "Fermions obey the exclusion principle, so the occupancy has a plus sign.",
+    "hints": [
+      "The plus sign comes from exclusion."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What chemical potential applies to a blackbody photon gas?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mu=0$",
+        "$\\mu$ equals the Fermi energy",
+        "$\\mu$ is large and positive",
+        "$\\mu$ is fixed by conservation of photon number"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "photons are bosons with no Fermi level",
+        "a large positive $\\mu$ would give fewer photons, not a blackbody",
+        "photon number is not conserved, so it cannot fix $\\mu$"
+      ]
+    },
+    "solution": "Photon number is not conserved, so $\\mu=0$ for thermal radiation.",
+    "hints": [
+      "Photon number changes with temperature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the Bose–Einstein occupancy of a state with $\\mu=0$ in terms of $x=E/(k_BT)$. Use x for this ratio.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/(exp(x)-1)",
+      "vars": [
+        "x"
+      ],
+      "also": [
+        "1/(e^x-1)",
+        "1/(-1+exp(x))"
+      ]
+    },
+    "check": null,
+    "solution": "$n=1/(e^{x}-1)$ for $\\mu=0$.",
+    "hints": [
+      "Set $\\mu=0$ in the Bose–Einstein form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A fermion state has energy $E=\\mu+k_BT$. Find its Fermi–Dirac occupancy.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.26894142,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1/(math.e+1)",
+    "solution": "$f=1/(e^{1}+1)\\approx0.269$.",
+    "hints": [
+      "Set $(E-\\mu)/k_BT=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t7-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A photon mode has energy $E=3k_BT$. Taking $\\mu=0$, find its Bose–Einstein occupancy.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.052395696,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1/(math.exp(3)-1)",
+    "solution": "$n=1/(e^{3}-1)\\approx0.0524$.",
+    "hints": [
+      "Set $x=3$ in the Bose–Einstein form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "When do Fermi–Dirac and Bose–Einstein occupancies both reduce to the Boltzmann form $e^{-(E-\\mu)/k_BT}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "When $E\\ll k_BT$ for every state",
+        "When $e^{(E-\\mu)/k_BT}\\gg1$, so the $\\pm1$ term is negligible",
+        "Only for fermions, since bosons never reduce to Boltzmann",
+        "Whenever $\\mu=0$, at any temperature"
+      ],
+      "correct": 1,
+      "why": [
+        "bosons diverge at small $E$, so this gives large occupancy, not the classical limit",
+        "",
+        "both statistics reduce to Boltzmann when occupancy is small",
+        "$\\mu=0$ alone does not make occupancy small"
+      ]
+    },
+    "solution": "When $e^{(E-\\mu)/k_BT}\\gg1$ the occupancy is small and the $\\pm1$ is negligible.",
+    "hints": [
+      "Check when the occupancy is small."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A fermion state has energy $E=\\mu-2k_BT$. Find its Fermi–Dirac occupancy.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.88079708,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1/(math.exp(-2)+1)",
+    "solution": "$f=1/(e^{-2}+1)\\approx0.881$.",
+    "hints": [
+      "Set $(E-\\mu)/k_BT=-2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A boson mode has $E=0.5\\,k_BT$ and $\\mu=0$. Find its Bose–Einstein occupancy.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.5414941,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1/(math.exp(0.5)-1)",
+    "solution": "$n=1/(e^{0.5}-1)\\approx1.54$.",
+    "hints": [
+      "Use $x=0.5$ in the Bose–Einstein form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quantum-stats"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the Fermi–Dirac occupancy in terms of $x=(E-\\mu)/(k_BT)$. Use x for this ratio.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/(exp(x)+1)",
+      "vars": [
+        "x"
+      ],
+      "also": [
+        "1/(1+exp(x))",
+        "1/(e^x+1)"
+      ]
+    },
+    "check": null,
+    "solution": "$f=1/(e^{x}+1)$.",
+    "hints": [
+      "Substitute $x$ into the Fermi–Dirac form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State the Stefan–Boltzmann law for the total power radiated per unit area by a blackbody at temperature $T$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$j=\\sigma T^4$",
+        "$j=\\sigma T^3$",
+        "$j=\\sigma T^4/4$",
+        "$j=\\sigma T^4\\,c$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "wrong exponent",
+        "adds an unjustified factor of one quarter",
+        "unit slip: multiplies by $c$"
+      ]
+    },
+    "solution": "$j=\\sigma T^4$ with $\\sigma=5.67\\times10^{-8}\\ \\mathrm{W\\,m^{-2}K^{-4}}$.",
+    "hints": [
+      "Power per area scales with the fourth power."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Wien's displacement law gives the peak wavelength $\\lambda_{\\max}$. How does it scale with temperature $T$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\lambda_{\\max}\\propto 1/T$",
+        "$\\lambda_{\\max}\\propto T$",
+        "$\\lambda_{\\max}\\propto T^4$",
+        "$\\lambda_{\\max}$ is independent of $T$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reverses the direction",
+        "uses the power law instead of the peak",
+        "confuses peak wavelength with the total power"
+      ]
+    },
+    "solution": "$\\lambda_{\\max}T=b$, so $\\lambda_{\\max}\\propto1/T$.",
+    "hints": [
+      "Hotter bodies peak at shorter wavelengths."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write Wien's peak wavelength $\\lambda_{\\max}$ in terms of the Wien constant $b$ and temperature $T$.",
+    "answer": {
+      "kind": "expression",
+      "value": "b/T",
+      "vars": [
+        "b",
+        "T"
+      ],
+      "also": [
+        "b*T^(-1)",
+        "1/(T/b)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\lambda_{\\max}=b/T$.",
+    "hints": [
+      "Solve $\\lambda_{\\max}T=b$ for $\\lambda_{\\max}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A blackbody has surface area $1.0\\ \\mathrm{m^2}$ and temperature $1000\\ \\mathrm K$. Take $\\sigma=5.67\\times10^{-8}\\ \\mathrm{W\\,m^{-2}K^{-4}}$. Find the total radiated power in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 56700.0,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "5.67e-8*1*1000**4",
+    "solution": "$P=\\sigma AT^4=5.67\\times10^{-8}\\times10^{12}=5.67\\times10^{4}\\ \\mathrm W$.",
+    "hints": [
+      "Multiply $\\sigma T^4$ by the area."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Take the Wien constant $b=2.90\\times10^{-3}\\ \\mathrm{m\\,K}$. Find the peak wavelength of a blackbody at $5800\\ \\mathrm K$ in $\\mathrm{nm}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 500,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "2.90e-3/5800*1e9",
+    "solution": "$\\lambda_{\\max}=b/T=2.90\\times10^{-3}/5800=5.0\\times10^{-7}\\ \\mathrm m=500\\ \\mathrm{nm}$.",
+    "hints": [
+      "Convert meters to nanometers at the end."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A blackbody's temperature doubles. By what factor does the power radiated per unit area increase?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "2 times",
+        "4 times",
+        "16 times",
+        "8 times"
+      ],
+      "correct": 2,
+      "why": [
+        "assumes a linear dependence on $T$",
+        "uses a $T^2$ dependence",
+        "",
+        "uses a $T^3$ dependence"
+      ]
+    },
+    "solution": "$j\\propto T^4$, so doubling $T$ multiplies $j$ by $2^4=16$.",
+    "hints": [
+      "Fourth power."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Model a star as a sphere of radius $7.0\\times10^{8}\\ \\mathrm m$ radiating as a blackbody at $5800\\ \\mathrm K$. Take $\\sigma=5.67\\times10^{-8}\\ \\mathrm{W\\,m^{-2}K^{-4}}$. Find its total power output in units of $10^{26}\\ \\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.9509449,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "5.67e-8*4*math.pi*(7e8)**2*5800**4/1e26",
+    "solution": "$P=\\sigma(4\\pi R^2)T^4\\approx3.95\\times10^{26}\\ \\mathrm W$, which is $3.95$ in the stated units.",
+    "hints": [
+      "Use the sphere's surface area, $4\\pi R^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A blackbody's peak wavelength shifts from $600\\ \\mathrm{nm}$ to $300\\ \\mathrm{nm}$. By what factor does its temperature change?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "Fraction(600,300)",
+    "solution": "$\\lambda_{\\max}T$ is constant, so the temperature doubles.",
+    "hints": [
+      "Use Wien's law as a ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.blackbody"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about blackbody radiation.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Power radiated per unit area scales as $T^4$.",
+        "The peak wavelength scales as $1/T$.",
+        "Doubling $T$ doubles the power per unit area.",
+        "The peak wavelength is independent of $T$."
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "$j\\propto T^4$ and $\\lambda_{\\max}\\propto1/T$. Doubling $T$ gives sixteen times the power.",
+    "hints": [
+      "Use the fourth power law."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "State Fourier's law for conduction through a slab of thickness $L$ and area $A$, with temperature difference $\\Delta T$ across it.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$P=kA\\,\\Delta T/L$",
+        "$P=kL\\,\\Delta T/A$",
+        "$P=k\\,\\Delta T/(AL)$",
+        "$P=kAL/\\Delta T$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "swaps the roles of $L$ and $A$",
+        "drops the area",
+        "inverts the temperature term"
+      ]
+    },
+    "solution": "Heat rate is conductivity times area times gradient, $P=kA\\,\\Delta T/L$.",
+    "hints": [
+      "Thicker walls conduct less."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Two slabs are in series, carrying the same heat flow. Which rule combines their thermal resistances?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$R=R_1+R_2$",
+        "$1/R=1/R_1+1/R_2$",
+        "$P=P_1+P_2$",
+        "$R=R_1R_2/(R_1+R_2)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the rule for parallel paths",
+        "series heat flows are equal, not added",
+        "that is the parallel combination"
+      ]
+    },
+    "solution": "Series resistances add. Parallel conductances add.",
+    "hints": [
+      "Series means one path."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the conduction heat rate $P$ through a slab of conductivity $k$, area $A$, thickness $L$, between faces at Thot and Tcold. Use the names as given.",
+    "answer": {
+      "kind": "expression",
+      "value": "k*A*(Thot-Tcold)/L",
+      "vars": [
+        "k",
+        "A",
+        "Thot",
+        "Tcold",
+        "L"
+      ],
+      "also": [
+        "k*A*Thot/L-k*A*Tcold/L",
+        "(k*A/L)*(Thot-Tcold)"
+      ]
+    },
+    "check": null,
+    "solution": "$P=kA(T_{\\rm hot}-T_{\\rm cold})/L$.",
+    "hints": [
+      "Use Fourier's law."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A window of area $2.0\\ \\mathrm{m^2}$ and thickness $0.010\\ \\mathrm m$ has conductivity $0.80\\ \\mathrm{W/(m\\,K)}$. Its faces differ by $20\\ \\mathrm K$. Find the conduction power in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3200,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "0.8*2*20/0.01",
+    "solution": "$P=kA\\Delta T/L=(0.80)(2.0)(20)/0.010=3200\\ \\mathrm W$.",
+    "hints": [
+      "Use Fourier's law."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A wall has a layer of thickness $0.10\\ \\mathrm m$ with $k=0.50\\ \\mathrm{W/(m\\,K)}$, followed by a layer of thickness $0.050\\ \\mathrm m$ with $k=0.10\\ \\mathrm{W/(m\\,K)}$. Area is $1.0\\ \\mathrm{m^2}$, and the temperature difference across the wall is $30\\ \\mathrm K$. Find the heat rate in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 42.857143,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "30*1/(0.10/0.5+0.05/0.1)",
+    "solution": "$R=L_1/k_1+L_2/k_2=0.20+0.50=0.70\\ \\mathrm{K\\,m^2/W}$, so $P=30/0.70\\approx42.9\\ \\mathrm W$.",
+    "hints": [
+      "Add resistances in series first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Through which mechanism does heat cross a vacuum gap between two surfaces?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Conduction only",
+        "Radiation only",
+        "Convection only",
+        "Conduction and convection together"
+      ],
+      "correct": 1,
+      "why": [
+        "conduction needs a material medium",
+        "",
+        "convection needs a fluid to move",
+        "both need matter"
+      ]
+    },
+    "solution": "Only radiation works without matter.",
+    "hints": [
+      "Vacuum has no matter to conduct or carry heat."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A surface of area $0.50\\ \\mathrm{m^2}$ loses heat to air by convection with coefficient $h=25\\ \\mathrm{W/(m^2\\,K)}$. The surface is $40\\ \\mathrm K$ hotter than the air. Find the heat loss rate in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 500,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "25*0.5*40",
+    "solution": "$P=hA\\Delta T=25(0.50)(40)=500\\ \\mathrm W$.",
+    "hints": [
+      "Use Newton's law of cooling."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A surface of area $1.0\\ \\mathrm{m^2}$ and emissivity $1$ is at $400\\ \\mathrm K$ and faces surroundings at $300\\ \\mathrm K$. Take $\\sigma=5.67\\times10^{-8}\\ \\mathrm{W\\,m^{-2}K^{-4}}$. Find the net radiated power in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 992.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "5.67e-8*(400**4-300**4)",
+    "solution": "$P=\\sigma A(T^4-T_s^4)=5.67\\times10^{-8}(2.56\\times10^{10}-8.1\\times10^{9})\\approx992\\ \\mathrm W$.",
+    "hints": [
+      "Net radiation is the difference of the two fourth powers."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t7-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.heat-transfer"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Two layers in series have thicknesses $L_1$, $L_2$ and conductivities $k_1$, $k_2$, with area $A$ and temperature difference dT across both. Write the heat rate $P$ in terms of these names.",
+    "answer": {
+      "kind": "expression",
+      "value": "A*dT/(L1/k1+L2/k2)",
+      "vars": [
+        "A",
+        "dT",
+        "L1",
+        "k1",
+        "L2",
+        "k2"
+      ],
+      "also": [
+        "A*dT*k1*k2/(L1*k2+L2*k1)"
+      ],
+      "domain": {
+        "A": [
+          1,
+          2
+        ],
+        "dT": [
+          5,
+          20
+        ],
+        "L1": [
+          0.1,
+          0.5
+        ],
+        "k1": [
+          0.5,
+          1.5
+        ],
+        "L2": [
+          0.1,
+          0.5
+        ],
+        "k2": [
+          0.5,
+          1.5
+        ]
+      }
+    },
+    "check": null,
+    "solution": "$P=A\\,\\Delta T/(L_1/k_1+L_2/k_2)$.",
+    "hints": [
+      "Add the resistances in series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

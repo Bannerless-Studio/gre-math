@@ -27,6 +27,7 @@
   var DEFAULT_POINTS = 12;
   var MIN_VALID = 8;
   var REL_TOL = 1e-9;
+  var ZERO_FLOOR = 1e-12;   // absolute slack where relative tolerance has no scale: exact-zero targets, cancelling expressions
 
   // ---- numbers: integers, decimals, p/q. Copied from engine/core.js.
   function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = a % b; a = b; b = t; } return a; }
@@ -37,6 +38,8 @@
   }
   var RAT_RE = /^([+-]?)(\d+)\/(\d+)$/;
   var DEC_RE = /^([+-]?)(\d*)(?:\.(\d*))?$/;
+  var SCI_RE = /^([+-]?)(\d*)(?:\.(\d*))?[eE]([+-]?\d+)$/;
+  var SAFE_INT = 9007199254740991;
   function parseNumber(input) {
     if (typeof input === 'number') return isFinite(input) ? { p: null, q: null, v: input, isFrac: false, lowest: false } : null;
     if (typeof input !== 'string') return null;
@@ -48,6 +51,22 @@
       if (!q0) return null;
       var r0 = makeRat(p0, q0);
       return { p: r0.p, q: r0.q, v: r0.v, isFrac: true, lowest: gcd(p0, q0) === 1 };
+    }
+    // Scientific literal (3e8, 1.6e-19): a typed numeric answer only. The expression tokenizer still rejects it,
+    // because 2e-1 is ambiguous there (2*e-1 or 0.2). Exact p/q when both sides fit a safe integer, else float only.
+    m = SCI_RE.exec(t);
+    if (m) {
+      var mant = (m[2] || '') + (m[3] || '');
+      if (!/\d/.test(mant)) return null;
+      var v10 = Number(t);
+      if (!isFinite(v10)) return null;
+      var e10 = Number(m[4]) - (m[3] || '').length;
+      var digits = Number(mant), pN = null, qN = null;
+      if (e10 >= 0 && e10 <= 15) { pN = digits * Math.pow(10, e10); qN = 1; }
+      else if (e10 < 0 && e10 >= -15) { pN = digits; qN = Math.pow(10, -e10); }
+      if (pN === null || pN > SAFE_INT || qN > SAFE_INT) return { p: null, q: null, v: v10, isFrac: false, lowest: false };
+      var rs = makeRat(m[1] === '-' ? -pN : pN, qN);
+      return { p: rs.p, q: rs.q, v: v10, isFrac: rs.q === 1, lowest: true };
     }
     m = DEC_RE.exec(t);
     if (!m) return null;
@@ -386,12 +405,13 @@
         if (!lit.isFrac) return verdict(false, parsed, 'fraction-form');
       }
       var ok;
+      var tv = Math.abs(target.v);
       if (form === 'decimal') {
-        ok = Math.abs(lit.v - target.v) <= Math.max(tol, rel * Math.abs(target.v)) + 1e-12;
+        ok = Math.abs(lit.v - target.v) <= Math.max(tol, rel * tv) + 4 * Number.EPSILON * tv;
       } else if (target.p !== null && lit.p !== null) {
-        ok = lit.p * target.q === target.p * lit.q;      // exact rational equality
+        ok = lit.p * target.q === target.p * lit.q;      // exact rational equality; tol and rel do not apply
       } else {
-        ok = Math.abs(lit.v - target.v) <= tol + 1e-9 * Math.max(1, Math.abs(target.v));
+        ok = Math.abs(lit.v - target.v) <= Math.max(tol, rel * tv) + REL_TOL * tv;
       }
       return verdict(ok, parsed);
     }
@@ -413,7 +433,8 @@
       return verdict(false, canonText, 'literal-required');
     }
     var t = target.v;
-    var same = Math.abs(val - t) <= Math.max(tol, rel * Math.abs(t)) + REL_TOL * Math.max(1, Math.abs(t));
+    // Relative tolerance; an exact-zero target gets a tiny absolute floor, since float cancellation (cos(pi/2), 0.1+0.2-0.3) never lands on 0.
+    var same = Math.abs(val - t) <= Math.max(tol, rel * Math.abs(t)) + REL_TOL * Math.abs(t) + (t === 0 ? ZERO_FLOOR : 0);
     return verdict(same, canonText);
   }
 
@@ -444,11 +465,22 @@
     for (var j = 0; j < targets.length; j++) {
       var tvals = evalAll(targets[j], pts);
       var valid = 0, match = true;
+      // Cancellation noise (sin(x)^2+cos(x)^2-1 against 0) never lands on exactly 0 and has no relative scale. When one
+      // side is exactly 0 at every valid point, allow a tiny absolute slack on the other. Two non-zero tiny sides
+      // (1.05e-34*w vs 2.1e-34*w) stay under the relative rule only.
+      var scale = 0, aZero = true, bZero = true;
+      for (var k0 = 0; k0 < pts.length; k0++) {
+        if (!finite(tvals[k0]) || !finite(typedVals[k0])) continue;
+        scale = Math.max(scale, Math.abs(tvals[k0]), Math.abs(typedVals[k0]));
+        if (tvals[k0] !== 0) aZero = false;
+        if (typedVals[k0] !== 0) bZero = false;
+      }
+      var slack = (aZero || bZero) ? ZERO_FLOOR * Math.max(1, scale) : 0;
       for (var k = 0; k < pts.length; k++) {
         var a = tvals[k], b = typedVals[k];
         if (!finite(a) || !finite(b)) continue;
         valid += 1;
-        if (Math.abs(a - b) > REL_TOL * Math.max(1, Math.abs(a), Math.abs(b))) match = false;
+        if (Math.abs(a - b) > REL_TOL * Math.max(Math.abs(a), Math.abs(b)) + slack) match = false;
       }
       if (valid < MIN_VALID) {
         if (j === 0) {

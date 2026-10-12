@@ -1,0 +1,1458 @@
+[
+ {
+  "id": "t3-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics",
+   "t2.newton",
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A string of linear density $2.5\\times10^{-3}\\ \\mathrm{kg/m}$ carries the wave $y=A\\sin(kx-\\omega t)$ with $k=20\\ \\mathrm{rad/m}$ and $\\omega=300\\ \\mathrm{rad/s}$. Find the string tension in N.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5625,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Wave speed $v=\\omega/k$",
+    "weight": 2
+   },
+   {
+    "text": "Tension relation $v=\\sqrt{T/\\mu}$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $T=\\mu v^2$ with units",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Read off $v=\\omega/k=15\\ \\mathrm{m/s}$ (wave-basics).\nString speed obeys $v=\\sqrt{T/\\mu}$; check dimensions: $\\mu v^2$ has units N (dimanal).\n$T=\\mu v^2=2.5\\times10^{-3}\\times225=0.5625\\ \\mathrm N$.\nTrap: using $\\omega$ or $k$ alone as the speed.",
+  "hints": [
+   "Wave speed comes from the ratio of the two coefficients in the phase."
+  ],
+  "check": "2.5e-3*(300/20)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.wave-basics",
+   "t1.calc-rates",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A transverse wave on a string is $y=A\\sin(kx-\\omega t)$ with $A=2.0\\ \\mathrm{mm}$, $k=25\\ \\mathrm{rad/m}$, $\\omega=500\\ \\mathrm{rad/s}$. What is the ratio (maximum speed of a string element) / (wave speed)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.050$",
+    "$20$",
+    "$8\\times10^{-5}$",
+    "$1.0$",
+    "$2.0\\times10^{-3}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "inverted the ratio",
+    "used $\\omega k$ as wave speed",
+    "gave $\\omega A$ in m/s without dividing by wave speed",
+    "used amplitude in m alone"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Element velocity $\\partial y/\\partial t$ and its maximum $\\omega A$",
+    "weight": 2
+   },
+   {
+    "text": "Wave speed $\\omega/k$",
+    "weight": 1
+   },
+   {
+    "text": "Ratio simplified to $kA$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Element velocity is $\\partial y/\\partial t$ (calc-rates), maximum $\\omega A=1.0\\ \\mathrm{m/s}$.\nWave speed $v=\\omega/k=20\\ \\mathrm{m/s}$ (wave-basics).\nRatio $=kA=25\\times0.0020=0.050$ (scaling: $\\omega$ cancels).\nTrap: confusing element speed with wave speed.",
+  "hints": [
+   "Differentiate with respect to time at fixed $x$; compare with $\\omega/k$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.superpose",
+   "t3.wave-basics",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A string of length $0.80\\ \\mathrm m$ and linear density $5.0\\times10^{-3}\\ \\mathrm{kg/m}$ is fixed at both ends under tension $80\\ \\mathrm N$. Find the frequency of its third harmonic in Hz.",
+  "answer": {
+   "kind": "numeric",
+   "value": 237.17082451262843,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Wave speed $\\sqrt{T/\\mu}$",
+    "weight": 1
+   },
+   {
+    "text": "Standing-wave condition $L=n\\lambda/2$",
+    "weight": 2
+   },
+   {
+    "text": "Frequency of $n=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Speed $v=\\sqrt{80/5.0\\times10^{-3}}=126.5\\ \\mathrm{m/s}$ (wave-basics, newton).\nFixed ends need nodes: $L=n\\lambda/2$, so $f_n=nv/2L$ (superpose).\n$f_1=126.5/1.6=79.1\\ \\mathrm{Hz}$, $f_3=3f_1=237.2\\ \\mathrm{Hz}$.",
+  "hints": [
+   "Fixed ends force nodes at both ends."
+  ],
+  "check": "3*math.sqrt(80/5.0e-3)/(2*0.80)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.superpose",
+   "t3.wave-basics",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A pipe closed at one end and open at the other has two adjacent resonances at $450\\ \\mathrm{Hz}$ and $750\\ \\mathrm{Hz}$. Take the speed of sound as $340\\ \\mathrm{m/s}$. What is the pipe length in m?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.57$",
+    "$0.28$",
+    "$0.19$",
+    "$1.13$",
+    "$2.27$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took the $300$ Hz gap as the fundamental",
+    "took $450$ Hz as the fundamental",
+    "treated as an open-open pipe with $f_1=150$ Hz",
+    "reported the wavelength $v/f_1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Ratio $450:750=3:5$ identifies odd harmonics of a closed pipe",
+    "weight": 2
+   },
+   {
+    "text": "Gap $=2f_1$, so $f_1=150$ Hz",
+    "weight": 1
+   },
+   {
+    "text": "$L=v/4f_1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Adjacent resonances $3:5$ mean odd harmonics only: closed-open pipe (superpose).\nThe gap equals $2f_1=300\\ \\mathrm{Hz}$, so $f_1=150\\ \\mathrm{Hz}$.\nNode at closed end, antinode at open end: $L=\\lambda/4=v/4f_1=340/600=0.57\\ \\mathrm m$ (wave-basics).\nTrap: the gap is $2f_1$, not $f_1$.",
+  "hints": [
+   "Check what ratio the two frequencies have."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.sound",
+   "t3.wave-basics",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A siren emits $600\\ \\mathrm{Hz}$ and moves at $25\\ \\mathrm{m/s}$ straight toward a large flat wall. Take the speed of sound as $340\\ \\mathrm{m/s}$. Find the frequency of the echo heard by someone riding with the siren, in Hz.",
+  "answer": {
+   "kind": "numeric",
+   "value": 695.2380952380952,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Wall as a stationary observer: $f_1=f\\,v/(v-u)$",
+    "weight": 2
+   },
+   {
+    "text": "Wall as a source re-emitting $f_1$ toward the moving listener",
+    "weight": 2
+   },
+   {
+    "text": "Combined $f\\,(v+u)/(v-u)$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Step 1: wall receives $f_1=600\\times340/315=647.6\\ \\mathrm{Hz}$ (sound: moving source).\nStep 2: wall re-emits $f_1$; the listener approaches it, so $f_2=f_1(340+25)/340$ (sound: moving observer).\n$f_2=600\\times365/315=695.2\\ \\mathrm{Hz}$.\nTrap: applying only one shift.",
+  "hints": [
+   "Do two Doppler steps; the wall is first an observer, then a source."
+  ],
+  "check": "600*(340+25)/(340-25)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.sound",
+   "t1.linearize",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $700\\ \\mathrm{Hz}$ siren passes a stationary listener at $30\\ \\mathrm{m/s}$ (straight line path, source speed constant). With $v=340\\ \\mathrm{m/s}$, by how many Hz does the heard frequency drop between approach and recession?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$124.5$",
+    "$67.7$",
+    "$56.8$",
+    "$61.8$",
+    "$767.7$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used only the approach shift above $700$",
+    "used only the recession shift below $700$",
+    "used $fu/v$ once instead of twice",
+    "reported the approach frequency itself"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Approach $f_a=fv/(v-u)$",
+    "weight": 1
+   },
+   {
+    "text": "Recession $f_r=fv/(v+u)$",
+    "weight": 1
+   },
+   {
+    "text": "Difference of the two heard frequencies",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "Approach: $f_a=700\\times340/310=767.7\\ \\mathrm{Hz}$ (sound).\nRecession: $f_r=700\\times340/370=643.2\\ \\mathrm{Hz}$.\nDrop $=124.5\\ \\mathrm{Hz}$.\nLinearized check: $2fu/v=123.5$, consistent (linearize).\nTrap: the shifts are asymmetric about $700$.",
+  "hints": [
+   "Compute both heard frequencies separately, then subtract."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.intensity",
+   "t1.scaling",
+   "t3.wave-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An isotropic point source radiates $40\\ \\mathrm W$ of sound. With reference intensity $I_0=1.00\\times10^{-12}\\ \\mathrm{W/m^2}$, find the sound level in dB at $10\\ \\mathrm m$ (ignore absorption).",
+  "answer": {
+   "kind": "numeric",
+   "value": 105.02850127305865,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Intensity $I=P/4\\pi r^2$",
+    "weight": 2
+   },
+   {
+    "text": "Level $\\beta=10\\log(I/I_0)$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical evaluation",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Spherical spreading: $I=40/(4\\pi\\cdot100)=3.18\\times10^{-2}\\ \\mathrm{W/m^2}$ (intensity, scaling).\n$\\beta=10\\log(3.18\\times10^{-2}/10^{-12})=10\\log(3.18\\times10^{10})$.\n$\\beta=105.0\\ \\mathrm{dB}$.",
+  "hints": [
+   "Intensity is power over the sphere area."
+  ],
+  "check": "10*math.log10(40/(4*math.pi*100)/1e-12)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.intensity",
+   "t1.scaling",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A machine produces $70\\ \\mathrm{dB}$ at $5.0\\ \\mathrm m$. Five identical machines run together (incoherent point sources, same place). What is the sound level, in dB, at $20\\ \\mathrm m$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$65$",
+    "$58$",
+    "$63$",
+    "$71$",
+    "$77$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot there are five machines",
+    "added $5$ dB instead of $10\\log5$",
+    "used $10\\log(r_2/r_1)$ for the distance drop",
+    "ignored the distance drop"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Distance factor: intensity $\\propto r^{-2}$ gives $-20\\log4=-12$ dB",
+    "weight": 2
+   },
+   {
+    "text": "Five sources multiply intensity: $+10\\log5=+7$ dB",
+    "weight": 2
+   },
+   {
+    "text": "Total $70-12+7$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Distance: $-20\\log(20/5)=-12.0\\ \\mathrm{dB}$ (scaling, inverse square).\nFive equal incoherent sources: intensity $\\times5$, so $+10\\log5=+7.0\\ \\mathrm{dB}$ (intensity).\nLevel $=70-12.0+7.0\\approx65\\ \\mathrm{dB}$.\nTrap: decibels add as logs, not as a count.",
+  "hints": [
+   "Convert each change to a dB shift, then add."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.refraction",
+   "t1.vec-comp",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Light enters the flat end of a straight optical fibre from air. The core has $n=1.50$ and the cladding $n=1.40$. Light is guided by total internal reflection at the core-cladding wall. Find the largest angle of incidence at the end face, measured from the fibre axis, in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 32.58270625514922,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Critical condition at the wall: $\\sin\\theta_c=n_2/n_1$",
+    "weight": 2
+   },
+   {
+    "text": "Relate wall angle to refraction angle at the end face (complementary)",
+    "weight": 1
+   },
+   {
+    "text": "Snell at the end face, giving $\\sin\\theta=\\sqrt{n_1^2-n_2^2}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "At the wall the ray angle from the normal must be at least $\\theta_c$ with $\\sin\\theta_c=1.40/1.50$ (refraction).\nAngle with the axis is $\\phi=90^\\circ-\\theta_c$, so $\\sin\\phi=\\cos\\theta_c$ (vec-comp geometry).\nSnell at the end: $\\sin\\theta=n_1\\sin\\phi=\\sqrt{n_1^2-n_2^2}=\\sqrt{0.29}=0.5385$.\n$\\theta=32.6^\\circ$.",
+  "hints": [
+   "The angle at the wall and the angle at the end face add to $90^\\circ$ inside the core."
+  ],
+  "check": "math.degrees(math.asin(math.sqrt(1.5**2-1.4**2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.refraction",
+   "t1.scaling",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A fish is $2.0\\ \\mathrm m$ below the surface of still water ($n=1.33$). A bird is $3.0\\ \\mathrm m$ directly above the surface. Both are viewed along the near-vertical line between them. How far from the fish does the bird appear to the fish, in m?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6.0$",
+    "$5.0$",
+    "$4.3$",
+    "$5.7$",
+    "$4.5$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored refraction",
+    "divided the height by $n$ instead of multiplying",
+    "multiplied the fish's own depth by $n$",
+    "used the fish's apparent depth seen from air"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Fish looks upward from the denser medium, so the bird's apparent height is $h\\,n_{water}/n_{air}$",
+    "weight": 2
+   },
+   {
+    "text": "Apparent height $3.0\\times1.33\\approx4.0$ m",
+    "weight": 1
+   },
+   {
+    "text": "Add the fish's real depth: the fish itself is the viewer",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Viewer in the denser medium sees an object in air farther away: $h'=h\\,n_w/n_a$ (refraction, paraxial).\n$h'=3.0\\times1.33=3.99\\ \\mathrm m$.\nThe fish is at its true depth $2.0\\ \\mathrm m$ from the surface, so separation $\\approx2.0+3.99=6.0\\ \\mathrm m$.\nTrap: apparent depth applies to the object, not the viewer.",
+  "hints": [
+   "Which observer is looking, and from which medium?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics",
+   "t1.estimate",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A converging thin lens of focal length $20\\ \\mathrm{cm}$ is placed between an object and a screen $90\\ \\mathrm{cm}$ apart. There are two lens positions that give a sharp real image. Find the larger magnification magnitude (dimensionless).",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Use $d_o+d_i=90$ and the lens equation together",
+    "weight": 2
+   },
+   {
+    "text": "Eliminate to $d_o d_i=f(d_o+d_i)=1800$ and solve the quadratic",
+    "weight": 2
+   },
+   {
+    "text": "Choose the position with $d_i>d_o$ and find $|m|=d_i/d_o$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Lens equation $1/d_o+1/d_i=1/f$ gives $d_o d_i=f(d_o+d_i)=20\\times90=1800$ (geom-optics).\nWith $d_o+d_i=90$ the roots satisfy $x^2-90x+1800=0$, so $x=30$ or $60\\ \\mathrm{cm}$ (estimate: check sum and product).\nPositions: $d_o=30,\\ d_i=60$ or the reverse.\n$|m|=d_i/d_o=60/30=2.0$ (the other position gives $0.5$).\nThe larger magnification is $|m|=d_i/d_o=60/30=2$ (the other position gives $0.5$).",
+  "hints": [
+   "Sum and product of the two distances are both known."
+  ],
+  "check": "60/30",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.geom-optics",
+   "t3.refraction",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Lens 1 ($f_1=+10\\ \\mathrm{cm}$) is at $x=0$ and lens 2 ($f_2=+15\\ \\mathrm{cm}$) at $x=40\\ \\mathrm{cm}$. An object sits at $x=-30\\ \\mathrm{cm}$. How far, in cm, is the final image to the right of lens 2?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$37.5$",
+    "$24.0$",
+    "$20.6$",
+    "$9.4$",
+    "$15.0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the lens separation $40$ cm as the object distance",
+    "used $55$ cm as the object distance",
+    "gave lens 2 a negative focal length",
+    "stopped at the first image position"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "First image: $1/d_i=1/10-1/30$ gives $15$ cm right of lens 1",
+    "weight": 2
+   },
+   {
+    "text": "Object for lens 2 is $40-15=25$ cm",
+    "weight": 2
+   },
+   {
+    "text": "Second image: $1/d_i=1/15-1/25$, $d_i=37.5$ cm",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Lens 1: $1/d_i=1/10-1/30=1/15$, so image at $x=15\\ \\mathrm{cm}$ (geom-optics).\nThis image is the object for lens 2 at distance $40-15=25\\ \\mathrm{cm}$ (real object).\nLens 2: $1/d_i=1/15-1/25=2/75$, so $d_i=37.5\\ \\mathrm{cm}$.\nTrap: the intermediate image position, not the lens position, sets the second object distance.",
+  "hints": [
+   "Treat the first image as the object of the second lens."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.interference",
+   "t3.refraction",
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A double slit with separation $0.30\\ \\mathrm{mm}$ is placed in water ($n=1.33$) in front of a screen $2.0\\ \\mathrm m$ away (also in water). Light of vacuum wavelength $600\\ \\mathrm{nm}$ is used. Find the distance from the central maximum to the third bright fringe on one side of it (not counting the central maximum itself), in mm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.022556390977444,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Wavelength in water $\\lambda/n$",
+    "weight": 2
+   },
+   {
+    "text": "Bright fringes $d\\sin\\theta=m\\lambda'$",
+    "weight": 1
+   },
+   {
+    "text": "Small angle $y=m\\lambda' L/d$ evaluated for $m=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "In water $\\lambda'=600/1.33=451\\ \\mathrm{nm}$ (refraction).\nBright fringe: $d\\sin\\theta=m\\lambda'$ (interference).\nSmall angle: $y\\approx L\\tan\\theta\\approx L\\sin\\theta$ (small-angle), so $y=m\\lambda' L/d$.\n$y=3\\times451\\times10^{-9}\\times2.0/(3.0\\times10^{-4})=9.02\\times10^{-3}\\ \\mathrm m=9.02\\ \\mathrm{mm}$.",
+  "hints": [
+   "The fringe spacing uses the wavelength inside the medium."
+  ],
+  "check": "1000*3*(600e-9/1.33)*2.0/0.30e-3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.interference",
+   "t3.superpose",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two identical in-phase point sources are $3.5\\lambda$ apart in a plane. How many distinct directions in the full plane have maximum radiated intensity far from the sources?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$14$",
+    "$7$",
+    "$12$",
+    "$18$",
+    "$9$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counted only one side of the source line",
+    "dropped the central pair",
+    "rounded $3.5$ up to $4$ orders",
+    "rounded up and counted one side only"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Maxima at $d\\sin\\theta=m\\lambda$ so $|m|\\le3.5$",
+    "weight": 2
+   },
+   {
+    "text": "Integer orders $m=-3,\\dots,3$ give $7$",
+    "weight": 1
+   },
+   {
+    "text": "Each order has a front and a back direction",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Far-field maxima require path difference $d\\sin\\theta=m\\lambda$ (interference).\n$|m|\\le d/\\lambda=3.5$ gives $m=-3,\\dots,3$: $7$ orders.\nEach order occurs in the front and back half-planes about the source line, so $14$ directions (superpose, plane geometry).\nTrap: $m=\\pm4$ would need $\\sin\\theta>1$.",
+  "hints": [
+   "Count integers with $|m|\\le3.5$, then count both half-planes."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film",
+   "t3.interference",
+   "t3.refraction"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A film of oil ($n=1.45$) of thickness $400\\ \\mathrm{nm}$ floats on water ($n=1.33$) in air. In normally incident white light, the only visible wavelength ($400$ to $700\\ \\mathrm{nm}$) strongly reflected is what, in nm?",
+  "answer": {
+   "kind": "numeric",
+   "value": 464,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Phase flip only at the air-oil surface (oil-water has $n_{oil}>n_{water}$)",
+    "weight": 2
+   },
+   {
+    "text": "Reflection maximum $2nt=(m+\\tfrac12)\\lambda$",
+    "weight": 2
+   },
+   {
+    "text": "Scan $m$ and keep the visible value",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Air to oil: reflected wave flips by $\\pi$. Oil to water: $1.45>1.33$, no flip (thin-film).\nOne flip means maxima at $2nt=(m+\\tfrac12)\\lambda$, with $2nt=1160\\ \\mathrm{nm}$ (interference).\n$\\lambda=1160/(m+\\tfrac12)$: $2320,\\ 773,\\ 464,\\ 331\\ \\mathrm{nm}$ for $m=0,1,2,3$.\nOnly $464\\ \\mathrm{nm}$ is visible.",
+  "hints": [
+   "Decide the phase flips at each interface before choosing the condition."
+  ],
+  "check": "2*1.45*400/2.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.thin-film",
+   "t3.interference",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two flat glass plates touch along one edge and are separated by a spacer of thickness $45.15\\ \\mathrm{\\mu m}$ at the opposite edge, forming an air wedge. Viewed from above at normal incidence with $\\lambda=600\\ \\mathrm{nm}$, how many dark fringes appear, counting the one at the contact line?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$151$",
+    "$150$",
+    "$75$",
+    "$76$",
+    "$301$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "omitted the dark fringe at the contact line",
+    "used $t=m\\lambda$ instead of $2t=m\\lambda$",
+    "same slip, with the contact fringe counted",
+    "counted bright and dark fringes together"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "One reflection flip, so dark when $2t=m\\lambda$",
+    "weight": 2
+   },
+   {
+    "text": "Maximum order $m=2t_{max}/\\lambda=150.5$",
+    "weight": 1
+   },
+   {
+    "text": "Count $m=0,\\dots,150$, which gives $151$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The bottom plate reflection flips, the top does not, so dark fringes need $2t=m\\lambda$ (thin-film).\nAt the contact edge $t=0$, so $m=0$ is dark (interference).\nMaximum: $m\\le2(45.15\\ \\mu\\mathrm m)/0.600\\ \\mu\\mathrm m=150.5$.\nIntegers $0,\\dots,150$: $151$ dark fringes.",
+  "hints": [
+   "Dark fringe condition when only one reflection flips."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction",
+   "t3.interference",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A grating has $500$ lines per mm. Light of wavelength $589\\ \\mathrm{nm}$ strikes it at normal incidence. How many bright lines in total (central line included) can be seen on a wide screen?",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Grating spacing $d=2000$ nm",
+    "weight": 1
+   },
+   {
+    "text": "Condition $d\\sin\\theta=m\\lambda$ with $\\sin\\theta<1$",
+    "weight": 2
+   },
+   {
+    "text": "Count orders $-m_{max},\\dots,m_{max}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Spacing $d=1\\ \\mathrm{mm}/500=2000\\ \\mathrm{nm}$ (diffraction).\nMaxima need $m=d\\sin\\theta/\\lambda\\le d/\\lambda=3.40$ (interference condition), so $m_{max}=3$.\nOrders $-3$ to $3$: $7$ lines.\nTrap: forgetting negative orders.",
+  "hints": [
+   "Largest possible $\\sin\\theta$ is $1$."
+  ],
+  "check": "2*int(2000//589)+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.diffraction",
+   "t3.interference",
+   "t3.superpose"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two slits of width $a=0.10\\ \\mathrm{mm}$ each are $d=0.50\\ \\mathrm{mm}$ apart (centre to centre) and illuminated by monochromatic light. How many bright double-slit fringes lie strictly inside the central diffraction maximum?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9$",
+    "$4$",
+    "$5$",
+    "$10$",
+    "$11$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counted only one side of the centre",
+    "counted orders up to $d/a$ on one side including the missing order",
+    "used the diffraction envelope width without the central fringe",
+    "included the missing orders $\\pm5$ at the edge"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "First diffraction minimum at $a\\sin\\theta=\\lambda$",
+    "weight": 2
+   },
+   {
+    "text": "Interference order at that angle is $m=d/a=5$",
+    "weight": 2
+   },
+   {
+    "text": "Bright orders $|m|\\le4$ lie inside: $9$ fringes",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Interference maxima: $d\\sin\\theta=m\\lambda$. First diffraction zero: $a\\sin\\theta=\\lambda$ (diffraction).\nThe zero falls where $m=d/a=5$; that order is missing (interference, superpose of the two patterns).\nInside the central maximum: $m=-4,\\dots,4$, so $9$ fringes.\nTrap: the order at the envelope edge is not inside.",
+  "hints": [
+   "Divide the two geometry conditions to find which order coincides with the first diffraction zero."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.polarization",
+   "t1.vec-comp",
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Unpolarized light of intensity $I_0$ passes through three ideal polarizers. The second axis is $30^\\circ$ from the first, and the third is $90^\\circ$ from the first. What is $I/I_0$ after the third?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.09375,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "First polarizer halves unpolarized light: $I_0/2$",
+    "weight": 1
+   },
+   {
+    "text": "Malus law with the angle between neighbouring axes: $30^\\circ$ then $60^\\circ$",
+    "weight": 2
+   },
+   {
+    "text": "Product $\\tfrac12\\cos^2 30^\\circ\\cos^2 60^\\circ$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Unpolarized to polarized: $I_1=I_0/2$ (polarization).\nMalus uses the angle between consecutive axes: $30^\\circ$, then $90^\\circ-30^\\circ=60^\\circ$ (vec-comp projection).\n$I_3/I_0=\\tfrac12\\cdot\\tfrac34\\cdot\\tfrac14=\\tfrac{3}{32}=0.0938$.\nTrap: using $90^\\circ$ from the first polarizer in the last step.",
+  "hints": [
+   "Each polarizer sees the field of the one before it."
+  ],
+  "check": "0.5*math.cos(math.radians(30))**2*math.cos(math.radians(60))**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.polarization",
+   "t3.refraction",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Light travelling in water ($n=1.33$) strikes a flat glass surface ($n=1.50$) from the water side. At what angle of incidence, in degrees, is the reflected light completely plane-polarized?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$48.4^\\circ$",
+    "$41.6^\\circ$",
+    "$56.3^\\circ$",
+    "$53.1^\\circ$",
+    "$62.5^\\circ$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "inverted the ratio",
+    "used air as the first medium",
+    "used $\\tan\\theta=1.33$ with vacuum as the second medium",
+    "used the critical-angle expression"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Brewster condition: reflected and refracted rays are at $90^\\circ$",
+    "weight": 2
+   },
+   {
+    "text": "$\\tan\\theta_B=n_2/n_1$ with the incident medium in the denominator",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $\\arctan(1.50/1.33)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "At Brewster's angle the reflected and refracted rays are perpendicular (polarization).\nSnell: $n_1\\sin\\theta_B=n_2\\cos\\theta_B$, so $\\tan\\theta_B=n_2/n_1$ (refraction).\n$\\theta_B=\\arctan(1.50/1.33)=48.4^\\circ$.\nTrap: the formula uses the ratio of the actual two media.",
+  "hints": [
+   "Derive from perpendicular reflected and refracted rays plus Snell's law."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments",
+   "t3.diffraction",
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A telescope objective has diameter $8.0\\ \\mathrm{cm}$. Use $\\lambda=550\\ \\mathrm{nm}$ and the Moon's distance $3.84\\times10^{8}\\ \\mathrm m$. By the Rayleigh criterion, what is the smallest resolvable separation of two points on the Moon, in m?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3220.8,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Circular aperture limit $\\theta=1.22\\lambda/D$",
+    "weight": 2
+   },
+   {
+    "text": "Small angle: separation $=\\theta\\times$ distance",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Diffraction by a circular aperture: $\\theta_{min}=1.22\\lambda/D=8.39\\times10^{-6}\\ \\mathrm{rad}$ (diffraction, instruments).\nSmall angle: $s=\\theta L$ (small-angle).\n$s=8.39\\times10^{-6}\\times3.84\\times10^{8}=3.2\\times10^{3}\\ \\mathrm m$.\nTrap: omitting the $1.22$.",
+  "hints": [
+   "Resolution is set by diffraction at the objective."
+  ],
+  "check": "1.22*550e-9/0.080*3.84e8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.optical-instruments",
+   "t3.geom-optics",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A compound microscope has objective focal length $0.50\\ \\mathrm{cm}$, eyepiece focal length $2.5\\ \\mathrm{cm}$, and the lenses are $16\\ \\mathrm{cm}$ apart. The final image is at infinity. Take the near point as $25\\ \\mathrm{cm}$. What is the magnitude of the total angular magnification?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$260$",
+    "$270$",
+    "$320$",
+    "$286$",
+    "$26$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $d_i/f_o$ instead of $(d_i-f_o)/f_o$",
+    "used the full $16$ cm separation for the image distance",
+    "eyepiece magnification $1+N/f_e$ (image at near point)",
+    "forgot the eyepiece"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Image at infinity: objective image is at the eyepiece focal point",
+    "weight": 2
+   },
+   {
+    "text": "Objective lateral magnification $(L-f_o-f_e)/f_o=13/0.5=26$",
+    "weight": 2
+   },
+   {
+    "text": "Eyepiece $N/f_e=10$; product $260$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Final image at infinity puts the first image at $f_e$ from the eyepiece: image distance from objective $16-2.5=13.5\\ \\mathrm{cm}$ (geom-optics).\n$m_o=-(d_i-f_o)/f_o=-26$.\nEyepiece used as magnifier with image at infinity: $M_e=N/f_e=10$ (instruments).\n$|M|=26\\times10=260$.",
+  "hints": [
+   "Where must the intermediate image lie for a relaxed final image?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static",
+   "t2.fbd",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A U-tube holds water ($1000\\ \\mathrm{kg/m^3}$). Oil ($800\\ \\mathrm{kg/m^3}$) is poured into one arm until the oil column is $12.0\\ \\mathrm{cm}$ tall. The oil sits directly on the water, and the water-oil interface is the lowest point of the oil. By how many metres does the oil's free surface stand above the water's free surface in the other arm?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.024,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Equal pressure at the level of the interface in both arms",
+    "weight": 2
+   },
+   {
+    "text": "$\\rho_w h_w=\\rho_o h_o$ gives the water height $9.6$ cm",
+    "weight": 1
+   },
+   {
+    "text": "Difference of free-surface heights",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Pick the horizontal level of the oil-water interface; fluid at rest has equal pressure there in both arms (fluid-static, fbd of a fluid slab).\n$\\rho_o g h_o=\\rho_w g h_w$, so $h_w=0.8\\times12.0=9.6\\ \\mathrm{cm}$.\nOil surface is higher by $12.0-9.6=2.4\\ \\mathrm{cm}=0.024\\ \\mathrm m$.\nTrap: comparing column heights directly without densities.",
+  "hints": [
+   "Compare pressures at one common level."
+  ],
+  "check": "0.12-0.12*800/1000",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-static",
+   "t2.fbd",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A solid hangs from a spring scale reading $6.0\\ \\mathrm N$ in air, $4.0\\ \\mathrm N$ fully in water ($1000\\ \\mathrm{kg/m^3}$), and $4.8\\ \\mathrm N$ fully in an unknown liquid. What is the liquid's density in $\\mathrm{kg/m^3}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$600$",
+    "$800$",
+    "$1200$",
+    "$1700$",
+    "$200$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "divided the apparent weight by the weight in air",
+    "divided the apparent weights",
+    "inverted the buoyancy ratio",
+    "divided buoyancy by weight in air"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Buoyancy as the weight loss in each liquid",
+    "weight": 2
+   },
+   {
+    "text": "$B_w=2.0$ N, $B_\\ell=1.2$ N from force balance",
+    "weight": 1
+   },
+   {
+    "text": "Ratio $\\rho_\\ell/\\rho_w=B_\\ell/B_w$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Static balance on the solid: $T+B=W$, so $B=W-T$ (fbd).\n$B_w=6.0-4.0=2.0\\ \\mathrm N$, $B_\\ell=6.0-4.8=1.2\\ \\mathrm N$.\nSame volume displaced, so $\\rho_\\ell/\\rho_w=B_\\ell/B_w=0.6$ (fluid-static, scaling).\n$\\rho_\\ell=600\\ \\mathrm{kg/m^3}$.",
+  "hints": [
+   "Same displaced volume in both liquids; buoyancy is proportional to density."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow",
+   "t3.fluid-static",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Water ($1000\\ \\mathrm{kg/m^3}$) flows at $2.0\\ \\mathrm{m/s}$ through a pipe of diameter $8.0\\ \\mathrm{cm}$ at gauge pressure $1.5\\times10^{5}\\ \\mathrm{Pa}$. The pipe then rises $3.0\\ \\mathrm m$ and narrows to diameter $4.0\\ \\mathrm{cm}$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the gauge pressure in the narrow section, in Pa.",
+  "answer": {
+   "kind": "numeric",
+   "value": 90600,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Continuity $A_1v_1=A_2v_2$ gives $v_2=8.0$ m/s",
+    "weight": 2
+   },
+   {
+    "text": "Bernoulli with elevation: $P_1+\\tfrac12\\rho v_1^2=P_2+\\tfrac12\\rho v_2^2+\\rho g h$",
+    "weight": 2
+   },
+   {
+    "text": "Solve for $P_2$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Continuity: area scales as $d^2$, so $v_2=2.0\\times4=8.0\\ \\mathrm{m/s}$ (fluid-flow).\nBernoulli (energy per volume, work-energy): $P_2=P_1+\\tfrac12\\rho(v_1^2-v_2^2)-\\rho g h$.\n$P_2=1.5\\times10^5+500(4-64)-1000(9.8)(3.0)$.\n$P_2=1.5\\times10^5-3.0\\times10^4-2.94\\times10^4=9.06\\times10^4\\ \\mathrm{Pa}$.",
+  "hints": [
+   "Area scales with diameter squared."
+  ],
+  "check": "150000+500*(2.0**2-8.0**2)-1000*9.8*3.0",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.fluid-flow",
+   "t1.kin-2d",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A wide open tank of water has a small hole $0.90\\ \\mathrm m$ below the surface and $1.00\\ \\mathrm m$ above the level floor. Take $g=9.8\\ \\mathrm{m/s^2}$. At what horizontal distance from the tank wall, in m, does the jet land?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.9$",
+    "$0.95$",
+    "$1.3$",
+    "$2.8$",
+    "$0.90$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "dropped the factor $2$ in $x=2\\sqrt{dy}$",
+    "used $\\sqrt{2dy}$",
+    "used $1.9$ m total as the depth",
+    "gave the hole depth as the range"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Exit speed from Bernoulli: $v=\\sqrt{2gd}$",
+    "weight": 2
+   },
+   {
+    "text": "Fall time $\\sqrt{2y/g}$ from rest in the vertical direction",
+    "weight": 1
+   },
+   {
+    "text": "Range $x=vt=2\\sqrt{dy}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Bernoulli for a wide tank: $v=\\sqrt{2gd}=4.2\\ \\mathrm{m/s}$ horizontal (fluid-flow, work-energy).\nProjectile: $t=\\sqrt{2y/g}=0.452\\ \\mathrm s$ (kin-2d).\n$x=vt=2\\sqrt{dy}=2\\sqrt{0.90}=1.9\\ \\mathrm m$.\nTrap: $d$ uses the hole depth, $y$ uses the height above floor.",
+  "hints": [
+   "Speed comes from Bernoulli; the landing point from projectile motion."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas",
+   "t3.fluid-static",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An air bubble rises from $20\\ \\mathrm m$ depth in a lake at $277\\ \\mathrm K$ to the surface at $293\\ \\mathrm K$. Take atmospheric pressure $1.01\\times10^{5}\\ \\mathrm{Pa}$, water density $1000\\ \\mathrm{kg/m^3}$ and $g=9.8\\ \\mathrm{m/s^2}$. Find $V_{surface}/V_{depth}$ (dimensionless).",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.110447867891482,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Pressure at depth $P_0+\\rho g h$",
+    "weight": 2
+   },
+   {
+    "text": "Ideal gas ratio $PV/T$ constant",
+    "weight": 1
+   },
+   {
+    "text": "Solve $V_2/V_1=(P_1/P_2)(T_2/T_1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Hydrostatic pressure at depth (fluid-static): $P_1=1.01\\times10^5+1000(9.8)(20)=2.97\\times10^5\\ \\mathrm{Pa}$.\nFixed amount of gas: $P_1V_1/T_1=P_2V_2/T_2$ (ideal-gas, temperatures absolute).\n$V_2/V_1=(2.97/1.01)(293/277)=2.941\\times1.058=3.11$.",
+  "hints": [
+   "Use absolute pressure and absolute temperature."
+  ],
+  "check": "((101000+1000*9.8*20)/101000)*(293/277)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ideal-gas",
+   "t1.scaling",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Rigid vessel 1 ($2.0\\ \\mathrm L$, $400\\ \\mathrm K$, $3.0\\ \\mathrm{atm}$) is connected through a valve to vessel 2 ($6.0\\ \\mathrm L$, $300\\ \\mathrm K$, $1.0\\ \\mathrm{atm}$) of the same ideal gas. After the valve opens, the gas is brought to a uniform $500\\ \\mathrm K$. What is the final pressure in atm?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2.19$",
+    "$1.50$",
+    "$2.00$",
+    "$1.31$",
+    "$4.38$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored the temperature change",
+    "averaged the two pressures",
+    "used $300$ K as the final temperature",
+    "used the mean volume $4.0$ L instead of $8.0$ L"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Mole amounts $n\\propto PV/T$ in each vessel",
+    "weight": 2
+   },
+   {
+    "text": "Total moles conserved; volume $8.0$ L",
+    "weight": 1
+   },
+   {
+    "text": "$P_f=n_{tot}RT_f/V_{tot}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Each vessel: $n=PV/RT$. In units with $R=1$: $n_1=6.0/400=0.0150$, $n_2=6.0/300=0.0200$ (ideal-gas).\nMoles conserved: $n=0.0350$; $V=8.0\\ \\mathrm L$.\n$P_f=nT_f/V=0.0350\\times500/8.0=2.19\\ \\mathrm{atm}$.\nTrap: pressure is not conserved or averaged.",
+  "hints": [
+   "Moles are conserved, not pressure."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

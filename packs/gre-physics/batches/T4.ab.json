@@ -1,0 +1,4226 @@
+[
+  {
+    "id": "t4-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write Coulomb's law for the force magnitude between point charges $q_1$ and $q_2$ a distance $r$ apart. Use $k$ for the Coulomb constant.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$F = k\\,q_1 q_2\\, r^2$",
+        "$F = \\dfrac{k\\,q_1 q_2}{r^2}$",
+        "$F = \\dfrac{k\\,(q_1+q_2)}{r^2}$",
+        "$F = \\dfrac{k\\,q_1^2 q_2^2}{r^2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "multiplies by the distance squared instead of dividing",
+        "",
+        "adds the charges instead of multiplying them",
+        "squares each charge"
+      ]
+    },
+    "solution": "Force is $k|q_1q_2|/r^2$. The charges multiply, and the distance enters squared in the denominator.",
+    "hints": [
+      "Field and force both fall off as the inverse square of distance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which unit is used for electric field?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathrm{N/C}$",
+        "$\\mathrm{C/N}$",
+        "$\\mathrm{J/C}$",
+        "$\\mathrm{N\\,m}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts force over charge",
+        "that is electric potential, not field",
+        "that is energy, not field"
+      ]
+    },
+    "solution": "Field is force per unit charge, so $\\mathrm{N/C}$. Equivalently $\\mathrm{V/m}$.",
+    "hints": [
+      "Force per unit charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the field magnitude of a point charge $Q$ at distance $r$ in terms of $Q$, $r$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "Q/(4*pi*eps0*r^2)",
+      "vars": [
+        "Q",
+        "r",
+        "eps0"
+      ],
+      "also": [
+        "Q/(4*pi*eps0*r*r)",
+        "Q*(4*pi*eps0*r^2)^(-1)"
+      ]
+    },
+    "solution": "$E=\\frac{Q}{4\\pi\\varepsilon_0 r^2}$, radial, for a point charge in vacuum.",
+    "hints": [
+      "The field of a point charge falls off as $1/r^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two point charges, $+2.0\\ \\mu\\mathrm C$ and $-3.0\\ \\mu\\mathrm C$, are $0.30\\ \\mathrm m$ apart in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the magnitude of the force in $\\mathrm N$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.599454,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$F=k|q_1q_2|/r^2$ with $k\\approx 8.99\\times10^{9}$. Magnitude $\\approx 0.60\\ \\mathrm N$.",
+    "hints": [
+      "Use the magnitudes; the signs only set attraction."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(1/(4*math.pi*8.85e-12))*2e-6*3e-6/0.3**2"
+  },
+  {
+    "id": "t4-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Charges $+5.0\\ \\mu\\mathrm C$ sit at $(-0.30\\ \\mathrm m, 0)$ and $(+0.30\\ \\mathrm m, 0)$. A charge $+1.0\\ \\mu\\mathrm C$ sits at $(0, 0.40\\ \\mathrm m)$. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the magnitude of the net electrostatic force on the $+1.0\\ \\mu\\mathrm C$ charge in $\\mathrm N$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.287738,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Each force has magnitude $kQq/d^2$ with $d=0.50\\ \\mathrm m$. Its vertical part is $0.8$ of that. The horizontal parts cancel, so $F\\approx 0.29\\ \\mathrm N$.",
+    "hints": [
+      "Sum the vertical components only after finding the horizontal parts cancel."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "2*(1/(4*math.pi*8.85e-12))*5e-6*1e-6/0.5**2*0.8"
+  },
+  {
+    "id": "t4-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two equal point charges $q$ sit at $x=\\pm a$ on the $x$-axis. Write the magnitude of the field at $(0,y)$ in terms of $q$, $a$, $y$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "q*y/(2*pi*eps0*(a^2+y^2)^(3/2))",
+      "vars": [
+        "q",
+        "a",
+        "y",
+        "eps0"
+      ],
+      "also": [
+        "2*q*y/(4*pi*eps0*(a^2+y^2)^(3/2))",
+        "2*q*y*(4*pi*eps0*(a^2+y^2)^(3/2))^(-1)"
+      ]
+    },
+    "solution": "Each charge gives $kq/(a^2+y^2)$ at the point. The $x$-parts cancel and the $y$-parts add, giving $E=\\dfrac{2kqy}{(a^2+y^2)^{3/2}}$.",
+    "hints": [
+      "Write each distance from a charge to the point first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point charge $Q=+2.0\\ \\mu\\mathrm C$ produces a field of magnitude $4.0\\times10^{4}\\ \\mathrm{N/C}$ at some point in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the distance from the charge to that point in $\\mathrm m$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.670515,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$r=\\sqrt{kQ/E}=\\sqrt{0.450}\\approx 0.67\\ \\mathrm m$.",
+    "hints": [
+      "Solve the field law for the distance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "math.sqrt((1/(4*math.pi*8.85e-12))*2e-6/4e4)"
+  },
+  {
+    "id": "t4-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Charge $+4.0\\ \\mu\\mathrm C$ sits at $x=0$ and charge $+1.0\\ \\mu\\mathrm C$ sits at $x=0.60\\ \\mathrm m$, both on the $x$-axis in vacuum. Find the $x$-coordinate in $\\mathrm m$ between them where the net electric field is zero.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/5",
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "At $x$, $4/x^2=1/(0.60-x)^2$, so $2(0.60-x)=x$ and $x=0.40\\ \\mathrm m$.",
+    "hints": [
+      "Both fields point in opposite directions there. Equate magnitudes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(2,5)"
+  },
+  {
+    "id": "t4-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.coulomb"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A uniformly charged ring of total charge $Q$ and radius $R$ sits in vacuum. Which statements are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The net field at its center is zero",
+        "The potential at its center is $kQ/R$",
+        "Far along its axis, the field approaches $kQ/z^2$ for axial distance $z$",
+        "The net field at its center is $kQ/R^2$"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Symmetry cancels the field at the center. Each element is a distance $R$ away, so $V=kQ/R$. Far away the ring looks like a point charge.",
+    "hints": [
+      "Symmetry decides the field; potentials add as scalars."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement is Gauss's law in integral form for the electric field?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\oint \\vec E\\cdot d\\vec A = Q_{\\mathrm{enc}}/\\varepsilon_0$",
+        "$\\oint \\vec E\\cdot d\\vec A = Q_{\\mathrm{enc}}\\,\\varepsilon_0$",
+        "$\\oint \\vec E\\cdot d\\vec A = 0$ for every closed surface",
+        "$\\oint \\vec E\\cdot d\\vec A = Q_{\\mathrm{total}}/\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "multiplies by permittivity instead of dividing",
+        "true only when no charge is enclosed",
+        "counts charge outside the surface"
+      ]
+    },
+    "solution": "Net outward flux equals enclosed charge over $\\varepsilon_0$. Charges outside contribute zero net flux.",
+    "hints": [
+      "Flux depends on what is enclosed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A closed surface encloses no charge. Which is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The net flux through it is zero, even with charges nearby but outside",
+        "Net flux is zero only if the field is zero everywhere on the surface",
+        "Net flux is positive whenever an external charge is nearby",
+        "Net flux equals the external charge divided by $\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "confuses a sufficient condition with a necessary one",
+        "assumes outside charges always add outward flux",
+        "counts a charge outside the surface"
+      ]
+    },
+    "solution": "Enclosed charge is zero, so the net flux is zero. Field can be nonzero on the surface while the net flux is zero.",
+    "hints": [
+      "Net flux depends only on enclosed charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the field magnitude of an infinite plane sheet of uniform charge density $\\sigma$ in vacuum, in terms of $\\sigma$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "sigma/(2*eps0)",
+      "vars": [
+        "sigma",
+        "eps0"
+      ],
+      "also": [
+        "sigma*(2*eps0)^(-1)",
+        "0.5*sigma/eps0"
+      ]
+    },
+    "solution": "Gauss's law on a pillbox gives $2EA=\\sigma A/\\varepsilon_0$, so $E=\\sigma/(2\\varepsilon_0)$.",
+    "hints": [
+      "Use a pillbox that straddles the sheet."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A long straight wire carries uniform linear charge density $\\lambda=+2.0\\ \\mu\\mathrm C/\\mathrm m$ in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the field magnitude in $\\mathrm{N/C}$ at distance $0.50\\ \\mathrm m$ from the wire.",
+    "answer": {
+      "kind": "numeric",
+      "value": 71934.4,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "A cylindrical Gaussian surface gives $E\\cdot 2\\pi r L=\\lambda L/\\varepsilon_0$, so $E=\\lambda/(2\\pi\\varepsilon_0 r)\\approx 7.2\\times10^{4}\\ \\mathrm{N/C}$.",
+    "hints": [
+      "Use a coaxial cylinder of length L."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "check": "2e-6/(2*math.pi*8.85e-12*0.5)"
+  },
+  {
+    "id": "t4-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A solid sphere of radius $R=0.20\\ \\mathrm m$ carries uniform charge $Q=+3.0\\ \\mu\\mathrm C$ throughout its volume in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the field magnitude in $\\mathrm{N/C}$ at $r=0.10\\ \\mathrm m$ from the center.",
+    "answer": {
+      "kind": "numeric",
+      "value": 337193.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Enclosed charge is $Q(r/R)^3$. Then $E=kQr/R^3\\approx 3.4\\times10^{5}\\ \\mathrm{N/C}$.",
+    "hints": [
+      "Only the charge inside radius r counts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(1/(4*math.pi*8.85e-12))*3e-6*0.10/0.20**3"
+  },
+  {
+    "id": "t4-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An infinite slab with uniform charge density $\\rho$ fills $-d<x<d$ in vacuum. Write the field magnitude at distance $x$ from the midplane, for $0<x<d$, in terms of $\\rho$, $x$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "rho*x/eps0",
+      "vars": [
+        "rho",
+        "x",
+        "eps0"
+      ],
+      "also": [
+        "x*rho/eps0",
+        "rho*x*eps0^(-1)"
+      ]
+    },
+    "solution": "A pillbox straddling $x$ encloses $\\rho\\cdot 2Ax$ of charge. Gauss's law gives $E\\cdot 2A=2\\rho A x/\\varepsilon_0$, so $E=\\rho x/\\varepsilon_0$.",
+    "hints": [
+      "Count only the slab between the pillbox face and the mid-plane."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point charge lies outside a closed cubic Gaussian surface. The charge moves to another spot, still outside the cube. What happens to the net flux through the cube?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It stays zero",
+        "It becomes positive",
+        "It changes with the charge's new distance",
+        "It becomes $q/\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "assumes an outside charge always adds outward flux",
+        "the field changes, but net flux depends only on enclosed charge",
+        "counts the external charge as enclosed"
+      ]
+    },
+    "solution": "No charge is enclosed before or after the move, so the net flux stays zero.",
+    "hints": [
+      "Ask which charges are inside the cube."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A closed box contains $+3.0\\ \\mu\\mathrm C$ and $-1.0\\ \\mu\\mathrm C$. A separate $+4.0\\ \\mu\\mathrm C$ charge sits outside the box in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the net electric flux out of the box in $\\mathrm{N\\,m^2/C}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 225989.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Enclosed charge is $+2.0\\ \\mu\\mathrm C$. Flux is $Q_{\\mathrm{enc}}/\\varepsilon_0\\approx 2.3\\times10^{5}\\ \\mathrm{N\\,m^2/C}$.",
+    "hints": [
+      "Exclude the outside charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(3e-6-1e-6)/8.85e-12"
+  },
+  {
+    "id": "t4-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which charge distributions let Gauss's law give the field from symmetry alone? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "A very long uniform line of charge",
+        "A very large uniform sheet of charge",
+        "A uniformly charged solid sphere, at points outside it or inside it",
+        "A short uniform rod, evaluated at a point near it"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Line, sheet and sphere have symmetry that makes $E$ constant on a chosen surface. A short rod does not.",
+    "hints": [
+      "Gauss's law needs a surface where $E$ is constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is the electric potential of a point charge $Q$ at distance $r$, with $V=0$ at infinity? Use $k$ for the Coulomb constant.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$V = kQ/r$",
+        "$V = kQ/r^2$",
+        "$V = kQ\\,r$",
+        "$V = kQ^2/r$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "uses the field law instead of the potential law",
+        "multiplies by distance instead of dividing",
+        "squares the charge"
+      ]
+    },
+    "solution": "Potential of a point charge is $kQ/r$, a scalar falling as $1/r$.",
+    "hints": [
+      "Potential falls as 1/r, field as 1/r squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which relation links the electric field $\\vec E$ to the potential $V$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\vec E = -\\nabla V$",
+        "$\\vec E = +\\nabla V$",
+        "$V = -\\nabla\\cdot\\vec E$",
+        "$\\vec E = -V\\,\\nabla r$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "drops the minus sign, so the field points uphill",
+        "swaps the roles of V and E",
+        "treats V as a factor on the gradient of distance"
+      ]
+    },
+    "solution": "Field points down the gradient of potential, so $\\vec E=-\\nabla V$.",
+    "hints": [
+      "The field points from high to low potential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the potential of a point charge $Q$ at distance $r$ in terms of $Q$, $r$ and $\\varepsilon_0$, with $V=0$ at infinity. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "Q/(4*pi*eps0*r)",
+      "vars": [
+        "Q",
+        "r",
+        "eps0"
+      ],
+      "also": [
+        "Q*(4*pi*eps0*r)^(-1)",
+        "Q/(4*pi*eps0)/r"
+      ]
+    },
+    "solution": "$V=\\frac{Q}{4\\pi\\varepsilon_0 r}$ with $V=0$ at infinity.",
+    "hints": [
+      "Potential is a scalar, so no direction is needed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Charge $+2.0\\ \\mu\\mathrm C$ sits at the origin and charge $-3.0\\ \\mu\\mathrm C$ sits at $(0.60\\ \\mathrm m, 0)$. Point $P$ is at $(0.30\\ \\mathrm m, 0.40\\ \\mathrm m)$. Take $V=0$ at infinity and $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the potential at $P$ in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -17983.6,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Both charges are $0.50\\ \\mathrm m$ from $P$. $V=k(2.0-3.0)\\times10^{-6}/0.50\\approx-1.8\\times10^{4}\\ \\mathrm V$.",
+    "hints": [
+      "Potentials add as signed scalars."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "check": "(1/(4*math.pi*8.85e-12))*(2e-6/0.5 - 3e-6/0.5)"
+  },
+  {
+    "id": "t4-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A proton starts from rest and is accelerated through a potential difference of $500\\ \\mathrm V$. Take $q=1.60\\times10^{-19}\\ \\mathrm C$ and $m_p=1.67\\times10^{-27}\\ \\mathrm{kg}$. Find its final speed in $\\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 309529.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Energy: $\\frac12 m_p v^2=qV$, so $v=\\sqrt{2qV/m_p}\\approx3.1\\times10^{5}\\ \\mathrm{m/s}$.",
+    "hints": [
+      "Energy gained equals qV."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "math.sqrt(2*1.60e-19*500/1.67e-27)"
+  },
+  {
+    "id": "t4-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A uniform ring of radius $R$ carries total charge $Q$ in vacuum. Write the potential at a point on its axis a distance $z$ from the ring's center, in terms of $Q$, $z$, $R$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "Q/(4*pi*eps0*sqrt(z^2+R^2))",
+      "vars": [
+        "Q",
+        "z",
+        "R",
+        "eps0"
+      ],
+      "also": [
+        "Q/(4*pi*eps0*(z^2+R^2)^(1/2))",
+        "Q*(4*pi*eps0)^(-1)*(z^2+R^2)^(-1/2)"
+      ]
+    },
+    "solution": "Every element is at distance $\\sqrt{z^2+R^2}$, so $V=\\frac{Q}{4\\pi\\varepsilon_0\\sqrt{z^2+R^2}}$.",
+    "hints": [
+      "Every ring element is the same distance from the axis point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "At the midpoint between two equal positive point charges in vacuum, which is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The field is zero and the potential is positive",
+        "The field is zero and the potential is zero",
+        "The potential is zero and the field is nonzero",
+        "The field and the potential are both nonzero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "treats potential cancellation like field cancellation",
+        "reverses the potential sum and the field sum",
+        "adds field magnitudes instead of letting them cancel"
+      ]
+    },
+    "solution": "Field vectors cancel by symmetry. Potentials add as positive scalars, so $V>0$.",
+    "hints": [
+      "Fields cancel as vectors. Potentials add as scalars."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An electron (charge $-1.60\\times10^{-19}\\ \\mathrm C$) is released from rest and moves toward higher potential through a potential rise of $300\\ \\mathrm V$. Find the kinetic energy it gains in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.8e-17,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "A charge $|q|$ crossing $\\Delta V$ gains $|q|\\,\\Delta V$, whatever its sign. $KE=1.60\\times10^{-19}\\times300=4.8\\times10^{-17}\\ \\mathrm J$.",
+    "hints": [
+      "An electron moves against the field, toward higher potential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "1.60e-19*300"
+  },
+  {
+    "id": "t4-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.potential"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about electric potential. Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Potential is a scalar, so potentials from several charges add algebraically",
+        "Equipotential surfaces are perpendicular to the field lines",
+        "The field points from high potential toward low potential",
+        "Equipotential surfaces can cross field lines at any angle"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Potential is a scalar. Field lines meet equipotentials at right angles and point toward lower potential.",
+    "hints": [
+      "Equipotentials and field lines are always perpendicular."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which defines the electric dipole moment of charges $+q$ and $-q$ separated by $d$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$p = qd$, directed from $-q$ to $+q$",
+        "$p = qd$, directed from $+q$ to $-q$",
+        "$p = q/d$, directed from $-q$ to $+q$",
+        "$p = q^2 d$, directed from $-q$ to $+q$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "reverses the direction convention",
+        "divides instead of multiplies",
+        "squares the charge"
+      ]
+    },
+    "solution": "Dipole moment is $p=qd$ with direction from negative to positive charge.",
+    "hints": [
+      "Magnitude first, then direction."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Far from an ideal electric dipole, on its axis, the field magnitude falls off as:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1/r$",
+        "$1/r^2$",
+        "$1/r^3$",
+        "$1/r^4$"
+      ],
+      "correct": 2,
+      "why": [
+        "the field of an infinite line charge",
+        "the point-charge law, which a dipole does not follow",
+        "",
+        "one power beyond the dipole, a quadrupole's law"
+      ]
+    },
+    "solution": "A dipole's axial field falls as $1/r^3$, one power faster than a point charge's $1/r^2$ field.",
+    "hints": [
+      "The net charge is zero, so the leading term is the dipole."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the dipole moment magnitude for charges $+q$ and $-q$ separated by $d$, in terms of $q$ and $d$.",
+    "answer": {
+      "kind": "expression",
+      "value": "q*d",
+      "vars": [
+        "q",
+        "d"
+      ],
+      "also": [
+        "d*q",
+        "q*d^1"
+      ]
+    },
+    "solution": "$p=qd$, the product of the charge magnitude and the separation.",
+    "hints": [
+      "Product, not ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Charges $\\pm2.0\\ \\mathrm{nC}$ are $4.0\\ \\mathrm{mm}$ apart in vacuum, forming a dipole. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the field magnitude in $\\mathrm{N/C}$ on the dipole's axis at distance $0.50\\ \\mathrm m$ from its center.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.15095,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Far field on the axis: $E\\approx 2kp/r^3$ with $p=8.0\\times10^{-12}\\ \\mathrm{C\\,m}$. $E\\approx 1.2\\ \\mathrm{N/C}$.",
+    "hints": [
+      "Use the dipole moment and the far-field form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "2*(1/(4*math.pi*8.85e-12))*(2e-9*4e-3)/0.5**3"
+  },
+  {
+    "id": "t4-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A dipole with moment $p=8.0\\times10^{-12}\\ \\mathrm{C\\,m}$ sits in a uniform field $E=2.0\\times10^{3}\\ \\mathrm{N/C}$, with its moment at $30^\\circ$ to the field. Find the magnitude of the torque in $\\mathrm{N\\,m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8e-09,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$\\tau=pE\\sin\\theta=(8.0\\times10^{-12})(2.0\\times10^{3})(0.5)=8.0\\times10^{-9}\\ \\mathrm{N\\,m}$.",
+    "hints": [
+      "Torque is p cross E."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "8e-12*2000*math.sin(math.radians(30))"
+  },
+  {
+    "id": "t4-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Charges $+q$ and $-q$ are a distance $d$ apart, with $d\\ll r$. Write the potential on their axis at distance $r$ from the midpoint, on the $+q$ side, in terms of $q$, $d$, $r$ and $\\varepsilon_0$. Take $V=0$ at infinity. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "q*d/(4*pi*eps0*r^2)",
+      "vars": [
+        "q",
+        "d",
+        "r",
+        "eps0"
+      ],
+      "also": [
+        "q*d/(4*pi*eps0*r*r)",
+        "q*d*(4*pi*eps0*r^2)^(-1)"
+      ]
+    },
+    "solution": "$V=kq\\left[\\frac1{r-d/2}-\\frac1{r+d/2}\\right]\\approx\\frac{kqd}{r^2}=\\frac{qd}{4\\pi\\varepsilon_0r^2}$, which falls as $1/r^2$.",
+    "hints": [
+      "A dipole potential falls one power faster than a point charge's $1/r$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A dipole with moment $p=8.0\\times10^{-12}\\ \\mathrm{C\\,m}$ is aligned with a uniform field $E=2.0\\times10^{3}\\ \\mathrm{N/C}$. It is then rotated slowly until it points antiparallel to the field. Find the work done by the external agent in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.2e-08,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Work equals the change in $U=-\\vec p\\cdot\\vec E$, which goes from $-pE$ to $+pE$. So $W=2pE=3.2\\times10^{-8}\\ \\mathrm J$.",
+    "hints": [
+      "Energy changes from minus pE to plus pE."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "2*8e-12*2000"
+  },
+  {
+    "id": "t4-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "On the axis of an ideal dipole at large distance $r$, the field magnitude falls as $1/r^n$. What is $n$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n=1$",
+        "$n=2$",
+        "$n=3$",
+        "$n=4$"
+      ],
+      "correct": 2,
+      "why": [
+        "the field of an infinite line charge",
+        "the point-charge field law, or the dipole potential's power",
+        "",
+        "the quadrupole field, one power beyond the dipole"
+      ]
+    },
+    "solution": "A dipole field falls as $1/r^3$ on the axis.",
+    "hints": [
+      "Charge zero means the leading term is the dipole term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.multipole"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about an ideal electric dipole are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Its net charge is zero",
+        "Its potential is zero on the perpendicular bisector",
+        "Its far field falls off faster than a point charge's",
+        "Its moment points from the positive charge to the negative charge"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Net charge zero. The bisector is equidistant from both charges. The far field falls as $1/r^3$. The moment points from $-q$ to $+q$.",
+    "hints": [
+      "Check the sign convention for the dipole moment."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In electrostatic equilibrium, where does the net charge on an isolated conductor reside?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "On its outer surface",
+        "Uniformly throughout its volume",
+        "At its geometric center",
+        "Only on sharp points"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "treats the conductor like an insulator",
+        "confuses the center of charge with the location of charge",
+        "keeps only the corner effect, which is partial"
+      ]
+    },
+    "solution": "Interior field is zero, so net charge moves to the outer surface.",
+    "hints": [
+      "Interior field is zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Just outside a conductor's surface in equilibrium, with surface charge density $\\sigma$, the field is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Perpendicular to the surface, magnitude $\\sigma/\\varepsilon_0$",
+        "Parallel to the surface, magnitude $\\sigma/\\varepsilon_0$",
+        "Perpendicular to the surface, magnitude $\\sigma/(2\\varepsilon_0)$",
+        "Zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "wrong direction; surface-parallel field would drive charge along the surface",
+        "half the sheet value, which applies inside a sheet's average",
+        "zero is the field inside, not just outside"
+      ]
+    },
+    "solution": "The conductor surface field is $\\sigma/\\varepsilon_0$ normal to the surface.",
+    "hints": [
+      "Field inside is zero; just outside it is $\\sigma/\\varepsilon_0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the electric field just outside a conductor surface with surface charge density $\\sigma$, in terms of $\\sigma$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "sigma/eps0",
+      "vars": [
+        "sigma",
+        "eps0"
+      ],
+      "also": [
+        "sigma*eps0^(-1)",
+        "sigma/(eps0)"
+      ]
+    },
+    "solution": "$E=\\sigma/\\varepsilon_0$, normal to the surface.",
+    "hints": [
+      "Surface field is double the sheet's half-field."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An isolated conducting sphere of radius $0.10\\ \\mathrm m$ carries charge $+2.0\\ \\mu\\mathrm C$ in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the field magnitude just outside its surface in $\\mathrm{N/C}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1798360.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Outside the surface it is a point charge at the center, so $E=kQ/R^2\\approx 1.8\\times10^{6}\\ \\mathrm{N/C}$.",
+    "hints": [
+      "The charge acts as if at the center from outside."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(1/(4*math.pi*8.85e-12))*2e-6/0.10**2"
+  },
+  {
+    "id": "t4-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A conducting shell has net charge $+1.0\\ \\mu\\mathrm C$. A point charge $+3.0\\ \\mu\\mathrm C$ sits inside its cavity, not touching the shell. Find the charge on the shell's outer surface in $\\mathrm C$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4e-06,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Inner wall carries $-3.0\\ \\mu\\mathrm C$. Outer surface carries $1.0-(-3.0)=+4.0\\ \\mu\\mathrm C$.",
+    "hints": [
+      "The cavity wall mirrors the enclosed charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "1e-6-(-3e-6)"
+  },
+  {
+    "id": "t4-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two isolated conducting spheres: sphere $A$ has radius $0.10\\ \\mathrm m$ and charge $+6.0\\ \\mu\\mathrm C$. Sphere $B$ has radius $0.20\\ \\mathrm m$ and no charge. They are joined by a long thin wire, then separated. Find the charge on sphere $B$ in $\\mathrm C$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4e-06,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Equal potential means $q_A/r_A=q_B/r_B$, so $q_B=2q_A$. With $q_A+q_B=6.0\\ \\mu\\mathrm C$, $q_B=4.0\\ \\mu\\mathrm C$.",
+    "hints": [
+      "Equal potentials, not equal charges."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "6e-6*0.2/(0.1+0.2)"
+  },
+  {
+    "id": "t4-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A conductor surface has surface charge density $\\sigma$. Write the outward electrostatic pressure on the surface in terms of $\\sigma$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "sigma^2/(2*eps0)",
+      "vars": [
+        "sigma",
+        "eps0"
+      ],
+      "also": [
+        "sigma*sigma/(2*eps0)",
+        "(sigma^2/eps0)/2"
+      ]
+    },
+    "solution": "The pressure is the average field times $\\sigma$: $\\frac{\\sigma}{2\\varepsilon_0}\\cdot\\sigma$.",
+    "hints": [
+      "Use the average of the inside and outside fields."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An uncharged conducting sphere is placed in a uniform external field $\\vec E_0$ in vacuum. In electrostatic equilibrium, the field inside the conductor is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Zero",
+        "$\\vec E_0$",
+        "$2\\vec E_0$",
+        "$-\\vec E_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ignores the induced surface charges",
+        "doubles the field from the surface charges",
+        "overcorrects the sign of the induced field"
+      ]
+    },
+    "solution": "Induced surface charges produce a field that cancels $\\vec E_0$ inside the conductor.",
+    "hints": [
+      "Induced surface charges cancel the external field inside."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about a conductor in electrostatic equilibrium. Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The electric field inside the conducting material is zero",
+        "The electric field just outside the surface is perpendicular to the surface",
+        "The potential is the same everywhere in the conductor",
+        "The surface charge density is uniform on an irregular conductor",
+        "The field just outside the surface is parallel to the surface"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Interior field is zero, so the potential is constant. Field outside is normal. Charge density is higher at sharp curvature.",
+    "hints": [
+      "Field components along a conductor surface vanish in equilibrium."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A point charge $q$ sits a distance $d$ in front of an infinite grounded conducting plane. Which describes the image charge?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Charge $-q$ at distance $d$ behind the plane",
+        "Charge $+q$ at distance $d$ behind the plane",
+        "Charge $-q$ at distance $2d$ behind the plane",
+        "Charge $-2q$ at distance $d$ behind the plane"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "same sign, forgets that the plane induces opposite charge",
+        "measures the image's distance from the real charge instead of from the plane",
+        "doubles the charge"
+      ]
+    },
+    "solution": "The image is opposite in sign and as far behind the plane as the charge is in front.",
+    "hints": [
+      "Mirror the charge across the plane."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Why can an image charge be used for a point charge near a grounded conducting plane?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Induced charges on the plane make its surface a surface of zero potential, so the fields match an image",
+        "The plane has zero charge, so no induced charges exist",
+        "Conductors repel charges, so the field cancels",
+        "Coulomb's law is invalid near conductors"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a conductor can carry induced charge even when it is neutral",
+        "conductors do not cancel external fields by repulsion",
+        "Coulomb's law still applies"
+      ]
+    },
+    "solution": "Uniqueness: the image solution satisfies the boundary condition $V=0$ on the plane in the real region.",
+    "hints": [
+      "Boundary conditions define the answer."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the image charge for a point charge $q$ placed near a grounded infinite conducting plane, in terms of $q$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-q",
+      "vars": [
+        "q"
+      ],
+      "also": [
+        "-1*q",
+        "0-q"
+      ]
+    },
+    "solution": "The image has charge $-q$.",
+    "hints": [
+      "Opposite sign, same magnitude."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point charge $q=+2.0\\ \\mu\\mathrm C$ is $0.30\\ \\mathrm m$ in front of an infinite grounded conducting plane in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the magnitude of the force on the charge in $\\mathrm N$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.0999089,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Image $-q$ is $2d=0.60\\ \\mathrm m$ away. $F=kq^2/(2d)^2\\approx 0.10\\ \\mathrm N$, attractive.",
+    "hints": [
+      "Distance to the image is twice the standoff distance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(1/(4*math.pi*8.85e-12))*(2e-6)**2/(4*0.3**2)"
+  },
+  {
+    "id": "t4-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point charge $+3.0\\ \\mu\\mathrm C$ is $0.40\\ \\mathrm m$ above an infinite grounded conducting plane in vacuum. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the magnitude of the electric field at the plane's surface directly below the charge, in $\\mathrm{N/C}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 337193.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Charge and image each give $kq/d^2$ at that point, in the same direction. $E=2kq/d^2\\approx 3.4\\times10^{5}\\ \\mathrm{N/C}$.",
+    "hints": [
+      "Charge and image contributions add at the plane."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "2*(1/(4*math.pi*8.85e-12))*3e-6/0.4**2"
+  },
+  {
+    "id": "t4-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point charge $q$ is at distance $d$ in front of an infinite grounded conducting plane. Write the electrostatic energy of the charge and its induced charge relative to infinity, in terms of $q$, $d$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "-q^2/(16*pi*eps0*d)",
+      "vars": [
+        "q",
+        "d",
+        "eps0"
+      ],
+      "also": [
+        "-(q^2)/(16*pi*eps0*d)",
+        "-q*q/(16*pi*eps0*d)"
+      ]
+    },
+    "solution": "Energy is $\\frac12 q V_{\\mathrm{image}}=\\frac12 q\\left(-\\frac{kq}{2d}\\right)=-\\frac{q^2}{16\\pi\\varepsilon_0 d}$.",
+    "hints": [
+      "The induced charge contributes half the potential energy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a point charge in front of a grounded plane, where may the image solution be used?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Only in the half-space containing the real charge",
+        "Only in the half-space behind the plane, where the image sits",
+        "Everywhere, including inside the conductor",
+        "Only on the plane itself"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the image is fictitious and has no field there",
+        "the real field inside a conductor is zero, not the image field",
+        "the boundary is a surface, not a region of solution"
+      ]
+    },
+    "solution": "The image solution describes the field only on the real side of the plane.",
+    "hints": [
+      "Use it on the side where the real charge is."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point charge $q=+2.0\\ \\mu\\mathrm C$ is $0.30\\ \\mathrm m$ above an infinite grounded conducting plane. Find the magnitude of the induced surface charge density on the plane directly below the charge, in $\\mathrm{C/m^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.53678e-06,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Induced density is $-qd/[2\\pi(d^2+\\rho^2)^{3/2}]$. At $\\rho=0$, $|\\sigma|=q/(2\\pi d^2)\\approx 3.5\\times10^{-6}\\ \\mathrm{C/m^2}$.",
+    "hints": [
+      "Evaluate the induced density at the foot of the perpendicular."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "2e-6/(2*math.pi*0.3**2)"
+  },
+  {
+    "id": "t4-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.images"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements are true when the image method is used for a point charge in front of a grounded plane? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The image charge equals $-q$",
+        "The image lies a distance $d$ behind the plane",
+        "The real charge is attracted toward the plane",
+        "The real charge is repelled from the plane"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Image is $-q$ at distance $d$ behind the plane. Opposite images attract the charge toward the plane.",
+    "hints": [
+      "Opposite charges attract."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Laplace's equation for the electric potential in a region with no charge is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\nabla^2 V = 0$",
+        "$\\nabla^2 V = \\rho/\\varepsilon_0$",
+        "$\\nabla V = 0$",
+        "$\\nabla^2 V = -\\rho\\,\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "Poisson's equation, which needs charge present",
+        "gradient zero means zero field, which is too strong",
+        "misplaces the permittivity and the sign"
+      ]
+    },
+    "solution": "With no charge, $\\nabla\\cdot\\vec E=0$ and $\\vec E=-\\nabla V$ give $\\nabla^2V=0$.",
+    "hints": [
+      "Set the charge density to zero in Poisson's equation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which statement about solving Laplace's equation with given boundary potentials is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The solution is unique",
+        "Many solutions exist, one for each guess of the field",
+        "A solution exists only if the boundary is symmetric",
+        "The solution depends on the field, not the boundaries"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "misremembers the uniqueness theorem",
+        "symmetry helps, but is not required",
+        "the boundary values determine the solution"
+      ]
+    },
+    "solution": "Uniqueness theorem: boundary potentials fix the solution in a charge-free region.",
+    "hints": [
+      "Boundary values determine the answer."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Between two parallel plates at $x=0$ (potential $0$) and $x=d$ (potential $V_0$), with no charge between them, write the potential $V(x)$ in terms of $V_0$, $x$ and $d$.",
+    "answer": {
+      "kind": "expression",
+      "value": "V0*x/d",
+      "vars": [
+        "V0",
+        "x",
+        "d"
+      ],
+      "also": [
+        "x*V0/d",
+        "V0*(d^(-1))*x"
+      ]
+    },
+    "solution": "$\\nabla^2V=0$ with the given boundaries gives a linear potential, $V=V_0x/d$.",
+    "hints": [
+      "In one dimension the solution is linear."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Parallel plates lie at $x=0$ (potential $0$) and $x=2.0\\ \\mathrm{cm}$ (potential $300\\ \\mathrm V$), with no charge between them. Find the potential in $\\mathrm V$ at $x=0.50\\ \\mathrm{cm}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 75,
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Linear: $V=300\\,x/2.0\\ \\mathrm{cm}$, so at $0.50\\ \\mathrm{cm}$, $V=75\\ \\mathrm V$.",
+    "hints": [
+      "The potential is linear between plates with no charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "300*Fraction(5,20)"
+  },
+  {
+    "id": "t4-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In a region with no charge, the potential is $V=A(x^2-y^2)$ with $A=5.0\\ \\mathrm{V/m^2}$. Find the magnitude of the electric field at $(1.0\\ \\mathrm m, 2.0\\ \\mathrm m)$ in $\\mathrm{V/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 22.3607,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$\\vec E=-\\nabla V=-(2Ax,\\,-2Ay)$, so $|E|=2A\\sqrt{x^2+y^2}=10\\sqrt5\\approx 22\\ \\mathrm{V/m}$.",
+    "hints": [
+      "Take the gradient, then the magnitude."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "10*math.sqrt(5)"
+  },
+  {
+    "id": "t4-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Concentric spheres of radii $a$ and $b$ ($a<b$) are held at potential $V_0$ at $r=a$ and $0$ at $r=b$, with no charge between them. Write the potential at radius $r$, for $a<r<b$, in terms of $V_0$, $a$, $b$ and $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "V0*a*(b-r)/(r*(b-a))",
+      "vars": [
+        "V0",
+        "a",
+        "b",
+        "r"
+      ],
+      "also": [
+        "V0*(1/r-1/b)/(1/a-1/b)",
+        "V0*(a/r)*(b-r)/(b-a)"
+      ]
+    },
+    "solution": "Radial Laplace solutions are $A+B/r$. Fitting the boundaries gives $V=V_0\\,\\dfrac{1/r-1/b}{1/a-1/b}$.",
+    "hints": [
+      "Radial solutions are constant plus constant over r."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A charge-free region has a potential $V$ that satisfies Laplace's equation. Which is true of $V$ in that region?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It has no interior maximum or minimum",
+        "It is largest where the field is largest",
+        "It has a minimum at the center of the region",
+        "It is always zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "confuses field magnitude with potential",
+        "assumes a symmetric center location",
+        "confuses no charge with zero potential"
+      ]
+    },
+    "solution": "A harmonic function has no interior extrema. Extremes lie on the boundary.",
+    "hints": [
+      "Extrema of a harmonic function sit on the boundary."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Coaxial cylinders at radii $a=1.0\\ \\mathrm{cm}$ (potential $100\\ \\mathrm V$) and $b=4.0\\ \\mathrm{cm}$ (potential $0$), with no charge between them. Find the potential in $\\mathrm V$ at $r=2.0\\ \\mathrm{cm}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 50.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Cylindrical Laplace solution: $V=V_0\\ln(b/r)/\\ln(b/a)=100\\ln2/\\ln4=50\\ \\mathrm V$.",
+    "hints": [
+      "In cylinders the potential is logarithmic in r."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "100*math.log(4/2)/math.log(4/1)"
+  },
+  {
+    "id": "t4-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.laplace"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which of these can be the potential in a region with no charge? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$V = x^2 - y^2$",
+        "$V = xy$",
+        "$V = x^2 + y^2$",
+        "$V = x$"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    },
+    "solution": "Laplacian: $x^2-y^2$ gives $0$, $xy$ gives $0$, $x$ gives $0$, but $x^2+y^2$ gives $4$.",
+    "hints": [
+      "Test each candidate by its Laplacian."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which defines capacitance?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$C = Q/V$",
+        "$C = QV$",
+        "$C = V/Q$",
+        "$C = Q^2/V$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "multiplies charge and voltage",
+        "inverts the ratio",
+        "uses the energy formula's charge squared"
+      ]
+    },
+    "solution": "Capacitance is charge stored per unit voltage, $C=Q/V$.",
+    "hints": [
+      "Charge per volt."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Parallel plates have area $A$ and gap $d$, separated by vacuum. Which gives $C$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$C = \\varepsilon_0 A/d$",
+        "$C = \\varepsilon_0 d/A$",
+        "$C = \\varepsilon_0 A d$",
+        "$C = 2\\varepsilon_0 A/d$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts the geometry",
+        "multiplies the geometry",
+        "adds a factor of two from a sheet of charge"
+      ]
+    },
+    "solution": "Ideal parallel-plate capacitance is $\\varepsilon_0 A/d$.",
+    "hints": [
+      "Bigger plates, smaller gap."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the capacitance of parallel plates of area $A$ and gap $d$ in vacuum, in terms of $A$, $d$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "eps0*A/d",
+      "vars": [
+        "eps0",
+        "A",
+        "d"
+      ],
+      "also": [
+        "A*eps0/d",
+        "eps0*A*d^(-1)"
+      ]
+    },
+    "solution": "$C=\\varepsilon_0 A/d$ for ideal parallel plates.",
+    "hints": [
+      "Area over gap."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Parallel plates have area $A=0.020\\ \\mathrm{m^2}$ and gap $d=0.50\\ \\mathrm{mm}$ in vacuum. They are connected to a $12\\ \\mathrm V$ battery. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the charge on each plate in $\\mathrm C$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.248e-09,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$C=\\varepsilon_0A/d=3.5\\times10^{-10}\\ \\mathrm F$. Then $Q=CV\\approx4.2\\times10^{-9}\\ \\mathrm C$.",
+    "hints": [
+      "Get C first, then Q = CV."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "check": "8.85e-12*0.02/0.0005*12"
+  },
+  {
+    "id": "t4-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $4.0\\ \\mu\\mathrm F$ capacitor and a $6.0\\ \\mu\\mathrm F$ capacitor are connected in series across a $10\\ \\mathrm V$ source. Find the charge on each capacitor in $\\mathrm C$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.4e-05,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Series: $C_{\\mathrm{eq}}=2.4\\ \\mu\\mathrm F$, so $Q=2.4\\times10^{-6}\\times10=2.4\\times10^{-5}\\ \\mathrm C$ on each.",
+    "hints": [
+      "Series capacitors share the same charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "1/(1/4e-6+1/6e-6)*10"
+  },
+  {
+    "id": "t4-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $4.0\\ \\mu\\mathrm F$ capacitor charged to $10\\ \\mathrm V$ is connected in parallel with an uncharged $6.0\\ \\mu\\mathrm F$ capacitor. Find the final common voltage in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Charge is conserved: $40\\ \\mu\\mathrm C$ spread over $10\\ \\mu\\mathrm F$ gives $4.0\\ \\mathrm V$.",
+    "hints": [
+      "Charge is conserved when the plates are joined."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "4e-6*10/(4e-6+6e-6)"
+  },
+  {
+    "id": "t4-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two concentric conducting spheres of radii $a<b$ are separated by vacuum. Write the capacitance in terms of $a$, $b$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "4*pi*eps0*a*b/(b-a)",
+      "vars": [
+        "a",
+        "b",
+        "eps0"
+      ],
+      "also": [
+        "4*pi*eps0*b*a/(b-a)",
+        "4*pi*eps0/(1/a-1/b)"
+      ]
+    },
+    "solution": "With charge $Q$, $V=\\frac{Q}{4\\pi\\varepsilon_0}\\left(\\frac1a-\\frac1b\\right)$, so $C=\\dfrac{4\\pi\\varepsilon_0 ab}{b-a}$.",
+    "hints": [
+      "Compute the voltage between the spheres first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor stays connected to a battery while its plate separation is doubled. What happens to its charge?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It halves",
+        "It doubles",
+        "It stays the same",
+        "It quadruples"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "assumes charge is set by spacing rather than voltage",
+        "forgets that C changes with spacing",
+        "squares the ratio of spacings"
+      ]
+    },
+    "solution": "With the battery attached, $V$ is fixed. $C$ halves, so $Q=CV$ halves.",
+    "hints": [
+      "Which quantity does the battery hold fixed?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about capacitors are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Capacitors in parallel have equivalent capacitance equal to the sum",
+        "Capacitors in series carry equal charge on each",
+        "Capacitors in series have an inverse-sum equivalent capacitance",
+        "Capacitors in series have equal voltage across each"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Parallel adds C. Series: equal charge, and reciprocals add. Series capacitors do not share voltage unless identical.",
+    "hints": [
+      "In series, charge is shared and voltage splits."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A dielectric with relative permittivity $\\kappa$ fills the gap of a capacitor that stays connected to a battery. The capacitance becomes:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\kappa C_0$",
+        "$C_0/\\kappa$",
+        "$C_0+\\kappa$",
+        "$C_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts the dielectric effect",
+        "adds the constant instead of multiplying",
+        "ignores the dielectric"
+      ]
+    },
+    "solution": "Filling with a dielectric multiplies capacitance by $\\kappa$.",
+    "hints": [
+      "Permittivity goes up by kappa."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the permittivity of a dielectric with relative permittivity $\\kappa$, in terms of $\\varepsilon_0$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\varepsilon = \\kappa\\varepsilon_0$",
+        "$\\varepsilon = \\varepsilon_0/\\kappa$",
+        "$\\varepsilon = \\kappa+\\varepsilon_0$",
+        "$\\varepsilon = \\kappa^2\\varepsilon_0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts the relative permittivity",
+        "adds instead of multiplying",
+        "squares the relative permittivity"
+      ]
+    },
+    "solution": "Permittivity is $\\varepsilon=\\kappa\\varepsilon_0$.",
+    "hints": [
+      "Relative times vacuum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the capacitance of parallel plates of area $A$ and gap $d$, completely filled with a dielectric of constant $\\kappa$, in terms of $\\kappa$, $A$, $d$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "kappa*eps0*A/d",
+      "vars": [
+        "kappa",
+        "eps0",
+        "A",
+        "d"
+      ],
+      "also": [
+        "kappa*A*eps0/d",
+        "eps0*kappa*A*d^(-1)"
+      ]
+    },
+    "solution": "$C=\\kappa\\varepsilon_0A/d$.",
+    "hints": [
+      "Vacuum formula times kappa."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A parallel-plate capacitor has $C_0=3.0\\ \\mu\\mathrm F$ in vacuum. A dielectric with $\\kappa=4.0$ fills the gap completely. Find the new capacitance in $\\mathrm F$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.2e-05,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$C=\\kappa C_0=4.0\\times3.0\\ \\mu\\mathrm F=12\\ \\mu\\mathrm F$.",
+    "hints": [
+      "Multiply, do not add."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "4.0*3e-6"
+  },
+  {
+    "id": "t4-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor charged to $60\\ \\mathrm V$ is disconnected from its battery. A dielectric with $\\kappa=3.0$ then fills the gap completely. Find the new voltage in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Charge is fixed, so $V\\to V/\\kappa=60/3=20\\ \\mathrm V$.",
+    "hints": [
+      "The charge cannot change when the battery is gone."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(60,3)"
+  },
+  {
+    "id": "t4-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Parallel plates with free surface charge density $\\sigma_f=5.0\\times10^{-7}\\ \\mathrm{C/m^2}$ are filled with a dielectric of $\\kappa=2.5$. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the electric field magnitude inside the dielectric in $\\mathrm{V/m}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 22598.9,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Field is $E=\\sigma_f/(\\kappa\\varepsilon_0)=5.0\\times10^{-7}/(2.5\\times8.85\\times10^{-12})\\approx 2.3\\times10^{4}\\ \\mathrm{V/m}$.",
+    "hints": [
+      "Only free charge sets the field in the dielectric's permittivity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "5e-7/(2.5*8.85e-12)"
+  },
+  {
+    "id": "t4-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A parallel-plate capacitor has two layers in its gap, each filling the full plate area $A$. Layer 1 has thickness $d_1$ and constant $\\kappa_1$. Layer 2 has thickness $d_2$ and constant $\\kappa_2$. Write the capacitance in terms of $\\varepsilon_0$, $A$, $d_1$, $d_2$, $\\kappa_1$ and $\\kappa_2$. Write $\\varepsilon_0$ as eps0, $\\kappa_1$ as kappa1, $\\kappa_2$ as kappa2.",
+    "answer": {
+      "kind": "expression",
+      "value": "eps0*A/(d1/kappa1+d2/kappa2)",
+      "vars": [
+        "eps0",
+        "A",
+        "d1",
+        "d2",
+        "kappa1",
+        "kappa2"
+      ],
+      "also": [
+        "eps0*A*kappa1*kappa2/(d1*kappa2+d2*kappa1)",
+        "1/(d1/(eps0*A*kappa1)+d2/(eps0*A*kappa2))"
+      ]
+    },
+    "solution": "Layers act in series. $1/C=d_1/(\\kappa_1\\varepsilon_0A)+d_2/(\\kappa_2\\varepsilon_0A)$.",
+    "hints": [
+      "Layers in series add their d over kappa."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Why does a dielectric reduce the field inside a capacitor, but not to zero?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Induced polarization charges partly cancel the field of the free charge",
+        "The dielectric adds free charge to the plates, which strengthens the field",
+        "The dielectric removes the potential difference between the plates",
+        "The field stays the same and only the potential changes"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "free charge is not added by a dielectric",
+        "confuses a dielectric with a short circuit",
+        "the field inside the dielectric drops by kappa"
+      ]
+    },
+    "solution": "Bound polarization charges oppose the free charge, so the net field drops by a factor kappa.",
+    "hints": [
+      "Bound charges oppose free charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dielectrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about dielectrics are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The permittivity is $\\kappa\\varepsilon_0$",
+        "Polarization charges oppose the applied field inside the dielectric",
+        "With the battery disconnected, inserting a dielectric leaves the free charge on the plates unchanged",
+        "Polarization charges can be removed from the dielectric to restore the original field"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Permittivity, opposing polarization, and fixed free charge when disconnected are true. Bound charges cannot be removed.",
+    "hints": [
+      "Bound charges are not free to move off."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Resistors in series combine as:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$R_{\\mathrm{eq}}=R_1+R_2$",
+        "$1/R_{\\mathrm{eq}}=1/R_1+1/R_2$",
+        "$R_{\\mathrm{eq}}=R_1R_2$",
+        "$R_{\\mathrm{eq}}=R_1R_2/(R_1+R_2)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "uses the parallel rule",
+        "multiplies the resistances",
+        "uses the two-resistor parallel formula in series"
+      ]
+    },
+    "solution": "In series, resistances add. The current is the same through each.",
+    "hints": [
+      "Series adds, parallel adds reciprocals."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For an ohmic resistor carrying current $I$, the voltage across it is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$V = IR$",
+        "$V = I/R$",
+        "$V = R/I$",
+        "$V = I^2R$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts Ohm's law",
+        "inverts the current and resistance roles",
+        "gives power, not voltage"
+      ]
+    },
+    "solution": "Ohm's law: $V=IR$.",
+    "hints": [
+      "Current times resistance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Two resistors, $4.0\\ \\Omega$ and $12\\ \\Omega$, are connected in parallel. Find the equivalent resistance in $\\Omega$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Parallel: $1/R=1/4+1/12=1/3$, so $R=3\\ \\Omega$.",
+    "hints": [
+      "Add conductances."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "1/(Fraction(1,4)+Fraction(1,12))"
+  },
+  {
+    "id": "t4-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $12\\ \\mathrm V$ source drives $4.0\\ \\Omega$ and $8.0\\ \\Omega$ resistors in series. Find the current in $\\mathrm A$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Total resistance is $12\\ \\Omega$, so $I=12/12=1.0\\ \\mathrm A$.",
+    "hints": [
+      "Series resistances add first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(12)/(4+8)"
+  },
+  {
+    "id": "t4-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $12\\ \\mathrm V$ source drives $4.0\\ \\Omega$ and $8.0\\ \\Omega$ resistors in series. Find the power dissipated in the $8.0\\ \\Omega$ resistor in $\\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "$I=1.0\\ \\mathrm A$ through both, so $P=I^2R=8.0\\ \\mathrm W$.",
+    "hints": [
+      "Current is shared in series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(Fraction(12,12))**2*8"
+  },
+  {
+    "id": "t4-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $24\\ \\mathrm V$ source is connected to a $6.0\\ \\Omega$ resistor in series with a parallel pair of $4.0\\ \\Omega$ and $12\\ \\Omega$ resistors. Find the total current drawn from the source in $\\mathrm A$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.6666666666666665,
+      "tol": 0,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "solution": "Parallel pair is $3.0\\ \\Omega$. Total is $9.0\\ \\Omega$, so $I=24/9=8/3\\ \\mathrm A$.",
+    "hints": [
+      "Reduce the parallel pair first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(24)/(6+Fraction(4*12,4+12))"
+  },
+  {
+    "id": "t4-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A source $V$ drives two resistors $R_1$ and $R_2$ in series. Write the voltage across $R_2$ in terms of $V$, $R_1$ and $R_2$.",
+    "answer": {
+      "kind": "expression",
+      "value": "V*R2/(R1+R2)",
+      "vars": [
+        "V",
+        "R1",
+        "R2"
+      ],
+      "also": [
+        "V*R2/(R2+R1)",
+        "V/(1+R1/R2)"
+      ]
+    },
+    "solution": "Series divider: $V_2=V\\,R_2/(R_1+R_2)$.",
+    "hints": [
+      "A divider splits in proportion to resistance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A battery with emf $\\mathcal E$ and internal resistance $r$ drives an external resistor $R$. The terminal voltage across the battery is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathcal E R/(R+r)$",
+        "$\\mathcal E$",
+        "$\\mathcal E r/(R+r)$",
+        "$\\mathcal E (R+r)/R$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ignores the drop across the internal resistance",
+        "gives the voltage across the internal resistance",
+        "inverts the divider"
+      ]
+    },
+    "solution": "Current is $\\mathcal E/(R+r)$, so the terminal voltage is $IR=\\mathcal E R/(R+r)$.",
+    "hints": [
+      "A real battery loses voltage inside."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about a series circuit with one current path are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The current is the same through every element",
+        "The resistances add",
+        "The voltage drops across the resistors sum to the source emf",
+        "Each resistor has the same voltage across it"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "One path means one current. Resistances add. The drops sum to the emf. Voltages split by resistance, not equal.",
+    "hints": [
+      "Equal voltage is for parallel branches."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Kirchhoff's junction rule states that:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Currents entering a junction equal the currents leaving it",
+        "Voltages around a junction sum to zero",
+        "Currents in every branch are equal",
+        "The emfs around a loop sum to the power dissipated"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "mixes up the junction and loop rules",
+        "assumes equal currents, which is not generally true",
+        "mixes energy and power"
+      ]
+    },
+    "solution": "Junction rule is charge conservation at a node.",
+    "hints": [
+      "Charge in equals charge out at a node."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Kirchhoff's loop rule follows from:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Conservation of energy, so the potential change around a closed loop is zero",
+        "Conservation of charge at each node",
+        "Ohm's law alone",
+        "Coulomb's law alone"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that gives the junction rule",
+        "Ohm's law lacks emfs",
+        "Coulomb's law does not give loops"
+      ]
+    },
+    "solution": "Potential change around any closed loop is zero, which is energy conservation.",
+    "hints": [
+      "Loop sums are energy statements."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "At a junction, $4.0\\ \\mathrm A$ flows in along one wire and $1.5\\ \\mathrm A$ flows out along a second. A third wire carries current out. Find the current in $\\mathrm A$ leaving through the third wire.",
+    "answer": {
+      "kind": "numeric",
+      "value": "5/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Charge conservation: $4.0=1.5+I_3$, so $I_3=2.5\\ \\mathrm A$.",
+    "hints": [
+      "Junction rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(4)-Fraction(3,2)"
+  },
+  {
+    "id": "t4-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $12\\ \\mathrm V$ battery and a $6.0\\ \\mathrm V$ battery are in series in one loop with their emfs opposing. The loop has $3.0\\ \\Omega$ total resistance. Find the current magnitude in $\\mathrm A$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Net emf is $12-6=6\\ \\mathrm V$, so $I=6/3=2.0\\ \\mathrm A$.",
+    "hints": [
+      "Net emf first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "check": "Fraction(12-6,3)"
+  },
+  {
+    "id": "t4-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two loops sit side by side and share a $4.0\\ \\Omega$ resistor as their common wall. Loop 1 has a $12\\ \\mathrm V$ battery in series with a $2.0\\ \\Omega$ resistor. Loop 2 has a $6.0\\ \\mathrm V$ battery in series with a $3.0\\ \\Omega$ resistor. Both batteries drive clockwise current in their own loops. Find the magnitude of the current through the shared resistor in $\\mathrm A$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.9230769230769231,
+      "tol": 0,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "solution": "Loops with currents $I_1$, $I_2$: $12=2I_1+4(I_1-I_2)$, $6=3I_2+4(I_2-I_1)$. So $I_1=54/13$, $I_2=42/13$, and the shared current is $12/13\\ \\mathrm A$.",
+    "hints": [
+      "Write one loop equation per loop with shared currents."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(54,13)-Fraction(42,13)"
+  },
+  {
+    "id": "t4-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $12\\ \\mathrm V$ battery drives a single loop with $2.0\\ \\Omega$, $3.0\\ \\Omega$ and $5.0\\ \\Omega$ resistors in series. Find the voltage drop across the $3.0\\ \\Omega$ resistor in $\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "18/5",
+      "tol": 0,
+      "form": "exact"
+    },
+    "solution": "Total $10\\ \\Omega$, so $I=1.2\\ \\mathrm A$. Drop across $3.0\\ \\Omega$ is $3.6\\ \\mathrm V$.",
+    "hints": [
+      "Find the current first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "Fraction(12,10)*3"
+  },
+  {
+    "id": "t4-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two resistors $R_1$ and $R_2$ are in parallel and carry total current $I$ from a junction. Write the current through $R_1$ in terms of $I$, $R_1$ and $R_2$.",
+    "answer": {
+      "kind": "expression",
+      "value": "I*R2/(R1+R2)",
+      "vars": [
+        "I",
+        "R1",
+        "R2"
+      ],
+      "also": [
+        "I*R2/(R2+R1)",
+        "I/(1+R1/R2)"
+      ]
+    },
+    "solution": "Current divider: $I_1=I\\,R_2/(R_1+R_2)$.",
+    "hints": [
+      "Current goes the lower-resistance way."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In a loop you traverse a resistor opposite to the assumed current direction. The potential change across the resistor is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$+IR$",
+        "$-IR$",
+        "$0$",
+        "$+I/R$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "traverses along the current",
+        "treats the resistor as ideal wire",
+        "inverts Ohm's law"
+      ]
+    },
+    "solution": "Going against the current rises by $IR$.",
+    "hints": [
+      "Going with the current drops by IR."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about Kirchhoff's rules are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "A negative current result means the true direction is opposite the assumed one",
+        "The junction rule expresses conservation of charge",
+        "The loop rule expresses conservation of energy",
+        "An ideal ammeter in parallel with a resistor measures its current accurately"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Negative sign flags direction. Junction is charge, loop is energy. An ammeter belongs in series.",
+    "hints": [
+      "An ammeter is in series with the element it measures."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The time constant of an RC circuit is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\tau = RC$",
+        "$\\tau = R/C$",
+        "$\\tau = C/R$",
+        "$\\tau = 1/(RC)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "divides instead of multiplies",
+        "inverts the resistance role",
+        "gives a rate, not a time"
+      ]
+    },
+    "solution": "Time constant is $\\tau=RC$.",
+    "hints": [
+      "Units: ohm times farad is seconds."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A capacitor starts uncharged and charges through $R$ from a source $V_0$. The capacitor voltage at time $t$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$V_0(1-e^{-t/RC})$",
+        "$V_0e^{-t/RC}$",
+        "$V_0(1-e^{-RC/t})$",
+        "$V_0\\,t/RC$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the discharge law, which starts at V_0",
+        "inverts the exponent",
+        "a linear approximation valid only at very early times"
+      ]
+    },
+    "solution": "Charging: $V=V_0(1-e^{-t/\\tau})$, starting from zero.",
+    "hints": [
+      "Exponential approach to the source voltage."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A capacitor charges from zero through a resistor from a source $V_0$, with time constant $\\tau$. Write the capacitor voltage at time $t$ in terms of $V_0$, $t$ and $\\tau$.",
+    "answer": {
+      "kind": "expression",
+      "value": "V0*(1-exp(-t/tau))",
+      "vars": [
+        "V0",
+        "t",
+        "tau"
+      ],
+      "also": [
+        "V0-V0*exp(-t/tau)",
+        "V0*(1-exp(-(t/tau)))"
+      ]
+    },
+    "solution": "$V(t)=V_0(1-e^{-t/\\tau})$.",
+    "hints": [
+      "The exponent is minus t over tau."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An RC circuit has $R=2.0\\ \\mathrm{k\\Omega}$ and $C=5.0\\ \\mu\\mathrm F$. A $10\\ \\mathrm V$ source charges the capacitor from zero. Find the time in $\\mathrm s$ for the capacitor voltage to reach $5.0\\ \\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.00693147,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$\\tau=RC=0.010\\ \\mathrm s$. Half of the source needs $t=\\tau\\ln2\\approx 6.9\\times10^{-3}\\ \\mathrm s$, since $1-e^{-t/\\tau}=1/2$.",
+    "hints": [
+      "Half of the source voltage is not reached in one time constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "check": "2e3*5e-6*math.log(2)"
+  },
+  {
+    "id": "t4-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor charged to $12\\ \\mathrm V$ discharges through a resistor. Find its voltage in $\\mathrm V$ after a time equal to twice the time constant.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.62402,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$V=V_0e^{-t/\\tau}=12e^{-2}\\approx1.6\\ \\mathrm V$.",
+    "hints": [
+      "Discharge is a decaying exponential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "12*math.exp(-2)"
+  },
+  {
+    "id": "t4-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor discharges from $10\\ \\mathrm V$ through a resistor with time constant $\\tau=0.50\\ \\mathrm s$. Find the time in $\\mathrm s$ for its voltage to fall to $2.0\\ \\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.804719,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$2=10e^{-t/\\tau}$ gives $t=\\tau\\ln5\\approx0.80\\ \\mathrm s$.",
+    "hints": [
+      "Solve the exponential for t."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "0.5*math.log(10/2)"
+  },
+  {
+    "id": "t4-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor $C$ charges fully from zero to $V_0$ through a resistor. Write the energy dissipated in the resistor during the charging, in terms of $C$ and $V_0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "C*V0^2/2",
+      "vars": [
+        "C",
+        "V0"
+      ],
+      "also": [
+        "V0^2*C/2",
+        "0.5*C*V0^2"
+      ]
+    },
+    "solution": "The source supplies $CV_0^2$, half stored and half dissipated, so the resistor gets $\\frac12CV_0^2$.",
+    "hints": [
+      "The source does twice the energy the capacitor stores."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In an RC circuit charging from zero, after one time constant the capacitor's charge is what fraction of its final charge?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$0.37$",
+        "$0.63$",
+        "$0.50$",
+        "$0.86$"
+      ],
+      "correct": 1,
+      "why": [
+        "the fraction still uncharged, $e^{-1}$, not the charge",
+        "",
+        "half-life applied with ln 2 but the wrong factor",
+        "uses two time constants instead of one"
+      ]
+    },
+    "solution": "$Q(\\tau)=Q_0(1-e^{-1})\\approx0.63\\,Q_0$.",
+    "hints": [
+      "Find the fraction after one time constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about an RC charging circuit are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The capacitor voltage cannot change instantly",
+        "The resistor current is largest at the start",
+        "At steady state no current flows",
+        "The capacitor voltage jumps to the source voltage when the switch closes"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Voltage is continuous. Current starts at $V_0/R$ and decays to zero. Capacitor current can change, but it cannot jump to any value.",
+    "hints": [
+      "Voltage is continuous across a capacitor."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the Drude model, the relaxation time $\\tau$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The average time between electron collisions",
+        "The time for an electron to cross the wire",
+        "The period of the applied AC field",
+        "The time for an electron to reach thermal speed"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "confuses transit time with collision time",
+        "unrelated to a DC field",
+        "conflates thermal speed with collision time"
+      ]
+    },
+    "solution": "$\\tau$ is the mean free time between collisions.",
+    "hints": [
+      "Collisions, not transit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The Drude conductivity is proportional to which set of quantities?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n\\,\\tau/m$",
+        "$n\\,m/\\tau$",
+        "$\\tau\\,m/n$",
+        "$m/(n\\tau)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverts the collision time and mass",
+        "inverts the carrier density",
+        "inverts every factor"
+      ]
+    },
+    "solution": "$\\sigma=nq^2\\tau/m$: carrier density and collision time raise it, mass lowers it.",
+    "hints": [
+      "Longer collision time, higher conductivity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the Drude conductivity in terms of carrier density $n$, charge $q$, relaxation time $\\tau$ and mass $m$.",
+    "answer": {
+      "kind": "expression",
+      "value": "n*q^2*tau/m",
+      "vars": [
+        "n",
+        "q",
+        "tau",
+        "m"
+      ],
+      "also": [
+        "n*q*q*tau/m",
+        "q^2*n*tau/m"
+      ]
+    },
+    "solution": "$\\sigma=nq^2\\tau/m$.",
+    "hints": [
+      "Charge enters squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Copper has carrier density $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$ and relaxation time $\\tau=2.5\\times10^{-14}\\ \\mathrm s$. Take $q=1.60\\times10^{-19}\\ \\mathrm C$ and $m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$. Find the conductivity in $\\mathrm{S/m}$ using the Drude model.",
+    "answer": {
+      "kind": "numeric",
+      "value": 59714600.0,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$\\sigma=nq^2\\tau/m_e\\approx 6.0\\times10^{7}\\ \\mathrm{S/m}$.",
+    "hints": [
+      "Square the charge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "8.5e28*(1.60e-19)**2*2.5e-14/9.11e-31"
+  },
+  {
+    "id": "t4-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A wire carries uniform current density $J=1.0\\times10^{6}\\ \\mathrm{A/m^2}$. Its carriers have density $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$ and each has charge $q=1.60\\times10^{-19}\\ \\mathrm C$. Find the drift speed in $\\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7.35294e-05,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$J=nqv_d$, so $v_d=J/(nq)\\approx 7.4\\times10^{-5}\\ \\mathrm{m/s}$.",
+    "hints": [
+      "Drift speed is current density over n q."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "1e6/(8.5e28*1.60e-19)"
+  },
+  {
+    "id": "t4-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Electrons in a metal have relaxation time $\\tau=2.5\\times10^{-14}\\ \\mathrm s$ and sit in a field $E=0.020\\ \\mathrm{V/m}$. Take $q=1.60\\times10^{-19}\\ \\mathrm C$ and $m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$. Find the drift speed in $\\mathrm{m/s}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8.78156e-05,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "Drude drift: $v_d=qE\\tau/m_e\\approx 8.8\\times10^{-5}\\ \\mathrm{m/s}$.",
+    "hints": [
+      "The drift speed grows with the field and the collision time."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "1.60e-19*0.020*2.5e-14/9.11e-31"
+  },
+  {
+    "id": "t4-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A uniform wire has length $L$ and cross-section $A$. Its carriers have density $n$, charge $q$, mass $m$ and relaxation time $\\tau$. Write its resistance from the Drude model, in terms of $L$, $A$, $n$, $q$, $\\tau$ and $m$.",
+    "answer": {
+      "kind": "expression",
+      "value": "L*m/(n*q^2*tau*A)",
+      "vars": [
+        "L",
+        "A",
+        "n",
+        "q",
+        "tau",
+        "m"
+      ],
+      "also": [
+        "m*L/(A*n*q^2*tau)",
+        "L/(A*(n*q^2*tau/m))"
+      ]
+    },
+    "solution": "Drude: $\\sigma=nq^2\\tau/m$. Then $R=\\dfrac{L}{\\sigma A}=\\dfrac{mL}{nq^2\\tau A}$.",
+    "hints": [
+      "Resistance grows with length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A metal is heated. The lattice vibrates more and electrons scatter more often. Which is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\tau$ falls and $\\sigma$ falls",
+        "$\\tau$ rises and $\\sigma$ rises",
+        "$\\tau$ falls and $\\sigma$ rises",
+        "$\\tau$ is unchanged and $\\sigma$ falls"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "assumes more motion means fewer collisions",
+        "reverses the effect of tau on sigma",
+        "moves the effect to density, which stays fixed"
+      ]
+    },
+    "solution": "More scattering shortens $\\tau$, which lowers $\\sigma$ and raises resistance.",
+    "hints": [
+      "Scattering is the resistance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.drude"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements are assumptions or consequences of the Drude model? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Electrons collide randomly with the lattice and lose their directed momentum",
+        "Between collisions, electrons accelerate under the applied field",
+        "The drift speed is much smaller than the typical thermal speed",
+        "The drift speed is comparable to the speed of light"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Random collisions, free acceleration between them, and small drift versus thermal speed. Drift speeds are far below light speed.",
+    "hints": [
+      "Drift is a small bias on large random motion."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The energy stored in a capacitor with charge $Q$ and voltage $V$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{1}{2}QV$",
+        "$QV$",
+        "$\\frac{1}{2}Q^2V$",
+        "$Q^2/C$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgets the factor one half from the linear ramp",
+        "unit inconsistency",
+        "missing factor 2 in the denominator, giving twice the energy"
+      ]
+    },
+    "solution": "$U=\\frac12QV=\\frac12CV^2=Q^2/(2C)$.",
+    "hints": [
+      "Average voltage over the charging ramp."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The energy density of an electric field of magnitude $E$ in vacuum is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{1}{2}\\varepsilon_0 E^2$",
+        "$\\varepsilon_0 E$",
+        "$\\frac{1}{2}\\varepsilon_0 E$",
+        "$\\frac{1}{2}\\varepsilon_0^2 E^2$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "linear in E, which is wrong",
+        "missing the square on E",
+        "squares the permittivity instead of the field"
+      ]
+    },
+    "solution": "Energy density is $u=\\frac12\\varepsilon_0E^2$.",
+    "hints": [
+      "Quadratic in the field."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the energy density of an electric field in a dielectric of constant $\\kappa$, in terms of $\\kappa$, $\\varepsilon_0$ and the field magnitude. Write the field magnitude as Emag, $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "kappa*eps0*Emag^2/2",
+      "vars": [
+        "kappa",
+        "eps0",
+        "Emag"
+      ],
+      "also": [
+        "0.5*kappa*eps0*Emag^2",
+        "kappa*eps0*Emag*Emag/2"
+      ]
+    },
+    "solution": "$u=\\frac12\\varepsilon E^2$ with $\\varepsilon=\\kappa\\varepsilon_0$.",
+    "hints": [
+      "Use the dielectric's permittivity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A $4.0\\ \\mu\\mathrm F$ capacitor is charged to $50\\ \\mathrm V$ and disconnected. Find the stored energy in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.005,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$U=\\frac12CV^2=\\frac12(4.0\\times10^{-6})(2500)=5.0\\times10^{-3}\\ \\mathrm J$.",
+    "hints": [
+      "Use the voltage formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "0.5*4e-6*50**2"
+  },
+  {
+    "id": "t4-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In vacuum, the electric field has magnitude $2.0\\times10^{5}\\ \\mathrm{V/m}$. Take $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the energy density in $\\mathrm{J/m^3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.177,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$u=\\frac12\\varepsilon_0E^2=\\frac12(8.85\\times10^{-12})(4.0\\times10^{10})\\approx 0.18\\ \\mathrm{J/m^3}$.",
+    "hints": [
+      "Energy density is quadratic in E."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "0.5*8.85e-12*(2e5)**2"
+  },
+  {
+    "id": "t4-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An isolated capacitor has $C=2.0\\ \\mu\\mathrm F$ and is charged to $10\\ \\mathrm V$. Its plates are slowly pulled apart, doubling the gap, with charge held fixed. Find the work done by the external agent in $\\mathrm J$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.0001,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "solution": "$Q=2.0\\times10^{-5}\\ \\mathrm C$. $U$ goes from $1.0\\times10^{-4}$ to $2.0\\times10^{-4}\\ \\mathrm J$, so the work is $1.0\\times10^{-4}\\ \\mathrm J$.",
+    "hints": [
+      "Fixed Q means C halves and U doubles."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": "(2e-5)**2/(2*1e-6)-(2e-5)**2/(2*2e-6)"
+  },
+  {
+    "id": "t4-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Charge $Q$ is spread uniformly over the surface of a sphere of radius $R$ in vacuum. Write the energy needed to assemble this charge from infinity, in terms of $Q$, $R$ and $\\varepsilon_0$. Write $\\varepsilon_0$ as eps0.",
+    "answer": {
+      "kind": "expression",
+      "value": "Q^2/(8*pi*eps0*R)",
+      "vars": [
+        "Q",
+        "R",
+        "eps0"
+      ],
+      "also": [
+        "Q^2/(8*pi*R*eps0)",
+        "(Q^2/R)/(8*pi*eps0)"
+      ]
+    },
+    "solution": "Assembly energy is $\\frac12QV=\\frac12Q\\cdot\\frac{Q}{4\\pi\\varepsilon_0R}=\\frac{Q^2}{8\\pi\\varepsilon_0R}$.",
+    "hints": [
+      "Half of Q times the final potential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    },
+    "check": null
+  },
+  {
+    "id": "t4-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A capacitor is charged, then disconnected from its battery. Its gap is changed so that $C$ halves with charge fixed. What happens to its stored energy?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It doubles",
+        "It halves",
+        "It is unchanged",
+        "It quadruples"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "assumes $\\frac12CV^2$ with voltage fixed",
+        "ignores that U depends on C at fixed Q",
+        "squares the factor 2 instead of the ratio"
+      ]
+    },
+    "solution": "At fixed $Q$, $U=Q^2/(2C)$. Halving $C$ doubles $U$.",
+    "hints": [
+      "Which quantity is fixed?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about electrostatic energy are true? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Energy is stored in the electric field itself",
+        "A capacitor with charge $Q$ and capacitance $C$ stores $Q^2/(2C)$",
+        "Energy density in vacuum is $\\frac12\\varepsilon_0E^2$",
+        "Pulling the plates apart at fixed charge reduces the stored energy"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Energy lives in the field. $Q^2/(2C)$ and the density formula are correct. At fixed Q, separating plates raises U.",
+    "hints": [
+      "Pulling plates apart against attraction takes work."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

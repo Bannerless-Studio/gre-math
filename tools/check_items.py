@@ -2,13 +2,14 @@
 """Check gre-math pack items. Stdlib only. Run: python3 -I tools/check_items.py [pack_dir]
 
 Numeric items: the `check` expression is evaluated independently and must equal
-`answer.value` within `answer.tol`. mcq items: 4 distinct options, valid index.
+`answer.value` within max(`answer.tol`, `answer.rel` * |value|); rel is 0 to 0.1. mcq items: 4 distinct options, valid index.
 Also cross-checks tags/level against techniques.json and prints per-technique counts.
 """
 import json
 import math
 import os
 import re
+import shutil
 import sys
 from collections import Counter, defaultdict
 from fractions import Fraction
@@ -62,6 +63,12 @@ def check_numeric(item, errors):
         elif Fraction(value.numerator, value.denominator) != value or str(value) != ans["value"]:
             errors.append(f"fraction value {ans['value']!r} not in lowest terms")
     tol = Fraction(str(ans.get("tol", 0)))
+    rel = ans.get("rel", 0)
+    if isinstance(rel, bool) or not isinstance(rel, (int, float)) or not 0 <= rel <= 0.1:
+        errors.append(f"rel {rel!r} must be a number from 0 to 0.1")
+        rel = 0
+    # Tolerance is max(tol, rel*|value|), as in engine/answer.js checkNumeric.
+    eff_tol = max(tol, Fraction(str(rel)) * abs(value))
     try:
         scope = {"__builtins__": {}}
         scope.update(ENV)  # globals, so generator expressions and lambdas can see names
@@ -70,11 +77,11 @@ def check_numeric(item, errors):
         errors.append(f"check raised {type(e).__name__}: {e}")
         return None
     if isinstance(got, float):
-        if abs(got - float(value)) > float(tol) + 1e-9:
-            errors.append(f"check gives {got!r}, value {ans['value']!r}")
+        if abs(got - float(value)) > float(eff_tol) + 1e-9 * abs(float(value)):
+            errors.append(f"check gives {got!r}, value {ans['value']!r}, tol {ans.get('tol', 0)}, rel {rel}")
     elif isinstance(got, (int, Fraction)):
-        if abs(Fraction(got) - value) > tol:
-            errors.append(f"check gives {got!r}, value {ans['value']!r}, tol {ans.get('tol', 0)}")
+        if abs(Fraction(got) - value) > eff_tol:
+            errors.append(f"check gives {got!r}, value {ans['value']!r}, tol {ans.get('tol', 0)}, rel {rel}")
     else:
         errors.append(f"check returned {type(got).__name__}, expected number")
     return got
@@ -144,7 +151,7 @@ def check_full_mcq(item, errors):
         errors.append(f"check gives {got!r}, correct option is {val}")
 
 
-NODE = os.environ.get("NODE", "/Users/ishmum/.nvm/versions/node/v22.22.2/bin/node")
+NODE = os.environ.get("NODE") or shutil.which("node") or "node"   # set NODE to pin a binary
 _EXPR_QUEUE = []
 
 

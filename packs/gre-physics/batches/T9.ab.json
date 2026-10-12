@@ -1,0 +1,5350 @@
+[
+ {
+  "id": "t9-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the energy of the hydrogen level with principal quantum number $n$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$E_n=-13.6/n$ eV",
+    "$E_n=-13.6/n^2$ eV",
+    "$E_n=-13.6\\,n^2$ eV",
+    "$E_n=+13.6/n^2$ eV"
+   ],
+   "correct": 1,
+   "why": [
+    "drops the square on $n$",
+    "",
+    "inverts the dependence on $n$",
+    "gives the wrong sign for a bound state"
+   ]
+  },
+  "solution": "Bound levels have $E_n=-13.6\\ \\mathrm{eV}/n^2$. They are negative and shrink in magnitude as $n$ grows.",
+  "hints": [
+   "Bound states have negative energy that rises toward zero as $n$ grows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the energy in eV of a photon emitted when a hydrogen electron falls from level $n$ to level $2$, for $n>2$, in terms of $n$. Use $13.6$ eV as the ground-state binding energy.",
+  "answer": {
+   "kind": "expression",
+   "value": "13.6*(1/4-1/n^2)",
+   "vars": [
+    "n"
+   ],
+   "domain": {
+    "n": [
+     3,
+     8
+    ]
+   },
+   "also": [
+    "13.6/4-13.6/n^2",
+    "3.4-13.6*n^(-2)"
+   ]
+  },
+  "check": null,
+  "solution": "$E=13.6\\,(1/2^2-1/n^2)$ eV. The lower level sets the first term.",
+  "hints": [
+   "The lower level is $n=2$, so its term is $1/2^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many electron states have principal quantum number $n$ in hydrogen, ignoring spin?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n$",
+    "$n^2$",
+    "$2n^2$",
+    "$2n$"
+   ],
+   "correct": 1,
+   "why": [
+    "counts only the $l=0$ states",
+    "",
+    "counts spin as well, but the prompt ignores spin",
+    "counts one $m_s$ value per $n$ and drops $l$"
+   ]
+  },
+  "solution": "For each $l=0,\\dots,n-1$ there are $2l+1$ values of $m_l$. The sum is $n^2$.",
+  "hints": [
+   "Add the $2l+1$ states for each allowed $l$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0004",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A one-electron ion with nuclear charge $Z=2$ (He$^+$) sits in its $n=2$ level. Hydrogen's ground-state binding energy is $13.6$ eV, and binding energy scales as $Z^2/n^2$. Find the energy in eV needed to remove the electron from this level.",
+  "answer": {
+   "kind": "numeric",
+   "value": 13.6,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "13.6*2**2/2**2",
+  "solution": "The factor is $Z^2/n^2=4/4=1$, so the energy is $13.6$ eV.",
+  "hints": [
+   "Scale the hydrogen value by $Z^2$ and by $1/n^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the wavelength in nm of the Balmer-alpha line, from $n=3$ to $n=2$. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C, and ground-state binding energy $13.6$ eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 658.125,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1e9*6.63e-34*3.00e8/(13.6*(Fraction(1,4)-Fraction(1,9))*1.60e-19)",
+  "solution": "$E=13.6\\,(1/4-1/9)=1.89$ eV, so $\\lambda=hc/E\\approx658$ nm.",
+  "hints": [
+   "Get the photon energy first, then use $\\lambda=hc/E$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A hydrogen atom drops from $n=4$ to $n=2$. Find the photon energy in eV, using $13.6$ eV as the ground-state binding energy.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.55,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "13.6*(Fraction(1,4)-Fraction(1,16))",
+  "solution": "$E=13.6\\,(1/4-1/16)=13.6\\cdot3/16=2.55$ eV.",
+  "hints": [
+   "Use the lower level as $n_f$ in the $1/n_f^2$ term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In hydrogen, the Bohr radius of the $n=1$ orbit is $53$ pm. Find the radius in pm of the $n=2$ orbit of He$^+$, which has nuclear charge $Z=2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 106,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "53*2**2/2",
+  "solution": "The radius scales as $n^2/Z$, so $r=53\\cdot4/2=106$ pm.",
+  "hints": [
+   "A larger nuclear charge pulls the orbit inward."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write the energy in eV of the photon emitted when a hydrogen electron falls from level $n$ to level $m$, with $n>m$, in terms of $n$ and $m$. Use $13.6$ eV as the ground-state binding energy.",
+  "answer": {
+   "kind": "expression",
+   "value": "13.6*(1/m^2-1/n^2)",
+   "vars": [
+    "n",
+    "m"
+   ],
+   "domain": {
+    "n": [
+     3,
+     7
+    ],
+    "m": [
+     1,
+     2
+    ]
+   },
+   "also": [
+    "13.6/m^2-13.6/n^2",
+    "13.6*(m^(-2)-n^(-2))"
+   ]
+  },
+  "check": null,
+  "solution": "$E=13.6\\,(1/m^2-1/n^2)$ eV, from the level energies $-13.6/k^2$.",
+  "hints": [
+   "Subtract the upper level's energy magnitude from the lower one's."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all sets of quantum numbers $(n,\\,l,\\,m_l)$ allowed for an electron in hydrogen.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(3,\\,0,\\,0)$",
+    "$(3,\\,2,\\,-2)$",
+    "$(3,\\,3,\\,0)$",
+    "$(3,\\,1,\\,2)$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "$l$ runs from $0$ to $n-1$ and $|m_l|\\le l$. $(3,3,0)$ needs $l\\le2$, and $(3,1,2)$ needs $|m_l|\\le1$.",
+  "hints": [
+   "Check the range of $l$ and then the range of $m_l$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the allowed values of total angular momentum $j$ for an electron with orbital quantum number $l\\ge1$ and spin $s=\\tfrac12$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$j=l$ only",
+    "$j=l\\pm\\tfrac12$",
+    "$j=l\\pm1$",
+    "$j=\\tfrac12$ only"
+   ],
+   "correct": 1,
+   "why": [
+    "drops the spin contribution",
+    "",
+    "uses integer steps, which a half-integer spin cannot give",
+    "keeps only the spin and drops the orbital motion"
+   ]
+  },
+  "solution": "Spin $\\tfrac12$ adds to $l$ to give $j=l+\\tfrac12$ or $l-\\tfrac12$, two fine-structure levels for $l\\ge1$.",
+  "hints": [
+   "Spin adds or subtracts a half-integer."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many distinct values of $j$ does a $d$ electron ($l=2$) have? Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "$j=\\tfrac52$ and $j=\\tfrac32$, so two values.",
+  "hints": [
+   "Use $j=l\\pm\\tfrac12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which two angular momenta does the hyperfine interaction couple?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Orbit $L$ and spin $S$ of one electron",
+    "Nuclear spin $I$ and total electron angular momentum $J$",
+    "The spins of two different electrons",
+    "Nuclear spin $I$ and orbital $L$ only"
+   ],
+   "correct": 1,
+   "why": [
+    "that coupling gives fine structure, not hyperfine structure",
+    "",
+    "that is exchange physics, not hyperfine structure",
+    "omits the electron spin that the hyperfine term needs"
+   ]
+  },
+  "solution": "The nuclear magnetic moment interacts with the electron's total $\\vec J$. This splits each fine level into $F=I+J,\\dots,|I-J|$.",
+  "hints": [
+   "The nucleus carries a spin of its own."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An atom has nuclear spin $I=\\tfrac32$ and electron total angular momentum $J=\\tfrac32$. How many distinct hyperfine levels $F$ does its ground state have? Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2*min(Fraction(3,2),Fraction(3,2))+1",
+  "solution": "$F$ runs from $|I-J|=0$ to $I+J=3$ in integer steps: $0,1,2,3$. That is four levels.",
+  "hints": [
+   "List $F$ from $|I-J|$ up to $I+J$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The hydrogen 21 cm line comes from a hyperfine splitting of $5.87\\ \\mu\\mathrm{eV}$. Find its wavelength in cm. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C.",
+  "answer": {
+   "kind": "numeric",
+   "value": 21.177597955706986,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "100*6.63e-34*3.00e8/(5.87e-6*1.60e-19)",
+  "solution": "$\\lambda=hc/\\Delta E$ with $\\Delta E=5.87\\times10^{-6}\\times1.60\\times10^{-19}$ J, giving $0.212$ m $=21.2$ cm.",
+  "hints": [
+   "Convert the energy to joules before using $hc/\\Delta E$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Hyperfine levels obey the Landé interval rule: the energy gap between $F$ and $F-1$ is $AF$. With $A=2.0\\ \\mu\\mathrm{eV}$, find the gap between $F=3$ and $F=2$ in $\\mu$eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.0,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2.0*3",
+  "solution": "The gap uses the upper level's $F$: $A\\cdot3=6.0\\ \\mu$eV.",
+  "hints": [
+   "The rule multiplies $A$ by the upper $F$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In hydrogen's $n=2$ level, which fine-structure level lies higher in energy, $2p_{1/2}$ or $2p_{3/2}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2p_{1/2}$ lies higher",
+    "$2p_{3/2}$ lies higher",
+    "They are degenerate, since spin-orbit coupling vanishes in hydrogen",
+    "$2p_{3/2}$ lies lower, since larger $j$ means more binding"
+   ],
+   "correct": 1,
+   "why": [
+    "reverses the sign of the spin-orbit energy",
+    "",
+    "drops the spin-orbit term that splits the level",
+    "gets the order backwards with a false heuristic"
+   ]
+  },
+  "solution": "The spin-orbit energy is positive for $j=l+\\tfrac12$, so $2p_{3/2}$ lies above $2p_{1/2}$.",
+  "hints": [
+   "Compare $\\vec L\\cdot\\vec S$ for each value of $j$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The spin-orbit shift is $A\\,\\vec L\\cdot\\vec S$, with $\\vec L\\cdot\\vec S=\\tfrac12[j(j+1)-l(l+1)-s(s+1)]$. Write the shift $\\Delta E$ in terms of $A$, $j$ and $l$, with $s=\\tfrac12$.",
+  "answer": {
+   "kind": "expression",
+   "value": "A/2*(j*(j+1)-l*(l+1)-3/4)",
+   "vars": [
+    "A",
+    "j",
+    "l"
+   ],
+   "domain": {
+    "A": [
+     0.5,
+     2
+    ],
+    "j": [
+     0.5,
+     3
+    ],
+    "l": [
+     1,
+     3
+    ]
+   },
+   "also": [
+    "A*(j*(j+1)-l*(l+1)-3/4)/2",
+    "A/2*(j^2+j-l^2-l-3/4)"
+   ]
+  },
+  "check": null,
+  "solution": "With $s=\\tfrac12$, $s(s+1)=\\tfrac34$, so $\\Delta E=\\tfrac{A}{2}[j(j+1)-l(l+1)-\\tfrac34]$.",
+  "hints": [
+   "Substitute $s=\\tfrac12$ into the bracket first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For an atom with nuclear spin $I=1$ and electron $J=\\tfrac12$, select all allowed values of the total $F$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$F=\\tfrac12$",
+    "$F=1$",
+    "$F=\\tfrac32$",
+    "$F=2$",
+    "$F=0$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "$F$ runs from $|I-J|=\\tfrac12$ to $I+J=\\tfrac32$ in integer steps. So $F=\\tfrac12$ and $F=\\tfrac32$ are the only values.",
+  "hints": [
+   "Step from $|I-J|$ to $I+J$ in integer steps."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the Zeeman energy shift of a level with Landé factor $g_J$ and projection $m_J$ in a magnetic field $B$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mu_B\\,g_J\\,m_J\\,B$",
+    "$\\mu_B\\,m_J\\,B$",
+    "$\\mu_B\\,g_J\\,B$",
+    "$\\mu_B\\,g_J\\,m_J^{2}B$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "drops the Landé factor",
+    "drops the projection, so every level shifts equally",
+    "squares the projection, which loses its sign"
+   ]
+  },
+  "solution": "The shift is $\\Delta E=g_Jm_J\\mu_BB$. It is linear in $m_J$, so the sign of $m_J$ sets the direction.",
+  "hints": [
+   "Start from the magnetic moment dotted into the field."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Is the Stark shift of the hydrogen ground state ($n=1$) linear or quadratic in the electric field?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Linear in $E$, because the ground state has a permanent dipole",
+    "Quadratic in $E$, because the field induces a dipole",
+    "Zero, because the level is not degenerate",
+    "Linear in $E$, with a sign set by $m_l$"
+   ],
+   "correct": 1,
+   "why": [
+    "assumes a permanent dipole, which exists only in degenerate-pair states",
+    "",
+    "assumes a non-degenerate level cannot shift at all, but second order still acts",
+    "takes the linear rule, which needs a degenerate pair, and adds a sign from $m_l$"
+   ]
+  },
+  "solution": "The ground state has no degenerate partner, so the first-order shift vanishes and the shift is quadratic in $E$.",
+  "hints": [
+   "Linear Stark splitting needs a degenerate pair of opposite parity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the Zeeman energy shift $\\Delta E$ in terms of the Bohr magneton $\\mu_B$ (muB), the Landé factor $g$, the projection $m$ and the field $B$.",
+  "answer": {
+   "kind": "expression",
+   "value": "muB*g*m*B",
+   "vars": [
+    "muB",
+    "g",
+    "m",
+    "B"
+   ],
+   "domain": {
+    "muB": [
+     0.5,
+     2
+    ],
+    "g": [
+     0.5,
+     2
+    ],
+    "m": [
+     -2,
+     2
+    ],
+    "B": [
+     0.5,
+     2
+    ]
+   },
+   "also": [
+    "g*m*muB*B",
+    "muB*B*g*m"
+   ]
+  },
+  "check": null,
+  "solution": "$\\Delta E=g\\,m\\,\\mu_B B$.",
+  "hints": [
+   "Multiply the three factors."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A free electron ($g=2$) sits in a field of $0.50$ T. Find the energy difference between its $m_s=+\\tfrac12$ and $m_s=-\\tfrac12$ states in $\\mu$eV. Use $\\mu_B=57.9\\ \\mu$eV/T.",
+  "answer": {
+   "kind": "numeric",
+   "value": 57.9,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*57.9*0.5",
+  "solution": "$\\Delta E=g\\mu_B B=2\\times57.9\\times0.50=57.9\\ \\mu$eV, since $m_s$ changes by $1$.",
+  "hints": [
+   "The two projections differ by one unit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the Landé factor $g_J$ for a level with $L=1$, $S=\\tfrac12$, $J=\\tfrac12$. Use $g_s=2$ and give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6666666666666666,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1+(Fraction(3,4)+Fraction(3,4)-2)/(2*Fraction(3,4))",
+  "solution": "$g_J=1+\\dfrac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}=1-\\tfrac13=\\tfrac23$.",
+  "hints": [
+   "Compute $J(J+1)$, $S(S+1)$ and $L(L+1)$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A level with $g_J=\\tfrac23$ and $m_J=-\\tfrac12$ sits in a field of $1.0$ T. Using $\\mu_B=57.9\\ \\mu$eV/T, find its Zeeman shift in $\\mu$eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": -19.3,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "Fraction(2,3)*Fraction(-1,2)*57.9*1.0",
+  "solution": "$\\Delta E=g_Jm_J\\mu_BB=\\tfrac23\\cdot(-\\tfrac12)\\cdot57.9\\cdot1.0=-19.3\\ \\mu$eV.",
+  "hints": [
+   "The sign of $m_J$ carries through to the shift."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $^2P_{3/2}$ level ($J=\\tfrac32$) is placed in a weak field. How many $m_J$ sublevels appear?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "6"
+   ],
+   "correct": 2,
+   "why": [
+    "counts only the two extremes $m_J=\\pm\\tfrac32$",
+    "uses $2L+1$ from the orbital motion, not $2J+1$",
+    "",
+    "multiplies $(2L+1)(2S+1)$, ignoring that $J$ fixes the sublevels"
+   ]
+  },
+  "solution": "A level with total $J$ has $2J+1$ sublevels, here $2(\\tfrac32)+1=4$.",
+  "hints": [
+   "Count $m_J$ from $-J$ to $+J$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A level has total $j$ and Landé factor $g$. Write the energy difference between its $m_J=+j$ and $m_J=-j$ sublevels in a field $B$, in terms of $g$, $j$, $\\mu_B$ (muB) and $B$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*g*j*muB*B",
+   "vars": [
+    "g",
+    "j",
+    "muB",
+    "B"
+   ],
+   "domain": {
+    "g": [
+     0.5,
+     2
+    ],
+    "j": [
+     0.5,
+     3
+    ],
+    "muB": [
+     0.5,
+     2
+    ],
+    "B": [
+     0.5,
+     2
+    ]
+   },
+   "also": [
+    "2*j*g*muB*B",
+    "g*muB*B*(2*j)"
+   ]
+  },
+  "check": null,
+  "solution": "$\\Delta E=g\\mu_B B\\,[\\,j-(-j)\\,]=2gj\\mu_B B$.",
+  "hints": [
+   "The two projections are $+j$ and $-j$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about the normal Zeeman effect.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "It splits a spin-zero line into three components",
+    "Adjacent components are separated by $\\mu_B B$",
+    "The spacing grows with the principal quantum number $n$",
+    "It appears only in weak fields where spin-orbit coupling dominates"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Normal Zeeman has $g=1$, so a singlet line splits into three by $\\Delta m_l=0,\\pm1$, spaced $\\mu_B B$. The weak-field spin-orbit case is anomalous.",
+  "hints": [
+   "Normal Zeeman has $g=1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the electric-dipole selection rule for the orbital quantum number $l$ of an atomic transition.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\Delta l=0$ only",
+    "$\\Delta l=\\pm1$",
+    "$\\Delta l=\\pm2$",
+    "$\\Delta l$ can take any value"
+   ],
+   "correct": 1,
+   "why": [
+    "treats $l$ as conserved, which a dipole photon does not allow",
+    "",
+    "is the electric quadrupole rule, not the dipole rule",
+    "drops the rule, but dipole transitions are restricted"
+   ]
+  },
+  "solution": "The photon carries one unit of angular momentum, so electric-dipole transitions obey $\\Delta l=\\pm1$.",
+  "hints": [
+   "A dipole photon has spin 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the electric-dipole rule on total angular momentum $j$ for a transition from $j_i$ to $j_f$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\Delta j=0$ only",
+    "$\\Delta j=0,\\pm1$, except $0\\to0$",
+    "$\\Delta j=\\pm2$",
+    "$\\Delta j$ is unrestricted"
+   ],
+   "correct": 1,
+   "why": [
+    "forbids the $\\Delta j=\\pm1$ transitions",
+    "",
+    "is the quadrupole rule",
+    "ignores the rule"
+   ]
+  },
+  "solution": "The photon carries $j=1$, so $|\\Delta j|\\le1$, and the $0\\to0$ transition is forbidden.",
+  "hints": [
+   "The photon adds at most one unit of $j$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The Lyman series of hydrogen ends on which lower level $n_f$? Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Lyman lines end at $n_f=1$; Balmer at $2$; Paschen at $3$.",
+  "hints": [
+   "Lyman is the ultraviolet series."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0031",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the wavelength in nm of the allowed $3p\\to1s$ transition (Lyman-$\\beta$). Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C, and ground-state binding energy $13.6$ eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 102.83203125000001,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1e9*6.63e-34*3.00e8/(13.6*(1-Fraction(1,9))*1.60e-19)",
+  "solution": "$E=13.6\\,(1-\\tfrac19)=12.09$ eV, so $\\lambda=hc/E\\approx103$ nm.",
+  "hints": [
+   "Lyman lines all end at $n=1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all transitions that are electric-dipole allowed.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$2s\\to1s$",
+    "$2p\\to1s$",
+    "$3s\\to2s$",
+    "$3d\\to2p$"
+   ],
+   "correct": [
+    1,
+    3
+   ]
+  },
+  "solution": "$2s\\to1s$ and $3s\\to2s$ have $\\Delta l=0$, so they are forbidden. $2p\\to1s$ and $3d\\to2p$ have $\\Delta l=-1$, so they are allowed.",
+  "hints": [
+   "Check $\\Delta l$ for each transition."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the wavelength in nm of the allowed $2p\\to1s$ Lyman-$\\alpha$ line. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C, and ground-state binding energy $13.6$ eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 121.875,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1e9*6.63e-34*3.00e8/(13.6*Fraction(3,4)*1.60e-19)",
+  "solution": "$E=13.6\\,(1-\\tfrac14)=10.2$ eV, so $\\lambda=hc/E\\approx122$ nm.",
+  "hints": [
+   "Only $n=1$ and $n=2$ enter this transition."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A hydrogen atom emits a photon with $\\Delta l=2$. Which statement is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Forbidden for electric dipole, but allowed as an electric quadrupole",
+    "Allowed for electric dipole, since $|\\Delta l|\\ge1$",
+    "Forbidden for every multipole",
+    "Allowed for electric dipole, since $\\Delta l$ is even"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reads the rule as $|\\Delta l|\\ge1$ instead of exactly $1$",
+    "forgets that a quadrupole photon carries two units of angular momentum",
+    "invents an even-$\\Delta l$ rule"
+   ]
+  },
+  "solution": "Electric dipole needs $|\\Delta l|=1$. A quadrupole photon can carry $|\\Delta l|=2$, so this line is quadrupole.",
+  "hints": [
+   "Ask which multipole a $\\Delta l=2$ photon can be."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write the wavenumber $1/\\lambda$ of a photon from level $n$ down to level $m$, with $n>m$, in terms of the Rydberg constant $R$ and the levels $n$ and $m$.",
+  "answer": {
+   "kind": "expression",
+   "value": "R*(1/m^2-1/n^2)",
+   "vars": [
+    "R",
+    "n",
+    "m"
+   ],
+   "domain": {
+    "R": [
+     0.5,
+     2
+    ],
+    "n": [
+     3,
+     7
+    ],
+    "m": [
+     1,
+     2
+    ]
+   },
+   "also": [
+    "R/m^2-R/n^2",
+    "R*(m^(-2)-n^(-2))"
+   ]
+  },
+  "check": null,
+  "solution": "$1/\\lambda=R\\,(1/m^2-1/n^2)$.",
+  "hints": [
+   "The lower level gives the larger term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.selection"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An atom starts in a $3p$ state. Its decays are electric-dipole allowed only. Level $2s$ can decay to $1s$ only by a forbidden transition. How many different spectral lines can this decay produce? Ignore fine structure. Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "From $3p$ the allowed decays are to $2s$ and to $1s$, both with $\\Delta l=-1$. From $2s$ no dipole decay exists, so there are two lines.",
+  "hints": [
+   "Ask which decay from $2s$ is allowed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State Hund's first rule for the ground term of an atom.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Minimize the total spin $S$, so electrons pair up early",
+    "Maximize the total spin $S$ allowed by the Pauli principle",
+    "Maximize the orbital $L$ before $S$",
+    "Maximize $J$ within every subshell"
+   ],
+   "correct": 1,
+   "why": [
+    "flips the sign: pairing is not what the rule favours",
+    "",
+    "is Hund's second rule, which comes after spin",
+    "is Hund's third rule and applies only past half filling"
+   ]
+  },
+  "solution": "Hund's first rule maximizes $S$ within a subshell, so electrons occupy different orbitals with parallel spins first.",
+  "hints": [
+   "Electrons in different orbitals lower the Coulomb repulsion."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the maximum number of electrons in the shell with $n=3$. Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 18,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2*3**2",
+  "solution": "The shell holds $2n^2=18$ electrons.",
+  "hints": [
+   "Count two spin states in each orbital."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the effective nuclear charge $Z_{\\mathrm{eff}}$ felt by an electron, in terms of the nuclear charge $Z$ and the screening constant $\\sigma$.",
+  "answer": {
+   "kind": "expression",
+   "value": "Z-sigma",
+   "vars": [
+    "Z",
+    "sigma"
+   ],
+   "domain": {
+    "Z": [
+     3,
+     30
+    ],
+    "sigma": [
+     0,
+     3
+    ]
+   },
+   "also": [
+    "-sigma+Z",
+    "Z+(-sigma)"
+   ]
+  },
+  "check": null,
+  "solution": "Screening reduces the pull, so $Z_{\\mathrm{eff}}=Z-\\sigma$.",
+  "hints": [
+   "Inner electrons subtract from $Z$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the number of unpaired electrons in the ground state of oxygen, with configuration $1s^2\\,2s^2\\,2p^4$. Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2*3-4",
+  "solution": "Hund's rule fills the three $2p$ orbitals singly first. The fourth electron pairs with one of them, leaving two unpaired.",
+  "hints": [
+   "Fill each $p$ orbital once before pairing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Sodium has $Z=11$ with configuration $1s^2\\,2s^2\\,2p^6\\,3s^1$. In Slater's rules, each electron in the shell just below screens $0.85$ and each electron in deeper shells screens $1.00$. Find $Z_{\\mathrm{eff}}$ for the $3s$ electron.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.2,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "11-(2*1.00+8*0.85)",
+  "solution": "$\\sigma=2(1.00)+8(0.85)=8.8$, so $Z_{\\mathrm{eff}}=11-8.8=2.2$.",
+  "hints": [
+   "Sum the screening over every core electron."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "By Hund's rules, which arrangement is the ground state of the two $2p$ electrons in carbon?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Both in one orbital, with opposite spins",
+    "One electron in each of two different orbitals, with parallel spins",
+    "One electron in each of two different orbitals, with opposite spins",
+    "Both in one orbital, with parallel spins"
+   ],
+   "correct": 1,
+   "why": [
+    "pairs the electrons, which raises the Coulomb repulsion",
+    "",
+    "minimizes spin and breaks Hund's first rule",
+    "breaks the Pauli principle"
+   ]
+  },
+  "solution": "Hund's first rule maximizes $S=1$, so the electrons occupy different $p$ orbitals with parallel spins.",
+  "hints": [
+   "Spread electrons across orbitals first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the maximum number of electrons in a subshell with orbital quantum number $l$, in terms of $l$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*(2*l+1)",
+   "vars": [
+    "l"
+   ],
+   "domain": {
+    "l": [
+     0,
+     4
+    ]
+   },
+   "also": [
+    "4*l+2",
+    "2*(l*2+1)"
+   ]
+  },
+  "check": null,
+  "solution": "There are $2l+1$ orbitals and each holds two electrons, so $2(2l+1)$.",
+  "hints": [
+   "Each orbital holds two electrons."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all sets of quantum numbers $(n,\\,l,\\,m_l,\\,m_s)$ that can be occupied by different electrons in one atom.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(2,1,0,+\\tfrac12)$ and $(2,1,0,-\\tfrac12)$",
+    "$(2,1,0,+\\tfrac12)$ and $(2,1,0,+\\tfrac12)$",
+    "$(2,1,1,+\\tfrac12)$ and $(2,1,0,+\\tfrac12)$",
+    "$(2,0,0,+\\tfrac12)$ and $(2,1,0,-\\tfrac12)$"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "solution": "Pauli forbids two electrons with all four numbers identical. Only the repeated set is forbidden; every other pair differs in some number.",
+  "hints": [
+   "Look for two identical sets of four numbers."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many electrons can occupy the $3d$ and $4s$ subshells together? Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2*(2*2+1)+2*1",
+  "solution": "$3d$ holds $2(2\\cdot2+1)=10$ and $4s$ holds $2$, for a total of $12$.",
+  "hints": [
+   "Use $2(2l+1)$ for each subshell."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the Duane–Hunt law for the short-wavelength limit of bremsstrahlung from a tube at voltage $V$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\lambda_{\\min}=qV/(hc)$",
+    "$\\lambda_{\\min}=hc/(qV)$",
+    "$\\lambda_{\\min}=2hc/(qV)$",
+    "$\\lambda_{\\min}=hc\\,qV$"
+   ],
+   "correct": 1,
+   "why": [
+    "inverts the ratio",
+    "",
+    "adds a factor of 2 that belongs to kinetic energy, not photons",
+    "drops the division by the photon energy"
+   ]
+  },
+  "solution": "The highest photon energy is $qV$, so $\\lambda_{\\min}=hc/(qV)$.",
+  "hints": [
+   "The largest photon energy equals the kinetic energy gained."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the $K_\\alpha$ photon energy in eV for an element of atomic number $Z$, using Moseley's law with the hydrogen-like energy $13.6$ eV and screening $1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "0.75*13.6*(Z-1)^2",
+   "vars": [
+    "Z"
+   ],
+   "domain": {
+    "Z": [
+     10,
+     80
+    ]
+   },
+   "also": [
+    "10.2*(Z-1)^2",
+    "(Z-1)^2*10.2"
+   ]
+  },
+  "check": null,
+  "solution": "$K_\\alpha$ is an $L\\to K$ transition: $E=\\tfrac34\\cdot13.6\\,(Z-1)^2$ eV.",
+  "hints": [
+   "Replace $Z$ by $Z-1$ and use the $n=1$ to $n=2$ energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which transition produces the characteristic $K_\\alpha$ X-ray line?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$L\\to K$, from $n=2$ to $n=1$",
+    "$M\\to K$, from $n=3$ to $n=1$",
+    "$L\\to M$, from $n=2$ to $n=3$",
+    "$M\\to L$, from $n=3$ to $n=2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is $K_\\beta$, a weaker line from the next level",
+    "is an absorption step, not an emitted line",
+    "emits between two outer shells, not into K"
+   ]
+  },
+  "solution": "The $K_\\alpha$ line is the $n=2$ to $n=1$ transition, the strongest K line.",
+  "hints": [
+   "The alpha line is the first line of a series."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An X-ray tube runs at $V=30$ kV. Find the shortest bremsstrahlung wavelength in pm. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C.",
+  "answer": {
+   "kind": "numeric",
+   "value": 41.43750000000001,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1e12*6.63e-34*3.00e8/(1.60e-19*30000)",
+  "solution": "$\\lambda_{\\min}=hc/(qV)=4.14\\times10^{-11}$ m $=41.4$ pm.",
+  "hints": [
+   "At the cutoff the photon energy equals $qV$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using Moseley's form $E=\\tfrac34\\cdot13.6\\,(Z-1)^2$ eV for the $K_\\alpha$ energy, find the $K_\\alpha$ energy of copper ($Z=29$) in keV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7.9967999999999995,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "0.75*13.6*(29-1)**2/1000",
+  "solution": "$E=10.2\\,(28)^2=7.99\\times10^3$ eV $\\approx8.00$ keV.",
+  "hints": [
+   "Use $Z-1=28$, not $Z=29$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using Moseley's law, find the ratio of $K_\\alpha$ energies $E(Z=41)/E(Z=21)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.0,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "((41-1)/(21-1))**2",
+  "solution": "$E\\propto(Z-1)^2$, so the ratio is $(40/20)^2=4$.",
+  "hints": [
+   "Moseley's energy scales with the square of $Z-1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "An X-ray tube runs at $50$ kV. What is the largest photon energy the tube emits?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "25 keV",
+    "50 keV",
+    "100 keV",
+    "0.05 keV"
+   ],
+   "correct": 1,
+   "why": [
+    "halves the voltage, as if only half the energy transfers",
+    "",
+    "doubles the voltage by counting the energy twice",
+    "converts kV to keV with the wrong power of ten"
+   ]
+  },
+  "solution": "The top photon energy equals the electron's kinetic energy $qV$, here $50$ keV.",
+  "hints": [
+   "The electron gains $qV$ crossing the tube gap."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A tube runs at voltage $V$. Write the highest photon frequency $f_{\\max}$ it emits, in terms of Planck's constant $h$, the elementary charge $q$ and $V$.",
+  "answer": {
+   "kind": "expression",
+   "value": "q*V/h",
+   "vars": [
+    "q",
+    "V",
+    "h"
+   ],
+   "domain": {
+    "q": [
+     0.5,
+     2
+    ],
+    "V": [
+     1,
+     5
+    ],
+    "h": [
+     0.5,
+     2
+    ]
+   },
+   "also": [
+    "V*q/h",
+    "q*V*h^(-1)",
+    "q*V/h*1"
+   ]
+  },
+  "check": null,
+  "solution": "The most energetic photon takes the electron's full energy: $hf_{\\max}=qV$, so $f_{\\max}=qV/h$.",
+  "hints": [
+   "Set the photon energy $hf$ equal to the electron's energy $qV$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about characteristic X-ray lines and bremsstrahlung.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Characteristic line energies depend on the target element",
+    "Characteristic lines appear only above the Duane–Hunt cutoff",
+    "$K_\\alpha$ comes from an $L\\to K$ transition",
+    "The continuous spectrum is fixed by the target element"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Line energies are set by atomic levels of the target. The continuous spectrum depends on the tube voltage, not on the element.",
+  "hints": [
+   "Separate the line spectrum from the continuum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the photoelectric equation for the maximum kinetic energy $K_{\\max}$ of an emitted electron, with photon frequency $f$ and work function $\\phi$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$K_{\\max}=hf-\\phi$",
+    "$K_{\\max}=hf+\\phi$",
+    "$K_{\\max}=\\phi-hf$",
+    "$K_{\\max}=hf/\\phi$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "adds the binding energy instead of subtracting it",
+    "reverses the sign, so the result is negative",
+    "divides instead of subtracting"
+   ]
+  },
+  "solution": "The photon gives $hf$. The electron pays $\\phi$ to escape, so $K_{\\max}=hf-\\phi$.",
+  "hints": [
+   "Energy in minus escape cost."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the stopping potential $V_0$ in volts in terms of Planck's constant $h$, the frequency $f$, the work function $\\phi$ in joules and the elementary charge $q$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(h*f-phi)/q",
+   "vars": [
+    "h",
+    "f",
+    "phi",
+    "q"
+   ],
+   "domain": {
+    "h": [
+     0.5,
+     2
+    ],
+    "f": [
+     1,
+     3
+    ],
+    "phi": [
+     0.1,
+     1
+    ],
+    "q": [
+     0.5,
+     2
+    ]
+   },
+   "also": [
+    "h*f/q-phi/q",
+    "(h*f-phi)*q^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$qV_0=K_{\\max}=hf-\\phi$, so $V_0=(hf-\\phi)/q$.",
+  "hints": [
+   "The stopping voltage gives energy $qV_0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the maximum Compton wavelength shift, at scattering angle $180^\\circ$, in pm. Use $h=6.63\\times10^{-34}$ J s, $m_e=9.11\\times10^{-31}$ kg, $c=3.00\\times10^{8}$ m/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.851811196487377,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2e12*6.63e-34/(9.11e-31*3.00e8)",
+  "solution": "$\\Delta\\lambda=\\tfrac{h}{m_ec}(1-\\cos\\theta)$. At $180^\\circ$ this is $2h/(m_ec)=4.85$ pm.",
+  "hints": [
+   "The largest shift is at the backward angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light of wavelength $500$ nm hits a metal with work function $2.00$ eV. Find $K_{\\max}$ in eV. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.48625000000000007,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "6.63e-34*3.00e8/(500e-9*1.60e-19)-2.0",
+  "solution": "$hf=hc/\\lambda=2.49$ eV, so $K_{\\max}=2.49-2.00=0.486$ eV.",
+  "hints": [
+   "Convert the photon energy to eV first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light of wavelength $400$ nm falls on a surface with work function $2.00$ eV. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C. Find the stopping potential in volts.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.1078125,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "6.63e-34*3.00e8/(400e-9*1.60e-19)-2.0",
+  "solution": "$hf=3.11$ eV, so $V_0=3.11-2.00=1.11$ V.",
+  "hints": [
+   "The stopping voltage equals $K_{\\max}$ in eV."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "At fixed frequency above threshold, doubling the light intensity changes the maximum electron kinetic energy by what factor?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "No change, factor 1",
+    "Factor 2",
+    "Factor 1/2",
+    "Factor 4"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treats intensity as setting the energy of each electron",
+    "assumes intensity divides a fixed energy among more photons",
+    "scales with intensity squared, which applies to field amplitude, not energy"
+   ]
+  },
+  "solution": "Intensity sets how many photons arrive, so it changes the current, not the energy per electron.",
+  "hints": [
+   "More photons is not more energy per photon."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the threshold wavelength in nm of a metal with work function $2.50$ eV. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C.",
+  "answer": {
+   "kind": "numeric",
+   "value": 497.25,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1e9*6.63e-34*3.00e8/(2.5*1.60e-19)",
+  "solution": "$\\lambda_0=hc/\\phi=497$ nm.",
+  "hints": [
+   "At threshold the photon energy equals the work function."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the Compton wavelength shift in pm for photons scattered at $90^\\circ$. Use $h=6.63\\times10^{-34}$ J s, $m_e=9.11\\times10^{-31}$ kg, $c=3.00\\times10^{8}$ m/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.425905598243688,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1e12*6.63e-34/(9.11e-31*3.00e8)*(1-math.cos(math.pi/2))",
+  "solution": "$\\Delta\\lambda=\\tfrac{h}{m_ec}(1-\\cos90^\\circ)=h/(m_ec)=2.43$ pm.",
+  "hints": [
+   "At $90^\\circ$, $\\cos\\theta=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A stopping voltage $V_0$ is measured at frequency $f$. Write the work function $\\phi$ in terms of $h$, $f$, the elementary charge $q$ and $V_0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "h*f-q*V0",
+   "vars": [
+    "h",
+    "f",
+    "q",
+    "V0"
+   ],
+   "domain": {
+    "h": [
+     0.5,
+     2
+    ],
+    "f": [
+     1,
+     3
+    ],
+    "q": [
+     0.5,
+     2
+    ],
+    "V0": [
+     0.1,
+     1
+    ]
+   },
+   "also": [
+    "h*f-V0*q",
+    "f*h-q*V0"
+   ]
+  },
+  "check": null,
+  "solution": "$\\phi=hf-qV_0$, rearranged from $qV_0=hf-\\phi$.",
+  "hints": [
+   "Solve the stopping relation for $\\phi$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State how the nuclear radius $R$ depends on mass number $A$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$R\\propto A$",
+    "$R\\propto A^{1/3}$",
+    "$R\\propto A^{2/3}$",
+    "$R\\propto A^{1/2}$"
+   ],
+   "correct": 1,
+   "why": [
+    "treats the radius as linear, as if density grew with $A$",
+    "",
+    "uses surface-area scaling, which applies to $R^2$",
+    "takes a square root, which has no basis here"
+   ]
+  },
+  "solution": "Nuclear density is nearly constant, so volume $\\propto A$ and $R\\propto A^{1/3}$.",
+  "hints": [
+   "Constant density means volume is proportional to mass number."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A nucleus has radius $6.0$ fm. With $R_0=1.2$ fm in $R=R_0A^{1/3}$, find its mass number $A$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 125,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "(6.0/1.2)**3",
+  "solution": "$A=(R/R_0)^3=5^3=125$.",
+  "hints": [
+   "Cube both sides of the radius relation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the volume of a nucleus with mass number $A$ in terms of $R_0$ and $A$, using a sphere of radius $R=R_0A^{1/3}$.",
+  "answer": {
+   "kind": "expression",
+   "value": "4/3*pi*R0^3*A",
+   "vars": [
+    "R0",
+    "A"
+   ],
+   "domain": {
+    "R0": [
+     0.5,
+     2
+    ],
+    "A": [
+     1,
+     240
+    ]
+   },
+   "also": [
+    "(4*pi/3)*R0^3*A",
+    "4*pi*R0^3*A/3"
+   ]
+  },
+  "check": null,
+  "solution": "$V=\\tfrac43\\pi R^3=\\tfrac43\\pi R_0^3A$.",
+  "hints": [
+   "Cube the radius, and the cube root cancels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0067",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the radius in fm of the lead-208 nucleus, using $R=R_0A^{1/3}$ with $R_0=1.2$ fm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7.109990564177688,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1.2*208**(1/3)",
+  "solution": "$R=1.2\\times208^{1/3}=1.2\\times5.92=7.11$ fm.",
+  "hints": [
+   "Take the cube root of 208 first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A helium-4 nucleus has mass $4.00151$ u. Use proton mass $1.00728$ u, neutron mass $1.00866$ u and $1$ u $=931.5$ MeV$/c^2$. Find its binding energy in MeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 28.289654999999595,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "(2*1.00728+2*1.00866-4.00151)*931.5",
+  "solution": "$\\Delta m=2(1.00728)+2(1.00866)-4.00151=0.03037$ u, so $B=0.03037\\times931.5=28.3$ MeV.",
+  "hints": [
+   "Binding energy is the mass defect times 931.5 MeV per u."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the ratio of nuclear volumes $V(^{197}\\mathrm{Au})/V(^{40}\\mathrm{Ca})$, using $R=R_0A^{1/3}$ with the same $R_0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.925,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "197/40",
+  "solution": "$V\\propto A$, so $V_{\\rm Au}/V_{\\rm Ca}=197/40=4.93$.",
+  "hints": [
+   "Check whether volume scales as $A$ or as $R$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which nucleus has the largest binding energy per nucleon, near the peak of the curve?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$^{208}$Pb, because it is doubly magic",
+    "$^{238}$U, the heaviest common nucleus",
+    "$^{56}$Fe, near the peak",
+    "$^{1}$H, because it is the lightest"
+   ],
+   "correct": 2,
+   "why": [
+    "assumes magic numbers maximize binding per nucleon",
+    "assumes heavier means more tightly bound",
+    "",
+    "assumes lighter means more tightly bound"
+   ]
+  },
+  "solution": "Binding energy per nucleon peaks near iron-56 and falls for heavier nuclei.",
+  "hints": [
+   "The curve rises from hydrogen and falls past iron."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the surface area of a nucleus with mass number $A$ in terms of $R_0$ and $A$, using $R=R_0A^{1/3}$ and surface $4\\pi R^2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "4*pi*R0^2*A^(2/3)",
+   "vars": [
+    "R0",
+    "A"
+   ],
+   "domain": {
+    "R0": [
+     0.5,
+     2
+    ],
+    "A": [
+     1,
+     240
+    ]
+   },
+   "also": [
+    "(4*pi)*(R0*A^(1/3))^2",
+    "4*pi*R0^2*(A^(1/3))^2"
+   ]
+  },
+  "check": null,
+  "solution": "$S=4\\pi R^2=4\\pi R_0^2A^{2/3}$.",
+  "hints": [
+   "Square the radius before applying the power."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about nuclear size and density.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Radius grows as $A^{1/3}$",
+    "Density is roughly the same for all nuclei",
+    "Volume is proportional to $A$",
+    "Surface area grows linearly with $A$"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "$R\\propto A^{1/3}$ and constant density give $V\\propto A$. Surface area goes as $R^2\\propto A^{2/3}$, not $A$.",
+  "hints": [
+   "Constant density means volume is proportional to $A$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the relation between the decay constant $k$ and the half-life $T_{1/2}$ for exponential decay.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$k=T_{1/2}/\\ln2$",
+    "$k=\\ln2/T_{1/2}$",
+    "$k=\\log_{10}2/T_{1/2}$",
+    "$k=2/T_{1/2}$"
+   ],
+   "correct": 1,
+   "why": [
+    "inverts the ratio, giving the mean life instead of the rate",
+    "",
+    "uses base-10 log, which is wrong for a natural exponential",
+    "ignores the exponential and treats decay as linear"
+   ]
+  },
+  "solution": "Half the nuclei remain after one half-life: $e^{-kT_{1/2}}=1/2$, so $k=\\ln2/T_{1/2}$.",
+  "hints": [
+   "Set the remaining fraction to one half."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the number of nuclei $N(t)$ remaining at time $t$, in terms of $N_0$, the decay constant $k$ and $t$.",
+  "answer": {
+   "kind": "expression",
+   "value": "N0*exp(-k*t)",
+   "vars": [
+    "N0",
+    "k",
+    "t"
+   ],
+   "domain": {
+    "N0": [
+     1,
+     5
+    ],
+    "k": [
+     0.1,
+     1
+    ],
+    "t": [
+     0,
+     3
+    ]
+   },
+   "also": [
+    "N0*exp(-(k*t))",
+    "N0/exp(k*t)"
+   ]
+  },
+  "check": null,
+  "solution": "$N(t)=N_0e^{-kt}$.",
+  "hints": [
+   "Exponential decay obeys $dN/dt=-kN$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A nucleus has half-life $10$ years. Find its mean lifetime in years.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14.426950408889635,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "10/math.log(2)",
+  "solution": "$\\tau=T_{1/2}/\\ln2=14.4$ years.",
+  "hints": [
+   "The mean life is longer than the half-life."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0076",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A source has initial activity $800$ Bq and half-life $2.0$ h. Find its activity in Bq after $6.0$ h.",
+  "answer": {
+   "kind": "numeric",
+   "value": 100,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "800*Fraction(1,2)**3",
+  "solution": "Three half-lives pass, so $A=800/2^3=100$ Bq.",
+  "hints": [
+   "Count the half-lives in 6.0 h."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sample holds $2.0\\times10^{15}$ nuclei with half-life $30$ years. Find its activity in Bq. Use 1 year $=3.156\\times10^{7}$ s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1464189.2280522715,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.log(2)/(30*3.156e7)*2.0e15",
+  "solution": "$\\lambda=\\ln2/T_{1/2}=7.32\\times10^{-10}$ /s, so $A=\\lambda N=1.46\\times10^{6}$ Bq.",
+  "hints": [
+   "Convert the half-life to seconds."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sample's activity must fall to one tenth of its initial value. Its half-life is $5.0$ min. Find the time in min.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16.609640474436816,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "5*math.log(10)/math.log(2)",
+  "solution": "$2^{-t/T}=1/10$ gives $t=T\\log_2 10=16.6$ min.",
+  "hints": [
+   "Solve for the number of half-lives."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Sample A has half-life 2 days and sample B has half-life 4 days. Both start with the same activity. After 8 days, which sample holds more nuclei?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A, because its half-life is shorter",
+    "B, because equal activity with a longer half-life means more initial nuclei",
+    "Equal, because the activities started equal",
+    "Equal, because both halve once every two days"
+   ],
+   "correct": 1,
+   "why": [
+    "reverses the half-life effect: a shorter life leaves fewer nuclei",
+    "",
+    "assumes equal activity means equal nuclei, but activity is $kN$",
+    "uses the 2-day half-life for both samples"
+   ]
+  },
+  "solution": "Activity is $kN$. Equal activity with $T_B=2T_A$ means $N_B=2N_A$. After 8 days, B keeps $2N_A\\cdot\\tfrac14=\\tfrac12N_A$, while A keeps $N_A/16$.",
+  "hints": [
+   "A longer half-life means a smaller decay constant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the fraction of a sample remaining after time $t$, in terms of the half-life $T$, as a power of $\\tfrac12$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(1/2)^(t/T)",
+   "vars": [
+    "t",
+    "T"
+   ],
+   "domain": {
+    "t": [
+     0,
+     5
+    ],
+    "T": [
+     1,
+     3
+    ]
+   },
+   "also": [
+    "2^(-t/T)",
+    "2^(-(t/T))"
+   ]
+  },
+  "check": null,
+  "solution": "After one half-life the fraction is $\\tfrac12$, so after time $t$ it is $(\\tfrac12)^{t/T}$.",
+  "hints": [
+   "Count half-lives as $t/T$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.decay"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all statements that hold for simple exponential decay.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The half-life does not depend on how many nuclei are present",
+    "The fraction decaying per unit time is constant",
+    "Activity is proportional to the number of nuclei",
+    "Activity halves each time the elapsed time doubles"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "The decay constant is fixed, so the half-life is independent of $N$ and the decay fraction per time is constant. Activity equals $kN$. Activity halves per half-life, not per doubling of time.",
+  "hints": [
+   "Check each statement against $dN/dt=-kN$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A reaction has $Q>0$. Which statement is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It absorbs energy, so the products have less kinetic energy",
+    "It releases energy, so the products carry more kinetic energy than the reactants",
+    "It releases energy, so the products are more massive than the reactants",
+    "It is impossible at any energy"
+   ],
+   "correct": 1,
+   "why": [
+    "reverses the sign of $Q$",
+    "",
+    "reverses the mass comparison: $Q>0$ means the products are lighter",
+    "confuses a negative $Q$ threshold with an impossible reaction"
+   ]
+  },
+  "solution": "$Q=(M_i-M_f)c^2>0$ means the final rest mass is less, and the freed energy appears as kinetic energy.",
+  "hints": [
+   "$Q$ is initial mass minus final mass, times $c^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A reaction loses $0.0100$ u of mass. Use $1$ u $=931.5$ MeV$/c^2$ and find the energy released in MeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.315,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "0.0100*931.5",
+  "solution": "$0.0100\\times931.5=9.32$ MeV.",
+  "hints": [
+   "Multiply the mass deficit by 931.5."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the $Q$-value (energy release) of a reaction in terms of initial total mass $M_i$, final total mass $M_f$ and the speed of light $c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(Mi-Mf)*c^2",
+   "vars": [
+    "Mi",
+    "Mf",
+    "c"
+   ],
+   "domain": {
+    "Mi": [
+     4,
+     12
+    ],
+    "Mf": [
+     3,
+     11
+    ],
+    "c": [
+     1,
+     3
+    ]
+   },
+   "also": [
+    "c^2*(Mi-Mf)",
+    "Mi*c^2-Mf*c^2"
+   ]
+  },
+  "check": null,
+  "solution": "$Q=(M_i-M_f)c^2$, positive when mass is lost.",
+  "hints": [
+   "Mass lost becomes energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $Q$ in MeV for ${}^{1}\\mathrm{H}+{}^{7}\\mathrm{Li}\\to2\\,{}^{4}\\mathrm{He}$. Atomic masses: ${}^{1}$H $1.00783$ u, ${}^{7}$Li $7.01600$ u, ${}^{4}$He $4.00260$ u. Use $1$ u $=931.5$ MeV$/c^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 17.35384499999993,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "(1.00783+7.01600-2*4.00260)*931.5",
+  "solution": "Mass lost is $8.02383-8.00520=0.01863$ u, so $Q=17.35$ MeV.",
+  "hints": [
+   "Sum the initial masses, then subtract the final masses."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An endothermic reaction has $Q=-2.00$ MeV. A projectile of mass $4.00$ u hits a target of mass $12.00$ u at rest. Find the threshold kinetic energy of the projectile in MeV, nonrelativistically.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.6666666666666665,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2.00*(4.00+12.00)/12.00",
+  "solution": "$T_{\\rm th}=|Q|(m+M)/M=2.00\\times16/12=2.67$ MeV.",
+  "hints": [
+   "Part of the energy must go into the moving centre of mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $Q$ in MeV for ${}^{238}\\mathrm U\\to{}^{234}\\mathrm{Th}+{}^{4}\\mathrm{He}$. Atomic masses: ${}^{238}$U $238.05079$ u, ${}^{234}$Th $234.04360$ u, ${}^{4}$He $4.00260$ u. Use $1$ u $=931.5$ MeV$/c^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.275585000007741,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "(238.05079-234.04360-4.00260)*931.5",
+  "solution": "Mass lost is $0.00459$ u, so $Q=4.28$ MeV.",
+  "hints": [
+   "Subtract the final masses from the initial."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A reaction has $Q=-3$ MeV. Which statement is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It releases 3 MeV to its surroundings",
+    "The threshold kinetic energy is at least 3 MeV",
+    "It cannot occur at any energy",
+    "The products gain 3 MeV of kinetic energy"
+   ],
+   "correct": 1,
+   "why": [
+    "treats the negative sign as a release",
+    "",
+    "confuses an energy barrier with a forbidden reaction",
+    "treats the energy shortfall as a surplus"
+   ]
+  },
+  "solution": "$T_{\\rm th}=|Q|(m+M)/M\\ge|Q|$, so the projectile needs at least 3 MeV.",
+  "hints": [
+   "The threshold is never below the energy shortfall."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A projectile of mass $m_a$ hits a target of mass $m_b$ at rest, in a reaction with $Q<0$. Write the threshold kinetic energy $T_{\\rm th}$ in terms of $Q$, $m_a$ and $m_b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "-Q*(ma+mb)/mb",
+   "vars": [
+    "Q",
+    "ma",
+    "mb"
+   ],
+   "domain": {
+    "Q": [
+     -5,
+     -0.5
+    ],
+    "ma": [
+     1,
+     4
+    ],
+    "mb": [
+     1,
+     12
+    ]
+   },
+   "also": [
+    "-Q*(mb+ma)/mb",
+    "-Q*(1+ma/mb)"
+   ]
+  },
+  "check": null,
+  "solution": "$T_{\\rm th}=-Q(m_a+m_b)/m_b$.",
+  "hints": [
+   "Share the shortfall over the centre-of-mass motion."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A nucleus at rest decays into a $234$ u daughter and a $4$ u alpha particle, releasing $Q=4.28$ MeV. Using momentum conservation and nonrelativistic recoil, find the alpha kinetic energy in MeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.208067226890757,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "4.28*234/(234+4)",
+  "solution": "Momentum balance gives $T_\\alpha=Q\\,M_d/(M_d+M_\\alpha)=4.21$ MeV.",
+  "hints": [
+   "The lighter particle carries most of the energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the relativistic energy–momentum relation for a particle of mass $m$, momentum $p$ and energy $E$, with speed of light $c$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$E^2=p^2c^2+m^2c^4$",
+    "$E=pc+mc^2$",
+    "$E^2=(pc)^2-(mc^2)^2$",
+    "$E=p^2/(2m)+mc^2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "adds the two terms linearly instead of in quadrature",
+    "reverses the sign of the mass term",
+    "uses the nonrelativistic kinetic energy, valid only at low speed"
+   ]
+  },
+  "solution": "$E^2=(pc)^2+(mc^2)^2$ at any speed. At rest it gives $E=mc^2$.",
+  "hints": [
+   "The two terms add in quadrature, like sides of a right triangle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the speed ratio $\\beta=v/c$ of a particle in terms of its momentum $p$, its total energy $E$ and the speed of light $c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "p*c/E",
+   "vars": [
+    "p",
+    "c",
+    "E"
+   ],
+   "domain": {
+    "p": [
+     0.5,
+     3
+    ],
+    "c": [
+     1,
+     3
+    ],
+    "E": [
+     3,
+     6
+    ]
+   },
+   "also": [
+    "c*p/E",
+    "p*c*E^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$\\beta=pc/E$, since $pc=\\gamma mvc$ and $E=\\gamma mc^2$.",
+  "hints": [
+   "Divide the momentum times $c$ by the energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the minimum photon energy in MeV to create an electron–positron pair. Use $m_ec^2=0.511$ MeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.022,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*0.511",
+  "solution": "The pair needs $2m_ec^2=1.022$ MeV at rest.",
+  "hints": [
+   "Two particles, each of rest energy $m_ec^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle of rest energy $0.940$ GeV has momentum $1.20$ GeV$/c$. Find its total energy in GeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5243359209832983,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(1.2**2+0.94**2)",
+  "solution": "$E=\\sqrt{p^2c^2+m^2c^4}=\\sqrt{1.44+0.884}=1.52$ GeV.",
+  "hints": [
+   "Energies add in quadrature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two photons have energies $0.30$ GeV and $0.20$ GeV and travel at $90^\\circ$ to each other. Find the invariant mass of the pair in GeV$/c^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.3464101615137754,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*0.30*0.20*(1-math.cos(math.pi/2)))",
+  "solution": "$M^2c^4=2E_1E_2(1-\\cos\\theta)=0.12$ GeV$^2$, so $M=0.346$ GeV$/c^2$.",
+  "hints": [
+   "For massless photons, the invariant mass depends on the angle between them."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A proton hits a proton at rest in a fixed-target experiment. The final state must have total rest mass $W=2.80$ GeV$/c^2$. Using proton rest energy $0.938$ GeV, find the minimum kinetic energy of the beam proton in GeV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.3031044776119405,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "((2.8**2-2*0.938**2)/(2*0.938))-0.938",
+  "solution": "$s=2m^2+2mE$ must reach $W^2$, so $E_{\\rm th}=(W^2-2m^2)/(2m)=3.24$ GeV. Then $T=E-m=2.30$ GeV.",
+  "hints": [
+   "Subtract one rest energy from the total energy to get kinetic energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle crosses a medium of refractive index $n=1.5$ and emits Cherenkov light. Which speed condition must hold?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$v>c/n$",
+    "$v<c/n$",
+    "$v>c$",
+    "$v=c$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reverses the inequality, so light would appear below threshold",
+    "uses vacuum light speed, which the particle cannot exceed in vacuum",
+    "takes the threshold as a single value of $v$ equal to $c$"
+   ]
+  },
+  "solution": "Cherenkov light needs speed above the light speed in the medium, $c/n$.",
+  "hints": [
+   "The threshold is the light speed in the medium, not in vacuum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle of rest mass $m$ has Lorentz factor $\\gamma$ (written as g). Write its momentum times $c$, $pc$, in terms of g, $m$ and the speed of light $c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m*c^2*sqrt(g^2-1)",
+   "vars": [
+    "g",
+    "m",
+    "c"
+   ],
+   "domain": {
+    "g": [
+     1.1,
+     3
+    ],
+    "m": [
+     0.5,
+     2
+    ],
+    "c": [
+     1,
+     3
+    ]
+   },
+   "also": [
+    "c^2*m*sqrt(g^2-1)",
+    "m*c^2*(g^2-1)^(1/2)",
+    "g*m*c^2*sqrt(1-1/g^2)"
+   ]
+  },
+  "check": null,
+  "solution": "$E=\\gamma mc^2$ and $(pc)^2=E^2-(mc^2)^2=(\\gamma^2-1)(mc^2)^2$. So $pc=mc^2\\sqrt{\\gamma^2-1}$.",
+  "hints": [
+   "Use $E^2=(pc)^2+(mc^2)^2$ with $E=\\gamma mc^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about measuring particle masses in a detector.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Measuring both speed and momentum gives the mass",
+    "Cherenkov light needs speed above $c$ in vacuum",
+    "Momentum from curvature in a magnetic field is $p=qBr$",
+    "Neutral particles curve in a magnetic field"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Mass follows from $p$ and $v$. Cherenkov light needs speed above $c/n$ in a medium, not $c$ in vacuum. Neutral particles do not curve.",
+  "hints": [
+   "Check each statement against the detector physics."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the lepton number of an electron and of a positron.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Electron $+1$, positron $+1$",
+    "Electron $+1$, positron $-1$",
+    "Electron $0$, positron $0$",
+    "Electron $-1$, positron $-1$"
+   ],
+   "correct": 1,
+   "why": [
+    "ignores the antiparticle sign",
+    "",
+    "treats leptons as neutral, like photons",
+    "reverses the electron's sign"
+   ]
+  },
+  "solution": "Leptons carry $+1$ and antileptons $-1$, so $e^-$ has $L_e=+1$ and $e^+$ has $L_e=-1$.",
+  "hints": [
+   "Antiparticles carry opposite quantum numbers."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many $u$ quarks does a proton contain (quark content $uud$)? Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The proton is $uud$: two up quarks and one down quark.",
+  "hints": [
+   "Count the letters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A state contains $n_q$ quarks and $n_{\\bar q}$ antiquarks. Write its baryon number $B$ in terms of $n_q$ and $n_{\\bar q}$, where each quark carries $B=\\tfrac13$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(nq-nqb)/3",
+   "vars": [
+    "nq",
+    "nqb"
+   ],
+   "domain": {
+    "nq": [
+     0,
+     6
+    ],
+    "nqb": [
+     0,
+     6
+    ]
+   },
+   "also": [
+    "nq/3-nqb/3",
+    "(nq-nqb)*3^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$B=(n_q-n_{\\bar q})/3$, so a baryon ($B=1$) has three net quarks.",
+  "hints": [
+   "Each antiquark subtracts one third."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $\\Delta^{++}$ baryon has quark content $uuu$. Using the $u$-quark charge $+\\tfrac23$, find its electric charge in units of $e$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "3*Fraction(2,3)",
+  "solution": "$3\\times\\tfrac23=2$.",
+  "hints": [
+   "Sum the quark charges."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all decays allowed by charge, baryon number and lepton-flavour conservation.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\mu^-\\to e^-+\\bar\\nu_e+\\nu_\\mu$",
+    "$n\\to p+e^-$",
+    "$\\pi^+\\to\\mu^++\\nu_\\mu$",
+    "$p\\to e^++\\pi^0$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "$\\mu^-$ and $\\pi^+$ decays conserve charge and lepton flavour. $n\\to p+e^-$ leaves $L_e=+1$ with no antineutrino. $p\\to e^++\\pi^0$ changes baryon number from $1$ to $0$.",
+  "hints": [
+   "Check each conserved quantity before and after."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The $K^+$ meson has quark content $u\\bar s$. Find its strangeness, with strange quark $S=-1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "The $\\bar s$ antiquark has $S=+1$, so $K^+$ has $S=+1$.",
+  "hints": [
+   "Antiquarks flip the sign of the quark's number."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The charged pion decays as $\\pi^+\\to\\mu^++X$. Which particle is $X$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\bar\\nu_\\mu$",
+    "$\\nu_\\mu$",
+    "$\\nu_e$",
+    "$\\bar\\nu_e$"
+   ],
+   "correct": 1,
+   "why": [
+    "gives $L_\\mu=-2$ overall, so lepton number fails",
+    "",
+    "carries electron flavour, leaving the muon flavour sum at $-1$",
+    "adds electron flavour, and the muon flavour stays at $-1$"
+   ]
+  },
+  "solution": "Muon flavour starts at zero, so the $\\mu^+$ needs a $\\nu_\\mu$ with $L_\\mu=+1$.",
+  "hints": [
+   "Pick the neutrino whose flavour sums to zero with the muon."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A meson is made of a quark of charge $q_1$ and an antiquark whose quark has charge $q_2$. Write the meson's total electric charge in terms of $q_1$ and $q_2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "q1-q2",
+   "vars": [
+    "q1",
+    "q2"
+   ],
+   "domain": {
+    "q1": [
+     -1,
+     1
+    ],
+    "q2": [
+     -1,
+     1
+    ]
+   },
+   "also": [
+    "-q2+q1",
+    "q1+(-q2)"
+   ]
+  },
+  "check": null,
+  "solution": "$Q=q_1+(-q_2)=q_1-q_2$. For $\\pi^+=u\\bar d$, $Q=\\tfrac23+\\tfrac13=1$.",
+  "hints": [
+   "An antiquark flips the sign of its charge."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The $\\Xi^-$ baryon has quark content $dss$. Using $q_d=q_s=-\\tfrac13$, find its electric charge in units of $e$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -1,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "3*Fraction(-1,3)",
+  "solution": "$3\\times(-\\tfrac13)=-1$.",
+  "hints": [
+   "Three quarks, each with the same charge."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many atoms does a conventional face-centred cubic unit cell contain?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1",
+    "2",
+    "4",
+    "8"
+   ],
+   "correct": 2,
+   "why": [
+    "counts only the corners, as in a simple cubic cell",
+    "is the body-centred cubic count",
+    "",
+    "counts all eight corners fully, which overcounts shared atoms"
+   ]
+  },
+  "solution": "Eight corners at $\\tfrac18$ each plus six faces at $\\tfrac12$ each gives $1+3=4$ atoms.",
+  "hints": [
+   "Share each corner and face with neighbouring cells."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the coordination number of a face-centred cubic lattice, meaning the number of nearest neighbours of each atom. Enter the integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "check": "12",
+  "solution": "Each atom in FCC touches 12 nearest neighbours.",
+  "hints": [
+   "It is the same count as in close packing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write $\\sin\\theta$ for first-order Bragg reflection from planes of spacing $d$, with X-ray wavelength $\\lambda$ (written as lam).",
+  "answer": {
+   "kind": "expression",
+   "value": "lam/(2*d)",
+   "vars": [
+    "lam",
+    "d"
+   ],
+   "domain": {
+    "lam": [
+     0.1,
+     0.5
+    ],
+    "d": [
+     0.5,
+     2
+    ]
+   },
+   "also": [
+    "lam*(2*d)^(-1)",
+    "0.5*lam/d"
+   ]
+  },
+  "check": null,
+  "solution": "Bragg's condition is $2d\\sin\\theta=n\\lambda$ with $n=1$.",
+  "hints": [
+   "Solve the Bragg condition for the sine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the atom number density of a simple cubic crystal with lattice constant $a=0.40$ nm and one atom per cell, in units of $10^{28}\\ \\mathrm{m^{-3}}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5624999999999998,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1/(0.40e-9)**3/1e28",
+  "solution": "$n=1/a^3=1/(4.0\\times10^{-10}\\ \\mathrm m)^3=1.56\\times10^{28}$ m$^{-3}$.",
+  "hints": [
+   "Convert nm to metres before cubing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "X-rays of wavelength $0.154$ nm reflect in first order from planes spaced $d=0.200$ nm. Find the Bragg angle $\\theta$ in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 22.6437402628851,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.degrees(math.asin(0.154/(2*0.200)))",
+  "solution": "$\\sin\\theta=\\lambda/(2d)=0.385$, so $\\theta\\approx22.6^\\circ$.",
+  "hints": [
+   "Solve $2d\\sin\\theta=\\lambda$ for $\\sin\\theta$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Copper is face-centred cubic with lattice constant $a=0.361$ nm. Find the nearest-neighbour distance in nm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2552655480083436,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "0.361/math.sqrt(2)",
+  "solution": "Nearest neighbours are half a face diagonal apart, $a/\\sqrt2=0.255$ nm.",
+  "hints": [
+   "The nearest pair sits along a face diagonal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does a metal conduct while a band insulator does not?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Its valence band is full, with a wide gap above",
+    "Its outermost band is partly filled, so electrons can gain energy freely",
+    "Its Fermi level sits inside a gap",
+    "Its electrons in full bands move freely as particles"
+   ],
+   "correct": 1,
+   "why": [
+    "describes an insulator, where the band is full",
+    "",
+    "describes an insulator, since a gap does not conduct at the Fermi level",
+    "ignores the Pauli principle, which blocks filled states"
+   ]
+  },
+  "solution": "A partly filled band has empty states just above the Fermi level, so electrons can respond to a field.",
+  "hints": [
+   "Conduction needs empty states nearby in energy."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write the Fermi wavevector $k_F$ of a three-dimensional electron gas with spin-$\\tfrac12$ electrons at number density $n$, in terms of $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(3*pi^2*n)^(1/3)",
+   "vars": [
+    "n"
+   ],
+   "domain": {
+    "n": [
+     0.5,
+     4
+    ]
+   },
+   "also": [
+    "(3*n*pi^2)^(1/3)"
+   ]
+  },
+  "check": null,
+  "solution": "Counting states inside a sphere of radius $k_F$, with two spins, gives $k_F=(3\\pi^2n)^{1/3}$.",
+  "hints": [
+   "Count states inside a sphere in $k$-space."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about crystal lattices.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Simple cubic is a Bravais lattice",
+    "Body-centred cubic is a Bravais lattice",
+    "Face-centred cubic is a Bravais lattice",
+    "The diamond structure is a Bravais lattice"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "Every lattice point sees the same environment in a Bravais lattice. Diamond has a two-atom basis, so it is a lattice with a basis, not a Bravais lattice.",
+  "hints": [
+   "Ask whether every lattice point sees the same environment."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the mass-action law for a semiconductor in equilibrium, with electron density $n$, hole density $p$ and intrinsic density $n_i$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$np=n_i$",
+    "$np=n_i^2$",
+    "$n+p=n_i^2$",
+    "$n/p=n_i^2$"
+   ],
+   "correct": 1,
+   "why": [
+    "drops the square on $n_i$",
+    "",
+    "adds where the product should be taken",
+    "takes a ratio where the product holds"
+   ]
+  },
+  "solution": "In equilibrium the product of carrier densities equals $n_i^2$, whatever the doping.",
+  "hints": [
+   "The product is fixed, not the sum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the intrinsic carrier density $n_i$ in terms of the effective densities of states $N_c$ and $N_v$, the band gap $E_g$ and the thermal energy $k_BT$ (written as kT).",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(Nc*Nv)*exp(-Eg/(2*kT))",
+   "vars": [
+    "Nc",
+    "Nv",
+    "Eg",
+    "kT"
+   ],
+   "domain": {
+    "Nc": [
+     0.5,
+     2
+    ],
+    "Nv": [
+     0.5,
+     2
+    ],
+    "Eg": [
+     0.5,
+     2
+    ],
+    "kT": [
+     0.1,
+     1
+    ]
+   },
+   "also": [
+    "sqrt(Nc*Nv*exp(-Eg/kT))",
+    "sqrt(Nc*Nv)*exp(-(Eg/(2*kT)))"
+   ]
+  },
+  "check": null,
+  "solution": "$n_i^2=N_cN_ve^{-E_g/k_BT}$, so $n_i=\\sqrt{N_cN_v}\\,e^{-E_g/2k_BT}$.",
+  "hints": [
+   "Square it first, then take the root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the longest wavelength in $\\mu$m that a silicon detector with band gap $1.10$ eV can absorb. Use $h=6.63\\times10^{-34}$ J s, $c=3.00\\times10^{8}$ m/s, $q=1.60\\times10^{-19}$ C.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.1301136363636364,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "6.63e-34*3.00e8/(1.10*1.60e-19)*1e6",
+  "solution": "$\\lambda=hc/E_g=1.13$ $\\mu$m.",
+  "hints": [
+   "Photons below the band gap pass through."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Intrinsic silicon has $n_i=1.0\\times10^{10}$ cm$^{-3}$. It is doped with acceptors to $N_A=1.0\\times10^{16}$ cm$^{-3}$. Find the electron density in cm$^{-3}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10000,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "Fraction(10**10)**2/10**16",
+  "solution": "$p\\approx N_A$, so $n=n_i^2/N_A=10^{4}$ cm$^{-3}$.",
+  "hints": [
+   "Holes are set by the acceptors, so use the mass-action law."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An $n$-type sample has electron density $1.0\\times10^{16}$ cm$^{-3}$ and electron mobility $1350$ cm$^2$/(V s). Ignore holes. Using $q=1.60\\times10^{-19}$ C, find the conductivity in S/cm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.16,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1.60e-19*1e16*1350",
+  "solution": "$\\sigma=qn\\mu_n=2.16$ S/cm.",
+  "hints": [
+   "Conductivity is charge times density times mobility."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Doping silicon (four valence electrons) with phosphorus (five valence electrons) produces what?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A $p$-type material with extra holes",
+    "An $n$-type material with a donor electron",
+    "An intrinsic material, since the lattice is unchanged",
+    "An insulator, since the extra electron is locked in place"
+   ],
+   "correct": 1,
+   "why": [
+    "reverses the donor sign, giving holes",
+    "",
+    "ignores the extra valence electron",
+    "treats the donor electron as tightly bound, but a shallow donor frees it at room temperature"
+   ]
+  },
+  "solution": "The fifth electron is weakly bound, so it becomes a mobile carrier: $n$-type.",
+  "hints": [
+   "Count the extra valence electron."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Take $E_g=1.12$ eV for silicon, $k_B=1.38\\times10^{-23}$ J/K and $q=1.60\\times10^{-19}$ C. Find the ratio $n_i(350\\ \\mathrm K)/n_i(300\\ \\mathrm K)$, neglecting the $T^{3/2}$ prefactor.",
+  "answer": {
+   "kind": "numeric",
+   "value": 22.016395804180732,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.exp(-(1.12*1.60e-19)/(2*1.38e-23)*(1/350-1/300))",
+  "solution": "$n_i\\propto e^{-E_g/2k_BT}$, so the ratio is $\\exp[-\\tfrac{E_g}{2k_B}(\\tfrac1{350}-\\tfrac1{300})]=22.0$.",
+  "hints": [
+   "Work in kelvin, and the exponent carries the sign of the temperature change."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For an $n$-type semiconductor with donor density $N_D$ and intrinsic density $n_i$, the Fermi level lies $E_F-E_i$ above the intrinsic level. Write $E_F-E_i$ in terms of $k$ (Boltzmann constant), $T$, $N_D$ and $n_i$.",
+  "answer": {
+   "kind": "expression",
+   "value": "k*T*ln(ND/ni)",
+   "vars": [
+    "k",
+    "T",
+    "ND",
+    "ni"
+   ],
+   "domain": {
+    "k": [
+     0.5,
+     2
+    ],
+    "T": [
+     1,
+     3
+    ],
+    "ND": [
+     1.5,
+     3
+    ],
+    "ni": [
+     0.5,
+     1
+    ]
+   },
+   "also": [
+    "k*T*ln(ND)-k*T*ln(ni)",
+    "k*T*(ln(ND)-ln(ni))"
+   ]
+  },
+  "check": null,
+  "solution": "With $n\\approx N_D$ and $n=n_i\\exp[(E_F-E_i)/kT]$, we get $E_F-E_i=kT\\ln(N_D/n_i)$.",
+  "hints": [
+   "Solve $n=n_i\\exp[(E_F-E_i)/kT]$ for the exponent."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about silicon.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Intrinsic silicon has equal electron and hole densities",
+    "In $n$-type silicon, electrons are the majority carriers",
+    "Raising temperature in doped silicon always lowers the carrier density",
+    "In $p$-type silicon, electrons outnumber holes"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Intrinsic silicon has $n=p=n_i$. Doping makes one carrier type dominant. Higher temperature adds intrinsic carriers, and $p$-type silicon has more holes than electrons.",
+  "hints": [
+   "Check each statement against $np=n_i^2$ and the dopant type."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0127",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the Dulong–Petit molar heat capacity of a solid at high temperature, in terms of the gas constant $R$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$R$",
+    "$\\tfrac32R$",
+    "$3R$",
+    "$6R$"
+   ],
+   "correct": 2,
+   "why": [
+    "counts one degree of freedom per atom",
+    "takes the monatomic-gas value, which has no vibrations",
+    "",
+    "counts kinetic and potential energy of each mode twice, which double counts"
+   ]
+  },
+  "solution": "Each atom has three vibrational modes, each storing $k_BT$, so $C=3R$ per mole.",
+  "hints": [
+   "Three oscillator directions per atom."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0128",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Use $R=8.31$ J/(mol K). Find the Dulong–Petit molar heat capacity in J/(mol K).",
+  "answer": {
+   "kind": "numeric",
+   "value": 24.93,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "3*8.31",
+  "solution": "$3R=24.9$ J/(mol K).",
+  "hints": [
+   "Apply the high-temperature limit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0129",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the zero-temperature BCS energy gap $\\Delta(0)$ in terms of Boltzmann's constant $k_B$ (kB) and the critical temperature $T_c$ (Tc), using the weak-coupling factor $1.76$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1.76*kB*Tc",
+   "vars": [
+    "kB",
+    "Tc"
+   ],
+   "domain": {
+    "kB": [
+     0.5,
+     2
+    ],
+    "Tc": [
+     1,
+     10
+    ]
+   },
+   "also": [
+    "kB*Tc*1.76",
+    "1.76*Tc*kB"
+   ]
+  },
+  "check": null,
+  "solution": "$\\Delta(0)=1.76\\,k_BT_c$ in weak coupling.",
+  "hints": [
+   "The gap is about 1.8 times $k_BT_c$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0130",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "One mole of a solid has Debye temperature $\\theta_D=300$ K, and its low-temperature heat capacity is $C=\\tfrac{12\\pi^4}{5}R\\left(T/\\theta_D\\right)^3$ with $R=8.31$ J/(mol K). Find $C$ in J/K at $T=10$ K.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.07195284857711645,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "12*math.pi**4/5*8.31*(10/300)**3",
+  "solution": "$C=233.8\\times8.31\\times(1/30)^3=0.0720$ J/K.",
+  "hints": [
+   "Compute the cube of $T/\\theta_D$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "At temperatures far above $\\theta_D$, the molar heat capacity of a solid is $3R$, with $R=8.31$ J/(mol K). How much heat, in J, warms $2.0$ mol of solid by $10$ K?",
+  "answer": {
+   "kind": "numeric",
+   "value": 498.6,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*3*8.31*10",
+  "solution": "$Q=nC\\,\\Delta T=2\\times24.9\\times10=499$ J.",
+  "hints": [
+   "Heat is moles times heat capacity times the temperature change."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Niobium has $T_c=9.2$ K. Using $\\Delta(0)=1.76\\,k_BT_c$ with $k_B=1.38\\times10^{-23}$ J/K and $q=1.60\\times10^{-19}$ C, find $\\Delta(0)$ in meV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.39656,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1.76*1.38e-23*9.2/1.60e-19*1000",
+  "solution": "$k_BT_c=0.794$ meV, so $\\Delta(0)=1.76\\times0.794=1.40$ meV.",
+  "hints": [
+   "Convert $k_BT_c$ to meV before multiplying by 1.76."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Superconducting $T_c$ depends on isotope mass $M$ as $T_c\\propto M^{-1/2}$. If the isotope mass doubles, how does $T_c$ change?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Falls by a factor $1/\\sqrt2$",
+    "Falls by a factor $1/2$",
+    "Rises by a factor $\\sqrt2$",
+    "Does not change"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treats the mass exponent as $-1$",
+    "flips the sign of the exponent",
+    "assumes the lattice does not affect pairing"
+   ]
+  },
+  "solution": "Heavier ions vibrate more slowly, lowering the phonon energy, and $T_c$ scales as $M^{-1/2}$.",
+  "hints": [
+   "The exponent is minus one half."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A solid has sound speed $v=3.0\\ \\mathrm{km/s}$ and Debye wavevector $k_D=1.4\\times10^{10}\\ \\mathrm{m^{-1}}$. The Debye temperature obeys $k_B\\theta_D=\\hbar v k_D$. Use $\\hbar=1.05\\times10^{-34}$ J s and $k_B=1.38\\times10^{-23}$ J/K. Find $\\theta_D$ in K.",
+  "answer": {
+   "kind": "numeric",
+   "value": 319.5652173913043,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1.05e-34*3.0e3*1.4e10/1.38e-23",
+  "solution": "The largest phonon energy $\\hbar vk_D$ equals $k_B\\theta_D$. $\\theta_D=(1.05\\times10^{-34})(3.0\\times10^{3})(1.4\\times10^{10})/(1.38\\times10^{-23})=320$ K.",
+  "hints": [
+   "Equate the largest phonon energy to $k_B\\theta_D$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all true statements about a superconductor below $T_c$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Its DC resistance is zero",
+    "It expels magnetic field (Meissner effect)",
+    "Its heat capacity jumps at $T_c$",
+    "Its resistance rises as temperature falls"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "Zero resistance and Meissner expulsion are defining properties. A heat-capacity jump marks the transition. Resistance rises with temperature in normal metals, not in superconductors.",
+  "hints": [
+   "Check each statement against the defining properties."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0136",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the one-standard-deviation uncertainty of a Poisson count $N$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sigma=N$",
+    "$\\sigma=\\sqrt N$",
+    "$\\sigma=1/\\sqrt N$",
+    "$\\sigma=N^2$"
+   ],
+   "correct": 1,
+   "why": [
+    "takes the variance as the standard deviation",
+    "",
+    "gives the fractional error as if it were absolute",
+    "squares the count instead of taking its root"
+   ]
+  },
+  "solution": "For Poisson counting $\\sigma^2=N$, so $\\sigma=\\sqrt N$.",
+  "hints": [
+   "The variance equals the mean for Poisson counts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0137",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A count gives $N=400$. Find the fractional 1$\\sigma$ uncertainty $\\sigma_N/N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.05,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1/math.sqrt(400)",
+  "solution": "$\\sigma/N=\\sqrt N/N=1/\\sqrt N=0.05$.",
+  "hints": [
+   "Divide the root by the count."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0138",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two independent measured quantities have 1$\\sigma$ uncertainties $\\sigma_a$ and $\\sigma_b$ (written sa and sb). Write the 1$\\sigma$ uncertainty of their difference $a-b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(sa^2+sb^2)",
+   "vars": [
+    "sa",
+    "sb"
+   ],
+   "domain": {
+    "sa": [
+     0.1,
+     2
+    ],
+    "sb": [
+     0.1,
+     2
+    ]
+   },
+   "also": [
+    "(sa^2+sb^2)^(1/2)",
+    "sqrt(sb^2+sa^2)"
+   ]
+  },
+  "check": null,
+  "solution": "Independent errors add in quadrature: $\\sigma_{a-b}=\\sqrt{\\sigma_a^2+\\sigma_b^2}$.",
+  "hints": [
+   "Variances add, not the uncertainties themselves."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0139",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A source plus background gives $900$ counts in $10$ s. Background alone gives $400$ counts in $10$ s. Using Poisson statistics, find the 1$\\sigma$ uncertainty of the net count rate in counts/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.605551275463989,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(900+400)/10",
+  "solution": "Net rate $=50$ counts/s. Variances add: $\\sigma=\\sqrt{900+400}/10=3.61$ counts/s.",
+  "hints": [
+   "Add the variances of the two measured counts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0140",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two independent measurements give $10.0\\pm0.5$ and $12.0\\pm1.0$ (1$\\sigma$). Find the weighted mean.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10.4,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "(10.0/0.5**2+12.0/1.0**2)/(1/0.5**2+1/1.0**2)",
+  "solution": "Weights are $1/\\sigma^2$: $(4\\cdot10+1\\cdot12)/5=10.4$.",
+  "hints": [
+   "Weight each value by one over its variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0141",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A rectangle measures $12.0\\pm0.3$ cm by $5.0\\pm0.2$ cm, with independent 1$\\sigma$ errors. Find the 1$\\sigma$ uncertainty of its area in cm$^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.8301943396169813,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "12*5*math.sqrt((0.3/12)**2+(0.2/5)**2)",
+  "solution": "Fractional errors add in quadrature: $\\sqrt{(0.3/12)^2+(0.2/5)^2}=0.0472$, so $\\sigma_A=2.83$ cm$^2$.",
+  "hints": [
+   "For a product, relative errors add in quadrature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0142",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A signal is counted for time $t$ at a constant rate. How does the signal-to-noise ratio $S/\\sigma$ scale with $t$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\propto\\sqrt t$",
+    "$\\propto t$",
+    "$\\propto1/\\sqrt t$",
+    "$\\propto t^2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treats the noise as fixed, so $S/\\sigma$ grows linearly",
+    "inverts the scaling, as if noise grew with time",
+    "squares the counting time"
+   ]
+  },
+  "solution": "$S\\propto t$ and $\\sigma\\propto\\sqrt t$, so $S/\\sigma\\propto\\sqrt t$.",
+  "hints": [
+   "Signal grows linearly, and noise grows as the square root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0143",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A Poisson count $N$ is recorded over a fixed, exact time $t$. Write the 1$\\sigma$ uncertainty of the rate $r=N/t$ in terms of $N$ and $t$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(N)/t",
+   "vars": [
+    "N",
+    "t"
+   ],
+   "domain": {
+    "N": [
+     10,
+     1000
+    ],
+    "t": [
+     1,
+     60
+    ]
+   },
+   "also": [
+    "N^(1/2)/t",
+    "(N)^(1/2)*t^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$\\sigma_r=\\sigma_N/t=\\sqrt N/t$.",
+  "hints": [
+   "The time is exact, so it only scales the error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0144",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A least-squares fit to $25$ data points has $4$ free parameters and gives $\\chi^2=33.6$. Find the reduced chi-square $\\chi^2/\\nu$, where $\\nu$ is the degrees of freedom.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.6,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "33.6/(25-4)",
+  "solution": "$\\nu=25-4=21$, so $\\chi^2/\\nu=33.6/21=1.6$.",
+  "hints": [
+   "Degrees of freedom are data points minus fitted parameters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0145",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the $-3$ dB cutoff frequency $f_c$ in hertz of a resistor–capacitor low-pass filter with resistance $R$ and capacitance $C$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f_c=1/(2\\pi RC)$",
+    "$f_c=RC/(2\\pi)$",
+    "$f_c=2\\pi RC$",
+    "$f_c=1/(RC)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "moves $RC$ into the numerator",
+    "multiplies by $2\\pi$ where it should divide",
+    "gives the angular frequency $1/(RC)$, in rad/s, not hertz"
+   ]
+  },
+  "solution": "Cutoff is where $\\omega RC=1$, so $f_c=\\omega_c/2\\pi=1/(2\\pi RC)$.",
+  "hints": [
+   "Set the reactance equal to the resistance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0146",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A voltage ratio of $10$ corresponds to a gain of $20\\log_{10}(V_{\\rm out}/V_{\\rm in})$ decibels. Find the gain in dB.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "20*math.log10(10)",
+  "solution": "$20\\log_{10}10=20$ dB.",
+  "hints": [
+   "A factor of ten in voltage is one decade."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0147",
+  "tier": "a",
+  "type": "recall",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the closed-loop gain $G$ of an ideal inverting op-amp with feedback resistor $R_f$ and input resistor $R_i$, as a ratio.",
+  "answer": {
+   "kind": "expression",
+   "value": "-Rf/Ri",
+   "vars": [
+    "Rf",
+    "Ri"
+   ],
+   "domain": {
+    "Rf": [
+     1,
+     10
+    ],
+    "Ri": [
+     1,
+     5
+    ]
+   },
+   "also": [
+    "-(Rf/Ri)",
+    "-Rf*Ri^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "The inverting input sits at virtual ground, so $G=-R_f/R_i$.",
+  "hints": [
+   "The inverting input is held at virtual ground."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0148",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An RC low-pass filter has $R=10$ k$\\Omega$ and $C=0.10$ $\\mu$F. Find its $-3$ dB cutoff frequency in hertz.",
+  "answer": {
+   "kind": "numeric",
+   "value": 159.15494309189535,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1/(2*math.pi*10e3*0.10e-6)",
+  "solution": "$f_c=1/(2\\pi RC)=159$ Hz.",
+  "hints": [
+   "Use $R$ and $C$ in SI units."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0149",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A non-inverting op-amp has $R_f=47$ k$\\Omega$ and $R_g=4.7$ k$\\Omega$. Using gain $G=1+R_f/R_g$, find its voltage gain in dB.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20.827853703164504,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "20*math.log10(1+47/4.7)",
+  "solution": "$G=1+10=11$, and $20\\log_{10}11=20.8$ dB.",
+  "hints": [
+   "Divide the feedback resistor by the ground resistor, then add one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0150",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sine wave on an oscilloscope spans $3.0$ V peak to peak. Find its RMS voltage in volts.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.0606601717798212,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1.5/math.sqrt(2)",
+  "solution": "$V_{\\rm pk}=1.5$ V, so $V_{\\rm rms}=1.5/\\sqrt2=1.06$ V.",
+  "hints": [
+   "The peak is half the peak-to-peak value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0151",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A source with $50\\ \\Omega$ output impedance drives a $1\\ \\mathrm{M}\\Omega$ oscilloscope input. What fraction of the source voltage appears at the input?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "About 100%, since $1\\,\\mathrm M\\Omega\\gg50\\ \\Omega$",
+    "About 50%, since the impedances should match",
+    "About 0.005%, from the ratio $50/10^6$ inverted",
+    "About 1%, from a 100-to-1 divider"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "applies power matching to a voltage divider, where it does not belong",
+    "inverts the divider ratio, giving the load's share rather than the signal's",
+    "invents a 100-to-1 divider with no basis"
+   ]
+  },
+  "solution": "The divider ratio is $10^6/(10^6+50)\\approx1$.",
+  "hints": [
+   "Compare the two resistances in the divider."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0152",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A single-pole RC filter has $R=4.7\\ \\mathrm{k\\Omega}$ and $C=22\\ \\mathrm{nF}$. Its 10% to 90% rise time is about $2.2$ time constants. Find the rise time in $\\mu$s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 227.48,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2.2*4.7e3*22e-9*1e6",
+  "solution": "$\\tau=RC=(4.7\\times10^3)(22\\times10^{-9})=103\\ \\mu$s. Rise time $=2.2\\tau=228\\ \\mu$s.",
+  "hints": [
+   "The time constant is $R$ times $C$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t9-0153",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "At the $-3$ dB point of a filter, the output power is half its passband value into the same load. Find the voltage ratio $V_{\\rm out}/V_{\\rm pass}$ at that point.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7071067811865475,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1/math.sqrt(2)",
+  "solution": "Power $\\propto V^2$, so half the power means $V$ scales by $1/\\sqrt2=0.707$.",
+  "hints": [
+   "Power goes as voltage squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

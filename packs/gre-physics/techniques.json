@@ -1,0 +1,1684 @@
+[
+ {
+  "id": "t1.units",
+  "name": "SI units and prefixes",
+  "level": "T1",
+  "area": "base",
+  "prereq": [],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** prefixes, mixed units, or any quantity you must check. **Move:** write each prefix as a power of ten and convert the number, not only the unit name. Square or cube the factor when the unit is squared or cubed. **Example:** $1\\ \\mathrm{mm^2}=(10^{-3}\\ \\mathrm m)^2=10^{-6}\\ \\mathrm{m^2}$. **Trap:** using $10^{3}$ where $10^{-3}$ is needed, or converting the length but not the square."
+ },
+ {
+  "id": "t1.sigfig",
+  "name": "Significant figures and error propagation",
+  "level": "T1",
+  "area": "base",
+  "prereq": [],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** combining measured values. **Move:** for multiplication and division, keep the fewest significant figures. For addition and subtraction, keep the fewest decimal places. Round only the final answer. **Example:** $12.3+4.56=16.86$. Since $12.3$ has one decimal place, report $16.9$. **Trap:** applying the multiplication rule to a sum, or rounding every intermediate step."
+ },
+ {
+  "id": "t1.dimanal",
+  "name": "Dimensional analysis",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.units"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** checking an equation, or guessing a form from the variables involved. **Move:** write each quantity in base dimensions $M$, $L$, $T$ and match exponents on both sides. Dimensionless numbers such as $\\tfrac12$ or $\\pi$ do not change dimensions. **Example:** $[\\tfrac12 at^{2}]=LT^{-2}\\cdot T^{2}=L$, a length. **Trap:** confusing units with dimensions, or expecting dimensional analysis to fix a numerical coefficient."
+ },
+ {
+  "id": "t1.vec-comp",
+  "name": "Vector components and addition",
+  "level": "T1",
+  "area": "base",
+  "prereq": [],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a vector given by magnitude and angle, or several vectors to add. **Move:** resolve each vector into $A_x=A\\cos\\theta$ and $A_y=A\\sin\\theta$ for an angle measured from the $+x$ axis. Add components separately, then find the magnitude with $\\sqrt{x^{2}+y^{2}}$. **Example:** a force of $10$ N at $30^\\circ$ has $F_x=10\\cos30^\\circ\\approx8.66$ N. **Trap:** using sine for the $x$-component of an angle measured from the $x$-axis, or adding magnitudes instead of components."
+ },
+ {
+  "id": "t1.vec-prod",
+  "name": "Dot and cross products",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.vec-comp"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** finding work, torque, or a direction perpendicular to two vectors. **Move:** the dot product $\\vec A\\cdot\\vec B=AB\\cos\\theta$ is a scalar, zero when the vectors are perpendicular. The cross product has magnitude $AB\\sin\\theta$, a vector perpendicular to both, zero when parallel. **Example:** $(4,0,3)\\cdot(2,5,0)=8$. **Trap:** using sine for the dot product or cosine for the cross product, or reversing a cross product without a sign change."
+ },
+ {
+  "id": "t1.kin-1d",
+  "name": "One-dimensional kinematics",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.units"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** motion along a line with constant acceleration. **Move:** pick the equation that leaves out the unknown. Use $v=u+at$ for time, $s=ut+\\tfrac12at^{2}$ for displacement, and $v^{2}=u^{2}+2as$ when time is absent. Fix one positive direction and take signs from it. **Example:** from rest with $a=2.5$ m/s$^2$ for $8$ s, $v=20$ m/s. **Trap:** a sign error for deceleration, or taking a root that does not fit the timing of the problem."
+ },
+ {
+  "id": "t1.kin-2d",
+  "name": "Projectile and 2D kinematics",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.vec-comp",
+   "t1.kin-1d"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** projectiles, and any motion with constant acceleration in two directions. **Move:** treat $x$ and $y$ separately. Without air, horizontal velocity stays constant, and vertical motion has $a=-g$. Use the vertical motion to find the time, then use that time for horizontal distance. **Example:** a horizontal launch from $20$ m falls for $\\sqrt{2\\cdot20/9.8}\\approx2.02$ s. **Trap:** applying $g$ to horizontal motion, or using the full speed where only a component is needed."
+ },
+ {
+  "id": "t1.graphs",
+  "name": "Reading physics graphs",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.kin-1d"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** a position, velocity, or acceleration graph. **Move:** the slope of an $x$–$t$ graph is velocity, and the slope of a $v$–$t$ graph is acceleration. Area under $v$–$t$ is displacement, and area under $a$–$t$ is change in velocity. Crossings of zero mark reversals. **Example:** a $v$–$t$ triangle rising to $12$ m/s over $4$ s has area $24$ m. **Trap:** reading the height of a $v$–$t$ graph as displacement, or reading the height of an $x$–$t$ graph as velocity."
+ },
+ {
+  "id": "t1.estimate",
+  "name": "Order-of-magnitude estimation",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.units"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a quantity with no exact data, where a power of ten is enough. **Move:** round each input to one significant figure, multiply the powers of ten, and report the nearest power. Use $\\log_{10}$ to choose between two neighboring powers. **Example:** a day has $86400$ s, and $\\log_{10}86400\\approx4.9$, so about $10^{5}$ s. **Trap:** skipping a unit conversion, or rounding the wrong way when the logarithm is near $0.5$."
+ },
+ {
+  "id": "t1.scaling",
+  "name": "Scaling and proportional reasoning",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.dimanal"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a quantity depends on another as a power, such as $A\\propto r^{2}$. **Move:** write $Q\\propto x^{n}$, so the factor is $(x_2/x_1)^{n}$. Read $n$ from geometry (area $r^{2}$, volume $r^{3}$) or from the law (gravity $1/r^{2}$, period $\\sqrt L$). **Example:** $T\\propto\\sqrt L$, so quadrupling $L$ doubles $T$. **Trap:** using the ratio without the exponent, or flipping the sign of $n$ for an inverse dependence."
+ },
+ {
+  "id": "t1.small-angle",
+  "name": "Small-quantity approximations",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.scaling"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** an angle or ratio much smaller than $1$, measured in radians. **Move:** $\\sin\\theta\\approx\\theta$, $\\tan\\theta\\approx\\theta$, and $\\cos\\theta\\approx1-\\theta^{2}/2$. Check that the angle is in radians first. The error of $\\sin\\theta\\approx\\theta$ is about $\\theta^{3}/6$. **Example:** for $\\theta=0.10$ rad, $\\cos\\theta\\approx0.995$. **Trap:** leaving the angle in degrees, which makes $\\theta$ about $57$ times too large."
+ },
+ {
+  "id": "t1.linearize",
+  "name": "Linearizing data",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.graphs",
+   "t1.scaling"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** data that should follow a power law or an exponential, and a straight line is needed to read a slope. **Move:** for $y=kx^{n}$, plot $\\log y$ against $\\log x$, giving slope $n$ and intercept $\\log k$. For $y=kx^{2}$, plot $y$ against $x^{2}$, giving slope $k$. **Example:** $y=5x^{3}$ gives a log-log slope of $3$. **Trap:** reading the slope of a nonlinear plot as a physical constant, or reading the intercept without undoing the logarithm."
+ },
+ {
+  "id": "t1.calc-rates",
+  "name": "Calculus as rates and sums",
+  "level": "T1",
+  "area": "base",
+  "prereq": [
+   "t1.graphs"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** a rate, a derivative, or a sum of a quantity that changes. **Move:** $\\dfrac{dx}{dt}$ gives a rate at an instant. $\\int v\\,dt$ gives displacement and $\\int F\\,dx$ gives work. Use $\\dfrac{d}{dt}t^{n}=nt^{n-1}$ and $\\int t^{n}\\,dt=\\dfrac{t^{n+1}}{n+1}$. **Example:** $\\int_0^2 4t\\,dt=8$. **Trap:** forgetting the $\\tfrac12$ from $\\int t\\,dt$, or dropping the lower limit."
+ },
+ {
+  "id": "t2.newton",
+  "name": "Newton's laws",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t1.vec-comp",
+   "t1.kin-2d"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** an object's acceleration is set by the net force on it. **Move:** draw the forces on one object, add them as vectors, then solve $\\sum \\vec F = m\\vec a$ component by component. **Example:** forces of $20\\ \\mathrm N$ east and $8.0\\ \\mathrm N$ west on $4.0\\ \\mathrm{kg}$ give $a=(20-8)/4=3.0\\ \\mathrm{m/s^2}$ east. **Trap:** adding a force to its third-law partner. The partner acts on another object, so it never cancels."
+ },
+ {
+  "id": "t2.fbd",
+  "name": "Free-body diagrams",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.newton"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** any problem with forces on a body, at rest or accelerating. **Move:** isolate one object and draw only the forces acting on it: weight, contact forces, tension, friction. Normal forces are perpendicular to the surface. Write one equation per axis. **Example:** a block on a level table with a $10\\ \\mathrm N$ downward push has $N=mg+10$. **Trap:** drawing forces the object exerts on other objects, or a force along the velocity."
+ },
+ {
+  "id": "t2.friction-drag",
+  "name": "Friction and drag",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.fbd"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** an object touches a surface or moves through a fluid. **Move:** static friction takes any value up to $\\mu_s N$, set by the other forces. Once sliding, use $f_k=\\mu_k N$, opposite the relative motion. Drag grows with speed until it balances the weight. **Example:** a $10\\ \\mathrm{kg}$ crate pushed with $25\\ \\mathrm N$ stays put, so friction is $25\\ \\mathrm N$. **Trap:** using $\\mu_k$ before the crate moves."
+ },
+ {
+  "id": "t2.incline-pulley",
+  "name": "Inclines, pulleys, constraints",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.fbd"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a block on a slope, or two masses on a rope over a pulley. **Move:** resolve weight along and perpendicular to the incline. For an Atwood machine, $a=(m_1-m_2)g/(m_1+m_2)$, with the same tension on both sides of a massless frictionless pulley. **Example:** $5.0$ and $3.0\\ \\mathrm{kg}$ give $a=2(9.8)/8=2.45\\ \\mathrm{m/s^2}$. **Trap:** dividing by one mass instead of the total mass."
+ },
+ {
+  "id": "t2.circular",
+  "name": "Circular motion",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.newton"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** an object moves on a curved path at steady speed. **Move:** find the net inward force and set it equal to $mv^2/r$. Circular motion needs only that inward net force. On a flat curve, friction supplies it, so $v_{\\max}=\\sqrt{\\mu_s g r}$. **Example:** a $40\\ \\mathrm m$ curve with $\\mu_s=0.50$ gives $v=\\sqrt{196}=14\\ \\mathrm{m/s}$. **Trap:** adding a separate outward force."
+ },
+ {
+  "id": "t2.work-energy",
+  "name": "Work and kinetic energy",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t1.vec-prod",
+   "t2.newton"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a force acts over a displacement, or you need a speed without the time. **Move:** compute net work, $W=\\int \\vec F\\cdot d\\vec r$, with $\\cos\\theta$ for a constant force. Then set $W_{\\text{net}}=\\Delta K=\\tfrac12 m(v_f^2-v_i^2)$. **Example:** a $2.0\\ \\mathrm{kg}$ block going from $3$ to $7\\ \\mathrm{m/s}$ has $W=\\tfrac12(2)(49-9)=40\\ \\mathrm J$. **Trap:** counting one force's work only, or using $Fd$ when the force is not along the displacement."
+ },
+ {
+  "id": "t2.potential",
+  "name": "Potential energy and conservation",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.work-energy",
+   "t1.calc-rates"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** only conservative forces do work, or a force comes from a potential. **Move:** use $K_i+U_i=K_f+U_f$. For a one-dimensional potential, $F=-dU/dx$, and turning points are where $K=0$. **Example:** a $5.0\\ \\mathrm m$ drop gives $v=\\sqrt{2gh}\\approx9.9\\ \\mathrm{m/s}$. **Trap:** applying energy conservation when friction does work, or dropping the minus sign in $F=-dU/dx$."
+ },
+ {
+  "id": "t2.momentum",
+  "name": "Momentum and impulse",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.newton"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** a collision, a push over time, or an isolated system. **Move:** impulse equals the change in momentum, $\\int \\vec F\\,dt=\\Delta\\vec p$. Momentum is conserved when the net external force is zero. Pick a positive direction and keep signs. **Example:** a $0.15\\ \\mathrm{kg}$ ball going from $20$ to $-16\\ \\mathrm{m/s}$ gets $\\Delta p=-5.4\\ \\mathrm{N\\,s}$. **Trap:** using speeds instead of signed velocities, which hides a reversal."
+ },
+ {
+  "id": "t2.collisions",
+  "name": "Collisions",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.momentum",
+   "t2.work-energy"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** two bodies interact over a short time. **Move:** momentum is conserved in every isolated collision. Kinetic energy is conserved only in elastic ones. For a sticky collision, use momentum alone. **Example:** a $2.0\\ \\mathrm{kg}$ cart at $6\\ \\mathrm{m/s}$ hits a $4.0\\ \\mathrm{kg}$ cart at rest, sticks, and moves at $2.0\\ \\mathrm{m/s}$. **Trap:** assuming kinetic energy is conserved in every collision."
+ },
+ {
+  "id": "t2.com",
+  "name": "Center of mass and two-body motion",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.momentum"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a system of particles or bodies, or a two-body problem. **Move:** the center of mass is the mass-weighted average position. Its acceleration is $\\sum F_{\\text{ext}}/M$, and internal forces drop out. For two bodies, use the reduced mass $\\mu=mM/(m+M)$. **Example:** $2\\ \\mathrm{kg}$ at $0$ and $6\\ \\mathrm{kg}$ at $4\\ \\mathrm m$ give $x_{cm}=3\\ \\mathrm m$. **Trap:** averaging the positions without the masses."
+ },
+ {
+  "id": "t2.torque-statics",
+  "name": "Torque and static equilibrium",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t1.vec-prod",
+   "t2.fbd"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a rigid body is held still, or a force rotates it. **Move:** torque is $\\tau=rF\\sin\\theta$, measured from one pivot. For equilibrium, set both net force and net torque to zero. Choosing the pivot at an unknown force removes that force from the torque equation. **Example:** a $30\\ \\mathrm N$ force at $1.5\\ \\mathrm m$, perpendicular, gives $\\tau=45\\ \\mathrm{N\\,m}$. **Trap:** using the full force and ignoring the angle."
+ },
+ {
+  "id": "t2.rot-dynamics",
+  "name": "Rotational dynamics",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.torque-statics",
+   "t2.com"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a body spins, rolls, or feels a torque. **Move:** use $\\tau=I\\alpha$ with $I$ about the axis of rotation. Rolling without slipping means the contact point has zero velocity, so $v=\\omega R$. **Example:** a solid disk with $I=\\tfrac12 mR^2=0.25\\ \\mathrm{kg\\,m^2}$ and $\\tau=3.0\\ \\mathrm{N\\,m}$ gives $\\alpha=12\\ \\mathrm{rad/s^2}$. **Trap:** using $I$ about a different axis, or using $mR^2$ for a solid body."
+ },
+ {
+  "id": "t2.ang-mom",
+  "name": "Angular momentum",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.rot-dynamics",
+   "t2.collisions"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** a spinning system changes shape, or no torque acts about its axis. **Move:** angular momentum is $\\vec L=\\vec r\\times\\vec p$, and for a rigid body $L=I\\omega$. If the net external torque about the axis is zero, $L$ is conserved, so $I_1\\omega_1=I_2\\omega_2$. **Example:** $I$ falling from $4.0$ to $1.0\\ \\mathrm{kg\\,m^2}$ at $2.0\\ \\mathrm{rad/s}$ gives $\\omega=8\\ \\mathrm{rad/s}$. **Trap:** conserving kinetic energy or linear momentum by mistake."
+ },
+ {
+  "id": "t2.gravitation",
+  "name": "Gravitation and Kepler",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.circular",
+   "t2.potential"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** a body orbits or falls under gravity from a central mass. **Move:** a circular orbit needs $v^2/r=GM/r^2$, so $v=\\sqrt{GM/r}$. Escape speed is $\\sqrt{2GM/R}$. Kepler's third law gives $T^2\\propto r^3$. **Example:** doubling the radius multiplies $T$ by $2^{3/2}$. **Trap:** using $\\sqrt{GM/R}$ as the escape speed, which misses the factor $\\sqrt{2}$."
+ },
+ {
+  "id": "t2.shm",
+  "name": "Simple harmonic motion",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.potential"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "**When:** a body is pushed back toward equilibrium by a force proportional to displacement. **Move:** write $F=-kx$, so $\\omega=\\sqrt{k/m}$ and $T=2\\pi/\\omega$. For a small-angle pendulum, $\\omega=\\sqrt{g/L}$. Total energy $\\tfrac12 kA^2$ is conserved. **Example:** $k=50$ and $m=2$ give $v_{\\max}=A\\omega=0.10(5)=0.50\\ \\mathrm{m/s}$. **Trap:** using $\\sqrt{m/k}$ for $\\omega$."
+ },
+ {
+  "id": "t2.damped-driven",
+  "name": "Damped and driven oscillators",
+  "level": "T2",
+  "area": "mech",
+  "prereq": [
+   "t2.shm"
+  ],
+  "order": 16,
+  "exam": true,
+  "teach": "**When:** an oscillator loses energy to damping, or is driven at a frequency. **Move:** the amplitude decays as $e^{-bt/2m}$, so $\\tau=2m/b$. The damped frequency is $\\omega_d=\\sqrt{\\omega_0^2-(b/2m)^2}$. Resonance peaks near $\\omega_0$, with height limited by $b$. **Example:** $m=0.50$ and $b=0.20$ give $\\tau=5\\ \\mathrm s$. **Trap:** dropping the factor 2 in $\\tau=2m/b$, or using the energy decay rate for the amplitude."
+ },
+ {
+  "id": "t3.wave-basics",
+  "name": "Wave properties",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t2.shm"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** any periodic disturbance travelling through a medium or along a string. **Move:** use $v=f\\lambda$, $T=1/f$, $\\omega=2\\pi f$ and $k=2\\pi/\\lambda$. On a string, $v=\\sqrt{F/\\mu}$ with tension $F$ and mass per length $\\mu$. **Example:** crests 0.25 m apart with period 0.040 s give $f=25$ Hz and $v=6.25$ m/s. **Trap:** using the period as the frequency, or $\\omega$ where $f$ belongs."
+ },
+ {
+  "id": "t3.superpose",
+  "name": "Superposition and standing waves",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.wave-basics"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** two or more waves overlap at one point, or a string or pipe holds standing waves. **Move:** add displacements point by point, with their signs. Equal waves with phase difference $\\varphi$ give resultant amplitude $2A\\cos(\\varphi/2)$. A string fixed at both ends has $\\lambda_n=2L/n$. **Example:** waves in phase give $2A$, and a half-cycle offset gives zero. **Trap:** adding intensities instead of displacements, or treating an end as an antinode."
+ },
+ {
+  "id": "t3.sound",
+  "name": "Sound and the Doppler effect",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.wave-basics"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** a source or listener moves relative to air, or an air column resonates. **Move:** for approach, use $f'=f(v+v_L)/(v-v_S)$ with speeds positive toward each other. Open pipes give $f_n=nv/2L$. A pipe closed at one end has only odd harmonics, $f=(2k-1)v/4L$. **Example:** a 1000 Hz source approaching at 30 m/s in 340 m/s air is heard near 1097 Hz. **Trap:** a wrong sign on the listener's speed, or using $2L$ for a closed pipe."
+ },
+ {
+  "id": "t3.intensity",
+  "name": "Intensity and decibels",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.sound"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** sound from a point source spreads out, or levels must be combined. **Move:** intensity falls as $1/r^2$. Level is $\\beta=10\\log(I/I_0)$ with $I_0=10^{-12}\\ \\mathrm{W/m^2}$, so a 10 dB change is a factor 10 in intensity. **Example:** 80 dB at 3 m gives about 68 dB at 12 m, since a fourfold distance costs 12 dB. **Trap:** adding decibel levels of two sources, when intensities must be added first."
+ },
+ {
+  "id": "t3.refraction",
+  "name": "Reflection and refraction",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.wave-basics"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** light crosses a boundary between two media, or total internal reflection is possible. **Move:** apply $n_1\\sin\\theta_1=n_2\\sin\\theta_2$ with angles from the normal. Reflection angle equals incidence angle. The critical angle satisfies $\\sin\\theta_c=n_2/n_1$ when $n_1>n_2$. **Example:** glass with $n=1.5$ to air has $\\theta_c\\approx41.8^\\circ$. **Trap:** measuring angles from the surface instead of the normal."
+ },
+ {
+  "id": "t3.geom-optics",
+  "name": "Mirrors and thin lenses",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.refraction"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a mirror or thin lens forms an image. **Move:** use $1/f=1/d_o+1/d_i$, $f=R/2$ for a mirror, and $m=-d_i/d_o$. Real image distances are positive, and virtual ones negative. Converging focal lengths are positive, diverging ones negative. **Example:** a converging lens with $f=10$ cm and object at 30 cm gives $d_i=15$ cm. **Trap:** writing $1/f=1/d_o-1/d_i$ for a real image."
+ },
+ {
+  "id": "t3.interference",
+  "name": "Two-source interference",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.superpose"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** two coherent sources, or two paths from one source, meet at a point. **Move:** find the path difference $\\Delta$. Bright when $\\Delta=m\\lambda$, dark when $\\Delta=(m+\\tfrac12)\\lambda$, for integer $m$. For a double slit with small angles, $\\Delta y=\\lambda L/d$. **Example:** a path difference of $2.5\\lambda$ is dark. **Trap:** taking half a wavelength as a whole one, or ignoring a phase offset between the sources."
+ },
+ {
+  "id": "t3.thin-film",
+  "name": "Thin-film interference",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.interference",
+   "t3.refraction"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** light reflects from a thin transparent layer. **Move:** count phase flips first. Reflection from a higher-index surface adds a $\\pi$ shift. With one flip, bright when $2nt=(m+\\tfrac12)\\lambda$. With zero or two flips, bright when $2nt=m\\lambda$. **Example:** an anti-reflection coating with both flips is dark at $t=\\lambda/4n$. **Trap:** skipping the flip count, which reverses bright and dark."
+ },
+ {
+  "id": "t3.diffraction",
+  "name": "Diffraction and gratings",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.interference"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** light passes a single slit, an aperture or a grating. **Move:** single-slit minima sit at $a\\sin\\theta=m\\lambda$ for $m=\\pm1,\\pm2,\\dots$. Grating maxima sit at $d\\sin\\theta=m\\lambda$ with $d=1/N$. The largest order is the largest integer below $d/\\lambda$. **Example:** $d=2.0\\ \\mu$m and $\\lambda=0.60\\ \\mu$m give $m_{\\max}=3$. **Trap:** using the single-slit rule with the grating spacing, or the reverse."
+ },
+ {
+  "id": "t3.polarization",
+  "name": "Polarization",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.refraction"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** polarized light meets a polarizer or analyser, or light reflects off a surface. **Move:** unpolarized light loses half its intensity at the first ideal polarizer. Later polarizers give $I=I_0\\cos^2\\theta$, with $\\theta$ between axes. At Brewster's angle $\\tan\\theta_B=n_2/n_1$, and reflected and refracted rays are perpendicular. **Example:** unpolarized 100 W/m$^2$ through axes 30 degrees apart gives 37.5 W/m$^2$. **Trap:** applying $\\cos^2\\theta$ to unpolarized light without the half."
+ },
+ {
+  "id": "t3.optical-instruments",
+  "name": "Optical instruments",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.geom-optics",
+   "t3.diffraction"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** magnifiers, microscopes, telescopes, or the smallest resolvable angle. **Move:** a relaxed-eye magnifier gives $M=N/f$. With the image at the near point, $M=1+N/f$, with $N=25$ cm. A telescope in normal adjustment gives $M=f_o/f_e$ and length $f_o+f_e$. Resolution is $\\theta=1.22\\lambda/D$. **Example:** $f=4.0$ cm at the near point gives $M=7.25$. **Trap:** using the near-point formula when the image is at infinity."
+ },
+ {
+  "id": "t3.fluid-static",
+  "name": "Fluid statics",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t2.fbd"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a fluid is at rest, or a body floats or sinks. **Move:** pressure rises by $\\rho g h$ with depth, so $p=p_0+\\rho g h$. Buoyant force equals the weight of displaced fluid, $\\rho_f V_{\\rm sub} g$. A floating body's submerged fraction is $\\rho_{\\rm body}/\\rho_f$. **Example:** at 12 m in fresh water the gauge pressure is 117.6 kPa. **Trap:** adding atmospheric pressure to a gauge reading, or using the full volume instead of the submerged volume."
+ },
+ {
+  "id": "t3.fluid-flow",
+  "name": "Fluid dynamics",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t3.fluid-static",
+   "t2.work-energy"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** steady, incompressible flow in a pipe, or a jet from a tank. **Move:** continuity gives $A_1v_1=A_2v_2$. Bernoulli gives $p+\\tfrac12\\rho v^2+\\rho g h$ constant along a streamline. A small hole at depth $h$ gives $v=\\sqrt{2gh}$. **Example:** halving a pipe's diameter raises the speed fourfold. **Trap:** writing $Av^2$ in continuity, or dropping the height term when the pipe rises."
+ },
+ {
+  "id": "t3.ideal-gas",
+  "name": "Ideal gas and heat basics",
+  "level": "T3",
+  "area": "wave",
+  "prereq": [
+   "t1.units",
+   "t2.work-energy"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** a fixed amount of gas in a closed container, or molecular speeds. **Move:** use $pV=nRT$ with $T$ in kelvin and $R=8.31$ J/(mol K). At fixed volume, pressure is proportional to temperature. Mean translational kinetic energy per molecule is $\\tfrac32k_BT$. **Example:** heating from 300 K to 450 K at fixed volume raises the pressure by a factor 1.5. **Trap:** using degrees Celsius in the gas law, or confusing molar $R$ with per-molecule $k_B$."
+ },
+ {
+  "id": "t4.coulomb",
+  "name": "Coulomb's law and electric field",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t1.vec-comp",
+   "t2.newton"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** finding the force between point charges, or the field of a point charge. **Move:** $F=k|q_1q_2|/r^2$ along the line joining them, with $k=1/(4\\pi\\varepsilon_0)$. For several charges, add force or field vectors component by component. **Example:** $+2.0\\ \\mu\\mathrm C$ and $-3.0\\ \\mu\\mathrm C$ at $0.30\\ \\mathrm m$ give $F\\approx0.60\\ \\mathrm N$. **Trap:** adding the charges instead of multiplying them, or leaving the distance squared out of the denominator."
+ },
+ {
+  "id": "t4.gauss",
+  "name": "Gauss's law",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.coulomb"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** the field is needed and the charge has enough symmetry (line, plane, sphere) that $E$ is constant over a chosen surface. **Move:** $\\oint \\vec E\\cdot d\\vec A=Q_{\\mathrm{enc}}/\\varepsilon_0$. Pick a Gaussian surface that matches the symmetry, so $E\\,dA$ becomes a plain product. **Example:** an infinite sheet gives $E=\\sigma/(2\\varepsilon_0)$ per side. **Trap:** counting charge outside the surface. Only enclosed charge sets the flux, though outside charges still shape the field."
+ },
+ {
+  "id": "t4.potential",
+  "name": "Electric potential",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.coulomb",
+   "t2.potential"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** converting between potential and field, or finding a point charge's potential. **Move:** for a point charge with $V=0$ at infinity, $V=kQ/r$. Potentials of several charges add as scalars. Then $\\vec E=-\\nabla V$, so the field is minus the slope of $V$. **Example:** $+2.0\\ \\mu\\mathrm C$ gives $V\\approx18\\ \\mathrm{kV}$ at $1.0\\ \\mathrm m$. **Trap:** adding field vectors when you should add potentials, or losing the minus sign."
+ },
+ {
+  "id": "t4.multipole",
+  "name": "Dipoles and multipoles",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.potential"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a pair of equal and opposite charges, seen from far away. **Move:** dipole moment $p=qd$, pointing from $-q$ to $+q$. On the axis, potential falls as $1/r^2$ and field as $1/r^3$. Torque is $\\vec p\\times\\vec E$; energy is $U=-\\vec p\\cdot\\vec E$. **Example:** $p=8.0\\times10^{-12}\\ \\mathrm{C\\,m}$ at $30^\\circ$ to $2.0\\times10^{3}\\ \\mathrm{N/C}$ feels $8.0\\times10^{-9}\\ \\mathrm{N\\,m}$. **Trap:** using point-charge falloffs ($1/r$ for $V$, $1/r^2$ for $E$)."
+ },
+ {
+  "id": "t4.conductors",
+  "name": "Conductors in electrostatics",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.gauss"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** charge sits on a metal, or a field is applied to one. **Move:** in equilibrium the field inside is zero, the potential is constant, and net charge sits on the surface. Just outside, $E=\\sigma/\\varepsilon_0$, normal to the surface. **Example:** a cavity with $+3\\ \\mu\\mathrm C$ inside a shell of net $+1\\ \\mu\\mathrm C$ puts $+4\\ \\mu\\mathrm C$ outside. **Trap:** forgetting the induced charge on the cavity wall."
+ },
+ {
+  "id": "t4.images",
+  "name": "Method of images",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.conductors",
+   "t4.potential"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a point charge sits near a grounded conducting plane, with the boundary at $V=0$. **Move:** replace the plane with an equal and opposite image charge at the mirror point. Compute fields or forces on the real side only. **Example:** $+q$ at $d$ in front of a plane is attracted with force $kq^2/(2d)^2$. **Trap:** using the image solution on the far side of the boundary."
+ },
+ {
+  "id": "t4.laplace",
+  "name": "Laplace's equation and boundaries",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.potential",
+   "t4.conductors"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** no charge lies in the region and $V$ is known on its boundaries. **Move:** solve $\\nabla^2 V=0$ with those values. In one dimension $V$ is linear, in cylinders $V\\propto\\ln r$, between spheres $A+B/r$. The solution is unique. **Example:** $V=0$ at $x=0$ and $300\\ \\mathrm V$ at $x=2.0\\ \\mathrm{cm}$ gives $75\\ \\mathrm V$ at $0.50\\ \\mathrm{cm}$. **Trap:** using a guessed function without checking $\\nabla^2V=0$."
+ },
+ {
+  "id": "t4.capacitors",
+  "name": "Capacitors",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.potential",
+   "t4.conductors"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** charge, voltage or stored energy of conductors separated by an insulator. **Move:** $C=Q/V$. Parallel plates give $C=\\varepsilon_0A/d$. In parallel, capacitances add. In series, reciprocals add and each capacitor carries the same charge. **Example:** $4.0\\ \\mu\\mathrm F$ and $6.0\\ \\mu\\mathrm F$ in series at $10\\ \\mathrm V$ each hold $24\\ \\mu\\mathrm C$. **Trap:** assuming equal voltage across series capacitors. Equal charge is the series rule."
+ },
+ {
+  "id": "t4.dielectrics",
+  "name": "Dielectrics",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.capacitors"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a dielectric fills part or all of a capacitor's gap. **Move:** capacitance becomes $\\kappa C_0$. With a battery attached, $V$ stays fixed and $Q$ grows. Disconnected, $Q$ stays fixed and $V$ falls to $V/\\kappa$. The field inside a dielectric is reduced by $\\kappa$ for fixed free charge. **Example:** $\\kappa=4$ quadruples $C$. **Trap:** holding both $V$ and $Q$ fixed. Whether the battery stays connected decides which one is fixed."
+ },
+ {
+  "id": "t4.dc-circuits",
+  "name": "DC circuits",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.potential"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** resistors and sources in DC steady state. **Move:** series resistances add. Parallel resistances combine by reciprocals, so two give $R=R_1R_2/(R_1+R_2)$. Reduce to one source and one resistor, find the current, then branch voltages. A real battery's terminal voltage is $\\mathcal E-Ir$. **Example:** $12\\ \\mathrm V$ across $4\\ \\Omega$ and $8\\ \\Omega$ in series gives $1\\ \\mathrm A$. **Trap:** using the parallel formula for series resistors, or taking emf as terminal voltage."
+ },
+ {
+  "id": "t4.kirchhoff",
+  "name": "Kirchhoff's rules",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.dc-circuits"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** several loops or junctions that no single series or parallel reduction handles. **Move:** assign a current to each branch. Junction rule: currents in equal currents out. Loop rule: emfs and $IR$ changes sum to zero around each loop. A negative result means the true direction is opposite. **Example:** $12\\ \\mathrm V$ and $6\\ \\mathrm V$ opposing over $3\\ \\Omega$ gives $2\\ \\mathrm A$. **Trap:** sign errors on $IR$ drops, which fall when you walk with the current."
+ },
+ {
+  "id": "t4.rc-transient",
+  "name": "RC transients",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.capacitors",
+   "t4.dc-circuits"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a capacitor charges or discharges through a resistor. **Move:** $\\tau=RC$. Charging: $V=V_0(1-e^{-t/\\tau})$. Discharging: $V=V_0e^{-t/\\tau}$. Capacitor voltage cannot jump, but the resistor current can. **Example:** $2.0\\ \\mathrm{k\\Omega}$ and $5.0\\ \\mu\\mathrm F$ give $\\tau=10\\ \\mathrm{ms}$. The voltage reaches half of $10\\ \\mathrm V$ at $\\tau\\ln2\\approx6.9\\ \\mathrm{ms}$. **Trap:** using $\\tau$ as the half-life. Half-life is $\\tau\\ln2$."
+ },
+ {
+  "id": "t4.drude",
+  "name": "Conduction and resistivity",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.dc-circuits"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** estimating conductivity, drift speed or resistance of a metal from microscopic quantities. **Move:** $\\sigma=nq^2\\tau/m$. Drift velocity is $v_d=qE\\tau/m$, and current density is $J=nqv_d$. Wire resistance is $R=L/(\\sigma A)$. **Example:** $I=2.0\\ \\mathrm A$ in $1.0\\ \\mathrm{mm^2}$ with $n=8.5\\times10^{28}$ gives $v_d\\approx1.5\\times10^{-4}\\ \\mathrm{m/s}$. **Trap:** using mm squared as area without converting to m squared."
+ },
+ {
+  "id": "t4.em-energy",
+  "name": "Electrostatic energy and forces",
+  "level": "T4",
+  "area": "em",
+  "prereq": [
+   "t4.capacitors",
+   "t4.dielectrics"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** stored energy in a capacitor, or in an electric field. **Move:** $U=\\frac12QV=\\frac12CV^2=Q^2/(2C)$. Energy density is $u=\\frac12\\varepsilon E^2$ with $\\varepsilon=\\kappa\\varepsilon_0$. Use $Q^2/(2C)$ when charge is held fixed, and $\\frac12CV^2$ when voltage is held fixed. **Example:** $4.0\\ \\mu\\mathrm F$ at $50\\ \\mathrm V$ stores $5.0\\ \\mathrm{mJ}$. **Trap:** using $\\frac12CV^2$ when charge, not voltage, is held fixed."
+ },
+ {
+  "id": "t5.lorentz",
+  "name": "Lorentz force and charged-particle motion",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t4.potential",
+   "t1.vec-prod"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** a charge moves through a magnetic field, or through crossed electric and magnetic fields. **Move:** the magnetic force is $q\\vec v\\times\\vec B$, perpendicular to velocity, so it does no work. For circular motion set it equal to $mv^2/r$, giving $r=mv/(|q|B)$. **Example:** a proton at $3\\times10^5$ m/s in $0.2$ T has $r\\approx1.6\\times10^{-2}$ m. **Trap:** using a dot product, or treating the magnetic force as changing the speed."
+ },
+ {
+  "id": "t5.biot-savart",
+  "name": "Biot-Savart law",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.lorentz"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** a field comes from a wire, loop or arc with no simple symmetry shortcut. **Move:** add $d\\vec B=\\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec\\ell\\times\\hat r}{r^2}$ over the current, element by element, keeping each direction. Symmetry usually reduces the sum to one scalar integral. **Example:** every element of a loop of radius $R$ sits a distance $R$ from the centre, giving $B=\\mu_0 I/(2R)$. **Trap:** dropping the cross product's direction, so opposing contributions are added when they cancel."
+ },
+ {
+  "id": "t5.ampere",
+  "name": "Ampere's law",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.biot-savart"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** the current has enough symmetry that $B$ is constant and parallel to a chosen loop. **Move:** $\\oint\\vec B\\cdot d\\vec\\ell=\\mu_0 I_{\\rm enc}$, so $B\\cdot2\\pi r=\\mu_0 I_{\\rm enc}$ for a long wire. Count only current passing through the loop's surface. **Example:** inside a solid wire of radius $R$, $I_{\\rm enc}=Ir^2/R^2$, so $B$ grows linearly with $r$. **Trap:** counting a current outside the loop as enclosed."
+ },
+ {
+  "id": "t5.mag-materials",
+  "name": "Magnetic materials",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.ampere"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a solenoid or toroid has a core other than vacuum. **Move:** $H=nI$ depends only on free current, so fix $H$ first. Then $B=\\mu H=\\mu_0\\mu_r H$ and $\\chi=\\mu_r-1$. Diamagnets have small negative $\\chi$, paramagnets small positive $\\chi$, and ferromagnets large positive $\\chi$. **Example:** $\\mu_r=200$, $n=2000$ turns/m and $I=0.5$ A give $B\\approx0.25$ T, with $H$ still $1000$ A/m. **Trap:** scaling $H$ by $\\mu_r$ when only $B$ changes."
+ },
+ {
+  "id": "t5.faraday",
+  "name": "Faraday's law",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.ampere"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** a loop's flux changes through a field, area or angle change, or a conductor moves across a field. **Move:** $|\\mathcal E|=|d\\Phi_B/dt|$ with $\\Phi_B=BA\\cos\\theta$. A rod of length $L$ moving at $v$ across a field gives $\\mathcal E=BLv$. The minus sign gives the sense: the induced current opposes the flux change. **Example:** a $0.050$ m radius loop with $B$ rising by $0.40$ T in $0.20$ s has $|\\mathcal E|\\approx0.016$ V. **Trap:** using $\\Delta B$ instead of $A\\,dB/dt$."
+ },
+ {
+  "id": "t5.inductance",
+  "name": "Inductance and Lenz's law",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.faraday"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a coil's current changes, or two coils share flux. **Move:** $\\mathcal E=-L\\,dI/dt$ and $L=N\\Phi_B/I$. Stored energy is $\\frac{1}{2}LI^2$. For an ideal solenoid $L=\\mu_0 N^2A/\\ell$. **Example:** a $0.50$ H coil with current rising at $4.0$ A/s has $|\\mathcal E|=2.0$ V. **Trap:** reading the EMF as aiding the current change. Lenz's law makes it oppose the change, and dropping $N$ from the flux linkage is a common slip."
+ },
+ {
+  "id": "t5.rl-lc",
+  "name": "RL and LC circuits",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.inductance",
+   "t4.rc-transient"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** a series resistor and inductor, or an inductor and capacitor with no resistance. **Move:** for RL, $\\tau=L/R$, and a switched source gives $I=(\\mathcal E/R)(1-e^{-t/\\tau})$. For LC, $\\omega_0=1/\\sqrt{LC}$, and energy shifts between $\\frac{1}{2}LI^2$ and $Q^2/(2C)$. **Example:** $L=0.40$ H and $R=8$ Ω give $\\tau=0.050$ s, and half the final current is reached at $\\tau\\ln2$. **Trap:** reporting $\\omega_0$ as a frequency in Hz without dividing by $2\\pi$."
+ },
+ {
+  "id": "t5.ac-circuits",
+  "name": "AC circuits and phasors",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.rl-lc"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** a sinusoidal source drives R, L and C in series. **Move:** use phasors, with $X_L=\\omega L$ and $X_C=1/(\\omega C)$. Then $|Z|=\\sqrt{R^2+(X_L-X_C)^2}$ and $I_{\\rm rms}=V_{\\rm rms}/|Z|$. Average power uses rms values, with $V_{\\rm rms}=V_0/\\sqrt2$. **Example:** a $120$ V peak across $30\\ \\Omega$ gives $P=(120^2/2)/30=240$ W. **Trap:** putting the peak voltage into an rms formula, which doubles the power."
+ },
+ {
+  "id": "t5.resonance",
+  "name": "Resonance and filters",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.ac-circuits"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a series RLC is driven near its natural frequency, or an RC or RL filter is used. **Move:** resonance is $X_L=X_C$, so $Z=R$ and the current peaks. Bandwidth is $\\Delta\\omega=R/L$ and $Q=\\omega_0L/R$. For a low-pass RC, $|H|=1/\\sqrt{1+(\\omega RC)^2}$, with cutoff $\\omega_c=1/(RC)$. **Example:** $Q=50$ means the inductor and capacitor voltages reach $50V_0$. **Trap:** assuming the capacitor voltage is zero at resonance; it equals $QV_0$."
+ },
+ {
+  "id": "t5.maxwell",
+  "name": "Maxwell's equations",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.faraday",
+   "t4.gauss"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** fields change in time, or sources are present. **Move:** the four equations are $\\nabla\\cdot\\vec E=\\rho/\\varepsilon_0$, $\\nabla\\cdot\\vec B=0$, $\\nabla\\times\\vec E=-\\partial\\vec B/\\partial t$ and $\\nabla\\times\\vec B=\\mu_0\\vec J+\\mu_0\\varepsilon_0\\,\\partial\\vec E/\\partial t$. The last term is displacement current. **Example:** combining the two curl equations in vacuum gives $c=1/\\sqrt{\\mu_0\\varepsilon_0}\\approx3.00\\times10^8$ m/s. **Trap:** dropping the $\\varepsilon_0\\,\\partial\\vec E/\\partial t$ term, which breaks wave solutions and charge continuity across a capacitor."
+ },
+ {
+  "id": "t5.disp-current",
+  "name": "Displacement current",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.maxwell"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a capacitor charges or discharges, so the gap carries no conduction current. **Move:** displacement current is $I_d=\\varepsilon_0 A\\,dE/dt$ across the gap, and it equals the wire current by continuity. Include it in Ampère's law for any surface that passes through the gap. **Example:** a $2.0$ A wire current charging a capacitor gives $2.0$ A of displacement current in the gap. **Trap:** using the conduction current on a surface through the gap, where it is zero."
+ },
+ {
+  "id": "t5.em-waves",
+  "name": "Electromagnetic waves",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.maxwell",
+   "t3.wave-basics"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a plane wave in vacuum, or any question about wave fields and speed. **Move:** $c=1/\\sqrt{\\mu_0\\varepsilon_0}$ and $E_0=cB_0$, with $\\vec E\\perp\\vec B\\perp\\vec k$ and $\\vec E\\times\\vec B$ along propagation. The fields peak together. **Example:** $E_0=6.0$ V/m gives $B_0=E_0/c=2.0\\times10^{-8}$ T. Light at $500$ nm has $f=c/\\lambda=6.0\\times10^{14}$ Hz. **Trap:** writing $B_0=cE_0$, which is the reverse of the correct relation."
+ },
+ {
+  "id": "t5.poynting",
+  "name": "Energy and momentum of fields",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.em-waves"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** energy flow, intensity, radiation pressure or field energy density is asked. **Move:** $\\vec S=\\vec E\\times\\vec B/\\mu_0$, with average intensity $I=\\varepsilon_0cE_0^2/2$. A perfect absorber feels pressure $I/c$, and a perfect reflector feels $2I/c$. **Example:** $I=500$ W/m² on a mirror gives $2I/c\\approx3.3\\times10^{-6}$ Pa. **Trap:** using $I/c$ for a reflector, which halves the pressure."
+ },
+ {
+  "id": "t5.em-boundary",
+  "name": "Waves at interfaces and in media",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.em-waves",
+   "t3.polarization"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** light crosses an interface or travels through a medium. **Move:** frequency is fixed, so $v=c/n$ and $\\lambda=\\lambda_0/n$. Snell's law is $n_1\\sin\\theta_1=n_2\\sin\\theta_2$. At normal incidence $R=((n_1-n_2)/(n_1+n_2))^2$, and Brewster's angle has $\\tan\\theta_B=n_2/n_1$. **Example:** glass at $n=1.5$ gives Brewster's angle $56.3^\\circ$. **Trap:** using $\\tan\\theta_B=n_1/n_2$, the inverse ratio."
+ },
+ {
+  "id": "t5.radiation",
+  "name": "Radiation from charges",
+  "level": "T5",
+  "area": "em",
+  "prereq": [
+   "t5.poynting"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "**When:** a charge accelerates, or an oscillating charge is a source. **Move:** Larmor power is $P=q^2a^2/(6\\pi\\varepsilon_0c^3)$, which depends on acceleration squared and not on mass. A dipole's intensity goes as $\\sin^2\\theta$, zero along the axis and maximal perpendicular to it. **Example:** an electron at $1.0\\times10^{15}$ m/s² radiates about $5.7\\times10^{-24}$ W. **Trap:** using speed in place of acceleration. Uniform motion radiates nothing."
+ },
+ {
+  "id": "t6.gen-coords",
+  "name": "Generalized coordinates",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t2.ang-mom",
+   "t2.shm"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** a system has constraints, such as a bead on a hoop or a pendulum on a moving pivot. **Move:** choose the fewest variables that fix the configuration, one per free direction, then write $T$ and $V$ in them. **Example:** a bead on a hoop of radius $R$ turning at $\\omega$ has $T=\\tfrac12 mR^2(\\dot\\theta^2+\\omega^2\\sin^2\\theta)$. **Trap:** counting Cartesian coordinates and forgetting the constraints, or treating a velocity as a coordinate."
+ },
+ {
+  "id": "t6.euler-lagrange",
+  "name": "Lagrange equations",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.gen-coords"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** forces are hard to find, but $T$ and $V$ are easy. **Move:** write $L=T-V$, then impose $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q}-\\frac{\\partial L}{\\partial q}=0$ for each coordinate. **Example:** $L=\\tfrac12 m\\dot x^2-\\tfrac12 kx^2$ gives $m\\ddot x=-kx$. **Trap:** dropping the $\\partial L/\\partial q$ term, which is nonzero whenever $V$ depends on $q$."
+ },
+ {
+  "id": "t6.cyclic",
+  "name": "Cyclic coordinates and conservation",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.euler-lagrange"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** $L$ does not depend explicitly on some coordinate $q$. **Move:** $q$ is cyclic, so $\\partial L/\\partial q=0$ and $p=\\partial L/\\partial\\dot q$ is conserved. **Example:** $L=\\tfrac12 m(\\dot r^2+r^2\\dot\\varphi^2)-V(r)$ gives $p_\\varphi=mr^2\\dot\\varphi$ constant. **Trap:** assuming the velocity $\\dot q$ stays fixed. Only the conjugate momentum is conserved, and $\\dot\\varphi$ changes as $r$ changes."
+ },
+ {
+  "id": "t6.hamiltonian",
+  "name": "Hamiltonian mechanics",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.cyclic"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** you need phase-space equations, or $H$ is simpler than $L$. **Move:** compute $p=\\partial L/\\partial\\dot q$, write $H=\\sum p\\dot q-L$ in $q$ and $p$, then use $\\dot q=\\partial H/\\partial p$ and $\\dot p=-\\partial H/\\partial q$. **Example:** $H=p^2/2m+\\tfrac12 kx^2$ gives $\\dot x=p/m$. **Trap:** writing $H=L+\\sum p\\dot q$. That gives $3T-V$, not the energy $T+V$."
+ },
+ {
+  "id": "t6.central-force",
+  "name": "Central forces",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.cyclic",
+   "t2.gravitation"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** a force always points at a fixed centre. **Move:** angular momentum $\\ell=mr^2\\dot\\varphi$ is conserved, so $v_t=\\ell/(mr)$ at each radius. **Example:** if the tangential speed is $3.0$ m/s at $r=2.0$ m, it is $6.0$ m/s at $r=1.0$ m. **Trap:** assuming linear momentum is conserved. The force is not zero, so only $\\ell$ and energy are conserved."
+ },
+ {
+  "id": "t6.eff-potential",
+  "name": "Effective potential and orbits",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.central-force"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** radial motion or circular orbits under a central force. **Move:** write $U_{\\rm eff}=V(r)+\\ell^2/(2mr^2)$. A circular orbit sits where $U_{\\rm eff}'(r_0)=0$, and it is stable at a minimum. **Example:** for $V=-k/r$, $r_0=\\ell^2/(mk)$. **Trap:** using $U_{\\rm eff}(r_0)=0$ or setting the slope equal to $E$."
+ },
+ {
+  "id": "t6.small-osc",
+  "name": "Small oscillations",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.euler-lagrange",
+   "t2.damped-driven"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** a particle sits at a stable equilibrium and moves a little. **Move:** expand $U$ to second order, so $F\\approx-U''(x_0)(x-x_0)$ and $\\omega^2=U''(x_0)/m$. **Example:** $U=2.0x^2+0.5x^4$ with $m=0.50$ kg gives $\\omega^2=8$ at $x=0$. **Trap:** using $U'(x_0)$, which vanishes at equilibrium, or the potential value itself."
+ },
+ {
+  "id": "t6.rotating",
+  "name": "Rotating frames",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.gen-coords",
+   "t2.circular"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** the problem is set in a turning frame, such as a turntable or rotating rod. **Move:** add the centrifugal acceleration $\\omega^2 r$ outward, and for moving bodies the Coriolis term $-2\\vec\\omega\\times\\vec v'$. **Example:** $\\omega=0.50$ rad/s and $v'=2.0$ m/s give Coriolis acceleration $2.0$ m/s$^2$. **Trap:** dropping the factor of 2, or expecting Coriolis for a body at rest in the frame."
+ },
+ {
+  "id": "t6.lorentz-tr",
+  "name": "Lorentz transformation",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t5.em-waves"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** two frames move at constant relative speed $v$ along $x$. **Move:** $x'=\\gamma(x-vt)$ and $t'=\\gamma(t-vx/c^2)$, with $\\gamma=1/\\sqrt{1-v^2/c^2}$. **Example:** at $v=0.80c$, an event at $x=3.00\\times10^8$ m and $t=0$ has $t'=-1.33$ s. **Trap:** using $t'=\\gamma(t-x/c)$, or the Galilean $x'=x-vt$. The time term carries $v/c^2$."
+ },
+ {
+  "id": "t6.dilation-contraction",
+  "name": "Time dilation and length contraction",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.lorentz-tr"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a clock or rod moves relative to an observer. **Move:** proper time $\\tau=T/\\gamma$ is measured by the clock at rest with the events. A rod's lab length is $L_0/\\gamma$, where $L_0$ is its proper length. **Example:** at $0.60c$, $\\gamma=1.25$, so $10.0$ years on Earth is $8.0$ years on the rocket. **Trap:** dilating lengths or contracting times. The moving clock always shows less time."
+ },
+ {
+  "id": "t6.vel-addition",
+  "name": "Relativistic velocity addition",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.lorentz-tr"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** velocities are a sizeable fraction of $c$ along one line. **Move:** an object with speed $u$ in the lab has speed $u'=(u-v)/(1-uv/c^2)$ in a frame moving at $v$. **Example:** two boosts of $0.5c$ combine to $\\dfrac{0.5+0.5}{1+0.25}c=0.8c$. **Trap:** adding speeds with $u+v$. Light still travels at $c$ in every frame."
+ },
+ {
+  "id": "t6.rel-energy",
+  "name": "Relativistic energy and momentum",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.dilation-contraction",
+   "t2.collisions"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a particle moves at a large fraction of $c$, or energy and momentum are both given. **Move:** $E=\\gamma mc^2$, $p=\\gamma mv$, and $E^2=p^2c^2+m^2c^4$. **Example:** an electron with $mc^2=0.511$ MeV at $0.80c$ has $E=0.511/0.6=0.852$ MeV. **Trap:** using $\\tfrac12 mv^2$ for kinetic energy. The correct kinetic energy is $(\\gamma-1)mc^2$."
+ },
+ {
+  "id": "t6.invariants",
+  "name": "Four-vectors and invariants",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.rel-energy"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** you need a quantity all frames agree on, such as a mass or a decay threshold. **Move:** for a whole system, $E_{\\rm tot}^2-p_{\\rm tot}^2c^2=M^2c^4$. **Example:** two $1.0$ MeV photons at right angles give $M=\\sqrt{2}\\approx1.41$ MeV/c$^2$. **Trap:** flipping the sign to $E^2+p^2c^2$, which is not invariant."
+ },
+ {
+  "id": "t6.rel-collisions",
+  "name": "Relativistic decays, collisions, Doppler",
+  "level": "T6",
+  "area": "mech",
+  "prereq": [
+   "t6.invariants",
+   "t6.vel-addition"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** collisions, decays, or a moving source's Doppler shift. **Move:** $s=E_{\\rm tot}^2-p_{\\rm tot}^2c^2$. For a target at rest, $s=m_1^2+m_2^2+2m_2E_1$, and creation needs $\\sqrt s$ at least the sum of the final masses. Doppler, source approaching: $f'/f=\\sqrt{(1+\\beta)/(1-\\beta)}$. **Example:** a $4.0$ GeV proton on a proton at rest gives $\\sqrt s=\\sqrt{10}\\approx3.16$ GeV. **Trap:** using the lab energy as $\\sqrt s$, or setting threshold at the initial rest mass."
+ },
+ {
+  "id": "t7.first-law",
+  "name": "First law and work",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t3.ideal-gas"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** a gas exchanges heat or work with its surroundings. **Move:** write $\\Delta U=Q-W$, with $Q$ heat into the gas and $W$ work done by the gas. Work done on the gas enters with the opposite sign. **Example:** a gas absorbs $300\\ \\mathrm J$ of heat and does $100\\ \\mathrm J$ of work, so $\\Delta U=200\\ \\mathrm J$. **Trap:** flipping the sign of $W$ when the prompt defines work done on the gas."
+ },
+ {
+  "id": "t7.gas-processes",
+  "name": "Ideal gas processes",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.first-law"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** a gas moves along an isothermal, isobaric, isochoric or adiabatic path. **Move:** isothermal means $\\Delta U=0$, so $Q=W=nRT\\ln(V_2/V_1)$. Isobaric gives $W=P\\Delta V$. Isochoric gives $W=0$. Adiabatic gives $Q=0$ and $W=-\\Delta U$. **Example:** $2\\ \\mathrm{mol}$ at $300\\ \\mathrm K$ doubling its volume isothermally does $W\\approx3.46\\ \\mathrm{kJ}$. **Trap:** taking $\\Delta U=0$ on an adiabatic path."
+ },
+ {
+  "id": "t7.engines",
+  "name": "Heat engines and Carnot",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.gas-processes"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** a cycle takes heat from a hot reservoir and returns some to a cold one. **Move:** efficiency is $\\eta=W/Q_h=1-Q_c/Q_h$. The Carnot bound is $\\eta_C=1-T_c/T_h$, with temperatures in kelvin. A Carnot refrigerator has $\\mathrm{COP}=T_c/(T_h-T_c)$. **Example:** between $600\\ \\mathrm K$ and $300\\ \\mathrm K$, $\\eta_C=0.50$, so $1200\\ \\mathrm J$ in gives $600\\ \\mathrm J$ of work. **Trap:** using Celsius, or inverting the temperature ratio."
+ },
+ {
+  "id": "t7.entropy",
+  "name": "Entropy",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.engines"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** heat moves reversibly, or a process changes a system's multiplicity. **Move:** for reversible heat at temperature $T$, $\\Delta S=\\int dQ/T$. Isothermal heat gives $\\Delta S=Q/T$. Irreversible adiabatic processes raise $S$ even though $Q=0$. **Example:** $2.0\\ \\mathrm{kJ}$ absorbed reversibly at $400\\ \\mathrm K$ gives $\\Delta S=5.0\\ \\mathrm{J/K}$. **Trap:** assuming every adiabatic process leaves $S$ unchanged."
+ },
+ {
+  "id": "t7.second-law",
+  "name": "Second law and free energy",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.entropy"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** deciding whether a process at fixed $T$ and $P$ runs on its own. **Move:** compute $\\Delta G=\\Delta H-T\\Delta S$. The process is spontaneous when $\\Delta G<0$. Check the signs of $\\Delta H$ and $\\Delta S$ separately, then find the temperature where $\\Delta G=0$. **Example:** $\\Delta H=+50\\ \\mathrm{kJ}$ and $\\Delta S=+0.10\\ \\mathrm{kJ/K}$ give $\\Delta G=0$ at $500\\ \\mathrm K$. **Trap:** judging spontaneity from $\\Delta S_{\\rm sys}$ alone, which ignores the surroundings."
+ },
+ {
+  "id": "t7.potentials",
+  "name": "Thermodynamic potentials",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.second-law",
+   "t5.maxwell"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a problem asks for a derivative of $U$, $H$, $F$ or $G$, or needs a Maxwell relation. **Move:** use the natural variables: $U(S,V)$, $H(S,P)$, $F(T,V)$, $G(T,P)$. Then $dU=T\\,dS-P\\,dV$ and $dF=-S\\,dT-P\\,dV$. Cross-derivatives of each give Maxwell relations. **Example:** $(\\partial S/\\partial V)_T=(\\partial P/\\partial T)_V=nR/V$ for an ideal gas. **Trap:** using $dU$ for a process held at constant $T$."
+ },
+ {
+  "id": "t7.phase",
+  "name": "Phase transitions",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.potentials"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** a liquid–vapor or solid–liquid boundary shifts with $P$ or $T$. **Move:** the Clapeyron slope is $dP/dT=L/(T\\,\\Delta V)$. For an ideal vapor, $\\ln(P_2/P_1)=(L/R)(1/T_1-1/T_2)$. **Example:** with $L=40\\ \\mathrm{kJ/mol}$, the vapor pressure doubles near $373\\ \\mathrm K$ at about $394\\ \\mathrm K$. **Trap:** forgetting the sign of $\\Delta V$, which is negative for ice melting into denser water."
+ },
+ {
+  "id": "t7.kinetic",
+  "name": "Kinetic theory",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.first-law",
+   "t2.collisions"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** a problem links pressure, temperature and molecular speeds. **Move:** kinetic theory gives $PV=\\tfrac13 Nm\\langle v^2\\rangle$ and $\\tfrac12 m\\langle v^2\\rangle=\\tfrac32 k_BT$. So $v_{\\rm rms}=\\sqrt{3k_BT/m}$, which scales as $\\sqrt T$. **Example:** $\\mathrm N_2$ at $300\\ \\mathrm K$ has $v_{\\rm rms}\\approx517\\ \\mathrm{m/s}$. **Trap:** treating speed as proportional to $T$ instead of $\\sqrt T$."
+ },
+ {
+  "id": "t7.equipartition",
+  "name": "Equipartition and heat capacity",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.kinetic"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a problem asks for heat capacity, $\\gamma$, or heat absorbed at fixed $V$ or $P$. **Move:** each quadratic energy term contributes $\\tfrac12 R$ per mole. Monatomic gas: $C_V=\\tfrac32 R$. Diatomic near room temperature: $C_V=\\tfrac52 R$. Then $C_P=C_V+R$ and $\\gamma=C_P/C_V$. **Example:** $\\gamma=7/5$ for a diatomic gas. **Trap:** counting vibration at room temperature, which is frozen out for diatomics."
+ },
+ {
+  "id": "t7.counting",
+  "name": "Microstates and the Boltzmann entropy",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.entropy"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a problem counts microstates or relates entropy to multiplicity. **Move:** $S=k_B\\ln\\Omega$. Independent systems multiply their multiplicities, so their entropies add. For $N$ two-state spins with $n$ up, $\\Omega=\\binom{N}{n}$. **Example:** $10$ spins with $3$ up give $\\Omega=120$. **Trap:** adding multiplicities instead of multiplying them."
+ },
+ {
+  "id": "t7.canonical",
+  "name": "Partition function",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.counting",
+   "t7.equipartition"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a system is in contact with a heat bath at temperature $T$. **Move:** state $i$ has probability $p_i=e^{-E_i/k_BT}/Z$, with $Z=\\sum_i e^{-E_i/k_BT}$. For levels $0$ and $\\varepsilon$, $Z=1+e^{-\\varepsilon/k_BT}$. **Example:** with $\\varepsilon=k_BT$, the upper-state probability is $e^{-1}/(1+e^{-1})\\approx0.27$. **Trap:** dropping the ground-state term from $Z$."
+ },
+ {
+  "id": "t7.quantum-stats",
+  "name": "Fermi-Dirac and Bose-Einstein",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.canonical"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** identical particles share states at one temperature. **Move:** fermion occupancy is $f=1/(e^{(E-\\mu)/k_BT}+1)$. Boson occupancy is $n=1/(e^{(E-\\mu)/k_BT}-1)$. Photons have $\\mu=0$. Both reduce to Boltzmann when $e^{(E-\\mu)/k_BT}\\gg1$. **Example:** a photon mode at $E=3k_BT$ has $n\\approx0.052$. **Trap:** using the $+1$ sign for bosons."
+ },
+ {
+  "id": "t7.blackbody",
+  "name": "Blackbody radiation",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.quantum-stats",
+   "t5.poynting"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** thermal radiation from a surface or star. **Move:** total power per area is $\\sigma T^4$, with $\\sigma=5.67\\times10^{-8}\\ \\mathrm{W\\,m^{-2}K^{-4}}$. The peak wavelength obeys $\\lambda_{\\max}T=b$, with $b=2.90\\times10^{-3}\\ \\mathrm{m\\,K}$. Multiply by the area for total power. **Example:** doubling $T$ multiplies power per area by $16$. **Trap:** using $T^2$ or $T$ instead of $T^4$."
+ },
+ {
+  "id": "t7.heat-transfer",
+  "name": "Conduction, convection, radiation",
+  "level": "T7",
+  "area": "therm",
+  "prereq": [
+   "t7.first-law"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** heat crosses a wall, a surface loses heat to air, or radiation passes between bodies. **Move:** conduction gives $P=kA\\Delta T/L$. Thermal resistances in series add, $R=\\sum L_i/(k_iA)$, and $P=\\Delta T/R$. Convection gives $P=hA\\Delta T$. Radiation from a blackbody surface (emissivity $1$) gives $P=\\sigma A(T^4-T_s^4)$. **Example:** layers with $L/k=0.2$ and $0.5$ give $R=0.7$. **Trap:** adding conductances in series."
+ },
+ {
+  "id": "t8.born",
+  "name": "Wavefunction and probability",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t3.wave-basics",
+   "t1.calc-rates"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** a question asks for a probability, a density, or normalisation of a wavefunction. **Move:** the density is $|\\psi|^2$, so a probability is $\\int|\\psi|^2\\,dx$ over the region, and normalisation sets the total to 1. **Example:** $\\psi=Ax$ on $0\\le x\\le2$ needs $A^2\\cdot\\tfrac83=1$, so $A=\\sqrt{3/8}$. **Trap:** integrating $\\psi$ instead of $|\\psi|^2$."
+ },
+ {
+  "id": "t8.tise",
+  "name": "Schrodinger equation",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.born",
+   "t6.hamiltonian"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** a particle has a definite energy, or a stationary state in a potential is asked for. **Move:** write $-\\frac{\\hbar^2}{2m}\\psi''+V\\psi=E\\psi$ and solve region by region. Where $E<V$, $\\psi\\propto e^{-\\kappa x}$ with $\\kappa=\\sqrt{2m(V-E)}/\\hbar$. **Example:** with $\\hbar^2/2m=1\\ \\mathrm{eV\\,nm^2}$, $\\sin 3x$ has $E=9$ eV. **Trap:** dropping $V$ or the mass factor when forming the eigenvalue equation."
+ },
+ {
+  "id": "t8.inf-well",
+  "name": "Infinite square well",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.tise"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** a particle is confined between impenetrable walls. **Move:** $\\psi(0)=\\psi(L)=0$ gives $\\psi_n=\\sqrt{2/L}\\sin(n\\pi x/L)$ and $E_n=n^2E_1$, with $E_1=\\pi^2\\hbar^2/2mL^2$. **Example:** an electron in a 1 nm well has $E_1\\approx0.377$ eV, so $E_3-E_2=5E_1\\approx1.88$ eV. **Trap:** counting the walls as nodes; the $n$th state has $n-1$ interior nodes."
+ },
+ {
+  "id": "t8.step-tunnel",
+  "name": "Steps, barriers, tunneling",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.tise"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a particle meets a step or barrier with energy near $V_0$. **Move:** if $E>V_0$, the far side oscillates with $k_2=\\sqrt{2m(E-V_0)}/\\hbar$ and reflection is partial. If $E<V_0$, the wave decays with $\\kappa$. For a thick barrier, WKB gives $T\\approx e^{-2\\kappa a}$. **Example:** $\\kappa a=1.5$ gives $T\\approx e^{-3}\\approx0.050$. **Trap:** taking $E<V_0$ to mean zero transmission."
+ },
+ {
+  "id": "t8.qho",
+  "name": "Quantum harmonic oscillator",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.inf-well",
+   "t2.shm"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** a particle sits in a quadratic well $V=\\tfrac12m\\omega^2x^2$. **Move:** levels are $E_n=(n+\\tfrac12)\\hbar\\omega$, evenly spaced by $\\hbar\\omega$ with zero-point energy $\\hbar\\omega/2$. Dipole transitions change $n$ by one. **Example:** with $\\hbar\\omega=0.40$ eV, the lowest allowed absorption from the ground state is 0.40 eV, not 0.80 eV. **Trap:** using $E_n=n\\hbar\\omega$ and dropping the zero-point energy."
+ },
+ {
+  "id": "t8.operators",
+  "name": "Operators and commutators",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.tise"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a question involves commutators, Hermitian operators, or the time derivative of an expectation value. **Move:** use $[x,p]=i\\hbar$ and $[AB,C]=A[B,C]+[A,C]B$. Expectation values are $\\langle A\\rangle=\\langle\\psi|A|\\psi\\rangle$. **Example:** $[x^2p,x]=x^2[p,x]=-i\\hbar x^2$. **Trap:** ignoring operator order; $xp$ and $px$ differ by $i\\hbar$."
+ },
+ {
+  "id": "t8.uncertainty",
+  "name": "Uncertainty principle",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.operators"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** a question asks for a minimum spread, a confinement energy, or a bound on $\\Delta x\\,\\Delta p$ or $\\Delta E\\,\\Delta t$. **Move:** use $\\Delta x\\,\\Delta p\\ge\\hbar/2$. At the minimum, $\\Delta p=\\hbar/(2\\Delta x)$, and the kinetic energy is about $(\\Delta p)^2/2m$. **Example:** $\\Delta x=0.10$ nm gives $\\Delta p=5\\,\\hbar/\\mathrm{nm}$. **Trap:** using $\\hbar$ instead of $\\hbar/2$, or reading the bound as a sum."
+ },
+ {
+  "id": "t8.dirac",
+  "name": "Dirac notation and expectation values",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.operators"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** a state is a superposition in an orthonormal basis, or an expectation value is needed. **Move:** write $|\\psi\\rangle=\\sum_n c_n|n\\rangle$, so $P_n=|c_n|^2$. Then $\\langle A\\rangle=\\langle\\psi|A|\\psi\\rangle$, and a normalised state has $\\langle\\psi|\\psi\\rangle=1$. **Example:** for $0.6|1\\rangle+0.8|2\\rangle$ and $A=\\mathrm{diag}(2,-1)$, $\\langle A\\rangle=0.72-0.64=0.08$. **Trap:** using $c_n$ instead of $|c_n|^2$ for probabilities."
+ },
+ {
+  "id": "t8.spin-half",
+  "name": "Spin one-half",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.dirac"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a question involves spin one-half results along an axis or Pauli matrices. **Move:** $S_z$ has eigenvalues $\\pm\\hbar/2$. For $a|{+}\\rangle+b|{-}\\rangle$, $P(+)=|a|^2$, $\\langle\\sigma_z\\rangle=|a|^2-|b|^2$, and $\\langle\\sigma_x\\rangle=2\\,\\mathrm{Re}(a^*b)$. **Example:** $|{+}z\\rangle$ measured along $x$ gives $+\\hbar/2$ with probability $\\tfrac12$. **Trap:** assuming $S_x$ and $S_z$ can be known together; they do not commute."
+ },
+ {
+  "id": "t8.ang-mom-qm",
+  "name": "Angular momentum in QM",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.operators",
+   "t6.central-force"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a state has definite $\\ell$ and $m$, or a question asks for $|\\mathbf L|$, $L_z$, or ladder coefficients. **Move:** $|\\mathbf L|^2=\\ell(\\ell+1)\\hbar^2$ and $L_z=m\\hbar$ with $m=-\\ell,\\dots,\\ell$. $L_\\pm$ change $m$ by $\\pm1$ with coefficient $\\hbar\\sqrt{\\ell(\\ell+1)-m(m\\pm1)}$. **Example:** for $\\ell=1$, $|\\mathbf L|=\\sqrt2\\,\\hbar$. **Trap:** taking $|\\mathbf L|=\\ell\\hbar$, or assuming $\\mathbf L$ can point exactly along $z$."
+ },
+ {
+  "id": "t8.time-evol",
+  "name": "Time evolution",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.dirac",
+   "t8.qho"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a state is a superposition of energy eigenstates and its time dependence is asked for. **Move:** $|\\psi(t)\\rangle=e^{-iHt/\\hbar}|\\psi(0)\\rangle$. Each energy component gets phase $e^{-iEt/\\hbar}$, so other expectation values oscillate at $\\Omega=(E_2-E_1)/\\hbar$. **Example:** with $E_2-E_1=4.0$ eV, the period is $h/\\Delta E\\approx1.04$ fs. **Trap:** expecting a single stationary state to change in time; its $|\\psi|^2$ is constant."
+ },
+ {
+  "id": "t8.two-level",
+  "name": "Two-level systems and measurement",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.spin-half",
+   "t8.time-evol"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a two-state system is driven by a coupling, or a sequence of measurements is asked. **Move:** for $H=\\tfrac12\\hbar\\Omega\\sigma_x$ starting in $|{\\uparrow}\\rangle$, $P_\\downarrow(t)=\\sin^2(\\Omega t/2)$, so a full flip takes $t=\\pi/\\Omega$. A measurement collapses the state onto the outcome. **Example:** from $|{+}x\\rangle$, $S_z=+$ then $S_x=+$ has probability $\\tfrac12\\cdot\\tfrac12=\\tfrac14$. **Trap:** using the pre-measurement state for a later step."
+ },
+ {
+  "id": "t8.perturbation",
+  "name": "Perturbation theory",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.dirac",
+   "t8.inf-well"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** a Hamiltonian is a known one plus a small extra term $H'$. **Move:** first order gives $E_n^{(1)}=\\langle n|H'|n\\rangle$, valid when $H'$ is small against the level spacings. Degenerate levels need $H'$ diagonalised inside the degenerate subspace first. **Example:** if $H'=V_0$ on half the well, the ground state shifts by $V_0/2$. **Trap:** using off-diagonal elements for the first-order shift, or trusting the expansion when $H'$ is comparable to the spacing."
+ },
+ {
+  "id": "t8.variational",
+  "name": "Variational and WKB methods",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.qho",
+   "t8.step-tunnel"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** the exact ground state is unknown, or an approximate energy or tunnelling exponent is needed. **Move:** for the variational method, $\\langle H\\rangle_\\psi\\ge E_0$ for any trial $\\psi$, so minimise over a parameter. For WKB, $\\int\\kappa\\,dx$ gives the tunnelling exponent and $\\int p\\,dx$ gives quantisation. **Example:** the trial $\\psi=x(L-x)$ gives $E_0\\le10\\,\\hbar^2/2mL^2$, against exact $\\pi^2$. **Trap:** reversing the variational inequality, or using WKB near turning points."
+ },
+ {
+  "id": "t8.identical",
+  "name": "Identical particles",
+  "level": "T8",
+  "area": "qm",
+  "prereq": [
+   "t8.spin-half",
+   "t8.inf-well"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "**When:** two or more particles of the same kind share a state. **Move:** the total wavefunction is symmetric under exchange for bosons and antisymmetric for fermions. Fermions cannot share a complete state, so each fermion needs its own level. **Example:** two spinless fermions in a well occupy $n=1$ and $n=2$, so $E=E_1+4E_1=5E_1$. **Trap:** assuming both fermions sit in the ground state."
+ },
+ {
+  "id": "t9.hydrogen",
+  "name": "Hydrogen atom",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t8.ang-mom-qm",
+   "t8.perturbation"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** an electron bound by Coulomb attraction to one nucleus, as in hydrogen or a one-electron ion. **Move:** scale the level energy as $E_n=-13.6\\,Z^2/n^2$ eV, so $Z$ enters squared and $n$ enters squared in the denominator. **Example:** He$^+$ at $n=2$ gives $13.6\\cdot4/4=13.6$ eV to ionize. **Trap:** dropping $Z^2$ or $n^2$, or making the level energy proportional to $n$."
+ },
+ {
+  "id": "t9.fine-hyperfine",
+  "name": "Fine and hyperfine structure",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.hydrogen"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** a level splits from spin, or from a nuclear spin. **Move:** fine structure adds spin to orbital motion, $j=l\\pm\\tfrac12$. Hyperfine adds nuclear spin $I$ to electron $J$, giving $F$ from $|I-J|$ to $I+J$ in integer steps. Count the levels as $2\\min(I,J)+1$. **Example:** $I=J=\\tfrac32$ gives $F=0,1,2,3$, four levels. **Trap:** stepping $F$ by half-integers, or counting levels as $2J+1$."
+ },
+ {
+  "id": "t9.zeeman-stark",
+  "name": "Zeeman and Stark effects",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.fine-hyperfine"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** an atom sits in an external field, magnetic (Zeeman) or electric (Stark). **Move:** the Zeeman shift is $g_Jm_J\\mu_BB$, linear in $m_J$, so adjacent sublevels differ by $g_J\\mu_BB$. The Stark shift is linear only for a degenerate pair, as in hydrogen $n=2$. The ground state shifts quadratically. **Example:** with $g_J=2$ and $B=0.50$ T, adjacent sublevels differ by $2\\times0.50\\,\\mu_B$. **Trap:** using a linear Stark shift for the non-degenerate ground state."
+ },
+ {
+  "id": "t9.selection",
+  "name": "Selection rules and spectra",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.hydrogen"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a photon is emitted or absorbed, and you must decide whether the line appears. **Move:** an electric-dipole photon carries $\\Delta l=\\pm1$, $\\Delta m_l=0,\\pm1$ and $\\Delta j=0,\\pm1$, with no $0\\to0$. Any $\\Delta n$ is allowed. **Example:** $2s\\to1s$ has $\\Delta l=0$, so it is forbidden, while $2p\\to1s$ is allowed. **Trap:** requiring $\\Delta n=1$, or assuming a forbidden transition never happens. It is just very slow."
+ },
+ {
+  "id": "t9.multi-electron",
+  "name": "Many-electron atoms",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.selection",
+   "t8.identical"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** you fill subshells or find the ground term of an atom with several electrons. **Move:** fill orbitals in energy order, obey the Pauli principle, and apply Hund's first rule. Place electrons singly in different orbitals with parallel spins before pairing. Screening lowers the pull, so $Z_{\\rm eff}=Z-\\sigma$. **Example:** $p^4$ has two unpaired electrons. **Trap:** pairing early, or using $Z$ where the screened $Z_{\\rm eff}$ belongs."
+ },
+ {
+  "id": "t9.xray-spectra",
+  "name": "X-rays and atomic spectra",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.multi-electron"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a tube emits X-rays, or an element emits characteristic K or L lines. **Move:** the continuum cutoff is $\\lambda_{\\min}=hc/(qV)$, because the electron's full energy becomes one photon. The $K_\\alpha$ energy follows Moseley's law, $E\\approx\\tfrac34\\cdot13.6\\,(Z-1)^2$ eV. **Example:** a $30$ kV tube has a cutoff near $41$ pm. **Trap:** using $Z$ instead of $Z-1$, or thinking line energies depend on tube voltage."
+ },
+ {
+  "id": "t9.early-quantum",
+  "name": "Early quantum phenomena",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t7.blackbody",
+   "t8.born"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** light hits a metal, or a photon scatters off an electron. **Move:** photoelectric emission gives $K_{\\max}=hf-\\phi$, and the stopping voltage is $V_0=K_{\\max}/q$. Intensity changes the number of electrons, not their energy. Compton scattering gives $\\Delta\\lambda=\\tfrac{h}{m_ec}(1-\\cos\\theta)$. **Example:** $500$ nm light on a $2.00$ eV metal gives $K_{\\max}=0.486$ eV. **Trap:** raising intensity to raise electron energy, or using $\\cos\\theta$ where $1-\\cos\\theta$ belongs."
+ },
+ {
+  "id": "t9.nuclear-structure",
+  "name": "Nuclear structure",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t6.rel-energy",
+   "t8.inf-well"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** a nucleus must be sized, or its binding estimated from a mass defect. **Move:** $R=R_0A^{1/3}$ with $R_0\\approx1.2$ fm, so volume scales as $A$ and surface area as $A^{2/3}$. Binding energy is the mass defect times $931.5$ MeV per u. **Example:** $^{208}$Pb has $R\\approx1.2\\times208^{1/3}=7.1$ fm. **Trap:** making the radius linear in $A$, or placing the binding-energy peak at lead. It sits near iron."
+ },
+ {
+  "id": "t9.decay",
+  "name": "Radioactive decay",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.nuclear-structure"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a sample decays exponentially, and you must convert between activity and nuclei. **Move:** $N(t)=N_0e^{-kt}$ with $k=\\ln2/T_{1/2}$. Activity is $A=kN$. The fraction left after time $t$ is $(1/2)^{t/T_{1/2}}$. **Example:** $800$ Bq with $T_{1/2}=2$ h falls to $800/2^3=100$ Bq after $6$ h. **Trap:** using $\\log_{10}2$ in place of $\\ln2$, or halving per unit time instead of per half-life."
+ },
+ {
+  "id": "t9.nuclear-reactions",
+  "name": "Nuclear reactions",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.decay"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a reaction or decay is asked about energy, threshold or feasibility. **Move:** $Q=(M_i-M_f)c^2$, with masses in u times $931.5$ MeV per u. Positive $Q$ releases energy. Negative $Q$ needs a threshold $T_{\\rm th}=|Q|(m+M)/M$, which is at least $|Q|$. Recoil shares energy by momentum balance. **Example:** $Q=-2$ MeV with $m=4$ u and $M=12$ u gives $T_{\\rm th}=2.67$ MeV. **Trap:** reading the sign of $Q$ backwards, or setting the threshold equal to $|Q|$."
+ },
+ {
+  "id": "t9.particle-kinematics",
+  "name": "Particle kinematics and detectors",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t6.rel-collisions"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a particle's energy, speed or mass comes from its momentum or from a detector signal. **Move:** use $E^2=p^2c^2+m^2c^4$ and $\\beta=pc/E$. A pair's invariant mass obeys $M^2c^4=(E_1+E_2)^2-|\\vec p_1c+\\vec p_2c|^2$. Cherenkov light needs $v>c/n$ in the medium. **Example:** two photons at $90^\\circ$ with $0.30$ and $0.20$ GeV give $M=0.346$ GeV$/c^2$. **Trap:** adding energies linearly, or using vacuum $c$ for Cherenkov light."
+ },
+ {
+  "id": "t9.standard-model",
+  "name": "Particles and conservation laws",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.nuclear-structure",
+   "t9.particle-kinematics"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a particle reaction or decay must be checked as allowed or forbidden. **Move:** conserve charge, baryon number $B$, and each lepton flavour $L_e$, $L_\\mu$, $L_\\tau$. Strangeness is conserved in strong and electromagnetic interactions. Antiparticles carry opposite numbers. Quarks carry $B=\\tfrac13$. **Example:** $\\pi^+\\to\\mu^++\\nu_\\mu$ sums $L_\\mu$ to zero. **Trap:** $n\\to p+e^-$ balances charge but breaks $L_e$ without an antineutrino."
+ },
+ {
+  "id": "t9.crystal-bands",
+  "name": "Crystals and band theory",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t7.quantum-stats",
+   "t3.diffraction"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** a lattice or diffraction pattern must be counted, or a metal's conduction must be explained. **Move:** count atoms per conventional cell by sharing corners ($\\tfrac18$ each) and faces ($\\tfrac12$ each). Bragg's law is $2d\\sin\\theta=n\\lambda$. Metals have a partly filled band. Insulators have a full band and a gap. **Example:** FCC has $8\\cdot\\tfrac18+6\\cdot\\tfrac12=4$ atoms. **Trap:** counting corner atoms fully, or calling a half-filled band an insulator."
+ },
+ {
+  "id": "t9.semiconductors",
+  "name": "Semiconductors",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.crystal-bands"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** the carrier densities or conductivity of a doped or intrinsic semiconductor are asked. **Move:** in equilibrium $np=n_i^2$. The majority carriers come from dopants: $n\\approx N_D$ for $n$-type and $p\\approx N_A$ for $p$-type. Conductivity is $\\sigma=q(n\\mu_n+p\\mu_p)$. **Example:** $N_A=10^{16}$ cm$^{-3}$ in silicon with $n_i=10^{10}$ cm$^{-3}$ gives $n=10^4$ cm$^{-3}$. **Trap:** using $N_D$ for holes, or forgetting that $np$ stays fixed when doping shifts the balance."
+ },
+ {
+  "id": "t9.solid-thermal",
+  "name": "Lattice heat capacity and superconductivity",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t9.crystal-bands",
+   "t7.equipartition"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "**When:** a solid's heat capacity, or a superconductor's gap or transition, is asked. **Move:** at high $T$, each atom stores $k_B$ per mode, giving $C=3R$ per mole. At low $T$, the Debye model gives $C\\propto T^3$. BCS gives $\\Delta(0)=1.76\\,k_BT_c$ and the isotope effect $T_c\\propto M^{-1/2}$. **Example:** warming $2$ mol by $10$ K at $3R$ needs $499$ J. **Trap:** using $\\tfrac32R$, the gas value, or applying the high-temperature limit near $T=0$."
+ },
+ {
+  "id": "t9.lab-stats",
+  "name": "Counting statistics and fitting",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t1.sigfig",
+   "t7.counting"
+  ],
+  "order": 16,
+  "exam": true,
+  "teach": "**When:** repeated counts or measured quantities are combined or fitted. **Move:** Poisson counts have $\\sigma=\\sqrt N$. Independent errors add in quadrature, so their variances add. For products, relative errors add in quadrature. Reduced chi-square is $\\chi^2/\\nu$, with $\\nu$ equal to data points minus fitted parameters. **Example:** the net rate from $900$ and $400$ counts in $10$ s has $\\sigma=\\sqrt{1300}/10=3.61$ counts/s. **Trap:** adding uncertainties linearly, or dividing by the number of data points instead of $\\nu$."
+ },
+ {
+  "id": "t9.lab-electronics",
+  "name": "Lab electronics and instruments",
+  "level": "T9",
+  "area": "atom",
+  "prereq": [
+   "t5.ac-circuits",
+   "t1.linearize"
+  ],
+  "order": 17,
+  "exam": true,
+  "teach": "**When:** a filter, amplifier or instrument reading must be interpreted. **Move:** an RC low-pass has cutoff $f_c=1/(2\\pi RC)$ in hertz. The $-3$ dB point is half power, which is $1/\\sqrt2$ in voltage. Voltage decibels are $20\\log_{10}$. An ideal inverting op-amp has gain $-R_f/R_i$. Loading is negligible when the load far exceeds the source impedance. **Example:** $10$ k$\\Omega$ with $0.10$ $\\mu$F gives $159$ Hz. **Trap:** reading $\\omega_c$ as hertz, or treating peak-to-peak as RMS."
+ },
+ {
+  "id": "t10.pacing",
+  "name": "Pacing and triage",
+  "level": "T10",
+  "area": "test",
+  "prereq": [],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** every timed set. **Move:** about 1.7 min per question; at 50 percent of the time you should be at 50 percent of the questions. Skip anything not started in 30 s and flag it. Check the current ETS scoring rule for wrong answers before deciding how to guess. **Example:** 70 questions in 120 min means a check at question 35 near minute 60. **Trap:** sinking five minutes into one derivation."
+ },
+ {
+  "id": "t10.elimination",
+  "name": "Option elimination",
+  "level": "T10",
+  "area": "test",
+  "prereq": [],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** options differ in sign, power, or form. **Move:** test each option against units, sign, limiting values, and symmetry, then compute only if two survive. **Example:** a speed answer with units of kg is wrong at once. **Trap:** eliminating the correct option because of one mistaken limit."
+ },
+ {
+  "id": "t10.dim-limits",
+  "name": "Dimensions and limiting cases",
+  "level": "T10",
+  "area": "test",
+  "prereq": [],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** an answer is a formula in several parameters. **Move:** check units first, then set a parameter to 0, infinity, or a symmetric value where the answer is known. **Example:** a pendulum period must reduce to the right form as g grows. **Trap:** a formula can pass dimensions and still be wrong by a pure number."
+ },
+ {
+  "id": "t10.order-magnitude",
+  "name": "Order-of-magnitude estimation",
+  "level": "T10",
+  "area": "test",
+  "prereq": [],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** options are spread by factors of ten or more. **Move:** round every constant to one figure, track powers of ten, then pick the nearest option. **Example:** 6.6e-34 x 3e8 / 5e-7 is about 4e-19. **Trap:** rounding errors compound over many factors, so keep one extra figure when options are close."
+ },
+ {
+  "id": "t10.full-practice",
+  "name": "Full-length practice and error log",
+  "level": "T10",
+  "area": "test",
+  "prereq": [],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** once the main tiers are placed. **Move:** sit a full set under the real clock, tag each miss with a technique id, and review the log before the next set. **Example:** two misses on the same technique id means more review of that technique, not another full set. **Trap:** reading solutions without retrying the missed items a week later."
+ }
+]

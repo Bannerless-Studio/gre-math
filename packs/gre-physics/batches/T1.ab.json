@@ -1,0 +1,3805 @@
+[
+ {
+  "id": "t1-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which SI base-unit combination equals the joule?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mathrm{kg\\,m^2/s^2}$",
+    "$\\mathrm{kg\\,m/s^2}$",
+    "$\\mathrm{kg\\,m^2/s}$",
+    "$\\mathrm{kg/(m\\,s^2)}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the newton",
+    "that is the joule-second, an action unit",
+    "that is the pascal"
+   ]
+  },
+  "solution": "$1\\ \\mathrm J=1\\ \\mathrm N\\cdot\\mathrm m=1\\ \\mathrm{kg\\,m^2/s^2}$.",
+  "hints": [
+   "Start from work equals force times distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many square centimetres make one square metre? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10000,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "100**2",
+  "solution": "$1\\ \\mathrm m=100\\ \\mathrm{cm}$, so $1\\ \\mathrm m^2=100^2\\ \\mathrm{cm^2}$.",
+  "hints": [
+   "Square the length conversion factor."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which prefix means $10^{-9}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "nano ($\\mathrm n$)",
+    "micro ($\\mu$)",
+    "pico ($\\mathrm p$)",
+    "giga ($\\mathrm G$)"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "micro is $10^{-6}$",
+    "pico is $10^{-12}$",
+    "giga is $10^{9}$, with the exponent sign flipped"
+   ]
+  },
+  "solution": "nano $=10^{-9}$. Micro is $10^{-6}$, pico is $10^{-12}$.",
+  "hints": [
+   "Memorise the prefixes in steps of three powers."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0004",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A wire has diameter $0.80\\ \\mathrm{mm}$. Its radius in micrometres is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$400\\ \\mu\\mathrm m$",
+    "$40\\ \\mu\\mathrm m$",
+    "$0.40\\ \\mu\\mathrm m$",
+    "$4000\\ \\mu\\mathrm m$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "factor $10^{2}$ instead of $10^{3}$ in the mm-to-$\\mu$m step",
+    "kept the number and changed only the unit name: $10^{3}$ too small",
+    "used $10^{4}$ instead of $10^{3}$ for the step"
+   ]
+  },
+  "solution": "Radius is $0.40\\ \\mathrm{mm}$. Since $1\\ \\mathrm{mm}=10^{3}\\ \\mu\\mathrm m$, the radius is $400\\ \\mu\\mathrm m$.",
+  "hints": [
+   "Halve the diameter first, then convert mm to micrometres."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A device draws $2.5\\ \\mathrm{mA}$ at $6.0\\ \\mathrm V$. Give its power in $\\mathrm{mW}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(25,10)*6",
+  "solution": "$P=IV$. Milliamperes times volts gives milliwatts: $2.5\\times6.0=15\\ \\mathrm{mW}$.",
+  "hints": [
+   "Use $P=IV$ and keep the prefixes in the units."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Convert $72\\ \\mathrm{km/h}$ to $\\mathrm{m/s}$. Give the number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(72000,3600)",
+  "solution": "$72\\ \\mathrm{km/h}=72\\times1000\\ \\mathrm m/3600\\ \\mathrm s=20\\ \\mathrm{m/s}$.",
+  "hints": [
+   "One kilometre is $1000$ m and one hour is $3600$ s."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A length is recorded as $x$ millimetres. Write the same length in metres as an expression in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x/1000",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "x*10^(-3)",
+    "x/10^3"
+   ]
+  },
+  "check": null,
+  "solution": "$1\\ \\mathrm{mm}=10^{-3}\\ \\mathrm m$, so $x\\ \\mathrm{mm}=x\\times10^{-3}\\ \\mathrm m$.",
+  "hints": [
+   "One millimetre is $10^{-3}$ m."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sensor reads $0.50\\ \\mu\\mathrm A$. Which equals this current?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.0\\times10^{-7}\\ \\mathrm A$",
+    "$5.0\\times10^{-5}\\ \\mathrm A$",
+    "$5.0\\times10^{-6}\\ \\mathrm A$",
+    "$5.0\\times10^{-9}\\ \\mathrm A$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$5.0\\times10^{-5}$ A is $50\\ \\mu$A: a factor $10^{2}$ too large",
+    "$5.0\\times10^{-6}$ A is $5\\ \\mu$A: a factor $10$ too large, decimal point moved",
+    "$5.0\\times10^{-9}$ A is $5$ nA: nano used for micro, a factor $10^{2}$ too small"
+   ]
+  },
+  "solution": "$1\\ \\mu\\mathrm A=10^{-6}\\ \\mathrm A$, so $0.50\\ \\mu\\mathrm A=0.50\\times10^{-6}\\ \\mathrm A=5.0\\times10^{-7}\\ \\mathrm A$.",
+  "hints": [
+   "Write $0.50\\ \\mu\\mathrm A$ as $0.50\\times10^{-6}$ A first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A nucleus has radius $4.0\\ \\mathrm{fm}$, where $1\\ \\mathrm{fm}=10^{-15}\\ \\mathrm m$. Take $\\pi=3.14$. Give the area $\\pi r^{2}$ in units of $10^{-29}\\ \\mathrm{m^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.02,
+   "tol": 0.1004,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "3.14*(4e-15)**2/1e-29",
+  "solution": "$r=4.0\\times10^{-15}$ m. Squaring gives $16\\times10^{-30}$ m$^2$, so $\\pi r^{2}=5.02\\times10^{-29}$ m$^2$.",
+  "hints": [
+   "Convert the radius to metres before squaring."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "When multiplying two measured values, the result keeps as many significant figures as:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "the input with the fewest significant figures",
+    "the input with the most decimal places",
+    "the calculator display",
+    "the sum of the input significant figures"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that rule governs addition and subtraction, which use decimal places",
+    "calculator digits overstate precision",
+    "significant figures do not add"
+   ]
+  },
+  "solution": "A product is limited by its least precise factor, so it keeps the fewest significant figures.",
+  "hints": [
+   "Ask which input limits the precision of the product."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many significant figures are in $0.00450$? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "Leading zeros are not significant. The digits $4$, $5$ and the trailing $0$ count: three.",
+  "hints": [
+   "Leading zeros only locate the decimal point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two independent uncertainties $\\delta x$ and $\\delta y$ combine in $z=x+y$ to give $\\delta z$ equal to:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{\\delta x^{2}+\\delta y^{2}}$",
+    "$\\delta x\\,\\delta y$",
+    "$\\delta x^{2}+\\delta y^{2}$",
+    "$\\delta x/\\delta y$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a product of uncertainties: wrong operation, and the units would be squared",
+    "forgot the square root",
+    "a ratio, which comes from dividing quantities"
+   ]
+  },
+  "solution": "Independent errors add in quadrature: $\\delta z=\\sqrt{\\delta x^{2}+\\delta y^{2}}$.",
+  "hints": [
+   "Independent errors add in quadrature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Lengths $12.3\\ \\mathrm{cm}$ and $4.56\\ \\mathrm{cm}$ are added. Which is the correctly reported sum?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$16.9\\ \\mathrm{cm}$",
+    "$16.86\\ \\mathrm{cm}$",
+    "$16.8\\ \\mathrm{cm}$",
+    "$17\\ \\mathrm{cm}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "kept all calculator digits",
+    "truncated instead of rounding",
+    "rounded to the units place: one decimal place too few"
+   ]
+  },
+  "solution": "Addition keeps the fewest decimal places. $12.3$ has one, so $16.86$ rounds to $16.9$.",
+  "hints": [
+   "For a sum, count decimal places, not significant figures."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many significant figures should the product $2.40\\times1.5$ be reported with? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "$1.5$ has two significant figures and $2.40$ has three. The product keeps the fewer, two.",
+  "hints": [
+   "Find the input with the fewest significant figures."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A period is $t=2.00\\pm0.04\\ \\mathrm s$. Give the percent uncertainty in $t^{2}$ as a number in percent.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*Fraction(4,200)*100",
+  "solution": "The relative uncertainty of $t$ is $0.04/2.00=2\\%$. Squaring doubles it: $4\\%$.",
+  "hints": [
+   "A power $n$ multiplies the relative uncertainty by $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $Q=a^{2}/b$, with fractional uncertainties $x=\\Delta a/a$ and $y=\\Delta b/b$. Write the worst-case fractional uncertainty $\\Delta Q/Q$ in terms of $x$ and $y$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*x+y",
+   "vars": [
+    "x",
+    "y"
+   ],
+   "also": [
+    "2x+y",
+    "y+2*x"
+   ]
+  },
+  "check": null,
+  "solution": "The power $2$ on $a$ doubles its fractional uncertainty. Worst case adds: $\\Delta Q/Q=2x+y$.",
+  "hints": [
+   "Multiply powers into the fractional uncertainties, then add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which measured value has exactly three significant figures?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.0\\times10^{3}$",
+    "$0.030$",
+    "$2.300\\times10^{3}$",
+    "$0.00300$"
+   ],
+   "correct": 3,
+   "why": [
+    "two significant figures: the mantissa $3.0$ has two digits",
+    "two significant figures: the final zero was not counted",
+    "four significant figures: all digits of $2300$ were counted",
+    ""
+   ]
+  },
+  "solution": "Leading zeros are placeholders. In $0.00300$ the digits $3$, $0$, $0$ are significant: three.",
+  "hints": [
+   "Trailing zeros after a decimal point count."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Mass $m=12.0\\pm0.3\\ \\mathrm g$ and volume $V=4.0\\pm0.2\\ \\mathrm{cm^3}$. Using worst-case propagation, give the percent uncertainty in $\\rho=m/V$ as a number in percent.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7.5,
+   "tol": 0.15,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "(Fraction(3,10)/12+Fraction(2,10)/4)*100",
+  "solution": "Fractional uncertainties: $0.3/12=2.5\\%$ and $0.2/4=5\\%$. Worst case adds them: $7.5\\%$.",
+  "hints": [
+   "For a quotient, worst case adds fractional uncertainties."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which combination of base dimensions $M$, $L$, $T$ is energy?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$ML^{2}T^{-2}$",
+    "$MLT^{-2}$",
+    "$ML^{2}T^{-1}$",
+    "$MLT^{-1}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is force",
+    "that is angular momentum",
+    "that is momentum"
+   ]
+  },
+  "solution": "Energy is $\\tfrac12mv^{2}$, with dimensions $M\\cdot L^{2}T^{-2}$.",
+  "hints": [
+   "Write energy as mass times speed squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Pressure has dimensions $ML^{-1}T^{-2}$. What is the exponent of $T$? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": -2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-2",
+  "solution": "Pressure is force per area: $MLT^{-2}/L^{2}=ML^{-1}T^{-2}$. The $T$ exponent is $-2$.",
+  "hints": [
+   "Pressure is force divided by area."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A physical equation is dimensionally consistent when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "every term and the left side have the same dimensions",
+    "all dimensionless coefficients equal $1$",
+    "every term carries SI units",
+    "the equation contains no numerical constants"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "coefficients such as $\\tfrac12$ are allowed; only the dimensions must match",
+    "units can differ by a prefix and still give the same dimensions",
+    "constants such as $\\tfrac12$ are allowed; they are dimensionless"
+   ]
+  },
+  "solution": "Dimensional consistency means matching base dimensions across all terms.",
+  "hints": [
+   "Dimensionless numbers never change the dimensions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0022",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $Q=\\dfrac{mv^{2}}{r}$, with mass $m$, speed $v$ and radius $r$. The dimensions of $Q$ are:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$MLT^{-2}$",
+    "$ML^{2}T^{-2}$",
+    "$ML^{0}T^{-2}$",
+    "$ML^{-1}T^{-2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is $mv^{2}$, energy: forgot to divide by $r$",
+    "treated $L^{2}/L$ as $L^{0}$, dropping the remaining $L$",
+    "put $r$ in the numerator instead of the denominator"
+   ]
+  },
+  "solution": "$v^{2}$ has $L^{2}T^{-2}$. Dividing by $r$ leaves one $L$: $MLT^{-2}$, the dimensions of force.",
+  "hints": [
+   "Write $v$ as $LT^{-1}$ and count each base dimension."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "On a stretched string, wave speed $v\\propto T^{a}\\mu^{b}$, where tension $T$ has dimensions $MLT^{-2}$ and mass per length $\\mu$ has dimensions $ML^{-1}$. Find $a$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1,2)",
+  "solution": "Match $M$: $a+b=0$. Match $L$: $a-b=1$. So $a=\\tfrac12$ and $b=-\\tfrac12$. Check $T$: $-2a=-1$.",
+  "hints": [
+   "Write one equation per base dimension."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "From $F=\\dfrac{GMm}{r^{2}}$, write the dimensions of $G$ as $M^{a}L^{b}T^{c}$. Find $b$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "$[G]=[F][r]^{2}/([M][m])=MLT^{-2}\\cdot L^{2}/M^{2}=M^{-1}L^{3}T^{-2}$. So $b=3$.",
+  "hints": [
+   "Solve $F=GMm/r^{2}$ for $G$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Pressure $P$ depends only on density $\\rho$ and speed $v$: $P=C\\rho^{a}v^{b}$, with $C$ dimensionless. Write $P$ in terms of $C$, $\\rho$, $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "C*rho*v^2",
+   "vars": [
+    "C",
+    "rho",
+    "v"
+   ],
+   "also": [
+    "rho*C*v^2",
+    "C*v^2*rho",
+    "(C*rho)*v^2"
+   ]
+  },
+  "check": null,
+  "solution": "Match dimensions: $ML^{-1}T^{-2}=(ML^{-3})^{a}(LT^{-1})^{b}$. Mass gives $a=1$; time gives $b=2$; length checks: $-3+2=-1$. So $P=C\\rho v^{2}$.",
+  "hints": [
+   "Match the exponents of $M$, $L$ and $T$ on both sides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which expression has the dimensions of length?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$vt^{2}$",
+    "$\\tfrac12 at^{2}$",
+    "$at$",
+    "$at^{2}/v$"
+   ],
+   "correct": 1,
+   "why": [
+    "$vt^{2}$ has dimensions $LT$: wrong power of $t$",
+    "",
+    "$at$ has dimensions $LT^{-1}$, a speed, not a length",
+    "$at^{2}/v$ has dimensions of time"
+   ]
+  },
+  "solution": "$[at^{2}]=LT^{-2}\\cdot T^{2}=L$. The factor $\\tfrac12$ is dimensionless.",
+  "hints": [
+   "Multiply the dimensions of $a$ by $T^{2}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Kepler's law follows from $T\\propto G^{a}M^{b}r^{c}$, where $T$ is a period, $G$ has dimensions $M^{-1}L^{3}T^{-2}$, $M$ is mass and $r$ is radius. Find $c$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(3,2)",
+  "solution": "Match $M$: $-a+b=0$. Match $T$: $-2a=1$, so $a=b=-\\tfrac12$. Match $L$: $3a+c=0$, so $c=\\tfrac32$.",
+  "hints": [
+   "The time dimension fixes one exponent alone."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A vector $\\vec A$ has magnitude $A$ and makes angle $\\theta$ with the $+x$ axis. Its $x$-component is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$A\\cos\\theta$",
+    "$A\\sin\\theta$",
+    "$A\\tan\\theta$",
+    "$A\\cot\\theta$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "swapped sine and cosine: that is the $y$-component",
+    "a component is a product with a trig function, not a ratio",
+    "inverted ratio: cotangent is not a component"
+   ]
+  },
+  "solution": "$A_x=A\\cos\\theta$ and $A_y=A\\sin\\theta$ for an angle measured from $+x$.",
+  "hints": [
+   "Think of the adjacent side of a right triangle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the magnitude of the vector $\\langle 3,\\,4\\rangle$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "5",
+  "solution": "$\\sqrt{3^{2}+4^{2}}=\\sqrt{25}=5$.",
+  "hints": [
+   "Use Pythagoras on the components."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two vectors $\\vec A$ and $\\vec B$ sum to the zero vector when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "they have equal magnitudes and opposite directions",
+    "they have equal magnitudes and the same direction",
+    "they are perpendicular",
+    "their $x$-components are equal"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "same direction doubles the magnitude instead of cancelling",
+    "perpendicular vectors sum to magnitude $\\sqrt2\\,A$",
+    "equal $x$-components say nothing about the $y$-components"
+   ]
+  },
+  "solution": "Zero sum needs equal magnitudes pointing exactly opposite.",
+  "hints": [
+   "Opposite directions cancel, same directions add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A displacement is $6.0\\ \\mathrm m$ east followed by $8.0\\ \\mathrm m$ north. Give the magnitude of the resultant in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.sqrt(6**2+8**2)",
+  "solution": "The east and north legs are perpendicular: $\\sqrt{6^{2}+8^{2}}=10\\ \\mathrm m$.",
+  "hints": [
+   "The east and north legs are perpendicular."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A force of $10\\ \\mathrm N$ acts at $30^\\circ$ above the $+x$ axis. Give its $x$-component in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8.66,
+   "tol": 0.1732,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "10*math.cos(math.radians(30))",
+  "solution": "$F_x=F\\cos30^\\circ=10\\times0.866\\approx8.66\\ \\mathrm N$.",
+  "hints": [
+   "The angle is measured from the $x$-axis, so use cosine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Three forces act: $\\vec F_1=(2.0,\\,-1.0)\\ \\mathrm N$, $\\vec F_2=(-5.0,\\,3.0)\\ \\mathrm N$, $\\vec F_3=(1.0,\\,4.0)\\ \\mathrm N$. Give the magnitude of the net force in $\\mathrm N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.32,
+   "tol": 0.1264,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.hypot(2-5+1,-1+3+4)",
+  "solution": "Add components: $(-2,\\,6)$ N. Magnitude $\\sqrt{4+36}=\\sqrt{40}\\approx6.32$ N.",
+  "hints": [
+   "Add the $x$-components and the $y$-components separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A vector has components $(a,\\,b)$. Write its magnitude in terms of $a$ and $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(a^2+b^2)",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "also": [
+    "(a^2+b^2)^(1/2)",
+    "sqrt(b^2+a^2)"
+   ]
+  },
+  "check": null,
+  "solution": "Pythagoras gives $|\\vec v|=\\sqrt{a^{2}+b^{2}}$. Adding the components is not the magnitude.",
+  "hints": [
+   "Pythagoras uses the squares of both components."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Displacements of $5\\ \\mathrm m$ east and $5\\ \\mathrm m$ north are added. Which describes the resultant's direction?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$45^\\circ$ north of east",
+    "$90^\\circ$ north of east",
+    "$63.4^\\circ$ north of east",
+    "$135^\\circ$ north of east"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "used the north displacement's direction as the resultant's",
+    "doubled the east part: $\\tan^{-1}(10/5)$",
+    "used a reference angle in the wrong quadrant"
+   ]
+  },
+  "solution": "Equal components give $\\tan\\theta=5/5=1$, so $\\theta=45^\\circ$ north of east.",
+  "hints": [
+   "Find $\\tan\\theta$ from the north and east components."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two vectors, each of magnitude $5.0\\ \\mathrm m$, have an angle of $120^\\circ$ between them. Give the magnitude of their sum in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.0,
+   "tol": 0.1,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*5*math.cos(math.radians(60))",
+  "solution": "Half the angle is $60^\\circ$. $|\\vec A+\\vec B|=2A\\cos(\\theta/2)=2(5.0)\\cos60^\\circ=5.0\\ \\mathrm m$.",
+  "hints": [
+   "Split the angle in half and use the rhombus formula."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the magnitude of $\\hat i\\times\\hat j$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "$\\hat i\\times\\hat j=\\hat k$, a unit vector, so its magnitude is $1$.",
+  "hints": [
+   "The cross product of perpendicular unit vectors is a unit vector."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement about $\\vec A\\times\\vec B$ is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "it is perpendicular to both $\\vec A$ and $\\vec B$",
+    "it is parallel to $\\vec A$",
+    "$\\vec A\\times\\vec B=\\vec B\\times\\vec A$",
+    "it is a scalar"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the result is perpendicular to $\\vec A$, not parallel to it",
+    "reversing the order changes the sign of the cross product",
+    "the cross product is a vector"
+   ]
+  },
+  "solution": "The cross product points normal to the plane of $\\vec A$ and $\\vec B$.",
+  "hints": [
+   "Use the right-hand rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For nonzero vectors, $\\vec A\\cdot\\vec B=0$ means:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "they are perpendicular",
+    "they are parallel",
+    "they are antiparallel",
+    "they have equal magnitudes"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "parallel vectors give $\\cos0^\\circ=1$, the maximum",
+    "antiparallel vectors give $\\cos180^\\circ=-1$",
+    "the dot product does not force equal magnitudes"
+   ]
+  },
+  "solution": "$\\vec A\\cdot\\vec B=AB\\cos\\theta=0$ requires $\\theta=90^\\circ$.",
+  "hints": [
+   "Which angle makes the cosine zero?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Vectors $\\vec A=(2,\\,3,\\,0)$ and $\\vec B=(4,\\,-1,\\,0)$. Find $\\vec A\\cdot\\vec B$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*4+3*(-1)+0*0",
+  "solution": "$\\vec A\\cdot\\vec B=8-3+0=5$.",
+  "hints": [
+   "Multiply matching components and add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A force of $12\\ \\mathrm N$ acts at $30^\\circ$ to a lever arm of $0.50\\ \\mathrm m$. Give the torque magnitude in $\\mathrm{N\\,m}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.0,
+   "tol": 0.06,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "Fraction(1,2)*12*math.sin(math.radians(30))",
+  "solution": "$\\tau=rF\\sin\\theta=0.50\\times12\\times\\tfrac12=3.0\\ \\mathrm{N\\,m}$.",
+  "hints": [
+   "Torque is the magnitude of the cross product of arm and force."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A constant force $\\vec F=(4,\\,0,\\,3)\\ \\mathrm N$ moves an object by $\\vec d=(2,\\,5,\\,0)\\ \\mathrm m$. Find the work done in $\\mathrm J$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*2+0*5+3*0",
+  "solution": "$W=\\vec F\\cdot\\vec d=8+0+0=8\\ \\mathrm J$.",
+  "hints": [
+   "Work is the dot product of force and displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Vectors of magnitudes $A$ and $B$ make angle $\\theta$. Write the magnitude of $\\vec A\\times\\vec B$ in terms of $A$, $B$, $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "A*B*sin(theta)",
+   "vars": [
+    "A",
+    "B",
+    "theta"
+   ],
+   "also": [
+    "A*sin(theta)*B",
+    "sin(theta)*A*B"
+   ]
+  },
+  "check": null,
+  "solution": "$|\\vec A\\times\\vec B|=AB\\sin\\theta$. The dot product would use $\\cos\\theta$ instead.",
+  "hints": [
+   "The cross product magnitude uses the sine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which pair of nonzero vectors has zero cross product?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(1,2,0)$ and $(2,4,0)$",
+    "$(1,0,0)$ and $(0,1,0)$",
+    "$(1,2,0)$ and $(2,-1,0)$",
+    "$(1,1,0)$ and $(1,-1,0)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "perpendicular vectors give the largest cross product, $\\sin90^\\circ=1$",
+    "zero dot product, not zero cross product: these are perpendicular",
+    "not parallel: the cross product is $-2\\hat k$"
+   ]
+  },
+  "solution": "$(2,4,0)=2(1,2,0)$, so the vectors are parallel and $\\vec A\\times\\vec B=\\vec 0$.",
+  "hints": [
+   "Check whether one vector is a multiple of the other."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the angle in degrees between $\\vec A=(1,1,0)$ and $\\vec B=(1,0,0)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "tol": 0.9,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.degrees(math.acos(1/math.sqrt(2)))",
+  "solution": "$\\cos\\theta=\\dfrac{\\vec A\\cdot\\vec B}{|\\vec A||\\vec B|}=\\dfrac{1}{\\sqrt2}$, so $\\theta=45^\\circ$.",
+  "hints": [
+   "Use the dot product formula for the angle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A particle has initial speed $u$ and constant acceleration $a$ over displacement $s$. Write its final speed $v\\ge0$ in terms of $u$, $a$, $s$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(u^2+2*a*s)",
+   "vars": [
+    "u",
+    "a",
+    "s"
+   ],
+   "also": [
+    "(u^2+2*a*s)^(1/2)",
+    "sqrt(s*2*a+u^2)"
+   ]
+  },
+  "check": null,
+  "solution": "Use $v^{2}=u^{2}+2as$ and take the positive root.",
+  "hints": [
+   "The equation without time links speed and displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A ball is thrown straight up. Take up as positive. At its highest point, its velocity and acceleration are:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$v=0$, $a=-g$",
+    "$v=0$, $a=0$",
+    "$v=g$, $a=0$",
+    "$v=-g$, $a=0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treated the top as equilibrium: gravity still acts",
+    "$g$ is an acceleration, not a velocity",
+    "same error as the previous option, with a sign"
+   ]
+  },
+  "solution": "At the top the velocity is zero, but gravity still gives $a=-g$.",
+  "hints": [
+   "Gravity acts at every instant, including the top."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "On a velocity–time graph, the area between the curve and the time axis gives:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "displacement",
+    "acceleration",
+    "the slope of the graph",
+    "change in velocity"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "acceleration is the slope of a $v$–$t$ graph",
+    "the slope of a $v$–$t$ graph is acceleration, not an area",
+    "area under an $a$–$t$ graph gives the change in velocity"
+   ]
+  },
+  "solution": "$\\int v\\,dt=\\Delta x$, so area under $v$–$t$ is displacement.",
+  "hints": [
+   "Area is an integral; slope is a derivative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A car starts from rest and accelerates uniformly at $2.5\\ \\mathrm{m/s^2}$ for $8.0\\ \\mathrm s$. Give its final speed in $\\mathrm{m/s}$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(5,2)*8",
+  "solution": "$v=u+at=0+2.5\\times8.0=20\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Use $v=u+at$ with $u=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A car at $20\\ \\mathrm{m/s}$ brakes at a uniform $4.0\\ \\mathrm{m/s^2}$ to a stop. Give the stopping distance in $\\mathrm m$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 50,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(20**2,2*4)",
+  "solution": "$v^{2}=u^{2}+2as$ with $v=0$: $s=\\dfrac{u^{2}}{2|a|}=\\dfrac{400}{8}=50\\ \\mathrm m$.",
+  "hints": [
+   "Use the equation that has no time in it."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A stone is dropped from rest from a height of $80\\ \\mathrm m$. Use $g=9.8\\ \\mathrm{m/s^2}$. Give the fall time in $\\mathrm s$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.04,
+   "tol": 0.0808,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*80/9.8)",
+  "solution": "$h=\\tfrac12 gt^{2}$, so $t=\\sqrt{2h/g}=\\sqrt{160/9.8}\\approx4.04\\ \\mathrm s$.",
+  "hints": [
+   "Start from rest: $h=\\tfrac12 gt^{2}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A ball is thrown straight up at $15\\ \\mathrm{m/s}$ with $g=9.8\\ \\mathrm{m/s^2}$. Which is the time to reach the top?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.06\\ \\mathrm s$",
+    "$1.53\\ \\mathrm s$",
+    "$0.77\\ \\mathrm s$",
+    "$23\\ \\mathrm s$"
+   ],
+   "correct": 1,
+   "why": [
+    "round-trip time, not the rise time",
+    "",
+    "halved the speed by using $v/2g$",
+    "used $v^{2}/g$, which has the dimensions of length, not time"
+   ]
+  },
+  "solution": "At the top $v=0$, so $t=v_0/g=15/9.8\\approx1.53\\ \\mathrm s$.",
+  "hints": [
+   "At the top the velocity is zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle has initial velocity $u$ and constant acceleration $a$. Write its displacement after time $t$ in terms of $u$, $a$, $t$.",
+  "answer": {
+   "kind": "expression",
+   "value": "u*t+a*t^2/2",
+   "vars": [
+    "u",
+    "a",
+    "t"
+   ],
+   "also": [
+    "u*t+(1/2)*a*t^2",
+    "t*(u+a*t/2)"
+   ]
+  },
+  "check": null,
+  "solution": "Integrating $v=u+at$ gives $s=ut+\\tfrac12at^{2}$.",
+  "hints": [
+   "Integrate the velocity over time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Car A moves at a constant $25\\ \\mathrm{m/s}$ from $x=0$. Car B starts from rest at $x=100\\ \\mathrm m$ and accelerates at $2.0\\ \\mathrm{m/s^2}$ in the same direction. Give the first time, in $\\mathrm s$, at which they share a position.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(25-math.sqrt(625-400))/2",
+  "solution": "Set $25t=100+t^{2}$, so $t^{2}-25t+100=0$, giving $t=5$ or $t=20$ s. The first is $5$ s.",
+  "hints": [
+   "Set the two position equations equal and solve the quadratic."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Ignoring air, a projectile on level ground goes farthest when launched at:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$45^\\circ$",
+    "$30^\\circ$",
+    "$60^\\circ$",
+    "$90^\\circ$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$\\sin60^\\circ<1$ at $30^\\circ$: a shorter range",
+    "$\\sin120^\\circ<1$ at $60^\\circ$: a shorter range",
+    "vertical launch returns to its start: zero range"
+   ]
+  },
+  "solution": "Range $\\propto\\sin2\\theta$, which is largest at $\\theta=45^\\circ$.",
+  "hints": [
+   "Range is proportional to $\\sin 2\\theta$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Ignoring air, the horizontal acceleration of a projectile is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "zero",
+    "$g$",
+    "$g\\sin\\theta$",
+    "$v^{2}/r$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$g$ acts vertically, not horizontally",
+    "the component of $g$ along an incline",
+    "a centripetal form, not a projectile property"
+   ]
+  },
+  "solution": "No horizontal force acts, so $a_x=0$.",
+  "hints": [
+   "Only gravity acts, and gravity is vertical."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Ignoring air, a projectile launched from ground level with speed $v$ at angle $\\theta$ has range $R$. Write $R$ in terms of $v$, $\\theta$, $g$.",
+  "answer": {
+   "kind": "expression",
+   "value": "v^2*sin(2*theta)/g",
+   "vars": [
+    "v",
+    "theta",
+    "g"
+   ],
+   "also": [
+    "2*v^2*sin(theta)*cos(theta)/g",
+    "v^2*sin(2*theta)*g^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "$R=v^{2}\\sin2\\theta/g$, from time of flight $2v\\sin\\theta/g$ times horizontal speed $v\\cos\\theta$.",
+  "hints": [
+   "Multiply time of flight by horizontal speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0058",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A ball leaves a table horizontally at $10\\ \\mathrm{m/s}$. Ignoring air, what is its horizontal velocity $2.0\\ \\mathrm s$ later?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10\\ \\mathrm{m/s}$",
+    "$20\\ \\mathrm{m/s}$",
+    "$0\\ \\mathrm{m/s}$",
+    "$19.6\\ \\mathrm{m/s}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "added $gt$ to the horizontal velocity: gravity acts vertically",
+    "treated gravity as a horizontal force that stops the ball",
+    "used the vertical velocity $gt$ in place of the horizontal one"
+   ]
+  },
+  "solution": "No horizontal force acts, so $v_x$ stays $10\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Only gravity acts, and it is vertical."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A ball leaves a table horizontally at $10\\ \\mathrm{m/s}$ from a height of $20\\ \\mathrm m$. Use $g=9.8\\ \\mathrm{m/s^2}$. Give the fall time in $\\mathrm s$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.02,
+   "tol": 0.0404,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2*20/9.8)",
+  "solution": "Vertical motion starts from rest: $h=\\tfrac12 gt^{2}$, so $t=\\sqrt{2h/g}\\approx2.02\\ \\mathrm s$.",
+  "hints": [
+   "The horizontal speed does not change the fall time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ball leaves a table horizontally at $10\\ \\mathrm{m/s}$ from a height of $20\\ \\mathrm m$. Use $g=9.8\\ \\mathrm{m/s^2}$ and ignore air. Give the horizontal distance travelled before landing, in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20.2,
+   "tol": 0.404,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "10*math.sqrt(2*20/9.8)",
+  "solution": "Horizontal motion is uniform: $x=v_xt=10\\times2.02\\approx20.2\\ \\mathrm m$.",
+  "hints": [
+   "Find the fall time first, then multiply by the horizontal speed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ball is launched at $30\\ \\mathrm{m/s}$ at $60^\\circ$ above horizontal on level ground. Use $g=9.8\\ \\mathrm{m/s^2}$ and ignore air. Give the range in $\\mathrm m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 79.5,
+   "tol": 1.59,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "900*math.sin(math.radians(120))/9.8",
+  "solution": "$R=\\dfrac{v^{2}\\sin2\\theta}{g}=\\dfrac{900\\sin120^\\circ}{9.8}\\approx79.5\\ \\mathrm m$.",
+  "hints": [
+   "Use the range formula for level ground."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A projectile is launched at speed $v$ and angle $\\theta$ from level ground. Write its time of flight $T$ in terms of $v$, $\\theta$, $g$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*v*sin(theta)/g",
+   "vars": [
+    "v",
+    "theta",
+    "g"
+   ],
+   "also": [
+    "2*v*sin(theta)*g^(-1)",
+    "(2*v/g)*sin(theta)"
+   ]
+  },
+  "check": null,
+  "solution": "The vertical velocity $v\\sin\\theta$ returns to $-v\\sin\\theta$ after time $T$, so $T=2v\\sin\\theta/g$.",
+  "hints": [
+   "Find when the vertical position returns to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A ball is thrown at $20\\ \\mathrm{m/s}$ at $30^\\circ$ above horizontal from ground level. Ignoring air and using $g=9.8\\ \\mathrm{m/s^2}$, what is its maximum height?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.1\\ \\mathrm m$",
+    "$10.2\\ \\mathrm m$",
+    "$15.3\\ \\mathrm m$",
+    "$20.4\\ \\mathrm m$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "dropped the factor 2 in $2g$",
+    "used $\\cos30^\\circ$ for the vertical velocity",
+    "used the full speed and ignored the angle"
+   ]
+  },
+  "solution": "$v_y=20\\sin30^\\circ=10\\ \\mathrm{m/s}$, and $H=v_y^{2}/(2g)=100/19.6\\approx5.1\\ \\mathrm m$.",
+  "hints": [
+   "At the top the vertical velocity is zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "On a position–time graph, the slope at a point gives:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "velocity",
+    "acceleration",
+    "displacement",
+    "force"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "acceleration is the slope of a velocity–time graph",
+    "displacement is a change in position, not a slope",
+    "a force is not read from a kinematics graph"
+   ]
+  },
+  "solution": "Slope of $x$–$t$ is $v=dx/dt$.",
+  "hints": [
+   "Slope is a rate of change."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A horizontal line on a velocity–time graph means:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "zero acceleration",
+    "zero velocity",
+    "constant acceleration",
+    "zero displacement"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a horizontal line sits at some velocity; it is zero only on the time axis",
+    "constant acceleration gives a sloped line",
+    "a line above the axis gives a nonzero area"
+   ]
+  },
+  "solution": "Slope $=dv/dt=0$, so the acceleration is zero: constant velocity.",
+  "hints": [
+   "Look at the slope of the line."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A velocity–time graph is a horizontal line at $v=4.0\\ \\mathrm{m/s}$ from $t=0$ to $t=3.0\\ \\mathrm s$. Give the displacement in $\\mathrm m$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*3",
+  "solution": "Displacement is the area under the graph: $4.0\\times3.0=12\\ \\mathrm m$.",
+  "hints": [
+   "The area of a rectangle is base times height."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A velocity–time graph rises linearly from $0$ to $12\\ \\mathrm{m/s}$ over $4.0\\ \\mathrm s$, then falls linearly to $0$ over $2.0\\ \\mathrm s$. Give the total displacement in $\\mathrm m$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 36,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*4*12+Fraction(1,2)*2*12",
+  "solution": "Two triangles: $\\tfrac12(4)(12)+\\tfrac12(2)(12)=24+12=36\\ \\mathrm m$.",
+  "hints": [
+   "Split the graph into triangles and add their areas."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A position–time graph follows $x(t)=2t^{2}-8t$, with $x$ in $\\mathrm m$ and $t$ in $\\mathrm s$. Give the velocity at $t=3.0\\ \\mathrm s$ in $\\mathrm{m/s}$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*3-8",
+  "solution": "The slope of $x$–$t$ is $v=4t-8$. At $t=3$: $v=4\\ \\mathrm{m/s}$.",
+  "hints": [
+   "The slope at a point is the derivative of $x(t)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A velocity–time graph falls linearly from $+6\\ \\mathrm{m/s}$ at $t=0$ to $-2\\ \\mathrm{m/s}$ at $t=4\\ \\mathrm s$. Which best describes the motion?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "acceleration $-2\\ \\mathrm{m/s^2}$, and the object reverses direction at $t=3\\ \\mathrm s$",
+    "acceleration $+2\\ \\mathrm{m/s^2}$, and the direction never changes",
+    "speed constant at $4\\ \\mathrm{m/s}$",
+    "stopped at $t=2\\ \\mathrm s$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "slope sign flipped to $+2$, and no reversal assumed",
+    "took the average of the end velocities as a constant speed",
+    "read the time midpoint as where the velocity is zero; the zero is at $t=3$ s"
+   ]
+  },
+  "solution": "Slope $=\\dfrac{-2-6}{4}=-2\\ \\mathrm{m/s^2}$. Velocity is zero at $t=3\\ \\mathrm s$, so the object reverses.",
+  "hints": [
+   "Find the slope, then where the line crosses zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A position–time graph is a straight line through $(0\\ \\mathrm s,\\,3\\ \\mathrm m)$ and $(5\\ \\mathrm s,\\,13\\ \\mathrm m)$. Give the slope in $\\mathrm{m/s}$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(13-3,5)",
+  "solution": "Slope $=\\dfrac{13-3}{5-0}=2\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Rise over run."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A velocity–time graph is $v=kt^{2}$ for $0\\le t\\le T$, with $k$ a constant. Write the displacement from $t=0$ to $t=T$ in terms of $k$ and $T$.",
+  "answer": {
+   "kind": "expression",
+   "value": "k*T^3/3",
+   "vars": [
+    "k",
+    "T"
+   ],
+   "also": [
+    "k*T^3*(1/3)",
+    "(k/3)*T^3"
+   ]
+  },
+  "check": null,
+  "solution": "Displacement is $\\int_0^T kt^{2}\\,dt=kT^{3}/3$.",
+  "hints": [
+   "Area under a curve is an integral."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A position–time graph is a straight line of slope $4\\ \\mathrm{m/s}$ from $t=0$ to $t=2\\ \\mathrm s$, then flat from $t=2\\ \\mathrm s$ to $t=5\\ \\mathrm s$. What is the displacement from $0$ to $5\\ \\mathrm s$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8\\ \\mathrm m$",
+    "$20\\ \\mathrm m$",
+    "$4\\ \\mathrm m$",
+    "$0\\ \\mathrm m$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "applied the slope to the whole $5\\ \\mathrm s$",
+    "took the slope value as the displacement, ignoring time",
+    "read the flat part as a return to the start"
+   ]
+  },
+  "solution": "Position rises by $4\\times2=8\\ \\mathrm m$, then stays fixed. Displacement is $8\\ \\mathrm m$.",
+  "hints": [
+   "The flat part adds no displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which is the best order-of-magnitude estimate of a car's mass?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10^{3}\\ \\mathrm{kg}$",
+    "$10^{5}\\ \\mathrm{kg}$",
+    "$10^{1}\\ \\mathrm{kg}$",
+    "$10^{7}\\ \\mathrm{kg}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$10^{5}$ kg is a truck: a factor $10^{2}$ too large",
+    "$10^{1}$ kg is a bicycle-scale mass: a factor $10^{2}$ too small",
+    "$10^{7}$ kg is a large ship: a factor $10^{4}$ too large"
+   ]
+  },
+  "solution": "A typical car is about $1500$ kg, so the order of magnitude is $10^{3}$ kg.",
+  "hints": [
+   "Picture the object and its mass in kilograms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What power of ten is nearest the number of seconds in one day? Type the exponent.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "round(math.log10(86400))",
+  "solution": "$1\\ \\mathrm d=86400\\ \\mathrm s\\approx10^{4.9}$, nearest power $10^{5}$.",
+  "hints": [
+   "Take the logarithm of 86400."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In an order-of-magnitude estimate, the usual first step is to:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "round each input to one significant figure",
+    "compute to six significant figures before rounding",
+    "use the largest value in each range",
+    "drop any constant in the formula"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "more precision than the estimate needs; a factor of a few is acceptable",
+    "biases the answer high, not a sound default",
+    "drops a factor and can change the power of ten"
+   ]
+  },
+  "solution": "Round inputs to one significant figure, then multiply powers of ten.",
+  "hints": [
+   "Estimation tolerates a factor of a few."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0076",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Estimate the number of heartbeats in a human life of $80$ years at $70$ beats per minute. Which order of magnitude is closest?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10^{6}$",
+    "$10^{9}$",
+    "$10^{12}$",
+    "$10^{3}$"
+   ],
+   "correct": 1,
+   "why": [
+    "$10^{6}$: that is about two years of minutes, not $80$ years",
+    "",
+    "$10^{12}$: a factor $10^{3}$ slipped in the minutes-to-years step",
+    "$10^{3}$: read 80 years as 80 minutes"
+   ]
+  },
+  "solution": "$80$ yr $\\times5.3\\times10^{5}$ min/yr $\\times70$ beats/min $\\approx3\\times10^{9}$ beats.",
+  "hints": [
+   "Convert years to minutes first, then multiply by beats per minute."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Estimate the power of ten nearest the number of seconds in $30$ years. Type the exponent.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "round(math.log10(30*365.25*86400))",
+  "solution": "$30\\times3.16\\times10^{7}\\approx9.5\\times10^{8}$ s, so the exponent is $9$.",
+  "hints": [
+   "One year is about $3\\times10^{7}$ s."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A room is $4.0\\ \\mathrm m\\times5.0\\ \\mathrm m\\times2.5\\ \\mathrm m$. Air has density $1.2\\ \\mathrm{kg/m^3}$. To the nearest power of ten, the air mass is $10^{p}\\ \\mathrm{kg}$. Give $p$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "round(math.log10(4*5*2.5*1.2))",
+  "solution": "Volume $=50\\ \\mathrm m^{3}$, mass $\\approx60\\ \\mathrm{kg}\\approx10^{2}\\ \\mathrm{kg}$.",
+  "hints": [
+   "Multiply volume by density, then take the nearest power of ten."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A car travels at $100\\ \\mathrm{km/h}$. Which is the closest order of magnitude of its speed in $\\mathrm{m/s}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10^{1}\\ \\mathrm{m/s}$",
+    "$10^{2}\\ \\mathrm{m/s}$",
+    "$10^{0}\\ \\mathrm{m/s}$",
+    "$10^{3}\\ \\mathrm{m/s}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "skipped the km-to-m conversion: read $100$ km/h as $100$ m/s",
+    "divided by $100$ instead of by $3.6$",
+    "multiplied by $3.6$ instead of dividing"
+   ]
+  },
+  "solution": "$100\\ \\mathrm{km/h}=100/3.6\\approx28\\ \\mathrm{m/s}\\approx10^{1}\\ \\mathrm{m/s}$.",
+  "hints": [
+   "One km/h is $1/3.6$ m/s."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $60\\ \\mathrm{kg}$ person climbs $3.0\\ \\mathrm m$ of stairs in $2.0\\ \\mathrm s$. Use $g=9.8\\ \\mathrm{m/s^2}$. To the nearest power of ten, the power is $10^{p}\\ \\mathrm W$. Give $p$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "round(math.log10(60*9.8*3/2))",
+  "solution": "$P=mgh/t=60\\times9.8\\times3.0/2.0\\approx880\\ \\mathrm W\\approx10^{3}\\ \\mathrm W$.",
+  "hints": [
+   "Power is work divided by time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A stack of paper is $1.0\\ \\mathrm m$ tall. Each sheet is $0.10\\ \\mathrm{mm}$ thick. Give the power of ten $p$ for the number of sheets, $10^{p}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "round(math.log10(10000))",
+  "solution": "$1.0\\ \\mathrm m=1000\\ \\mathrm{mm}$, so the stack has $1000/0.10=10^{4}$ sheets.",
+  "hints": [
+   "Convert the stack height to millimetres first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If every length of a cube doubles, its volume becomes:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "8 times larger",
+    "2 times larger",
+    "4 times larger",
+    "6 times larger"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "scaled volume linearly, but volume needs three lengths",
+    "squared instead of cubed",
+    "added the three dimensions instead of multiplying"
+   ]
+  },
+  "solution": "Volume $\\propto L^{3}$, so doubling each length gives $2^{3}=8$.",
+  "hints": [
+   "Volume uses three lengths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A pendulum's period is proportional to $\\sqrt{L}$. If $L$ is quadrupled, by what factor does $T$ change? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.sqrt(4)",
+  "solution": "$T\\propto L^{1/2}$, so $4^{1/2}=2$.",
+  "hints": [
+   "Take the square root of the length factor."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The surface area of a sphere scales with its radius $r$ as:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$r^{2}$",
+    "$r^{3}$",
+    "$r$",
+    "$r^{1/2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$r^{3}$ is the volume scaling",
+    "linear scaling is for lengths, not areas",
+    "a square root is not the area scaling"
+   ]
+  },
+  "solution": "Area $=4\\pi r^{2}$.",
+  "hints": [
+   "Area is a two-dimensional measure."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sphere of uniform density has its radius doubled. By what factor does its mass change? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2**3",
+  "solution": "Mass $\\propto$ volume $\\propto r^{3}$, so $2^{3}=8$.",
+  "hints": [
+   "Mass at fixed density is volume times density."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two point masses attract with force $F$. Their separation is then tripled. The new force is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$F/9$",
+    "$F/3$",
+    "$F/27$",
+    "$3F$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "dropped the square: treated force as $1/r$",
+    "cubed the separation: $1/r^{3}$",
+    "inverted the power: force grows with distance"
+   ]
+  },
+  "solution": "$F\\propto1/r^{2}$. Tripling $r$ gives $1/9$ of the force.",
+  "hints": [
+   "Gravitational force scales as the inverse square of distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A car's kinetic energy is proportional to $v^{2}$. Its speed rises from $30\\ \\mathrm{m/s}$ to $90\\ \\mathrm{m/s}$. By what factor does its kinetic energy change? Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(90/30)**2",
+  "solution": "$K\\propto v^{2}$, so $(90/30)^{2}=9$.",
+  "hints": [
+   "Take the ratio of the speeds first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A planet orbits at a radius $4$ times Earth's. Use $T^{2}\\propto r^{3}$ and an Earth period of $1\\ \\mathrm{yr}$. Give the planet's period in $\\mathrm{yr}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.sqrt(4**3)",
+  "solution": "$T^{2}\\propto r^{3}$: $T^{2}=4^{3}=64$, so $T=8\\ \\mathrm{yr}$.",
+  "hints": [
+   "Square the period to get the scaling."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A pendulum has period $T$. Its length is multiplied by $k$. Write the new period in terms of $T$ and $k$.",
+  "answer": {
+   "kind": "expression",
+   "value": "T*sqrt(k)",
+   "vars": [
+    "T",
+    "k"
+   ],
+   "also": [
+    "T*k^(1/2)",
+    "sqrt(k)*T"
+   ]
+  },
+  "check": null,
+  "solution": "$T\\propto L^{1/2}$, so the new period is $T\\sqrt k$.",
+  "hints": [
+   "Period is proportional to the square root of length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A wire's resistance is $R=\\rho L/A$, with $A$ its cross-sectional area. If the wire's radius is halved, with length and material fixed, the resistance becomes:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "4 times",
+    "2 times",
+    "1/4 times",
+    "8 times"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "used radius in place of area: $A\\propto r$, not $r^{2}$",
+    "inverted the area dependence",
+    "used volume $r^{3}$ for the cross section"
+   ]
+  },
+  "solution": "$A\\propto r^{2}$. Halving $r$ quarters $A$, so $R$ quadruples.",
+  "hints": [
+   "Area scales with the square of the radius."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a small angle $\\theta$ in radians, $\\sin\\theta\\approx$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\theta$",
+    "$1-\\theta^{2}/2$",
+    "$\\theta^{2}$",
+    "$\\sqrt{\\theta}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that expansion is $\\cos\\theta$, the wrong function",
+    "sine is linear in $\\theta$, with no square term",
+    "a square root is not the leading term of a Taylor series"
+   ]
+  },
+  "solution": "$\\sin\\theta=\\theta-\\theta^{3}/6+\\dots$, so the leading term is $\\theta$.",
+  "hints": [
+   "Think about the first term of the sine series."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $\\theta=0.10$ rad, use $\\cos\\theta\\approx1-\\theta^{2}/2$. Give the approximate value of $\\cos\\theta$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.995,
+   "tol": 0.0001,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "check": "1-Fraction(1,100)/2",
+  "solution": "$\\cos0.10\\approx1-0.01/2=0.995$.",
+  "hints": [
+   "Square the angle, then halve it."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The small-angle approximation for a pendulum's period needs:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "amplitude much less than $1$ rad",
+    "mass much less than length",
+    "period much less than $1$ s",
+    "$g$ much less than $1$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "mass drops out of the period, so it is not the condition",
+    "a period is not a dimensionless smallness parameter",
+    "$g$ is a fixed constant, not a small parameter"
+   ]
+  },
+  "solution": "The period $2\\pi\\sqrt{L/g}$ holds when the amplitude is small in radians.",
+  "hints": [
+   "Which quantity must be a small number in radians?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0094",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Use $\\sin\\theta\\approx\\theta$ for $\\theta=0.02$ rad. What is the relative error $(\\theta-\\sin\\theta)/\\theta$, to one significant figure?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7\\times10^{-5}$",
+    "$2\\times10^{-2}$",
+    "$3\\times10^{-3}$",
+    "$7\\times10^{-4}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "took the error as $\\theta$ itself, not a fraction of it",
+    "used $\\theta/6$ instead of $\\theta^{2}/6$",
+    "slipped a factor $10$ when squaring $\\theta$: $0.004$ instead of $0.0004$"
+   ]
+  },
+  "solution": "$\\sin\\theta\\approx\\theta-\\theta^{3}/6$, so the relative error is $\\theta^{2}/6=0.0004/6\\approx7\\times10^{-5}$.",
+  "hints": [
+   "Use the next term of the sine series."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A distant object $2.0\\ \\mathrm m$ across is $4.0\\ \\mathrm{km}$ away. Using $\\theta\\approx d/D$, give its angular size in microradians ($\\mu\\mathrm{rad}$). Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 500,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,4000)*10**6",
+  "solution": "$\\theta\\approx2.0/4000=5.0\\times10^{-4}$ rad, which is $500\\ \\mu\\mathrm{rad}$.",
+  "hints": [
+   "Divide the size by the distance; the result is in radians."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Light of wavelength $500\\ \\mathrm{nm}$ passes through a slit $0.10\\ \\mathrm{mm}$ wide. Using $\\theta\\approx\\lambda/d$, give the angle in $\\mathrm{mrad}$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(500,10**9)/Fraction(1,10**4)*10**3",
+  "solution": "$\\theta\\approx\\lambda/d=5.0\\times10^{-7}/1.0\\times10^{-4}=5.0\\times10^{-3}$ rad $=5$ mrad.",
+  "hints": [
+   "Convert everything to metres before dividing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A simple pendulum has length $1.00\\ \\mathrm m$. Use $g=9.8\\ \\mathrm{m/s^2}$ and the small-angle period $T=2\\pi\\sqrt{L/g}$. Give $T$ in $\\mathrm s$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.01,
+   "tol": 0.0402,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*math.pi*math.sqrt(1/9.8)",
+  "solution": "$T=2\\pi\\sqrt{1.00/9.8}\\approx2.01\\ \\mathrm s$.",
+  "hints": [
+   "Use the small-angle period formula directly."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Use the small-angle approximation to write $1-\\cos x$ in terms of $x$ for small $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x^2/2",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "x^2*(1/2)",
+    "(1/2)*x^2"
+   ]
+  },
+  "check": null,
+  "solution": "$\\cos x\\approx1-x^{2}/2$, so $1-\\cos x\\approx x^{2}/2$.",
+  "hints": [
+   "Use the second-order expansion of cosine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For small $\\theta$ in radians, the ratio $\\tan\\theta/\\sin\\theta$ is approximately:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1$",
+    "$\\theta$",
+    "$1/\\theta$",
+    "$\\theta^{2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "used $\\tan\\theta/\\sin\\theta\\approx\\theta$: mistook the ratio for $\\tan\\theta$ alone",
+    "inverted the ratio of two nearly equal quantities",
+    "squared a single factor of $\\theta$"
+   ]
+  },
+  "solution": "$\\tan\\theta/\\sin\\theta=1/\\cos\\theta\\approx1/(1-\\theta^{2}/2)\\approx1$; both are $\\approx\\theta$ to first order.",
+  "hints": [
+   "Write $\\tan\\theta=\\sin\\theta/\\cos\\theta$ and use $\\cos\\theta\\to1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which plot gives a straight line through the origin with slope $k$ for the law $y=kx^{2}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$y$ against $x^{2}$",
+    "$y$ against $x$",
+    "$\\ln y$ against $x$",
+    "$y$ against $1/x$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a parabola: curved, not a line",
+    "a straight line only for exponential laws",
+    "a hyperbola: curved"
+   ]
+  },
+  "solution": "$y=k\\,(x^{2})$ is linear in $x^{2}$ with slope $k$ through the origin.",
+  "hints": [
+   "Replace $x^{2}$ with a new variable."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $y=5x^{3}$, give the slope of $\\log_{10}y$ against $\\log_{10}x$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "$\\log_{10}y=\\log_{10}5+3\\log_{10}x$, so the slope is $3$.",
+  "hints": [
+   "Take the logarithm of both sides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why plot data in a linearized form?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "a straight line makes slope and intercept easy to read and test",
+    "it removes measurement uncertainty",
+    "it makes every point lie exactly on the line",
+    "it changes the physical law being tested"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uncertainty remains and must still be shown",
+    "real data scatter, so a fit is still needed",
+    "a transformation does not change the law, only how it is displayed"
+   ]
+  },
+  "solution": "A line makes the slope and intercept directly readable.",
+  "hints": [
+   "Think about what a straight line lets you read off."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Data follow $y=4.0\\,x^{2}$ in SI units. Give the slope of $y$ against $x^{2}$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "$y=4\\,(x^{2})$ is linear in $x^{2}$ with slope $4$.",
+  "hints": [
+   "Treat $x^{2}$ as the new variable."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $y=c\\,x^{n}$, a fit of $\\log_{10}y$ against $\\log_{10}x$ has intercept $0.699$. Give $c$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.0,
+   "tol": 0.1,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "10**0.699",
+  "solution": "The intercept is $\\log_{10}c$, so $c=10^{0.699}\\approx5.0$.",
+  "hints": [
+   "Invert the logarithm of the intercept."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Counts obey $N=N_0\\,e^{-t/\\tau}$. A plot of $\\ln N$ against $t$ has slope $-0.50\\ \\mathrm{s^{-1}}$. Give $\\tau$ in $\\mathrm s$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1/0.5",
+  "solution": "The slope is $-1/\\tau=-0.50\\ \\mathrm{s^{-1}}$, so $\\tau=2.0\\ \\mathrm s$.",
+  "hints": [
+   "Compare the slope with $-1/\\tau$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "To test Kepler's law $T^{2}\\propto r^{3}$ with a straight line, which plot should be used?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$T^{2}$ against $r^{3}$",
+    "$T$ against $r^{3}$",
+    "$\\ln T$ against $r$",
+    "$T$ against $r$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$T\\propto r^{3/2}$, so $T$ against $r^{3}$ is still curved",
+    "a straight line from logs fits exponentials, not power laws",
+    "a power law $T\\propto r^{3/2}$ is curved against $r$"
+   ]
+  },
+  "solution": "$T^{2}=kr^{3}$ is linear in $r^{3}$ with slope $k$.",
+  "hints": [
+   "Square both sides of the period law first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A straight-line fit of $\\log_{10}y$ against $\\log_{10}x$ has intercept $c$. Write $A$ in terms of $c$ for the law $y=Ax^{n}$.",
+  "answer": {
+   "kind": "expression",
+   "value": "10^c",
+   "vars": [
+    "c"
+   ],
+   "also": [
+    "exp(c*ln(10))",
+    "10^(c)"
+   ]
+  },
+  "check": null,
+  "solution": "The intercept is $\\log_{10}A$, so $A=10^{c}$.",
+  "hints": [
+   "Undo the logarithm."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fit of $y$ against $x^{2}$ gives slope $0.25$ through the origin. Find $y$ when $x=6.0$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)*36",
+  "solution": "$y=0.25\\,x^{2}=0.25\\times36=9$.",
+  "hints": [
+   "Multiply the slope by $x^{2}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The derivative $\\dfrac{dx}{dt}$ at a point gives:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "the instantaneous rate of change of $x$",
+    "the average value of $x$",
+    "the area under $x$ against $t$",
+    "the total change in $x$ over an interval"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "average value is an integral divided by the interval",
+    "area under a curve is an integral",
+    "total change is $x(b)-x(a)$, not a derivative"
+   ]
+  },
+  "solution": "The derivative is the limit of the difference quotient: an instantaneous rate.",
+  "hints": [
+   "Derivatives are rates at an instant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Constant acceleration $a=2.0\\ \\mathrm{m/s^2}$ acts for $3.0\\ \\mathrm s$. Give the velocity change in $\\mathrm{m/s}$ from $\\int_0^{3}a\\,dt$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*3",
+  "solution": "$\\Delta v=\\int a\\,dt=a\\,\\Delta t=2.0\\times3.0=6.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "A constant integrand gives a rectangle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write $\\dfrac{d}{dt}(c\\,t^{3})$ in terms of $c$ and $t$.",
+  "answer": {
+   "kind": "expression",
+   "value": "3*c*t^2",
+   "vars": [
+    "c",
+    "t"
+   ],
+   "also": [
+    "3*t^2*c",
+    "3*(c*t^2)"
+   ]
+  },
+  "check": null,
+  "solution": "Power rule: $\\dfrac{d}{dt}t^{3}=3t^{2}$, and $c$ is a constant factor.",
+  "hints": [
+   "Bring the exponent down and lower it by one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A particle's position is $x(t)=3t^{2}$ in $\\mathrm m$, with $t$ in $\\mathrm s$. Give its velocity at $t=2.0\\ \\mathrm s$ in $\\mathrm{m/s}$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "6*2",
+  "solution": "$v=dx/dt=6t=12\\ \\mathrm{m/s}$ at $t=2$.",
+  "hints": [
+   "Differentiate $x(t)$, then substitute $t=2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A particle has velocity $v=4t$ in $\\mathrm{m/s}$. Give its displacement from $t=0$ to $t=2.0\\ \\mathrm s$ in $\\mathrm m$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*2**2",
+  "solution": "$\\Delta x=\\int_0^2 4t\\,dt=2t^{2}\\big|_0^2=8\\ \\mathrm m$.",
+  "hints": [
+   "Integrate velocity over time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle has velocity $v=6-2t$ in $\\mathrm{m/s}$, with $t$ in $\\mathrm s$. Give its displacement from $t=0$ to $t=3.0\\ \\mathrm s$ in $\\mathrm m$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "6*3-3**2",
+  "solution": "$\\Delta x=\\int_0^3(6-2t)\\,dt=18-9=9\\ \\mathrm m$.",
+  "hints": [
+   "The area under the velocity–time graph equals the displacement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A particle has velocity $v=5t\\ \\mathrm{m/s}$ and starts at $x=0$. What is its position at $t=2.0\\ \\mathrm s$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10\\ \\mathrm m$",
+    "$20\\ \\mathrm m$",
+    "$5\\ \\mathrm m$",
+    "$4\\ \\mathrm m$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot the $\\tfrac12$ from integrating $5t$: $5t^{2}$ gives $20$",
+    "integrated to $\\tfrac52 t$ and dropped one power of $t$",
+    "dropped the coefficient $5$ and kept only $t^{2}$"
+   ]
+  },
+  "solution": "$x=\\int 5t\\,dt=\\tfrac52t^{2}$, so $x(2)=\\tfrac52\\times4=10\\ \\mathrm m$.",
+  "hints": [
+   "Integrate the velocity, then use the starting position."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A force $F=kx$ acts over a distance from $0$ to $x$. Write the work $W=\\int_0^{x}F\\,dx$ in terms of $k$ and $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "k*x^2/2",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "also": [
+    "(1/2)*k*x^2",
+    "k*x*x/2"
+   ]
+  },
+  "check": null,
+  "solution": "$W=\\int_0^x kx'\\,dx'=\\tfrac12kx^{2}$.",
+  "hints": [
+   "Integrate $kx'$ from zero to $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Water flows into a tank at $0.5t\\ \\mathrm{m^3/s}$, with $t$ in $\\mathrm s$. Give the volume that enters from $t=0$ to $t=4.0\\ \\mathrm s$ in $\\mathrm m^3$. Type a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)*16",
+  "solution": "$V=\\int_0^4 0.5t\\,dt=0.25t^{2}\\big|_0^4=4\\ \\mathrm m^{3}$.",
+  "hints": [
+   "Integrate the flow rate over time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

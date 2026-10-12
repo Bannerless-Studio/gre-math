@@ -137,8 +137,9 @@ function check(data) {
     if (!core.ANSWER_KINDS.includes(a.kind)) { err(w, `answer.kind must be one of ${core.ANSWER_KINDS.join(', ')}`); return; }
     if (a.kind === 'numeric') {
       const v = typeof a.value === 'number' ? answer.parseNumber(a.value) : typeof a.value === 'string' ? answer.parseNumber(a.value) : null;
-      if (!v || (typeof a.value === 'string' && !/^\s*[+-]?\d+\s*\/\s*\d+\s*$|^\s*[+-]?(\d+\.?\d*|\.\d+)\s*$/.test(a.value))) err(w, 'answer.value must be a number, "p/q" or a decimal string');
+      if (!v || (typeof a.value === 'string' && !/^\s*[+-]?\d+\s*\/\s*\d+\s*$|^\s*[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?\s*$/.test(a.value))) err(w, 'answer.value must be a number, "p/q", a decimal or a scientific string (1.6e-19)');
       if (a.tol !== undefined && !(typeof a.tol === 'number' && a.tol >= 0)) err(w, 'answer.tol must be a number >= 0');
+      if (a.rel !== undefined && !(typeof a.rel === 'number' && a.rel >= 0 && a.rel <= 0.1)) err(w, 'answer.rel must be a number from 0 to 0.1 (relative tolerance)');
       if (a.form !== undefined && !answer.FORMS.includes(a.form)) err(w, 'answer.form must be exact, decimal or fraction');
     }
     if (Array.isArray(a.options) || a.kind === 'mcq' || a.kind === 'multi') {

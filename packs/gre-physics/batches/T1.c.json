@@ -1,0 +1,1341 @@
+[
+ {
+  "id": "t1-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.units",
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A lecture room measures $4.0\\ \\mathrm m\\times5.0\\ \\mathrm m\\times2.5\\ \\mathrm m$. Air density is $1.20\\ \\mathrm{g/L}$. Find the mass of air in the room, in kg.",
+  "answer": {
+   "kind": "numeric",
+   "value": 60.0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Volume found in $\\mathrm m^3$",
+    "weight": 2
+   },
+   {
+    "text": "Density converted: $1\\ \\mathrm{g/L}=1\\ \\mathrm{kg/m^3}$",
+    "weight": 2
+   },
+   {
+    "text": "Mass $=\\rho V$ with consistent units",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Volume: $4.0\\times5.0\\times2.5=50\\ \\mathrm m^3$ (units).\n$1\\ \\mathrm{g/L}=\\dfrac{10^{-3}\\ \\mathrm{kg}}{10^{-3}\\ \\mathrm{m^3}}=1\\ \\mathrm{kg/m^3}$ (units: both prefixes cancel).\nMass $=1.20\\times50=60\\ \\mathrm{kg}$ (dimanal check: $\\mathrm{kg/m^3}\\cdot\\mathrm{m^3}=\\mathrm{kg}$).\nTrap: reading $1\\ \\mathrm{g/L}$ as $1000\\ \\mathrm{kg/m^3}$ gives $6\\times10^4$ kg.",
+  "hints": [
+   "Convert density to kg/m³ before multiplying."
+  ],
+  "check": "4.0*5.0*2.5*1.20",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.units",
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A pressure of $3.0\\ \\mathrm{kPa}$ is expressed in CGS units, $\\mathrm{g\\,cm^{-1}\\,s^{-2}}$. Its value is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.0\\times10^{1}$",
+    "$3.0\\times10^{4}$",
+    "$3.0\\times10^{6}$",
+    "$3.0\\times10^{8}$",
+    "$3.0\\times10^{3}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "converted metres to centimetres but forgot kg to g",
+    "",
+    "converted kg to g and kPa to Pa but forgot the length conversion",
+    "inverted the length conversion: used $1\\ \\mathrm{m^{-1}}=100\\ \\mathrm{cm^{-1}}$",
+    "treated Pa as already CGS and only converted kPa to Pa"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Pa reduced to base units $\\mathrm{kg\\,m^{-1}\\,s^{-2}}$",
+    "weight": 2
+   },
+   {
+    "text": "Each base unit converted with the right power of ten and direction",
+    "weight": 2
+   },
+   {
+    "text": "Final power of ten checked against $1\\ \\mathrm{Pa}=10\\ \\mathrm{g\\,cm^{-1}\\,s^{-2}}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$1\\ \\mathrm{Pa}=1\\ \\mathrm{kg\\,m^{-1}\\,s^{-2}}$ (dimanal: $\\mathrm N/\\mathrm m^2$).\n$1\\ \\mathrm{kg}=10^{3}\\ \\mathrm g$ gives a factor $10^{3}$.\n$1\\ \\mathrm{m^{-1}}=10^{-2}\\ \\mathrm{cm^{-1}}$ gives a factor $10^{-2}$ (units: a longer unit makes the number smaller).\n$1\\ \\mathrm{Pa}=10\\ \\mathrm{g\\,cm^{-1}\\,s^{-2}}$, so $3.0\\times10^{3}\\ \\mathrm{Pa}\\to3.0\\times10^{4}$.",
+  "hints": [
+   "Pa = kg m⁻¹ s⁻²; convert each base unit separately."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A pendulum of length $L=1.000\\pm0.002\\ \\mathrm m$ has period $T=2.007\\pm0.004\\ \\mathrm s$. Use $g=4\\pi^{2}L/T^{2}$. Treat the errors as independent and add relative errors in quadrature. Find the uncertainty $\\delta g$ in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0437086042,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Power rule: $T^{-2}$ doubles the relative error of $T$",
+    "weight": 2
+   },
+   {
+    "text": "Relative errors combined in quadrature",
+    "weight": 2
+   },
+   {
+    "text": "$g$ computed and scaled: $\\delta g=g\\cdot(\\delta g/g)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$g=4\\pi^2(1.000)/2.007^2\\approx9.80\\ \\mathrm{m/s^2}$ (sigfig: keep 3-4 figures).\n$\\delta L/L=0.002$; $T$ enters squared, so its contribution is $2\\,\\delta T/T=2(0.004/2.007)=0.00399$ (scaling: power rule).\nQuadrature: $\\delta g/g=\\sqrt{0.002^2+0.00399^2}\\approx0.00446$.\n$\\delta g\\approx9.80\\times0.00446\\approx0.044\\ \\mathrm{m/s^2}$.\nTrap: linear addition gives $0.059$.",
+  "hints": [
+   "Relative error of $T^2$ is twice that of $T$."
+  ],
+  "check": "4*math.pi**2*1.000/2.007**2*math.sqrt(0.002**2+(2*0.004/2.007)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.sigfig",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A resistance is found as $R=V/I$ with $V=12.0\\pm0.6\\ \\mathrm V$ and $I=2.00\\pm0.10\\ \\mathrm A$. The errors are independent. The percentage uncertainty in $R$ is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7.1\\%$",
+    "$10\\%$",
+    "$5.0\\%$",
+    "$0.5\\%$",
+    "$0\\%$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "added the percent errors linearly",
+    "kept only one of the two equal contributions",
+    "summed the squared fractions but forgot the square root",
+    "treated a quotient as a difference of percent errors"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Fractional errors $5\\%$ and $5\\%$ found",
+    "weight": 2
+   },
+   {
+    "text": "Independent errors combined in quadrature",
+    "weight": 2
+   },
+   {
+    "text": "Quotient handled by adding, not subtracting, the contributions",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\delta V/V=0.6/12.0=5.0\\%$; $\\delta I/I=0.10/2.00=5.0\\%$ (sigfig: fractional errors).\nFor a quotient, relative errors add in quadrature, never cancel (error propagation).\n$\\delta R/R=\\sqrt{0.05^2+0.05^2}=0.0707$, so $7.1\\%$ (units: $R=6.0\\ \\Omega$).\nLinear sum $10\\%$ is an upper bound for correlated errors only.",
+  "hints": [
+   "Divide each absolute error by its value first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal",
+   "t1.scaling",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The speed $v$ of a deep-water surface wave depends only on its wavelength $\\lambda$, the gravitational acceleration $g$ and the water density $\\rho$. Dimensional analysis shows $v$ is proportional to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{g\\lambda}$",
+    "$\\sqrt{g/\\lambda}$",
+    "$g\\lambda$",
+    "$\\rho\\sqrt{g\\lambda}$",
+    "$\\sqrt{\\rho g\\lambda}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gets units of 1/s, not m/s",
+    "has units $\\mathrm{m^2/s^2}$, the square of a speed",
+    "leaves a stray $\\mathrm{kg/m^3}$ that nothing can cancel",
+    "leaves a stray $\\mathrm{kg/m^3}$ under the root"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Dimensions of $v,\\lambda,g,\\rho$ written",
+    "weight": 2
+   },
+   {
+    "text": "Mass argument: $\\rho$ is the only mass-carrying quantity, so it cannot appear",
+    "weight": 2
+   },
+   {
+    "text": "Exponents of $g$ and $\\lambda$ solved from length and time",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$[v]=\\mathrm{L\\,T^{-1}}$, $[\\lambda]=\\mathrm L$, $[g]=\\mathrm{L\\,T^{-2}}$, $[\\rho]=\\mathrm{M\\,L^{-3}}$ (dimanal).\nOnly $\\rho$ contains $\\mathrm M$, so its exponent must be $0$.\nTake $v\\propto g^a\\lambda^b$: time gives $-2a=-1$, so $a=\\tfrac12$ (units: seconds).\nLength gives $a+b=1$, so $b=\\tfrac12$ (scaling: $v\\propto\\sqrt{\\lambda}$).\nResult: $v\\propto\\sqrt{g\\lambda}$.",
+  "hints": [
+   "Mass appears in only one variable."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.dimanal",
+   "t1.scaling",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The period $T$ of small oscillations of a liquid drop depends only on its density $\\rho$, radius $R$ and surface tension $\\sigma$ (units $\\mathrm{N/m}$). A drop of radius $2.0\\ \\mathrm{mm}$ oscillates with $T=8.0\\ \\mathrm{ms}$. For the same liquid, find $T$ in ms for a drop of radius $3.0\\ \\mathrm{mm}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14.6969384567,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Dimensional combination of $\\rho,R,\\sigma$ with units of time found",
+    "weight": 2
+   },
+   {
+    "text": "Exponent of $R$ identified",
+    "weight": 2
+   },
+   {
+    "text": "Scaling ratio applied to the measured $T$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$[\\sigma]=\\mathrm{kg\\,s^{-2}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[R]=\\mathrm m$ (units).\n$\\rho R^3/\\sigma$ has units $\\mathrm{kg}\\cdot\\mathrm{s^2/kg}=\\mathrm{s^2}$ (dimanal).\nSo $T\\propto\\sqrt{\\rho R^3/\\sigma}\\propto R^{3/2}$ at fixed liquid.\n$T=8.0\\times(3.0/2.0)^{3/2}=8.0\\times1.837=14.7\\ \\mathrm{ms}$ (scaling).\nTrap: $T\\propto R$ gives $12$; $T\\propto R^{2}$ gives $18$.",
+  "hints": [
+   "Find the combination of rho, R, sigma that gives seconds squared."
+  ],
+  "check": "8.0*1.5**1.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A hiker walks $30\\ \\mathrm m$ due east, then $0.040\\ \\mathrm{km}$ in a direction $60^\\circ$ north of west, then $2000\\ \\mathrm{cm}$ due south. Find the magnitude of the net displacement, in m.",
+  "answer": {
+   "kind": "numeric",
+   "value": 17.7301820054,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Legs converted to metres, then resolved into east and north components",
+    "weight": 2
+   },
+   {
+    "text": "Components summed separately: $R_x=10$, $R_y\\approx14.6$",
+    "weight": 2
+   },
+   {
+    "text": "Magnitude from the Pythagorean sum of the totals",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Axes: east $+x$, north $+y$ (vec-comp).\nUnits: $0.040$ km $=40$ m and $2000$ cm $=20$ m.\nLegs: $(30,0)$; $(-40\\cos60^\\circ,\\,40\\sin60^\\circ)=(-20,\\,34.64)$; $(0,-20)$.\n$R_x=30-20=10$, $R_y=34.64-20=14.64$ (component sums).\n$|R|=\\sqrt{10^2+14.64^2}=17.7\\ \\mathrm m$.\nTrap: adding magnitudes gives $90$ m.",
+  "hints": [
+   "Sum x and y separately before taking a magnitude."
+  ],
+  "check": "math.hypot(30-40*math.cos(math.radians(60)), 40*math.sin(math.radians(60))-20)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.vec-comp",
+   "t1.kin-2d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A boat moves at $5.0\\ \\mathrm{m/s}$ relative to the water. A river $200\\ \\mathrm m$ wide flows at $3.0\\ \\mathrm{m/s}$. The boat is steered so that it lands at the point directly opposite its start. The crossing time, in s, is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$50$",
+    "$40$",
+    "$25$",
+    "$67$",
+    "$100$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed the boat heads straight across, so speed across is 5.0 m/s",
+    "used $5.0+3.0=8.0$ m/s across",
+    "used the current speed $3.0$ m/s across",
+    "used $5.0-3.0=2.0$ m/s across"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "No net downstream motion imposed: upstream component $=3.0$",
+    "weight": 2
+   },
+   {
+    "text": "Cross-stream component found as $\\sqrt{5^2-3^2}=4.0$",
+    "weight": 2
+   },
+   {
+    "text": "Time $=200/4.0$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Land opposite: downstream drift must vanish (vec-comp).\nBoat velocity relative to water has upstream component $3.0$ m/s.\nIts cross-stream component is $\\sqrt{5.0^2-3.0^2}=4.0\\ \\mathrm{m/s}$ (components of a fixed-magnitude vector).\n$t=200/4.0=50\\ \\mathrm s$ (kin-2d: cross and along motions are independent).",
+  "hints": [
+   "Cancel the current with an upstream component; only the rest crosses."
+  ],
+  "check": "200/math.sqrt(5**2-3**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A constant force $\\vec F=(2\\hat x+\\hat y-3\\hat z)\\ \\mathrm N$ acts on a particle that moves in a straight line from $(1,2,0)\\ \\mathrm m$ to $(4,-2,3)\\ \\mathrm m$. Find the work done, in J.",
+  "answer": {
+   "kind": "numeric",
+   "value": -7,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Displacement as final minus initial position",
+    "weight": 2
+   },
+   {
+    "text": "Work written as the dot product $\\vec F\\cdot\\vec d$",
+    "weight": 2
+   },
+   {
+    "text": "Component products summed with signs",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\vec d=(4-1,\\,-2-2,\\,3-0)=(3,-4,3)\\ \\mathrm m$ (vec-comp).\n$W=\\vec F\\cdot\\vec d$ (vec-prod: work is a dot product).\n$W=2(3)+1(-4)+(-3)(3)=6-4-9=-7\\ \\mathrm J$.\nNegative: the force opposes the net motion.",
+  "hints": [
+   "Work is F dot d, with d = final minus initial position."
+  ],
+  "check": "2*3+1*(-4)+(-3)*3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.vec-prod",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A force $\\vec F=(\\hat x+3\\hat y+2\\hat z)\\ \\mathrm N$ acts at position $\\vec r=(2\\hat x+\\hat y)\\ \\mathrm m$ from a pivot. The magnitude of the torque about the pivot, in $\\mathrm{N\\,m}$, is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.0$",
+    "$8.4$",
+    "$3.0$",
+    "$6.7$",
+    "$45$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "used the dot product $\\vec r\\cdot\\vec F$",
+    "used $|r||F|$, assuming the vectors are perpendicular",
+    "added the components of $\\vec r\\times\\vec F$ instead of taking the magnitude",
+    "",
+    "forgot the square root of the sum of squares"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Torque set up as $\\vec\\tau=\\vec r\\times\\vec F$",
+    "weight": 2
+   },
+   {
+    "text": "Determinant expansion done with correct signs: $(2,-4,5)$",
+    "weight": 2
+   },
+   {
+    "text": "Magnitude $\\sqrt{4+16+25}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\vec\\tau=\\vec r\\times\\vec F$ (vec-prod).\n$\\tau_x=r_yF_z-r_zF_y=1\\cdot2-0=2$.\n$\\tau_y=r_zF_x-r_xF_z=0-2\\cdot2=-4$; $\\tau_z=r_xF_y-r_yF_x=6-1=5$.\n$|\\tau|=\\sqrt{4+16+25}=\\sqrt{45}=6.7\\ \\mathrm{N\\,m}$ (vec-comp: magnitude from components).",
+  "hints": [
+   "Cross product by determinant, then take the length."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d",
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A car travels at $30\\ \\mathrm{m/s}$. On its velocity–time graph the speed stays constant for $0.80\\ \\mathrm s$, then falls linearly, with slope $-5.0\\ \\mathrm{m/s^2}$, to zero. Find the total distance from $t=0$ to the stop, in m.",
+  "answer": {
+   "kind": "numeric",
+   "value": 114.0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Constant-speed section: rectangle area $vt_r=24$ m",
+    "weight": 2
+   },
+   {
+    "text": "Falling section: triangle area $\\tfrac12(30)(6.0)=90$ m, or $v^2=2ad$",
+    "weight": 2
+   },
+   {
+    "text": "Two phases added",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Phase 1 (constant speed): $d_1=30(0.80)=24\\ \\mathrm m$.\nPhase 2: $0=v^2-2ad_2$, so $d_2=\\dfrac{30^2}{2(5.0)}=90\\ \\mathrm m$ (kin-1d).\nTotal $=24+90=114\\ \\mathrm m$.\nCheck with a v-t sketch: rectangle $24$ plus triangle $\\tfrac12(30)(6.0)=90$ (graphs).",
+  "hints": [
+   "Split the motion into constant speed, then braking."
+  ],
+  "check": "30*0.80+30**2/(2*5.0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.kin-1d",
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "On a velocity–time graph, car A is a horizontal line at $20\\ \\mathrm{m/s}$ and car B is a straight line from the origin with slope $4.0\\ \\mathrm{m/s^2}$. Both cars are at the same point at $t=0$. B catches A at $t=$ (in s)",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$5$",
+    "$40$",
+    "$20$",
+    "$2.5$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "the time when the speeds are equal, not when positions match",
+    "dropped the acceleration from $\\tfrac12at^2$",
+    "halved the acceleration twice: used $\\tfrac14at^2$",
+    "used $v/(2a)$ for the time"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Displacements read as areas under each graph",
+    "weight": 2
+   },
+   {
+    "text": "Areas equated: $20t=\\tfrac12(4.0)t^2$",
+    "weight": 2
+   },
+   {
+    "text": "Nonzero root selected",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Area under A's line: $x_A=20t$ (graphs). Area under B's line: $x_B=\\tfrac12(4.0)t^2=2t^2$ (kin-1d).\nCatch-up means $x_A=x_B$: $20t=2t^2$.\n$t=0$ is the start; the other root is $t=10\\ \\mathrm s$.\nGraph view: B's v-t line reaches $40$ m/s, twice A's speed, and the areas match (graphs).\nTrap: equal speeds occur at $t=5$ s, when B is still behind.",
+  "hints": [
+   "Catching up means equal positions, not equal speeds."
+  ],
+  "check": "20/(0.5*4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d",
+   "t1.vec-comp",
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A stone is thrown horizontally at $12\\ \\mathrm{m/s}$ from the top of a $45\\ \\mathrm m$ cliff over level ground. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its speed at impact, in m/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 32.0312347561,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Horizontal speed constant at $12$ m/s",
+    "weight": 2
+   },
+   {
+    "text": "Vertical speed from $v_y^2=2gh$",
+    "weight": 2
+   },
+   {
+    "text": "Components combined into the speed",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Horizontal: $v_x=12\\ \\mathrm{m/s}$ throughout (kin-2d: independent axes).\nVertical: $v_y^2=2gh=2(9.8)(45)=882$ (kin-1d from rest).\nSpeed $=\\sqrt{12^2+882}=\\sqrt{1026}=32.0\\ \\mathrm{m/s}$ (vec-comp).\nTrap: adding $12+29.7=41.7$ treats speeds as collinear.",
+  "hints": [
+   "Energy-free route: vertical fall is plain 1D motion."
+  ],
+  "check": "math.sqrt(12**2+2*9.8*45)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.kin-2d",
+   "t1.vec-comp",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A projectile is launched on level ground with fixed speed. Launch angles $30^\\circ$ and $60^\\circ$ give equal ranges. The ratio of the maximum height at $60^\\circ$ to that at $30^\\circ$ is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$\\sqrt3$",
+    "$1$",
+    "$\\tfrac13$",
+    "$9$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the ratio $\\sin60^\\circ/\\sin30^\\circ$, forgetting that $H\\propto\\sin^2$",
+    "assumed equal range means equal height",
+    "inverted the ratio",
+    "squared the correct ratio again"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Vertical launch component $v\\sin\\theta$ identified",
+    "weight": 2
+   },
+   {
+    "text": "Height scaling $H\\propto\\sin^2\\theta$ derived from $v_y^2=2gH$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio $\\sin^2 60^\\circ/\\sin^2 30^\\circ$ evaluated",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Vertical speed at launch: $v\\sin\\theta$ (kin-2d, components).\nAt the top $v_y=0$, so $H=\\dfrac{v^2\\sin^2\\theta}{2g}$.\nAt fixed $v$: $H\\propto\\sin^2\\theta$ (scaling).\n$\\dfrac{H_{60}}{H_{30}}=\\dfrac{(3/4)}{(1/4)}=3$.",
+  "hints": [
+   "Height depends only on the vertical component."
+  ],
+  "check": "(math.sin(math.radians(60))/math.sin(math.radians(30)))**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.graphs",
+   "t1.kin-1d",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A velocity-time graph of a cart is piecewise linear. The velocity rises from $0$ to $8\\ \\mathrm{m/s}$ between $t=0$ and $4\\ \\mathrm s$, stays at $8\\ \\mathrm{m/s}$ until $t=10\\ \\mathrm s$, then falls linearly to $0$ at $t=14\\ \\mathrm s$. The average velocity over the $14\\ \\mathrm s$, in m/s, is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.7$",
+    "$3.4$",
+    "$8.0$",
+    "$4.0$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counted only the rectangle and omitted both triangles",
+    "quoted the peak velocity",
+    "took the midpoint of the velocity range, $(0+8)/2$",
+    "used final minus initial velocity, i.e. mean acceleration"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Displacement identified as the area under the v-t graph",
+    "weight": 2
+   },
+   {
+    "text": "Areas $16+48+16=80$ m computed",
+    "weight": 2
+   },
+   {
+    "text": "Divided by total time $14$ s",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Displacement = area under $v(t)$ (graphs).\nRamp up: $\\tfrac12(4)(8)=16$; plateau: $6\\times8=48$; ramp down: $\\tfrac12(4)(8)=16$.\nTotal $80\\ \\mathrm m$ (calc-rates: integral of velocity).\n$\\bar v=80/14=5.7\\ \\mathrm{m/s}$ (kin-1d).",
+  "hints": [
+   "Area under v-t is displacement."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.graphs",
+   "t1.calc-rates",
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An acceleration-time graph for a cart starting from rest shows $a=3.0\\ \\mathrm{m/s^2}$ constant from $t=0$ to $4.0\\ \\mathrm s$, then decreasing linearly to $0$ at $t=10\\ \\mathrm s$. Find the speed at $t=10\\ \\mathrm s$, in m/s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 21.0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Change in speed identified as area under the a-t graph",
+    "weight": 2
+   },
+   {
+    "text": "Rectangle $3.0\\times4.0=12$",
+    "weight": 2
+   },
+   {
+    "text": "Triangle $\\tfrac12(3.0)(6.0)=9$ added to the start from rest",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\Delta v=\\int a\\,dt$ = area under the a-t graph (graphs, calc-rates).\nRectangle $0$ to $4$ s: $3.0\\times4.0=12$.\nTriangle $4$ to $10$ s: $\\tfrac12(6.0)(3.0)=9$.\nStart from rest: $v=12+9=21\\ \\mathrm{m/s}$ (kin-1d).\nTrap: using $a_{\\max}\\times10=30$.",
+  "hints": [
+   "Speed gained is the area under a vs t."
+  ],
+  "check": "3.0*4+0.5*3.0*6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.estimate",
+   "t1.units",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Estimate the mass of Earth's atmosphere in kg. Use $R_E=6.4\\times10^{6}\\ \\mathrm m$, sea-level pressure $1.0\\times10^{5}\\ \\mathrm{Pa}$ and $g=9.8\\ \\mathrm{m/s^2}$. The closest value is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5\\times10^{19}$",
+    "$5\\times10^{20}$",
+    "$5\\times10^{18}$",
+    "$5\\times10^{12}$",
+    "$5\\times10^{15}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "stopped at the weight in newtons, forgot to divide by $g$",
+    "multiplied by $g$ instead of dividing",
+    "",
+    "used $R_E$ in kilometres",
+    "used the pressure in kPa as if it were in Pa"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Atmosphere's weight set equal to pressure times Earth's surface area",
+    "weight": 2
+   },
+   {
+    "text": "Mass $=PA/g$ with $A=4\\pi R_E^2$",
+    "weight": 2
+   },
+   {
+    "text": "Powers of ten tracked in SI",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Weight of the air balances the pressure force: $mg=P\\cdot4\\pi R_E^2$ (estimate).\n$A=4\\pi(6.4\\times10^6)^2\\approx5.1\\times10^{14}\\ \\mathrm{m^2}$.\n$m=\\dfrac{PA}{g}=\\dfrac{(1.0\\times10^5)(5.1\\times10^{14})}{9.8}\\approx5\\times10^{18}\\ \\mathrm{kg}$.\nUnits: $\\mathrm{Pa\\,m^2/(m\\,s^{-2})}=\\mathrm{kg}$ (units, dimanal check).",
+  "hints": [
+   "Pressure times area is the weight of the column."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.estimate",
+   "t1.units",
+   "t1.sigfig"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Estimate the number of air molecules in a room $8.0\\ \\mathrm m\\times10\\ \\mathrm m\\times3.0\\ \\mathrm m$. Take $P=1.0\\times10^{5}\\ \\mathrm{Pa}$, $T=300\\ \\mathrm K$ and $k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$. The closest value is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\times10^{25}$",
+    "$6\\times10^{27}$",
+    "$6\\times10^{28}$",
+    "$6\\times10^{26}$",
+    "$6\\times10^{25}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "number density per cubic metre, forgot the volume",
+    "",
+    "used $T=27$ (the Celsius value) instead of kelvin",
+    "used a volume of $24\\ \\mathrm{m^3}$, dropping a factor $10$",
+    "used $P=1$ (atm number) with SI $k_BT$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Ideal-gas number density $n=P/k_BT$ used",
+    "weight": 2
+   },
+   {
+    "text": "Volume $240\\ \\mathrm m^3$ computed",
+    "weight": 2
+   },
+   {
+    "text": "Product $N=nV$ with powers of ten tracked",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$n=\\dfrac{P}{k_BT}=\\dfrac{1.0\\times10^5}{(1.38\\times10^{-23})(300)}\\approx2.4\\times10^{25}\\ \\mathrm{m^{-3}}$ (estimate, units).\n$V=8.0\\times10\\times3.0=240\\ \\mathrm{m^3}$.\n$N=nV\\approx5.8\\times10^{27}\\approx6\\times10^{27}$ (sigfig: two figures are enough).\nSanity: about $0.4\\times10^{4}$ mol, i.e. $10^4$ mol times $6\\times10^{23}$ per mol.",
+  "hints": [
+   "N = PV / kT."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.scaling",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two solid spheres of the same material and surface finish, with radii $R$ and $2R$, are at the same temperature. Each loses heat at a rate proportional to its surface area. The ratio of the initial cooling rate $|dT/dt|$ of the larger sphere to that of the smaller is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac12$",
+    "$2$",
+    "$4$",
+    "$\\tfrac18$",
+    "$8$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "inverted the ratio",
+    "counted the area ratio only; ignored the larger heat capacity",
+    "counted the heat-capacity growth only; ignored the larger area",
+    "used the volume ratio"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Power loss scales as $R^2$",
+    "weight": 2
+   },
+   {
+    "text": "Heat capacity scales as $R^3$",
+    "weight": 2
+   },
+   {
+    "text": "Cooling rate $\\propto R^2/R^3=1/R$, giving $\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Heat lost per second $\\propto$ area $\\propto R^2$ (scaling).\nHeat capacity $\\propto$ mass $\\propto$ volume $\\propto R^3$.\n$|dT/dt|\\propto R^2/R^3=1/R$.\nDoubling $R$ halves the rate: $\\tfrac12$.",
+  "hints": [
+   "Rate = power out divided by heat capacity."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.scaling",
+   "t1.dimanal",
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The period of small oscillations of a simple pendulum depends only on its length $L$, the acceleration $g$ and its mass. At one site the period is $2.00\\ \\mathrm s$. At another site $g$ is $2.5$ times larger and the pendulum length is tripled. Find the new period, in s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.19089023,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Mass excluded and $T\\propto\\sqrt{L/g}$ established by dimensions",
+    "weight": 2
+   },
+   {
+    "text": "Both factors substituted in the ratio",
+    "weight": 2
+   },
+   {
+    "text": "Period computed",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Mass cannot appear: only $m$ carries kilograms (dimanal).\n$\\sqrt{L/g}$ has units of seconds, so $T=k\\sqrt{L/g}$ (small-angle: $k$ is a pure number).\nRatio: $T'/T=\\sqrt{3/2.5}=1.095$ (scaling).\n$T'=2.00\\times1.095=2.19\\ \\mathrm s$.",
+  "hints": [
+   "Dimensions fix T up to a constant; take a ratio."
+  ],
+  "check": "2.00*math.sqrt(3/2.5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle",
+   "t1.units",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In a double-slit experiment the light has wavelength $600\\ \\mathrm{nm}$, the slit separation is $0.20\\ \\mathrm{mm}$ and the screen is $2.0\\ \\mathrm m$ away. The first bright fringe satisfies $d\\sin\\theta=\\lambda$. Using a small-angle approximation, find its distance from the central maximum, in mm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Small-angle step: $\\sin\\theta\\approx\\tan\\theta\\approx\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "$\\theta=\\lambda/d$ with consistent SI units",
+    "weight": 2
+   },
+   {
+    "text": "Fringe position $y=L\\theta$ converted to mm",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\theta=\\lambda/d=\\dfrac{6.0\\times10^{-7}}{2.0\\times10^{-4}}=3.0\\times10^{-3}\\ \\mathrm{rad}$ (small-angle: $\\sin\\theta\\approx\\theta$).\n$\\tan\\theta\\approx\\theta$ at this size, so $y=L\\theta$.\n$y=2.0\\times3.0\\times10^{-3}=6.0\\times10^{-3}\\ \\mathrm m=6.0\\ \\mathrm{mm}$ (units).\nError from the approximation is below $10^{-5}$ relative.",
+  "hints": [
+   "theta is about 3 milliradians."
+  ],
+  "check": "2.0*6.0e-7/2.0e-4*1000",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.small-angle",
+   "t1.scaling",
+   "t1.estimate"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Gravity at height $h$ above Earth's surface is $g(h)=g_0R^2/(R+h)^2$. For a mountain $3.2\\ \\mathrm{km}$ high, with $R=6.4\\times10^{6}\\ \\mathrm m$, the fractional decrease of $g$ is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.10\\%$",
+    "$0.050\\%$",
+    "$0.20\\%$",
+    "$1.0\\%$",
+    "$0.010\\%$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot the factor $2$ in $(1+x)^{-2}\\approx1-2x$",
+    "used a factor $4$ instead of $2$",
+    "slipped a factor $10$ in $h/R$",
+    "slipped a factor $10$ the other way in $h/R$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Small parameter $x=h/R=5\\times10^{-4}$ identified",
+    "weight": 2
+   },
+   {
+    "text": "Binomial approximation $(1+x)^{-2}\\approx1-2x$",
+    "weight": 2
+   },
+   {
+    "text": "Percent conversion",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$g=g_0(1+x)^{-2}$ with $x=h/R=3.2\\times10^3/6.4\\times10^6=5.0\\times10^{-4}$ (units).\n$x\\ll1$, so $(1+x)^{-2}\\approx1-2x$ (small-angle: first-order expansion).\nFractional drop $=2x=1.0\\times10^{-3}=0.10\\%$ (scaling: relative change doubles with the exponent).",
+  "hints": [
+   "Expand to first order in h/R."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.linearize",
+   "t1.graphs",
+   "t1.kin-1d"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A car brakes at constant deceleration $\\mu g$ after a reaction time $t_r$ at initial speed $v$. A student plots $d/v$ (in s) against $v$ (in m/s) and gets a straight line of slope $0.070\\ \\mathrm{s^2/m}$ and intercept $0.80\\ \\mathrm s$, where $d$ is the total stopping distance. Take $g=9.8\\ \\mathrm{m/s^2}$. Find $\\mu$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7288629738,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Model $d=vt_r+v^2/(2\\mu g)$ written",
+    "weight": 2
+   },
+   {
+    "text": "Divided by $v$ to get the linear form $d/v=t_r+v/(2\\mu g)$",
+    "weight": 2
+   },
+   {
+    "text": "Slope equated to $1/(2\\mu g)$ and solved",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Model: $d=vt_r+\\dfrac{v^2}{2\\mu g}$ (kin-1d).\nDivide by $v$: $\\dfrac dv=t_r+\\dfrac{1}{2\\mu g}\\,v$, a line in $v$ (linearize).\nIntercept $=t_r=0.80\\ \\mathrm s$; slope $=1/(2\\mu g)=0.070$ (graphs).\n$\\mu=\\dfrac{1}{2(9.8)(0.070)}=0.729$.\nTrap: dropping the 2 gives $1.46$.",
+  "hints": [
+   "Divide the stopping-distance law by v."
+  ],
+  "check": "1/(2*9.8*0.070)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.linearize",
+   "t1.scaling",
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For two moons of one planet, a log-log plot of orbital period against orbital radius is a straight line. Moon 1 has $r=2.0\\times10^{5}\\ \\mathrm{km}$ and $T=1.0$ day. Moon 2 has $r=8.0\\times10^{5}\\ \\mathrm{km}$ and $T=8.0$ days. The period at $r=4.0\\times10^{5}\\ \\mathrm{km}$, in days, is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2.8$",
+    "$2.0$",
+    "$4.0$",
+    "$3.3$",
+    "$4.5$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed $T\\propto r$",
+    "assumed $T\\propto r^2$",
+    "interpolated linearly on a $T$ versus $r$ plot",
+    "took the mean of $1.0$ and $8.0$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Straight log-log line means a power law $T=kr^n$",
+    "weight": 2
+   },
+   {
+    "text": "Slope $n=\\ln8/\\ln4=1.5$",
+    "weight": 2
+   },
+   {
+    "text": "Midpoint scaling $T\\propto 2^{1.5}$ applied",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Straight on log-log axes means $T=kr^n$ (linearize: $\\ln T=n\\ln r+\\ln k$).\n$n=\\dfrac{\\ln(8.0/1.0)}{\\ln(8.0/2.0)}=\\dfrac{\\ln 8}{\\ln 4}=1.5$ (graphs: slope).\n$r$ doubles from Moon 1, so $T=1.0\\times2^{1.5}=2.8$ days (scaling).\nTrap: linear interpolation on $T$ versus $r$ gives $3.3$.",
+  "hints": [
+   "Slope on log-log axes is the exponent."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates",
+   "t1.kin-1d",
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A particle moves along a line with $x(t)=2t^3-9t^2+12t$, with $x$ in m and $t$ in s. Find the total distance travelled from $t=0$ to $t=3\\ \\mathrm s$, in m.",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Velocity $v=dx/dt=6(t-1)(t-2)$ found",
+    "weight": 2
+   },
+   {
+    "text": "Turning points $t=1,2$ identified",
+    "weight": 2
+   },
+   {
+    "text": "Distances summed over each leg with absolute values",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$v=\\dfrac{dx}{dt}=6t^2-18t+12=6(t-1)(t-2)$ (calc-rates).\nThe particle reverses at $t=1$ and $t=2$ (graphs: $v$ changes sign).\n$x(0)=0$, $x(1)=5$, $x(2)=4$, $x(3)=9$ (kin-1d).\nDistance $=5+1+5=11\\ \\mathrm m$; net displacement is only $9$ m.",
+  "hints": [
+   "Distance is not displacement: find where v changes sign."
+  ],
+  "check": "(lambda x: abs(x(1)-x(0))+abs(x(2)-x(1))+abs(x(3)-x(2)))(lambda t: 2*t**3-9*t**2+12*t)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.calc-rates",
+   "t1.dimanal",
+   "t1.graphs"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A current $I(t)=I_0\\sin(\\omega t)$ flows in a wire from $t=0$ to $t=\\pi/\\omega$, one half period. The charge that passes a cross section in that interval is",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{2I_0}{\\omega}$",
+    "$\\dfrac{\\pi I_0}{\\omega}$",
+    "$\\dfrac{I_0}{\\omega}$",
+    "$2I_0\\omega$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used peak current times duration",
+    "evaluated $1-\\cos(\\pi)$ as $1$",
+    "wrong dimensions: $\\omega$ in the numerator, not charge",
+    "integrated over a full period instead of a half period"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Charge identified as $\\int I\\,dt$",
+    "weight": 2
+   },
+   {
+    "text": "Antiderivative $-\\tfrac{I_0}{\\omega}\\cos\\omega t$ evaluated at the limits",
+    "weight": 2
+   },
+   {
+    "text": "Result checked against units of $\\mathrm{A\\,s}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$I=dQ/dt$, so $Q=\\int_0^{\\pi/\\omega}I\\,dt$ (calc-rates).\n$Q=-\\dfrac{I_0}{\\omega}\\cos\\omega t\\Big|_0^{\\pi/\\omega}=\\dfrac{I_0}{\\omega}\\,(1-\\cos\\pi)=\\dfrac{2I_0}{\\omega}$.\nUnits: $\\mathrm A/(\\mathrm{s^{-1}})=\\mathrm{A\\,s}=\\mathrm C$ (dimanal).\nGraph check: area under one arch of a sine is $2\\times$ peak $\\times\\,\\omega^{-1}$ (graphs).",
+  "hints": [
+   "Charge is the time integral of current."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

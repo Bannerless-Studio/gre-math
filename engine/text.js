@@ -63,5 +63,9 @@
     return '<span role="math" aria-label="' + esc(String(tex).replace(/\s+/g, ' ').trim()) + '">' + h + '</span>';
   }
 
-  return { esc: esc, md: md, mathSpan: mathSpan, OPEN: OPEN, CLOSE: CLOSE };
+  // Figure above a prompt or teach card. The string is inserted as HTML, which is safe only because the build allowlist
+  // (tools/figure.js) refused anything else. Never pass learner text here.
+  function figure(svg) { return svg ? '<div class="figure">' + svg + '</div>' : ''; }
+
+  return { esc: esc, md: md, mathSpan: mathSpan, figure: figure, OPEN: OPEN, CLOSE: CLOSE };
 });

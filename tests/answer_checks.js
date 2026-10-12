@@ -128,7 +128,7 @@ okCase('numeric expression pi-based integer-valued 2*pi/pi', { kind: 'numeric', 
 // ---- 6. numeric: parse errors (attempt:false)
 parseFail('numeric "1 2" unparsable', { kind: 'numeric', value: '12' }, '1 2');
 parseFail('numeric "3,000" unparsable', { kind: 'numeric', value: 3000 }, '3,000');
-parseFail('numeric "1e5" unparsable', { kind: 'numeric', value: 100000 }, '1e5');
+okCase('numeric "1e5" is a scientific literal (typed numeric answers only)', { kind: 'numeric', value: 100000, form: 'exact' }, '1e5');
 parseFail('numeric empty unparsable', { kind: 'numeric', value: 1 }, '');
 parseFail('numeric whitespace-only unparsable', { kind: 'numeric', value: 1 }, '   ');
 parseFail('numeric undeclared letter unparsable', { kind: 'numeric', value: 1 }, 'x');
@@ -303,5 +303,60 @@ check('2e-1 is a parse error, not 0.2', isErr('2e-1'));
 okCase('mcq string correct', { kind: 'mcq', options: ['a', 'b', 'c'], correct: '2' }, 2);
 okCase('multi string correct', { kind: 'multi', options: ['a', 'b', 'c'], correct: ['0', '2'] }, [2, 0]);
 noCase('typed side NaN almost everywhere is a wrong answer', ex('ln(x)', ['x']), 'ln(1-x)');
+
+// ---- 14. physics variables (multi-letter names, e as a variable), rel, scientific literals, magnitudes
+okCase('e declared as a variable: e^2 equals e*e', ex('e^2', ['e']), 'e*e');
+okCase('e not declared: e is Euler number', ex('e', ['x']), '2.718281828459045');
+check('e declared as a variable: value is the variable, not 2.718', (() => {
+  const r = A.parseExpr('e', ['e']); return r.ast && r.ast.type === 'var' && r.ast.name === 'e';
+})());
+check('e not declared: parses as the constant', (() => {
+  const r = A.parseExpr('e', ['x']); return r.ast && r.ast.type === 'const' && r.ast.name === 'e';
+})());
+okCase('hbar*omega matches omega*hbar', ex('hbar*omega', ['hbar', 'omega']), 'omega*hbar');
+noCase('hbar*omega rejects 2*hbar*omega', ex('hbar*omega', ['hbar', 'omega']), '2*hbar*omega');
+okCase('1/(4*pi*eps0)*q/r^2 matches q/(4*pi*eps0*r^2)', ex('1/(4*pi*eps0)*q/r^2', ['eps0', 'q', 'r']), 'q/(4*pi*eps0*r^2)');
+noCase('1/(4*pi*eps0)*q/r^2 rejects q/(2*pi*eps0*r^2)', ex('1/(4*pi*eps0)*q/r^2', ['eps0', 'q', 'r']), 'q/(2*pi*eps0*r^2)');
+okCase('underscore name declared as a variable: k_B*T', ex('k_B*T', ['k_B', 'T']), 'T*k_B');
+parseFail('undeclared underscore name is unparsable', ex('k*T', ['k', 'T']), 'k_B*T');
+okCase('omega as a variable with a multi-letter name and implicit 2omega', ex('omega*2', ['omega']), '2omega');
+noCase('tiny magnitude: 1.05e-34*omega rejects 2.1e-34*omega (no absolute floor)', ex('1.05*10^-34*omega', ['omega']), '2.1*10^-34*omega');
+okCase('tiny magnitude: 1.05e-34*omega accepts the same value', ex('1.05*10^-34*omega', ['omega']), '1.05*10^-34*omega');
+noCase('tiny literal: target 1e-20 is not 0', { kind: 'numeric', value: 1e-20, form: 'decimal', tol: 0 }, '0');
+noCase('tiny literal: target 1.6e-19 is not 1.5e-19 (exact form, float target)', { kind: 'numeric', value: 1.6e-19, form: 'exact' }, '1.5e-19');
+okCase('negative exponent: 2^-1 equals 1/2', ex('2^-1', ['x']), '1/2');
+okCase('fractional exponent: x^(1/2) equals sqrt(x)', ex('x^(1/2)', ['x']), 'sqrt(x)');
+okCase('exp(-x) equals 1/exp(x)', ex('exp(-x)', ['x']), '1/exp(x)');
+okCase('pi constant in a multi-letter product', ex('2*pi*f', ['f']), '2*\u03c0*f');
+
+// numeric rel: tolerance max(tol, rel*|value|). Applies to decimal and float targets; exact rationals compare exactly.
+okCase('rel 0.05: 3.14e8 is within 5% of 3.0e8 (exact form, float target)', { kind: 'numeric', value: 3.0e8, form: 'exact', rel: 0.05 }, '3.14e8');
+okCase('rel 0.05: 3.14e8 is within 5% of 3.0e8 (decimal)', { kind: 'numeric', value: 3.0e8, form: 'decimal', rel: 0.05 }, '3.14e8');
+noCase('rel 0.02: 3.14e8 is outside 2% of 3.0e8 (decimal)', { kind: 'numeric', value: 3.0e8, form: 'decimal', rel: 0.02 }, '3.14e8');
+noCase('rel 0.02: 3.14e8 is outside 2% of 3.0e8 (exact form, float target)', { kind: 'numeric', value: 3.0e8, form: 'exact', rel: 0.02 }, '3.14e8');
+okCase('rel applies to typed expressions too (decimal, pi-based typed)', { kind: 'numeric', value: 3.0e8, form: 'decimal', rel: 0.05 }, '3.14*10^8');
+noCase('rel with exact rational target ignores rel (exact compare)', { kind: 'numeric', value: '3/1', form: 'exact', rel: 0.5 }, '3.1');
+
+// scientific literals: typed numeric answers only
+okCase('sci literal 3e8 equals 300000000 (exact)', { kind: 'numeric', value: 300000000, form: 'exact' }, '3e8');
+okCase('sci literal 1.6e-19 equals 1.6e-19 (decimal)', { kind: 'numeric', value: '1.6e-19', form: 'decimal', tol: 0 }, '1.6e-19');
+okCase('sci literal 1.6E-19 uppercase E', { kind: 'numeric', value: '1.6e-19', form: 'decimal', tol: 0 }, '1.6E-19');
+okCase('sci literal -2.5e3 equals -2500', { kind: 'numeric', value: -2500, form: 'exact' }, '-2.5e3');
+noCase('sci literal 1.6e-19 is not 1.7e-19', { kind: 'numeric', value: '1.6e-19', form: 'decimal', tol: 0 }, '1.7e-19');
+check('parseNumber reads 3e8 as an integer literal', (() => { const n = A.parseNumber('3e8'); return n && n.p === 300000000 && n.q === 1 && n.isFrac === true; })());
+check('parseNumber reads 1.6e-19 as a float literal (no safe p/q)', (() => { const n = A.parseNumber('1.6e-19'); return n && n.v === 1.6e-19 && n.p === null; })());
+check('parseNumber rejects a bare exponent', A.parseNumber('e5') === null && A.parseNumber('.e5') === null);
+check('expression tokenizer still rejects 3e8 (2e-1 is ambiguous there)', isErr('3e8', []) && isErr('1.6e-19*x', ['x']));
+
+// Exact-zero targets: cancellation noise must not fail a correct equivalent (relative-only tolerance has no scale at 0).
+okCase('zero target: sin^2+cos^2-1 equals 0', ex('0', ['x']), 'sin(x)^2+cos(x)^2-1');
+okCase('zero target: spec sin^2+cos^2-1 accepts typed 0', ex('sin(x)^2+cos(x)^2-1', ['x']), '0');
+okCase('zero target: double-angle identity difference', ex('0', ['x']), 'sin(2*x)-2*sin(x)*cos(x)');
+okCase('zero target: expanded (x+1)^5 difference', ex('0', ['x']), '(x+1)^5-(x^5+5*x^4+10*x^3+10*x^2+5*x+1)');
+noCase('zero target: x is not 0', ex('0', ['x']), 'x');
+noCase('zero target: 1e-6 offset is not 0', ex('0', ['x']), 'x*0+0.000001');
+okCase('numeric zero target accepts cos(pi/2)', { kind: 'numeric', value: 0, form: 'decimal', tol: 0 }, 'cos(pi/2)');
+okCase('numeric zero target accepts 0.1+0.2-0.3', { kind: 'numeric', value: 0, form: 'decimal', tol: 0 }, '0.1+0.2-0.3');
+noCase('numeric zero target rejects 0.001', { kind: 'numeric', value: 0, form: 'decimal', tol: 0 }, '0.001');
 
 S.done();

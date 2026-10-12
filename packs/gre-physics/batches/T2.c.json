@@ -1,0 +1,1802 @@
+[
+ {
+  "id": "t2-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.newton",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ object on a frictionless horizontal plane feels $\\vec F_1=(6,-3)\\ \\mathrm N$, $\\vec F_2=(1,4)\\ \\mathrm N$ and an unknown $\\vec F_3$. Its acceleration is $(1.5,\\,2.0)\\ \\mathrm{m/s^2}$. Find $|\\vec F_3|$ in N.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Net force from $\\vec F_{net}=m\\vec a$ componentwise",
+    "weight": 2
+   },
+   {
+    "text": "$\\vec F_3=\\vec F_{net}-\\vec F_1-\\vec F_2$",
+    "weight": 1
+   },
+   {
+    "text": "Magnitude of $\\vec F_3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Newton II is a vector law: $\\vec F_{net}=m\\vec a=(3,4)\\ \\mathrm N$ (newton, vec-comp).\n$\\vec F_1+\\vec F_2=(7,1)\\ \\mathrm N$.\n$\\vec F_3=(3-7,\\,4-1)=(-4,3)\\ \\mathrm N$.\n$|\\vec F_3|=\\sqrt{16+9}=5\\ \\mathrm N$.",
+  "hints": [
+   "Solve for the missing force component by component."
+  ],
+  "check": "math.hypot(2*1.5-(6+1), 2*2.0-(-3+4))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.newton",
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Block A ($3.0\\ \\mathrm{kg}$) is pushed by a horizontal $20\\ \\mathrm N$ force and contacts block B ($2.0\\ \\mathrm{kg}$) on a frictionless table; only A is pushed. Find the magnitude of the contact force A exerts on B, in N.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$12$",
+    "$20$",
+    "$4$",
+    "$10$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "net force on A, $m_Aa$, not the contact force",
+    "applied force passed to B undiminished",
+    "the common acceleration in $\\mathrm{m/s^2}$ (unit slip)",
+    "assumed the force splits equally"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Common acceleration of the pair: $a=F/(m_A+m_B)$",
+    "weight": 2
+   },
+   {
+    "text": "Isolate B: contact force is its net force",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Treat A+B as one body: $a=20/5=4\\ \\mathrm{m/s^2}$ (newton).\nDraw B alone: the only horizontal force is the contact force $N$ (fbd).\n$N=m_Ba=2.0\\times4=8\\ \\mathrm N$.\nCheck on A: $20-N=m_Aa=12$, so $N=8$.",
+  "hints": [
+   "Find the shared acceleration first, then isolate B."
+  ],
+  "check": "20*2/(3+2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.fbd",
+   "t2.newton",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $5.0\\ \\mathrm{kg}$ lamp hangs at rest from two identical light cables, each making $30^\\circ$ with the horizontal. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the tension in each cable, in N.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$49$",
+    "$24.5$",
+    "$28.3$",
+    "$98$",
+    "$42.4$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took $T=mg/2$, ignoring the angle",
+    "used $\\cos$ instead of $\\sin$: $mg/(2\\cos30^\\circ)$",
+    "counted one cable: $mg/\\sin30^\\circ$",
+    "used $mg\\cos30^\\circ$, a component of the weight"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Free-body diagram: two tensions and weight, equilibrium",
+    "weight": 1
+   },
+   {
+    "text": "Vertical components $2T\\sin30^\\circ$ taken (angle is from horizontal)",
+    "weight": 2
+   },
+   {
+    "text": "Solve for $T$ with $mg=49\\ \\mathrm N$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Forces on the lamp: weight $mg=49\\ \\mathrm N$ down and two tensions (fbd).\nHorizontal components cancel by symmetry.\nVertical: $2T\\sin30^\\circ=mg$ (vec-comp; angle is from horizontal).\n$T=mg/(2\\cdot0.5)=49\\ \\mathrm N$.",
+  "hints": [
+   "Which component of each tension balances the weight?"
+  ],
+  "check": "5*9.8/(2*math.sin(math.radians(30)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.fbd",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $70\\ \\mathrm{kg}$ person stands on a scale in an elevator that is moving upward while slowing down at $1.5\\ \\mathrm{m/s^2}$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the scale reading in N.",
+  "answer": {
+   "kind": "numeric",
+   "value": 581,
+   "tol": 0.01,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Direction of acceleration identified as downward",
+    "weight": 2
+   },
+   {
+    "text": "Newton II on the person: $N-mg=ma$ with signed $a$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical reading",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Moving up but slowing, so the acceleration points down: $a=-1.5\\ \\mathrm{m/s^2}$ (newton).\nForces on the person: $N$ up, $mg$ down (fbd).\n$N-mg=ma$, so $N=m(g+a)=70(9.8-1.5)$.\n$N=581\\ \\mathrm N$.",
+  "hints": [
+   "Slowing while moving up means acceleration points which way?"
+  ],
+  "check": "70*(9.8-1.5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag",
+   "t2.fbd",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $10\\ \\mathrm{kg}$ block on a horizontal floor ($\\mu_s=0.40$, $\\mu_k=0.30$) is pulled by a $40\\ \\mathrm N$ force directed $30^\\circ$ above the horizontal. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the block's acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.1241,
+   "tol": 0.022482,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Normal force reduced by the vertical pull: $N=mg-F\\sin30^\\circ$",
+    "weight": 2
+   },
+   {
+    "text": "Static limit checked against $F\\cos30^\\circ$ before using $\\mu_k$",
+    "weight": 1
+   },
+   {
+    "text": "Kinetic friction and $a=(F_x-f_k)/m$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Vertical balance (fbd): $N=mg-F\\sin30^\\circ=98-20=78\\ \\mathrm N$.\nStatic limit $\\mu_sN=31.2\\ \\mathrm N$ is below $F\\cos30^\\circ=34.6\\ \\mathrm N$, so the block slides (friction-drag).\n$f_k=\\mu_kN=23.4\\ \\mathrm N$.\n$a=(34.6-23.4)/10\\approx1.12\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "The pull has a vertical component; what does it do to N?"
+  ],
+  "check": "(40*math.cos(math.radians(30))-0.30*(10*9.8-40*math.sin(math.radians(30))))/10",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.friction-drag",
+   "t2.newton",
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A body of mass $m$ falls from rest through air exerting drag $bv^2$. Its terminal speed is $v_t$. At what speed is its acceleration $g/4$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\tfrac{\\sqrt3}{2}v_t$",
+    "$\\tfrac34 v_t$",
+    "$\\tfrac12 v_t$",
+    "$\\tfrac14 v_t$",
+    "$\\tfrac{\\sqrt3}{4}v_t$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "treated drag as linear in $v$",
+    "matched $v/v_t$ to $a/g$ halfway",
+    "set $v/v_t=a/g$ directly",
+    "took the root of the numerator only"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Terminal speed from $mg=bv_t^2$, so $b=mg/v_t^2$",
+    "weight": 1
+   },
+   {
+    "text": "Newton II: $mg-bv^2=m(g/4)$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $v^2/v_t^2=3/4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Terminal speed: $mg=bv_t^2$, so $v_t^2=mg/b$ (friction-drag).\nAt $a=g/4$: $mg-bv^2=mg/4$ (newton).\n$bv^2=\\tfrac34mg$, so $v^2=\\tfrac34v_t^2$.\n$v=\\tfrac{\\sqrt3}{2}v_t$ (dimanal: ratio is dimensionless).",
+  "hints": [
+   "Express $b$ through $v_t$ before using the acceleration condition."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley",
+   "t2.fbd",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $4.0\\ \\mathrm{kg}$ block on a frictionless $30^\\circ$ incline is tied by a light string over a frictionless pulley at the top to a $3.0\\ \\mathrm{kg}$ block hanging vertically. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the string tension in N.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$25.2$",
+    "$29.4$",
+    "$19.6$",
+    "$33.6$",
+    "$1.4$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed $T=m_2g$ (hanging block in equilibrium)",
+    "used the incline component $m_1g\\sin30^\\circ$ (equilibrium)",
+    "used $m_1(g-a)$, mixing the two blocks' equations",
+    "the acceleration in $\\mathrm{m/s^2}$ (unit slip)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Free-body equations for each block with a shared $a$",
+    "weight": 1
+   },
+   {
+    "text": "Acceleration $a=(m_2g-m_1g\\sin30^\\circ)/(m_1+m_2)$",
+    "weight": 2
+   },
+   {
+    "text": "Tension from the hanging block: $T=m_2(g-a)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Hanging block moves down, incline block up the slope; same $a$ (incline-pulley).\nIncline block: $T-m_1g\\sin30^\\circ=m_1a$. Hanging block: $m_2g-T=m_2a$ (fbd).\nAdd: $a=(29.4-19.6)/7=1.4\\ \\mathrm{m/s^2}$ (newton).\n$T=m_2(g-a)=3.0\\times8.4=25.2\\ \\mathrm N$.",
+  "hints": [
+   "Write one equation per block and add them to eliminate T."
+  ],
+  "check": "3*(9.8-(3*9.8-4*9.8*0.5)/7)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.incline-pulley",
+   "t2.newton",
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ block A on a frictionless table is tied to a rope that runs over a fixed pulley at the table edge, down around a light movable pulley carrying a hanging $3.0\\ \\mathrm{kg}$ block B, and up to a fixed ceiling anchor. Take $g=9.8\\ \\mathrm{m/s^2}$. Find A's acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$11.76$",
+    "$5.88$",
+    "$8.40$",
+    "$16.80$",
+    "$9.80$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave A the acceleration of B, missing the length constraint",
+    "used the plain Atwood result $m_Bg/(m_A+m_B)$",
+    "doubled the plain Atwood result",
+    "assumed A is in free fall"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rope-length constraint $a_A=2a_B$",
+    "weight": 2
+   },
+   {
+    "text": "Pulley B supported by two segments: $m_Bg-2T=m_Ba_B$",
+    "weight": 1
+   },
+   {
+    "text": "Block A: $T=m_Aa_A$, solved for $a_A$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Rope length fixed: $x_A+2y_B=\\text{const}$, so $a_A=2a_B$ (incline-pulley).\nBlock A: $T=m_Aa_A$. Block B has two rope segments up: $m_Bg-2T=m_Ba_B$ (fbd).\n$m_Bg=(4m_A+m_B)a_B$, so $a_B=29.4/5=5.88\\ \\mathrm{m/s^2}$ (newton).\n$a_A=2a_B=11.76\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "If B drops by y, how far must A slide?"
+  ],
+  "check": "2*3*9.8/(3+4*0.5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.circular",
+   "t2.potential",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A small ball on a light string of length $1.0\\ \\mathrm m$ moves in a vertical circle. Take $g=9.8\\ \\mathrm{m/s^2}$. What is the minimum speed at the bottom, in m/s, for the string to stay taut all the way round?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7.0$",
+    "$3.13$",
+    "$4.43$",
+    "$6.26$",
+    "$7.67$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "speed needed at the top only, $\\sqrt{gR}$",
+    "energy for a rise of $R$ only, $\\sqrt{2gR}$",
+    "used $\\sqrt{4gR}$, dropping the top-speed kinetic energy",
+    "used $\\sqrt{6gR}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Top condition $mg=mv_{top}^2/R$ (tension zero)",
+    "weight": 2
+   },
+   {
+    "text": "Energy conservation bottom to top, rise $2R$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $v_b^2=5gR$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "At the top, tension zero: $mg=mv_t^2/R$, so $v_t^2=gR$ (circular).\nEnergy: $\\tfrac12v_b^2=\\tfrac12v_t^2+g(2R)$ (potential).\n$v_b^2=gR+4gR=5gR=49$.\n$v_b=7.0\\ \\mathrm{m/s}$ (newton: centripetal condition).",
+  "hints": [
+   "Find the slowest allowed speed at the top first."
+  ],
+  "check": "math.sqrt(5*9.8*1.0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.circular",
+   "t2.fbd",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A conical pendulum has a bob on a $1.5\\ \\mathrm m$ light string moving in a horizontal circle with the string at $60^\\circ$ from the vertical. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the period in s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.7382,
+   "tol": 0.034764,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Vertical balance $T\\cos\\theta=mg$",
+    "weight": 1
+   },
+   {
+    "text": "Horizontal: $T\\sin\\theta=m\\omega^2 r$ with $r=L\\sin\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "Period $2\\pi/\\omega$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Vertical (fbd): $T\\cos\\theta=mg$. Horizontal: $T\\sin\\theta=m\\omega^2L\\sin\\theta$ (circular).\nDivide: $T=m\\omega^2L$, so $\\omega^2=g/(L\\cos\\theta)$ (vec-comp).\n$\\omega^2=9.8/0.75=13.07$, $\\omega=3.615\\ \\mathrm{rad/s}$.\n$T=2\\pi/\\omega\\approx1.74\\ \\mathrm s$.",
+  "hints": [
+   "Circle radius is $L\\sin\\theta$; eliminate the tension."
+  ],
+  "check": "2*math.pi*math.sqrt(1.5*math.cos(math.pi/3)/9.8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy",
+   "t1.calc-rates",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ block starts from rest on a frictionless line and is pushed by $F(x)=(4x-x^2)\\ \\mathrm N$ ($x$ in m) from $x=0$ to $x=3.0\\ \\mathrm m$. Find its final speed in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.0$",
+    "$4.5$",
+    "$2.12$",
+    "$4.24$",
+    "$9.0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took $v=W/m$",
+    "used $v=\\sqrt{W/m}$, missing the factor 2",
+    "used $v=\\sqrt{2W}$, forgot to divide by $m$",
+    "reported the work in J as the speed"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Work as the integral $\\int_0^3F\\,dx$",
+    "weight": 2
+   },
+   {
+    "text": "Value $W=9\\ \\mathrm J$",
+    "weight": 1
+   },
+   {
+    "text": "Work-energy theorem $W=\\tfrac12mv^2$ solved for $v$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Variable force: $W=\\int_0^3(4x-x^2)\\,dx$ (calc-rates).\n$W=[2x^2-x^3/3]_0^3=18-9=9\\ \\mathrm J$.\nWork-energy: $W=\\tfrac12mv^2$ (work-energy).\n$v=\\sqrt{2\\cdot9/2}=3.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Integrate the force over position, then equate to kinetic energy."
+  ],
+  "check": "math.sqrt(2*(2*9-27/3)/2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.work-energy",
+   "t2.friction-drag",
+   "t2.incline-pulley"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A block slides from rest down a rough incline ($\\sin\\theta=0.6$, $\\cos\\theta=0.8$, $\\mu_k=0.25$) for $4.0\\ \\mathrm m$ along the slope. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its speed at the bottom in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.6$",
+    "$6.86$",
+    "$5.94$",
+    "$5.24$",
+    "$3.96$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored friction",
+    "friction taken as $\\mu_k mg\\sin\\theta$",
+    "friction taken as $\\mu_k mg$, missing $\\cos\\theta$",
+    "dropped the factor 2 in $v^2=2ad$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gravity work along slope $mgd\\sin\\theta$",
+    "weight": 1
+   },
+   {
+    "text": "Friction work $-\\mu_k mg\\cos\\theta\\,d$ (normal force on incline)",
+    "weight": 2
+   },
+   {
+    "text": "Work-energy to $v$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Normal force on the incline: $N=mg\\cos\\theta$, so $f_k=0.25\\times0.8\\,mg=0.2mg$ (friction-drag).\nNet work per unit mass: $g d(\\sin\\theta-\\mu_k\\cos\\theta)=9.8\\times4\\times0.4=15.68\\ \\mathrm{J/kg}$ (work-energy).\n$\\tfrac12v^2=15.68$, so $v=\\sqrt{31.36}=5.6\\ \\mathrm{m/s}$.\nIncline geometry fixes $N$ (incline-pulley).",
+  "hints": [
+   "Total work on the block equals its final kinetic energy."
+  ],
+  "check": "math.sqrt(2*9.8*(0.6-0.25*0.8)*4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.potential",
+   "t2.work-energy",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ particle moves along x with potential energy $U(x)=(x^3-12x)\\ \\mathrm J$ ($x$ in m). It is released from rest at $x=0$. Find its speed at the stable equilibrium point, in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4.0$",
+    "$2.83$",
+    "$5.66$",
+    "$8.0$",
+    "$4.90$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $v=\\sqrt{K/m}$, missing the factor 2",
+    "used $v=\\sqrt{2K}$, forgot to divide by $m$",
+    "used $v=K/m$",
+    "dropped the cubic term of $U(2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Equilibrium from $dU/dx=3x^2-12=0$; stable where $U''>0$, so $x=2$",
+    "weight": 2
+   },
+   {
+    "text": "$K=U(0)-U(2)=16\\ \\mathrm J$",
+    "weight": 1
+   },
+   {
+    "text": "Speed from $K=\\tfrac12mv^2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Equilibria: $U'=3x^2-12=0$ gives $x=\\pm2$ (calc-rates).\n$U''=6x>0$ only at $x=2$, so that point is stable (potential).\nEnergy: $K=U(0)-U(2)=0-(8-24)=16\\ \\mathrm J$ (work-energy).\n$v=\\sqrt{2K/m}=4.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Which root of $U'=0$ is a minimum of $U$?"
+  ],
+  "check": "math.sqrt(2*16/2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.potential",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ block sits on a vertical spring ($k=200\\ \\mathrm{N/m}$) compressed $0.14\\ \\mathrm m$ and is released from rest. Take $g=9.8\\ \\mathrm{m/s^2}$. How high above its release point does the block rise, in m, ignoring air resistance?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.40$",
+    "$0.26$",
+    "$0.80$",
+    "$0.54$",
+    "$0.20$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "measured height from the natural length, $h-x$",
+    "dropped the $\\tfrac12$ in $\\tfrac12kx^2$",
+    "added the compression, $h+x$",
+    "applied the factor $\\tfrac12$ twice"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Energy conservation including spring and gravity",
+    "weight": 2
+   },
+   {
+    "text": "Release point as the gravity reference: $\\tfrac12kx^2=mgh$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $h$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Choose the release point as $h=0$. At the top the block is at rest, spring slack (potential).\n$\\tfrac12kx^2=mgh$ (work-energy).\n$\\tfrac12(200)(0.14)^2=1.96\\ \\mathrm J=0.5(9.8)h$.\n$h=0.40\\ \\mathrm m$ above release; it leaves the spring at $0.14$ m up.",
+  "hints": [
+   "All spring energy ends as gravitational energy relative to the release point."
+  ],
+  "check": "0.5*200*0.14**2/(0.5*9.8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.momentum",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.20\\ \\mathrm{kg}$ ball hits a smooth wall at $10\\ \\mathrm{m/s}$, its velocity $60^\\circ$ from the wall's normal, and rebounds elastically at the mirror angle. Contact lasts $5.0\\ \\mathrm{ms}$. Find the magnitude of the average force on the ball in N.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$400$",
+    "$800$",
+    "$693$",
+    "$200$",
+    "$346$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the full speed along the normal: $2mv/\\Delta t$",
+    "used $\\sin60^\\circ$, the tangential component",
+    "counted only one way: $mv\\cos60^\\circ/\\Delta t$",
+    "one-way impulse with $\\sin60^\\circ$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Only the normal component of momentum changes",
+    "weight": 2
+   },
+   {
+    "text": "$\\Delta p=2mv\\cos60^\\circ=2.0\\ \\mathrm{N\\,s}$",
+    "weight": 1
+   },
+   {
+    "text": "$F=\\Delta p/\\Delta t$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Smooth wall: tangential velocity is unchanged (vec-comp).\nNormal component reverses: $\\Delta p=2mv\\cos60^\\circ=2(0.20)(10)(0.5)=2.0\\ \\mathrm{N\\,s}$ (momentum).\n$F=\\Delta p/\\Delta t=2.0/0.0050=400\\ \\mathrm N$.",
+  "hints": [
+   "Which component of the ball's momentum does a smooth wall change?"
+  ],
+  "check": "2*0.2*10*math.cos(math.radians(60))/0.005",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.momentum",
+   "t2.newton",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An open $60\\ \\mathrm{kg}$ cart rolls frictionlessly at $3.0\\ \\mathrm{m/s}$. Rain falls vertically into it at $2.0\\ \\mathrm{kg/s}$ and stays. Find the cart's speed after $10\\ \\mathrm s$, in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2.25$",
+    "$3.0$",
+    "$2.90$",
+    "$2.57$",
+    "$1.80$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed vertical rain cannot change horizontal speed",
+    "added only $2$ kg of water",
+    "added $10$ kg, using rate $1.0\\ \\mathrm{kg/s}$",
+    "added $40$ kg, using $4.0\\ \\mathrm{kg/s}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Horizontal momentum conserved (rain has none horizontally)",
+    "weight": 2
+   },
+   {
+    "text": "Mass at $t=10$: $60+20=80\\ \\mathrm{kg}$",
+    "weight": 1
+   },
+   {
+    "text": "$v=p/m$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Rain carries no horizontal momentum, so horizontal $p=mv$ is conserved (momentum).\n$m(10)=60+2.0\\times10=80\\ \\mathrm{kg}$ (calc-rates: mass accumulates at a constant rate).\n$60\\times3.0=80\\,v$, so $v=2.25\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Which momentum component is unchanged by falling rain?"
+  ],
+  "check": "60*3/(60+2*10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.collisions",
+   "t2.momentum",
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.020\\ \\mathrm{kg}$ bullet embeds in a $0.98\\ \\mathrm{kg}$ block hanging from long light strings. The block-bullet system rises $0.40\\ \\mathrm m$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the bullet's speed in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$140$",
+    "$137.2$",
+    "$19.8$",
+    "$2.8$",
+    "$280$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $M/m=49$, ignoring the bullet's mass in the system",
+    "conserved kinetic energy through the collision",
+    "gave the speed just after impact",
+    "doubled the correct value"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Swing phase: energy gives speed after impact $\\sqrt{2gh}=2.8$",
+    "weight": 2
+   },
+   {
+    "text": "Collision: momentum (perfectly inelastic, KE not conserved)",
+    "weight": 1
+   },
+   {
+    "text": "$v=\\frac{m+M}{m}\\sqrt{2gh}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "After impact, mechanical energy is conserved: $\\tfrac12V^2=gh$, so $V=\\sqrt{2(9.8)(0.40)}=2.8\\ \\mathrm{m/s}$ (potential).\nImpact is perfectly inelastic: only momentum is conserved (collisions).\n$mv=(m+M)V$, so $v=1.00\\,(2.8)/0.020=140\\ \\mathrm{m/s}$ (momentum).",
+  "hints": [
+   "Use momentum for the impact and energy only for the swing."
+  ],
+  "check": "(0.02+0.98)/0.02*math.sqrt(2*9.8*0.4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.collisions",
+   "t2.momentum",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A mass $m$ moving at speed $v$ makes a head-on perfectly elastic collision with a stationary mass $2m$. What fraction of the initial kinetic energy goes to the $2m$ body?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{8}{9}$",
+    "$\\frac{1}{9}$",
+    "$\\frac{2}{3}$",
+    "$\\frac{4}{9}$",
+    "$\\frac{1}{2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "kinetic energy fraction kept by the first body",
+    "fraction lost in a perfectly inelastic collision",
+    "forgot to divide by the initial energy $\\tfrac12mv^2$",
+    "guessed equal sharing"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Elastic 1D: conserve both momentum and kinetic energy",
+    "weight": 1
+   },
+   {
+    "text": "Final speeds $v_1=-v/3$, $v_2=2v/3$",
+    "weight": 2
+   },
+   {
+    "text": "KE of $2m$ divided by initial KE",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Elastic collision: $v_2'=\\frac{2m_1}{m_1+m_2}v=\\frac{2m}{3m}v=\\frac{2v}{3}$ (collisions).\nMomentum check: $v_1'=-v/3$, and $m(-v/3)+2m(2v/3)=mv$ (momentum).\n$K_2=\\tfrac12(2m)(4v^2/9)=\\tfrac49mv^2$ (work-energy).\nFraction $=\\frac{4/9}{1/2}=\\frac89$.",
+  "hints": [
+   "Find both final velocities before comparing energies."
+  ],
+  "check": "Fraction(4*1*2,9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.com",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A uniform disk of radius $R$ has a circular hole of radius $R/2$ cut out, its centre at $R/2$ from the disk's centre. Find the distance from the disk's centre to the centre of mass of the remaining plate.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$R/6$",
+    "$R/8$",
+    "$R/10$",
+    "$R/4$",
+    "$R/2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot to divide by the remaining mass",
+    "added the hole mass instead of subtracting it",
+    "took the hole mass as $\\tfrac12$ (radius ratio, not area ratio)",
+    "hole mass $\\tfrac12$ and divided by the remaining $\\tfrac12$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Mass proportional to area: hole is $\\tfrac14$ of the full disk",
+    "weight": 2
+   },
+   {
+    "text": "Treat the hole as negative mass: $M x_{full}=m_{rem}x+m_{hole}\\,(R/2)$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $x$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Mass scales with area (scaling): hole mass $=\\tfrac14M$, remainder $=\\tfrac34M$.\nFull disk COM at 0: $0=\\tfrac34M\\,x+\\tfrac14M\\,(R/2)$ (com).\n$x=-\\tfrac{R/8}{3/4}=-R/6$.\nDistance $R/6$ from centre, on the side away from the hole.",
+  "hints": [
+   "Full disk = remaining plate + hole; mass goes with area."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.com",
+   "t2.momentum",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two skaters, $60\\ \\mathrm{kg}$ and $40\\ \\mathrm{kg}$, stand $10\\ \\mathrm m$ apart on frictionless ice and pull on a light rope stretched between them. How far from the $60\\ \\mathrm{kg}$ skater's starting point do they meet, in m?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4.0$",
+    "$6.0$",
+    "$5.0$",
+    "$2.4$",
+    "$3.3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "distance moved by the lighter skater",
+    "assumed they meet at the midpoint",
+    "multiplied $4.0$ by the mass fraction $0.6$ again",
+    "used mass ratio $1{:}2$, giving $10/3$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Only internal forces: centre of mass stays at rest",
+    "weight": 2
+   },
+   {
+    "text": "COM position from the 60 kg skater: $40\\times10/100$",
+    "weight": 1
+   },
+   {
+    "text": "Meeting point is the COM",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The rope force is internal, so the COM does not move (com).\nStarting from rest, internal forces cannot change the total momentum (momentum).\nCOM from the heavy skater: $\\frac{40(10)}{60+40}=4.0\\ \\mathrm m$.\nThey meet at the COM, $4.0\\ \\mathrm m$ from the $60$ kg start (equal and opposite forces: newton).",
+  "hints": [
+   "Where is the centre of mass, and can it move?"
+  ],
+  "check": "40*10/(60+40)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics",
+   "t2.fbd"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A uniform $20\\ \\mathrm{kg}$ ladder, $5.0\\ \\mathrm m$ long, leans against a frictionless wall. Its foot is $3.0\\ \\mathrm m$ from the wall on rough floor. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the horizontal friction force at the foot, in N.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$73.5$",
+    "$98$",
+    "$147$",
+    "$122.5$",
+    "$196$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "swapped the two lever arms",
+    "used the full $3.0$ m as the weight's lever arm",
+    "used the along-ladder $2.5$ m as the lever arm",
+    "used $f=mg$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Free-body diagram: wall normal horizontal, floor normal and friction",
+    "weight": 1
+   },
+   {
+    "text": "Torque about the foot with correct lever arms ($4.0$ m vs $1.5$ m)",
+    "weight": 2
+   },
+   {
+    "text": "Horizontal balance $f=N_{wall}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Wall is frictionless, so it pushes only horizontally; floor friction balances it (fbd).\nTorque about the foot: $N_w(4.0)=mg(1.5)$ (torque-statics; weight acts at horizontal distance $1.5$ m).\n$N_w=196\\times1.5/4.0=73.5\\ \\mathrm N$.\nHorizontal balance: $f=N_w=73.5\\ \\mathrm N$.",
+  "hints": [
+   "Take torques about the foot so the floor forces drop out."
+  ],
+  "check": "20*9.8*1.5/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.torque-statics",
+   "t2.fbd",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A uniform $30\\ \\mathrm{kg}$ horizontal beam is hinged to a wall. A cable from the outer end runs up toward the wall at $30^\\circ$ to the beam and holds it level, and a $10\\ \\mathrm{kg}$ mass hangs from that end. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the cable tension in N.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$490$",
+    "$245$",
+    "$283$",
+    "$196$",
+    "$784$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "omitted the $\\sin30^\\circ$ factor",
+    "used $\\cos30^\\circ$ for the perpendicular component",
+    "forgot the beam's own weight",
+    "put the beam's weight at the end"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Torque about the hinge (hinge force drops out)",
+    "weight": 1
+   },
+   {
+    "text": "Perpendicular cable component $T\\sin30^\\circ$ at lever arm $L$",
+    "weight": 2
+   },
+   {
+    "text": "Weights: beam at $L/2$, load at $L$; solve $T$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Take torques about the hinge so the hinge force drops out (torque-statics).\nCable torque: $T\\sin30^\\circ\\,L$ (vec-comp: only the perpendicular part counts).\nWeights: $(30g)(L/2)+(10g)L=25gL$ (fbd).\n$T(0.5)=25(9.8)=245$, so $T=490\\ \\mathrm N$.",
+  "hints": [
+   "Only the part of T perpendicular to the beam makes torque."
+  ],
+  "check": "(30/2+10)*9.8/math.sin(math.radians(30))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics",
+   "t2.newton",
+   "t2.torque-statics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ block hangs from a light string wrapped on a frictionless pulley, a uniform solid disk of mass $4.0\\ \\mathrm{kg}$ and radius $0.20\\ \\mathrm m$. The string does not slip. Take $g=9.8\\ \\mathrm{m/s^2}$. Find the block's acceleration in $\\mathrm{m/s^2}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4.9$",
+    "$9.8$",
+    "$3.27$",
+    "$5.44$",
+    "$19.6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored the pulley's inertia",
+    "used $I=MR^2$ (hoop)",
+    "used $I=\\tfrac25MR^2$ (sphere)",
+    "reported $mg$ in N"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Block: $mg-T=ma$",
+    "weight": 1
+   },
+   {
+    "text": "Pulley: $TR=I\\alpha=\\tfrac12MR^2(a/R)$",
+    "weight": 2
+   },
+   {
+    "text": "Combine: $a=mg/(m+M/2)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Block (newton): $mg-T=ma$.\nPulley (rot-dynamics): torque $TR=I\\alpha$ with $I=\\tfrac12MR^2$, $\\alpha=a/R$.\nSo $T=\\tfrac12Ma$ (torque-statics: tension is the only torque source).\n$a=mg/(m+M/2)=19.6/4=4.9\\ \\mathrm{m/s^2}$.",
+  "hints": [
+   "Link the string tension, the torque on the disk, and a = alpha R."
+  ],
+  "check": "2*9.8/(2+4/2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.rot-dynamics",
+   "t2.potential",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A uniform solid sphere rolls without slipping from rest down a slope, dropping vertically $3.5\\ \\mathrm m$. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its speed at the bottom in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7.0$",
+    "$8.28$",
+    "$5.86$",
+    "$6.76$",
+    "$4.95$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "treated it as sliding without friction",
+    "used a hoop, $v=\\sqrt{gh}$",
+    "used a solid disk, $v^2=\\tfrac43gh$",
+    "dropped the 2: $v^2=gh/1.4$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rolling: energy splits into translation and rotation, $v=\\omega R$",
+    "weight": 2
+   },
+   {
+    "text": "$I=\\tfrac25mR^2$ gives $K=\\tfrac12mv^2(1+\\tfrac25)$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $v^2=\\tfrac{10}{7}gh$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Rolling without slipping: $\\omega=v/R$, no energy lost to friction (potential).\n$mgh=\\tfrac12mv^2+\\tfrac12I\\omega^2=\\tfrac12mv^2(1+\\tfrac25)$ (rot-dynamics).\n$v^2=\\frac{2gh}{1.4}=\\tfrac{10}{7}gh=49$ (work-energy).\n$v=7.0\\ \\mathrm{m/s}$.",
+  "hints": [
+   "Count both translational and rotational kinetic energy."
+  ],
+  "check": "math.sqrt(2*9.8*3.5/(1+0.4))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom",
+   "t2.collisions",
+   "t2.rot-dynamics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A horizontal disk with $I=6.0\\ \\mathrm{kg\\,m^2}$ spins freely at $5.0\\ \\mathrm{rad/s}$. A $1.0\\ \\mathrm{kg}$ lump of putty is dropped onto it at $2.0\\ \\mathrm m$ from the axis and sticks. Find the new angular speed in rad/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.0$",
+    "$3.75$",
+    "$5.0$",
+    "$4.29$",
+    "$3.87$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $mr$ instead of $mr^2$",
+    "assumed the putty cannot change $\\omega$",
+    "added the putty's mass only: $I+m$",
+    "conserved kinetic energy instead of angular momentum"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "No external torque about the axis: $L$ conserved",
+    "weight": 2
+   },
+   {
+    "text": "Putty's moment of inertia $mr^2=4.0$",
+    "weight": 1
+   },
+   {
+    "text": "$\\omega'=I\\omega/(I+mr^2)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Sticking is inelastic, so kinetic energy is not conserved (collisions).\nNo external torque about the axis: $I\\omega=(I+mr^2)\\omega'$ (ang-mom).\n$mr^2=1.0\\times4.0=4.0\\ \\mathrm{kg\\,m^2}$ (rot-dynamics).\n$\\omega'=6.0\\times5.0/10=3.0\\ \\mathrm{rad/s}$.",
+  "hints": [
+   "Conserve angular momentum about the axis; compute the lump's I."
+  ],
+  "check": "6*5/(6+1*2**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.ang-mom",
+   "t1.vec-prod"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2.0\\ \\mathrm{kg}$ particle is at $\\vec r=(3,4)\\ \\mathrm m$ with velocity $\\vec v=(2,-1)\\ \\mathrm{m/s}$ in the xy-plane. Find the z-component of its angular momentum about the origin, in $\\mathrm{kg\\,m^2/s}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-22$",
+    "$22$",
+    "$-11$",
+    "$4$",
+    "$10$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "reversed the cross-product order, $\\vec v\\times\\vec r$",
+    "forgot the mass",
+    "used the dot product $m\\,\\vec r\\cdot\\vec v$",
+    "added the cross terms instead of subtracting"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Definition $\\vec L=\\vec r\\times m\\vec v$",
+    "weight": 1
+   },
+   {
+    "text": "z-component $m(xv_y-yv_x)$",
+    "weight": 2
+   },
+   {
+    "text": "Substitution and sign",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\vec L=\\vec r\\times m\\vec v$, so $L_z=m(xv_y-yv_x)$ (ang-mom).\nCross-product z-component (vec-prod): $xv_y-yv_x=3(-1)-4(2)=-11$.\nMultiply by $m$: $L_z=-22\\ \\mathrm{kg\\,m^2/s}$.",
+  "hints": [
+   "Use the 2D cross product, order matters."
+  ],
+  "check": "2*(3*(-1)-4*2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation",
+   "t2.ang-mom",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A planet orbits a Sun-like star with period $8.0$ years and closest approach $1.0\\ \\mathrm{AU}$. Use Kepler's third law in years and AU. What is the ratio of its speed at closest approach to its speed at farthest approach?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7$",
+    "$49$",
+    "$4$",
+    "$3$",
+    "$8$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "squared the ratio",
+    "used $a/r_p$",
+    "used $r_a-a$",
+    "used the period"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Kepler III: $a^3=T^2$ gives $a=4.0$ AU",
+    "weight": 1
+   },
+   {
+    "text": "Aphelion $r_a=2a-r_p=7.0$ AU",
+    "weight": 1
+   },
+   {
+    "text": "Angular momentum: $v_p/v_a=r_a/r_p$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "Kepler III in years/AU: $a^3=T^2=64$, so $a=4.0$ AU (gravitation, scaling).\nMajor axis $=r_p+r_a=2a$, so $r_a=8-1=7.0$ AU.\nAt the apsides $v\\perp r$: $mr_pv_p=mr_av_a$ (ang-mom).\n$v_p/v_a=r_a/r_p=7$.",
+  "hints": [
+   "Find the farthest distance first, then conserve L."
+  ],
+  "check": "(2*8**(2/3)-1)/1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.gravitation",
+   "t2.circular",
+   "t2.potential"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A satellite is in a circular orbit of radius $2R$ about a planet of radius $R$. The surface escape speed is $v_e$. What minimum extra speed, added along the orbital velocity, lets it escape?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{\\sqrt2-1}{2}\\,v_e$",
+    "$\\frac{v_e}{\\sqrt2}$",
+    "$\\frac{v_e}{2}$",
+    "$(\\sqrt2-1)\\,v_e$",
+    "$\\frac{\\sqrt2+1}{2}\\,v_e$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave the escape speed at $2R$ rather than the extra speed",
+    "gave the orbital speed itself",
+    "used the surface values for orbital speed",
+    "added instead of subtracting the orbital speed"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Orbital speed from $GM/(2R)=v^2$ (gravity as centripetal force)",
+    "weight": 1
+   },
+   {
+    "text": "Escape speed at radius $2R$ is $\\sqrt2$ times orbital speed",
+    "weight": 2
+   },
+   {
+    "text": "Difference expressed in $v_e=\\sqrt{2GM/R}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Circular orbit at $2R$: $v_c^2=GM/2R$ (circular, gravitation).\nEscape at the same radius: $v_{esc}^2=2GM/2R=2v_c^2$ (potential: zero total energy).\nExtra speed $=(\\sqrt2-1)v_c$, with $v_c=\\sqrt{GM/2R}=v_e/2$.\nResult $\\frac{\\sqrt2-1}{2}v_e$.",
+  "hints": [
+   "Compare escape speed and orbital speed at the same radius."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.shm",
+   "t2.potential",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A block hanging from a spring stretches it $0.098\\ \\mathrm m$ at equilibrium. It is pulled down a further $0.050\\ \\mathrm m$ and released. Take $g=9.8\\ \\mathrm{m/s^2}$. Find its maximum speed in m/s.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.50$",
+    "$0.080$",
+    "$0.99$",
+    "$5.0$",
+    "$0.050$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the frequency $f$ instead of $\\omega$",
+    "free-fall speed $\\sqrt{2gA}$",
+    "decimal-place slip",
+    "reported the amplitude"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Equilibrium: $k\\Delta=mg$, so $\\omega^2=g/\\Delta=100$",
+    "weight": 2
+   },
+   {
+    "text": "Amplitude is the extra stretch $0.050$ m",
+    "weight": 1
+   },
+   {
+    "text": "$v_{max}=A\\omega$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Equilibrium (newton): $k\\Delta=mg$, so $k/m=g/\\Delta=100\\ \\mathrm{s^{-2}}$.\n$\\omega=10\\ \\mathrm{rad/s}$ (shm).\nAmplitude is the extra pull-down, $A=0.050\\ \\mathrm m$.\n$v_{max}=A\\omega=0.50\\ \\mathrm{m/s}$ (energy check: $\\tfrac12kA^2=\\tfrac12mv^2$).",
+  "hints": [
+   "Use the equilibrium stretch to get $k/m$."
+  ],
+  "check": "0.05*math.sqrt(9.8/0.098)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.shm",
+   "t2.rot-dynamics",
+   "t1.small-angle"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A uniform thin rod of length $L$ swings about a horizontal pivot at one end, with small amplitude. What is the ratio of its period to that of a simple pendulum of length $L$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{2/3}$",
+    "$\\sqrt{3/2}$",
+    "$\\sqrt{1/6}$",
+    "$\\sqrt2$",
+    "$\\sqrt{1/3}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "inverted the ratio",
+    "used $I=\\tfrac1{12}mL^2$ about the end",
+    "used $I=mL^2$, treating it as a point mass",
+    "used $d=L$ instead of $L/2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Moment of inertia about the end, $I=\\tfrac13mL^2$",
+    "weight": 1
+   },
+   {
+    "text": "Small-angle torque $-mg(L/2)\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "$T=2\\pi\\sqrt{I/(mgd)}$ vs $2\\pi\\sqrt{L/g}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Torque on the rod: $-mg\\tfrac L2\\sin\\theta\\approx-mg\\tfrac L2\\theta$ (small-angle).\n$I=\\tfrac13mL^2$ about the end (rot-dynamics), so $\\ddot\\theta=-\\frac{3g}{2L}\\theta$ (shm).\n$T_{rod}=2\\pi\\sqrt{2L/3g}$; simple pendulum $2\\pi\\sqrt{L/g}$.\nRatio $\\sqrt{2/3}$.",
+  "hints": [
+   "Write the torque equation about the pivot and linearize."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f031",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven",
+   "t2.shm",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ oscillator on a spring ($k=200\\ \\mathrm{N/m}$) feels damping force $-bv$ with $b=2.0\\ \\mathrm{kg/s}$. In what time, in s, does its mechanical energy fall to $1/e$ of its value (the damping is light)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.25$",
+    "$0.50$",
+    "$0.125$",
+    "$4.0$",
+    "$1.0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave the amplitude decay time $2m/b$",
+    "used $m/(2b)$",
+    "gave the decay rate $b/m$ in $\\mathrm{s^{-1}}$",
+    "used $m/b$ with $m$ taken as $1.0$ kg"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Amplitude decays as $e^{-bt/2m}$",
+    "weight": 2
+   },
+   {
+    "text": "Energy $\\propto$ amplitude$^2$ decays as $e^{-bt/m}$",
+    "weight": 1
+   },
+   {
+    "text": "Time $\\tau=m/b$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Equation: $m\\ddot x+b\\dot x+kx=0$; light damping gives amplitude $\\propto e^{-bt/2m}$ (damped-driven).\nEnergy $\\propto x^2\\propto e^{-bt/m}$ (shm; calc-rates: $dE/dt=-(b/m)E$ on average).\nEnergy falls to $1/e$ at $t=m/b=0.50/2.0$.\n$t=0.25\\ \\mathrm s$.",
+  "hints": [
+   "Energy goes as amplitude squared."
+  ],
+  "check": "0.5/2.0",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f032",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.damped-driven",
+   "t2.shm",
+   "t2.newton"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $0.50\\ \\mathrm{kg}$ mass on a spring ($k=200\\ \\mathrm{N/m}$) with damping $-bv$, $b=2.0\\ \\mathrm{kg/s}$, is driven by $F_0\\cos\\omega t$ with $F_0=4.0\\ \\mathrm N$ at the natural angular frequency of the undamped oscillator. Find the steady-state amplitude in m.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.10$",
+    "$0.02$",
+    "$0.05$",
+    "$2.0$",
+    "$0.005$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave the static deflection $F_0/k$",
+    "used $F_0/(2b\\omega_0)$",
+    "used $F_0/b$, missing $\\omega_0$",
+    "used $F_0/(b\\omega_0^2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Natural frequency $\\omega_0=\\sqrt{k/m}=20\\ \\mathrm{rad/s}$",
+    "weight": 1
+   },
+   {
+    "text": "At resonance the spring and inertia terms cancel: $A=F_0/(b\\omega_0)$",
+    "weight": 2
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Natural frequency: $\\omega_0=\\sqrt{200/0.50}=20\\ \\mathrm{rad/s}$ (shm).\nAmplitude: $A=F_0/\\sqrt{(k-m\\omega^2)^2+b^2\\omega^2}$ (damped-driven).\nAt $\\omega=\\omega_0$ the bracket vanishes: $A=F_0/(b\\omega_0)$ (newton: drive balances drag).\n$A=4.0/(2.0\\times20)=0.10\\ \\mathrm m$.",
+  "hints": [
+   "At resonance the drive balances only the damping force."
+  ],
+  "check": "4/(2.0*math.sqrt(200/0.5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

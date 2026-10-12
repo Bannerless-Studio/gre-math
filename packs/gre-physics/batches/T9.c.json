@@ -1,0 +1,1683 @@
+[
+ {
+  "id": "t9-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A muonic hydrogen atom binds a negative muon (mass $207\\,m_e$) to a proton (mass $1836\\,m_e$). Ordinary hydrogen, with the nucleus taken infinitely heavy, has Rydberg energy $13.6\\ \\mathrm{eV}$ for electron mass $m_e$. Take $hc=1240\\ \\mathrm{eV\\,nm}$. Find the wavelength of the $n=2\\to n=1$ photon in nm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6535019046929181,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Reduced mass of the muon-proton pair",
+    "weight": 2
+   },
+   {
+    "text": "Level energies scale linearly with reduced mass",
+    "weight": 1
+   },
+   {
+    "text": "Photon energy and wavelength",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Bound energies scale with the reduced mass (hydrogen, scaling).\n$\\mu=\\dfrac{207\\cdot1836}{207+1836}m_e=186.0\\,m_e$.\n$E_2-E_1=13.6\\,\\mu/m_e\\,(1-\\tfrac14)=1898\\ \\mathrm{eV}$.\n$\\lambda=hc/\\Delta E=1240/1898=0.654\\ \\mathrm{nm}$.",
+  "hints": [
+   "Use the reduced mass, not the muon mass."
+  ],
+  "check": "1240/(13.6*(207*1836/(207+1836))*(1-1/4))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.hydrogen",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A hydrogen atom emits on the transition $n=100\\to n=99$. The levels are $E_n=-hcR/n^2$ with $cR=3.29\\times10^{15}\\ \\mathrm{Hz}$. The emission frequency is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "3.3 GHz",
+    "13 GHz",
+    "6.7 GHz",
+    "670 GHz",
+    "0.067 GHz"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "used $cR/n^3$, dropped the factor 2",
+    "doubled the factor 2 again",
+    "",
+    "used $1/n^2$ scaling instead of $1/n^3$",
+    "used $1/n^4$ scaling"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Frequency $\\nu=cR(1/99^2-1/100^2)$",
+    "weight": 2
+   },
+   {
+    "text": "Expand for large $n$: $\\approx 2cR/n^3$",
+    "weight": 2
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   },
+   {
+    "text": "Reject options with wrong power of $n$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Transition frequency is $cR\\left(\\dfrac1{99^2}-\\dfrac1{100^2}\\right)$ (hydrogen).\nFor large $n$, $\\dfrac1{(n-1)^2}-\\dfrac1{n^2}\\approx\\dfrac{2}{n^3}$ (scaling).\n$\\nu\\approx2(3.29\\times10^{15})/10^6=6.6\\ \\mathrm{GHz}$; exact value $6.68$ GHz.\nThis equals the classical orbital frequency (correspondence).",
+  "hints": [
+   "Difference of $1/n^2$ terms for adjacent large $n$ falls as a power of $n$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine",
+   "t8.ang-mom-qm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The $3s\\ {}^2S_{1/2}$ ground level of $^{23}$Na has nuclear spin $I=3/2$ and hyperfine interaction $H=A\\,\\vec I\\cdot\\vec J$ with $A/h=886\\ \\mathrm{MHz}$. Find the frequency in MHz between the two hyperfine levels.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1772,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Allowed $F=I\\pm J$: 1 and 2",
+    "weight": 1
+   },
+   {
+    "text": "$\\vec I\\cdot\\vec J=\\tfrac12[F(F+1)-I(I+1)-J(J+1)]$",
+    "weight": 2
+   },
+   {
+    "text": "Difference of the two energies",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$J=1/2$, $I=3/2$ give $F=1,2$ (ang-mom addition).\n$\\vec I\\cdot\\vec J=\\tfrac12[F(F+1)-\\tfrac{15}4-\\tfrac34]$.\n$F=2$: $+\\tfrac34$. $F=1$: $-\\tfrac54$.\nSplitting $=2A$, so $\\nu=2(886)=1772\\ \\mathrm{MHz}$ (interval rule $A F_{max}$).",
+  "hints": [
+   "Square $\\vec F=\\vec I+\\vec J$ to get $\\vec I\\cdot\\vec J$."
+  ],
+  "check": "2*886",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.fine-hyperfine",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In hydrogen the $2p$ fine-structure splitting ($2p_{3/2}-2p_{1/2}$) is $45.3\\ \\mu\\mathrm{eV}$. Use the hydrogenic scaling of the spin-orbit splitting at fixed $l$ to find the $3p$ splitting of $\\mathrm{Li}^{2+}$ ($Z=3$) in $\\mu$eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1087.1999999999996,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Spin-orbit splitting $\\propto Z^4$",
+    "weight": 2
+   },
+   {
+    "text": "Splitting $\\propto 1/n^3$ at fixed $l$",
+    "weight": 2
+   },
+   {
+    "text": "Combine scale factors",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Spin-orbit splitting $\\propto \\langle r^{-3}\\rangle\\times Z\\propto Z^4/n^3$ at fixed $l$ (fine structure).\nFactor from $Z$: $3^4=81$.\nFactor from $n$: $(2/3)^3=8/27$.\n$45.3\\times81\\times8/27=1087\\ \\mu\\mathrm{eV}$.",
+  "hints": [
+   "Both the field at the electron and $\\langle r^{-3}\\rangle$ carry powers of $Z$."
+  ],
+  "check": "45.3*3**4*(2/3)**3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark",
+   "t8.ang-mom-qm"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The sodium D$_2$ line is the transition $3p\\ {}^2P_{3/2}\\to3s\\ {}^2S_{1/2}$. In a weak field $B=0.500\\ \\mathrm T$, with $\\mu_B=5.79\\times10^{-5}\\ \\mathrm{eV/T}$, find the magnitude of the shift, from the zero-field photon energy, of the component that goes from $m_J=+\\tfrac12$ in the upper level to $m_J=-\\tfrac12$ in the lower level. Give it in $\\mu$eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 48.24999999999999,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Landé factors: $g=4/3$ for $^2P_{3/2}$, $g=2$ for $^2S_{1/2}$",
+    "weight": 2
+   },
+   {
+    "text": "Shift $=(g_um_u-g_lm_l)\\mu_BB$ with $\\Delta m=0,\\pm1$",
+    "weight": 2
+   },
+   {
+    "text": "Apply to $m_u=+\\tfrac12\\to m_l=-\\tfrac12$: $\\tfrac23+1=\\tfrac53$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$g_J=1+\\dfrac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}$: $4/3$ for $^2P_{3/2}$, $2$ for $^2S_{1/2}$ (Zeeman).\nShift $=(g_um_u-g_lm_l)\\mu_BB$ (selection, $\\Delta m=-1$ here).\nFor $m_u=\\tfrac12,m_l=-\\tfrac12$: $\\tfrac23+1=\\tfrac53$.\n$\\tfrac53(5.79\\times10^{-5})(0.5)=48.3\\ \\mu\\mathrm{eV}$.",
+  "hints": [
+   "Compute each $g_J$ first, then apply them to the given pair of $m_J$ values."
+  ],
+  "check": "((1+(1.5*2.5+0.75-2)/(2*1.5*2.5))*0.5-(2*(-0.5)))*5.79e-5*0.5*1e6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.zeeman-stark",
+   "t4.capacitors"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Hydrogen atoms in the $n=2$ shell sit between parallel plates $2.00\\ \\mathrm{mm}$ apart, in a uniform field $F$. The linear Stark shifts of the $n=2$ components are $0$ and $\\pm3qa_0F$, with elementary charge $q$ and $a_0=5.29\\times10^{-11}\\ \\mathrm m$. Find the plate voltage in kV at which the two outermost components are separated by $1.00\\ \\mathrm{meV}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.30119722747322,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Linear Stark shifts of $n=2$: $\\pm3qa_0F$, so extreme gap $6qa_0F$",
+    "weight": 2
+   },
+   {
+    "text": "Field from the gap, in V/m",
+    "weight": 2
+   },
+   {
+    "text": "$V=Fd$ for the plates",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "The $n=2$ shell mixes $2s$ and $2p_0$ into states with shifts $\\pm3qa_0F$ (Stark).\nExtreme gap $=6qa_0F$, so $F=\\dfrac{10^{-3}\\ \\mathrm{eV}}{6a_0q}=3.15\\times10^{6}\\ \\mathrm{V/m}$.\nPlates: $V=Fd=3.15\\times10^6(2.00\\times10^{-3})=6.30\\ \\mathrm{kV}$.",
+  "hints": [
+   "The $m=\\pm1$ states do not shift to first order."
+  ],
+  "check": "1e-3/(6*5.29e-11)*2e-3/1e3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.selection",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Adjacent lines in the pure rotational absorption spectrum of $^{12}\\mathrm C^{16}\\mathrm O$ are spaced $3.84\\ \\mathrm{cm^{-1}}$ apart. Take $h=6.63\\times10^{-34}\\ \\mathrm{J\\,s}$, $c=3.00\\times10^{8}\\ \\mathrm{m/s}$, $1\\ \\mathrm u=1.66\\times10^{-27}\\ \\mathrm{kg}$, and atomic masses 12 u and 16 u. Find the bond length in pm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 113.16835773940207,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Rule $\\Delta J=\\pm1$: line spacing is $2B$",
+    "weight": 2
+   },
+   {
+    "text": "Moment of inertia $I=h/(8\\pi^2cB)$, units $\\mathrm{cm^{-1}}\\to\\mathrm{m^{-1}}$",
+    "weight": 2
+   },
+   {
+    "text": "$r=\\sqrt{I/\\mu}$ with reduced mass",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "$\\Delta J=\\pm1$ lines sit at $2B(J+1)$, so spacing $=2B$ and $B=1.92\\ \\mathrm{cm^{-1}}=192\\ \\mathrm{m^{-1}}$ (selection).\n$I=\\dfrac{h}{8\\pi^2cB}=1.458\\times10^{-46}\\ \\mathrm{kg\\,m^2}$.\n$\\mu=\\dfrac{12\\cdot16}{28}\\ \\mathrm u=1.138\\times10^{-26}\\ \\mathrm{kg}$.\n$r=\\sqrt{I/\\mu}=113\\ \\mathrm{pm}$.",
+  "hints": [
+   "Spacing is $2B$, not $B$."
+  ],
+  "check": "math.sqrt(6.63e-34/(8*math.pi**2*3e8*192)/((12*16/28)*1.66e-27))*1e12",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.selection",
+   "t9.multi-electron"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which helium transition is forbidden for single-photon electric-dipole emission?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1s2p\\ {}^1P_1\\to1s^2\\ {}^1S_0$",
+    "$1s3d\\ {}^1D_2\\to1s2p\\ {}^1P_1$",
+    "$1s2p\\ {}^3P_1\\to1s2s\\ {}^3S_1$",
+    "$1s3p\\ {}^3P_2\\to1s2s\\ {}^3S_1$",
+    "$1s2s\\ {}^1S_0\\to1s^2\\ {}^1S_0$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "allowed: parity flips, $\\Delta J=-1$, $\\Delta S=0$",
+    "allowed: $d\\to p$ flips parity, $\\Delta J=-1$",
+    "allowed: triplet to triplet, $\\Delta L=-1$, $J=1\\to1$ ok",
+    "allowed: $\\Delta J=-1$, parity flips",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "State the E1 rules: parity change, $\\Delta S=0$, $\\Delta L=0,\\pm1$, $\\Delta J=0,\\pm1$ with no $0\\to0$",
+    "weight": 2
+   },
+   {
+    "text": "Apply to each option",
+    "weight": 2
+   },
+   {
+    "text": "Identify the $J=0\\to J=0$, same-parity case",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "E1 needs a parity flip, $\\Delta S=0$, $\\Delta J=0,\\pm1$, and no $J=0\\to0$ (selection).\n$1s2s\\ {}^1S_0\\to1s^2\\ {}^1S_0$ keeps parity (both even) and is $0\\to0$: forbidden.\nThe other four flip parity and obey $\\Delta S=0$, $\\Delta J=0,\\pm1$.",
+  "hints": [
+   "Check parity first: sum of $l$ values."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron",
+   "t8.ang-mom-qm"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The free ion $\\mathrm{Ni}^{2+}$ has configuration $3d^8$. Apply Hund's rules to find its ground term, then the Landé factor. The effective moment $g_J\\sqrt{J(J+1)}$ in units of $\\mu_B$ is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "2.83",
+    "5.59",
+    "8.94",
+    "4.47",
+    "1.63"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "spin-only value $2\\sqrt{S(S+1)}$",
+    "",
+    "used $g=2$ with $J=4$",
+    "dropped $g_J$ (took $g=1$)",
+    "took $J=L-S=2$, the less-than-half-filled rule"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Hund's rules: $S=1$, $L=3$ (F term)",
+    "weight": 2
+   },
+   {
+    "text": "More than half-filled, so $J=L+S=4$",
+    "weight": 2
+   },
+   {
+    "text": "$g_J=1.25$, then moment",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "$d^8$: maximise $S$ ($S=1$), then $L$ ($L=3$) (Hund's rules).\nShell more than half full, so $J=L+S=4$: term $^3F_4$.\n$g_J=1+\\dfrac{20+2-12}{2\\cdot20}=1.25$.\nMoment $=1.25\\sqrt{20}=5.59\\,\\mu_B$.",
+  "hints": [
+   "Fill order: spin first, then orbital; the $J$ rule depends on the shell filling."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.multi-electron",
+   "t8.identical"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An atom has the excited configuration $2p3p$ outside closed shells. In LS coupling, how many distinct fine-structure levels $^{2S+1}L_J$ does it have? Each allowed $(L,S,J)$ counts once.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "5",
+    "6",
+    "10",
+    "15",
+    "36"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "counted levels of the equivalent $2p^2$ configuration",
+    "counted terms, not $J$ levels",
+    "",
+    "counted microstates of $2p^2$",
+    "counted all microstates"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Nonequivalent electrons: no Pauli restriction on $L,S$ pairs",
+    "weight": 2
+   },
+   {
+    "text": "Terms: $^{1,3}(S,P,D)$",
+    "weight": 2
+   },
+   {
+    "text": "Count $J$ values per term",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "Electrons in different shells are distinguishable, so all combinations of $L=0,1,2$ and $S=0,1$ occur (identical particles).\nSinglets: $^1S_0,\\,{}^1P_1,\\,{}^1D_2$ give 3 levels.\nTriplets: $^3S_1$ gives 1, $^3P_{0,1,2}$ gives 3, $^3D_{1,2,3}$ gives 3.\nTotal $=3+1+3+3=10$. Check: $1+3+5+3+9+15=36$ states.",
+  "hints": [
+   "Count J levels per term, not terms."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra",
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Copper ($Z=29$) $K_\\alpha$ photons have energy $8.05\\ \\mathrm{keV}$. An unknown target emits $K_\\alpha$ photons of wavelength $0.0709\\ \\mathrm{nm}$. Take $hc=1240\\ \\mathrm{eV\\,nm}$ and Moseley's law $\\sqrt\\nu\\propto(Z-1)$. Find the atomic number of the target.",
+  "answer": {
+   "kind": "numeric",
+   "value": 42,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Photon energy from wavelength",
+    "weight": 1
+   },
+   {
+    "text": "Moseley: $(Z-1)\\propto\\sqrt{E}$",
+    "weight": 2
+   },
+   {
+    "text": "Solve and round to an integer $Z$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$E=1240/0.0709=17.49\\ \\mathrm{keV}$ (photon energy).\nMoseley: $\\dfrac{Z-1}{28}=\\sqrt{17.49/8.05}=1.474$ (x-ray).\n$Z-1=41.3$, so $Z=42$.",
+  "hints": [
+   "The screened charge is $Z-1$, not $Z$."
+  ],
+  "check": "round(1+28*math.sqrt((1240/0.0709/1000)/8.05))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.xray-spectra",
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Electrons strike a target in an X-ray tube at $40.0\\ \\mathrm{kV}$. A crystal with plane spacing $d=0.200\\ \\mathrm{nm}$ analyses the beam by first-order Bragg reflection. Take $hc=1240\\ \\mathrm{eV\\,nm}$. Find the smallest Bragg angle in degrees at which any radiation from the tube is reflected.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.4448800178775905,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Duane-Hunt cutoff $\\lambda_{min}=hc/(qV)$",
+    "weight": 2
+   },
+   {
+    "text": "Bragg: $2d\\sin\\theta=\\lambda$ (first order)",
+    "weight": 2
+   },
+   {
+    "text": "Smallest angle goes with shortest wavelength",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "The continuum ends at $\\lambda_{min}=hc/(qV)=1240/40000=0.0310\\ \\mathrm{nm}$ (x-ray).\n$2d\\sin\\theta=\\lambda$ (diffraction), and $\\theta$ grows with $\\lambda$.\n$\\sin\\theta=0.0310/0.400=0.0775$.\n$\\theta=4.44^\\circ$.",
+  "hints": [
+   "The most energetic photon carries the full electron energy."
+  ],
+  "check": "math.degrees(math.asin(1240/40000/(2*0.200)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum",
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Light of wavelength $400\\ \\mathrm{nm}$ gives a photoelectric stopping potential of $1.10\\ \\mathrm V$ on a metal. Light of $300\\ \\mathrm{nm}$ gives $2.13\\ \\mathrm V$. Do not assume a value of $hc$: use only these two data. Find the threshold wavelength in nm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 621.1055276381911,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Einstein: $qV_s=hc/\\lambda-\\phi$",
+    "weight": 1
+   },
+   {
+    "text": "Slope of $V_s$ against $1/\\lambda$ gives $hc/q$",
+    "weight": 2
+   },
+   {
+    "text": "Work function, then $\\lambda_{th}=hc/\\phi$",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "$V_s=(hc/q)(1/\\lambda)-\\phi/q$ is linear in $1/\\lambda$ (photoelectric, linearize).\nSlope $=\\dfrac{2.13-1.10}{1/300-1/400}=1236\\ \\mathrm{V\\,nm}$.\n$\\phi/q=1236/400-1.10=1.99\\ \\mathrm V$.\n$\\lambda_{th}=1236/1.99=621\\ \\mathrm{nm}$.",
+  "hints": [
+   "Two points fix a line in the variables $(1/\\lambda,V_s)$."
+  ],
+  "check": "((2.13-1.10)/(1/300-1/400))/(((2.13-1.10)/(1/300-1/400))/400-1.10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.early-quantum",
+   "t6.rel-collisions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A photon of wavelength $0.0500\\ \\mathrm{nm}$ scatters through $90^\\circ$ from a free electron at rest. Take $hc=1240\\ \\mathrm{eV\\,nm}$ and the electron Compton wavelength $h/(m_ec)=2.43\\ \\mathrm{pm}$. Find the electron's kinetic energy in eV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1149.4182719816927,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Compton shift $\\Delta\\lambda=\\lambda_C(1-\\cos\\theta)$",
+    "weight": 2
+   },
+   {
+    "text": "Scattered wavelength and photon energies",
+    "weight": 2
+   },
+   {
+    "text": "Electron kinetic energy is the energy lost by the photon",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "At $90^\\circ$, $\\Delta\\lambda=\\lambda_C=0.00243\\ \\mathrm{nm}$ (Compton).\n$\\lambda'=0.05243\\ \\mathrm{nm}$.\n$E=24800\\ \\mathrm{eV}$, $E'=23650\\ \\mathrm{eV}$.\n$K=E-E'=1150\\ \\mathrm{eV}$ (energy conservation).",
+  "hints": [
+   "Keep four digits in the photon energies before subtracting."
+  ],
+  "check": "1240/0.0500-1240/(0.0500+0.00243)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure",
+   "t6.rel-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Atomic masses: $^4\\mathrm{He}$ $4.002603\\ \\mathrm u$, $^3\\mathrm{He}$ $3.016029\\ \\mathrm u$, neutron $1.008665\\ \\mathrm u$. Take $1\\ \\mathrm u=931.5\\ \\mathrm{MeV}/c^2$. Find the energy in MeV needed to remove one neutron from $^4\\mathrm{He}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20.57776650000049,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Separation energy $S_n=(M_{A-1}+m_n-M_A)c^2$",
+    "weight": 2
+   },
+   {
+    "text": "Atomic masses: electron counts match, so they cancel",
+    "weight": 1
+   },
+   {
+    "text": "Convert $u$ to MeV",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Removal gives $^3\\mathrm{He}+n$; both sides have two electrons, so atomic masses cancel electrons (binding).\n$\\Delta m=3.016029+1.008665-4.002603=0.022091\\ \\mathrm u$.\n$S_n=0.022091\\times931.5=20.6\\ \\mathrm{MeV}$.",
+  "hints": [
+   "Mass defect of the products over the parent."
+  ],
+  "check": "(3.016029+1.008665-4.002603)*931.5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-structure",
+   "t4.coulomb"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The mirror nuclei $^{39}\\mathrm{Ca}$ ($Z=20$) and $^{39}\\mathrm K$ ($Z=19$) differ by a Coulomb displacement energy of $7.30\\ \\mathrm{MeV}$. Model each as a uniformly charged sphere of radius $R=r_0A^{1/3}$ with Coulomb energy $\\tfrac35 Z^2q^2/(4\\pi\\varepsilon_0R)$, where $q^2/(4\\pi\\varepsilon_0)=1.44\\ \\mathrm{MeV\\,fm}$. Find $r_0$ in fm.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.361133178666153,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Difference of Coulomb energies $\\propto Z^2-(Z-1)^2=2Z-1$",
+    "weight": 2
+   },
+   {
+    "text": "Mirror pair has the same $R$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $r_0$ with $A^{1/3}$",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "Mirror nuclei have the same $A$ and radius; only $Z^2$ differs (nuclear structure).\n$\\Delta E=\\tfrac35\\dfrac{1.44}{R}(400-361)$, with $400-361=39$.\n$R=\\dfrac{0.6(39)(1.44)}{7.30}=4.616\\ \\mathrm{fm}$.\n$r_0=R/39^{1/3}=4.616/3.391=1.36\\ \\mathrm{fm}$.",
+  "hints": [
+   "Charge-independent nuclear forces cancel in the difference."
+  ],
+  "check": "0.6*(20**2-19**2)*1.44/7.30/39**(1/3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.decay",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A parent isotope of half-life $50.0$ d decays to a daughter of half-life $2.00$ d, and the daughter is stable beyond that. After a long time, the ratio (daughter activity)/(parent activity) is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1.00",
+    "0.042",
+    "25",
+    "1.04",
+    "0.96"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "secular equilibrium, ignored the finite parent half-life",
+    "atom-number ratio $N_d/N_p=T_d/(T_p-T_d)$",
+    "ratio of half-lives",
+    "",
+    "inverted: $(T_p-T_d)/T_p$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Bateman: $A_d/A_p=\\lambda_d/(\\lambda_d-\\lambda_p)$ in transient equilibrium",
+    "weight": 2
+   },
+   {
+    "text": "Express with half-lives: $T_p/(T_p-T_d)$",
+    "weight": 2
+   },
+   {
+    "text": "Numerical value and rule out $1.00$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "After many daughter half-lives the ratio is constant (decay chain).\n$\\dfrac{A_d}{A_p}=\\dfrac{\\lambda_d}{\\lambda_d-\\lambda_p}=\\dfrac{T_p}{T_p-T_d}$.\n$=\\dfrac{50}{48}=1.04$.\nSecular equilibrium (ratio 1) holds only when $T_p\\gg T_d$.",
+  "hints": [
+   "Activity is $\\lambda N$, and $N_d/N_p$ is not 1."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.decay",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A nucleus decays by two competing modes. Mode A alone would have half-life $1.40\\ \\mathrm{Gyr}$ and mode B alone $12.0\\ \\mathrm{Gyr}$. Find the fraction of the original nuclei that have decayed by mode B within $2.00\\ \\mathrm{Gyr}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.06989890727055297,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Rates add: $\\lambda=\\lambda_A+\\lambda_B$",
+    "weight": 2
+   },
+   {
+    "text": "Branching fraction $\\lambda_B/\\lambda$",
+    "weight": 1
+   },
+   {
+    "text": "Total decayed fraction $1-e^{-\\lambda t}$ times branch",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "Partial rates add (decay): $\\lambda_A=0.495$, $\\lambda_B=0.0578\\ \\mathrm{Gyr^{-1}}$, $\\lambda=0.553$.\nBranch to B $=0.0578/0.553=0.1045$.\nDecayed by time $t$: $1-e^{-1.106}=0.669$.\nFraction via B $=0.1045\\times0.669=0.0699$.",
+  "hints": [
+   "Branching ratio is fixed in time; total decay follows the summed rate."
+  ],
+  "check": "(1/12)/(1/1.4+1/12)*(1-math.exp(-math.log(2)*(1/1.4+1/12)*2.00))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions",
+   "t6.invariants"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Consider $\\alpha+{}^{14}\\mathrm N\\to p+{}^{17}\\mathrm O$ with a stationary $^{14}$N target. Atomic masses: $^4\\mathrm{He}$ $4.002603\\ \\mathrm u$, $^{14}\\mathrm N$ $14.003074\\ \\mathrm u$, $^{17}\\mathrm O$ $16.999132\\ \\mathrm u$, $^1\\mathrm H$ $1.007825\\ \\mathrm u$; $1\\ \\mathrm u=931.5\\ \\mathrm{MeV}/c^2$. Find the threshold kinetic energy of the alpha in the lab frame in MeV, using the nonrelativistic factor $1+m_\\alpha/m_N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.533129711422936,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$Q$ from mass difference (negative)",
+    "weight": 2
+   },
+   {
+    "text": "Threshold in lab: $K_{th}=-Q(1+m_\\alpha/m_N)$",
+    "weight": 2
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$Q=(4.002603+14.003074-16.999132-1.007825)\\times931.5=-1.192\\ \\mathrm{MeV}$ (reaction).\nAt threshold the products move together with the CM velocity, so only $K_{cm}$ is available (invariants).\n$K_{th}=1.192\\left(1+\\dfrac{4.0026}{14.0031}\\right)=1.53\\ \\mathrm{MeV}$.",
+  "hints": [
+   "Momentum conservation keeps some kinetic energy locked in the CM motion."
+  ],
+  "check": "-((4.002603+14.003074-16.999132-1.007825)*931.5)*(1+4.002603/14.003074)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.nuclear-reactions",
+   "t2.momentum"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In $\\mathrm D+\\mathrm T\\to\\alpha+n$ with negligible initial momentum, $Q=17.6\\ \\mathrm{MeV}$. Treat the products nonrelativistically with masses $4.0015\\ \\mathrm u$ and $1.0087\\ \\mathrm u$. The kinetic energy of the alpha is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "3.5 MeV",
+    "14.1 MeV",
+    "8.8 MeV",
+    "4.4 MeV",
+    "17.6 MeV"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "the neutron's share",
+    "equal energy split",
+    "used the mass ratio $Q/4$, not $m_n/(m_n+m_\\alpha)$",
+    "gave the alpha all of $Q$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Momentum balance: equal and opposite momenta",
+    "weight": 2
+   },
+   {
+    "text": "Kinetic energy $p^2/2m$ so lighter particle takes more",
+    "weight": 2
+   },
+   {
+    "text": "$K_\\alpha=Q\\,m_n/(m_n+m_\\alpha)$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Total momentum is zero, so $p_\\alpha=p_n$ (momentum).\n$K=p^2/2m$ gives $K_\\alpha/K_n=m_n/m_\\alpha$.\n$K_\\alpha=Q\\dfrac{m_n}{m_n+m_\\alpha}=17.6\\times0.201=3.5\\ \\mathrm{MeV}$ (reaction).",
+  "hints": [
+   "Equal momenta, not equal energies."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics",
+   "t6.dilation-contraction"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A beam of $\\pi^+$ with momentum $500\\ \\mathrm{MeV}/c$ travels $20.0\\ \\mathrm m$ in vacuum. The pion has mass $139.6\\ \\mathrm{MeV}/c^2$ and $c\\tau=7.80\\ \\mathrm m$ (where $\\tau$ is the proper lifetime). Find the fraction of pions that survive undecayed.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4887532901710545,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\beta\\gamma=p/(mc)$",
+    "weight": 2
+   },
+   {
+    "text": "Decay length $\\beta\\gamma c\\tau$ (dilation)",
+    "weight": 2
+   },
+   {
+    "text": "Survival $e^{-L/\\lambda}$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$\\beta\\gamma=p/mc=500/139.6=3.582$ (kinematics).\nLab decay length $=\\beta\\gamma c\\tau=3.582\\times7.80=27.9\\ \\mathrm m$ (dilation).\nSurvival $=e^{-20.0/27.9}=0.489$.",
+  "hints": [
+   "Use $\\beta\\gamma$ directly from momentum; no need for $\\beta$ alone."
+  ],
+  "check": "math.exp(-20.0/((500/139.6)*7.80))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.particle-kinematics",
+   "t6.rel-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A Cherenkov counter is filled with gas of refractive index $n=1.0020$. A $\\pi^+$ of momentum $5.00\\ \\mathrm{GeV}/c$ (mass $139.6\\ \\mathrm{MeV}/c^2$) passes through. Find the Cherenkov emission angle in degrees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.24875575831398,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Speed from momentum: $\\beta=1/\\sqrt{1+(m/p)^2}$",
+    "weight": 2
+   },
+   {
+    "text": "$\\cos\\theta=1/(n\\beta)$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate angle",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$\\beta=\\dfrac{p}{\\sqrt{p^2+m^2}}=\\dfrac1{\\sqrt{1+(0.1396/5)^2}}=0.999610$ (kinematics).\n$n\\beta=1.001610$.\n$\\cos\\theta=1/(n\\beta)=0.998391$.\n$\\theta=3.25^\\circ$.",
+  "hints": [
+   "Small angle: $\\theta^2\\approx2(n\\beta-1)$."
+  ],
+  "check": "math.degrees(math.acos(1/(1.0020*5000/math.hypot(5000,139.6))))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model",
+   "t9.nuclear-reactions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Which reaction conserves electric charge, baryon number, lepton number and strangeness, so that it can proceed through the strong interaction?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$p+p\\to p+K^+$",
+    "$\\pi^-+p\\to K^0+n$",
+    "$\\pi^-+p\\to K^0+\\Lambda$",
+    "$n\\to p+e^-$",
+    "$\\Lambda\\to p+\\pi^-$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "baryon number 2 to 1",
+    "strangeness 0 to $+1$",
+    "",
+    "lepton number 0 to $+1$",
+    "strangeness $-1$ to 0 (a weak decay)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Tabulate $Q$, $B$, $L$, $S$ for each reaction",
+    "weight": 2
+   },
+   {
+    "text": "Strong force conserves strangeness",
+    "weight": 2
+   },
+   {
+    "text": "Select the one reaction with all four balanced",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Strangeness: $K^0$ has $S=+1$, $\\Lambda$ has $S=-1$ (standard model).\n$\\pi^-+p\\to K^0+\\Lambda$: $Q:0\\to0$, $B:1\\to1$, $S:0\\to+1-1=0$. Allowed.\nOthers fail: $B$ changes in $p+p\\to p+K^+$; $S$ changes in the $K^0n$ and $\\Lambda\\to p\\pi^-$ cases; $L$ changes in $n\\to p\\,e^-$.",
+  "hints": [
+   "Add up strangeness: $K^0:+1$, $\\Lambda:-1$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.standard-model",
+   "t6.rel-collisions"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A $\\pi^+$ ($139.57\\ \\mathrm{MeV}/c^2$) decays at rest to $\\mu^+$ ($105.66\\ \\mathrm{MeV}/c^2$) and a massless neutrino. Which choice gives the neutrino type and the muon kinetic energy correctly?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\bar\\nu_\\mu$; $4.1\\ \\mathrm{MeV}$",
+    "$\\nu_e$; $4.1\\ \\mathrm{MeV}$",
+    "$\\nu_\\mu$; $33.9\\ \\mathrm{MeV}$",
+    "$\\nu_\\mu$; $29.8\\ \\mathrm{MeV}$",
+    "$\\nu_\\mu$; $4.1\\ \\mathrm{MeV}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "wrong lepton: $\\bar\\nu_\\mu$ would give $L_\\mu=-2$",
+    "wrong flavour",
+    "gave the muon the whole mass difference",
+    "quoted the momentum in MeV/$c$ as kinetic energy",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Lepton number: $\\mu^+$ has $L_\\mu=-1$, so need $\\nu_\\mu$",
+    "weight": 2
+   },
+   {
+    "text": "Two-body momentum $p=(m_\\pi^2-m_\\mu^2)/2m_\\pi=29.8$ MeV/$c$",
+    "weight": 2
+   },
+   {
+    "text": "Muon $K=\\sqrt{p^2+m_\\mu^2}-m_\\mu$",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "$\\pi^+\\to\\mu^+\\nu$: antimuon has $L_\\mu=-1$, so the neutrino is $\\nu_\\mu$ (lepton number).\n$p=\\dfrac{m_\\pi^2-m_\\mu^2}{2m_\\pi}=29.8\\ \\mathrm{MeV}/c$ (two-body decay).\n$E_\\mu=\\sqrt{29.8^2+105.66^2}=109.8$, so $K_\\mu=4.1\\ \\mathrm{MeV}$.",
+  "hints": [
+   "Muon and neutrino share the energy; they do not split the mass difference equally."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands",
+   "t3.diffraction"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Monochromatic X-rays of wavelength $0.154\\ \\mathrm{nm}$ strike a powder of a body-centred cubic metal with cubic cell edge $a=0.400\\ \\mathrm{nm}$. Find the smallest Bragg angle in degrees at which a first-order peak appears.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15.79737189868732,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Plane spacing $d=a/\\sqrt{h^2+k^2+l^2}$",
+    "weight": 1
+   },
+   {
+    "text": "BCC extinction: allowed only if $h+k+l$ is even, so $(110)$ first",
+    "weight": 3
+   },
+   {
+    "text": "Bragg angle from $2d\\sin\\theta=\\lambda$",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "(100) is absent for BCC: the body-centre atom cancels it, structure factor needs $h+k+l$ even (crystal).\nLargest allowed spacing: $(110)$, $d=0.400/\\sqrt2=0.2828\\ \\mathrm{nm}$.\n$\\sin\\theta=0.154/(2\\times0.2828)=0.2722$ (Bragg).\n$\\theta=15.8^\\circ$.",
+  "hints": [
+   "Check which low-index planes survive the structure factor."
+  ],
+  "check": "math.degrees(math.asin(0.154/(2*0.400/math.sqrt(2))))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.crystal-bands",
+   "t7.quantum-stats"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Copper has one conduction electron per atom, density $n=8.5\\times10^{28}\\ \\mathrm{m^{-3}}$. Treat them as a free-electron gas at $T=0$. Take $\\hbar=1.05\\times10^{-34}\\ \\mathrm{J\\,s}$ and $m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$. Find the Fermi speed in units of $10^{6}\\ \\mathrm{m/s}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5677767900594888,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$k_F=(3\\pi^2n)^{1/3}$ (spin-degenerate)",
+    "weight": 2
+   },
+   {
+    "text": "$v_F=\\hbar k_F/m$",
+    "weight": 2
+   },
+   {
+    "text": "Unit conversion",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Filled sphere with two spins per $k$: $n=k_F^3/3\\pi^2$ (free electrons).\n$k_F=(3\\pi^2\\cdot8.5\\times10^{28})^{1/3}=1.36\\times10^{10}\\ \\mathrm{m^{-1}}$.\n$v_F=\\hbar k_F/m_e=1.57\\times10^{6}\\ \\mathrm{m/s}$ (Fermi gas).",
+  "hints": [
+   "Spin doubles the states per $k$."
+  ],
+  "check": "1.05e-34*(3*math.pi**2*8.5e28)**(1/3)/9.11e-31/1e6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors",
+   "t7.canonical"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Silicon at $300\\ \\mathrm K$ ($k_BT=0.0259\\ \\mathrm{eV}$) has intrinsic carrier density $n_i=1.0\\times10^{10}\\ \\mathrm{cm^{-3}}$. It is doped with $1.0\\times10^{16}\\ \\mathrm{cm^{-3}}$ fully ionised donors. By how many eV does the Fermi level lie above the intrinsic level?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.35782172345127466,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Full ionisation: $n\\approx N_d$",
+    "weight": 2
+   },
+   {
+    "text": "$n=n_ie^{(E_F-E_i)/k_BT}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $\\ln(10^6)$ and product",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Donors dominate: $n=N_d=10^{16}\\ \\mathrm{cm^{-3}}$ (semiconductor).\n$n=n_i\\exp[(E_F-E_i)/k_BT]$ (Boltzmann statistics).\n$E_F-E_i=0.0259\\ln(10^6)=0.0259\\times13.82=0.358\\ \\mathrm{eV}$.",
+  "hints": [
+   "Use the intrinsic level as the reference."
+  ],
+  "check": "0.0259*math.log(1e16/1e10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.semiconductors",
+   "t9.early-quantum"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A GaAs photodiode (band gap $1.42\\ \\mathrm{eV}$) has quantum efficiency $0.70$ for every absorbed photon. It is illuminated by $1.00\\ \\mathrm{mW}$ at $850\\ \\mathrm{nm}$ and simultaneously by $1.00\\ \\mathrm{mW}$ at $1000\\ \\mathrm{nm}$. Take $hc=1240\\ \\mathrm{eV\\,nm}$. The photocurrent is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1.04 mA",
+    "0.48 mA",
+    "0.56 mA",
+    "0.69 mA",
+    "0.98 mA"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "counted both beams, ignoring the gap",
+    "",
+    "counted only the 1000 nm beam",
+    "left out the quantum efficiency",
+    "divided by the quantum efficiency instead of multiplying"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Compare photon energies with the gap: only 850 nm (1.46 eV) is absorbed",
+    "weight": 2
+   },
+   {
+    "text": "Responsivity $\\eta\\lambda/(1240\\ \\mathrm{nm\\,V})$",
+    "weight": 2
+   },
+   {
+    "text": "Current $=R\\,P$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "850 nm photons carry $1240/850=1.46\\ \\mathrm{eV}>1.42$: absorbed. 1000 nm photons carry $1.24\\ \\mathrm{eV}$: below the gap, no carriers (band gap).\nPhotons per second $=P\\lambda/hc$; each absorbed one yields $0.70\\,q$.\n$I=0.70\\times\\dfrac{850}{1240}\\times1.00\\ \\mathrm{mA}=0.48\\ \\mathrm{mA}$.",
+  "hints": [
+   "Which wavelength carries enough energy to cross the gap?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal",
+   "t7.first-law"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A dielectric crystal well below its Debye temperature has heat capacity $1.50\\ \\mathrm{mJ/K}$ at $2.00\\ \\mathrm K$. The heat needed to warm it from $1.00\\ \\mathrm K$ to $3.00\\ \\mathrm K$ is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "3.75 mJ",
+    "3.0 mJ",
+    "10.1 mJ",
+    "15.0 mJ",
+    "1.63 mJ"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $C(2\\,\\mathrm K)\\times\\Delta T$",
+    "used $C(3\\,\\mathrm K)\\times\\Delta T$",
+    "integrated $T^3$ to $T^4$ without the factor $1/4$",
+    "integrated $T^3$ to $T^3/3$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Debye law $C=aT^3$, so $a=C/T^3$",
+    "weight": 2
+   },
+   {
+    "text": "$Q=\\int C\\,dT=\\tfrac a4(T_f^4-T_i^4)$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Low-$T$ lattice heat capacity follows $C=aT^3$ (Debye).\n$a=1.50/8=0.1875\\ \\mathrm{mJ/K^4}$.\n$Q=\\int_1^3aT^3dT=\\dfrac a4(81-1)=20a=3.75\\ \\mathrm{mJ}$ (first law).",
+  "hints": [
+   "Integrate; $C$ is not constant."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.solid-thermal",
+   "t5.ampere"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A long niobium wire of radius $0.50\\ \\mathrm{mm}$ has $T_c=9.2\\ \\mathrm K$ and critical field $B_c(T)=B_c(0)[1-(T/T_c)^2]$ with $B_c(0)=0.200\\ \\mathrm T$. At $T=4.6\\ \\mathrm K$ the wire stays superconducting only while the field at its surface is below $B_c$. Find the largest current in A. Take $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 375.0,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$B_c(4.6\\,\\mathrm K)=0.200(1-\\tfrac14)=0.150$ T",
+    "weight": 2
+   },
+   {
+    "text": "Surface field of the current: $B=\\mu_0I/2\\pi r$ (Ampere)",
+    "weight": 2
+   },
+   {
+    "text": "Solve for $I$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$T/T_c=0.5$, so $B_c=0.200(1-0.25)=0.150\\ \\mathrm T$ (superconductivity).\nAmpere's law at the surface: $B=\\mu_0I/(2\\pi r)$ (Silsbee).\n$I=2\\pi rB_c/\\mu_0=\\dfrac{(0.50\\times10^{-3})(0.150)}{2\\times10^{-7}}=375\\ \\mathrm A$.",
+  "hints": [
+   "The critical current is set by the current's own field."
+  ],
+  "check": "2*math.pi*0.50e-3*0.200*(1-(4.6/9.2)**2)/(4*math.pi*1e-7)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f031",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A source plus background gives $2500$ counts in $100\\ \\mathrm s$. Background alone gives $3200$ counts in $400\\ \\mathrm s$. Counts are Poisson. The $1\\sigma$ uncertainty on the net source rate, in counts/s, is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.52",
+    "0.64",
+    "0.50",
+    "4.1",
+    "5.7"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "added the two errors linearly",
+    "ignored background uncertainty",
+    "took $\\sqrt{\\text{net rate}}$ as if it were a count",
+    "took $\\sqrt{25+8}$, forgetting to divide by time"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Poisson: $\\sigma_N=\\sqrt N$",
+    "weight": 1
+   },
+   {
+    "text": "Rate errors $\\sigma_N/t$",
+    "weight": 2
+   },
+   {
+    "text": "Independent errors add in quadrature",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "Rates: $25.0\\pm0.50$ and $8.0\\pm0.141$ counts/s (counting).\nNet $=17.0$ counts/s.\nIndependent errors combine in quadrature: $\\sigma=\\sqrt{0.25+0.020}=0.52$ counts/s (error propagation).",
+  "hints": [
+   "Divide each count error by its own counting time."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f032",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.lab-stats",
+   "t1.linearize"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The line $y=mx$ (through the origin) is fitted by least squares to $(x,y)=(1,2.1),\\ (2,3.9),\\ (3,6.2),\\ (4,7.8)$. The $x$ values are exact and each $y$ has independent $1\\sigma$ uncertainty $0.20$. Find the $1\\sigma$ uncertainty of the fitted slope $m$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.03651483716701107,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Least squares: $m=\\sum xy/\\sum x^2$",
+    "weight": 2
+   },
+   {
+    "text": "Propagate: $\\sigma_m^2=\\sigma^2\\sum x^2/(\\sum x^2)^2$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $\\sigma/\\sqrt{30}$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$m=\\dfrac{\\sum xy}{\\sum x^2}$ and $\\sum x^2=30$ (fitting).\n$m$ is linear in the $y_i$ with weights $x_i/30$.\n$\\sigma_m^2=\\sigma^2\\sum\\dfrac{x_i^2}{30^2}=\\dfrac{\\sigma^2}{30}$ (error propagation).\n$\\sigma_m=0.20/\\sqrt{30}=0.0365$.",
+  "hints": [
+   "Treat $m$ as a weighted sum of the $y_i$."
+  ],
+  "check": "0.20/math.sqrt(1**2+2**2+3**2+4**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f033",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics",
+   "t5.ac-circuits"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An inverting op-amp stage has $R_{in}=1.0\\ \\mathrm{k\\Omega}$ and $R_f=4.0\\ \\mathrm{k\\Omega}$. The op-amp has a gain-bandwidth product of $1.0\\ \\mathrm{MHz}$ and behaves as a single-pole system. For a single pole, the $10$-$90\\%$ rise time is $0.35/f_{3\\mathrm{dB}}$. The rise time of the stage is closest to",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.40\\ \\mu\\mathrm s$",
+    "$0.35\\ \\mu\\mathrm s$",
+    "$1.75\\ \\mu\\mathrm s$",
+    "$3.5\\ \\mu\\mathrm s$",
+    "$0.07\\ \\mu\\mathrm s$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "used signal gain 4, giving $f=250$ kHz",
+    "used the full 1 MHz bandwidth",
+    "",
+    "used $0.7/f_{3dB}$",
+    "multiplied the GBW by 5 instead of dividing"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Noise gain $1+R_f/R_{in}=5$ sets the loop bandwidth",
+    "weight": 2
+   },
+   {
+    "text": "$f_{3dB}=\\mathrm{GBW}/5=200$ kHz",
+    "weight": 2
+   },
+   {
+    "text": "$t_r=0.35/f_{3dB}$",
+    "weight": 2
+   }
+  ],
+  "pass": 4,
+  "solution": "Feedback fraction is $R_{in}/(R_{in}+R_f)=1/5$, so the loop gain bandwidth rolls off at $\\mathrm{GBW}/5$ (op-amp).\n$f_{3\\mathrm{dB}}=200\\ \\mathrm{kHz}$ (instrument bandwidth).\n$t_r=0.35/(2\\times10^5)=1.75\\ \\mu\\mathrm s$.",
+  "hints": [
+   "The inverting gain is 4, but bandwidth depends on $1+R_f/R_{in}$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f034",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.lab-electronics",
+   "t7.equipartition"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $1.0\\ \\mathrm{M\\Omega}$ resistor at $300\\ \\mathrm K$ is read by a lock-in amplifier whose equivalent noise bandwidth is $0.25\\ \\mathrm{Hz}$. Johnson noise voltage in bandwidth $\\Delta f$ is $\\sqrt{4k_BTR\\Delta f}$ (rms). Take $k_B=1.38\\times10^{-23}\\ \\mathrm{J/K}$. Find the rms noise voltage in nV.",
+  "answer": {
+   "kind": "numeric",
+   "value": 64.34283176858165,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Use the lock-in bandwidth $0.25$ Hz, not 1 Hz",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $4k_BTR\\Delta f$",
+    "weight": 2
+   },
+   {
+    "text": "Square root and unit to nV",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "$4k_BTR\\Delta f=4(1.38\\times10^{-23})(300)(10^6)(0.25)=4.14\\times10^{-15}\\ \\mathrm V^2$ (Johnson noise).\n$V_n=6.43\\times10^{-8}\\ \\mathrm V$.\nIn nV: $64.3$.",
+  "hints": [
+   "Noise power scales with bandwidth, so amplitude scales with its square root."
+  ],
+  "check": "math.sqrt(4*1.38e-23*300*1.0e6*0.25)*1e9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

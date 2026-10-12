@@ -1,0 +1,1519 @@
+[
+ {
+  "id": "t4-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.coulomb",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Charges of $+4.0\\ \\mu\\mathrm C$ sit at two vertices of an equilateral triangle of side $0.10\\ \\mathrm m$. A $+2.0\\ \\mu\\mathrm C$ charge sits at the third vertex. Find the magnitude of the net force on it, in N. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12.5$",
+    "$7.19$",
+    "$14.4$",
+    "$8.3$",
+    "$10.2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "one pair force only",
+    "added magnitudes as if collinear",
+    "divided by $\\cos30^\\circ$ instead of multiplying the sum",
+    "treated the two forces as perpendicular"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Each pair force from Coulomb's law",
+    "weight": 2
+   },
+   {
+    "text": "Components: parts along the base cancel, parts along the symmetry axis add",
+    "weight": 1
+   },
+   {
+    "text": "Combine to the net magnitude",
+    "weight": 1
+   }
+  ],
+  "solution": "Each repulsion: $F=kq_1q_2/a^2=7.19\\ \\mathrm N$ (coulomb).\nEach force points away from its source, $30^\\circ$ from the symmetry axis (vec-comp).\nComponents along the base cancel by symmetry.\nComponents along the symmetry axis add: $2F\\cos30^\\circ=12.5\\ \\mathrm N$.",
+  "hints": [
+   "Split each force along and across the symmetry axis."
+  ],
+  "check": "round(2*8.99e9*4e-6*2e-6/0.1**2*math.cos(math.pi/6), 1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.coulomb",
+   "t1.vec-comp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Point charges $+9.0\\ \\mu\\mathrm C$ at $x=0$ and $-1.0\\ \\mu\\mathrm C$ at $x=0.20\\ \\mathrm m$ lie on the $x$-axis. At what finite $x$ in metres on the axis does the net field vanish?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.3$",
+    "$0.15$",
+    "$0.225$",
+    "$0.6$",
+    "$0.1$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "searched between the charges, $3(0.2-x)=x$",
+    "dropped the squares: $9/x=1/(x-0.2)$",
+    "used $x=3d$ from the square root alone",
+    "midpoint"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Locate the region: must be outside the pair, beyond the smaller charge",
+    "weight": 2
+   },
+   {
+    "text": "Equate field magnitudes: $9/x^2=1/(x-d)^2$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $x$",
+    "weight": 1
+   }
+  ],
+  "solution": "Between the charges both fields point the same way, so no zero there (coulomb).\nBeyond the larger charge the larger field always wins, so the zero is past the $-1\\ \\mu$C charge (vec-comp: directions).\nSet $9/x^2=1/(x-0.20)^2$, so $3(x-0.20)=x$.\n$x=0.30\\ \\mathrm m$.",
+  "hints": [
+   "Which side of the weaker charge can the fields cancel on?"
+  ],
+  "check": "round(0.2*math.sqrt(9)/(math.sqrt(9)-1), 1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.gauss",
+   "t4.coulomb",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A solid insulating sphere of radius $R$ has charge density $\\rho=\\rho_0\\,r/R$ for $r\\le R$. Find the ratio $E(R/2)\\,/\\,E(3R)$ of field magnitudes.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9/4$",
+    "$9/2$",
+    "$36$",
+    "$4/9$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "treated the density as uniform: $E\\propto r$ inside, $E(R/2)/E(3R)=9/2$",
+    "used the full charge at $R/2$ (ignored the enclosed fraction)",
+    "inverted the ratio",
+    "used the ratio of radii only"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Enclosed charge by integrating $\\rho\\,4\\pi r^2dr$: $Q(r)\\propto r^4$",
+    "weight": 2
+   },
+   {
+    "text": "Gauss: $E=kQ_{enc}/r^2$ at each radius",
+    "weight": 1
+   },
+   {
+    "text": "Ratio of the two fields",
+    "weight": 1
+   }
+  ],
+  "solution": "Gauss with spherical symmetry (gauss): $E=kQ_{enc}/r^2$.\nInside, $Q_{enc}=\\int_0^r\\rho_0\\frac{r'}{R}4\\pi r'^2dr'=\\pi\\rho_0r^4/R$, so $E(R/2)=\\rho_0R/(16\\varepsilon_0)$.\nOutside, $Q=\\pi\\rho_0R^3$, so $E(3R)=\\rho_0R/(36\\varepsilon_0)$ (scaling).\nRatio $=36/16=9/4$.",
+  "hints": [
+   "Find Q_enc(r) with an integral, not r cubed."
+  ],
+  "check": "round((0.5**4/0.5**2)/(1/3**2), 3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.gauss",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A very long solid insulating cylinder of radius $2.0\\ \\mathrm{cm}$ carries uniform volume charge density $3.0\\ \\mu\\mathrm{C/m^3}$. Find the field magnitude $5.0\\ \\mathrm{cm}$ from the axis, in V/m. $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$",
+  "answer": {
+   "kind": "numeric",
+   "value": 1355.9322033898304,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Charge per unit length $\\lambda=\\rho\\pi R^2$",
+    "weight": 2
+   },
+   {
+    "text": "Gauss on a coaxial cylinder: $E=\\lambda/(2\\pi\\varepsilon_0 r)$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value with consistent SI units",
+    "weight": 1
+   }
+  ],
+  "solution": "Per unit length the cylinder holds $\\lambda=\\rho\\pi R^2$ (gauss, units: convert $\\mu$C and cm).\nA coaxial Gaussian cylinder of radius $r>R$ gives $E\\,2\\pi r=\\lambda/\\varepsilon_0$.\n$E=\\rho R^2/(2\\varepsilon_0r)=1.36\\times10^{3}\\ \\mathrm{V/m}$.",
+  "hints": [
+   "Outside, only the enclosed charge per length matters."
+  ],
+  "check": "3e-6*0.02**2/(2*8.85e-12*0.05)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.potential",
+   "t4.coulomb"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Three point charges $+2.0\\ \\mu\\mathrm C$, $+2.0\\ \\mu\\mathrm C$ and $-4.0\\ \\mu\\mathrm C$ sit at the vertices of an equilateral triangle of side $0.30\\ \\mathrm m$. Find the energy in J needed to pull them all apart to infinite separation. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.36$",
+    "$0.719$",
+    "$0.599$",
+    "$0.479$",
+    "$0.12$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "counted each pair twice",
+    "added magnitudes, ignored signs",
+    "kept only the attractive pairs",
+    "kept only the repulsive pair"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Total energy is a sum over pairs, each counted once",
+    "weight": 2
+   },
+   {
+    "text": "Sign of each pair term from the charge product",
+    "weight": 1
+   },
+   {
+    "text": "Energy needed is minus the total $U$",
+    "weight": 1
+   }
+  ],
+  "solution": "$U=k\\sum_{pairs}q_iq_j/a$ (potential energy of a charge set; each pair once).\nPairs: $(2)(2)+2\\,(2)(-4)=4-16=-12$ in $\\mu\\mathrm C^2$ (coulomb signs).\n$U=-8.99\\times10^{9}\\cdot12\\times10^{-12}/0.30=-0.36\\ \\mathrm J$.\nSeparating to infinity costs $+0.36\\ \\mathrm J$.",
+  "hints": [
+   "Count three pairs, signs matter."
+  ],
+  "check": "round(8.99e9*(16e-12-4e-12)/0.3, 2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.potential",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A thin ring of radius $0.30\\ \\mathrm m$ carries uniform charge $+5.0\\ \\mu\\mathrm C$. A $1.0\\ \\mathrm g$ bead with charge $+2.0\\ \\mu\\mathrm C$ is released from rest on the ring's axis, $0.40\\ \\mathrm m$ from the centre. Ignoring gravity, find its speed far away, in m/s. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "numeric",
+   "value": 18.963122105813696,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Axial potential $V=kQ/\\sqrt{R^2+x^2}$ by superposition of ring elements",
+    "weight": 2
+   },
+   {
+    "text": "Energy conservation: $qV=\\tfrac12mv^2$",
+    "weight": 1
+   },
+   {
+    "text": "Mass in kg and numerical value",
+    "weight": 1
+   }
+  ],
+  "solution": "Every ring element is $\\sqrt{R^2+x^2}=0.50\\ \\mathrm m$ away, so $V=kQ/0.50=8.99\\times10^{4}\\ \\mathrm V$ (potential).\nThe bead gains $qV=0.180\\ \\mathrm J$ going to $V=0$ (work-energy).\n$v=\\sqrt{2qV/m}=19\\ \\mathrm{m/s}$ with $m=10^{-3}\\ \\mathrm{kg}$.",
+  "hints": [
+   "Potential is a scalar sum, no vector components needed."
+  ],
+  "check": "math.sqrt(2*2e-6*8.99e9*5e-6/math.sqrt(0.3**2+0.4**2)/1e-3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.multipole",
+   "t1.small-angle",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Point charges $+1.0\\ \\mathrm{nC}$, $-2.0\\ \\mathrm{nC}$, $+1.0\\ \\mathrm{nC}$ lie on a line, spaced $1.0\\ \\mathrm{cm}$ apart with the middle one at the origin. Find the potential in V at $1.0\\ \\mathrm m$ from the origin on the line. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.80\\times10^{-3}$",
+    "$0.0899$",
+    "$8.99\\times10^{-4}$",
+    "$3.60\\times10^{-3}$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "dipole-style $kqa/r^2$",
+    "dropped the factor 2",
+    "factor 4 from counting both outer charges twice",
+    "assumed zero because the net charge is zero"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Net charge and dipole moment vanish: leading term is the quadrupole",
+    "weight": 2
+   },
+   {
+    "text": "Expand $1/(r\\mp a)$ to second order: $V\\approx2kqa^2/r^3$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "solution": "Net charge $0$, dipole moment $0$ by symmetry, so the monopole and dipole terms drop (multipole).\nExpand $kq[1/(r-a)-2/r+1/(r+a)]$ with $a/r\\ll1$ (small-angle expansion).\nLinear terms cancel; second order leaves $2kqa^2/r^3$.\n$V=2(8.99\\times10^{9})(10^{-9})(10^{-2})^2=1.8\\times10^{-3}\\ \\mathrm V$.",
+  "hints": [
+   "Expand each term in a/r; what survives?"
+  ],
+  "check": "8.99e9*1e-9*(1/(1-0.01)-2+1/(1+0.01))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.multipole",
+   "t4.coulomb",
+   "t1.calc-rates"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A small dipole of moment $p=2.0\\ \\mathrm{nC\\,m}$ lies along the line to a fixed point charge $Q=3.0\\ \\mathrm{nC}$, $0.10\\ \\mathrm m$ away, and points along the line. Find the force magnitude on the dipole in N. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.08\\times10^{-4}$",
+    "$5.39\\times10^{-5}$",
+    "$5.39\\times10^{-6}$",
+    "$0$",
+    "$1.62\\times10^{-4}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "derivative of $1/r^2$ taken as $1/r^3$ without the 2",
+    "used $pE$ (an energy) as the force",
+    "uniform-field argument: net force zero",
+    "used the dipole fall-off $1/r^3$ factor 3"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Uniform-field idea fails: force needs the field gradient",
+    "weight": 2
+   },
+   {
+    "text": "Force $F=p\\,|dE/dr|$ with $E=kQ/r^2$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "solution": "In a uniform field the net force is zero, so only the gradient of $E$ matters (multipole).\n$E=kQ/r^2$ gives $|dE/dr|=2kQ/r^3$ (rates of change).\n$F=p\\cdot2kQ/r^3$ (Coulomb field of $Q$).\n$=2(8.99\\times10^{9})(3\\times10^{-9})(2\\times10^{-9})/10^{-3}=1.08\\times10^{-4}\\ \\mathrm N$.",
+  "hints": [
+   "Differentiate the field of Q along the line."
+  ],
+  "check": "2*8.99e9*3e-9*2e-9/0.1**3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.conductors",
+   "t4.gauss"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A conducting spherical shell, inner radius $0.10\\ \\mathrm m$ and outer radius $0.20\\ \\mathrm m$, carries net charge $-2.0\\ \\mathrm{nC}$. A $+6.0\\ \\mathrm{nC}$ point charge sits at its centre. Find the surface charge density magnitude on the outer surface, in $\\mathrm{C/m^2}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7.96\\times10^{-9}$",
+    "$1.19\\times10^{-8}$",
+    "$3.98\\times10^{-9}$",
+    "$4.77\\times10^{-8}$",
+    "$3.18\\times10^{-8}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the point charge alone on the outer surface",
+    "used the shell's net charge, ignoring induction",
+    "gave the inner-surface charge on the outer surface (wrong radius)",
+    "right charge, inner radius"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Field inside conductor is zero: inner surface carries $-6$ nC (Gauss)",
+    "weight": 2
+   },
+   {
+    "text": "Charge conservation: outer surface carries $-2-(-6)=+4$ nC",
+    "weight": 1
+   },
+   {
+    "text": "$\\sigma=Q/4\\pi b^2$",
+    "weight": 1
+   }
+  ],
+  "solution": "Gaussian sphere inside the metal: $E=0$, so the inner surface holds $-6.0\\ \\mathrm{nC}$ (conductors, gauss).\nShell net charge is $-2.0$ nC, so the outer surface holds $-2.0-(-6.0)=+4.0\\ \\mathrm{nC}$.\n$\\sigma=4.0\\times10^{-9}/(4\\pi\\,0.20^2)=7.96\\times10^{-9}\\ \\mathrm{C/m^2}$.",
+  "hints": [
+   "What must the inner surface hold for E to vanish in the metal?"
+  ],
+  "check": "4e-9/(4*math.pi*0.2**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.conductors",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two conducting spheres of radii $2.0\\ \\mathrm{cm}$ and $6.0\\ \\mathrm{cm}$, far apart, are joined by a thin wire and hold a total charge of $8.0\\ \\mathrm{nC}$. Find the field magnitude at the surface of the smaller sphere, in V/m. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4.50\\times10^{4}$",
+    "$8.99\\times10^{4}$",
+    "$1.50\\times10^{4}$",
+    "$1.35\\times10^{5}$",
+    "$1.80\\times10^{5}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "split the charge equally",
+    "gave the field of the larger sphere",
+    "assigned the larger charge to the small sphere",
+    "put the whole charge on the small sphere"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Joined conductors share one potential: $kq_1/R_1=kq_2/R_2$",
+    "weight": 2
+   },
+   {
+    "text": "Split: $q_1:q_2=R_1:R_2$, so $q_1=2.0$ nC",
+    "weight": 2
+   },
+   {
+    "text": "Surface field $E=kq_1/R_1^2$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "solution": "The wire makes one equipotential, so $q_1/R_1=q_2/R_2$ (conductors, potential).\nWith $q_1+q_2=8$ nC and $R_2=3R_1$: $q_1=2.0$ nC.\nField at the surface of the small sphere: $E=kq_1/R_1^2=8.99\\times10^{9}(2\\times10^{-9})/(4\\times10^{-4})=4.5\\times10^{4}\\ \\mathrm{V/m}$.",
+  "hints": [
+   "Equal potential, not equal charge."
+  ],
+  "check": "8.99e9*2e-9/0.02**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 4
+ },
+ {
+  "id": "t4-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.images",
+   "t2.work-energy",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A point charge $q=2.0\\ \\mathrm{nC}$ is $0.10\\ \\mathrm m$ above a large grounded conducting plane. Find the work in J an external agent must do to move it slowly to infinity. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8.99\\times10^{-8}$",
+    "$1.80\\times10^{-7}$",
+    "$8.99\\times10^{-7}$",
+    "$3.60\\times10^{-7}$",
+    "$4.50\\times10^{-8}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the full two-charge energy at separation $2d$",
+    "gave the force instead of the work",
+    "used separation $d$ instead of $2d$",
+    "extra factor of 2"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Image charge $-q$ at distance $2d$",
+    "weight": 2
+   },
+   {
+    "text": "Force $kq^2/(2d')^2$ varies with height $d'$: integrate",
+    "weight": 1
+   },
+   {
+    "text": "Do not use the full pair energy: field exists on one side only",
+    "weight": 1
+   }
+  ],
+  "solution": "Replace the plane by an image $-q$ a distance $d'$ below it (images).\nAt height $d'$ the force is $kq^2/(2d')^2$ (attractive).\nWork: $W=\\int_d^\\infty kq^2/(4d'^2)\\,dd'=kq^2/(4d)$ (work-energy).\n$=8.99\\times10^{9}(4\\times10^{-18})/0.40=9.0\\times10^{-8}\\ \\mathrm J$.",
+  "hints": [
+   "Integrate the image force; only half the pair energy."
+  ],
+  "check": "8.99e9*(2e-9)**2/(4*0.1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.images",
+   "t4.conductors",
+   "t4.coulomb"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A point charge $5.0\\ \\mathrm{nC}$ is $5.0\\ \\mathrm{cm}$ above a large grounded conducting plane. Find the magnitude of the induced surface charge density, in $\\mathrm{C/m^2}$, at the point of the plane $5.0\\ \\mathrm{cm}$ from the foot of the perpendicular.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.1253953951963823e-07,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Image charge $-q$ at depth $h$ replaces the plane",
+    "weight": 2
+   },
+   {
+    "text": "Normal field at the plane from charge plus image: $E_n=2kqh/(h^2+\\rho^2)^{3/2}$",
+    "weight": 2
+   },
+   {
+    "text": "Conductor surface: $\\sigma=\\varepsilon_0E_n$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "solution": "Image $-q$ at depth $h$ gives the right field above the plane (images).\nAt in-plane distance $\\rho$ the tangential parts cancel and the normal parts add: $E_n=2kqh/(h^2+\\rho^2)^{3/2}$ (coulomb).\nBoundary condition for a conductor: $\\sigma=\\varepsilon_0E_n=qh/[2\\pi(h^2+\\rho^2)^{3/2}]$ (conductors).\nWith $h=\\rho=0.05$: $\\sigma=1.13\\times10^{-7}\\ \\mathrm{C/m^2}$.",
+  "hints": [
+   "σ equals ε0 times the normal field at the surface."
+  ],
+  "check": "5e-9*0.05/(2*math.pi*(0.05**2+0.05**2)**1.5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 4
+ },
+ {
+  "id": "t4-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.laplace",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two concentric conducting spheres have radii $5.0\\ \\mathrm{cm}$ (held at $100\\ \\mathrm V$) and $10\\ \\mathrm{cm}$ (grounded). There is no charge between them. Find the potential in V at $7.5\\ \\mathrm{cm}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$33.3$",
+    "$50$",
+    "$25.9$",
+    "$41.5$",
+    "$66.7$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "linear interpolation (plane-capacitor form)",
+    "used $1/r^2$ (the field's form) for the potential",
+    "used the cylindrical solution $\\ln r$",
+    "swapped the boundary values"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Spherical Laplace solution: $V=A/r+B$",
+    "weight": 2
+   },
+   {
+    "text": "Fit both boundary values",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate at $7.5$ cm",
+    "weight": 1
+   }
+  ],
+  "solution": "Laplace with spherical symmetry (laplace): $V=A/r+B$.\nBoundary values: $V(0.05)=100$, $V(0.10)=0$.\n$V(r)=100\\,\\dfrac{1/r-1/0.10}{1/0.05-1/0.10}$ (potential).\nAt $r=0.075$: $100\\cdot(13.33-10)/10=33.3\\ \\mathrm V$.",
+  "hints": [
+   "Not linear in r: solve ∇²V=0 for r-only dependence."
+  ],
+  "check": "round(100*(1/0.075-1/0.1)/(1/0.05-1/0.1), 1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.laplace",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A hollow cube has no charge inside. Its six faces are held at $120,\\ 60,\\ 0,\\ 0,\\ 30$ and $30\\ \\mathrm V$ (each face uniform; treat the gaps at the edges as negligible). Find the potential in V at the cube's centre.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$40$",
+    "$60$",
+    "$48$",
+    "$30$",
+    "$80$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "averaged only the nonzero faces",
+    "divided by five",
+    "used a mean-value factor for eight faces",
+    "divided by three (opposite-pair guess)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Laplace solutions superpose",
+    "weight": 2
+   },
+   {
+    "text": "Symmetry: each face acting alone gives the same centre value",
+    "weight": 1
+   },
+   {
+    "text": "Sum is $V_{face}/6$ per face: average of six faces",
+    "weight": 1
+   }
+  ],
+  "solution": "Inside the cube $\\nabla^2V=0$ and the boundary data fix $V$ uniquely (laplace).\nSplit into six problems with one face at its value, the rest at 0 (superposition).\nBy cube symmetry each contributes the same fraction, and a uniform $V_0$ on all six gives $V_0$ at the centre, so the fraction is $1/6$.\n$V=(120+60+0+0+30+30)/6=40\\ \\mathrm V$.",
+  "hints": [
+   "Equal-weight averaging needs how many faces?"
+  ],
+  "check": "round((120+60+0+0+30+30)/6, 0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.capacitors",
+   "t4.dc-circuits"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $12\\ \\mathrm V$ battery is connected across a $6.0\\ \\mu\\mathrm F$ capacitor in series with a parallel pair of $3.0\\ \\mu\\mathrm F$ and $6.0\\ \\mu\\mathrm F$ capacitors, all initially uncharged. Find the energy stored in the $3.0\\ \\mu\\mathrm F$ capacitor, in J.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.456e-05,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Parallel pair equivalent $9.0\\ \\mu$F; series pair shares equal charge",
+    "weight": 2
+   },
+   {
+    "text": "Voltage across the pair: $12\\cdot6/(6+9)=4.8$ V",
+    "weight": 1
+   },
+   {
+    "text": "$U=\\tfrac12CV^2$ for the $3.0\\ \\mu$F capacitor",
+    "weight": 1
+   }
+  ],
+  "solution": "Parallel pair: $C_p=3+6=9\\ \\mu\\mathrm F$ (capacitors).\nSeries elements carry equal charge, so voltage splits inversely to $C$ (series reduction): $V_p=12\\cdot6/(6+9)=4.8\\ \\mathrm V$.\nThe $3.0\\ \\mu$F capacitor sees the full $V_p$.\n$U=\\tfrac12(3\\times10^{-6})(4.8)^2=3.46\\times10^{-5}\\ \\mathrm J$.",
+  "hints": [
+   "Equal charge on series elements; voltage splits inversely to C."
+  ],
+  "check": "0.5*3e-6*(12*6/(6+9))**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.capacitors",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $2.0\\ \\mathrm{nF}$ parallel-plate capacitor is charged to $100\\ \\mathrm V$ and then disconnected. Its plates are slowly pulled apart from separation $d$ to $3d$. Find the work in J done by the external agent.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2.00\\times10^{-5}$",
+    "$6.67\\times10^{-6}$",
+    "$3.00\\times10^{-5}$",
+    "$8.00\\times10^{-5}$",
+    "$1.00\\times10^{-5}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "held $V$ fixed: $U\\propto1/d$, magnitude of the change",
+    "gave the final energy, not the change",
+    "used $U\\propto d^2$",
+    "gave the initial energy"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Isolated: charge fixed, so $U=Q^2/2C$",
+    "weight": 2
+   },
+   {
+    "text": "$C\\propto1/d$, so $U\\propto d$",
+    "weight": 1
+   },
+   {
+    "text": "$W=\\Delta U=2U_0$",
+    "weight": 1
+   }
+  ],
+  "solution": "Disconnected means $Q$ is constant (capacitors).\n$U=Q^2/2C$ and $C\\propto1/d$, so $U\\propto d$.\n$U_0=\\tfrac12CV^2=1.0\\times10^{-5}\\ \\mathrm J$; at $3d$, $U=3U_0$.\nWork-energy: $W=\\Delta U=2U_0=2.0\\times10^{-5}\\ \\mathrm J$.",
+  "hints": [
+   "Which quantity stays fixed after disconnecting?"
+  ],
+  "check": "2*0.5*2e-9*100**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.dielectrics",
+   "t4.capacitors",
+   "t2.work-energy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $5.0\\ \\mathrm{nF}$ parallel-plate capacitor charged to $200\\ \\mathrm V$ is isolated. A slab with $\\kappa=4$ is then slid in until it fills the gap. Find the energy in J given up by the stored field as the slab enters.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7.50\\times10^{-5}$",
+    "$1.00\\times10^{-4}$",
+    "$2.50\\times10^{-5}$",
+    "$3.00\\times10^{-4}$",
+    "$4.00\\times10^{-4}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave the initial energy",
+    "gave the final energy",
+    "held $V$ fixed: energy gain $(\\kappa-1)U_0$",
+    "held $V$ fixed: final energy $\\kappa U_0$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Isolated: $Q$ fixed, $C\\to\\kappa C$",
+    "weight": 2
+   },
+   {
+    "text": "$U=Q^2/2C$ falls by factor $\\kappa$",
+    "weight": 1
+   },
+   {
+    "text": "Released energy $U_0(1-1/\\kappa)$",
+    "weight": 1
+   }
+  ],
+  "solution": "No battery, so $Q$ stays fixed (capacitors).\nFilling with dielectric: $C\\to4C$ and $U=Q^2/2C\\to U_0/4$ (dielectrics).\n$U_0=\\tfrac12(5\\times10^{-9})(200)^2=1.0\\times10^{-4}\\ \\mathrm J$.\nEnergy released $=U_0(1-\\tfrac14)=7.5\\times10^{-5}\\ \\mathrm J$ (work-energy: pulled in by the field).",
+  "hints": [
+   "Fixed Q: does U go up or down?"
+  ],
+  "check": "0.5*5e-9*200**2*(1-1/4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.dielectrics",
+   "t4.capacitors"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An air capacitor has $C_0=3.0\\ \\mathrm{pF}$. A slab with $\\kappa=5$, full plate area and thickness equal to half the gap, is placed flat against one plate. Find the new capacitance in pF.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$9$",
+    "$7.5$",
+    "$15$",
+    "$3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "treated the layers as side by side (parallel)",
+    "scaled $C_0$ by $\\kappa/2$",
+    "slab filling the whole gap",
+    "ignored the slab"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Slab and air gap are in series",
+    "weight": 2
+   },
+   {
+    "text": "$C_{slab}=2\\kappa C_0$, $C_{air}=2C_0$",
+    "weight": 1
+   },
+   {
+    "text": "Series combination",
+    "weight": 1
+   }
+  ],
+  "solution": "The layers are stacked across the field, so they are in series (dielectrics).\nSlab: $C_1=\\kappa\\varepsilon_0A/(d/2)=2\\kappa C_0$; air: $C_2=2C_0$.\n$C=\\dfrac{C_1C_2}{C_1+C_2}=C_0\\dfrac{2\\kappa}{\\kappa+1}$ (capacitors, series).\n$=3.0\\cdot10/6=5.0\\ \\mathrm{pF}$.",
+  "hints": [
+   "Layers stacked along the field add as series capacitors."
+  ],
+  "check": "round(3.0*2*5/(5+1), 0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.dc-circuits",
+   "t4.potential"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An ideal $6.0\\ \\mathrm V$ battery is in series with a $2.0\\ \\Omega$ resistor and then a parallel pair of $3.0\\ \\Omega$ and $6.0\\ \\Omega$. Find the power in W dissipated in the $6.0\\ \\Omega$ resistor.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.5$",
+    "$3$",
+    "$13.5$",
+    "$3.38$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "power in the $3\\ \\Omega$ resistor",
+    "used the total current in the $6\\ \\Omega$",
+    "split the current equally between the branches",
+    "used the battery voltage across it"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Reduce the parallel pair to $2.0\\ \\Omega$, total $4.0\\ \\Omega$",
+    "weight": 2
+   },
+   {
+    "text": "Voltage across the pair: $I\\cdot2=3.0$ V",
+    "weight": 1
+   },
+   {
+    "text": "$P=V^2/R$ for the $6\\ \\Omega$",
+    "weight": 1
+   }
+  ],
+  "solution": "Parallel pair: $3\\cdot6/9=2.0\\ \\Omega$; total $4.0\\ \\Omega$ (dc-circuits).\n$I=6/4=1.5\\ \\mathrm A$; pair voltage $=1.5\\cdot2=3.0\\ \\mathrm V$ (potential drop).\nThe $6\\ \\Omega$ resistor sees the full pair voltage: $P=V^2/R=9/6=1.5\\ \\mathrm W$.",
+  "hints": [
+   "Find the voltage across the pair first."
+  ],
+  "check": "round((6/4*2)**2/6, 1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.dc-circuits",
+   "t1.scaling"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An infinite ladder repeats one stage: a $2.0\\ \\Omega$ resistor in series along the rail, then a $2.0\\ \\Omega$ resistor across the rails. A $10\\ \\mathrm V$ battery drives the input. Find the battery current in A.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.090169943749474,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Self-similarity: adding a stage leaves $R_{eq}$ unchanged",
+    "weight": 2
+   },
+   {
+    "text": "Equation $x=2+2x/(2+x)$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $x$ and $I=10/x$",
+    "weight": 1
+   }
+  ],
+  "solution": "Removing one stage leaves an identical infinite ladder, so $R_{eq}=x$ is unchanged (scaling).\nOne stage: series $2$, then parallel of $2$ with $x$: $x=2+\\dfrac{2x}{2+x}$ (dc-circuits).\n$x^2-2x-4=0$, so $x=1+\\sqrt5=3.24\\ \\Omega$.\n$I=10/3.24=3.09\\ \\mathrm A$.",
+  "hints": [
+   "Add one stage in front and demand the same resistance."
+  ],
+  "check": "10/(1+math.sqrt(5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.kirchhoff",
+   "t4.dc-circuits"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Three branches connect a top wire to a bottom wire. Left: a $12\\ \\mathrm V$ battery (positive terminal up) in series with $4.0\\ \\Omega$. Middle: $3.0\\ \\Omega$. Right: a $6.0\\ \\mathrm V$ battery (positive terminal up) in series with $2.0\\ \\Omega$. Find the current through the middle resistor, in A.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.8461538461538465,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Junction rule: $I_{mid}=I_1+I_2$",
+    "weight": 2
+   },
+   {
+    "text": "Loop rule on left and middle",
+    "weight": 2
+   },
+   {
+    "text": "Loop rule on right and middle",
+    "weight": 1
+   },
+   {
+    "text": "Solve the linear system",
+    "weight": 1
+   }
+  ],
+  "solution": "Let $V$ be the top-minus-bottom voltage (kirchhoff junction rule).\nLeft current $(12-V)/4$, right $(6-V)/2$, middle $V/3$.\nJunction: $(12-V)/4+(6-V)/2=V/3$, so $72=13V$ and $V=72/13\\ \\mathrm V$ (loop rules).\n$I_{mid}=V/3=24/13=1.85\\ \\mathrm A$.",
+  "hints": [
+   "Use the common voltage between top and bottom as the unknown."
+  ],
+  "check": "(12/4+6/2)/(1/4+1/2+1/3)/3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 4
+ },
+ {
+  "id": "t4-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.kirchhoff",
+   "t4.dc-circuits"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Three branches connect a top wire to a bottom wire. Left: a $12\\ \\mathrm V$ battery (positive terminal up) in series with $4.0\\ \\Omega$. Middle: $3.0\\ \\Omega$. Right: a $9.0\\ \\mathrm V$ battery with its positive terminal down, in series with $2.0\\ \\Omega$. Find the magnitude of the current through the middle resistor, in A.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4615384615384616,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Junction rule with signed branch currents",
+    "weight": 2
+   },
+   {
+    "text": "Right-branch EMF enters with a minus sign",
+    "weight": 2
+   },
+   {
+    "text": "Solve for the common node voltage",
+    "weight": 1
+   },
+   {
+    "text": "Report the magnitude",
+    "weight": 1
+   }
+  ],
+  "solution": "Let $V$ be top-minus-bottom (kirchhoff). Left: $(12-V)/4$. Right: $(-9-V)/2$ because its EMF opposes. Middle: $V/3$.\nJunction rule: $(12-V)/4+(-9-V)/2=V/3$, so $-18=13V$ (dc-circuits).\n$V=-18/13\\ \\mathrm V$, so the middle current is $6/13=0.46\\ \\mathrm A$, flowing upward.",
+  "hints": [
+   "Flip the sign of the right EMF; the node voltage may come out negative."
+  ],
+  "check": "abs((12/4-9/2)/(1/4+1/2+1/3)/3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 4
+ },
+ {
+  "id": "t4-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.rc-transient",
+   "t4.capacitors",
+   "t4.em-energy"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A $5.0\\ \\mu\\mathrm F$ capacitor, initially uncharged, charges through a $200\\ \\mathrm{k\\Omega}$ resistor from a battery. Find the time in s at which the stored energy reaches half of its final value.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.23$",
+    "$0.693$",
+    "$1$",
+    "$2.3$",
+    "$0.347$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used half the voltage",
+    "gave one time constant",
+    "time to 90%",
+    "halved $\\ln2$ for the energy"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\tau=RC=1.0$ s and $V(t)=V_0(1-e^{-t/\\tau})$",
+    "weight": 2
+   },
+   {
+    "text": "Energy $\\propto V^2$: need $V=V_0/\\sqrt2$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $t$",
+    "weight": 1
+   }
+  ],
+  "solution": "$\\tau=RC=1.0\\ \\mathrm s$ (rc-transient).\n$U=\\tfrac12CV^2$ is proportional to $V^2$ (em-energy), so half energy means $V=V_0/\\sqrt2$.\n$1-e^{-t/\\tau}=0.707$, so $t=-\\tau\\ln(0.293)$.\n$t=1.23\\ \\mathrm s$.",
+  "hints": [
+   "Energy goes as V squared, so V is not half."
+  ],
+  "check": "round(-1.0*math.log(1-1/math.sqrt(2)), 2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.rc-transient",
+   "t4.dc-circuits",
+   "t4.capacitors"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A $10\\ \\mu\\mathrm F$ capacitor charged to $100\\ \\mathrm V$ discharges through a $2.0\\ \\mathrm{k\\Omega}$ resistor in series with a parallel pair of $6.0\\ \\mathrm{k\\Omega}$ and $3.0\\ \\mathrm{k\\Omega}$. Find the total heat in J produced in the $3.0\\ \\mathrm{k\\Omega}$ resistor.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.016666666666666666,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "All stored energy $\\tfrac12CV^2=0.050$ J ends as heat",
+    "weight": 2
+   },
+   {
+    "text": "Pair resistance $2$ k$\\Omega$: half of the series power",
+    "weight": 2
+   },
+   {
+    "text": "Within the pair, power $\\propto1/R$: $3$ k$\\Omega$ gets $2/3$",
+    "weight": 1
+   },
+   {
+    "text": "Combine",
+    "weight": 1
+   }
+  ],
+  "solution": "All the stored energy is dissipated: $\\tfrac12CV^2=0.050\\ \\mathrm J$ (rc-transient; the decay rate drops out).\nSeries current is common, power $\\propto R$ (dc-circuits): the pair ($2$ k$\\Omega$ equivalent) gets $2/4=1/2$.\nIn the pair the voltage is common, power $\\propto1/R$: the $3$ k$\\Omega$ share is $2/3$.\nHeat $=0.050\\cdot\\tfrac12\\cdot\\tfrac23=1.67\\times10^{-2}\\ \\mathrm J$.",
+  "hints": [
+   "Time constant is irrelevant to the total heat."
+  ],
+  "check": "0.5*10e-6*100**2*(2e3/4e3)*(1/3e3)/(1/3e3+1/6e3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 4
+ },
+ {
+  "id": "t4-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.drude",
+   "t4.dc-circuits",
+   "t1.units"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A copper wire of radius $1.0\\ \\mathrm{mm}$ carries $5.0\\ \\mathrm A$. The free-electron density is $8.5\\times10^{28}\\ \\mathrm{m^{-3}}$ and $q=1.60\\times10^{-19}\\ \\mathrm C$. How many seconds does an electron take to drift $1.0\\ \\mathrm m$ along the wire?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8.55\\times10^{3}$",
+    "$2.14\\times10^{3}$",
+    "$3.42\\times10^{4}$",
+    "$2.72\\times10^{3}$",
+    "$855$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used half the radius",
+    "used the diameter as the radius",
+    "dropped $\\pi$ in the area",
+    "power-of-ten slip in the area"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Drift speed from $I=nqAv_d$",
+    "weight": 2
+   },
+   {
+    "text": "Area $A=\\pi r^2$ with $r$ in metres",
+    "weight": 1
+   },
+   {
+    "text": "Time $=1.0\\ \\mathrm m/v_d$",
+    "weight": 1
+   }
+  ],
+  "solution": "$I=nqAv_d$ (drude), so $v_d=I/(nq\\pi r^2)$.\n$A=\\pi(10^{-3})^2=3.14\\times10^{-6}\\ \\mathrm{m^2}$ (units in metres).\n$v_d=5/(8.5\\times10^{28}\\cdot1.6\\times10^{-19}\\cdot3.14\\times10^{-6})=1.17\\times10^{-4}\\ \\mathrm{m/s}$.\n$t=1/v_d=8.5\\times10^{3}\\ \\mathrm s$, about $2.4$ hours.",
+  "hints": [
+   "Drift is slow: use I = n q A v."
+  ],
+  "check": "1/(5/(8.5e28*1.60e-19*math.pi*1e-3**2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.drude",
+   "t1.dimanal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Copper has resistivity $1.70\\times10^{-8}\\ \\Omega\\,\\mathrm m$ and free-electron density $8.5\\times10^{28}\\ \\mathrm{m^{-3}}$. Use the Drude model with $q=1.60\\times10^{-19}\\ \\mathrm C$ and $m_e=9.11\\times10^{-31}\\ \\mathrm{kg}$ to find the mean time between collisions, in s.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.4626946366782007e-14,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Drude conductivity $\\sigma=nq^2\\tau/m_e$",
+    "weight": 2
+   },
+   {
+    "text": "Invert: $\\tau=m_e/(nq^2\\rho)$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value in seconds",
+    "weight": 1
+   }
+  ],
+  "solution": "Drude: $\\sigma=nq^2\\tau/m_e$ (drude), with $\\sigma=1/\\rho$.\nSolve $\\tau=m_e/(nq^2\\rho)$ (dimensions check: kg/(m$^{-3}$C$^2\\,\\Omega$m) gives s).\n$\\tau=\\dfrac{9.11\\times10^{-31}}{(8.5\\times10^{28})(2.56\\times10^{-38})(1.7\\times10^{-8})}=2.5\\times10^{-14}\\ \\mathrm s$.",
+  "hints": [
+   "Resistivity is the inverse of the Drude conductivity."
+  ],
+  "check": "9.11e-31/(8.5e28*1.60e-19**2*1.7e-8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.em-energy",
+   "t4.gauss"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A uniformly charged insulating sphere of radius $0.10\\ \\mathrm m$ holds $2.0\\ \\mu\\mathrm C$ of charge. Find the total electrostatic field energy in J, inside and outside. $k=8.99\\times10^{9}\\ \\mathrm{N\\,m^2/C^2}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.216$",
+    "$0.18$",
+    "$0.36$",
+    "$0.719$",
+    "$0.036$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "outside energy only (conducting-shell result)",
+    "used $kQ^2/R$",
+    "used $2kQ^2/R$",
+    "inside energy only"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gauss: $E_{in}=kQr/R^3$, $E_{out}=kQ/r^2$",
+    "weight": 2
+   },
+   {
+    "text": "Energy density $\\tfrac12\\varepsilon_0E^2$ integrated: outside $kQ^2/2R$, inside $kQ^2/10R$",
+    "weight": 1
+   },
+   {
+    "text": "Sum $=\\tfrac35kQ^2/R$",
+    "weight": 1
+   }
+  ],
+  "solution": "Gauss gives the field everywhere (gauss).\nOutside, energy density $\\tfrac12\\varepsilon_0E^2$ integrates to $kQ^2/2R$ (em-energy).\nInside, $E\\propto r$ integrates to $kQ^2/10R$.\nTotal $=\\tfrac35kQ^2/R=0.6(8.99\\times10^{9})(4\\times10^{-12})/0.10=0.216\\ \\mathrm J$.",
+  "hints": [
+   "The field inside also stores energy."
+  ],
+  "check": "round(0.6*8.99e9*(2e-6)**2/0.1, 3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ },
+ {
+  "id": "t4-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.em-energy",
+   "t4.capacitors"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Parallel plates of area $0.040\\ \\mathrm m^2$ in air have uniform field $1.0\\times10^{5}\\ \\mathrm{V/m}$ between them (negligible outside). Find the attractive force in N between the plates. $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.77\\times10^{-3}$",
+    "$3.54\\times10^{-3}$",
+    "$8.85\\times10^{-4}$",
+    "$7.08\\times10^{-3}$",
+    "$1.77\\times10^{-4}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the full field $E$ on the plate charge",
+    "extra factor $1/2$",
+    "counted both plates' fields",
+    "area slip, a factor of ten"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Energy density $\\tfrac12\\varepsilon_0E^2$ and energy per volume",
+    "weight": 2
+   },
+   {
+    "text": "Force from $dU/dx$ at fixed charge: $F=u\\,A$",
+    "weight": 1
+   },
+   {
+    "text": "Do not use $\\sigma A E$: the plate's own field is $E/2$",
+    "weight": 1
+   }
+  ],
+  "solution": "Field energy density is $u=\\tfrac12\\varepsilon_0E^2$ (em-energy).\nOpening the gap by $dx$ at fixed charge adds energy $uA\\,dx$, so $F=uA$ (capacitors).\n$F=\\tfrac12(8.85\\times10^{-12})(10^{10})(0.040)=1.77\\times10^{-3}\\ \\mathrm N$.\nEquivalent: one plate's charge $\\sigma A$ in the other plate's field $E/2$.",
+  "hints": [
+   "One plate feels only the other plate's field."
+  ],
+  "check": "0.5*8.85e-12*1e10*0.04",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  },
+  "pass": 3
+ }
+]

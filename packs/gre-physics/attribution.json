@@ -1,0 +1,5 @@
+{
+  "items": "original, CC BY-SA 4.0",
+  "generated": "2026-10-13",
+  "model": "recall/micro + teach cards: claude-haiku-5-5; full items: claude-sonnet-5-5; blind-solve review per tier: claude-sonnet-5-5"
+}

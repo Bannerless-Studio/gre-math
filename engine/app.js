@@ -172,11 +172,11 @@
     }
     if (card.type === 'teach') {
       return head + '<article class="card"><p class="kicker">New technique</p><h2>' + esc(card.name) + '</h2>' +
-        '<div class="prose">' + techHtml(card) + '</div>' +
+        T.figure(card.figure) + '<div class="prose">' + techHtml(card) + '</div>' +
         '<button type="button" class="primary" data-act="continue">Start problems</button></article>';
     }
     if (card.type === 'full') return head + viewFull(card);
-    var body = '<div class="card"><div class="prose">' + field(card.item, 'prompt') + '</div>';
+    var body = '<div class="card">' + T.figure(card.item && card.item.figure) + '<div class="prose">' + field(card.item, 'prompt') + '</div>';
     if (sess.kind === 'place') {
       // Placement gives no feedback: the probe is answered and the next one opens.
       body += cardBody(card) + '<button type="button" class="ghost dk" data-act="dk">I don\'t know</button>';
@@ -216,7 +216,7 @@
     var item = card.item, c = card.commit, g = card.graded, budget = card.budgetSec;
     var numeric = card.kind !== 'mcq';
     var meta = '<p class="kicker">Timed problem · budget ' + mmss(budget) + '</p>';
-    var prompt = '<div class="prose">' + field(item, 'prompt') + '</div>';
+    var prompt = T.figure(item.figure) + '<div class="prose">' + field(item, 'prompt') + '</div>';
     if (!c) {
       var live = clockRead();
       var clock = '<p class="clock" id="clock">' + (live ? clockLabel(live, budget) : '') + '</p>';

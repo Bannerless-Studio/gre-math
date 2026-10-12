@@ -1,0 +1,1468 @@
+[
+  {
+    "id": "t5-f001",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz",
+      "t4.potential",
+      "t2.circular"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A proton ($q=1.60\\times10^{-19}\\ \\mathrm C$, $m_p=1.67\\times10^{-27}\\ \\mathrm{kg}$) starts from rest and is accelerated through $2.00\\ \\mathrm{kV}$. It then enters a uniform field $B=0.100\\ \\mathrm T$ perpendicular to its velocity. Find the radius of its circular path in m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.06461423991660042,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Speed from $qV=\\tfrac12mv^2$",
+        "weight": 2
+      },
+      {
+        "text": "Magnetic force supplies centripetal force: $r=mv/(qB)$",
+        "weight": 1
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Energy gain: $qV=\\tfrac12 mv^2$ gives $v=\\sqrt{2qV/m}\\approx6.2\\times10^5\\ \\mathrm{m/s}$ (potential).\nCircular motion: $qvB=mv^2/r$ so $r=mv/(qB)$ (lorentz, circular).\nCombined: $r=\\dfrac1B\\sqrt{\\dfrac{2mV}{q}}=0.0646\\ \\mathrm m$.",
+    "hints": [
+      "Get the speed from energy conservation first."
+    ],
+    "check": "math.sqrt(2*1.67e-27*2000/1.60e-19)/0.100",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f002",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.lorentz",
+      "t2.circular"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "In a region of crossed uniform fields $E=4.0\\times10^{4}\\ \\mathrm{V/m}$ and $B=0.20\\ \\mathrm T$ (perpendicular to each other), a singly charged ion of mass $2.0\\times10^{-26}\\ \\mathrm{kg}$ ($q=1.60\\times10^{-19}\\ \\mathrm C$) passes undeflected. The electric field is then switched off. Find the radius of the ion's circular path in the remaining magnetic field, in m.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$0.125$",
+        "$0.0625$",
+        "$0.25$",
+        "$6.3\\times10^{-3}$",
+        "$5.0\\times10^{-3}$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "assumed charge $2q$ (an alpha-like ion)",
+        "used the diameter, not the radius",
+        "used $E$ instead of $B$ in $r=mv/(qB)$",
+        "took the speed as $v=EB$ instead of $E/B$"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Undeflected: $qE=qvB$ gives $v=E/B$",
+        "weight": 2
+      },
+      {
+        "text": "Circular motion with $B$ alone: $r=mv/(qB)$",
+        "weight": 1
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "No deflection means the forces cancel: $qE=qvB$, so $v=E/B=2.0\\times10^{5}\\ \\mathrm{m/s}$ (lorentz).\nWith $E$ off only $qvB$ remains and it is centripetal (circular).\n$r=\\dfrac{mv}{qB}=\\dfrac{mE}{qB^2}=\\dfrac{(2.0\\times10^{-26})(2.0\\times10^{5})}{(1.60\\times10^{-19})(0.20)}=0.125\\ \\mathrm m$.",
+    "hints": [
+      "Find the speed from the no-deflection condition."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f003",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart",
+      "t1.vec-prod"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A wire carrying $I=5.0\\ \\mathrm A$ comes in along a straight line that lies on a radius, runs around a three-quarter circular arc of radius $R=0.20\\ \\mathrm m$ centred at point $P$, then leaves along another straight line that also lies on a radius extended outward from the arc end. Using $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$, find the magnitude of $\\vec B$ at $P$ in $\\mu\\mathrm T$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 11.780972450961723,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Radial leads give $d\\vec l\\times\\hat r=0$",
+        "weight": 1
+      },
+      {
+        "text": "Arc: $B=\\tfrac{\\theta}{2\\pi}\\cdot\\dfrac{\\mu_0I}{2R}$ with $\\theta=3\\pi/2$",
+        "weight": 2
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "On each lead $d\\vec l\\parallel\\hat r$, so $d\\vec l\\times\\hat r=0$ and the leads contribute nothing (vec-prod).\nOn the arc every element is perpendicular to the radius, so contributions add: $B=\\dfrac{\\mu_0 I}{4\\pi R^2}\\,(R\\theta)$ (biot-savart).\n$B=\\dfrac{3}{4}\\dfrac{\\mu_0I}{2R}=\\dfrac{3\\mu_0 I}{8R}=1.18\\times10^{-5}\\ \\mathrm T=11.8\\ \\mu\\mathrm T$.",
+    "hints": [
+      "Which parts of the wire give zero Biot-Savart contribution at P?"
+    ],
+    "check": "0.75*4*math.pi*1e-7*5.0/(2*0.20)*1e6",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f004",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.biot-savart",
+      "t1.vec-prod",
+      "t1.small-angle"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A single square loop of side $a=0.30\\ \\mathrm m$ carries $I=3.0\\ \\mathrm A$. Using $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$ and the field of a finite straight wire, find $|\\vec B|$ at the centre of the square in $\\mu\\mathrm T$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$11.3$",
+        "$2.83$",
+        "$16.0$",
+        "$12.6$",
+        "$22.6$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "counted one side only",
+        "used the infinite-wire field $\\mu_0I/2\\pi d$ for all four sides",
+        "treated the loop as a circle of radius $a/2$",
+        "counted both ends of each side twice"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Finite-wire field: $B=\\dfrac{\\mu_0I}{4\\pi d}(\\sin\\theta_1+\\sin\\theta_2)$",
+        "weight": 2
+      },
+      {
+        "text": "Geometry: $d=a/2$, $\\sin\\theta=1/\\sqrt2$, four sides add",
+        "weight": 1
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "One side, perpendicular distance $d=a/2$, ends at $\\pm a/2$ along the wire: $\\sin\\theta=\\dfrac{a/2}{\\sqrt{2}\\,a/2}=\\tfrac1{\\sqrt2}$ (biot-savart).\n$B_1=\\dfrac{\\mu_0I}{4\\pi d}\\cdot2\\sin\\theta=\\dfrac{\\sqrt2\\,\\mu_0I}{2\\pi a}$.\nAll four sides give the same direction at the centre, so add (vec-prod): $B=\\dfrac{2\\sqrt2\\,\\mu_0I}{\\pi a}$.\n$B=2\\sqrt2\\,(4\\times10^{-7})(3.0)/0.30=1.13\\times10^{-5}\\ \\mathrm T=11.3\\ \\mu\\mathrm T$.",
+    "hints": [
+      "Use the finite-wire result with the half-length angle, then multiply by four."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f005",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.ampere",
+      "t4.gauss"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A long coaxial cable has a solid inner conductor of radius $2.0\\ \\mathrm{mm}$ carrying $6.0\\ \\mathrm A$ along $+z$, spread uniformly over its cross-section. A hollow outer conductor, inner radius $5.0\\ \\mathrm{mm}$ and outer radius $8.0\\ \\mathrm{mm}$, carries $6.0\\ \\mathrm A$ along $-z$ spread uniformly over its cross-section. Using $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$, find $|\\vec B|$ at a distance $6.5\\ \\mathrm{mm}$ from the axis, in $\\mu\\mathrm T$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 102.95857988165682,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Amperian circle by symmetry",
+        "weight": 1
+      },
+      {
+        "text": "Enclosed current includes the part of the return current inside $r$",
+        "weight": 2
+      },
+      {
+        "text": "$B=\\mu_0I_{enc}/2\\pi r$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Cylindrical symmetry: take a circle of radius $r=6.5\\ \\mathrm{mm}$ about the axis (gauss, ampere).\nReturn current enclosed is $6.0\\,\\dfrac{r^2-b^2}{c^2-b^2}=6.0\\times\\dfrac{17.25}{39}=2.65\\ \\mathrm A$ (area ratio).\n$I_{enc}=6.0-2.65=3.35\\ \\mathrm A$.\n$B=\\dfrac{\\mu_0I_{enc}}{2\\pi r}=\\dfrac{(2\\times10^{-7})(3.35)}{6.5\\times10^{-3}}=1.03\\times10^{-4}\\ \\mathrm T=103\\ \\mu\\mathrm T$.\nTrap: using the full $-6.0\\ \\mathrm A$ gives zero.",
+    "hints": [
+      "Part of the outer conductor lies inside your Amperian circle."
+    ],
+    "check": "4*math.pi*1e-7*6.0*(1-(6.5**2-5.0**2)/(8.0**2-5.0**2))/(2*math.pi*6.5e-3)*1e6",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f006",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.ampere",
+      "t4.gauss",
+      "t1.scaling"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A long straight cylinder of radius $R$ carries current along its axis with density $J=J_0\\,r/R$ for $r<R$ (with $r$ the distance from the axis) and zero current outside. Find the ratio $B(R/2)\\,/\\,B(2R)$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\tfrac12$",
+        "$1$",
+        "$\\tfrac14$",
+        "$\\tfrac18$",
+        "$2$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "used uniform current density, for which both fields equal $\\mu_0J_0R/4$",
+        "compared with $B(R)$: forgot the $1/r$ fall-off outside",
+        "took $B\\propto I_{enc}\\propto r^3$ and forgot the $1/2\\pi r$ factor",
+        "inverted the ratio"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Enclosed current $I(r)=\\int J\\,2\\pi r\\,dr$",
+        "weight": 2
+      },
+      {
+        "text": "$B=\\mu_0I_{enc}/2\\pi r$ inside and outside",
+        "weight": 1
+      },
+      {
+        "text": "Ratio",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Ampere with a circle of radius $r$ (ampere): $I_{enc}=\\int_0^r\\dfrac{J_0r'}{R}2\\pi r'dr'=\\dfrac{2\\pi J_0r^3}{3R}$.\nInside: $B=\\dfrac{\\mu_0J_0r^2}{3R}$, so $B(R/2)=\\dfrac{\\mu_0J_0R}{12}$ (gauss symmetry).\nOutside: $I_{enc}=2\\pi J_0R^2/3$ and $B(2R)=\\dfrac{\\mu_0J_0R}{6}$.\nRatio $=\\tfrac{1/12}{1/6}=\\tfrac12$.",
+    "hints": [
+      "Integrate the density to get the current enclosed at each radius."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f007",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials",
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A thin toroidal core of relative permeability $\\mu_r=800$ (linear) is wound with $500$ turns carrying $0.400\\ \\mathrm A$. Its mean circumference is $0.500\\ \\mathrm m$, but a radial saw cut leaves an air gap of $1.00\\ \\mathrm{mm}$, so the core material occupies $0.499\\ \\mathrm m$ of that circumference. Neglect fringing and flux leakage, and use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$. Find $B$ in the core in T.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.15478208608910454,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "$B$ is continuous across the gap (same flux, same area)",
+        "weight": 2
+      },
+      {
+        "text": "Ampere: $NI=H_{core}l+H_{gap}g$ with $H=B/\\mu$",
+        "weight": 2
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3.5,
+    "solution": "Flux through core and gap is the same and the area is the same, so $B$ is the same in both (mag-materials).\nAmpere around the mean path: $NI=\\dfrac{B}{\\mu_0\\mu_r}l_c+\\dfrac{B}{\\mu_0}g$ (ampere).\n$B=\\dfrac{\\mu_0NI}{l_c/\\mu_r+g}=\\dfrac{2.51\\times10^{-4}}{6.24\\times10^{-4}+1.0\\times10^{-3}}=0.155\\ \\mathrm T$.\nTrap: ignoring the gap gives $0.40\\ \\mathrm T$.",
+    "hints": [
+      "The small air gap contributes comparably to the whole core."
+    ],
+    "check": "4*math.pi*1e-7*500*0.400/(0.499/800+0.001)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f008",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.mag-materials",
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A long solenoid with $n$ turns per metre carries a current such that $nI=3.00\\times10^{5}\\ \\mathrm{A/m}$. When filled with a magnetic material the measured field inside is $B=0.800\\ \\mathrm T$. Using $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$, find the magnetization $M$ of the material in A/m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 336619.7723675814,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "$H=nI$ from the free current (Ampere for $H$)",
+        "weight": 1
+      },
+      {
+        "text": "$B=\\mu_0(H+M)$",
+        "weight": 2
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "$H$ depends only on the free current: $H=nI=3.00\\times10^{5}\\ \\mathrm{A/m}$ (ampere).\nConstitutive relation: $B=\\mu_0(H+M)$ (mag-materials).\n$M=\\dfrac{B}{\\mu_0}-H=6.366\\times10^{5}-3.00\\times10^{5}=3.37\\times10^{5}\\ \\mathrm{A/m}$.\nTrap: $B/\\mu_0$ alone gives $6.4\\times10^{5}$.",
+    "hints": [
+      "Which field is set by the free current alone?"
+    ],
+    "check": "0.800/(4*math.pi*1e-7)-3.00e5",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f009",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.faraday",
+      "t2.work-energy",
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A uniform field $B=0.50\\ \\mathrm T$ points along $+z$ for $x<0$ and is zero for $x>0$. A rectangular loop in the $xy$-plane (resistance $0.40\\ \\Omega$, side $0.20\\ \\mathrm m$ along $y$, side $0.30\\ \\mathrm m$ along $x$) is pulled in the $+x$ direction at constant speed $3.0\\ \\mathrm{m/s}$. At the instant considered, its trailing side is still at $x<0$ and its leading side is at $x>0$. Find the magnitude of the external force needed to keep the speed constant, in N.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.07500000000000001,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Motional emf $\\varepsilon=Bwv$ from the side still in the field",
+        "weight": 2
+      },
+      {
+        "text": "Current $I=\\varepsilon/R$ and magnetic force $F=IwB$",
+        "weight": 1
+      },
+      {
+        "text": "Constant speed: external force equals the magnetic force",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Only the trailing side (length $w=0.20\\ \\mathrm m$) cuts field, so flux falls at rate $Bwv$: $\\varepsilon=Bwv=0.30\\ \\mathrm V$ (faraday).\n$I=\\varepsilon/R=0.75\\ \\mathrm A$ (dc-circuits).\nForce on that side: $F=IwB=0.075\\ \\mathrm N$, opposing the motion.\nConstant speed means the pull equals this. Check by power: $Fv=0.225\\ \\mathrm W=\\varepsilon^2/R$ (work-energy).",
+    "hints": [
+      "Only one side of the loop sees the field."
+    ],
+    "check": "0.50**2*0.20**2*3.0/0.40",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f010",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.faraday",
+      "t5.maxwell"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A long solenoid of radius $5.0\\ \\mathrm{cm}$ has a uniform axial field $B(t)$ inside and zero field outside. The field is increasing at $dB/dt=0.80\\ \\mathrm{T/s}$. Find the magnitude of the induced electric field at a point $15\\ \\mathrm{cm}$ from the axis, in V/m.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.006666666666666669,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Faraday in integral form on a circle of radius $r$ by symmetry",
+        "weight": 1
+      },
+      {
+        "text": "Only flux inside the solenoid radius counts: $\\Phi=B\\pi a^2$",
+        "weight": 2
+      },
+      {
+        "text": "$E=\\dfrac{a^2}{2r}\\dfrac{dB}{dt}$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Symmetry makes $E$ tangential and constant on a circle of radius $r$ (faraday).\n$\\oint\\vec E\\cdot d\\vec l=-d\\Phi/dt$ gives $E\\,2\\pi r=\\pi a^2\\,dB/dt$ in magnitude (maxwell).\nOutside the solenoid the flux is capped at $B\\pi a^2$.\n$E=\\dfrac{a^2}{2r}\\dfrac{dB}{dt}=\\dfrac{(0.050)^2(0.80)}{2(0.15)}=6.7\\times10^{-3}\\ \\mathrm{V/m}$.",
+    "hints": [
+      "Use the loop at 15 cm but count only flux inside 5 cm."
+    ],
+    "check": "0.050**2*0.80/(2*0.15)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f011",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.inductance",
+      "t5.ampere",
+      "t4.em-energy"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A long air-cored solenoid has $1000$ turns uniformly wound over a length $0.400\\ \\mathrm m$ and has radius $2.00\\ \\mathrm{cm}$. Neglect end effects and use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$. Find the energy stored in its field when it carries $3.00\\ \\mathrm A$, in mJ.",
+    "answer": {
+      "kind": "numeric",
+      "value": 17.76528792196084,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Field inside $B=\\mu_0nI$ and flux linkage $N\\Phi$",
+        "weight": 1
+      },
+      {
+        "text": "Self-inductance $L=\\mu_0N^2A/\\ell$",
+        "weight": 2
+      },
+      {
+        "text": "$U=\\tfrac12LI^2$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Ampere gives $B=\\mu_0NI/\\ell$ (ampere); flux linkage $N BA$ gives $L=\\mu_0N^2A/\\ell$ (inductance).\n$A=\\pi(0.0200)^2=1.257\\times10^{-3}\\ \\mathrm{m^2}$, so $L=3.95\\times10^{-3}\\ \\mathrm H$.\n$U=\\tfrac12LI^2=\\tfrac12(3.95\\times10^{-3})(9.00)=1.78\\times10^{-2}\\ \\mathrm J=17.8\\ \\mathrm{mJ}$ (em-energy).",
+    "hints": [
+      "Find L from flux linkage first."
+    ],
+    "check": "0.5*4*math.pi*1e-7*1000**2*math.pi*0.0200**2/0.400*3.00**2*1e3",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f012",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.inductance",
+      "t5.biot-savart",
+      "t5.faraday"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A large coil of $40$ turns and radius $0.20\\ \\mathrm m$ is coaxial with a small coil of $100$ turns and radius $1.0\\ \\mathrm{cm}$ at its centre; the planes are parallel. Take the large coil's field as uniform over the small coil and use $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$. The current in the large coil changes at $50\\ \\mathrm{A/s}$. Find the magnitude of the emf in the small coil in $\\mu\\mathrm V$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 197.39208802178715,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Field at the centre of the large coil: $B=\\mu_0N_1I/2R$",
+        "weight": 1
+      },
+      {
+        "text": "Mutual inductance $M=N_2BA_2/I$",
+        "weight": 2
+      },
+      {
+        "text": "$\\varepsilon=M\\,dI/dt$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Centre field of the large coil per unit current: $\\dfrac{\\mu_0N_1}{2R}=1.26\\times10^{-4}\\ \\mathrm{T/A}$ (biot-savart).\nFlux linkage in the small coil: $N_2\\pi a^2 B$, so $M=N_2\\pi a^2\\dfrac{\\mu_0N_1}{2R}=3.95\\times10^{-6}\\ \\mathrm H$ (inductance).\n$\\varepsilon=M\\,dI/dt=(3.95\\times10^{-6})(50)=1.97\\times10^{-4}\\ \\mathrm V=197\\ \\mu\\mathrm V$ (faraday).",
+    "hints": [
+      "Get flux linkage in the small coil per ampere in the large one."
+    ],
+    "check": "100*math.pi*0.010**2*(4*math.pi*1e-7*40/(2*0.20))*50*1e6",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f013",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc",
+      "t4.rc-transient",
+      "t1.calc-rates"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A $12\\ \\mathrm V$ battery, a $40\\ \\Omega$ resistor and a $0.20\\ \\mathrm H$ inductor are in series. The switch closes at $t=0$ with no initial current. At what time, in ms, is the rate at which energy is stored in the inductor greatest?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.465735902799726,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "$i(t)=\\dfrac{\\varepsilon}{R}(1-e^{-t/\\tau})$ with $\\tau=L/R$",
+        "weight": 1
+      },
+      {
+        "text": "Storage rate $\\dfrac{dU}{dt}=Li\\,\\dfrac{di}{dt}\\propto e^{-t/\\tau}(1-e^{-t/\\tau})$",
+        "weight": 2
+      },
+      {
+        "text": "Maximise: $e^{-t/\\tau}=\\tfrac12$ so $t=\\tau\\ln2$",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Rise of current: $i=\\dfrac{\\varepsilon}{R}\\left(1-e^{-t/\\tau}\\right)$, $\\tau=L/R=5.0\\ \\mathrm{ms}$ (rl-lc).\n$\\dfrac{dU}{dt}=Li\\dfrac{di}{dt}=\\dfrac{\\varepsilon^2}{R}\\,e^{-t/\\tau}\\left(1-e^{-t/\\tau}\\right)$ (calc-rates).\nLet $x=e^{-t/\\tau}$; $x(1-x)$ peaks at $x=\\tfrac12$ (rc-transient shape).\n$t=\\tau\\ln2=3.47\\ \\mathrm{ms}$.\nTrap: the answer is not $\\tau$.",
+    "hints": [
+      "Write the stored-energy rate as a function of time and maximise it."
+    ],
+    "check": "math.log(2)*0.20/40*1e3",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f014",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.rl-lc",
+      "t4.capacitors",
+      "t2.shm"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A $2.0\\ \\mu\\mathrm F$ capacitor charged to $30\\ \\mathrm V$ is connected at $t=0$ across an ideal $0.50\\ \\mathrm H$ inductor. Find the first time, in ms, at which the energy is shared equally between the capacitor and the inductor.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.7853981633974483,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Oscillation frequency $\\omega=1/\\sqrt{LC}$",
+        "weight": 1
+      },
+      {
+        "text": "Capacitor energy $\\propto\\cos^2\\omega t$",
+        "weight": 2
+      },
+      {
+        "text": "Equal sharing at $\\omega t=\\pi/4$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "LC is an oscillator with $\\omega=1/\\sqrt{LC}=1000\\ \\mathrm{rad/s}$ (shm, rl-lc).\n$q=q_0\\cos\\omega t$, so $U_C=U_{tot}\\cos^2\\omega t$ (capacitors).\nEqual sharing: $\\cos^2\\omega t=\\tfrac12$, first at $\\omega t=\\pi/4$.\n$t=\\dfrac{\\pi}{4\\omega}=0.785\\ \\mathrm{ms}$.\nTrap: a quarter period ($1.57\\ \\mathrm{ms}$) is when all energy is in the inductor.",
+    "hints": [
+      "Write capacitor energy as a function of time."
+    ],
+    "check": "math.pi/4*math.sqrt(0.50*2.0e-6)*1e3",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f015",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits",
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A series circuit has $R=30\\ \\Omega$, $L=0.10\\ \\mathrm H$ and $C=50\\ \\mu\\mathrm F$, driven by a sinusoidal source of amplitude $200\\ \\mathrm V$ at $\\omega=400\\ \\mathrm{rad/s}$. Find the time-averaged power dissipated in the resistor, in W.",
+    "answer": {
+      "kind": "numeric",
+      "value": 599.9999999999998,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Reactances $X_L=\\omega L$ and $X_C=1/\\omega C$; impedance $Z$",
+        "weight": 2
+      },
+      {
+        "text": "Convert amplitude to rms",
+        "weight": 1
+      },
+      {
+        "text": "$P=I_{rms}^2R$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "$X_L=40\\ \\Omega$, $X_C=50\\ \\Omega$, so $Z=\\sqrt{30^2+10^2}=31.6\\ \\Omega$ (ac-circuits).\n$V_{rms}=200/\\sqrt2=141\\ \\mathrm V$, $I_{rms}=4.47\\ \\mathrm A$.\n$P=I_{rms}^2R=20\\times30=600\\ \\mathrm W$ (dc-circuits).\nTrap: using the amplitude as rms doubles the answer.",
+    "hints": [
+      "Reactances first, then impedance, then rms current."
+    ],
+    "check": "(200/math.sqrt(2))**2/(30**2+(400*0.10-1/(400*50e-6))**2)*30",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f016",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.ac-circuits",
+      "t4.kirchhoff"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A resistor $R=30\\ \\Omega$ is connected in parallel with an ideal inductor whose reactance is $40\\ \\Omega$ at the source frequency. The source has voltage amplitude $120\\ \\mathrm V$. Find the amplitude of the total current drawn from the source, in A.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$5.0$",
+        "$7.0$",
+        "$2.4$",
+        "$1.0$",
+        "$1.7$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "added branch amplitudes arithmetically (ignored the $90^\\circ$ phase)",
+        "used the series impedance $\\sqrt{30^2+40^2}$",
+        "subtracted branch amplitudes",
+        "used $R+X_L$ as the impedance"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Branch amplitudes $V_0/R=4.0$ A and $V_0/X_L=3.0$ A",
+        "weight": 1
+      },
+      {
+        "text": "Resistor current is in phase, inductor current lags by $90^\\circ$",
+        "weight": 2
+      },
+      {
+        "text": "Phasor sum in quadrature and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Both branches see the full source voltage (kirchhoff).\n$I_R=120/30=4.0\\ \\mathrm A$ in phase with $V$; $I_L=120/40=3.0\\ \\mathrm A$ lagging by $90^\\circ$ (ac-circuits).\nKirchhoff's current law holds for phasors, so add in quadrature: $I_0=\\sqrt{4^2+3^2}=5.0\\ \\mathrm A$.",
+    "hints": [
+      "Branch currents add as phasors, not as numbers."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f017",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.resonance",
+      "t5.ac-circuits",
+      "t2.damped-driven"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A series RLC circuit has $L=2.0\\ \\mathrm{mH}$, $C=0.50\\ \\mu\\mathrm F$ and $R=5.0\\ \\Omega$ and is driven by a source of fixed amplitude and variable frequency. Find the full width of the average-power resonance curve between its half-power points, in Hz.",
+    "answer": {
+      "kind": "numeric",
+      "value": 397.8873577297383,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Half-power points where $|X_L-X_C|=R$",
+        "weight": 2
+      },
+      {
+        "text": "Width $\\Delta\\omega=R/L$ (equivalently $\\omega_0/Q$)",
+        "weight": 1
+      },
+      {
+        "text": "Convert to Hz and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Power is half its peak when $Z=\\sqrt2R$, i.e. $|X_L-X_C|=R$ (resonance).\nThe two roots differ by $\\Delta\\omega=R/L$ exactly (damped-driven: width equals damping rate).\n$\\Delta f=\\dfrac{R}{2\\pi L}=\\dfrac{5.0}{2\\pi(2.0\\times10^{-3})}=398\\ \\mathrm{Hz}$.\nCheck: $f_0=5.03\\ \\mathrm{kHz}$, $Q=12.6$, $f_0/Q=398\\ \\mathrm{Hz}$.",
+    "hints": [
+      "Half power means impedance rises by a factor of root two."
+    ],
+    "check": "5.0/(2*math.pi*2.0e-3)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f018",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.resonance",
+      "t5.ac-circuits",
+      "t4.rc-transient"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A sinusoidal source drives $R=1.0\\ \\mathrm{k\\Omega}$ in series with $C=0.10\\ \\mu\\mathrm F$, and the output is the voltage across the capacitor. At what frequency, in Hz, is the output amplitude exactly half the input amplitude?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2756.6444771089605,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Voltage divider: $V_{out}/V_{in}=X_C/|Z|$",
+        "weight": 2
+      },
+      {
+        "text": "Solve $1/\\sqrt{1+(\\omega RC)^2}=\\tfrac12$ for $\\omega$",
+        "weight": 1
+      },
+      {
+        "text": "Convert to Hz and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Capacitor voltage fraction: $\\dfrac{X_C}{\\sqrt{R^2+X_C^2}}=\\dfrac{1}{\\sqrt{1+(\\omega RC)^2}}$ (ac-circuits, filter).\nSet equal to $\\tfrac12$: $(\\omega RC)^2=3$, so $\\omega=\\sqrt3/RC=1.73\\times10^{4}\\ \\mathrm{rad/s}$ (resonance).\n$f=\\omega/2\\pi=2.76\\times10^{3}\\ \\mathrm{Hz}$.\nTrap: $f=1/2\\pi RC=1.59\\ \\mathrm{kHz}$ is the $1/\\sqrt2$ point.",
+    "hints": [
+      "The half-amplitude point is not the corner frequency."
+    ],
+    "check": "math.sqrt(3)/(2*math.pi*1.0e3*0.10e-6)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f019",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell",
+      "t5.em-waves",
+      "t3.superpose"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "In source-free vacuum, with $\\omega=ck$ unless stated otherwise and $E_0,k$ constants, which of the following is a possible electric field of a travelling or oscillating wave?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\vec E=E_0\\sin(kz-\\omega t)\\,\\hat x$",
+        "$\\vec E=E_0\\sin(kz-\\omega t)\\,\\hat z$",
+        "$\\vec E=E_0\\sin(kz-\\omega t)\\,\\hat x$ with $\\omega=2ck$",
+        "$\\vec E=E_0\\sin(kx)\\cos(\\omega t)\\,\\hat x$",
+        "$\\vec E=E_0\\cos(kz-\\omega t)\\,\\hat x+E_0\\cos(ky-\\omega t)\\,\\hat y$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "longitudinal: violates $\\nabla\\cdot\\vec E=0$",
+        "wave equation requires $\\omega=ck$ in vacuum",
+        "longitudinal standing wave: $\\nabla\\cdot\\vec E\\neq0$",
+        "the $y$-wave is polarised along its own propagation direction: $\\nabla\\cdot\\vec E\\neq0$"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Gauss: $\\nabla\\cdot\\vec E=0$ requires transverse fields",
+        "weight": 2
+      },
+      {
+        "text": "Faraday plus Ampere-Maxwell give $\\omega=ck$",
+        "weight": 1
+      },
+      {
+        "text": "Test each option against both",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Source-free Gauss law: $\\nabla\\cdot\\vec E=0$ (maxwell). That removes every field that varies along its own polarisation direction: the $\\hat z$-polarised wave, the $\\sin(kx)$ standing field and the $y$-propagating $\\hat y$ component.\nCombining Faraday and Ampere-Maxwell gives $\\nabla^2\\vec E=\\mu_0\\varepsilon_0\\,\\partial_t^2\\vec E$, so $\\omega=ck$ (em-waves). That removes the $\\omega=2ck$ wave.\nWhat remains is a transverse plane wave with $\\omega=ck$ (superpose: the two-wave sum fails only because one part is longitudinal).",
+    "hints": [
+      "Check divergence first, then dispersion."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f020",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.maxwell",
+      "t1.vec-comp",
+      "t5.ampere"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "In a region with no currents, a steady magnetic field has components $B_x=\\alpha x$, $B_y=3\\alpha y$ and $B_z=\\gamma z$, where $\\alpha=0.50\\ \\mathrm{T/m}$ and $\\gamma$ is a constant. Find $|\\vec B|$ at $(x,y,z)=(1.0,\\,1.0,\\,2.0)\\ \\mathrm m$, in T.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.301162633521313,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "No magnetic monopoles: $\\nabla\\cdot\\vec B=0$ fixes $\\gamma$",
+        "weight": 2
+      },
+      {
+        "text": "Components at the point",
+        "weight": 1
+      },
+      {
+        "text": "Magnitude",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Gauss's law for magnetism: $\\nabla\\cdot\\vec B=\\alpha+3\\alpha+\\gamma=0$, so $\\gamma=-4\\alpha=-2.0\\ \\mathrm{T/m}$ (maxwell).\nThe curl vanishes, consistent with no currents (ampere).\nComponents at the point: $(0.50,\\ 1.5,\\ -4.0)\\ \\mathrm T$ (vec-comp).\n$|\\vec B|=\\sqrt{0.25+2.25+16}=4.30\\ \\mathrm T$.",
+    "hints": [
+      "Which Maxwell equation constrains the sum of the three slopes?"
+    ],
+    "check": "math.sqrt((0.50*1.0)**2+(3*0.50*1.0)**2+((-4*0.50)*2.0)**2)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f021",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current",
+      "t5.ampere",
+      "t4.capacitors"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A parallel-plate capacitor has circular plates of radius $5.0\\ \\mathrm{cm}$ and is charged by a steady current $I=3.0\\ \\mathrm A$ in the leads. Neglect fringing, so $\\vec E$ is uniform between the plates and parallel to the axis. Using $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$, find $|\\vec B|$ between the plates at $2.0\\ \\mathrm{cm}$ from the axis, in $\\mu\\mathrm T$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.8,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Ampere-Maxwell: no conduction current in the gap, only $\\varepsilon_0\\,d\\Phi_E/dt$",
+        "weight": 2
+      },
+      {
+        "text": "Fraction of displacement current enclosed by radius $r$: $r^2/R^2$",
+        "weight": 1
+      },
+      {
+        "text": "$B=\\dfrac{\\mu_0Ir}{2\\pi R^2}$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Between the plates $\\oint\\vec B\\cdot d\\vec l=\\mu_0\\varepsilon_0\\,d\\Phi_E/dt$ (disp-current).\nTotal displacement current equals the lead current $I$, spread uniformly over the plate area (capacitors), so $I_d(r)=I\\,r^2/R^2$.\n$B\\,2\\pi r=\\mu_0Ir^2/R^2$ gives $B=\\dfrac{\\mu_0Ir}{2\\pi R^2}$ (ampere).\n$B=\\dfrac{(2\\times10^{-7})(3.0)(0.020)}{(0.050)^2}=4.8\\times10^{-6}\\ \\mathrm T=4.8\\ \\mu\\mathrm T$.",
+    "hints": [
+      "Only the displacement current through a smaller circle counts."
+    ],
+    "check": "4*math.pi*1e-7*3.0*0.020/(2*math.pi*0.050**2)*1e6",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f022",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.disp-current",
+      "t5.maxwell",
+      "t4.conductors"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A sinusoidal electric field of frequency $1.0\\ \\mathrm{MHz}$ exists in seawater of conductivity $\\sigma=4.0\\ \\mathrm{S/m}$. Take the permittivity as $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the ratio of the amplitude of the displacement current density to the amplitude of the conduction current density.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.000013901547492134835,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Conduction current density $J_c=\\sigma E$",
+        "weight": 1
+      },
+      {
+        "text": "Displacement current density $J_d=\\varepsilon_0\\,\\partial E/\\partial t$, amplitude $\\varepsilon_0\\omega E_0$",
+        "weight": 2
+      },
+      {
+        "text": "Ratio $\\omega\\varepsilon_0/\\sigma$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Ohm's law: $J_c=\\sigma E$, amplitude $\\sigma E_0$ (conductors).\nMaxwell's displacement term: $J_d=\\varepsilon_0\\,\\partial E/\\partial t$, amplitude $\\varepsilon_0\\omega E_0$ (disp-current).\nRatio $=\\dfrac{\\omega\\varepsilon_0}{\\sigma}=\\dfrac{2\\pi(10^{6})(8.85\\times10^{-12})}{4.0}=1.39\\times10^{-5}$.\nTrap: using $f$ in place of $\\omega=2\\pi f$ gives $2.2\\times10^{-6}$.",
+    "hints": [
+      "Differentiate a sinusoid: the displacement term picks up a factor of omega."
+    ],
+    "check": "2*math.pi*1.0e6*8.85e-12/4.0",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f023",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves",
+      "t1.vec-prod"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "In vacuum, a plane wave travels along $+z$ with electric field $\\vec E=E_0\\cos(kz-\\omega t)\\,\\hat y$. Which expression gives the magnetic field of this wave?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\vec B=-\\dfrac{E_0}{c}\\cos(kz-\\omega t)\\,\\hat x$",
+        "$\\vec B=+\\dfrac{E_0}{c}\\cos(kz-\\omega t)\\,\\hat x$",
+        "$\\vec B=\\dfrac{E_0}{c}\\cos(kz-\\omega t)\\,\\hat y$",
+        "$\\vec B=-cE_0\\cos(kz-\\omega t)\\,\\hat x$",
+        "$\\vec B=-\\dfrac{E_0}{c}\\cos(kz+\\omega t)\\,\\hat x$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "wrong sign: $\\vec E\\times\\vec B$ would point along $-z$",
+        "parallel to $\\vec E$: $\\vec E\\times\\vec B=0$",
+        "used $B=cE$ instead of $E/c$",
+        "phase belongs to a wave travelling toward $-z$"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "$\\vec B\\perp\\vec E$ and $\\vec E\\times\\vec B$ along the propagation direction",
+        "weight": 2
+      },
+      {
+        "text": "Amplitude $B_0=E_0/c$ and same phase",
+        "weight": 1
+      },
+      {
+        "text": "Sign fixed by $\\hat y\\times(\\pm\\hat x)$",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "In a plane wave $\\vec E$, $\\vec B$ and $\\hat k$ are mutually perpendicular with $\\hat E\\times\\hat B=\\hat k$ (em-waves).\nSince $\\hat y\\times\\hat x=-\\hat z$ and $\\hat y\\times(-\\hat x)=+\\hat z$, $\\vec B$ must point along $-\\hat x$ (vec-prod).\nMagnitude $B_0=E_0/c$, in phase with $\\vec E$, with the same argument $kz-\\omega t$.",
+    "hints": [
+      "Use the cross product E times B to find the direction of travel."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f024",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.em-waves",
+      "t3.wave-basics",
+      "t1.vec-comp"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A plane electromagnetic wave of frequency $6.0\\times10^{8}\\ \\mathrm{Hz}$ travels in vacuum in the $xy$-plane, along the direction making $45^\\circ$ with both $+x$ and $+y$. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. At one instant, find the phase difference in rad between two points on the $x$ axis separated by $0.10\\ \\mathrm m$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.8885765876316732,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "$\\lambda=c/f$ and wavevector $k=2\\pi/\\lambda$ along the propagation direction",
+        "weight": 1
+      },
+      {
+        "text": "Phase difference $\\Delta\\phi=\\vec k\\cdot\\Delta\\vec r$",
+        "weight": 2
+      },
+      {
+        "text": "Component of separation along $\\hat k$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "$\\lambda=c/f=0.50\\ \\mathrm m$, so $k=2\\pi/\\lambda=4\\pi\\ \\mathrm{rad/m}$ (wave-basics).\nPhase depends on $\\vec k\\cdot\\vec r$: only the component of the separation along $\\hat k$ counts, $0.10\\cos45^\\circ=0.0707\\ \\mathrm m$ (vec-comp).\n$\\Delta\\phi=k(0.0707)=0.889\\ \\mathrm{rad}$ (em-waves).\nTrap: $k\\,\\Delta x=1.26$ ignores the angle.",
+    "hints": [
+      "Phase differences use the wavevector dotted with the separation."
+    ],
+    "check": "2*math.pi*6.0e8/3.00e8*0.10*math.cos(math.pi/4)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f025",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.poynting",
+      "t2.momentum",
+      "t2.newton"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A perfectly reflecting flat mirror is struck at normal incidence by a laser beam of power $3.0\\ \\mathrm W$, all of which hits the mirror. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$ and $g=9.8\\ \\mathrm{m/s^2}$. Find the largest mass, in micrograms ($1\\ \\mu\\mathrm g=10^{-9}\\ \\mathrm{kg}$), whose weight the light force could just support.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.04081632653061,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Momentum flux of light: absorbed force is $P/c$",
+        "weight": 1
+      },
+      {
+        "text": "Perfect reflection reverses momentum: force $2P/c$",
+        "weight": 2
+      },
+      {
+        "text": "Set $F=mg$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Light of power $P$ carries momentum at rate $P/c$ (poynting).\nReflection reverses the momentum, so the momentum change doubles: $F=2P/c=2.0\\times10^{-8}\\ \\mathrm N$ (momentum).\nSupport condition $F=mg$ (newton): $m=\\dfrac{2P}{cg}=2.04\\times10^{-9}\\ \\mathrm{kg}=2.04\\ \\mu\\mathrm g$.\nTrap: an absorber gives half this.",
+    "hints": [
+      "Count the momentum change of the light, not only its arrival."
+    ],
+    "check": "2*3.0/(3.00e8*9.8)*1e9",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f026",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.poynting",
+      "t5.ampere",
+      "t4.dc-circuits"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A straight cylindrical resistive wire of radius $1.0\\ \\mathrm{mm}$ and length $2.00\\ \\mathrm m$ has resistance $0.040\\ \\Omega$ and carries a steady current $10\\ \\mathrm A$. Using $\\mu_0=4\\pi\\times10^{-7}\\ \\mathrm{T\\,m/A}$, find the magnitude of the Poynting vector at the wire's surface in $\\mathrm{W/m^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 318.3098861837907,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Axial $E=IR/\\ell$ (uniform field in the wire)",
+        "weight": 1
+      },
+      {
+        "text": "Azimuthal $B=\\mu_0I/2\\pi a$ at the surface (ampere)",
+        "weight": 1
+      },
+      {
+        "text": "$S=EB/\\mu_0$ (fields perpendicular) and value",
+        "weight": 2
+      }
+    ],
+    "pass": 3,
+    "solution": "Uniform axial field: $E=V/\\ell=IR/\\ell=0.20\\ \\mathrm{V/m}$ (dc-circuits).\nAmpere at the surface: $B=\\mu_0I/(2\\pi a)=2.0\\times10^{-3}\\ \\mathrm T$ (ampere).\n$\\vec S=\\vec E\\times\\vec B/\\mu_0$ with $\\vec E\\perp\\vec B$ (poynting): $S=\\dfrac{(0.20)(2.0\\times10^{-3})}{4\\pi\\times10^{-7}}=318\\ \\mathrm{W/m^2}$, pointing radially inward.\nCheck: $S\\cdot2\\pi a\\ell=4.0\\ \\mathrm W=I^2R$.",
+    "hints": [
+      "Fields at the surface: E along the wire, B around it."
+    ],
+    "check": "(10*0.040/2.00)*(4*math.pi*1e-7*10/(2*math.pi*1.0e-3))/(4*math.pi*1e-7)",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f027",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary",
+      "t3.refraction",
+      "t3.thin-film"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A thin, non-absorbing glass plate of index $n=3.0$ stands in air and is illuminated at normal incidence. The light is incoherent, so interference can be ignored, but all multiple reflections between the two faces must be counted. What fraction of the incident power is transmitted?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$0.600$",
+        "$0.563$",
+        "$0.750$",
+        "$0.500$",
+        "$0.250$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "two surfaces, but ignored multiple reflections",
+        "counted only one surface",
+        "subtracted $R$ twice from 1 ($1-2R$)",
+        "used the reflectance of one face as the transmittance"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Single-face reflectance $R=\\left(\\dfrac{n-1}{n+1}\\right)^2$",
+        "weight": 1
+      },
+      {
+        "text": "Sum the multiple-reflection series",
+        "weight": 2
+      },
+      {
+        "text": "$T_{tot}=\\dfrac{1-R}{1+R}$ and value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Normal-incidence reflectance of one face: $R=\\left(\\dfrac{3-1}{3+1}\\right)^2=0.25$ (em-boundary).\nPlate with two faces and incoherent multiple bounces: $T=\\dfrac{(1-R)^2}{1-R^2}=\\dfrac{1-R}{1+R}$ (thin-film series, refraction indices).\n$T=\\dfrac{0.75}{1.25}=0.600$.",
+    "hints": [
+      "Sum the geometric series of bounces between the faces."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f028",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.em-boundary",
+      "t5.poynting",
+      "t3.intensity"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A plane wave in air with electric amplitude $100\\ \\mathrm{V/m}$ strikes a flat glass surface of index $n=1.50$ at normal incidence. In a medium of index $n$ the time-averaged intensity is $I=\\tfrac12\\,n\\,c\\,\\varepsilon_0E_0^2$. Take $c=3.00\\times10^{8}\\ \\mathrm{m/s}$ and $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$. Find the intensity of the transmitted wave in $\\mathrm{W/m^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 12.744,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Boundary conditions give transmitted amplitude $E_t=\\dfrac{2}{n+1}E_i$",
+        "weight": 2
+      },
+      {
+        "text": "Intensity formula includes the factor $n$ in glass",
+        "weight": 1
+      },
+      {
+        "text": "Value (check against $1-R$ times incident)",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "Continuity of tangential $E$ and $H$ at the interface gives $E_t=\\dfrac{2}{1+n}E_i=80\\ \\mathrm{V/m}$ (em-boundary).\nIntensity in glass: $I_t=\\tfrac12 nc\\varepsilon_0E_t^2=\\tfrac12(1.5)(3.00\\times10^{8})(8.85\\times10^{-12})(80)^2=12.7\\ \\mathrm{W/m^2}$ (poynting, intensity).\nCheck: incident $I_i=13.3\\ \\mathrm{W/m^2}$ and $1-R=0.96$.\nTrap: omitting the factor $n$ gives $8.5\\ \\mathrm{W/m^2}$.",
+    "hints": [
+      "Energy flux scales with n times amplitude squared; find the amplitude from the boundary conditions."
+    ],
+    "check": "0.5*1.5*3.00e8*8.85e-12*(2/(1+1.5)*100)**2",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f029",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.radiation",
+      "t5.lorentz",
+      "t2.circular"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "A proton moves at $1.0\\times10^{6}\\ \\mathrm{m/s}$ on a circular path in a uniform magnetic field $B=2.0\\ \\mathrm T$ perpendicular to its velocity. Use the nonrelativistic radiated power of an accelerated charge. Constants: $q=1.60\\times10^{-19}\\ \\mathrm C$, $m_p=1.67\\times10^{-27}\\ \\mathrm{kg}$, $\\varepsilon_0=8.85\\times10^{-12}\\ \\mathrm{F/m}$, $c=3.00\\times10^{8}\\ \\mathrm{m/s}$. Find the power radiated in units of $10^{-25}\\ \\mathrm W$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.08688646200509,
+      "tol": 0,
+      "rel": 0.02,
+      "form": "decimal"
+    },
+    "rubric": [
+      {
+        "text": "Acceleration from the Lorentz force: $a=qvB/m$",
+        "weight": 2
+      },
+      {
+        "text": "Larmor power $P=\\dfrac{q^2a^2}{6\\pi\\varepsilon_0c^3}$",
+        "weight": 1
+      },
+      {
+        "text": "Numerical value",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "The magnetic force does no work but sets the acceleration: $a=\\dfrac{qvB}{m_p}=1.92\\times10^{14}\\ \\mathrm{m/s^2}$ (lorentz, circular).\nLarmor (radiation): $P=\\dfrac{q^2a^2}{6\\pi\\varepsilon_0c^3}$.\n$P=\\dfrac{(2.56\\times10^{-38})(3.67\\times10^{28})}{6\\pi(8.85\\times10^{-12})(2.70\\times10^{25})}=2.1\\times10^{-25}\\ \\mathrm W$, which is $2.09$ in units of $10^{-25}\\ \\mathrm W$.",
+    "hints": [
+      "Radiated power depends on acceleration squared."
+    ],
+    "check": "(1.60e-19)**2*(1.60e-19*1.0e6*2.0/1.67e-27)**2/(6*math.pi*8.85e-12*(3.00e8)**3)*1e25",
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-f030",
+    "tier": "c",
+    "type": "full",
+    "level": "T5",
+    "tags": [
+      "t5.radiation",
+      "t1.scaling"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Bound electrons in air molecules are driven far below resonance by sunlight, so their oscillation amplitude is the same for blue light ($450\\ \\mathrm{nm}$) and red light ($650\\ \\mathrm{nm}$) of equal field amplitude. What is the ratio of the power radiated by one molecule's oscillating dipole in blue light to that in red light?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$4.35$",
+        "$2.09$",
+        "$3.01$",
+        "$1.44$",
+        "$18.9$"
+      ],
+      "correct": 0,
+      "shuffle": true,
+      "why": [
+        "",
+        "took $P\\propto\\omega^2$ (wrote $a\\propto\\omega$)",
+        "took $P\\propto\\omega^3$",
+        "ratio of frequencies only",
+        "took $P\\propto\\omega^8$"
+      ]
+    },
+    "rubric": [
+      {
+        "text": "Charge oscillating at $\\omega$ with fixed amplitude has $a\\propto\\omega^2$",
+        "weight": 2
+      },
+      {
+        "text": "Larmor: $P\\propto a^2\\propto\\omega^4$",
+        "weight": 1
+      },
+      {
+        "text": "$(650/450)^4$",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "solution": "For $x=x_0\\cos\\omega t$ the acceleration amplitude is $a=\\omega^2x_0$ (scaling).\nLarmor power $P\\propto a^2$ (radiation), so $P\\propto\\omega^4\\propto\\lambda^{-4}$.\nRatio $=(650/450)^4=(1.444)^4=4.35$: blue scatters more, hence the blue sky.",
+    "hints": [
+      "How does acceleration scale with frequency at fixed amplitude?"
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  }
+]

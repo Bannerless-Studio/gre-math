@@ -1,0 +1,23 @@
+{
+  "key": "gre-physics",
+  "name": "GRE Physics Subject Test",
+  "lang": "en",
+  "levels": [
+    { "id": "T1", "label": "Physics fluency: units, vectors, kinematics, estimation", "short": "Fluency" },
+    { "id": "T2", "label": "Newtonian mechanics: forces, energy, momentum, rotation, oscillations", "short": "Mechanics" },
+    { "id": "T3", "label": "Waves, optics, fluids and thermal basics", "short": "Waves and optics" },
+    { "id": "T4", "label": "Electrostatics and circuits", "short": "Electrostatics" },
+    { "id": "T5", "label": "Magnetism, induction, Maxwell and EM waves", "short": "Magnetism and EM" },
+    { "id": "T6", "label": "Lagrangian and Hamiltonian mechanics, special relativity", "short": "Analytical and SR" },
+    { "id": "T7", "label": "Thermodynamics and statistical mechanics", "short": "Thermo and stat mech" },
+    { "id": "T8", "label": "Quantum mechanics", "short": "Quantum" },
+    { "id": "T9", "label": "Atomic, nuclear, particle, condensed matter, lab methods", "short": "Atomic and specialized" },
+    { "id": "T10", "label": "Test mode: timed mixed sets and full-length practice", "short": "Test mode" }
+  ],
+  "weights": { "mechanics": 0.20, "em": 0.18, "qm": 0.13, "thermo": 0.10, "atomic": 0.10, "specialized": 0.09, "optics": 0.08, "relativity": 0.06, "lab": 0.06 },
+  "gate": 0.7,
+  "mastered": 3,
+  "settled": 0.9,
+  "full": { "budgetSec": { "easy": 300, "mid": 600, "hard": 1080 } },
+  "session": { "review": 12, "learn": 2, "micro": 8, "full": 1 }
+}
