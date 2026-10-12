@@ -1,0 +1,23 @@
+{
+  "key": "gre-math",
+  "name": "GRE Mathematics Subject Test",
+  "lang": "en",
+  "levels": [
+    { "id": "T1", "label": "Algebra fluency and functions", "short": "Algebra" },
+    { "id": "T2", "label": "Trig, logs, sequences, proof basics", "short": "Trig and logs" },
+    { "id": "T3", "label": "Calculus I", "short": "Calc I" },
+    { "id": "T4", "label": "Calculus II: integration and series", "short": "Calc II" },
+    { "id": "T5", "label": "Calculus III: multivariable and vector calculus", "short": "Calc III" },
+    { "id": "T6", "label": "Linear algebra", "short": "Linear algebra" },
+    { "id": "T7", "label": "Abstract algebra and number theory", "short": "Abstract algebra" },
+    { "id": "T8", "label": "Real analysis and point-set topology", "short": "Analysis" },
+    { "id": "T9", "label": "Additional topics: discrete, probability, complex, ODE, numerical", "short": "Additional" },
+    { "id": "T10", "label": "Test mode: timed mixed sets and full-length practice", "short": "Test mode" }
+  ],
+  "weights": { "calc": 0.5, "alg": 0.25, "extra": 0.25 },
+  "gate": 0.7,
+  "mastered": 3,
+  "settled": 0.9,
+  "full": { "budgetSec": { "easy": 300, "mid": 600, "hard": 1080 } },
+  "session": { "review": 12, "learn": 2, "micro": 8, "full": 1 }
+}

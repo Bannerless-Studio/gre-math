@@ -67,11 +67,11 @@ Same rule as vocab: the clock is the session ordinal `prog.sessions`, never days
 Per technique: `s` (streak 0-3+), `l` (last credited session), `m` (mastered flag, sticky until a miss).
 
 - A correct answer on any item carrying the technique adds credit **at most once per session** per technique. This is the "master by 3 right across sessions" rule: three credited sessions = mastered (`TECH_MASTERED = 3`). Extra right answers in the same session are practice only.
-- A wrong answer sets `s = 0` immediately and re-queues the item once in the same session (practice, no credit), exactly like vocab's in-drill requeue.
-- Production gate: from `s = 2`, only a free-response answer (numeric/expression, or full-problem self-grade "clean") adds credit; a right MCQ holds the streak. Mirrors `wordsBy: "typed"`.
+- A wrong answer costs one streak step: `s = max(0, s - 1)`. It re-queues the item once in the same session (practice, no credit), exactly like vocab's in-drill requeue. `m` stays set only while `s >= 3` (changed 2026-10-12 after pacing study; was `s = 0` and un-mastered at once).
+- Production gate: from `s = 2`, only a free-response answer (numeric/expression, or full-problem self-grade "clean") adds credit; a right MCQ holds the streak. Mirrors `wordsBy: "typed"`. A right typed tier b answer at `s >= 2` also sets `fp` (changed 2026-10-12 after pacing study).
 - A multi-tag item credits/penalises its **primary** tag only (first in `tags`); secondary tags get practice records without streak change on right, and no reset on wrong, unless the author marked the tag `critical`. Prevents one slip on a 4-technique full problem from wiping 4 streaks.
-- Full-problem self-grade: `0` missed, `1` right but over time or with help, `2` clean and in budget. `2` credits like a right micro; `1` holds; `0` resets primary tag and marks each secondary tag `weak` (next micro for it is prioritised, no streak change).
-- Mastered techniques come back for refresh: ~10% of Review slots, oldest first. A miss on a refresh sets `s = 0` and un-masters.
+- Full-problem self-grade: `0` missed, `1` right but over time or with help, `2` clean and in budget. `2` credits like a right micro; `1` holds; `0` costs the primary tag one streak step (changed 2026-10-12 after pacing study) and marks each secondary tag `weak` (next micro for it is prioritised, no streak change).
+- Mastered techniques come back for refresh: ~10% of Review slots, oldest first. A miss on a refresh costs one streak step and un-masters only when `s` drops below 3 (changed 2026-10-12 after pacing study).
 
 ### 2.5 Progress record (format version 1)
 
@@ -104,7 +104,7 @@ localStorage key `pe_<pack.key>`; same backup keys as vocab (`_invalid_backup`, 
 Pack levels are ordered bands (GRE math: `L0` pre-calculus review, `L1` single-variable calculus, `L2` multivariable + ODE, `L3` linear algebra, `L4` abstract algebra, `L5` real analysis, `L6` additional topics: discrete, number theory, probability/stats, topology basics). The subject test is roughly 50% calculus-based, 25% algebra, 25% additional topics; the pack's `weights` field carries that so Review samples proportionally once the learner is past placement.
 
 - Gate: the first level with untaught techniques is held while the previous level has fewer known techniques than `LEVEL_GATE = 0.7` (known = mastered). Held level also holds all later ones. Evaluated at plan time, not stored (vocab rule).
-- Exam rule (analogue of `levelExam`): a technique counts as known for the gate only if mastered **and** `fp = 1`. Without it a learner could master 70% of a level on recall cards alone and never solve a full problem. Level 0 and recall-only techniques (pure definitions) are exempt via `techniques.json` field `exam: false`.
+- Exam rule (analogue of `levelExam`): a technique counts as known for the gate only if mastered **and** `fp = 1`. `fp` is set by a full problem at grade 2, or by a right typed tier b answer at streak >= 2 (changed 2026-10-12 after pacing study). Without the exam rule a learner could master 70% of a level on recall cards alone and never solve a full problem. Level 0 and recall-only techniques (pure definitions) are exempt via `techniques.json` field `exam: false`.
 - Level exam: when the gate sits within 5 percentage points of opening, offer a timed mixed set of 8 micro + 2 full at the previous level; passing at >= 0.7 sets `fp = 1` on every technique answered correctly. Optional, in Test tab.
 
 ## 3. Pack schema
@@ -205,16 +205,16 @@ By analogy with vocab Today (review 15, learn, listen 12, recall 8, sentences 8,
 | # | Stage | Count | Content |
 |---|---|---|---|
 | 1 | Review | 12 | Recall cards (tier a) on due techniques, lowest streak first, then oldest `l`; ~10% refresh of mastered. 40% production (typed) once streaks allow, mirroring `REVIEW_PRODUCTION_SHARE`. |
-| 2 | Learn | 1 technique | Teach card (30-60 s), then 4 micro problems on it in ascending difficulty, same-session. The new technique is the next unplaced one by `order` whose prereqs are all mastered and which the gate does not hold. |
+| 2 | Learn | 2 techniques | Teach card (30-60 s), then 4 micro problems on it in ascending difficulty, same-session. The new technique is the next unplaced one by `order` whose prereqs each have a streak of at least 1 (or are placed) and which the gate does not hold (changed 2026-10-12 after pacing study; the prereq was mastered before). |
 | 3 | Micro | 8 | Tier b, due techniques, interleaved (no two consecutive items of the same technique when avoidable). Includes any `wk` (weak after a failed full problem) technique first. |
-| 4 | Full | 1 | Timed tier c on the oldest-due technique that has `s >= 1` (so the learner has met it), with at least one secondary tag already mastered. Skipped when fewer than 4 techniques have `s >= 1`. |
+| 4 | Full | `session.full` (default 1) | Timed tier c on the oldest-due techniques that have `s >= 1` (so the learner has met them), each on a different technique, with at least one secondary tag already mastered. Skipped when fewer than 4 techniques have `s >= 1`. (changed 2026-10-12 after pacing study: a value above 1 was ignored before.) |
 | 5 | Debrief | - | Drill-end summary as vocab `missSummary`: `7 of 8`, then only missed items with solutions; `Session 43 done  +2 mastered  +1 full`. |
 
 Capacity rules at the technique level (the vocab "set size / ramp" analogue):
 
-- **New-technique cap:** at most 1 new technique per session (2 when the previous session's micro accuracy was >= 0.9 and nothing is `wk`). Zero when more than 6 techniques sit at `0 < s < 3` ("work in progress" cap). This is the only brake on overload.
+- **New-technique cap:** at most 2 new techniques per session, before and after 20 techniques are started (`pack.session.learn` is the ceiling; changed 2026-10-12 after pacing study, was 1 after 20). Zero when more than 6 techniques sit at `0 < s < 3` ("work in progress" cap). This is the only brake on overload.
 - **Per-technique cap per session:** at most 3 items of one technique across stages 1-3 outside its Learn block.
-- **Prereq rule:** a technique is introduced only when all `prereq` techniques are mastered (or placement-provisional).
+- **Prereq rule:** a technique is introduced only when all `prereq` techniques have a streak of at least 1 or are placement-provisional (changed 2026-10-12 after pacing study; was mastered).
 - **Weak first:** `wk` techniques (failed in a full problem) jump the Micro queue once, then clear on the next credited right.
 - **Pause new:** `pauseNew` (vocab) as an owner toggle in Progress settings: review-only session when the learner is behind or on an exam week.
 - **Level gate** holds Learn only (never Review or Full); the gate sentence appears on the Today row.

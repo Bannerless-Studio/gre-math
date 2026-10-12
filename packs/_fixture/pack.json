@@ -1,0 +1,32 @@
+{
+  "key": "fixture",
+  "name": "Fixture pack (tests only)",
+  "lang": "en",
+  "levels": [
+    {
+      "id": "T1",
+      "label": "Fixture algebra",
+      "short": "Algebra"
+    },
+    {
+      "id": "T2",
+      "label": "Fixture trig and logs",
+      "short": "Trig"
+    }
+  ],
+  "gate": 0.7,
+  "mastered": 3,
+  "session": {
+    "review": 12,
+    "learn": 1,
+    "micro": 8,
+    "full": 1
+  },
+  "full": {
+    "budgetSec": {
+      "easy": 300,
+      "mid": 600,
+      "hard": 1080
+    }
+  }
+}

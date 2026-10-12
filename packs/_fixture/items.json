@@ -1,0 +1,975 @@
+[
+  {
+    "id": "f001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $2x+3=11$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=2$",
+        "$x=3$",
+        "$x=4$",
+        "$x=5$"
+      ],
+      "correct": 2,
+      "shuffle": true
+    },
+    "solution": "Subtract 3 to get $2x=8$, so $x=4$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $3x-5=10$. Give $x$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Add 5 to get $3x=15$, so $x=5$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f003",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $\\frac{x}{4}+2=5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Subtract 2 to get $x/4=3$, so $x=12$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $5x-2=3x+7$. Give $x$ as a fraction.",
+    "answer": {
+      "kind": "numeric",
+      "value": "9/2",
+      "form": "fraction",
+      "tol": 0
+    },
+    "solution": "Gives $2x=9$, so $x=9/2$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "If $\\frac{2}{3}x=8$, then $x=$",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$6$",
+        "$12$",
+        "$16/3$",
+        "$24$"
+      ],
+      "correct": 1,
+      "shuffle": true
+    },
+    "solution": "Multiply by $3/2$: $x=12$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f006",
+    "tier": "a",
+    "type": "recall",
+    "level": "T1",
+    "tags": [
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which factorization of $x^2-5x+6$ is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$(x-1)(x-6)$",
+        "$(x-2)(x-3)$",
+        "$(x+2)(x+3)$",
+        "$(x-2)(x+3)$"
+      ],
+      "correct": 1,
+      "shuffle": true
+    },
+    "solution": "Roots $2$ and $3$ with sum $5$ and product $6$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f007",
+    "tier": "a",
+    "type": "recall",
+    "level": "T1",
+    "tags": [
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the sum of the roots of $x^2-7x+10=0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Sum of roots is $-b/a=7$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the positive root of $x^2=49$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Take the positive square root.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Compute the discriminant of $2x^2+3x-5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 49,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Discriminant is $9+40=49$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f010",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find the product of the roots of $3x^2-6x+1=0$. Give a fraction.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "fraction",
+      "tol": 0
+    },
+    "solution": "Product is $c/a=1/3$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T1",
+    "tags": [
+      "t1.factor"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Factor $x^2-9$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$(x-3)^2$",
+        "$(x-3)(x+3)$",
+        "$(x+9)(x-1)$",
+        "$(x-9)(x+1)$"
+      ],
+      "correct": 1,
+      "shuffle": true
+    },
+    "solution": "Difference of squares: $(x-3)(x+3)$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T1",
+    "tags": [
+      "t1.factor"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $x^2-9$ at $x=5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 16,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Substitute: $25-9=16$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.factor"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Compute $99^2-1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 9800,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Use $a^2-b^2=(a-b)(a+b)=98\\cdot 100$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.factor"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Compute $\\frac{x^2-4}{x-2}$ at $x=5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Cancel to $x+2$, then $5+2=7$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.factor"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Simplify $\\frac{x^2+5x+6}{x+2}$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x+3$",
+        "$x+2$",
+        "$x+6$",
+        "$x+4$"
+      ],
+      "correct": 0,
+      "shuffle": true
+    },
+    "solution": "Factor the numerator as $(x+2)(x+3)$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f016",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $\\sin(\\pi/6)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{1}{2}$",
+        "$\\frac{\\sqrt{3}}{2}$",
+        "$\\frac{\\sqrt{2}}{2}$",
+        "$1$"
+      ],
+      "correct": 0,
+      "shuffle": true
+    },
+    "solution": "$\\sin(\\pi/6)=1/2$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f017",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Give $\\cos(\\pi/3)$ as a fraction.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "fraction",
+      "tol": 0
+    },
+    "solution": "$\\cos(\\pi/3)=1/2$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Compute $\\tan(\\pi/4)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "$\\sin=\\cos$ at $\\pi/4$, so $\\tan=1$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f019",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Compute $\\sin(\\pi/2)+\\cos(\\pi)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "$1+(-1)=0$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f020",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Compute $\\cos^2(\\pi/6)$ as a fraction.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/4",
+      "form": "fraction",
+      "tol": 0
+    },
+    "solution": "$(\\sqrt{3}/2)^2=3/4$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $\\ln(e^3)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$e^3$",
+        "$3$",
+        "$\\ln 3$",
+        "$1$"
+      ],
+      "correct": 1,
+      "shuffle": true
+    },
+    "solution": "$\\ln$ undoes $e^x$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f022",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Compute $\\log_2 8$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "$2^3=8$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Compute $e^{\\ln 5}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "$e$ and $\\ln$ cancel.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Compute $\\log_{10} 0.001$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -3,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "$10^{-3}=0.001$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Solve $2^{x}=32$ for $x$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "$32=2^5$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f026",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which identity holds for all $x$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\sin^2 x+\\cos^2 x=1$",
+        "$\\sin^2 x-\\cos^2 x=1$",
+        "$\\tan x=\\cos x/\\sin x$",
+        "$\\sec x=\\sin x$"
+      ],
+      "correct": 0,
+      "shuffle": true
+    },
+    "solution": "The Pythagorean identity.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f027",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Compute $\\sin^2(0.3)+\\cos^2(0.3)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Pythagorean identity.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f028",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $\\sin\\theta=1/2$, compute $1-\\cos^2\\theta$. Give a fraction.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/4",
+      "form": "fraction",
+      "tol": 0
+    },
+    "solution": "$1-\\cos^2=\\sin^2=1/4$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f029",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Compute $\\sec^2 x-\\tan^2 x$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "solution": "Divide $\\sin^2+\\cos^2=1$ by $\\cos^2$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f030",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Simplify $\\frac{\\sin^2 x}{1-\\cos x}$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1+\\cos x$",
+        "$1-\\cos x$",
+        "$\\sin x$",
+        "$1$"
+      ],
+      "correct": 0,
+      "shuffle": true
+    },
+    "solution": "Write $\\sin^2=(1-\\cos)(1+\\cos)$.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f031",
+    "tier": "c",
+    "type": "full",
+    "level": "T1",
+    "tags": [
+      "t1.quad",
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two numbers have sum $8$ and product $15$. Which quadratic has them as its roots?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x^2-8x+15=0$",
+        "$x^2+8x+15=0$",
+        "$x^2-8x-15=0$",
+        "$x^2+15x+8=0$",
+        "$x^2-15x+8=0$"
+      ],
+      "correct": 0,
+      "shuffle": true
+    },
+    "solution": "For roots $r$ and $s$, $x^2-(r+s)x+rs=0$. With $r+s=8$ and $rs=15$ this is $x^2-8x+15=0$.",
+    "hints": [],
+    "rubric": [
+      {
+        "text": "Use the sum and product of roots: $r+s=-b/a$ and $rs=c/a$.",
+        "weight": 1
+      },
+      {
+        "text": "Set $-b/a=8$ and $c/a=15$ with $a=1$.",
+        "weight": 2
+      },
+      {
+        "text": "Check that $3$ and $5$ satisfy the equation.",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f032",
+    "tier": "c",
+    "type": "full",
+    "level": "T1",
+    "tags": [
+      "t1.quad",
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Let $x^2-6x+k=0$ have roots $r$ and $s$ with $r^2+s^2=20$. Find $k$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tol": 0
+    },
+    "solution": "$r^2+s^2=(r+s)^2-2rs=36-2k=20$, so $k=8$.",
+    "hints": [],
+    "rubric": [
+      {
+        "text": "Write $r^2+s^2$ as $(r+s)^2-2rs$.",
+        "weight": 1
+      },
+      {
+        "text": "Use $r+s=6$ and $rs=k$ from the equation.",
+        "weight": 1
+      },
+      {
+        "text": "Solve $36-2k=20$ correctly.",
+        "weight": 1
+      }
+    ],
+    "pass": 2,
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f033",
+    "tier": "c",
+    "type": "full",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log",
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 4,
+    "prompt": "Solve $\\log_2(x+1)+\\log_2(x-1)=3$ for $x>1$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=2$",
+        "$x=3$",
+        "$x=\\sqrt{7}$",
+        "$x=9$",
+        "$x=2\\sqrt{2}$"
+      ],
+      "correct": 1,
+      "shuffle": true
+    },
+    "solution": "Combine the logs: $\\log_2\\big((x+1)(x-1)\\big)=3$, so $x^2-1=8$ and $x=3$. The root $x=-3$ is excluded by $x>1$.",
+    "hints": [],
+    "rubric": [
+      {
+        "text": "Combine the logs with the product rule.",
+        "weight": 1
+      },
+      {
+        "text": "Turn $\\log_2 N=3$ into $N=8$.",
+        "weight": 1
+      },
+      {
+        "text": "Solve $x^2-1=8$ and reject $x=-3$ using the domain.",
+        "weight": 2
+      }
+    ],
+    "pass": 3,
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f034",
+    "tier": "c",
+    "type": "full",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log",
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 5,
+    "prompt": "If $2^{x}+2^{-x}=\\frac{5}{2}$ with $x>0$, find $2^{x}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0
+    },
+    "solution": "Let $y=2^x$. Then $2y^2-5y+2=0$, so $(2y-1)(y-2)=0$. Since $x>0$ gives $y>1$, $y=2$.",
+    "hints": [],
+    "rubric": [
+      {
+        "text": "Substitute $y=2^x$ and clear the denominator.",
+        "weight": 1
+      },
+      {
+        "text": "Factor $(2y-1)(y-2)=0$.",
+        "weight": 1
+      },
+      {
+        "text": "Use $x>0$ to reject $y=\\tfrac12$.",
+        "weight": 2
+      },
+      {
+        "text": "State the value of $2^{x}$.",
+        "weight": 1
+      }
+    ],
+    "pass": 3,
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "t1.lin-eq",
+    "name": "Linear equations",
+    "level": "T1",
+    "area": "alg",
+    "prereq": [],
+    "order": 1,
+    "exam": true,
+    "teach": "Isolate the variable: undo additions, then multiplications. Check by substitution."
+  },
+  {
+    "id": "t1.quad",
+    "name": "Quadratic roots",
+    "level": "T1",
+    "area": "alg",
+    "prereq": [
+      "t1.lin-eq"
+    ],
+    "order": 2,
+    "exam": true,
+    "teach": "Use factoring or the formula. Sum of roots is $-b/a$, product is $c/a$."
+  },
+  {
+    "id": "t1.factor",
+    "name": "Factoring",
+    "level": "T1",
+    "area": "alg",
+    "prereq": [
+      "t1.quad"
+    ],
+    "order": 3,
+    "exam": true,
+    "teach": "Look for a difference of squares first, then trinomial pairs."
+  },
+  {
+    "id": "t2.unit-circle",
+    "name": "Unit circle values",
+    "level": "T2",
+    "area": "calc",
+    "prereq": [
+      "t1.lin-eq"
+    ],
+    "order": 1,
+    "exam": true,
+    "teach": "Know $\\sin$ and $\\cos$ at $0$, $\\pi/6$, $\\pi/4$, $\\pi/3$, $\\pi/2$."
+  },
+  {
+    "id": "t2.exp-log",
+    "name": "Exponents and logs",
+    "level": "T2",
+    "area": "alg",
+    "prereq": [
+      "t1.quad"
+    ],
+    "order": 2,
+    "exam": true,
+    "teach": "$\\ln(e^x)=x$ and $\\log_b(b^x)=x$. Use change of base for other bases."
+  },
+  {
+    "id": "t2.trig-id",
+    "name": "Trig identities",
+    "level": "T2",
+    "area": "calc",
+    "prereq": [
+      "t2.unit-circle"
+    ],
+    "order": 3,
+    "exam": true,
+    "teach": "Start from $\\sin^2+\\cos^2=1$ and divide to get the other two Pythagorean forms."
+  }
+]

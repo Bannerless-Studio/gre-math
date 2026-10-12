@@ -1,0 +1,17 @@
+katex 0.16.11
+source: npm tarball katex@0.16.11 (npm pack, not executed), sha512 as reported by npm pack at vendoring time
+license: MIT (LICENSE in this folder)
+files:
+  katex.min.js          dist/katex.min.js (Node render step only; not inlined into the page)
+  katex.min.css         dist/katex.min.css (build inlines core @font-face rules only)
+  fonts/KaTeX_Main-Regular.woff2
+  fonts/KaTeX_Main-Bold.woff2
+  fonts/KaTeX_Main-Italic.woff2
+  fonts/KaTeX_Math-Italic.woff2
+  fonts/KaTeX_AMS-Regular.woff2
+  fonts/KaTeX_Size1-Regular.woff2
+  fonts/KaTeX_Size2-Regular.woff2
+  fonts/KaTeX_Size3-Regular.woff2
+  fonts/KaTeX_Size4-Regular.woff2
+  fonts/KaTeX_Caligraphic-Regular.woff2
+core subset: the 10 faces above. Not vendored: Math-BoldItalic, Fraktur, Script, SansSerif, Typewriter, all woff/ttf files.
