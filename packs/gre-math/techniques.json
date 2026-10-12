@@ -1,1715 +1,1715 @@
 [
-  {
-    "id": "t1.lin-eq",
-    "name": "Linear equations",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [],
-    "order": 1,
-    "exam": true,
-    "teach": "**When:** an equation where the unknown appears only to the first power. **Move:** apply the same operation to both sides until the unknown stands alone. Undo additions and subtractions before multiplications and divisions. **Example:** $3x-7=2x+5 \\Rightarrow x=12$. **Trap:** operating on one side only, or distributing a minus sign over just the first term of a bracket."
-  },
-  {
-    "id": "t1.sys-eq",
-    "name": "Systems of equations",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.lin-eq"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "**When:** two or three linear equations in the same unknowns. **Move:** eliminate a variable by adding a multiple of one equation to another, or substitute one equation into the other. **Example:** $x+y=10$ and $x-y=4$ give $x=7$. **Trap:** reading $0=5$ as an answer. It means no solution. $0=0$ means infinitely many."
-  },
-  {
-    "id": "t1.quad",
-    "name": "Quadratic solving",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.lin-eq"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "**When:** $ax^2+bx+c=0$, or an expression that reduces to it. **Move:** factor if the roots are visible. Otherwise use $x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. The discriminant $b^2-4ac$ gives the root count without solving. **Example:** $x^2-5x+6=0$ has roots $2$ and $3$. **Trap:** a sign slip on $b$, or forgetting the $2a$ in the denominator."
-  },
-  {
-    "id": "t1.factor",
-    "name": "Factoring patterns",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.quad"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "**When:** a polynomial with a visible pattern or a known root. **Move:** check difference of squares $a^2-b^2=(a-b)(a+b)$, cubes $a^3\\mp b^3=(a\\mp b)(a^2\\pm ab+b^2)$, then grouping. For $x^2+px+q$ with roots $r,s$: $r+s=-p$ and $rs=q$. **Example:** $x^2-7x+10=(x-2)(x-5)$. **Trap:** $a^2+b^2$ does not factor over the reals."
-  },
-  {
-    "id": "t1.poly-div",
-    "name": "Polynomial division",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.factor"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "**When:** dividing by $x-c$, or finding roots of a cubic or higher. **Move:** the remainder theorem gives the remainder $p(c)$ with no division. Synthetic division gives the quotient. Rational-root candidates are $\\pm p/q$, with $p$ a factor of the constant term and $q$ a factor of the leading coefficient. **Example:** $p(1)=0$ for $x^3-3x+2$. **Trap:** using $c$ when the divisor is $x+c$; that case needs $-c$."
-  },
-  {
-    "id": "t1.rational-expr",
-    "name": "Rational expressions",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.factor"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "**When:** fractions whose numerator and denominator are polynomials. **Move:** factor everything, cancel only common factors, and combine over a common denominator. For equations, multiply through, solve, then discard any root that makes a denominator zero. **Example:** $\\frac{x}{x-2}=\\frac{4}{x-2}$ gives $x=4$. **Trap:** cancelling terms instead of factors, as in $\\frac{x^2+4}{x}\\neq x+4$."
-  },
-  {
-    "id": "t1.exp-rules",
-    "name": "Exponent and radical rules",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [],
-    "order": 7,
-    "exam": true,
-    "teach": "**When:** powers with negative, fractional, or integer exponents, and radicals. **Move:** $a^m a^n=a^{m+n}$, $(a^m)^n=a^{mn}$, $a^{-m}=1/a^m$, $a^{m/n}=\\sqrt[n]{a^m}$. To rationalize $\\frac{1}{\\sqrt u-\\sqrt v}$, multiply top and bottom by $\\sqrt u+\\sqrt v$. **Example:** $\\frac{1}{\\sqrt3-1}=\\frac{\\sqrt3+1}{2}$. **Trap:** $(a+b)^n\\neq a^n+b^n$."
-  },
-  {
-    "id": "t1.abs-ineq",
-    "name": "Absolute value and inequalities",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.quad",
-      "t1.rational-expr"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "**When:** absolute values, or a rational or polynomial inequality with sign changes. **Move:** $|u|<b$ means $-b<u<b$; $|u|>b$ means $u<-b$ or $u>b$. For a quotient, find the zeros of numerator and denominator, test each interval, then decide the endpoints. **Example:** $|x-2|\\le 3$ gives $-1\\le x\\le 5$. **Trap:** multiplying by an expression of unknown sign, or including a denominator's zero."
-  },
-  {
-    "id": "t1.func-basics",
-    "name": "Function notation and domain",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [],
-    "order": 9,
-    "exam": true,
-    "teach": "**When:** any formula written as $f(x)$. **Move:** substitute the input inside the brackets and simplify. For the domain, exclude zero denominators and negative values under even roots. For piecewise functions, use the branch whose condition holds. **Example:** $f(x)=\\sqrt{8-2x}$ has domain $x\\le 4$. **Trap:** writing $f(a+b)=f(a)+f(b)$. That is almost never true."
-  },
-  {
-    "id": "t1.compose",
-    "name": "Composition and inverse",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.func-basics"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "**When:** combining functions, or undoing one. **Move:** $(f\\circ g)(x)=f(g(x))$, so apply $g$ first. To invert, swap $x$ and $y$ and solve for $y$. Only one-to-one functions have inverses. **Example:** if $f(x)=3x-1$, then $f^{-1}(x)=\\frac{x+1}{3}$. **Trap:** $f^{-1}(x)$ is not $1/f(x)$, and $f\\circ g$ is usually not $g\\circ f$."
-  },
-  {
-    "id": "t1.transforms",
-    "name": "Graph transformations",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.func-basics"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "**When:** a graph is shifted, stretched, or reflected. **Move:** $f(x-h)+k$ moves right $h$ and up $k$. $af(x)$ stretches by $a$ vertically. $-f(x)$ reflects in the $x$-axis and $f(-x)$ in the $y$-axis. Even functions satisfy $f(-x)=f(x)$. **Example:** $y=(x-3)^2+4$ has vertex $(3,4)$. **Trap:** $f(x+2)$ moves left, the opposite of what the sign suggests."
-  },
-  {
-    "id": "t1.coord-geom",
-    "name": "Coordinate geometry",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [
-      "t1.quad"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "**When:** points, lines, or conics in the plane. **Move:** distance is $\\sqrt{(\\Delta x)^2+(\\Delta y)^2}$. The midpoint averages coordinates. Slope is $\\frac{\\Delta y}{\\Delta x}$. Complete the square to read off the center and radius of $(x-h)^2+(y-k)^2=r^2$. **Example:** $x^2+y^2-6x+4y-3=0$ has center $(3,-2)$ and radius $4$. **Trap:** a vertical line has undefined slope, not slope $0$."
-  },
-  {
-    "id": "t1.geom-formulas",
-    "name": "Plane and solid geometry",
-    "level": "T1",
-    "area": "alg",
-    "prereq": [],
-    "order": 13,
-    "exam": true,
-    "teach": "**When:** triangles, circles, solids, and similar figures. **Move:** recall area, volume, and Pythagorean relations. Scaling lengths by $k$ scales areas by $k^2$ and volumes by $k^3$. An angle inscribed in a semicircle is $90^\\circ$. **Example:** legs $9$ and $12$ give hypotenuse $15$. **Trap:** using the diameter where the radius is needed."
-  },
-  {
-    "id": "t2.unit-circle",
-    "name": "Unit circle values",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t1.geom-formulas"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.trig-id",
-    "name": "Trig identities",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.unit-circle"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.trig-eq",
-    "name": "Trig equations",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.trig-id"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.trig-graph",
-    "name": "Trig graphs",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.unit-circle",
-      "t1.transforms"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.inv-trig",
-    "name": "Inverse trig",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.unit-circle",
-      "t1.compose"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.tri-laws",
-    "name": "Law of sines and cosines",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.unit-circle"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.exp-log",
-    "name": "Exponentials and logs",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t1.exp-rules",
-      "t1.compose"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.log-eq",
-    "name": "Log and exponential equations",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.exp-log"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.seq-series",
-    "name": "Arithmetic and geometric sequences",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t1.lin-eq"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.sigma-binom",
-    "name": "Sigma notation and binomial theorem",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.seq-series"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.logic-sets",
-    "name": "Logic and sets",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.proof-methods",
-    "name": "Proof methods",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.logic-sets"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t2.induction",
-    "name": "Induction",
-    "level": "T2",
-    "area": "alg",
-    "prereq": [
-      "t2.proof-methods",
-      "t2.seq-series"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.limit-algebra",
-    "name": "Algebraic limits",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t1.rational-expr"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.limit-special",
-    "name": "Special limits and squeeze",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.limit-algebra",
-      "t2.trig-id"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.continuity",
-    "name": "Continuity",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.limit-algebra"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.deriv-def",
-    "name": "Derivative from definition",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.limit-algebra"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.deriv-rules",
-    "name": "Power, product, quotient rules",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.deriv-def"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.chain-rule",
-    "name": "Chain rule",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.deriv-rules",
-      "t1.compose"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.trans-deriv",
-    "name": "Transcendental derivatives",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.chain-rule",
-      "t2.exp-log",
-      "t2.inv-trig"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.implicit",
-    "name": "Implicit differentiation",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.chain-rule"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.log-diff",
-    "name": "Logarithmic differentiation",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.trans-deriv"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.lhopital",
-    "name": "L'Hopital's rule",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.trans-deriv",
-      "t3.limit-special"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.related-rates",
-    "name": "Related rates",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.implicit"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.optimize",
-    "name": "Optimization",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.deriv-rules"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.curve-shape",
-    "name": "Curve shape",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.optimize"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t3.mvt-rolle",
-    "name": "Rolle and Mean Value Theorem",
-    "level": "T3",
-    "area": "calc",
-    "prereq": [
-      "t3.continuity",
-      "t3.curve-shape"
-    ],
-    "order": 14,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.antideriv",
-    "name": "Basic antiderivatives",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t3.trans-deriv"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.u-sub",
-    "name": "Substitution",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.antideriv"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.by-parts",
-    "name": "Integration by parts",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.u-sub"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.trig-int",
-    "name": "Trigonometric integrals",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.u-sub",
-      "t2.trig-id"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.trig-sub",
-    "name": "Trigonometric substitution",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.trig-int"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.partial-frac",
-    "name": "Partial fractions",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.u-sub",
-      "t1.poly-div"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.ftc",
-    "name": "Fundamental theorem of calculus",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.u-sub"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.improper-int",
-    "name": "Improper integrals",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.ftc",
-      "t3.limit-algebra"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.area-volume",
-    "name": "Area and volume",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.ftc"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.arc-avg",
-    "name": "Arc length, surface area, averages",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.area-volume"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.seq-limits",
-    "name": "Sequence limits",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t3.limit-special",
-      "t2.seq-series"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.series-tests",
-    "name": "Series convergence tests",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.seq-limits",
-      "t4.improper-int"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.alt-series",
-    "name": "Alternating and conditional convergence",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.series-tests"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.power-series",
-    "name": "Power series",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.series-tests"
-    ],
-    "order": 14,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.taylor",
-    "name": "Taylor series",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.power-series",
-      "t3.deriv-rules"
-    ],
-    "order": 15,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t4.param-polar",
-    "name": "Parametric and polar curves",
-    "level": "T4",
-    "area": "calc",
-    "prereq": [
-      "t4.area-volume",
-      "t2.trig-graph"
-    ],
-    "order": 16,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.vec-ops",
-    "name": "Vector operations",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t2.tri-laws"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.lines-planes",
-    "name": "Lines and planes in R3",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.vec-ops"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.partials",
-    "name": "Partial derivatives",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t3.chain-rule"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.mv-chain",
-    "name": "Multivariable chain rule",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.partials"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.gradient",
-    "name": "Gradient and directional derivative",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.mv-chain",
-      "t5.vec-ops"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.mv-extrema",
-    "name": "Multivariable extrema",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.gradient"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.lagrange",
-    "name": "Lagrange multipliers",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.mv-extrema"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.double-int",
-    "name": "Double integrals",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t4.area-volume",
-      "t5.partials"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.coord-change",
-    "name": "Polar, cylindrical, spherical integrals",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.double-int",
-      "t4.param-polar"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.triple-int",
-    "name": "Triple integrals",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.coord-change"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.line-int",
-    "name": "Line integrals and conservative fields",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.gradient",
-      "t5.double-int"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.green",
-    "name": "Green's theorem",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.line-int"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.div-curl",
-    "name": "Divergence, curl, surface integrals",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.line-int",
-      "t5.triple-int"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t5.stokes-gauss",
-    "name": "Stokes and divergence theorems",
-    "level": "T5",
-    "area": "calc",
-    "prereq": [
-      "t5.green",
-      "t5.div-curl"
-    ],
-    "order": 14,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.matrix-ops",
-    "name": "Matrix algebra",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t1.sys-eq"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.gauss",
-    "name": "Row reduction",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.matrix-ops"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.determinant",
-    "name": "Determinants",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.matrix-ops"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.inverse",
-    "name": "Matrix inverse",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.gauss",
-      "t6.determinant"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.vector-spaces",
-    "name": "Vector spaces and subspaces",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t2.logic-sets"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.basis-dim",
-    "name": "Span, independence, basis, dimension",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.vector-spaces",
-      "t6.gauss"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.rank-nullity",
-    "name": "Rank-nullity",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.basis-dim"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.lin-maps",
-    "name": "Linear transformations",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.rank-nullity"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.change-basis",
-    "name": "Change of basis and similarity",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.lin-maps",
-      "t6.inverse"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.eigen-2x2",
-    "name": "Eigenvalues of small matrices",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.determinant",
-      "t1.quad"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.diagonalize",
-    "name": "Diagonalization",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.eigen-2x2",
-      "t6.change-basis"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.cayley-ham",
-    "name": "Cayley-Hamilton and minimal polynomial",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.eigen-2x2"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.inner-product",
-    "name": "Inner products and Gram-Schmidt",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t5.vec-ops",
-      "t6.basis-dim"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.spectral",
-    "name": "Symmetric matrices and quadratic forms",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.diagonalize",
-      "t6.inner-product"
-    ],
-    "order": 14,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t6.jordan-nilpotent",
-    "name": "Nilpotent and Jordan structure",
-    "level": "T6",
-    "area": "alg",
-    "prereq": [
-      "t6.cayley-ham"
-    ],
-    "order": 15,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.nt-gcd",
-    "name": "Divisibility and gcd",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t2.induction"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.nt-mod",
-    "name": "Modular arithmetic",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.nt-gcd"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.nt-euler",
-    "name": "Fermat, Euler, Wilson",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.nt-mod"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.group-axioms",
-    "name": "Group definition and examples",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t2.proof-methods"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.subgroup-cyclic",
-    "name": "Subgroups and cyclic groups",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.group-axioms",
-      "t7.nt-gcd"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.order-lagrange",
-    "name": "Element order and Lagrange",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.subgroup-cyclic"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.perm-groups",
-    "name": "Permutation groups",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.order-lagrange"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.dihedral-small",
-    "name": "Dihedral and small groups",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.perm-groups"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.cosets-normal",
-    "name": "Cosets and normal subgroups",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.order-lagrange"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.quotient-hom",
-    "name": "Quotients and homomorphisms",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.cosets-normal"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.abelian-class",
-    "name": "Finite abelian groups",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.quotient-hom",
-      "t7.nt-mod"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.sylow-action",
-    "name": "Group actions and Sylow",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.quotient-hom",
-      "t7.perm-groups"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.ring-basics",
-    "name": "Rings and ideals",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.quotient-hom"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.domain-ufd",
-    "name": "Domains, PIDs, UFDs",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.ring-basics"
-    ],
-    "order": 14,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.poly-irred",
-    "name": "Irreducible polynomials",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.ring-basics",
-      "t1.poly-div"
-    ],
-    "order": 15,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t7.field-ext",
-    "name": "Field extensions",
-    "level": "T7",
-    "area": "alg",
-    "prereq": [
-      "t7.poly-irred"
-    ],
-    "order": 16,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.real-axioms",
-    "name": "Real numbers and sup/inf",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t2.proof-methods"
-    ],
-    "order": 1,
-    "exam": false,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.seq-conv",
-    "name": "Sequence convergence proofs",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.real-axioms",
-      "t4.seq-limits"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.cauchy-bw",
-    "name": "Cauchy sequences and Bolzano-Weierstrass",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.seq-conv"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.cont-eps",
-    "name": "Continuity (epsilon-delta)",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.seq-conv",
-      "t3.continuity"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.unif-cont",
-    "name": "Uniform continuity",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.cont-eps"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.cont-thms",
-    "name": "Consequences of continuity",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.cont-eps"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.diff-thms",
-    "name": "Differentiation theory",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.cont-thms",
-      "t3.mvt-rolle"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.riemann",
-    "name": "Riemann integrability",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.cont-thms",
-      "t4.ftc"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.series-formal",
-    "name": "Series convergence theory",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.seq-conv",
-      "t4.series-tests"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.unif-conv",
-    "name": "Uniform convergence",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.cont-eps",
-      "t8.series-formal"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.metric-open",
-    "name": "Metric spaces and open/closed sets",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.real-axioms"
-    ],
-    "order": 11,
-    "exam": false,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.compact-conn",
-    "name": "Compactness and connectedness",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.metric-open",
-      "t8.cauchy-bw"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.top-general",
-    "name": "General topology",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.metric-open"
-    ],
-    "order": 13,
-    "exam": false,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.cardinality",
-    "name": "Countability",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.real-axioms"
-    ],
-    "order": 14,
-    "exam": false,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t8.counterexamples",
-    "name": "Standard counterexamples",
-    "level": "T8",
-    "area": "extra",
-    "prereq": [
-      "t8.cont-eps",
-      "t8.unif-conv"
-    ],
-    "order": 15,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.counting",
-    "name": "Counting principles",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t2.sigma-binom"
-    ],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.incl-excl",
-    "name": "Inclusion-exclusion and pigeonhole",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.counting",
-      "t2.logic-sets"
-    ],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.recurrence",
-    "name": "Recurrences",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.counting",
-      "t2.seq-series"
-    ],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.graph-basics",
-    "name": "Graph theory basics",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.counting"
-    ],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.graph-structure",
-    "name": "Euler, Hamilton, coloring, planarity",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.graph-basics"
-    ],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.algorithms",
-    "name": "Algorithms and complexity",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.graph-basics",
-      "t9.recurrence"
-    ],
-    "order": 6,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.prob-basics",
-    "name": "Probability basics",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.counting"
-    ],
-    "order": 7,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.rand-var",
-    "name": "Random variables",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.prob-basics",
-      "t4.series-tests"
-    ],
-    "order": 8,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.distributions",
-    "name": "Common distributions",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.rand-var",
-      "t4.improper-int"
-    ],
-    "order": 9,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.stats-basics",
-    "name": "Statistics essentials",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.distributions"
-    ],
-    "order": 10,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.complex-arith",
-    "name": "Complex arithmetic and polar form",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t2.trig-id"
-    ],
-    "order": 11,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.complex-analytic",
-    "name": "Analytic functions",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.complex-arith",
-      "t5.partials"
-    ],
-    "order": 12,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.contour-residue",
-    "name": "Contour integrals and residues",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.complex-analytic",
-      "t5.line-int"
-    ],
-    "order": 13,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.complex-maps",
-    "name": "Mobius maps and zeros",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.complex-analytic"
-    ],
-    "order": 14,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.ode-first",
-    "name": "First-order ODEs",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t4.ftc"
-    ],
-    "order": 15,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.ode-linear",
-    "name": "Linear ODEs with constant coefficients",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.ode-first",
-      "t2.trig-id"
-    ],
-    "order": 16,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.ode-systems",
-    "name": "ODE systems and phase behavior",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t9.ode-linear",
-      "t6.diagonalize"
-    ],
-    "order": 17,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.numerical",
-    "name": "Numerical analysis",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t3.optimize",
-      "t4.taylor"
-    ],
-    "order": 18,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t9.geometry-misc",
-    "name": "Geometry and transformations",
-    "level": "T9",
-    "area": "extra",
-    "prereq": [
-      "t5.lines-planes"
-    ],
-    "order": 19,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t10.triage",
-    "name": "Question triage",
-    "level": "T10",
-    "area": "extra",
-    "prereq": [],
-    "order": 1,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t10.plug-choices",
-    "name": "Plug in the choices",
-    "level": "T10",
-    "area": "extra",
-    "prereq": [],
-    "order": 2,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t10.special-cases",
-    "name": "Special-case and symmetry checks",
-    "level": "T10",
-    "area": "extra",
-    "prereq": [],
-    "order": 3,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t10.sanity-check",
-    "name": "Sanity checks",
-    "level": "T10",
-    "area": "extra",
-    "prereq": [],
-    "order": 4,
-    "exam": true,
-    "teach": "TODO: teach card"
-  },
-  {
-    "id": "t10.time-boxing",
-    "name": "Time-boxing at pace",
-    "level": "T10",
-    "area": "extra",
-    "prereq": [],
-    "order": 5,
-    "exam": true,
-    "teach": "TODO: teach card"
-  }
+ {
+  "id": "t1.lin-eq",
+  "name": "Linear equations",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** an equation where the unknown appears only to the first power. **Move:** apply the same operation to both sides until the unknown stands alone. Undo additions and subtractions before multiplications and divisions. **Example:** $3x-7=2x+5 \\Rightarrow x=12$. **Trap:** operating on one side only, or distributing a minus sign over just the first term of a bracket."
+ },
+ {
+  "id": "t1.sys-eq",
+  "name": "Systems of equations",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.lin-eq"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** two or three linear equations in the same unknowns. **Move:** eliminate a variable by adding a multiple of one equation to another, or substitute one equation into the other. **Example:** $x+y=10$ and $x-y=4$ give $x=7$. **Trap:** reading $0=5$ as an answer. It means no solution. $0=0$ means infinitely many."
+ },
+ {
+  "id": "t1.quad",
+  "name": "Quadratic solving",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.lin-eq"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** $ax^2+bx+c=0$, or an expression that reduces to it. **Move:** factor if the roots are visible. Otherwise use $x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. The discriminant $b^2-4ac$ gives the root count without solving. **Example:** $x^2-5x+6=0$ has roots $2$ and $3$. **Trap:** a sign slip on $b$, or forgetting the $2a$ in the denominator."
+ },
+ {
+  "id": "t1.factor",
+  "name": "Factoring patterns",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.quad"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a polynomial with a visible pattern or a known root. **Move:** check difference of squares $a^2-b^2=(a-b)(a+b)$, cubes $a^3\\mp b^3=(a\\mp b)(a^2\\pm ab+b^2)$, then grouping. For $x^2+px+q$ with roots $r,s$: $r+s=-p$ and $rs=q$. **Example:** $x^2-7x+10=(x-2)(x-5)$. **Trap:** $a^2+b^2$ does not factor over the reals."
+ },
+ {
+  "id": "t1.poly-div",
+  "name": "Polynomial division",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.factor"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** dividing by $x-c$, or finding roots of a cubic or higher. **Move:** the remainder theorem gives the remainder $p(c)$ with no division. Synthetic division gives the quotient. Rational-root candidates are $\\pm p/q$, with $p$ a factor of the constant term and $q$ a factor of the leading coefficient. **Example:** $p(1)=0$ for $x^3-3x+2$. **Trap:** using $c$ when the divisor is $x+c$; that case needs $-c$."
+ },
+ {
+  "id": "t1.rational-expr",
+  "name": "Rational expressions",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.factor"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** fractions whose numerator and denominator are polynomials. **Move:** factor everything, cancel only common factors, and combine over a common denominator. For equations, multiply through, solve, then discard any root that makes a denominator zero. **Example:** $\\frac{x}{x-2}=\\frac{4}{x-2}$ gives $x=4$. **Trap:** cancelling terms instead of factors, as in $\\frac{x^2+4}{x}\\neq x+4$."
+ },
+ {
+  "id": "t1.exp-rules",
+  "name": "Exponent and radical rules",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** powers with negative, fractional, or integer exponents, and radicals. **Move:** $a^m a^n=a^{m+n}$, $(a^m)^n=a^{mn}$, $a^{-m}=1/a^m$, $a^{m/n}=\\sqrt[n]{a^m}$. To rationalize $\\frac{1}{\\sqrt u-\\sqrt v}$, multiply top and bottom by $\\sqrt u+\\sqrt v$. **Example:** $\\frac{1}{\\sqrt3-1}=\\frac{\\sqrt3+1}{2}$. **Trap:** $(a+b)^n\\neq a^n+b^n$."
+ },
+ {
+  "id": "t1.abs-ineq",
+  "name": "Absolute value and inequalities",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.quad",
+   "t1.rational-expr"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** absolute values, or a rational or polynomial inequality with sign changes. **Move:** $|u|<b$ means $-b<u<b$; $|u|>b$ means $u<-b$ or $u>b$. For a quotient, find the zeros of numerator and denominator, test each interval, then decide the endpoints. **Example:** $|x-2|\\le 3$ gives $-1\\le x\\le 5$. **Trap:** multiplying by an expression of unknown sign, or including a denominator's zero."
+ },
+ {
+  "id": "t1.func-basics",
+  "name": "Function notation and domain",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** any formula written as $f(x)$. **Move:** substitute the input inside the brackets and simplify. For the domain, exclude zero denominators and negative values under even roots. For piecewise functions, use the branch whose condition holds. **Example:** $f(x)=\\sqrt{8-2x}$ has domain $x\\le 4$. **Trap:** writing $f(a+b)=f(a)+f(b)$. That is almost never true."
+ },
+ {
+  "id": "t1.compose",
+  "name": "Composition and inverse",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.func-basics"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** combining functions, or undoing one. **Move:** $(f\\circ g)(x)=f(g(x))$, so apply $g$ first. To invert, swap $x$ and $y$ and solve for $y$. Only one-to-one functions have inverses. **Example:** if $f(x)=3x-1$, then $f^{-1}(x)=\\frac{x+1}{3}$. **Trap:** $f^{-1}(x)$ is not $1/f(x)$, and $f\\circ g$ is usually not $g\\circ f$."
+ },
+ {
+  "id": "t1.transforms",
+  "name": "Graph transformations",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.func-basics"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a graph is shifted, stretched, or reflected. **Move:** $f(x-h)+k$ moves right $h$ and up $k$. $af(x)$ stretches by $a$ vertically. $-f(x)$ reflects in the $x$-axis and $f(-x)$ in the $y$-axis. Even functions satisfy $f(-x)=f(x)$. **Example:** $y=(x-3)^2+4$ has vertex $(3,4)$. **Trap:** $f(x+2)$ moves left, the opposite of what the sign suggests."
+ },
+ {
+  "id": "t1.coord-geom",
+  "name": "Coordinate geometry",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [
+   "t1.quad"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** points, lines, or conics in the plane. **Move:** distance is $\\sqrt{(\\Delta x)^2+(\\Delta y)^2}$. The midpoint averages coordinates. Slope is $\\frac{\\Delta y}{\\Delta x}$. Complete the square to read off the center and radius of $(x-h)^2+(y-k)^2=r^2$. **Example:** $x^2+y^2-6x+4y-3=0$ has center $(3,-2)$ and radius $4$. **Trap:** a vertical line has undefined slope, not slope $0$."
+ },
+ {
+  "id": "t1.geom-formulas",
+  "name": "Plane and solid geometry",
+  "level": "T1",
+  "area": "alg",
+  "prereq": [],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** triangles, circles, solids, and similar figures. **Move:** recall area, volume, and Pythagorean relations. Scaling lengths by $k$ scales areas by $k^2$ and volumes by $k^3$. An angle inscribed in a semicircle is $90^\\circ$. **Example:** legs $9$ and $12$ give hypotenuse $15$. **Trap:** using the diameter where the radius is needed."
+ },
+ {
+  "id": "t2.unit-circle",
+  "name": "Unit circle values",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t1.geom-formulas"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** an angle needs an exact sine, cosine or tangent. **Move:** find the reference angle, the acute angle to the $x$-axis, and take its value from the $30^\\circ$, $45^\\circ$, $60^\\circ$ table. Then apply the sign from the quadrant. **Example:** $\\cos\\frac{5\\pi}{3}=\\frac12$, since $\\frac{5\\pi}{3}$ is in quadrant IV and $\\cos$ is positive there. **Trap:** making $\\sin\\frac{5\\pi}{3}$ positive, which forgets that sine is negative in quadrant IV."
+ },
+ {
+  "id": "t2.trig-id",
+  "name": "Trig identities",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.unit-circle"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** a trig expression needs simplifying, or one trig value is given and another is asked. **Move:** rewrite everything in $\\sin$ and $\\cos$, or use $\\sin^2\\theta+\\cos^2\\theta=1$, $1+\\tan^2\\theta=\\sec^2\\theta$, or $\\cos 2\\theta=\\cos^2\\theta-\\sin^2\\theta$. **Example:** if $\\sin\\theta=\\frac35$ with $\\cos\\theta>0$, then $\\cos\\theta=\\frac45$. **Trap:** taking a square root and dropping the sign, so the quadrant check is skipped."
+ },
+ {
+  "id": "t2.trig-eq",
+  "name": "Trig equations",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.trig-id"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** a trig equation on a stated interval, or its general solution. **Move:** isolate one trig function, find the reference angle, then list every angle in the interval with that value, using the period. A substitution such as $u=\\sin x$ turns a trig quadratic into an ordinary one. **Example:** $\\cos x=\\frac12$ on $[0,2\\pi)$ gives $x=\\frac{\\pi}{3},\\frac{5\\pi}{3}$. **Trap:** listing only the principal angle, or using the period of $\\sin$ for $\\tan$."
+ },
+ {
+  "id": "t2.trig-graph",
+  "name": "Trig graphs",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.unit-circle",
+   "t1.transforms"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** sketching or reading $y=A\\sin(Bx-C)+D$, or its cosine or tangent form. **Move:** amplitude is $|A|$, period is $\\frac{2\\pi}{|B|}$ (tangent: $\\frac{\\pi}{|B|}$), the horizontal shift is $\\frac{C}{B}$ to the right, and the midline is $y=D$. **Example:** $y=3\\sin 2x+1$ has amplitude $3$, period $\\pi$, midline $y=1$, and range $[-2,4]$. **Trap:** shifting by $C$ instead of $\\frac{C}{B}$."
+ },
+ {
+  "id": "t2.inv-trig",
+  "name": "Inverse trig",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.unit-circle",
+   "t1.compose"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** an angle is needed from a trig value, or a trig function of an inverse function. **Move:** $\\arcsin$, $\\arccos$ and $\\arctan$ return one angle from a fixed range: $[-\\frac\\pi2,\\frac\\pi2]$, $[0,\\pi]$, and $(-\\frac\\pi2,\\frac\\pi2)$. Draw a right triangle to read other trig values. **Example:** $\\cos\\left(\\arcsin\\frac{5}{13}\\right)=\\frac{12}{13}$. **Trap:** writing $\\arccos(\\cos\\theta)=\\theta$ for every $\\theta$, which fails outside $[0,\\pi]$."
+ },
+ {
+  "id": "t2.tri-laws",
+  "name": "Law of sines and cosines",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.unit-circle"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a triangle with no right angle, given three parts including one angle. **Move:** for SSS or SAS use $c^2=a^2+b^2-2ab\\cos C$. For AAS or ASA use $\\frac{a}{\\sin A}=\\frac{b}{\\sin B}$. **Example:** $a=5$, $b=7$, $C=60^\\circ$ give $c^2=25+49-35=39$. **Trap:** in the SSA case there can be two triangles, because $\\arcsin$ returns only one of the two possible angles. Check $180^\\circ-B$ too."
+ },
+ {
+  "id": "t2.exp-log",
+  "name": "Exponentials and logs",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t1.exp-rules",
+   "t1.compose"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** an exponential or log expression, or a power to solve for. **Move:** $\\log_b(xy)=\\log_b x+\\log_b y$, $\\log_b(x^r)=r\\log_b x$, $\\log_b b^x=x$, and $e^{\\ln x}=x$. Take logs of both sides to bring exponents down. **Example:** $\\ln\\left(e^{3}\\right)=3$, and $\\log_{10}\\left(100^{2}\\right)=4$. **Trap:** writing $\\log(x+y)=\\log x+\\log y$. Logs do not split sums."
+ },
+ {
+  "id": "t2.log-eq",
+  "name": "Log and exponential equations",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.exp-log"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** an equation with a variable in an exponent or inside a log. **Move:** rewrite both sides with one base or as one log, then compare. Check every root in the original equation, since a log needs a positive argument. **Example:** $\\log_{10}(x+1)=2$ gives $x+1=100$, so $x=99$. **Trap:** keeping a root that makes a log argument zero or negative, such as $x=-1$ in $\\log x+\\log(x-3)=\\log 4$."
+ },
+ {
+  "id": "t2.seq-series",
+  "name": "Arithmetic and geometric sequences",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t1.lin-eq"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** terms with a constant difference or a constant ratio, or a sum of such terms. **Move:** arithmetic: $a_n=a_1+(n-1)d$ and $S_n=\\frac{n(a_1+a_n)}{2}$. Geometric: $a_n=a_1r^{n-1}$, $S_n=\\frac{a_1(1-r^n)}{1-r}$, and $S_\\infty=\\frac{a_1}{1-r}$ when $|r|<1$. **Example:** $5,\\frac52,\\frac54,\\ldots$ has $S_\\infty=10$. **Trap:** using the arithmetic sum on a geometric sequence, or counting $n+1$ terms when the sum has $n$."
+ },
+ {
+  "id": "t2.sigma-binom",
+  "name": "Sigma notation and binomial theorem",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.seq-series"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a sum with a variable index, or a power of a binomial. **Move:** use $\\sum_{k=1}^{n}k=\\frac{n(n+1)}{2}$ and $\\sum_{k=1}^{n}k^2=\\frac{n(n+1)(2n+1)}{6}$. In $(a+b)^n$, the term with $b^k$ is $\\binom{n}{k}a^{n-k}b^k$. **Example:** the $x^2$ coefficient of $(1+x)^4$ is $\\binom42=6$. **Trap:** starting the index at $0$ when the sum starts at $1$."
+ },
+ {
+  "id": "t2.logic-sets",
+  "name": "Logic and sets",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** a statement with $\\forall$, $\\exists$ or $\\to$, or a set union, intersection or complement. **Move:** negate by flipping the quantifier and negating the predicate: $\\neg\\forall x\\,P\\equiv\\exists x\\,\\neg P$. The contrapositive $\\neg q\\to\\neg p$ is equivalent to $p\\to q$. For sets, $|A\\cup B|=|A|+|B|-|A\\cap B|$. **Example:** $|A|=5$, $|B|=7$, $|A\\cap B|=2$ give $|A\\cup B|=10$. **Trap:** taking the converse $q\\to p$ as the contrapositive."
+ },
+ {
+  "id": "t2.proof-methods",
+  "name": "Proof methods",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.logic-sets"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** choosing how to prove a claim. **Move:** a direct proof assumes the hypothesis and reaches the conclusion. A contrapositive proof assumes $\\neg q$ and reaches $\\neg p$. A contradiction proof assumes $p$ and $\\neg q$ and derives a false statement. One example proves only an existence claim. **Example:** to prove $\\sqrt2$ irrational, assume $\\sqrt2=\\frac pq$ in lowest terms. **Trap:** assuming the conclusion, or proving a universal claim from one example."
+ },
+ {
+  "id": "t2.induction",
+  "name": "Induction",
+  "level": "T2",
+  "area": "alg",
+  "prereq": [
+   "t2.proof-methods",
+   "t2.seq-series"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** a claim $P(n)$ holds for all integers from some starting value. **Move:** prove the base case $P(n_0)$. Then assume $P(k)$ for an arbitrary $k\\ge n_0$ and prove $P(k+1)$. **Example:** for $\\sum_{k=1}^{n}(2k-1)=n^2$, the step adds $2k+1$ to $k^2$ to get $(k+1)^2$. **Trap:** proving the step without a base case, which proves nothing."
+ },
+ {
+  "id": "t3.limit-algebra",
+  "name": "Algebraic limits",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t1.rational-expr"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "**When:** a limit of a rational or radical expression where direct substitution gives $\\frac{0}{0}$. **Move:** substitute first. If the denominator is zero, factor or rationalize to cancel the shared factor, then substitute again. **Example:** $\\lim_{x\\to2}\\frac{x^2-4}{x-2}=\\lim_{x\\to2}(x+2)=4$. **Trap:** cancelling terms instead of factors, as in $\\frac{x+4}{x}\\neq4$."
+ },
+ {
+  "id": "t3.limit-special",
+  "name": "Special limits and squeeze",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.limit-algebra",
+   "t2.trig-id"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "**When:** a limit with $\\sin$, $\\tan$, $1-\\cos$, $e^x-1$, or $\\ln(1+x)$, or a bounded factor times a term that tends to zero. **Move:** rewrite so the argument matches the denominator, then use $\\frac{\\sin u}{u}\\to1$ or $\\frac{1-\\cos u}{u^2}\\to\\frac12$. Use the squeeze theorem when one factor is bounded. **Example:** $\\lim_{x\\to0}\\frac{\\sin3x}{x}=3$. **Trap:** $\\frac{\\sin3x}{x}$ is not $\\frac{\\sin3}{1}$. The sine's argument must match the denominator exactly."
+ },
+ {
+  "id": "t3.continuity",
+  "name": "Continuity",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.limit-algebra"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "**When:** a formula with a hole, or a piecewise function with a parameter. **Move:** check three things at $a$: $f(a)$ is defined, the two-sided limit exists, and the limit equals $f(a)$. To fill a parameter, match the one-sided limits to the other branch. **Example:** $f(x)=\\frac{x^2-4}{x-2}$ with $f(2)=c$ needs $c=4$. **Trap:** matching only the left-hand limit. Continuity needs both sides to agree with $f(a)$."
+ },
+ {
+  "id": "t3.deriv-def",
+  "name": "Derivative from definition",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.limit-algebra"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "**When:** a derivative asked from first principles, or a corner such as $|x|$ at $0$ where no rule applies. **Move:** write $f'(a)=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$, expand, cancel the factor $h$, then let $h\\to0$. At a corner, compare the left and right quotients. **Example:** for $f(x)=x^2$, $\\frac{(a+h)^2-a^2}{h}=2a+h\\to2a$. **Trap:** forgetting to subtract $f(a)$, or dividing by $a$ instead of $h$."
+ },
+ {
+  "id": "t3.deriv-rules",
+  "name": "Power, product, quotient rules",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.deriv-def"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "**When:** a sum, product, or quotient of powers and polynomials. **Move:** differentiate a sum term by term. For a product use $u'v+uv'$. For a quotient use $\\frac{u'v-uv'}{v^2}$. The power rule $\\frac{d}{dx}x^n=nx^{n-1}$ holds for any real $n$. **Example:** $\\frac{d}{dx}\\frac{x}{x+1}=\\frac{1}{(x+1)^2}$. **Trap:** $(uv)'\\neq u'v'$, and the quotient numerator keeps the order $u'v-uv'$."
+ },
+ {
+  "id": "t3.chain-rule",
+  "name": "Chain rule",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.deriv-rules",
+   "t1.compose"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "**When:** a function of a function, such as $(3x+1)^5$, $\\sin(x^2)$, or $e^{x^2}$. **Move:** differentiate the outer function at the inner function, then multiply by the derivative of the inner function. **Example:** $\\frac{d}{dx}(3x+1)^5=5(3x+1)^4\\cdot3$. **Trap:** dropping the inner derivative. Evaluating the outer derivative at $x$ instead of at $g(x)$ is also common."
+ },
+ {
+  "id": "t3.trans-deriv",
+  "name": "Transcendental derivatives",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.chain-rule",
+   "t2.exp-log",
+   "t2.inv-trig"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "**When:** exponentials, logarithms, trigonometric and inverse trigonometric functions. **Move:** memorize $\\frac{d}{dx}e^x=e^x$, $\\frac{d}{dx}\\ln x=\\frac1x$, $\\frac{d}{dx}\\tan x=\\sec^2x$, $\\frac{d}{dx}\\arctan x=\\frac{1}{1+x^2}$, and $\\frac{d}{dx}a^x=a^x\\ln a$. Add the chain rule for composites. **Example:** $\\frac{d}{dx}e^{3x}=3e^{3x}$. **Trap:** $\\frac{d}{dx}a^x$ is not $xa^{x-1}$. That is the power rule with the variable in the wrong place."
+ },
+ {
+  "id": "t3.implicit",
+  "name": "Implicit differentiation",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.chain-rule"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "**When:** an equation in $x$ and $y$ that is hard to solve for $y$, such as $x^2+y^2=25$. **Move:** differentiate both sides with respect to $x$. Every $y$ term gets a factor $y'$ from the chain rule. Then solve the resulting linear equation for $y'$. **Example:** $\\frac{d}{dx}(x^2+y^2)=0$ gives $2x+2yy'=0$, so $y'=-\\frac{x}{y}$. **Trap:** forgetting the $y'$ factor on $y$ terms, which leaves a wrong slope."
+ },
+ {
+  "id": "t3.log-diff",
+  "name": "Logarithmic differentiation",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.trans-deriv"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "**When:** a product or quotient of many factors, or a variable exponent, as in $x^x$. **Move:** take $\\ln$ of both sides, expand with the log rules, differentiate, then multiply by $y$. **Example:** for $y=x^x$, $\\ln y=x\\ln x$, so $\\frac{y'}{y}=\\ln x+1$. **Trap:** leaving the log of a product or power unexpanded, or forgetting to multiply by $y$ at the end."
+ },
+ {
+  "id": "t3.lhopital",
+  "name": "L'Hopital's rule",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.trans-deriv",
+   "t3.limit-special"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "**When:** a limit that is $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$ after substitution, where the quotient of derivatives is simpler. **Move:** differentiate the numerator and the denominator separately, not the quotient. Substitute again, and repeat if the form is still indeterminate. Convert $0\\cdot\\infty$ to a quotient first. **Example:** $\\lim_{x\\to0}\\frac{\\sin x}{x}=\\lim\\frac{\\cos x}{1}=1$. **Trap:** applying the quotient rule to the whole fraction, or skipping the check for an indeterminate form."
+ },
+ {
+  "id": "t3.related-rates",
+  "name": "Related rates",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.implicit"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "**When:** two or more quantities change with time and are linked by a formula. **Move:** write the equation linking the quantities, differentiate both sides with respect to $t$, substitute the given values and rates, then solve for the unknown rate. **Example:** for $V=x^3$, $\\frac{dV}{dt}=3x^2\\frac{dx}{dt}$, which is $12\\frac{dx}{dt}$ at $x=2$. **Trap:** substituting numbers before differentiating, which loses the rate terms."
+ },
+ {
+  "id": "t3.optimize",
+  "name": "Optimization",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.deriv-rules"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "**When:** a quantity must be maximized or minimized under a constraint. **Move:** write the objective in one variable using the constraint. Find critical points where $f'=0$ or $f'$ is undefined, then compare them with the endpoints. **Example:** for $x+y=10$, maximize $xy=x(10-x)$. The derivative $10-2x=0$ gives $x=5$ and product $25$. **Trap:** skipping the domain check, or ignoring endpoints of a closed interval."
+ },
+ {
+  "id": "t3.curve-shape",
+  "name": "Curve shape",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.optimize"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "**When:** sketching a graph, or finding intervals of increase, decrease, concavity, extrema, and inflection points. **Move:** use $f'$ for increase and decrease, and $f''$ for concavity. A local extremum is a sign change of $f'$. An inflection point is a sign change of $f''$. **Example:** for $f=x^3-3x$, $f''=6x$ changes sign at $0$, so $x=0$ is an inflection point. **Trap:** calling every critical point an extremum. A zero of $f'$ with no sign change is neither a maximum nor a minimum."
+ },
+ {
+  "id": "t3.mvt-rolle",
+  "name": "Rolle and Mean Value Theorem",
+  "level": "T3",
+  "area": "calc",
+  "prereq": [
+   "t3.continuity",
+   "t3.curve-shape"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "**When:** a claim that a derivative takes a given value somewhere on an interval. **Move:** check continuity on $[a,b]$ and differentiability on $(a,b)$. Rolle needs $f(a)=f(b)$ and gives $f'(c)=0$. The MVT gives $f'(c)=\\frac{f(b)-f(a)}{b-a}$. **Example:** for $f=x^2$ on $[1,4]$, $2c=5$, so $c=\\frac52$. **Trap:** forgetting to check the hypotheses. The conclusion is not guaranteed without them."
+ },
+ {
+  "id": "t4.antideriv",
+  "name": "Basic antiderivatives",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t3.trans-deriv"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.u-sub",
+  "name": "Substitution",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.antideriv"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.by-parts",
+  "name": "Integration by parts",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.u-sub"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.trig-int",
+  "name": "Trigonometric integrals",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.u-sub",
+   "t2.trig-id"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.trig-sub",
+  "name": "Trigonometric substitution",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.trig-int"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.partial-frac",
+  "name": "Partial fractions",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.u-sub",
+   "t1.poly-div"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.ftc",
+  "name": "Fundamental theorem of calculus",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.u-sub"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.improper-int",
+  "name": "Improper integrals",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.ftc",
+   "t3.limit-algebra"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.area-volume",
+  "name": "Area and volume",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.ftc"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.arc-avg",
+  "name": "Arc length, surface area, averages",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.area-volume"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.seq-limits",
+  "name": "Sequence limits",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t3.limit-special",
+   "t2.seq-series"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.series-tests",
+  "name": "Series convergence tests",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.seq-limits",
+   "t4.improper-int"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.alt-series",
+  "name": "Alternating and conditional convergence",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.series-tests"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.power-series",
+  "name": "Power series",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.series-tests"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.taylor",
+  "name": "Taylor series",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.power-series",
+   "t3.deriv-rules"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t4.param-polar",
+  "name": "Parametric and polar curves",
+  "level": "T4",
+  "area": "calc",
+  "prereq": [
+   "t4.area-volume",
+   "t2.trig-graph"
+  ],
+  "order": 16,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.vec-ops",
+  "name": "Vector operations",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t2.tri-laws"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.lines-planes",
+  "name": "Lines and planes in R3",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.vec-ops"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.partials",
+  "name": "Partial derivatives",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t3.chain-rule"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.mv-chain",
+  "name": "Multivariable chain rule",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.partials"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.gradient",
+  "name": "Gradient and directional derivative",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.mv-chain",
+   "t5.vec-ops"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.mv-extrema",
+  "name": "Multivariable extrema",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.gradient"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.lagrange",
+  "name": "Lagrange multipliers",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.mv-extrema"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.double-int",
+  "name": "Double integrals",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t4.area-volume",
+   "t5.partials"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.coord-change",
+  "name": "Polar, cylindrical, spherical integrals",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.double-int",
+   "t4.param-polar"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.triple-int",
+  "name": "Triple integrals",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.coord-change"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.line-int",
+  "name": "Line integrals and conservative fields",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.gradient",
+   "t5.double-int"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.green",
+  "name": "Green's theorem",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.line-int"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.div-curl",
+  "name": "Divergence, curl, surface integrals",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.line-int",
+   "t5.triple-int"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t5.stokes-gauss",
+  "name": "Stokes and divergence theorems",
+  "level": "T5",
+  "area": "calc",
+  "prereq": [
+   "t5.green",
+   "t5.div-curl"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.matrix-ops",
+  "name": "Matrix algebra",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t1.sys-eq"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.gauss",
+  "name": "Row reduction",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.matrix-ops"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.determinant",
+  "name": "Determinants",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.matrix-ops"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.inverse",
+  "name": "Matrix inverse",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.gauss",
+   "t6.determinant"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.vector-spaces",
+  "name": "Vector spaces and subspaces",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t2.logic-sets"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.basis-dim",
+  "name": "Span, independence, basis, dimension",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.vector-spaces",
+   "t6.gauss"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.rank-nullity",
+  "name": "Rank-nullity",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.basis-dim"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.lin-maps",
+  "name": "Linear transformations",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.rank-nullity"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.change-basis",
+  "name": "Change of basis and similarity",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.lin-maps",
+   "t6.inverse"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.eigen-2x2",
+  "name": "Eigenvalues of small matrices",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.determinant",
+   "t1.quad"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.diagonalize",
+  "name": "Diagonalization",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.eigen-2x2",
+   "t6.change-basis"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.cayley-ham",
+  "name": "Cayley-Hamilton and minimal polynomial",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.eigen-2x2"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.inner-product",
+  "name": "Inner products and Gram-Schmidt",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t5.vec-ops",
+   "t6.basis-dim"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.spectral",
+  "name": "Symmetric matrices and quadratic forms",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.diagonalize",
+   "t6.inner-product"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t6.jordan-nilpotent",
+  "name": "Nilpotent and Jordan structure",
+  "level": "T6",
+  "area": "alg",
+  "prereq": [
+   "t6.cayley-ham"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.nt-gcd",
+  "name": "Divisibility and gcd",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t2.induction"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.nt-mod",
+  "name": "Modular arithmetic",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.nt-gcd"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.nt-euler",
+  "name": "Fermat, Euler, Wilson",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.nt-mod"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.group-axioms",
+  "name": "Group definition and examples",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t2.proof-methods"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.subgroup-cyclic",
+  "name": "Subgroups and cyclic groups",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.group-axioms",
+   "t7.nt-gcd"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.order-lagrange",
+  "name": "Element order and Lagrange",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.subgroup-cyclic"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.perm-groups",
+  "name": "Permutation groups",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.order-lagrange"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.dihedral-small",
+  "name": "Dihedral and small groups",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.perm-groups"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.cosets-normal",
+  "name": "Cosets and normal subgroups",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.order-lagrange"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.quotient-hom",
+  "name": "Quotients and homomorphisms",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.cosets-normal"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.abelian-class",
+  "name": "Finite abelian groups",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.quotient-hom",
+   "t7.nt-mod"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.sylow-action",
+  "name": "Group actions and Sylow",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.quotient-hom",
+   "t7.perm-groups"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.ring-basics",
+  "name": "Rings and ideals",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.quotient-hom"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.domain-ufd",
+  "name": "Domains, PIDs, UFDs",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.ring-basics"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.poly-irred",
+  "name": "Irreducible polynomials",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.ring-basics",
+   "t1.poly-div"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t7.field-ext",
+  "name": "Field extensions",
+  "level": "T7",
+  "area": "alg",
+  "prereq": [
+   "t7.poly-irred"
+  ],
+  "order": 16,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.real-axioms",
+  "name": "Real numbers and sup/inf",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t2.proof-methods"
+  ],
+  "order": 1,
+  "exam": false,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.seq-conv",
+  "name": "Sequence convergence proofs",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.real-axioms",
+   "t4.seq-limits"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.cauchy-bw",
+  "name": "Cauchy sequences and Bolzano-Weierstrass",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.seq-conv"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.cont-eps",
+  "name": "Continuity (epsilon-delta)",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.seq-conv",
+   "t3.continuity"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.unif-cont",
+  "name": "Uniform continuity",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.cont-eps"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.cont-thms",
+  "name": "Consequences of continuity",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.cont-eps"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.diff-thms",
+  "name": "Differentiation theory",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.cont-thms",
+   "t3.mvt-rolle"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.riemann",
+  "name": "Riemann integrability",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.cont-thms",
+   "t4.ftc"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.series-formal",
+  "name": "Series convergence theory",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.seq-conv",
+   "t4.series-tests"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.unif-conv",
+  "name": "Uniform convergence",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.cont-eps",
+   "t8.series-formal"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.metric-open",
+  "name": "Metric spaces and open/closed sets",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.real-axioms"
+  ],
+  "order": 11,
+  "exam": false,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.compact-conn",
+  "name": "Compactness and connectedness",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.metric-open",
+   "t8.cauchy-bw"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.top-general",
+  "name": "General topology",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.metric-open"
+  ],
+  "order": 13,
+  "exam": false,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.cardinality",
+  "name": "Countability",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.real-axioms"
+  ],
+  "order": 14,
+  "exam": false,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t8.counterexamples",
+  "name": "Standard counterexamples",
+  "level": "T8",
+  "area": "extra",
+  "prereq": [
+   "t8.cont-eps",
+   "t8.unif-conv"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.counting",
+  "name": "Counting principles",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t2.sigma-binom"
+  ],
+  "order": 1,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.incl-excl",
+  "name": "Inclusion-exclusion and pigeonhole",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.counting",
+   "t2.logic-sets"
+  ],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.recurrence",
+  "name": "Recurrences",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.counting",
+   "t2.seq-series"
+  ],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.graph-basics",
+  "name": "Graph theory basics",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.counting"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.graph-structure",
+  "name": "Euler, Hamilton, coloring, planarity",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.graph-basics"
+  ],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.algorithms",
+  "name": "Algorithms and complexity",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.graph-basics",
+   "t9.recurrence"
+  ],
+  "order": 6,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.prob-basics",
+  "name": "Probability basics",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.counting"
+  ],
+  "order": 7,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.rand-var",
+  "name": "Random variables",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.prob-basics",
+   "t4.series-tests"
+  ],
+  "order": 8,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.distributions",
+  "name": "Common distributions",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.rand-var",
+   "t4.improper-int"
+  ],
+  "order": 9,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.stats-basics",
+  "name": "Statistics essentials",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.distributions"
+  ],
+  "order": 10,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.complex-arith",
+  "name": "Complex arithmetic and polar form",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t2.trig-id"
+  ],
+  "order": 11,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.complex-analytic",
+  "name": "Analytic functions",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.complex-arith",
+   "t5.partials"
+  ],
+  "order": 12,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.contour-residue",
+  "name": "Contour integrals and residues",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.complex-analytic",
+   "t5.line-int"
+  ],
+  "order": 13,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.complex-maps",
+  "name": "Mobius maps and zeros",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.complex-analytic"
+  ],
+  "order": 14,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.ode-first",
+  "name": "First-order ODEs",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t4.ftc"
+  ],
+  "order": 15,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.ode-linear",
+  "name": "Linear ODEs with constant coefficients",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.ode-first",
+   "t2.trig-id"
+  ],
+  "order": 16,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.ode-systems",
+  "name": "ODE systems and phase behavior",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t9.ode-linear",
+   "t6.diagonalize"
+  ],
+  "order": 17,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.numerical",
+  "name": "Numerical analysis",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t3.optimize",
+   "t4.taylor"
+  ],
+  "order": 18,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t9.geometry-misc",
+  "name": "Geometry and transformations",
+  "level": "T9",
+  "area": "extra",
+  "prereq": [
+   "t5.lines-planes"
+  ],
+  "order": 19,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t10.triage",
+  "name": "Question triage",
+  "level": "T10",
+  "area": "extra",
+  "prereq": [],
+  "order": 1,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t10.plug-choices",
+  "name": "Plug in the choices",
+  "level": "T10",
+  "area": "extra",
+  "prereq": [],
+  "order": 2,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t10.special-cases",
+  "name": "Special-case and symmetry checks",
+  "level": "T10",
+  "area": "extra",
+  "prereq": [],
+  "order": 3,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t10.sanity-check",
+  "name": "Sanity checks",
+  "level": "T10",
+  "area": "extra",
+  "prereq": [],
+  "order": 4,
+  "exam": true,
+  "teach": "TODO: teach card"
+ },
+ {
+  "id": "t10.time-boxing",
+  "name": "Time-boxing at pace",
+  "level": "T10",
+  "area": "extra",
+  "prereq": [],
+  "order": 5,
+  "exam": true,
+  "teach": "TODO: teach card"
+ }
 ]

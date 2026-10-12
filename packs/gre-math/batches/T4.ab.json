@@ -1,0 +1,4517 @@
+[
+  {
+    "id": "t4-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $n\\neq -1$, which is an antiderivative of $x^n$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{x^{n+1}}{n+1}$",
+        "$nx^{n-1}$",
+        "$\\frac{x^{n}}{n}$",
+        "$(n+1)x^{n+1}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "differentiated instead of integrating",
+        "power not raised before dividing",
+        "multiplied by $n+1$ instead of dividing"
+      ]
+    },
+    "solution": "Raise the power by one and divide by the new power: $\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$.",
+    "hints": [
+      "Add one to the exponent, then divide by it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $\\int \\cos(3x)\\,dx=\\frac{1}{k}\\sin(3x)+C$, what is $k$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "Since $\\frac{d}{dx}\\sin(3x)=3\\cos(3x)$, the antiderivative carries $\\frac{1}{3}$, so $k=3$.",
+    "hints": [
+      "Differentiate $\\sin(3x)$ and compare the factor."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is an antiderivative of $\\frac{1}{x}$ on $x>0$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$-\\frac{1}{x^2}$",
+        "$\\ln x$",
+        "$\\frac{1}{\\ln x}$",
+        "$-\\frac{1}{2x^2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "differentiated $\\frac{1}{x}$ instead of integrating it",
+        "",
+        "inverted the function",
+        "applied the power rule with $n=-1$"
+      ]
+    },
+    "solution": "The power rule fails at $n=-1$. The antiderivative of $\\frac{1}{x}$ is $\\ln x$ for $x>0$.",
+    "hints": [
+      "The power rule has one exception."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\int_1^2 (4x^3-x)\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "27/2",
+      "form": "exact"
+    },
+    "check": "Fraction(27,2)",
+    "solution": "An antiderivative is $x^4-\\frac{x^2}{2}$. It gives $14$ at $2$ and $\\frac{1}{2}$ at $1$. The difference is $\\frac{27}{2}$.",
+    "hints": [
+      "Integrate term by term, then subtract at the bounds."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $F(x)$ with $F'(x)=\\frac{1}{\\sqrt{x}}$ for $x>0$ and $F(0)=0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "2*sqrt(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "sqrt(4*x)"
+      ]
+    },
+    "check": null,
+    "solution": "Write $\\frac{1}{\\sqrt x}=x^{-1/2}$. Then $F(x)=2x^{1/2}$, which is $0$ at $x=0$.",
+    "hints": [
+      "Rewrite the root as a power of $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^2 e^{x}\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6.389056,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.exp(2)-1",
+    "solution": "$\\int_0^2 e^x\\,dx=e^2-1\\approx 6.389056$.",
+    "hints": [
+      "The antiderivative of $e^x$ is itself."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find an antiderivative of $x^{-3}$ on $x>0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "-1/(2*x^2)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "-(1/2)*x^(-2)"
+      ]
+    },
+    "check": null,
+    "solution": "Use the power rule with $n=-3$: $\\frac{x^{-2}}{-2}=-\\frac{1}{2x^2}$.",
+    "hints": [
+      "Raise the exponent by one, then divide by the new exponent."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\int_0^4 \\sqrt{x}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "16/3",
+      "form": "exact"
+    },
+    "check": "Fraction(16,3)",
+    "solution": "$\\int_0^4 x^{1/2}\\,dx=\\frac{2}{3}x^{3/2}$ from $0$ to $4$, which gives $\\frac{2}{3}\\cdot 8=\\frac{16}{3}$.",
+    "hints": [
+      "Use the power rule with exponent $\\frac{1}{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.antideriv"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all antiderivatives of $f(x)=2x+\\cos x$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$x^2+\\sin x-3$",
+        "$x^2+\\sin x$",
+        "$x^2-\\sin x$",
+        "$2x^2+\\sin x$"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "$\\int(2x+\\cos x)\\,dx=x^2+\\sin x+C$. The $\\sin x$ sign and the $x^2$ term are fixed.",
+    "hints": [
+      "Integrate each term separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "After $u=g(x)$, which form does $\\int f(g(x))\\,g'(x)\\,dx$ take?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\int f(u)\\,du$",
+        "$\\int f(u)\\,dx$",
+        "$\\int f(g(x))\\,du$",
+        "$\\int u\\,f(u)\\,du$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgot to replace $dx$ with $du$",
+        "left $x$ inside $f$ after substituting",
+        "multiplied the integrand by $u$"
+      ]
+    },
+    "solution": "Replace $g(x)$ by $u$ and $g'(x)\\,dx$ by $du$. The integrand becomes $f(u)$.",
+    "hints": [
+      "Replace every $x$ piece, including $dx$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In $\\int 2x\\,e^{x^2+1}\\,dx$ with $u=x^2+1$, what is $c$ in $c\\int e^{u}\\,du$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "Here $du=2x\\,dx$, so $2x\\,dx$ becomes $du$ with coefficient $1$.",
+    "hints": [
+      "Compare $du$ with $2x\\,dx$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a definite integral with $u=g(x)$, what happens to the limits?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Keep the $x$-limits with the $u$-integrand",
+        "Replace them by $0$ and $1$",
+        "Convert them to $g(a)$ and $g(b)$",
+        "Reverse their sign"
+      ],
+      "correct": 2,
+      "why": [
+        "kept $x$-limits with a $u$ integrand, mixing variables",
+        "assumed the limits are always $0$ and $1$",
+        "",
+        "reversed the sign without any reason"
+      ]
+    },
+    "solution": "Each limit maps through $u=g(x)$: $x=a$ gives $u=g(a)$ and $x=b$ gives $u=g(b)$.",
+    "hints": [
+      "Apply $g$ to each limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1 2x\\,(x^2+1)^3\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "15/4",
+      "form": "exact"
+    },
+    "check": "Fraction(15,4)",
+    "solution": "Let $u=x^2+1$, so $du=2x\\,dx$ and the limits become $1$ to $2$. Then $\\int_1^2 u^3\\,du=\\frac{15}{4}$.",
+    "hints": [
+      "Take $u$ as the inside of the power and change the limits."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1 x\\,e^{x^2}\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.859141,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "(math.e-1)/2",
+    "solution": "Let $u=x^2$. Then $\\frac{1}{2}\\int_0^1 e^u\\,du=\\frac{e-1}{2}\\approx 0.859141$.",
+    "hints": [
+      "The factor $x$ pairs with $dx$ to give $\\frac{1}{2}du$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $F(x)$ with $F'(x)=\\frac{2x}{x^2+1}$ and $F(0)=0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "ln(x^2+1)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "ln(1+x^2)"
+      ]
+    },
+    "check": null,
+    "solution": "With $u=x^2+1$ the integral is $\\int\\frac{du}{u}=\\ln u$. Also $F(0)=\\ln 1=0$.",
+    "hints": [
+      "Let $u=x^2+1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^{\\pi/2}\\cos x\\,\\sin^2x\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "exact"
+    },
+    "check": "Fraction(1,3)",
+    "solution": "Let $u=\\sin x$, so $du=\\cos x\\,dx$ and the limits become $0$ to $1$. Then $\\int_0^1 u^2\\,du=\\frac{1}{3}$.",
+    "hints": [
+      "Take $u=\\sin x$, the inside of the power."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_1^e \\frac{\\ln x}{x}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "Let $u=\\ln x$, so $du=\\frac{dx}{x}$ and the limits become $0$ and $1$. Then $\\int_0^1 u\\,du=\\frac{1}{2}$.",
+    "hints": [
+      "The derivative of $\\ln x$ sits in the denominator."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t4-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.u-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all substitutions that turn $\\int x\\sqrt{1+x^2}\\,dx$ into an integral in $u$ alone.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$u=1+x^2$, so $du=2x\\,dx$",
+        "$u=\\sqrt{1+x^2}$, so $x\\,dx=u\\,du$",
+        "$u=x$, so $du=dx$",
+        "$u=x^2$, so $du=dx$"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Option 1 gives $\\frac{1}{2}\\int\\sqrt{u}\\,du$. Option 2 gives $\\int u^2\\,du$. The other two leave $x$ in the integrand.",
+    "hints": [
+      "Check that every $x$ and $dx$ is replaced."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Integration by parts is the reverse of which differentiation rule?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Product rule",
+        "Chain rule",
+        "Quotient rule",
+        "Power rule"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "handles compositions, not a product of two functions",
+        "has a denominator squared, not a product",
+        "has one term only, not a pair of factors"
+      ]
+    },
+    "solution": "The product rule gives $(uv)'=u'v+uv'$. Integrating both sides yields $\\int u\\,dv=uv-\\int v\\,du$.",
+    "hints": [
+      "Start from $(uv)'$ and integrate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\int x\\ln x\\,dx$ with $u=\\ln x$ and $dv=x\\,dx$, what is the coefficient of $x^2$ in $v$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "Integrate $dv=x\\,dx$: $v=\\frac{x^2}{2}$.",
+    "hints": [
+      "Integrate $x$ with the power rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\int x^2\\ln x\\,dx$, which choice of $u$ does LIATE recommend?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$u=x^2$",
+        "$u=\\ln x$",
+        "$u=x^2\\ln x$",
+        "$u=dx$"
+      ],
+      "correct": 1,
+      "why": [
+        "ranks algebraic above logarithmic, so this is the wrong order",
+        "",
+        "takes the whole integrand as $u$, leaving no $dv$",
+        "treats $dx$ as a function, which is meaningless"
+      ]
+    },
+    "solution": "LIATE ranks logarithmic functions first. $u=\\ln x$ gives $\\frac{1}{x}$ as its derivative, which is simpler.",
+    "hints": [
+      "LIATE: log, inverse trig, algebraic, trig, exponential."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1 x e^{x}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "Take $u=x$ and $dv=e^x\\,dx$. Then $[xe^x-e^x]_0^1=(e-e)-(0-1)=1$.",
+    "hints": [
+      "Differentiate $u=x$ to get $du=dx$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t4-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_1^e x\\ln x\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.097264,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "(math.e**2+1)/4",
+    "solution": "Using $u=\\ln x$ and $dv=x\\,dx$ gives $\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}$. Evaluating gives $\\frac{e^2+1}{4}\\approx 2.097264$.",
+    "hints": [
+      "Integrate $x$ to get $v$, then evaluate the new integral $\\int v\\,du$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^{\\pi} x\\cos x\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -2,
+      "form": "exact"
+    },
+    "check": "-2",
+    "solution": "With $u=x$ and $v=\\sin x$: $[x\\sin x+\\cos x]_0^\\pi=(0-1)-(0+1)=-2$.",
+    "hints": [
+      "Take $u=x$ and $v=\\sin x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find $F(x)$ with $F'(x)=xe^{2x}$ and $F(0)=0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(2*x-1)*exp(2*x)/4+1/4",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "exp(2*x)*(2*x-1)/4+0.25"
+      ]
+    },
+    "check": null,
+    "solution": "Parts with $u=x$, $dv=e^{2x}dx$ give $\\frac{xe^{2x}}{2}-\\frac{e^{2x}}{4}$. Adding $C$ so that $F(0)=0$ gives $C=\\frac{1}{4}$.",
+    "hints": [
+      "Take $u=x$ and $v=\\frac{e^{2x}}{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1 \\arctan x\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.438825,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/4-math.log(2)/2",
+    "solution": "With $u=\\arctan x$ and $dv=dx$: $\\int_0^1\\arctan x\\,dx=\\frac{\\pi}{4}-\\frac{\\ln 2}{2}\\approx 0.438825$.",
+    "hints": [
+      "Take $u=\\arctan x$ and $v=x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.by-parts"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find an antiderivative of $x\\cos x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "x*sin(x)+cos(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "cos(x)+x*sin(x)"
+      ]
+    },
+    "check": null,
+    "solution": "Let $u=x$ and $dv=\\cos x\\,dx$, so $v=\\sin x$. Then $\\int x\\cos x\\,dx=x\\sin x-\\int\\sin x\\,dx=x\\sin x+\\cos x$.",
+    "hints": [
+      "Let $u=x$; $v$ is an antiderivative of $\\cos x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which identity rewrites $\\sin^2x$ with a double angle?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\sin^2x=\\frac{1-\\cos 2x}{2}$",
+        "$\\sin^2x=1-\\cos 2x$",
+        "$\\sin^2x=\\frac{1+\\cos 2x}{2}$",
+        "$\\sin^2x=\\cos^2x-1$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgot the factor $\\frac{1}{2}$",
+        "that is the form for $\\cos^2x$, so the sign of the cosine term is wrong",
+        "a wrong rearrangement of the Pythagorean identity"
+      ]
+    },
+    "solution": "From $\\cos 2x=1-2\\sin^2x$, solve for $\\sin^2x$.",
+    "hints": [
+      "Solve $\\cos 2x=1-2\\sin^2x$ for $\\sin^2x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the average value of $\\sin^2x$ over $[0,\\pi]$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "Average $=\\frac{1}{\\pi}\\int_0^\\pi\\sin^2x\\,dx=\\frac{1}{\\pi}\\cdot\\frac{\\pi}{2}=\\frac{1}{2}$.",
+    "hints": [
+      "Use the half-angle identity or the symmetry of $\\sin^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $\\int\\cos^3x\\,dx$, what is the usual first move?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Use $\\cos^2x=\\frac{1+\\cos 2x}{2}$ on all three factors",
+        "Let $u=\\cos^3x$",
+        "Save one $\\cos x$ and write $\\cos^2x=1-\\sin^2x$",
+        "Integrate by parts repeatedly"
+      ],
+      "correct": 2,
+      "why": [
+        "the half-angle form on an odd power makes the integral harder",
+        "the inner function is $\\cos x$, not its cube",
+        "",
+        "not needed, and it does not end quickly"
+      ]
+    },
+    "solution": "Save $\\cos x\\,dx=d(\\sin x)$ and convert the rest. This gives $\\int(1-u^2)\\,du$ with $u=\\sin x$.",
+    "hints": [
+      "An odd power leaves one factor to pair with $dx$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^{\\pi/2}\\cos^2x\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.785398,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/4",
+    "solution": "Use $\\cos^2x=\\frac{1+\\cos 2x}{2}$. The integral is $\\frac{x}{2}+\\frac{\\sin 2x}{4}$, which gives $\\frac{\\pi}{4}\\approx 0.785398$.",
+    "hints": [
+      "Replace $\\cos^2x$ with the half-angle form first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^{\\pi/2}\\sin^3x\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/3",
+      "form": "exact"
+    },
+    "check": "Fraction(2,3)",
+    "solution": "Save $\\sin x\\,dx$ and let $u=\\cos x$: $\\int_0^1(1-u^2)\\,du=1-\\frac{1}{3}=\\frac{2}{3}$.",
+    "hints": [
+      "Pair one $\\sin x$ with $dx$ and convert the rest."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $F(x)$ with $F'(x)=\\sin^2x$ and $F(0)=0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "x/2-sin(2*x)/4",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "0.5*x-0.25*sin(2*x)"
+      ]
+    },
+    "check": null,
+    "solution": "Use $\\sin^2x=\\frac{1-\\cos 2x}{2}$. Integrating gives $\\frac{x}{2}-\\frac{\\sin 2x}{4}$, which is $0$ at $x=0$.",
+    "hints": [
+      "Apply the half-angle identity before integrating."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Evaluate $\\int_0^{\\pi}\\sin x\\cos^2x\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/3",
+      "form": "exact"
+    },
+    "check": "Fraction(2,3)",
+    "solution": "Let $u=\\cos x$, so $du=-\\sin x\\,dx$. Then $\\int_{-1}^{1}u^2\\,du=\\frac{2}{3}$.",
+    "hints": [
+      "Take $u=\\cos x$, which pairs with the lone $\\sin x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Evaluate $\\int_0^{\\pi/2}\\sin^2x\\cos^2x\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.19635,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/16",
+    "solution": "Write $\\sin^2x\\cos^2x=\\frac{\\sin^2 2x}{4}$, so the integral is $\\frac{\\pi}{16}\\approx 0.196350$.",
+    "hints": [
+      "Use $\\sin 2x=2\\sin x\\cos x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-int"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find $F(x)$ with $F'(x)=\\tan x\\sec^2x$ and $F(0)=0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "tan(x)^2/2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.1,
+        1.2
+      ],
+      "also": [
+        "sin(x)^2/(2*cos(x)^2)"
+      ]
+    },
+    "check": null,
+    "solution": "Let $u=\\tan x$, so $du=\\sec^2x\\,dx$. Then $\\int u\\,du=\\frac{\\tan^2x}{2}$, which is $0$ at $x=0$.",
+    "hints": [
+      "Let $u=\\tan x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\sqrt{a^2-x^2}$, which substitution removes the root?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=a\\sin\\theta$",
+        "$x=a\\tan\\theta$",
+        "$x=a\\sec\\theta$",
+        "$u=a^2-x^2$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "suits $a^2+x^2$, which gives secant terms",
+        "suits $x^2-a^2$, not $a^2-x^2$",
+        "a plain $u$-substitution on the radicand does not remove the root"
+      ]
+    },
+    "solution": "With $x=a\\sin\\theta$, $a^2-x^2=a^2\\cos^2\\theta$, so the root becomes $a\\cos\\theta$.",
+    "hints": [
+      "Use $1-\\sin^2\\theta=\\cos^2\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\sqrt{x^2+9}$, what is $a$ when the radical is written as $\\sqrt{x^2+a^2}$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "Since $9=3^2$, $a=3$, and the substitution is $x=3\\tan\\theta$.",
+    "hints": [
+      "Read $a^2$ off the constant term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "With $x=2\\sec\\theta$, what does $\\sqrt{x^2-4}$ become?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$2\\sec\\theta$",
+        "$4\\tan^2\\theta$",
+        "$2\\tan\\theta$",
+        "$2\\cot\\theta$"
+      ],
+      "correct": 2,
+      "why": [
+        "reused the secant instead of simplifying the radical",
+        "forgot to take the square root",
+        "",
+        "inverted the trig ratio"
+      ]
+    },
+    "solution": "$x^2-4=4\\sec^2\\theta-4=4\\tan^2\\theta$, so the root is $2\\tan\\theta$ on the usual branch.",
+    "hints": [
+      "Factor $4$ out of $4\\sec^2\\theta-4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1\\sqrt{1-x^2}\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.785398,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/4",
+    "solution": "Let $x=\\sin\\theta$. Then $\\int_0^{\\pi/2}\\cos^2\\theta\\,d\\theta=\\frac{\\pi}{4}\\approx 0.785398$.",
+    "hints": [
+      "Let $x=\\sin\\theta$ and use $\\cos^2\\theta=\\frac{1+\\cos 2\\theta}{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^3\\frac{dx}{\\sqrt{9-x^2}}$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.570796,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/2",
+    "solution": "Let $x=3\\sin\\theta$. The integral becomes $\\int_0^{\\pi/2}d\\theta=\\frac{\\pi}{2}\\approx 1.570796$.",
+    "hints": [
+      "Let $x=3\\sin\\theta$, so $\\sqrt{9-x^2}=3\\cos\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find $F(x)$ with $F'(x)=\\frac{1}{\\sqrt{x^2+4}}$ and $F(0)=0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "ln(x/2+sqrt(x^2+4)/2)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "ln((x+sqrt(x^2+4))/2)"
+      ]
+    },
+    "check": null,
+    "solution": "Let $x=2\\tan\\theta$. The integral is $\\ln(\\sec\\theta+\\tan\\theta)$, which equals the value shown. It is $0$ at $x=0$.",
+    "hints": [
+      "Let $x=2\\tan\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^2\\sqrt{4-x^2}\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.141593,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi",
+    "solution": "The integral is the area of a quarter disk of radius $2$, so it equals $\\pi\\approx 3.141593$.",
+    "hints": [
+      "Read $y=\\sqrt{4-x^2}$ as the upper half of a circle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^{\\sqrt{3}/2}\\frac{dx}{\\sqrt{1-x^2}}$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.047198,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/3",
+    "solution": "Let $x=\\sin\\theta$. The integral is $\\int_0^{\\pi/3}d\\theta=\\frac{\\pi}{3}\\approx 1.047198$.",
+    "hints": [
+      "Let $x=\\sin\\theta$ and find the new upper limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.trig-sub"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find $F(x)$ with $F'(x)=\\frac{x^2}{\\sqrt{1-x^2}}$ and $F(0)=0$ for $|x|<1$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(asin(x)-x*sqrt(1-x^2))/2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.1,
+        0.8
+      ],
+      "also": [
+        "asin(x)/2-x*sqrt(1-x^2)/2"
+      ]
+    },
+    "check": null,
+    "solution": "Let $x=\\sin\\theta$. The integrand becomes $\\sin^2\\theta$, with antiderivative $\\frac{\\theta-\\sin\\theta\\cos\\theta}{2}$.",
+    "hints": [
+      "Let $x=\\sin\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the partial fraction form of $\\frac{1}{(x-1)(x+2)}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{A}{x-1}+\\frac{B}{(x+2)^2}$",
+        "$\\frac{A}{x-1}+\\frac{B}{x+2}$",
+        "$\\frac{A}{(x-1)(x+2)}$",
+        "$\\frac{Ax+B}{x-1}+\\frac{C}{x+2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "squared a linear factor that appears once",
+        "",
+        "no split: the form is unchanged",
+        "gave a linear numerator over a linear factor"
+      ]
+    },
+    "solution": "Each distinct linear factor gets one constant over it: $\\frac{1}{(x-1)(x+2)}=\\frac{A}{x-1}+\\frac{B}{x+2}$.",
+    "hints": [
+      "Each distinct linear factor gets its own term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $\\frac{1}{x^2-1}=\\frac{A}{x-1}+\\frac{B}{x+1}$, what is $A$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "Cover up the factor $x-1$ and set $x=1$: $A=\\frac{1}{1+1}=\\frac{1}{2}$.",
+    "hints": [
+      "Multiply through by $x-1$ and set $x=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Before splitting $\\frac{p(x)}{q(x)}$ into partial fractions, what must hold?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\deg p<\\deg q$",
+        "$\\deg p=\\deg q$",
+        "$q$ has no real roots",
+        "$p$ is constant"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "equal degrees: divide first, since the quotient is not proper",
+        "irreducible quadratics still split, into a linear numerator over the quadratic",
+        "not required: a constant numerator is a special case"
+      ]
+    },
+    "solution": "Partial fractions need a proper fraction, so the degree of $p$ must be below the degree of $q$. Otherwise divide first.",
+    "hints": [
+      "Compare the degrees of numerator and denominator."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1\\frac{dx}{(x+1)(x+2)}$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.287682,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.log(4/3)",
+    "solution": "$\\frac{1}{(x+1)(x+2)}=\\frac{1}{x+1}-\\frac{1}{x+2}$. The integral is $\\ln\\frac{4}{3}\\approx 0.287682$.",
+    "hints": [
+      "Split with a constant over each linear factor first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t4-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $\\frac{5x-3}{(x-1)(x+3)}=\\frac{A}{x-1}+\\frac{B}{x+3}$, what is $A$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "Set $x=1$ after multiplying by $x-1$: $A=\\frac{5-3}{1+3}=\\frac{1}{2}$.",
+    "hints": [
+      "Cover up the factor $x-1$ and substitute $x=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "One antiderivative of $\\frac{1}{x(x+1)}$ on $x>0$ is:",
+    "answer": {
+      "kind": "expression",
+      "value": "ln(x/(x+1))",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "ln(x)-ln(x+1)"
+      ]
+    },
+    "check": null,
+    "solution": "Split as $\\frac{1}{x}-\\frac{1}{x+1}$. Integrating gives $\\ln x-\\ln(x+1)=\\ln\\frac{x}{x+1}$.",
+    "hints": [
+      "Split the fraction as $\\frac{A}{x}+\\frac{B}{x+1}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_2^3\\frac{dx}{x^2-1}$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.202733,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.log(1.5)/2",
+    "solution": "$\\frac{1}{x^2-1}=\\frac{1}{2}\\left(\\frac{1}{x-1}-\\frac{1}{x+1}\\right)$. The integral is $\\frac{1}{2}\\ln\\frac{3}{2}\\approx 0.202733$.",
+    "hints": [
+      "Factor $x^2-1$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Evaluate $\\int_0^1\\frac{2x+3}{x^2+3x+2}\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.098612,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.log(3)",
+    "solution": "The integrand is $\\frac{1}{x+1}+\\frac{1}{x+2}$. Integrating gives $\\ln 2+\\ln\\frac{3}{2}=\\ln 3\\approx 1.098612$.",
+    "hints": [
+      "Write $2x+3=(x+1)+(x+2)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.partial-frac"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all valid partial fraction forms of $\\frac{1}{x^2(x+1)}$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\frac{A}{x}+\\frac{B}{x^2}+\\frac{C}{x+1}$",
+        "$\\frac{A}{x^2}+\\frac{B}{x+1}$",
+        "$\\frac{A}{x}+\\frac{B}{x^2}+\\frac{C}{(x+1)^2}$",
+        "$\\frac{A}{x^2}+\\frac{B}{x}+\\frac{C}{x+1}$"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "solution": "Each power of $x$ up to $2$ needs its own term, and $x+1$ needs one term. The first and last forms match.",
+    "hints": [
+      "Give $x$ a term for each power up to $x^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $F(x)=\\int_a^x f(t)\\,dt$ with $f$ continuous, what is $F'(x)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$f(a)$",
+        "$f(x)$",
+        "$f'(x)$",
+        "$f(x)-f(a)$"
+      ],
+      "correct": 1,
+      "why": [
+        "treated the upper limit as a constant",
+        "",
+        "differentiated the integrand instead",
+        "subtracted the lower-limit value, which is constant"
+      ]
+    },
+    "solution": "Part 1 of the FTC: differentiating the integral with respect to its upper limit returns the integrand at that limit.",
+    "hints": [
+      "Differentiate with respect to the variable in the upper limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $G'(x)=x^3$ and $G(0)=0$, what is $G(2)$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "$G(2)=\\int_0^2 x^3\\,dx=\\frac{2^4}{4}=4$.",
+    "hints": [
+      "Use $G(2)-G(0)=\\int_0^2 G'(x)\\,dx$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which condition does part 2 of the FTC require?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$f$ continuous on $[a,b]$ with antiderivative $F$",
+        "$f$ is a polynomial",
+        "$f\\ge 0$ on $[a,b]$",
+        "$a=0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "polynomials are not required, any continuous $f$ works",
+        "the sign of $f$ does not matter for the identity",
+        "the lower limit can be any point"
+      ]
+    },
+    "solution": "Part 2: if $F'=f$ on $[a,b]$ with $f$ continuous, then $\\int_a^b f=F(b)-F(a)$.",
+    "hints": [
+      "Continuity is the key hypothesis."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\frac{d}{dx}\\int_0^{x^2}\\sin t\\,dt$ at $x=1$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.682942,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "2*math.sin(1)",
+    "solution": "The FTC with the chain rule gives $\\sin(x^2)\\cdot 2x$. At $x=1$ this is $2\\sin 1\\approx 1.682942$.",
+    "hints": [
+      "Apply the FTC, then the chain rule for the upper limit $x^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^{\\pi/3}\\sec^2x\\,dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.732051,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.sqrt(3)",
+    "solution": "An antiderivative is $\\tan x$, so the integral is $\\tan\\frac{\\pi}{3}=\\sqrt{3}\\approx 1.732051$.",
+    "hints": [
+      "Find an antiderivative of $\\sec^2x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_1^2\\left(\\frac{1}{x}+x\\right)dx$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.193147,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.log(2)+1.5",
+    "solution": "$\\int_1^2\\frac{dx}{x}=\\ln 2$ and $\\int_1^2 x\\,dx=\\frac{3}{2}$, so the total is $\\ln 2+\\frac{3}{2}\\approx 2.193147$.",
+    "hints": [
+      "Split the integral into two pieces."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $F(x)=\\int_0^x\\frac{dt}{1+t^4}$. Write $F'(x)$ as a function of $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/(1+x^4)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "(1+x^4)^(-1)"
+      ]
+    },
+    "check": null,
+    "solution": "Part 1 of the FTC gives the integrand evaluated at the upper limit: $\\frac{1}{1+x^4}$.",
+    "hints": [
+      "Replace $t$ by $x$ in the integrand."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_{-1}^{2}|x|\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "5/2",
+      "form": "exact"
+    },
+    "check": "Fraction(5,2)",
+    "solution": "Split at $0$: $\\int_{-1}^0(-x)\\,dx=\\frac{1}{2}$ and $\\int_0^2 x\\,dx=2$. The total is $\\frac{5}{2}$.",
+    "hints": [
+      "Split the integral where $|x|$ changes form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.ftc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For continuous $f$ on $[a,b]$ with antiderivative $F$, select all true statements.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\int_a^b f(x)\\,dx=F(b)-F(a)$",
+        "$\\int_a^b f(x)\\,dx=F(a)-F(b)$",
+        "$\\frac{d}{dx}\\int_a^x f(t)\\,dt=f(x)$",
+        "$\\frac{d}{dx}\\int_a^x f(t)\\,dt=F(x)$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Part 2 gives the first statement. Part 1 gives the third. The second reverses the sign, and the fourth returns $F(x)$ instead of $f(x)$.",
+    "hints": [
+      "Recall the two parts of the FTC."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For which $p$ does $\\int_1^\\infty\\frac{dx}{x^p}$ converge?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$p\\ge 0$",
+        "$p>1$",
+        "$p<1$",
+        "$p\\neq 1$"
+      ],
+      "correct": 1,
+      "why": [
+        "includes $0<p\\le 1$, which diverge",
+        "",
+        "the complement of the convergent range",
+        "includes $p<1$, which diverge"
+      ]
+    },
+    "solution": "$\\int_1^\\infty x^{-p}\\,dx$ converges exactly when $p>1$, since the antiderivative tends to $0$ only then.",
+    "hints": [
+      "Compute the antiderivative and let the upper limit go to infinity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $\\lim_{t\\to\\infty}\\int_0^t e^{-x}\\,dx$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$\\int_0^t e^{-x}\\,dx=1-e^{-t}\\to 1$.",
+    "hints": [
+      "Evaluate first, then take the limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An integrand blows up at $c$ with $a<c<b$. What is the first step for $\\int_a^b$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Evaluate the antiderivative at $a$ and $b$ directly",
+        "Replace the integrand with its average",
+        "Split at $c$ and take a limit on each piece",
+        "Ignore $c$ because the function is continuous elsewhere"
+      ],
+      "correct": 2,
+      "why": [
+        "direct FTC across $c$ hides the blow-up",
+        "averaging is not a valid method",
+        "",
+        "a point of infinite value cannot be ignored"
+      ]
+    },
+    "solution": "Write $\\int_a^b=\\int_a^c+\\int_c^b$, and treat each piece as a one-sided improper integral.",
+    "hints": [
+      "Split the interval at the bad point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_1^\\infty\\frac{2}{x^3}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "The antiderivative is $-x^{-2}$, and $\\lim_{t\\to\\infty}(1-t^{-2})=1$.",
+    "hints": [
+      "Write the integral as a limit with upper bound $t$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t4-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^1\\frac{dx}{\\sqrt{x}}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$\\int_0^1 x^{-1/2}\\,dx=\\lim_{t\\to0^+}\\left[2\\sqrt x\\right]_t^1=2$.",
+    "hints": [
+      "The singularity is at the lower limit, so use a limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_0^\\infty xe^{-2x}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/4",
+      "form": "exact"
+    },
+    "check": "Fraction(1,4)",
+    "solution": "By parts, the antiderivative is $-\\frac{xe^{-2x}}{2}-\\frac{e^{-2x}}{4}$. Its value is $0$ at $\\infty$ and $-\\frac{1}{4}$ at $0$, so the integral is $\\frac{1}{4}$.",
+    "hints": [
+      "Use parts with $u=x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Evaluate $\\int_2^\\infty\\frac{dx}{x(\\ln x)^2}$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.442695,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "1/math.log(2)",
+    "solution": "With $u=\\ln x$, the integral is $\\int_{\\ln 2}^\\infty u^{-2}\\,du=\\frac{1}{\\ln 2}\\approx 1.442695$.",
+    "hints": [
+      "Substitute $u=\\ln x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\int_{-\\infty}^0 e^{3x}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "exact"
+    },
+    "check": "Fraction(1,3)",
+    "solution": "$\\lim_{t\\to-\\infty}\\left[\\frac{e^{3x}}{3}\\right]_t^0=\\frac{1}{3}$.",
+    "hints": [
+      "The lower limit is the one going to infinity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.improper-int"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all integrals that converge.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\int_1^\\infty\\frac{dx}{x}$",
+        "$\\int_1^\\infty\\frac{dx}{x^{3/2}}$",
+        "$\\int_0^1\\frac{dx}{x}$",
+        "$\\int_0^1\\frac{dx}{\\sqrt x}$"
+      ],
+      "correct": [
+        1,
+        3
+      ]
+    },
+    "solution": "$p=\\frac{3}{2}>1$ converges at infinity, and $p=\\frac{1}{2}<1$ converges at $0$. The other two diverge.",
+    "hints": [
+      "Use the p-test at infinity and near zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which integral gives the volume of $y=f(x)$ on $[a,b]$ revolved about the $x$-axis by disks?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\pi\\int_a^b f(x)^2\\,dx$",
+        "$\\int_a^b f(x)^2\\,dx$",
+        "$2\\pi\\int_a^b f(x)\\,dx$",
+        "$\\pi\\int_a^b f(x)\\,dx$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgot the factor $\\pi$",
+        "shell-method form with the wrong radius",
+        "uses $f$ instead of $f^2$"
+      ]
+    },
+    "solution": "Each disk has area $\\pi f(x)^2$ and thickness $dx$.",
+    "hints": [
+      "A disk has area $\\pi r^2$ with $r=f(x)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the area between $y=x$ and $y=x^2$ on $[0,1]$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/6",
+      "form": "exact"
+    },
+    "check": "Fraction(1,6)",
+    "solution": "$\\int_0^1(x-x^2)\\,dx=\\frac{1}{2}-\\frac{1}{3}=\\frac{1}{6}$.",
+    "hints": [
+      "Take the top curve minus the bottom curve."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "When is the washer method needed?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Region between two curves revolved, leaving a hole",
+        "Region touching the axis of revolution, no hole",
+        "Region above the $x$-axis only",
+        "Revolution about the $y$-axis only"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the disk method, with no hole",
+        "the sign of $f$ does not decide the method",
+        "the axis choice does not decide the method"
+      ]
+    },
+    "solution": "Washers have an outer radius $R(x)$ and an inner radius $r(x)$, so the volume is $\\pi\\int(R^2-r^2)\\,dx$.",
+    "hints": [
+      "Ask whether the solid has a hole."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the area between $y=2-x^2$ and $y=x$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "9/2",
+      "form": "exact"
+    },
+    "check": "Fraction(9,2)",
+    "solution": "Intersections solve $x^2+x-2=0$, so $x=-2$ and $x=1$. Then $\\int_{-2}^1(2-x-x^2)\\,dx=\\frac{9}{2}$.",
+    "hints": [
+      "Solve for the intersections first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The region under $y=\\sqrt{x}$ on $[0,4]$ is revolved about the $x$-axis. Find the volume to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 25.132741,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "8*math.pi",
+    "solution": "$V=\\pi\\int_0^4 x\\,dx=8\\pi\\approx 25.132741$.",
+    "hints": [
+      "Square the radius $\\sqrt{x}$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The region between $y=x$ and $y=x^2$ on $[0,1]$ is revolved about the $x$-axis. Find the volume to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.418879,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "2*math.pi/15",
+    "solution": "Washers: $\\pi\\int_0^1(x^2-x^4)\\,dx=\\frac{2\\pi}{15}\\approx 0.418879$.",
+    "hints": [
+      "The outer radius is $x$ and the inner radius is $x^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Revolve $y=x^2$ on $[0,1]$ about the $y$-axis by shells. Find the volume to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.570796,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/2",
+    "solution": "Shells: $2\\pi\\int_0^1 x\\cdot x^2\\,dx=\\frac{\\pi}{2}\\approx 1.570796$.",
+    "hints": [
+      "The shell radius is $x$ and the shell height is $x^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $V(b)=\\pi\\int_0^b x^2\\,dx$. Write $V(b)$ in closed form.",
+    "answer": {
+      "kind": "expression",
+      "value": "pi*b^3/3",
+      "vars": [
+        "b"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "b^3*pi/3"
+      ]
+    },
+    "check": null,
+    "solution": "The integral of $x^2$ is $\\frac{x^3}{3}$. Multiply by $\\pi$ and evaluate at $b$.",
+    "hints": [
+      "Integrate $x^2$ first, then multiply by $\\pi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.area-volume"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all integrals that give the volume of $y=x^2$ on $[0,1]$ revolved about the $x$-axis.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\pi\\int_0^1 x^4\\,dx$",
+        "$\\pi\\int_0^1 (x^2)^2\\,dx$",
+        "$2\\pi\\int_0^1 x^3\\,dx$",
+        "$\\pi\\int_0^1 x^2\\,dx$"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "The radius is $x^2$, so the disk integrand is $\\pi(x^2)^2=\\pi x^4$. The shell form $2\\pi\\int x^3\\,dx$ is for the $y$-axis.",
+    "hints": [
+      "The radius is the function value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the average value of $f$ on $[a,b]$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\int_a^b f(x)\\,dx$",
+        "$\\frac{1}{b-a}\\int_a^b f(x)\\,dx$",
+        "$\\frac{f(a)+f(b)}{2}$",
+        "$\\frac{1}{b-a}\\int_a^b f(x)^2\\,dx$"
+      ],
+      "correct": 1,
+      "why": [
+        "missed the division by $b-a$",
+        "",
+        "averaged only the endpoints",
+        "squared the function before averaging"
+      ]
+    },
+    "solution": "The average value is $\\frac{1}{b-a}\\int_a^b f(x)\\,dx$.",
+    "hints": [
+      "Divide the integral by the length of the interval."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the average value of $3x^2$ on $[0,2]$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "$\\frac{1}{2}\\int_0^2 3x^2\\,dx=\\frac{1}{2}\\cdot 8=4$.",
+    "hints": [
+      "Divide the integral of $3x^2$ by the length $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which integrand gives the surface area when $y=f(x)$ on $[a,b]$ is revolved about the $x$-axis?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\pi f(x)^2$",
+        "$2\\pi x f(x)$",
+        "$2\\pi f(x)\\sqrt{1+f'(x)^2}$",
+        "$\\sqrt{1+f'(x)^2}$"
+      ],
+      "correct": 2,
+      "why": [
+        "disk-volume integrand, not area",
+        "shell-volume integrand",
+        "",
+        "arc-length integrand, missing the $2\\pi f$ radius factor"
+      ]
+    },
+    "solution": "Each slice is a band of radius $f$ and slant length $\\sqrt{1+f'^2}\\,dx$, so the area is $2\\pi\\int f\\sqrt{1+f'^2}\\,dx$.",
+    "hints": [
+      "Band circumference times slant length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the arc length of $y=\\frac{2}{3}x^{3/2}$ on $[0,3]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "14/3",
+      "form": "exact"
+    },
+    "check": "Fraction(14,3)",
+    "solution": "$f'=x^{1/2}$, so $1+f'^2=1+x$. Then $\\int_0^3\\sqrt{1+x}\\,dx=\\frac{2}{3}(8-1)=\\frac{14}{3}$.",
+    "hints": [
+      "Simplify $1+f'^2$ before integrating."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the average value of $\\sin x$ on $[0,\\pi]$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.63662,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "2/math.pi",
+    "solution": "$\\frac{1}{\\pi}\\int_0^\\pi\\sin x\\,dx=\\frac{2}{\\pi}\\approx 0.636620$.",
+    "hints": [
+      "The integral is $2$; divide by the interval length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Revolve $y=x$ on $[0,1]$ about the $x$-axis. Find the surface area to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.442883,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi*math.sqrt(2)",
+    "solution": "$S=2\\pi\\int_0^1 x\\sqrt{2}\\,dx=\\pi\\sqrt{2}\\approx 4.442883$.",
+    "hints": [
+      "Here $f'=1$, so $\\sqrt{1+f'^2}=\\sqrt{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find the arc length of $y=\\frac{x^2}{2}$ on $[0,1]$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.147794,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "(math.sqrt(2)+math.log(1+math.sqrt(2)))/2",
+    "solution": "$f'=x$, so $L=\\int_0^1\\sqrt{1+x^2}\\,dx=\\frac{1}{2}\\left(\\sqrt2+\\ln(1+\\sqrt2)\\right)\\approx 1.147794$.",
+    "hints": [
+      "Use $x=\\tan\\theta$ or a standard table entry for $\\int\\sqrt{1+x^2}\\,dx$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the average value of $f(x)=x^n$ on $[0,b]$ as a function of $b$ and $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "b^n/(n+1)",
+      "vars": [
+        "b",
+        "n"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "b^n*(n+1)^(-1)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\frac{1}{b}\\int_0^b x^n\\,dx=\\frac{1}{b}\\cdot\\frac{b^{n+1}}{n+1}=\\frac{b^n}{n+1}$.",
+    "hints": [
+      "Divide by the length $b$ after integrating."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.arc-avg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all integrals that give the arc length of $y=f(x)$ on $[a,b]$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\int_a^b\\sqrt{1+f'(x)^2}\\,dx$",
+        "$\\int_a^b\\sqrt{1+f(x)^2}\\,dx$",
+        "$\\int_a^b\\left(1+f'(x)\\right)dx$",
+        "$\\int_a^b\\sqrt{1+f'(x)}\\,dx$",
+        "$\\int_a^b\\sqrt{f'(x)^2+1}\\,dx$"
+      ],
+      "correct": [
+        0,
+        4
+      ]
+    },
+    "solution": "Arc length uses the square of the derivative: $\\sqrt{1+(f')^2}$. The last form is the same expression reordered.",
+    "hints": [
+      "The integrand contains the square of the derivative, not of the function."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $|r|<1$, what is $\\lim_{n\\to\\infty} r^n$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$0$",
+        "$1$",
+        "$\\infty$",
+        "Does not exist"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "confused with the case $r=1$",
+        "treated $|r|<1$ as growth",
+        "oscillation happens only for $r\\le -1$"
+      ]
+    },
+    "solution": "Powers of a number with absolute value below $1$ shrink to $0$.",
+    "hints": [
+      "Think of $r=\\frac{1}{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $\\lim_{n\\to\\infty}\\frac{3n^2+n}{n^2-5}$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "Divide numerator and denominator by $n^2$: $\\frac{3+\\frac{1}{n}}{1-\\frac{5}{n^2}}\\to 3$.",
+    "hints": [
+      "Divide by the highest power of $n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is $\\lim_{n\\to\\infty}\\left(1+\\frac{a}{n}\\right)^n$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$e^{a}$",
+        "$1+a$",
+        "$a$",
+        "$\\infty$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "linearized the power wrongly",
+        "treated the limit as $n\\cdot\\frac{a}{n}$",
+        "ignored that the base tends to $1$ while the power grows"
+      ]
+    },
+    "solution": "This is the standard limit $\\left(1+\\frac{x}{n}\\right)^n\\to e^x$ with $x=a$.",
+    "hints": [
+      "Compare with $\\left(1+\\frac{1}{n}\\right)^n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\lim_{n\\to\\infty}\\frac{\\sqrt{4n^2+1}}{n+2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Divide by $n$: $\\frac{\\sqrt{4+1/n^2}}{1+2/n}\\to\\frac{2}{1}=2$.",
+    "hints": [
+      "Factor $n$ out of the square root."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\lim_{n\\to\\infty}\\left(1+\\frac{3}{n}\\right)^n$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 20.085537,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.exp(3)",
+    "solution": "This is $e^{3}\\approx 20.085537$.",
+    "hints": [
+      "Use $\\left(1+\\frac{x}{n}\\right)^n\\to e^x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\lim_{n\\to\\infty}\\frac{2^n+3^n}{3^n+1}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "The $3^n$ terms dominate, so the ratio tends to $\\frac{3^n}{3^n}=1$.",
+    "hints": [
+      "Divide top and bottom by $3^n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\lim_{n\\to\\infty} n\\sin\\frac{1}{n}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "Let $h=\\frac{1}{n}$. Then $\\frac{\\sin h}{h}\\to 1$.",
+    "hints": [
+      "Rewrite it as $\\frac{\\sin h}{h}$ with $h=\\frac{1}{n}\\to 0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $\\lim_{n\\to\\infty}\\left(1+\\frac{x}{n}\\right)^n$ as a function of $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "exp(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "e^x"
+      ]
+    },
+    "check": null,
+    "solution": "The standard limit $\\left(1+\\frac{x}{n}\\right)^n\\to e^{x}$ holds for every real $x$.",
+    "hints": [
+      "Compare with $e=\\lim\\left(1+\\frac{1}{n}\\right)^n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.seq-limits"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all sequences that converge.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\frac{n^2}{n+1}$",
+        "$\\frac{(-1)^n}{n}$",
+        "$\\sin n$",
+        "$\\frac{2n+3}{5n-1}$",
+        "$\\frac{3^n}{n!}$"
+      ],
+      "correct": [
+        1,
+        3,
+        4
+      ]
+    },
+    "solution": "$\\frac{(-1)^n}{n}\\to 0$, $\\frac{2n+3}{5n-1}\\to\\frac{2}{5}$, and $\\frac{3^n}{n!}\\to 0$. The others diverge.",
+    "hints": [
+      "Compare the growth rates of numerator and denominator."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $\\lim_{n\\to\\infty}a_n\\neq 0$, what does the $n$th term test say about $\\sum a_n$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It diverges",
+        "It converges",
+        "The test is inconclusive",
+        "Its sum is $0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "confused with a comparison test",
+        "missed that this test does decide divergence",
+        "mistook the limit of the terms for the sum"
+      ]
+    },
+    "solution": "Terms that do not tend to $0$ cannot add to a finite total, so the series diverges.",
+    "hints": [
+      "Terms must shrink to zero for a finite sum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the smallest integer $p$ for which $\\sum_{n\\ge1}\\frac{1}{n^p}$ converges?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "A $p$-series converges exactly when $p>1$. The smallest integer greater than $1$ is $2$.",
+    "hints": [
+      "Compare with the $p>1$ rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which test fits $\\sum\\frac{1}{n^2+1}$ best?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Limit comparison with $\\sum\\frac{1}{n^2}$",
+        "Ratio test",
+        "Alternating series test",
+        "$n$th term test, concluding convergence"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the ratio limit is $1$, so the test gives no answer",
+        "the terms are not alternating",
+        "a zero limit of terms does not prove convergence"
+      ]
+    },
+    "solution": "Since $\\frac{1/(n^2+1)}{1/n^2}\\to 1>0$, the series behaves like the convergent $\\sum\\frac{1}{n^2}$.",
+    "hints": [
+      "Compare the terms with a p-series of the same size."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $a_n=\\frac{2^n}{n^2}$, find $\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$\\frac{a_{n+1}}{a_n}=2\\left(\\frac{n}{n+1}\\right)^2\\to 2$, so the ratio test gives divergence.",
+    "hints": [
+      "Simplify the ratio before taking the limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t4-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\lim_{n\\to\\infty}\\frac{a_n}{b_n}$ for $a_n=\\frac{n+1}{n^3+2}$ and $b_n=\\frac{1}{n^2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$\\frac{(n+1)n^2}{n^3+2}\\to 1$.",
+    "hints": [
+      "Multiply out and compare leading terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Integral test: find $\\int_1^\\infty\\frac{\\ln x}{x^3}\\,dx$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/4",
+      "form": "exact"
+    },
+    "check": "Fraction(1,4)",
+    "solution": "By parts with $u=\\ln x$, $dv=x^{-3}dx$: $\\left[-\\frac{\\ln x}{2x^2}-\\frac{1}{4x^2}\\right]_1^\\infty=\\frac{1}{4}$.",
+    "hints": [
+      "Apply the integral test to $f(x)=\\frac{\\ln x}{x^3}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Ratio test: find $\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|$ for $a_n=\\frac{n}{3^n}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "exact"
+    },
+    "check": "Fraction(1,3)",
+    "solution": "$\\frac{a_{n+1}}{a_n}=\\frac{n+1}{3n}\\to\\frac{1}{3}$.",
+    "hints": [
+      "Write $a_{n+1}$ and divide."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $a_n=\\frac{x^n}{n}$, write $\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|$ as a function of $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "abs(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "sqrt(x^2)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\frac{a_{n+1}}{a_n}=x\\cdot\\frac{n}{n+1}\\to x$, so the limit is $|x|$.",
+    "hints": [
+      "Factor $x$ out of the ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.series-tests"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all series that converge.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\sum\\frac{1}{\\sqrt n}$",
+        "$\\sum\\frac{1}{n^{3/2}}$",
+        "$\\sum\\frac{n}{n+1}$",
+        "$\\sum_{n\\ge2}\\frac{1}{n(\\ln n)^2}$",
+        "$\\sum\\frac{2^n}{n!}$"
+      ],
+      "correct": [
+        1,
+        3,
+        4
+      ]
+    },
+    "solution": "$p=\\frac{3}{2}$ converges, $\\frac{1}{n(\\ln n)^2}$ converges by the integral test, and $\\frac{2^n}{n!}$ converges by the ratio test. The first diverges as a $p$-series, and the third has terms not tending to $0$.",
+    "hints": [
+      "Pick the test that matches each form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which condition does the alternating series test require?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|a_n|$ decreases to $0$",
+        "$|a_n|$ increases to $\\infty$",
+        "$\\sum|a_n|$ diverges",
+        "$a_n$ is constant"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "terms must shrink, not grow",
+        "a condition on the absolute series, not part of this test",
+        "a constant nonzero sequence fails the limit condition"
+      ]
+    },
+    "solution": "The alternating series test needs $|a_n|$ decreasing to $0$. Then $\\sum(-1)^n|a_n|$ converges.",
+    "hints": [
+      "The magnitudes must shrink monotonically to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\sum_{n\\ge1}\\frac{(-1)^{n+1}}{n}$, the error after 3 terms is at most $a_4$. What is $a_4$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/4",
+      "form": "exact"
+    },
+    "check": "Fraction(1,4)",
+    "solution": "The bound is the first omitted term, $\\frac{1}{4}$.",
+    "hints": [
+      "Count the terms and find the first one left out."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series converges conditionally when:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It converges, but $\\sum|a_n|$ diverges",
+        "Both $\\sum a_n$ and $\\sum|a_n|$ converge",
+        "$\\sum a_n$ diverges but $\\sum|a_n|$ converges",
+        "Its terms do not tend to $0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is absolute convergence",
+        "impossible: absolute convergence implies convergence",
+        "then the terms fail the $n$th term test"
+      ]
+    },
+    "solution": "Conditional convergence means $\\sum a_n$ converges while the absolute series diverges, as for the alternating harmonic series.",
+    "hints": [
+      "Compare with the alternating harmonic series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $\\sum_{n\\ge1}\\frac{(-1)^{n+1}}{n^2}$, the error after 4 terms is at most $a_5$. What is $a_5$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/25",
+      "form": "exact"
+    },
+    "check": "Fraction(1,25)",
+    "solution": "The first omitted term is $a_5=\\frac{1}{5^2}=\\frac{1}{25}$.",
+    "hints": [
+      "Use $a_n=\\frac{1}{n^2}$ with $n=5$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the second partial sum $S_2$ of $\\sum_{n\\ge1}\\frac{(-1)^{n+1}}{n}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "$S_2=1-\\frac{1}{2}=\\frac{1}{2}$.",
+    "hints": [
+      "Add the first two terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $\\sum_{n\\ge1}\\frac{(-1)^{n+1}}{2n+1}$, the error after 5 terms is at most $a_6$. What is $a_6$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/13",
+      "form": "exact"
+    },
+    "check": "Fraction(1,13)",
+    "solution": "$a_6=\\frac{1}{2\\cdot 6+1}=\\frac{1}{13}$.",
+    "hints": [
+      "Plug $n=6$ into $\\frac{1}{2n+1}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write $\\sum_{n\\ge1}\\frac{(-1)^{n+1}x^n}{n}$ in closed form for $|x|<1$.",
+    "answer": {
+      "kind": "expression",
+      "value": "ln(1+x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        0.8
+      ],
+      "also": [
+        "log(1+x)/log(e)"
+      ]
+    },
+    "check": null,
+    "solution": "Each term is $\\frac{(-1)^{n+1}x^n}{n}$, the expansion of $\\ln(1+x)$ valid for $|x|<1$.",
+    "hints": [
+      "Integrate $\\frac{1}{1+t}=\\sum(-t)^n$ term by term from $0$ to $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "For $\\sum_{n\\ge1}\\frac{(-1)^{n+1}}{n^3}$, the error after 2 terms is at most $a_3$. What is $a_3$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/27",
+      "form": "exact"
+    },
+    "check": "Fraction(1,27)",
+    "solution": "$a_3=\\frac{1}{3^3}=\\frac{1}{27}$.",
+    "hints": [
+      "Two terms are summed, so the bound is the third term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.alt-series"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Select all series that converge conditionally.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\sum\\frac{(-1)^n}{n}$",
+        "$\\sum\\frac{(-1)^n}{n^2}$",
+        "$\\sum\\frac{(-1)^n}{\\sqrt n}$",
+        "$\\sum(-1)^n\\frac{n}{n^2+1}$",
+        "$\\sum\\frac{1}{n^2}$"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ]
+    },
+    "solution": "Alternating terms with $|a_n|$ decreasing to $0$ converge. Their absolute series diverge for the first, third, and fourth. The second converges absolutely, and the last is not alternating.",
+    "hints": [
+      "Check the absolute series for each alternating one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $\\lim|c_{n+1}/c_n|=L$ for $\\sum c_nx^n$, what is the radius of convergence $R$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$R=\\frac{1}{L}$",
+        "$R=L$",
+        "$R=\\infty$ for every $L$",
+        "$R=\\frac{1}{L^2}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverted the ratio",
+        "treated any finite $L$ as no restriction",
+        "squared the ratio"
+      ]
+    },
+    "solution": "The ratio test gives $|x|L<1$, so $|x|<\\frac{1}{L}$.",
+    "hints": [
+      "Solve $L|x|<1$ for $|x|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the radius of convergence of $\\sum_{n\\ge1}\\frac{x^n}{n}$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$\\lim\\left|\\frac{c_{n+1}}{c_n}\\right|=\\lim\\frac{n}{n+1}=1$, so $R=1$.",
+    "hints": [
+      "Use the ratio of consecutive coefficients."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Why must endpoints of the interval of convergence be checked separately?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The ratio test is inconclusive at $|x|=R$",
+        "Endpoints always converge",
+        "Endpoints always diverge",
+        "Endpoints are never included"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "endpoints can converge or diverge depending on the series",
+        "some endpoints converge, e.g. $\\sum\\frac{x^n}{n^2}$ at $x=1$",
+        "some series include an endpoint, e.g. $\\sum\\frac{(-1)^n x^n}{n}$ at $x=-1$"
+      ]
+    },
+    "solution": "At $|x|=R$ the ratio test gives $1$, so each endpoint must be tested directly.",
+    "hints": [
+      "What does the ratio test return when $|x|=R$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the radius of convergence of $\\sum_{n\\ge1}\\frac{(x-2)^n}{5^n\\,n}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact"
+    },
+    "check": "5",
+    "solution": "$\\lim\\left|\\frac{c_{n+1}}{c_n}\\right|=\\frac{1}{5}$, so $|x-2|<5$ and $R=5$.",
+    "hints": [
+      "Treat $x-2$ as the variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $\\sum_{n\\ge1}\\frac{x^n}{n}$, find the left endpoint of the interval of convergence.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1,
+      "form": "exact"
+    },
+    "check": "-1",
+    "solution": "At $x=-1$ the series is alternating and converges, while at $x=1$ it diverges. The interval is $[-1,1)$.",
+    "hints": [
+      "Test the endpoints $x=\\pm 1$ separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Sum the geometric power series $\\sum_{n\\ge0}x^n$ at $x=\\frac{1}{3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/2",
+      "form": "exact"
+    },
+    "check": "Fraction(3,2)",
+    "solution": "$\\sum_{n\\ge0}x^n=\\frac{1}{1-x}$, so the value is $\\frac{1}{1-1/3}=\\frac{3}{2}$.",
+    "hints": [
+      "Use the closed form for $|x|<1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write $\\sum_{n\\ge0}(n+1)x^n$ in closed form for $|x|<1$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/(1-x)^2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        -0.8,
+        0.8
+      ],
+      "also": [
+        "(1-x)^(-2)"
+      ]
+    },
+    "check": null,
+    "solution": "Differentiate $\\sum_{n\\ge0}x^{n+1}=\\frac{x}{1-x}$ term by term: $\\frac{d}{dx}\\frac{x}{1-x}=\\frac{1}{(1-x)^2}$.",
+    "hints": [
+      "Differentiate the geometric series term by term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find $\\sum_{n\\ge1}nx^n$ at $x=\\frac{1}{2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$\\sum_{n\\ge1}nx^n=\\frac{x}{(1-x)^2}$, and at $x=\\frac{1}{2}$ this is $\\frac{1/2}{1/4}=2$.",
+    "hints": [
+      "Apply $x\\frac{d}{dx}$ to the geometric series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.power-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all power series with radius of convergence $1$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\sum x^n$",
+        "$\\sum\\frac{x^n}{2^n}$",
+        "$\\sum n!\\,x^n$",
+        "$\\sum\\frac{x^n}{n^2}$",
+        "$\\sum\\frac{(2x)^n}{n}$"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "solution": "$\\sum x^n$ and $\\sum\\frac{x^n}{n^2}$ both have $R=1$. $\\sum\\frac{x^n}{2^n}$ has $R=2$, $\\sum n!\\,x^n$ has $R=0$, and $\\sum\\frac{(2x)^n}{n}$ has $R=\\frac{1}{2}$.",
+    "hints": [
+      "Read the radius from the ratio of coefficients."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0127",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the Taylor series of $e^x$ about $0$, what is the coefficient of $x^3$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{1}{6}$",
+        "$\\frac{1}{3}$",
+        "$1$",
+        "$\\frac{1}{2}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "divided by $3$ instead of $3!$",
+        "no factorial at all",
+        "divided by $2!$ instead of $3!$"
+      ]
+    },
+    "solution": "$e^x=\\sum\\frac{x^n}{n!}$, and $3!=6$.",
+    "hints": [
+      "The coefficient is $f^{(n)}(0)/n!$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0128",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the Taylor series of $\\frac{1}{1-x}$ about $0$, what is the coefficient of $x^5$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$\\frac{1}{1-x}=\\sum x^n$, so every coefficient is $1$.",
+    "hints": [
+      "Use the geometric series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0129",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which condition does the Taylor coefficient $c_n=\\frac{f^{(n)}(a)}{n!}$ require?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$f$ is $n$ times differentiable at $a$",
+        "$f$ is a polynomial of degree $n$",
+        "$a=0$",
+        "$f(a)=1$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "polynomials are a special case, not a requirement",
+        "the expansion point can be any $a$",
+        "the value at $a$ does not affect the coefficient"
+      ]
+    },
+    "solution": "The coefficient needs the $n$th derivative at $a$, so $f$ must be $n$ times differentiable there.",
+    "hints": [
+      "Count the derivatives the formula uses."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0130",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In the Taylor series of $\\cos x$ about $0$, find the coefficient of $x^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1/2",
+      "form": "exact"
+    },
+    "check": "Fraction(-1,2)",
+    "solution": "$\\cos x=1-\\frac{x^2}{2}+\\cdots$.",
+    "hints": [
+      "Recall $\\cos x=\\sum\\frac{(-1)^n x^{2n}}{(2n)!}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true
+  },
+  {
+    "id": "t4-0131",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In the Taylor series of $\\sin x$ about $0$, find the coefficient of $x^3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1/6",
+      "form": "exact"
+    },
+    "check": "Fraction(-1,6)",
+    "solution": "$\\sin x=x-\\frac{x^3}{3!}+\\cdots$, so the coefficient is $-\\frac{1}{6}$.",
+    "hints": [
+      "Use the alternating sign pattern of sine."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0132",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "In the Taylor series of $\\ln(1+x)$ about $0$, find the coefficient of $x^3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/3",
+      "form": "exact"
+    },
+    "check": "Fraction(1,3)",
+    "solution": "$\\ln(1+x)=x-\\frac{x^2}{2}+\\frac{x^3}{3}-\\cdots$.",
+    "hints": [
+      "Integrate $\\frac{1}{1+x}=1-x+x^2-\\cdots$ term by term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0133",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the degree-2 Taylor polynomial of $e^x$ about $0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1+x+x^2/2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        -1,
+        1
+      ],
+      "also": [
+        "1+x+0.5*x^2"
+      ]
+    },
+    "check": null,
+    "solution": "$1+x+\\frac{x^2}{2}$, using $e^x=\\sum\\frac{x^n}{n!}$ up to $n=2$.",
+    "hints": [
+      "Keep the terms up to $x^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0134",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Add the terms up to $x^3$ of the Taylor series of $\\frac{1}{1-x}$ about $0$, then set $x=\\frac{1}{2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "15/8",
+      "form": "exact"
+    },
+    "check": "Fraction(15,8)",
+    "solution": "$1+x+x^2+x^3$ at $x=\\frac12$ gives $1+\\frac12+\\frac14+\\frac18=\\frac{15}{8}$.",
+    "hints": [
+      "Evaluate the polynomial at $x=\\frac12$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0135",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.taylor"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Select all correct Taylor series about $0$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$e^x=\\sum_{n\\ge0}\\frac{x^n}{n!}$",
+        "$\\cos x=\\sum_{n\\ge0}\\frac{(-1)^n x^{2n}}{(2n)!}$",
+        "$\\sin x=\\sum_{n\\ge0}\\frac{x^{2n+1}}{(2n)!}$",
+        "$\\frac{1}{1+x}=\\sum_{n\\ge0}x^n$",
+        "$\\ln(1+x)=\\sum_{n\\ge1}\\frac{(-1)^{n+1}x^n}{n}$"
+      ],
+      "correct": [
+        0,
+        1,
+        4
+      ]
+    },
+    "solution": "The first, second, and fifth are standard. The third needs $(2n+1)!$ in the denominator. The fourth needs $(-1)^n$ in front of $x^n$.",
+    "hints": [
+      "Check the factorial and the sign pattern."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0136",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $x=x(t)$ and $y=y(t)$, what is $\\frac{dy}{dx}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{y'(t)}{x'(t)}$",
+        "$\\frac{x'(t)}{y'(t)}$",
+        "$y'(t)\\,x'(t)$",
+        "$y'(t)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inverted the ratio",
+        "multiplied instead of dividing",
+        "forgot to divide by $\\frac{dx}{dt}$"
+      ]
+    },
+    "solution": "Chain rule: $\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}$.",
+    "hints": [
+      "Divide the $t$-derivatives."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0137",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the area enclosed by $r=2$ over $[0,2\\pi]$ to six decimal places?",
+    "answer": {
+      "kind": "numeric",
+      "value": 12.566371,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "4*math.pi",
+    "solution": "Area $=\\frac{1}{2}\\int_0^{2\\pi}2^2\\,d\\theta=4\\pi\\approx 12.566371$.",
+    "hints": [
+      "Use $\\frac{1}{2}\\int r^2\\,d\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0138",
+    "tier": "a",
+    "type": "recall",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression gives $x$ in polar coordinates?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$r\\cos\\theta$",
+        "$r\\sin\\theta$",
+        "$r^2\\cos\\theta$",
+        "$\\frac{\\cos\\theta}{r}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is $y$",
+        "wrong power of $r$",
+        "inverted the relationship"
+      ]
+    },
+    "solution": "Since $x=r\\cos\\theta$ and $y=r\\sin\\theta$, the conversion is direct.",
+    "hints": [
+      "Project the point $(r,\\theta)$ onto the $x$-axis."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0139",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $x=t^2$ and $y=t^3$, find $\\frac{dy}{dx}$ at $t=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/2",
+      "form": "exact"
+    },
+    "check": "Fraction(3,2)",
+    "solution": "$\\frac{dy}{dx}=\\frac{3t^2}{2t}=\\frac{3t}{2}$, which is $\\frac{3}{2}$ at $t=1$.",
+    "hints": [
+      "Divide $y'(t)$ by $x'(t)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0140",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the length of $x=\\cos t$, $y=\\sin t$ for $0\\le t\\le\\pi$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3.141593,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi",
+    "solution": "The speed is $\\sqrt{\\sin^2t+\\cos^2t}=1$, so the length is $\\pi\\approx 3.141593$.",
+    "hints": [
+      "Simplify the speed $\\sqrt{x'^2+y'^2}$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0141",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the area enclosed by $r=\\cos\\theta$ on $[-\\frac{\\pi}{2},\\frac{\\pi}{2}]$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.785398,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "math.pi/4",
+    "solution": "Area $=\\frac{1}{2}\\int_{-\\pi/2}^{\\pi/2}\\cos^2\\theta\\,d\\theta=\\frac{\\pi}{4}\\approx 0.785398$.",
+    "hints": [
+      "Use $\\cos^2\\theta=\\frac{1+\\cos2\\theta}{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0142",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find the area enclosed by the cardioid $r=1+\\cos\\theta$ to six decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.712389,
+      "form": "decimal",
+      "tol": 1e-06
+    },
+    "check": "3*math.pi/2",
+    "solution": "Area $=\\frac{1}{2}\\int_0^{2\\pi}(1+\\cos\\theta)^2\\,d\\theta=\\frac{3\\pi}{2}\\approx 4.712389$.",
+    "hints": [
+      "Expand $(1+\\cos\\theta)^2$ and use $\\int_0^{2\\pi}\\cos^2\\theta\\,d\\theta=\\pi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0143",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $x=e^t$ and $y=t$, write $\\frac{dy}{dx}$ as a function of $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/x",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "x^(-1)"
+      ]
+    },
+    "check": null,
+    "solution": "$\\frac{dy}{dt}=1$ and $\\frac{dx}{dt}=e^t=x$. So $\\frac{dy}{dx}=\\frac{1}{x}$.",
+    "hints": [
+      "Divide $y'(t)$ by $x'(t)$, then write $e^t$ as $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t4-0144",
+    "tier": "b",
+    "type": "micro",
+    "level": "T4",
+    "tags": [
+      "t4.param-polar"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all true statements about parametric curves $x(t)$, $y(t)$.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\frac{dy}{dx}=\\frac{y'(t)}{x'(t)}$ where $x'(t)\\neq 0$",
+        "Arc length is $\\int\\sqrt{x'(t)^2+y'(t)^2}\\,dt$",
+        "$\\frac{d^2y}{dx^2}=\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)$",
+        "$\\frac{dy}{dx}=\\frac{x'(t)}{y'(t)}$"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "The first two are standard. The third omits division by $\\frac{dx}{dt}$, and the fourth is inverted.",
+    "hints": [
+      "Compare the ratio with the chain rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

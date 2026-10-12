@@ -1,0 +1,1587 @@
+[
+ {
+  "id": "t2-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.unit-circle",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\sin\\frac{5\\pi}{6}\\cos\\frac{4\\pi}{3}+\\cos\\frac{5\\pi}{6}\\sin\\frac{4\\pi}{3}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\frac14$",
+    "$\\frac34$",
+    "$\\frac12$",
+    "$-\\frac12$",
+    "$1$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "kept only the first product",
+    "kept only the second product",
+    "",
+    "took $\\cos\\frac{4\\pi}{3}$ and $\\sin\\frac{4\\pi}{3}$ as positive (quadrant I signs), giving $\\frac14-\\frac34$",
+    "dropped every negative sign: $\\frac14+\\frac34$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Exact values read from the unit circle with correct signs in quadrants II and III",
+    "weight": 2
+   },
+   {
+    "text": "Recognised the sum as $\\sin\\left(\\frac{5\\pi}{6}+\\frac{4\\pi}{3}\\right)$ or multiplied out",
+    "weight": 2
+   },
+   {
+    "text": "Reduced $\\frac{13\\pi}{6}$ (or summed the products) to $\\frac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Values (unit-circle): $\\sin\\frac{5\\pi}{6}=\\frac12$, $\\cos\\frac{4\\pi}{3}=-\\frac12$, $\\cos\\frac{5\\pi}{6}=-\\frac{\\sqrt3}{2}$, $\\sin\\frac{4\\pi}{3}=-\\frac{\\sqrt3}{2}$.\nProducts: $-\\frac14$ and $+\\frac34$, sum $\\frac12$.\nShortcut (trig-id): the expression is $\\sin(A+B)$ with $A+B=\\frac{13\\pi}{6}$.\nSubtract $2\\pi$: $\\sin\\frac{\\pi}{6}=\\frac12$.",
+  "hints": [
+   "Spot the sine addition formula before computing anything."
+  ],
+  "check": "math.sin(5*math.pi/6)*math.cos(4*math.pi/3)+math.cos(5*math.pi/6)*math.sin(4*math.pi/3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.unit-circle",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The terminal side of angle $\\theta$ meets the unit circle at $\\left(-\\frac35,\\frac45\\right)$. Find $\\cos 2\\theta+\\sin\\left(\\theta-\\frac{\\pi}{2}\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{8}{25}$",
+    "$-\\frac{22}{25}$",
+    "$\\frac{22}{25}$",
+    "$-\\frac{8}{25}$",
+    "$-\\frac{7}{25}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took $\\sin(\\theta-\\frac{\\pi}{2})=+\\cos\\theta=-\\frac35$",
+    "used $\\cos2\\theta=\\sin^2\\theta-\\cos^2\\theta=+\\frac{7}{25}$",
+    "used $\\cos2\\theta=+\\frac{7}{25}$ and the wrong sign on the shift term",
+    "forgot the second term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Read $\\cos\\theta=-\\frac35$, $\\sin\\theta=\\frac45$ from the point",
+    "weight": 1
+   },
+   {
+    "text": "$\\cos2\\theta=\\cos^2\\theta-\\sin^2\\theta=-\\frac{7}{25}$",
+    "weight": 2
+   },
+   {
+    "text": "$\\sin(\\theta-\\frac{\\pi}{2})=-\\cos\\theta=\\frac35$ by a shift identity or the circle",
+    "weight": 1
+   },
+   {
+    "text": "Summed to $\\frac{8}{25}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "The coordinates give $\\cos\\theta=-\\frac35$, $\\sin\\theta=\\frac45$ (unit-circle).\n$\\cos2\\theta=\\cos^2\\theta-\\sin^2\\theta=\\frac{9-16}{25}=-\\frac{7}{25}$ (trig-id).\nQuarter turn back: $\\sin(\\theta-\\frac{\\pi}{2})=-\\cos\\theta=\\frac35=\\frac{15}{25}$.\nSum $=\\frac{8}{25}$.",
+  "hints": [
+   "Write down $\\cos\\theta$ and $\\sin\\theta$ first."
+  ],
+  "check": "Fraction(9,25)-Fraction(16,25)+Fraction(3,5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.trig-id",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "If $\\sin x+\\cos x=\\frac43$, find $\\sin^3x+\\cos^3x$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{50}{27}$",
+    "$\\frac{22}{27}$",
+    "$\\frac{64}{27}$",
+    "$\\frac{7}{18}$",
+    "$\\frac{4}{3}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used $a^3+b^3=(a+b)(a^2+b^2+ab)$ with $a^2+b^2$ left as $1$ and $ab$ added",
+    "",
+    "cubed the sum: $(\\frac43)^3$",
+    "stopped at $\\sin x\\cos x$",
+    "assumed $\\sin^3x+\\cos^3x$ equals $\\sin x+\\cos x$ times $1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Squared the given equation to get $\\sin x\\cos x=\\frac{7}{18}$",
+    "weight": 2
+   },
+   {
+    "text": "Factored $a^3+b^3=(a+b)(a^2-ab+b^2)$",
+    "weight": 1
+   },
+   {
+    "text": "Used $\\sin^2x+\\cos^2x=1$ to get $1-\\frac{7}{18}$",
+    "weight": 1
+   },
+   {
+    "text": "Final value $\\frac{4}{3}\\cdot\\frac{11}{18}=\\frac{22}{27}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Square the hypothesis (trig-id): $1+2\\sin x\\cos x=\\frac{16}{9}$, so $\\sin x\\cos x=\\frac{7}{18}$.\nSum of cubes (factor): $s^3+c^3=(s+c)(s^2-sc+c^2)$.\nWith $s^2+c^2=1$: $(s+c)(1-sc)=\\frac43\\cdot\\frac{11}{18}=\\frac{44}{54}=\\frac{22}{27}$.",
+  "hints": [
+   "Square the given equation to reach the product $\\sin x\\cos x$."
+  ],
+  "check": "Fraction(4,3)*(1-Fraction(7,18))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.trig-id",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "If $\\tan x=2$, find $\\sin2x+\\cos2x$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac75$",
+    "$\\frac45$",
+    "$-\\frac15$",
+    "$\\frac15$",
+    "$-\\frac43$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "took $\\cos2x=+\\frac35$ (swapped $\\cos^2$ and $\\sin^2$)",
+    "forgot $\\cos2x$",
+    "negated the whole sum",
+    "",
+    "computed $\\tan2x$ instead"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rewrote $\\sin2x$ and $\\cos2x$ in terms of $\\tan x$ (or drew the triangle with $\\sin x=\\frac{2}{\\sqrt5}$, $\\cos x=\\frac{1}{\\sqrt5}$)",
+    "weight": 1
+   },
+   {
+    "text": "$\\sin2x=\\frac{2\\tan x}{1+\\tan^2x}=\\frac45$",
+    "weight": 2
+   },
+   {
+    "text": "$\\cos2x=\\frac{1-\\tan^2x}{1+\\tan^2x}=-\\frac35$",
+    "weight": 1
+   },
+   {
+    "text": "Sum $=\\frac15$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "In terms of $t=\\tan x$ (trig-id): $\\sin2x=\\frac{2t}{1+t^2}$ and $\\cos2x=\\frac{1-t^2}{1+t^2}$.\nWith $t=2$: $\\sin2x=\\frac45$ (rational-expr evaluation), $\\cos2x=\\frac{1-4}{5}=-\\frac35$.\nSum $=\\frac15$.",
+  "hints": [
+   "A right triangle with legs $2$ and $1$ gives both ratios."
+  ],
+  "check": "Fraction(4,5)+Fraction(-3,5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.trig-eq",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find the sum of all solutions of $2\\sin^2x-\\sin x-1=0$ in the interval $[0,2\\pi)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{5\\pi}{2}$",
+    "$3\\pi$",
+    "$\\frac{7\\pi}{2}$",
+    "$\\frac{9\\pi}{2}$",
+    "$\\frac{3\\pi}{2}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "took the roots of $\\sin x=-\\frac12$ as $\\frac{5\\pi}{6}$ and $\\frac{7\\pi}{6}$",
+    "dropped the root $\\frac{\\pi}{2}$",
+    "",
+    "took $\\sin x=1$ as $x=\\frac{3\\pi}{2}$",
+    "solved $\\sin x=+\\frac12$ instead of $-\\frac12$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Factored as $(2\\sin x+1)(\\sin x-1)=0$",
+    "weight": 2
+   },
+   {
+    "text": "$\\sin x=1$ gives $\\frac{\\pi}{2}$ once",
+    "weight": 1
+   },
+   {
+    "text": "$\\sin x=-\\frac12$ gives $\\frac{7\\pi}{6}$ and $\\frac{11\\pi}{6}$",
+    "weight": 1
+   },
+   {
+    "text": "Sum $\\frac{7\\pi}{2}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Treat as a quadratic in $s=\\sin x$ (quad): $(2s+1)(s-1)=0$, so $s=1$ or $s=-\\frac12$.\n$s=1$: $x=\\frac{\\pi}{2}$ only (trig-eq).\n$s=-\\frac12$: quadrants III and IV, $x=\\frac{7\\pi}{6},\\frac{11\\pi}{6}$.\nSum $=\\frac{3\\pi+7\\pi+11\\pi}{6}=\\frac{7\\pi}{2}$.",
+  "hints": [
+   "Substitute $s=\\sin x$ and factor."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.trig-eq",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many distinct solutions does $\\sin x+\\sin3x=0$ have in $[0,2\\pi)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$3$",
+    "$5$",
+    "$8$",
+    "$4$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "counted the roots of $\\sin2x=0$ and of $\\cos x=0$ separately, double counting $\\frac{\\pi}{2},\\frac{3\\pi}{2}$",
+    "dropped $x=0$",
+    "included $x=2\\pi$ from the half-open interval",
+    "counted every solution of $\\sin2x=0$ over $[0,4\\pi)$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Sum-to-product: $\\sin x+\\sin3x=2\\sin2x\\cos x$",
+    "weight": 2
+   },
+   {
+    "text": "Split into $\\sin2x=0$ and $\\cos x=0$ without dividing by either",
+    "weight": 1
+   },
+   {
+    "text": "Listed $0,\\frac{\\pi}{2},\\pi,\\frac{3\\pi}{2}$ from $\\sin 2x=0$",
+    "weight": 1
+   },
+   {
+    "text": "Noticed $\\cos x=0$ adds nothing new; total $4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Sum to product (trig-id): $\\sin x+\\sin3x=2\\sin2x\\cos x$.\nSo $\\sin2x=0$ or $\\cos x=0$ (trig-eq, no cancelling).\n$\\sin2x=0$: $2x=k\\pi$, so $x=0,\\frac{\\pi}{2},\\pi,\\frac{3\\pi}{2}$ in $[0,2\\pi)$.\n$\\cos x=0$ gives $\\frac{\\pi}{2},\\frac{3\\pi}{2}$, already listed. Total $4$.",
+  "hints": [
+   "Convert the sum into a product."
+  ],
+  "check": "len([k for k in range(0,720) if abs(math.sin(k*math.pi/360)+math.sin(3*k*math.pi/360))<1e-9])",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.trig-graph",
+   "t1.transforms"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The first positive $x$ at which $y=3\\sin\\left(2x-\\frac{\\pi}{3}\\right)+1$ attains its maximum value is $x=c\\pi$. Find $c$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{1}{12}$",
+    "$\\frac{5}{12}$",
+    "$\\frac56$",
+    "$\\frac{11}{12}$",
+    "$\\frac14$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "shifted the wrong way: $2x=\\frac{\\pi}{2}-\\frac{\\pi}{3}$",
+    "",
+    "solved $x-\\frac{\\pi}{3}=\\frac{\\pi}{2}$, forgetting to divide the shift by $2$",
+    "located the minimum, where the argument is $\\frac{3\\pi}{2}$",
+    "ignored the phase shift"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Maximum occurs when $\\sin(\\cdot)=1$, i.e. the argument is $\\frac{\\pi}{2}+2k\\pi$",
+    "weight": 2
+   },
+   {
+    "text": "Set $2x-\\frac{\\pi}{3}=\\frac{\\pi}{2}$ and solve",
+    "weight": 1
+   },
+   {
+    "text": "Divide by the factor $2$ correctly: $x=\\frac{5\\pi}{12}$",
+    "weight": 1
+   },
+   {
+    "text": "Checked it is the first positive one (period $\\pi$, next at $\\frac{17\\pi}{12}$)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Max of $3\\sin(\\cdot)+1$ needs the sine to equal $1$ (trig-graph).\n$2x-\\frac{\\pi}{3}=\\frac{\\pi}{2}$ gives $2x=\\frac{5\\pi}{6}$, so $x=\\frac{5\\pi}{12}$.\nPeriod is $\\pi$ (transforms: horizontal compression by $2$), so the next maximum is $\\frac{17\\pi}{12}$.\nThe first positive one is $\\frac{5\\pi}{12}$, so $c=\\frac{5}{12}$.",
+  "hints": [
+   "Set the inside of the sine equal to $\\frac{\\pi}{2}$."
+  ],
+  "check": "Fraction(5,12)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.trig-graph",
+   "t1.func-basics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A function $f(x)=A\\sin(bx)+k$ with $A,b>0$ has maximum value $5$, minimum value $-1$ and period $\\pi$. Find $f\\left(\\frac{\\pi}{12}\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac92$",
+    "$5$",
+    "$\\frac72$",
+    "$\\frac12$",
+    "$\\frac{11}{2}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "used the maximum $5$ as the amplitude",
+    "used amplitude $6$ (max minus min)",
+    "",
+    "used $A\\sin(-bx)$, a decreasing start",
+    "added the midline twice"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Amplitude $A=\\frac{5-(-1)}{2}=3$",
+    "weight": 1
+   },
+   {
+    "text": "Midline $k=\\frac{5+(-1)}{2}=2$",
+    "weight": 1
+   },
+   {
+    "text": "Period $\\pi$ gives $b=2$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluated $3\\sin\\frac{\\pi}{6}+2=\\frac72$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Amplitude and midline (func-basics): $A=\\frac{5-(-1)}{2}=3$, $k=\\frac{5+(-1)}{2}=2$.\nPeriod $\\frac{2\\pi}{b}=\\pi$ gives $b=2$ (trig-graph).\n$f\\left(\\frac{\\pi}{12}\\right)=3\\sin\\frac{\\pi}{6}+2=\\frac32+2=\\frac72$.",
+  "hints": [
+   "Half the spread is the amplitude; the average is the midline."
+  ],
+  "check": "Fraction(3,2)+2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.inv-trig",
+   "t2.unit-circle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\arcsin\\left(\\sin\\frac{7\\pi}{6}\\right)+\\arccos\\left(\\cos\\frac{7\\pi}{6}\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{2\\pi}{3}$",
+    "$\\frac{7\\pi}{3}$",
+    "$\\pi$",
+    "$0$",
+    "$\\frac{5\\pi}{6}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "treated both compositions as the identity",
+    "took $\\arcsin(\\sin\\frac{7\\pi}{6})=+\\frac{\\pi}{6}$",
+    "used the reference angle $\\frac{\\pi}{6}$ for the arccos",
+    "forgot the arcsin term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Ranges recalled: $\\arcsin\\in[-\\frac{\\pi}{2},\\frac{\\pi}{2}]$, $\\arccos\\in[0,\\pi]$",
+    "weight": 2
+   },
+   {
+    "text": "$\\arcsin(\\sin\\frac{7\\pi}{6})=-\\frac{\\pi}{6}$ since $\\sin\\frac{7\\pi}{6}=-\\frac12$",
+    "weight": 1
+   },
+   {
+    "text": "$\\arccos(\\cos\\frac{7\\pi}{6})=\\frac{5\\pi}{6}$ since $\\cos\\frac{7\\pi}{6}=-\\frac{\\sqrt3}{2}$",
+    "weight": 1
+   },
+   {
+    "text": "Sum $\\frac{2\\pi}{3}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Compositions return the principal value, not the input (inv-trig).\n$\\sin\\frac{7\\pi}{6}=-\\frac12$, and $\\arcsin(-\\frac12)=-\\frac{\\pi}{6}$ (unit-circle, range $[-\\frac{\\pi}{2},\\frac{\\pi}{2}]$).\n$\\cos\\frac{7\\pi}{6}=-\\frac{\\sqrt3}{2}$, and $\\arccos(-\\frac{\\sqrt3}{2})=\\frac{5\\pi}{6}$ (range $[0,\\pi]$).\nSum $=\\frac{4\\pi}{6}=\\frac{2\\pi}{3}$.",
+  "hints": [
+   "Ask which interval each inverse function lands in."
+  ],
+  "check": "Fraction(2,3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.inv-trig",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Find $\\sin\\left(\\arctan3+\\arctan2\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\frac{\\sqrt2}{2}$",
+    "$-1$",
+    "$\\frac{3\\sqrt2}{10}$",
+    "$\\frac{\\sqrt2}{2}$",
+    "$1$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "used $\\tan(\\alpha+\\beta)=-1$ to place the angle at $-\\frac{\\pi}{4}$",
+    "confused the tangent of the sum with its sine",
+    "kept only $\\sin\\alpha\\cos\\beta$",
+    "",
+    "assumed $\\arctan3+\\arctan2=\\frac{\\pi}{2}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Drew right triangles: $\\sin\\alpha=\\frac{3}{\\sqrt{10}}$, $\\cos\\alpha=\\frac{1}{\\sqrt{10}}$, $\\sin\\beta=\\frac{2}{\\sqrt5}$, $\\cos\\beta=\\frac{1}{\\sqrt5}$",
+    "weight": 2
+   },
+   {
+    "text": "Applied $\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta$",
+    "weight": 1
+   },
+   {
+    "text": "Computed $\\frac{3+2}{\\sqrt{50}}=\\frac{\\sqrt2}{2}$",
+    "weight": 1
+   },
+   {
+    "text": "Sanity check: the angle is in $(\\frac{\\pi}{2},\\pi)$ and the sine is positive",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Let $\\alpha=\\arctan3$, $\\beta=\\arctan2$, both acute (inv-trig).\nTriangles: $\\sin\\alpha=\\frac{3}{\\sqrt{10}}$, $\\cos\\alpha=\\frac{1}{\\sqrt{10}}$, $\\sin\\beta=\\frac{2}{\\sqrt5}$, $\\cos\\beta=\\frac{1}{\\sqrt5}$.\n$\\sin(\\alpha+\\beta)=\\frac{3\\cdot1+1\\cdot2}{\\sqrt{50}}=\\frac{5}{5\\sqrt2}=\\frac{\\sqrt2}{2}$ (trig-id).\nCheck: $\\tan(\\alpha+\\beta)=-1$ with $\\alpha+\\beta=\\frac{3\\pi}{4}$, whose sine is positive.",
+  "hints": [
+   "Treat each arctan as an angle in a right triangle."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.tri-laws",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A triangle has sides $7$, $8$ and $9$. What is the radius of its circumscribed circle?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{21}{4}$",
+    "$\\frac{21\\sqrt5}{5}$",
+    "$\\frac{63\\sqrt5}{10}$",
+    "$\\frac{12\\sqrt5}{5}$",
+    "$\\frac{21\\sqrt5}{10}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "used $\\cos A=\\frac23$ in place of $\\sin A$",
+    "used $R=\\frac{a}{\\sin A}$ and forgot the factor $2$",
+    "took $\\sin A=\\frac{\\sqrt5}{9}$",
+    "paired side $8$ with angle $A$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Law of cosines for the angle opposite $7$: $\\cos A=\\frac{64+81-49}{2\\cdot8\\cdot9}=\\frac23$",
+    "weight": 2
+   },
+   {
+    "text": "$\\sin A=\\sqrt{1-\\frac49}=\\frac{\\sqrt5}{3}$",
+    "weight": 1
+   },
+   {
+    "text": "Law of sines $2R=\\frac{a}{\\sin A}$ with matching side and angle",
+    "weight": 1
+   },
+   {
+    "text": "$R=\\frac{21\\sqrt5}{10}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Let $a=7$ with angle $A$ opposite. Law of cosines (tri-laws): $\\cos A=\\frac{8^2+9^2-7^2}{2\\cdot8\\cdot9}=\\frac{96}{144}=\\frac23$.\n$\\sin A=\\sqrt{1-\\frac49}=\\frac{\\sqrt5}{3}$ (trig-id).\nLaw of sines: $2R=\\frac{7}{\\sin A}=\\frac{21}{\\sqrt5}$.\n$R=\\frac{21}{2\\sqrt5}=\\frac{21\\sqrt5}{10}$.",
+  "hints": [
+   "Find one angle with the law of cosines, then use $2R=a/\\sin A$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.tri-laws",
+   "t2.unit-circle",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "In triangle $ABC$, $A=30^\\circ$, $a=5$ and $b=8$. Two non-congruent triangles satisfy these conditions. What is the sum of their two possible values of $c$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8\\sqrt3$",
+    "$6$",
+    "$3+4\\sqrt3$",
+    "$4\\sqrt3-3$",
+    "$4\\sqrt3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took the difference of the two values of $c$",
+    "kept only the larger triangle",
+    "kept only the smaller triangle",
+    "averaged the two values of $c$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Law of cosines for $a$: $25=64+c^2-16c\\cos30^\\circ$",
+    "weight": 2
+   },
+   {
+    "text": "Reduced to $c^2-8\\sqrt3\\,c+39=0$",
+    "weight": 1
+   },
+   {
+    "text": "Checked the discriminant is positive, so two triangles exist",
+    "weight": 1
+   },
+   {
+    "text": "Sum of roots $8\\sqrt3$ (Vieta)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Law of cosines on side $a$ (tri-laws): $25=64+c^2-2\\cdot8\\cdot c\\cos30^\\circ$.\nWith $\\cos30^\\circ=\\frac{\\sqrt3}{2}$ (unit-circle): $c^2-8\\sqrt3\\,c+39=0$.\nDiscriminant $192-156=36>0$, so two positive roots, $4\\sqrt3\\pm3$.\nSum of roots by Vieta (quad) is $8\\sqrt3$, no need to solve.",
+  "hints": [
+   "Treat $c$ as the unknown in the law of cosines for $a$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.exp-log",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $a,b,c,d>1$ satisfy $\\log_ab=2$, $\\log_bc=3$ and $\\log_cd=\\frac12$. Find $\\log_{a^2}\\left(d^3\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3$",
+    "$\\frac92$",
+    "$18$",
+    "$2$",
+    "$6$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "computed $\\log_ad$ and stopped",
+    "",
+    "multiplied by $2$ for the base instead of dividing",
+    "inverted the ratio: $\\log_ad\\cdot\\frac23$",
+    "used $\\log_{a^2}=2\\log_a$ and dropped the cube's effect"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Chain: $\\log_ad=\\log_ab\\cdot\\log_bc\\cdot\\log_cd=2\\cdot3\\cdot\\frac12=3$",
+    "weight": 2
+   },
+   {
+    "text": "Power rule for the argument: $\\log(d^3)=3\\log d$",
+    "weight": 1
+   },
+   {
+    "text": "Base change for $a^2$: divide by $2$",
+    "weight": 1
+   },
+   {
+    "text": "Result $\\frac{3\\cdot3}{2}=\\frac92$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Change-of-base chain (exp-log): $\\log_ad=\\log_ab\\,\\log_bc\\,\\log_cd=2\\cdot3\\cdot\\frac12=3$.\nArgument power (exp-rules): $\\log_a(d^3)=3\\log_ad=9$.\nBase power: $\\log_{a^2}x=\\frac{1}{2}\\log_ax$.\nSo $\\log_{a^2}(d^3)=\\frac92$.",
+  "hints": [
+   "Chain the three logs into one with the change-of-base rule."
+  ],
+  "check": "Fraction(3*2*3,2*2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.exp-log",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $x=\\log_23$, $y=\\log_35$ and $z=\\log_57$. Find $4^{xyz}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$105$",
+    "$7$",
+    "$14$",
+    "$343$",
+    "$49$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "multiplied the arguments $3,5,7$",
+    "computed $2^{xyz}$",
+    "took $4^{xyz}=2\\cdot7$",
+    "cubed instead of squared",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Telescoped $xyz=\\log_27$ via change of base",
+    "weight": 2
+   },
+   {
+    "text": "Rewrote $4^{xyz}=(2^{xyz})^2$",
+    "weight": 1
+   },
+   {
+    "text": "$2^{\\log_27}=7$",
+    "weight": 1
+   },
+   {
+    "text": "Result $49$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Change of base (exp-log): $\\log_23\\cdot\\log_35\\cdot\\log_57=\\frac{\\ln3}{\\ln2}\\frac{\\ln5}{\\ln3}\\frac{\\ln7}{\\ln5}=\\log_27$.\nPower rule (exp-rules): $4^{xyz}=(2^2)^{xyz}=(2^{xyz})^2$.\n$2^{\\log_27}=7$, so the value is $7^2=49$.",
+  "hints": [
+   "The product telescopes into a single logarithm."
+  ],
+  "check": "int(round(4**(math.log(3,2)*math.log(5,3)*math.log(7,5))))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.log-eq",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find the sum of all real solutions of $\\log_2x+\\log_2(x-2)=3$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$-2$",
+    "$4$",
+    "$\\frac52$",
+    "$8$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "kept both roots $4$ and $-2$",
+    "kept only the extraneous root",
+    "",
+    "added the arguments: $x+(x-2)=3$",
+    "stopped at $x(x-2)=8$ and reported the right side"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Combined to $\\log_2\\left[x(x-2)\\right]=3$ and exponentiated to $x^2-2x=8$",
+    "weight": 2
+   },
+   {
+    "text": "Solved the quadratic: $x=4$ or $x=-2$",
+    "weight": 1
+   },
+   {
+    "text": "Rejected $x=-2$ using the domain $x>2$",
+    "weight": 1
+   },
+   {
+    "text": "Sum $=4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Product rule (log-eq): $\\log_2[x(x-2)]=3$, so $x(x-2)=2^3=8$.\n$x^2-2x-8=0$ (quad) gives $x=4$ or $x=-2$.\nDomain needs $x>0$ and $x-2>0$, so $x>2$ and $-2$ is extraneous.\nOnly $x=4$ works, so the sum is $4$.",
+  "hints": [
+   "Check every root against the domain of both logarithms."
+  ],
+  "check": "4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.log-eq",
+   "t1.quad",
+   "t2.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Find the sum of the squares of all real solutions of $2\\cdot4^x-9\\cdot2^x+4=0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$1$",
+    "$-2$",
+    "$\\frac{65}{4}$",
+    "$\\frac92$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "summed the solutions instead of their squares",
+    "reported their product",
+    "squared the values of $2^x$ instead of $x$",
+    "reported the sum of the values of $2^x$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Substituted $u=2^x$, giving $2u^2-9u+4=0$",
+    "weight": 2
+   },
+   {
+    "text": "Roots $u=4$ and $u=\\frac12$",
+    "weight": 1
+   },
+   {
+    "text": "Converted back: $x=2$ and $x=-1$",
+    "weight": 1
+   },
+   {
+    "text": "Sum of squares $4+1=5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Since $4^x=(2^x)^2$ (exp-log), set $u=2^x>0$: $2u^2-9u+4=0$.\nFactor (quad): $(2u-1)(u-4)=0$, so $u=\\frac12$ or $u=4$.\nBoth positive. Taking $\\log_2$ (log-eq): $x=-1$ or $x=2$.\nSum of squares $=1+4=5$.",
+  "hints": [
+   "Rewrite $4^x$ as $(2^x)^2$ and substitute."
+  ],
+  "check": "(-1)**2+2**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.seq-series",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Three numbers form an arithmetic sequence with sum $15$. Adding $1$, $4$ and $19$ to them respectively produces a geometric sequence. What is the largest possible value of the largest of the original numbers?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$27$",
+    "$24$",
+    "$26$",
+    "$19$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "found only the solution $d=3$",
+    "reported the largest term of the geometric sequence",
+    "took $5+19$",
+    "",
+    "reported the added constant"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Parametrised as $5-d,\\,5,\\,5+d$ using the sum",
+    "weight": 1
+   },
+   {
+    "text": "Geometric condition $(6-d)(24+d)=9^2$ gives $d^2+18d-63=0$",
+    "weight": 2
+   },
+   {
+    "text": "Both roots $d=3$ and $d=-21$ valid",
+    "weight": 1
+   },
+   {
+    "text": "Compared largest terms: $8$ versus $26$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Middle term of an AP with sum $15$ is $5$ (seq-series): write $5-d,5,5+d$.\nAfter adding: $6-d,\\ 9,\\ 24+d$ must satisfy $9^2=(6-d)(24+d)$.\nSo $d^2+18d-63=0$ (quad): $(d-3)(d+21)=0$.\n$d=3$: numbers $2,5,8$. $d=-21$: numbers $26,5,-16$, with GP $27,9,3$.\nBoth valid, largest possible is $26$.",
+  "hints": [
+   "Pick a symmetric parametrisation for the AP."
+  ],
+  "check": "5+21",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.seq-series",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A ball is dropped from a height of $8$ m. Each time it hits the ground it rebounds to $\\frac34$ of the previous height. What total distance, in metres, does it travel before coming to rest?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$32$",
+    "$56$",
+    "$48$",
+    "$24$",
+    "$64$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "summed only the downward drops",
+    "",
+    "left out the first drop of $8$ m",
+    "summed only the upward rebounds",
+    "doubled the whole downward sum"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Separated the first drop $8$ from the repeated up-and-down legs",
+    "weight": 1
+   },
+   {
+    "text": "Rebound heights form a geometric series, first term $6$, ratio $\\frac34$",
+    "weight": 2
+   },
+   {
+    "text": "Used $S=\\frac{a}{1-r}=24$ and doubled it for up plus down",
+    "weight": 1
+   },
+   {
+    "text": "Total $8+48=56$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "First drop: $8$ m.\nAfter that each rebound height is travelled up and down. Heights: $6,\\frac92,\\dots$, a geometric series with $a=6$, $r=\\frac34$ (seq-series).\n$S=\\frac{6}{1-\\frac34}=24$ (lin-eq in the closed form).\nUp and down doubles it to $48$. Total $8+48=56$ m.",
+  "hints": [
+   "The first drop is travelled once; every later height is travelled twice."
+  ],
+  "check": "8+2*Fraction(6)/(1-Fraction(3,4))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.sigma-binom",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Find the constant term in the expansion of $\\left(2x^2-\\frac1x\\right)^6$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$15$",
+    "$-160$",
+    "$60$",
+    "$240$",
+    "$20$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "forgot the factor $2^{6-k}$",
+    "used $k=3$, which gives $x^3$, not $x^0$",
+    "",
+    "used $2^k$ in place of $2^{6-k}$",
+    "took $\\binom63$ with no powers"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "General term $\\binom6k(2x^2)^{6-k}\\left(-\\frac1x\\right)^k$",
+    "weight": 1
+   },
+   {
+    "text": "Exponent of $x$ is $12-3k$, so $k=4$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluated $\\binom64\\cdot2^2\\cdot(-1)^4$",
+    "weight": 1
+   },
+   {
+    "text": "Result $60$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "General term (sigma-binom): $T_k=\\binom6k(2x^2)^{6-k}(-x^{-1})^k=\\binom6k2^{6-k}(-1)^kx^{12-2k-k}$.\nExponent rule (exp-rules): power $12-3k=0$ gives $k=4$.\n$T_4=\\binom64\\cdot2^2\\cdot(+1)=15\\cdot4=60$.",
+  "hints": [
+   "Write the exponent of $x$ in the $k$th term and set it to $0$."
+  ],
+  "check": "math.comb(6,4)*2**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.sigma-binom",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\sum_{k=2}^{6}\\binom6k2^k$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$729$",
+    "$716$",
+    "$728$",
+    "$717$",
+    "$656$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used the full sum $(1+2)^6$",
+    "",
+    "removed only the $k=0$ term",
+    "removed only the $k=1$ term",
+    "also removed the $k=2$ term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Recognised $\\sum_{k=0}^6\\binom6k2^k=(1+2)^6=729$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluated the missing terms: $k=0$ gives $1$, $k=1$ gives $12$",
+    "weight": 1
+   },
+   {
+    "text": "Subtracted both from $729$",
+    "weight": 1
+   },
+   {
+    "text": "Result $716$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Binomial theorem (sigma-binom): $\\sum_{k=0}^{6}\\binom6k2^k=(1+2)^6=729$ (exp-rules for $3^6$).\nThe given sum starts at $k=2$, so subtract the $k=0$ and $k=1$ terms.\n$k=0$: $1$. $k=1$: $6\\cdot2=12$.\n$729-1-12=716$.",
+  "hints": [
+   "Complete the sum to $k=0$, then remove the extra terms."
+  ],
+  "check": "sum(math.comb(6,k)*2**k for k in range(2,7))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.logic-sets",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A club has sets $A,B,C$ of members with $|A|=30$, $|B|=25$, $|C|=20$, $|A\\cap B|=10$, $|A\\cap C|=8$, $|B\\cap C|=6$ and $|A\\cup B\\cup C|=55$. How many members belong to exactly one of the three sets?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$39$",
+    "$31$",
+    "$43$",
+    "$51$",
+    "$12$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "subtracted pairwise overlaps from the union without restoring the triple overlap",
+    "counted the triple overlap as belonging to one set",
+    "subtracted the overlaps from the total of the set sizes",
+    "counted the members in exactly two sets"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Inclusion–exclusion to find $|A\\cap B\\cap C|=4$",
+    "weight": 2
+   },
+   {
+    "text": "Regions with exactly two sets: $6+4+2=12$",
+    "weight": 1
+   },
+   {
+    "text": "Exactly one $=55-12-4$",
+    "weight": 1
+   },
+   {
+    "text": "Result $39$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Inclusion–exclusion (logic-sets): $55=30+25+20-10-8-6+t$, so $t=|A\\cap B\\cap C|=4$ (lin-eq).\nExactly two sets: $(10-4)+(8-4)+(6-4)=12$.\nUnion splits as exactly one + exactly two + exactly three.\nExactly one $=55-12-4=39$.",
+  "hints": [
+   "Find the triple intersection first."
+  ],
+  "check": "55-24+2*(55-(30+25+20-24))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.logic-sets",
+   "t2.proof-methods"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Each of the following is asserted for all real $x$. $P$: $x^2>9\\Rightarrow x>3$. $Q$: $x>3\\Rightarrow x^2>9$. $R$: $x\\le3\\Rightarrow x^2\\le9$. Which of $P,Q,R$ are true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P$ and $R$ only",
+    "$Q$ and $R$ only",
+    "$P$, $Q$ and $R$",
+    "$Q$ only",
+    "None of them"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "missed the counterexample $x=-4$ and rejected $Q$",
+    "believed $R$ can hold while its equivalent contrapositive $P$ fails, or took $R$ as a converse",
+    "missed the counterexample $x=-4$",
+    "",
+    "missed that $Q$ holds"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identified $R$ as the contrapositive of $P$ (logically equivalent)",
+    "weight": 2
+   },
+   {
+    "text": "Found the counterexample $x=-4$ for $P$ (and hence $R$)",
+    "weight": 1
+   },
+   {
+    "text": "Verified $Q$: $x>3\\Rightarrow x^2>9$",
+    "weight": 1
+   },
+   {
+    "text": "Concluded $Q$ only",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$R$ is the contrapositive of $P$ (logic-sets): they are equivalent, so both are true or both false.\n$x=-4$: $x^2=16>9$ but $x<3$, so $P$ fails. At the same $x$, $x\\le3$ but $x^2=16>9$, so $R$ fails.\n$Q$: $x>3$ gives $x^2>9$, true.\nOne counterexample suffices to refute a universal claim (proof-methods). Answer: $Q$ only.",
+  "hints": [
+   "Test the sign of $x$: what about $x=-4$?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.proof-methods",
+   "t2.logic-sets",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Exactly one of the following claims holds for every positive integer $n$. Which one?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n^2-n+11$ is prime",
+    "$n^3-n$ is divisible by $6$",
+    "$2^n>n^2$",
+    "$n!>2^n$",
+    "$n^2+n+41$ is prime"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "true for small $n$ but fails at $n=11$",
+    "",
+    "fails at $n=2,3,4$",
+    "fails at $n=1,2,3$",
+    "fails at $n=40$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Understood that one counterexample refutes a universal claim",
+    "weight": 1
+   },
+   {
+    "text": "Found a counterexample for each false claim ($n=11$, $n=2$, $n=3$, $n=40$)",
+    "weight": 2
+   },
+   {
+    "text": "Factored $n^3-n=(n-1)n(n+1)$ and argued divisibility by $2$ and $3$",
+    "weight": 1
+   },
+   {
+    "text": "Selected the divisibility claim",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Disprove by counterexample (proof-methods):\n$n=11$: $121-11+11=121=11^2$, not prime. $n=2$: $2^2=4=2^2$, not greater. $n=3$: $3!=6<8$. $n=40$: $1600+40+41=1681=41^2$.\nRemaining claim (factor): $n^3-n=(n-1)n(n+1)$ is a product of three consecutive integers.\nOne is divisible by $3$ and at least one is even, so $6$ divides it. Direct proof settles it.",
+  "hints": [
+   "Hunt for counterexamples among small values and special values like $n=11$ and $n=40$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.proof-methods",
+   "t2.logic-sets"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $a$ and $b$ be real numbers. How many of the following four statements are true?\n(i) If $ab$ is irrational, then $a$ or $b$ is irrational.\n(ii) If $a$ and $b$ are irrational, then $a+b$ is irrational.\n(iii) If $a$ is rational and $b$ is irrational, then $a+b$ is irrational.\n(iv) If $a$ is rational and $b$ is irrational, then $ab$ is irrational.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1$",
+    "$3$",
+    "$4$",
+    "$2$",
+    "$0$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "rejected (i) or (iii) although the contrapositive proves them",
+    "accepted (iv), missing $a=0$",
+    "accepted every statement",
+    "",
+    "rejected every statement"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "(i) proved by contrapositive: rational $a,b$ give rational $ab$",
+    "weight": 1
+   },
+   {
+    "text": "(iii) proved by contradiction: $b=(a+b)-a$ would be rational",
+    "weight": 1
+   },
+   {
+    "text": "(ii) and (iv) refuted by counterexamples: $\\sqrt2+(-\\sqrt2)=0$ and $a=0$",
+    "weight": 2
+   },
+   {
+    "text": "Counted the true statements: $2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "(i) Contrapositive (proof-methods): if $a,b$ both rational then $ab$ is rational. True.\n(ii) Counterexample $\\sqrt2+(-\\sqrt2)=0$. False.\n(iii) Contradiction: if $a+b=r$ is rational then $b=r-a$ is rational. True.\n(iv) Counterexample $a=0$, $b=\\sqrt2$, $ab=0$. False.\nTwo are true (logic-sets: negate to disprove).",
+  "hints": [
+   "Use contrapositive for the 'or' statement and look for $0$ and opposite pairs as counterexamples."
+  ],
+  "check": "2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.induction",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\sum_{k=1}^{6}k\\cdot k!$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5040$",
+    "$5041$",
+    "$5039$",
+    "$719$",
+    "$40319$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "off by one: reported $7!$",
+    "reported $7!+1$",
+    "",
+    "used the closed form for the sum up to $5$",
+    "used $(n+2)!-1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Conjectured the closed form $\\sum_{k=1}^nk\\cdot k!=(n+1)!-1$ from small cases",
+    "weight": 2
+   },
+   {
+    "text": "Verified the base case and the inductive step",
+    "weight": 1
+   },
+   {
+    "text": "Substituted $n=6$ to get $7!-1$",
+    "weight": 1
+   },
+   {
+    "text": "Result $5039$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Small cases (induction guess): $n=1$: $1=2!-1$. $n=2$: $1+4=5=3!-1$. So conjecture $(n+1)!-1$.\nStep: assume true for $n$. Then $\\sum_{k=1}^{n+1}=(n+1)!-1+(n+1)(n+1)!=(n+1)!(1+n+1)-1=(n+2)!-1$.\nThe closed form holds for all $n$ (sigma notation).\nFor $n=6$: $7!-1=5040-1=5039$.",
+  "hints": [
+   "Compute the first few partial sums and compare with factorials."
+  ],
+  "check": "sum(k*math.factorial(k) for k in range(1,7))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.induction",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $n_0$ be the smallest positive integer such that $3^n>n^4$ for every integer $n\\ge n_0$. Find $n_0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7$",
+    "$3$",
+    "$1$",
+    "$9$",
+    "$8$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "the inequality fails at $n=7$: $2187<2401$",
+    "accepted the equality $81=81$ at $n=3$ as success, or took the step threshold as the start",
+    "saw the inequality at $n=1$ but ignored the failures at $n=2$ to $7$",
+    "required a strict gap beyond the first success at $n=8$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Tested small cases: fails for $2\\le n\\le7$, holds at $n=8$ ($6561>4096$)",
+    "weight": 2
+   },
+   {
+    "text": "Inductive step: $3^{n+1}>3n^4\\ge(n+1)^4$ when $(1+\\frac1n)^4\\le3$, true for $n\\ge4$",
+    "weight": 1
+   },
+   {
+    "text": "Combined base case $n=8$ with the step to cover all $n\\ge8$",
+    "weight": 1
+   },
+   {
+    "text": "Concluded $n_0=8$ and excluded $n=1$ by the 'every $n\\ge n_0$' wording",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Test values (induction base): $n=7$: $2187<2401$, fails. $n=8$: $6561>4096$, holds.\nStep: if $3^n>n^4$ then $3^{n+1}>3n^4$. Need $3n^4\\ge(n+1)^4$, i.e. $(1+\\frac1n)^4\\le3$, true for $n\\ge4$ (exp-rules).\nSo from base case $n=8$ the claim holds for all $n\\ge8$.\n$n=1$ holds, $n=3$ is only an equality, and $n=2$ to $7$ fail, so $n_0=8$.",
+  "hints": [
+   "Find where the inequality first holds and keeps holding."
+  ],
+  "check": "8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

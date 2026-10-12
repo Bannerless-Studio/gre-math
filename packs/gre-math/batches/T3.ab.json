@@ -1,0 +1,3817 @@
+[
+ {
+  "id": "t3-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $p$ and $q$ be polynomials with $q(a)\\neq 0$. What is $\\lim_{x\\to a}\\dfrac{p(x)}{q(x)}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{p(a)}{q(a)}$",
+    "$\\dfrac{p'(a)}{q'(a)}$",
+    "$p(a)-q(a)$",
+    "$\\dfrac{p(a)+q(a)}{2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "L'Hopital used with no 0/0 or infinity/infinity form",
+    "subtracted the values instead of dividing",
+    "averaged the values instead of dividing"
+   ]
+  },
+  "solution": "Since $q(a)\\neq0$ the quotient is continuous at $a$. Substitute to get $\\frac{p(a)}{q(a)}$.",
+  "hints": [
+   "Check whether the denominator is nonzero at the limit point first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f(x)=\\dfrac{x^2-4}{x-2}$ for $x\\neq 2$. What is $\\lim_{x\\to 2}f(x)$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "For $x\\neq2$, $f(x)=x+2$. Its limit at $2$ is $4$.",
+  "hints": [
+   "Factor the numerator as a difference of squares."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which first step is valid for $\\lim_{x\\to 3}\\dfrac{x^2-9}{x-3}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Factor $x^2-9=(x-3)(x+3)$, cancel $x-3$ for $x\\neq3$, then substitute",
+    "Cancel the $x^2$ and the $9$, leaving $\\dfrac{1}{x-3}$",
+    "Substitute $x=3$, get $\\frac{0}{0}$, and conclude the limit does not exist",
+    "Split as $\\dfrac{x^2}{x}-\\dfrac{9}{x-3}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "dropped terms instead of factoring",
+    "stopped at the 0/0 form",
+    "split the numerator's terms over different denominators"
+   ]
+  },
+  "solution": "$\\frac{x^2-9}{x-3}=x+3$ for $x\\neq3$, so the limit is $6$.",
+  "hints": [
+   "Factor before substituting."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 2}\\frac{x^2-x-2}{x^2-4}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/4",
+   "form": "exact"
+  },
+  "check": "Fraction(2+1,2+2)",
+  "solution": "$x^2-x-2=(x-2)(x+1)$ and $x^2-4=(x-2)(x+2)$. Cancel $x-2$, then $\\frac{x+1}{x+2}\\to\\frac34$.",
+  "hints": [
+   "Factor both polynomials."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to -1}\\frac{x^3+1}{x+1}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "(-1)**2-(-1)+1",
+  "solution": "Use $x^3+1=(x+1)(x^2-x+1)$. Cancel $x+1$, then $(-1)^2-(-1)+1=3$.",
+  "hints": [
+   "Use the sum of cubes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Evaluate $\\displaystyle\\lim_{h\\to 0}\\frac{(2+h)^2-4}{h}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "2*2",
+  "solution": "The numerator is $4h+h^2$, so the quotient is $4+h$. The limit is $4$.",
+  "hints": [
+   "Expand $(2+h)^2$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Simplify $\\dfrac{x^2-5x+6}{x-3}$ for $x\\neq 3$. Give the result in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x-2",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "-2+x"
+   ]
+  },
+  "check": null,
+  "solution": "Factor $x^2-5x+6=(x-2)(x-3)$, then cancel $x-3$ to get $x-2$.",
+  "hints": [
+   "Factor the numerator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 5}\\frac{x^2-25}{x^2-3x-10}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "10/7",
+   "form": "exact"
+  },
+  "check": "Fraction(5+5,5+2)",
+  "solution": "Factor: $x^2-25=(x-5)(x+5)$ and $x^2-3x-10=(x-5)(x+2)$. Cancel and substitute to get $\\frac{10}{7}$.",
+  "hints": [
+   "Factor $x^2-3x-10$ using two numbers with product $-10$ and sum $-3$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{\\sqrt{x+4}-2}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "form": "exact"
+  },
+  "check": "Fraction(1, 2+2)",
+  "solution": "Multiply by $\\frac{\\sqrt{x+4}+2}{\\sqrt{x+4}+2}$. The numerator becomes $x$, leaving $\\frac{1}{\\sqrt{x+4}+2}\\to\\frac14$.",
+  "hints": [
+   "Rationalize the numerator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\displaystyle\\lim_{x\\to 0}\\frac{1-\\cos x}{x^2}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)",
+  "solution": "Multiply by $\\frac{1+\\cos x}{1+\\cos x}$ to get $\\frac{\\sin^2 x}{x^2(1+\\cos x)}\\to\\frac12$.",
+  "hints": [
+   "Multiply top and bottom by $1+\\cos x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement is the squeeze theorem?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "If $g\\le f\\le h$ near $a$ and $g,h\\to L$, then $f\\to L$",
+    "If $|f(x)|\\le M$ for all $x$, then $\\lim_{x\\to a}f(x)=0$",
+    "If $f(a)=g(a)=0$, then $\\lim_{x\\to a}\\frac{f(x)}{g(x)}=0$",
+    "If $f\\to L$ and $g\\to 0$, then $\\frac{f}{g}\\to\\infty$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "boundedness alone does not force a limit",
+    "a zero value at $a$ does not fix the quotient's limit",
+    "a denominator tending to zero does not always give infinity"
+   ]
+  },
+  "solution": "Trapping $f$ between two functions with the same limit forces $f$ to that limit.",
+  "hints": [
+   "The squeezed function must be trapped on both sides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\displaystyle\\lim_{x\\to\\infty}\\left(1+\\frac{1}{x}\\right)^{x}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$e$",
+    "$1$",
+    "$2$",
+    "$\\infty$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treated $1^{\\infty}$ as $1$ without checking the exponent",
+    "substituted $x=1$ into the expression",
+    "assumed a base above $1$ always grows without bound"
+   ]
+  },
+  "solution": "As $x\\to\\infty$, $(1+\\frac1x)^x\\to e$. This is the standard form $(1+u)^{1/u}\\to e$ with $u=\\frac1x$.",
+  "hints": [
+   "Write it as $(1+u)^{1/u}$ with $u=1/x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{\\sin 3x}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "Write $\\frac{\\sin 3x}{x}=3\\cdot\\frac{\\sin 3x}{3x}$. The second factor tends to $1$, so the limit is $3$.",
+  "hints": [
+   "Make the sine's argument match the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{\\tan x}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Use $\\tan x=\\frac{\\sin x}{\\cos x}$. Then $\\frac{\\tan x}{x}=\\frac{\\sin x}{x}\\cdot\\frac{1}{\\cos x}\\to1\\cdot1=1$.",
+  "hints": [
+   "Rewrite tangent as sine over cosine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{1-\\cos 2x}{x^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "Use $1-\\cos2x=2\\sin^2x$. Then $\\frac{2\\sin^2x}{x^2}=2\\left(\\frac{\\sin x}{x}\\right)^2\\to2$.",
+  "hints": [
+   "Apply the double-angle identity for cosine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{x}{\\sin 5x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/5",
+   "form": "exact"
+  },
+  "check": "Fraction(1,5)",
+  "solution": "Write $\\frac{x}{\\sin5x}=\\frac15\\cdot\\frac{5x}{\\sin5x}\\to\\frac15$.",
+  "hints": [
+   "Match the sine's argument to the numerator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to\\infty}\\left(1+\\frac{3}{x}\\right)^{x}$. Give a decimal to 4 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "20.0855",
+   "form": "decimal",
+   "tol": 0.0001
+  },
+  "check": "math.exp(3)",
+  "solution": "Let $u=3/x$. The limit is $\\left[(1+u)^{1/u}\\right]^3\\to e^3\\approx20.0855$.",
+  "hints": [
+   "Rewrite with $u=3/x$ and use the base $e$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to 0}x^{2}\\sin\\frac{1}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "form": "exact"
+  },
+  "check": "0",
+  "solution": "Since $|\\sin(1/x)|\\le1$, we have $|x^2\\sin(1/x)|\\le x^2$. By the squeeze theorem the limit is $0$.",
+  "hints": [
+   "Bound the sine factor by $1$ in absolute value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which three conditions define continuity of $f$ at $a$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f(a)$ is defined, $\\lim_{x\\to a}f(x)$ exists, and the two are equal",
+    "$f$ is differentiable at $a$",
+    "$f(a)$ is defined and $f'(a)=0$",
+    "The left-hand limit exists at $a$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "differentiability is stronger than continuity",
+    "confused continuity with a critical point",
+    "a single one-sided limit is not enough"
+   ]
+  },
+  "solution": "Continuity at $a$ means $\\lim_{x\\to a}f(x)=f(a)$. That needs a defined value and a two-sided limit equal to it.",
+  "hints": [
+   "Compare the limit with the function value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f(x)=\\dfrac{x^2-4}{x-2}$ for $x\\neq 2$. What value $c=f(2)$ makes $f$ continuous at $2$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "The limit at $2$ is $\\lim(x+2)=4$, so $c=4$.",
+  "hints": [
+   "Find the limit of the simplified form."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Does continuity at $a$ imply differentiability at $a$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "No. $|x|$ is continuous at $0$ but not differentiable there",
+    "Yes. Every continuous function is differentiable",
+    "Yes, except at the endpoints of the domain",
+    "Only when $f(a)=0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "assumed continuity implies differentiability",
+    "confused endpoint rules with corners",
+    "required a zero function value"
+   ]
+  },
+  "solution": "A corner such as $|x|$ at $0$ is continuous with no derivative. Continuity is weaker than differentiability.",
+  "hints": [
+   "Look for a corner in a continuous graph."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $k$ so that $f(x)=\\begin{cases}x^2+k,&x<1\\\\3x,&x\\ge1\\end{cases}$ is continuous at $1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "3*1-1**2",
+  "solution": "The left limit is $1+k$ and the value at $1$ is $3$. Set $1+k=3$, so $k=2$.",
+  "hints": [
+   "Equate the left limit with $f(1)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f(x)=\\dfrac{x^2-9}{x-3}$ for $x\\neq3$. Which value $c$ makes $f(3)=c$ continuous?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact"
+  },
+  "check": "3+3",
+  "solution": "The limit is $\\lim(x+3)=6$, so $c=6$.",
+  "hints": [
+   "Simplify first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=\\begin{cases}ax+1,&x\\le 2\\\\x^2,&x>2\\end{cases}$. Find $a$ that makes $f$ continuous at $2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact"
+  },
+  "check": "Fraction(2**2-1,2)",
+  "solution": "The left limit $2a+1$ must equal $2^2=4$. So $2a=3$ and $a=\\frac32$.",
+  "hints": [
+   "Both branches must meet at $x=2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $g(x)=\\dfrac{\\sin 4x}{x}$ for $x\\neq0$ and $g(0)=c$. Find $c$ for continuity at $0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "$\\lim_{x\\to0}\\frac{\\sin4x}{x}=4\\lim_{x\\to0}\\frac{\\sin4x}{4x}=4$, so $c=4$.",
+  "hints": [
+   "Use the sine limit with argument $4x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which functions are continuous at every real number? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\dfrac{1}{x}$",
+    "$|x|$",
+    "$\\dfrac{x^2-1}{x-1}$",
+    "$\\sqrt{x^2+1}$",
+    "$\\lfloor x\\rfloor$"
+   ],
+   "correct": [
+    1,
+    3
+   ]
+  },
+  "solution": "$|x|$ and $\\sqrt{x^2+1}$ have no gaps or jumps. $\\frac1x$ fails at $0$, $\\frac{x^2-1}{x-1}$ at $1$, and $\\lfloor x\\rfloor$ jumps at integers.",
+  "hints": [
+   "Check each function for a missing point or a jump."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.continuity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find a continuous extension of $\\dfrac{x^2-x}{x}$ to $x=0$. Give the extension as a formula in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x-1",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "-1+x"
+   ]
+  },
+  "check": null,
+  "solution": "For $x\\neq0$, $\\frac{x(x-1)}{x}=x-1$. The extension is $x-1$, which takes the value $-1$ at $0$.",
+  "hints": [
+   "Cancel the factor $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which expression is the definition of $f'(a)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\displaystyle\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$",
+    "$\\displaystyle\\lim_{h\\to0}\\frac{f(a+h)}{h}$",
+    "$\\displaystyle\\frac{f(a)-f(0)}{a}$",
+    "$\\displaystyle\\lim_{h\\to0}\\bigl(f(a+h)-f(a)\\bigr)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot to subtract $f(a)$",
+    "used a fixed secant, not a limit",
+    "forgot to divide by $h$"
+   ]
+  },
+  "solution": "The derivative is the limit of the difference quotient. Subtract the value at $a$ and divide by the step $h$.",
+  "hints": [
+   "It is the slope of a secant over an interval of length $h$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using $f(x)=x^2$ and the definition, what is $f'(3)$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact"
+  },
+  "check": "2*3",
+  "solution": "$\\frac{(3+h)^2-9}{h}=6+h\\to6$.",
+  "hints": [
+   "Expand $(3+h)^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement about $f(x)=|x|$ at $x=0$ is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f'(0)$ does not exist. The one-sided difference quotients are $1$ and $-1$",
+    "$f'(0)=0$ because $|0|=0$",
+    "$f'(0)=1$ because the graph has slope $1$ on the right",
+    "$f'(0)$ is infinite because the graph has a corner"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "read the function value as the slope",
+    "used only the right-hand side",
+    "confused a corner with a vertical tangent"
+   ]
+  },
+  "solution": "For $h>0$ the quotient is $\\frac{|h|}{h}=1$. For $h<0$ it is $-1$. The two limits differ, so no derivative exists.",
+  "hints": [
+   "Compute the quotient separately for $h>0$ and $h<0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using the definition, find $f'(2)$ for $f(x)=x^3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact"
+  },
+  "check": "3*2**2",
+  "solution": "$\\frac{(2+h)^3-8}{h}=12+6h+h^2\\to12$.",
+  "hints": [
+   "Expand $(2+h)^3$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\displaystyle\\lim_{h\\to 0}\\frac{(1+h)^4-1}{h}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "4*1",
+  "solution": "This is the definition of $f'(1)$ for $f(x)=x^4$, which is $4\\cdot1^3=4$.",
+  "hints": [
+   "Recognize the difference quotient."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\displaystyle\\lim_{h\\to 0}\\frac{\\sqrt{4+h}-2}{h}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "form": "exact"
+  },
+  "check": "Fraction(1, 2*2)",
+  "solution": "This is $f'(4)$ for $f(x)=\\sqrt{x}$, which is $\\frac{1}{2\\sqrt4}=\\frac14$.",
+  "hints": [
+   "Recognize $\\sqrt{x}$ at $x=4$, or rationalize."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using the definition, find $f'(2)$ for $f(x)=\\dfrac{1}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-1/4",
+   "form": "exact"
+  },
+  "check": "-Fraction(1, 2*2)",
+  "solution": "$\\frac{\\frac{1}{2+h}-\\frac12}{h}=\\frac{-1}{2(2+h)}\\to-\\frac14$.",
+  "hints": [
+   "Combine the two fractions over a common denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using the definition, find $f'(9)$ for $f(x)=\\sqrt{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "form": "exact"
+  },
+  "check": "Fraction(1, 2*3)",
+  "solution": "Taking $f'(x)=\\frac{1}{2\\sqrt x}$ at $x=9$ gives $\\frac{1}{6}$. The definition gives the same value.",
+  "hints": [
+   "Use $\\sqrt{9}=3$ in the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using the definition, find $f'(x)$ for $f(x)=x^2+3x$. Give $f'(x)$ in terms of $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*x+3",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "3+2*x"
+   ]
+  },
+  "check": null,
+  "solution": "$\\frac{(x+h)^2+3(x+h)-x^2-3x}{h}=2x+3+h\\to2x+3$.",
+  "hints": [
+   "Expand, cancel $h$, then let $h\\to0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which is the product rule for $\\dfrac{d}{dx}\\bigl(u(x)v(x)\\bigr)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$u'v+uv'$",
+    "$u'v'$",
+    "$\\dfrac{u'v-uv'}{v^2}$",
+    "$u'v$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "multiplied the derivatives",
+    "used the quotient rule for a product",
+    "differentiated only one factor"
+   ]
+  },
+  "solution": "The derivative of a product has two terms, each differentiating one factor while the other stays put.",
+  "hints": [
+   "Each factor takes a turn being differentiated."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In $\\dfrac{d}{dx}x^{7}=k\\,x^{6}$, what is $k$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact"
+  },
+  "check": "7",
+  "solution": "Power rule: $\\frac{d}{dx}x^n=nx^{n-1}$ with $n=7$.",
+  "hints": [
+   "Bring the exponent down."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which is the quotient rule for $\\dfrac{d}{dx}\\dfrac{u}{v}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{u'v-uv'}{v^2}$",
+    "$\\dfrac{u'v+uv'}{v^2}$",
+    "$\\dfrac{u'v-uv'}{v}$",
+    "$\\dfrac{u'}{v'}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign error on the second term",
+    "forgot to square the denominator",
+    "divided the derivatives"
+   ]
+  },
+  "solution": "The quotient rule is $\\frac{u'v-uv'}{v^2}$. The order in the numerator matters, with $u'v$ first.",
+  "hints": [
+   "Remember the square in the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=x^3(2x+1)$. Find $f'(1)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "form": "exact"
+  },
+  "check": "8*1**3+3*1**2",
+  "solution": "Product rule: $f'=3x^2(2x+1)+2x^3=8x^3+3x^2$. At $x=1$, $f'(1)=11$.",
+  "hints": [
+   "Differentiate $x^3$ and $2x+1$ separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $g(x)=\\dfrac{x}{x+1}$. Find $g'(1)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "form": "exact"
+  },
+  "check": "Fraction(1, (1+1)**2)",
+  "solution": "Quotient rule: $g'=\\frac{(x+1)-x}{(x+1)^2}=\\frac{1}{(x+1)^2}$. At $x=1$, $g'=\\frac14$.",
+  "hints": [
+   "Simplify the numerator before substituting."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $h(x)=\\dfrac{2x^2-1}{x}$. Find $h'(2)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/4",
+   "form": "exact"
+  },
+  "check": "Fraction(2*2**2+1, 2**2)",
+  "solution": "Quotient rule: $h'=\\frac{4x\\cdot x-(2x^2-1)}{x^2}=\\frac{2x^2+1}{x^2}$. At $x=2$, $h'=\\frac94$.",
+  "hints": [
+   "Use $u'v-uv'$ with $u=2x^2-1$ and $v=x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\dfrac{x^2+1}{x-1}$ for $x\\neq1$. Give the derivative in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(x^2-2*x-1)/(x-1)^2",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "x^2/(x-1)^2-2*x/(x-1)^2-1/(x-1)^2"
+   ]
+  },
+  "check": null,
+  "solution": "Quotient rule: $\\frac{2x(x-1)-(x^2+1)}{(x-1)^2}=\\frac{x^2-2x-1}{(x-1)^2}$.",
+  "hints": [
+   "Numerator: $u'v-uv'$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $f'(4)$ for $f(x)=x^{-2}+\\sqrt{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "7/32",
+   "form": "exact"
+  },
+  "check": "-2*Fraction(1,4**3)+Fraction(1,2*2)",
+  "solution": "$f'(x)=-2x^{-3}+\\frac{1}{2\\sqrt x}$. At $x=4$: $-\\frac{2}{64}+\\frac14=\\frac{7}{32}$.",
+  "hints": [
+   "Write $\\sqrt{x}$ as $x^{1/2}$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $p(x)=(3x-1)(x^2+2)$. Find $p'(2)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 38,
+   "form": "exact"
+  },
+  "check": "3*(2**2+2)+(3*2-1)*2*2",
+  "solution": "$p'=3(x^2+2)+(3x-1)(2x)$. At $x=2$: $3\\cdot6+5\\cdot4=38$.",
+  "hints": [
+   "Product rule with $u=3x-1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which is the chain rule for $\\dfrac{d}{dx}f(g(x))$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f'(g(x))\\,g'(x)$",
+    "$f'(x)\\,g'(x)$",
+    "$f'(g(x))$",
+    "$f(g'(x))$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "evaluated the outer derivative at $x$ instead of $g(x)$",
+    "dropped the inner derivative",
+    "composed the derivative with $f$"
+   ]
+  },
+  "solution": "Differentiate the outer function at the inner input, then multiply by the derivative of the inner function.",
+  "hints": [
+   "Outer derivative first, then inner."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\dfrac{d}{dx}\\sin(2x)$ at $x=0$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "2*math.cos(0)",
+  "solution": "$\\frac{d}{dx}\\sin(2x)=2\\cos(2x)$. At $x=0$ this is $2$.",
+  "hints": [
+   "Apply the chain rule with inner function $2x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\dfrac{d}{dx}e^{x^2}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2x\\,e^{x^2}$",
+    "$e^{x^2}$",
+    "$2\\,e^{x^2}$",
+    "$x^2e^{x^2-1}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "dropped the inner derivative",
+    "kept the $2$ and dropped the $x$",
+    "treated $e^{x^2}$ as a power function of $x$"
+   ]
+  },
+  "solution": "The outer derivative is $e^{u}$ with $u=x^2$. The inner derivative is $2x$.",
+  "hints": [
+   "The inner derivative of $x^2$ is $2x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\dfrac{d}{dx}(x^2+1)^3$ at $x=1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 24,
+   "form": "exact"
+  },
+  "check": "3*(1**2+1)**2*2*1",
+  "solution": "$\\frac{d}{dx}(x^2+1)^3=3(x^2+1)^2\\cdot2x$. At $x=1$: $3\\cdot4\\cdot2=24$.",
+  "hints": [
+   "Outer power first, then the inner $x^2+1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\dfrac{d}{dx}(3x+1)^5$ at $x=0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "form": "exact"
+  },
+  "check": "5*(3*0+1)**4*3",
+  "solution": "$5(3x+1)^4\\cdot3$. At $x=0$: $5\\cdot1\\cdot3=15$.",
+  "hints": [
+   "Multiply by the derivative of $3x+1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\sqrt{4x^2+9}$ at $x=2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "8/5",
+   "form": "exact"
+  },
+  "check": "4*2/math.sqrt(4*2**2+9)",
+  "solution": "$\\frac{d}{dx}\\sqrt{4x^2+9}=\\frac{8x}{2\\sqrt{4x^2+9}}=\\frac{4x}{\\sqrt{4x^2+9}}$. At $x=2$: $\\frac85$.",
+  "hints": [
+   "Write the root as a power $\\frac12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\ln(3x^2+1)$ at $x=1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact"
+  },
+  "check": "6*1/(3*1**2+1)",
+  "solution": "$\\frac{6x}{3x^2+1}$. At $x=1$: $\\frac{6}{4}=\\frac32$.",
+  "hints": [
+   "Differentiate the inside of the logarithm."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}(2x+\\cos x)^2$ at $x=0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "2*(2*0+math.cos(0))*(2-math.sin(0))",
+  "solution": "$2(2x+\\cos x)(2-\\sin x)$. At $x=0$: $2\\cdot1\\cdot2=4$.",
+  "hints": [
+   "The inner derivative is $2-\\sin x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\sin(x^2)$. Give the derivative in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*x*cos(x^2)",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "cos(x^2)*2*x"
+   ]
+  },
+  "check": null,
+  "solution": "The outer derivative gives $\\cos(x^2)$ and the inner derivative gives $2x$.",
+  "hints": [
+   "Multiply by the inner derivative $2x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\dfrac{d}{dx}\\ln x$ for $x>0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac1x$",
+    "$\\dfrac{1}{\\ln x}$",
+    "$\\ln x$",
+    "$e^x$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "inverted the logarithm",
+    "treated the function as its own derivative",
+    "used the derivative of the exponential"
+   ]
+  },
+  "solution": "The derivative of $\\ln x$ is $\\frac1x$ for $x>0$. The natural log is the inverse of $e^x$.",
+  "hints": [
+   "Use $\\ln$ as the inverse of exp."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\dfrac{d}{dx}\\arctan x$ at $x=1$?",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact"
+  },
+  "check": "Fraction(1, 1+1**2)",
+  "solution": "$\\frac{d}{dx}\\arctan x=\\frac{1}{1+x^2}$. At $x=1$ this is $\\frac12$.",
+  "hints": [
+   "Recall the arctangent derivative formula."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\dfrac{d}{dx}a^{x}$ for $a>0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a^{x}\\ln a$",
+    "$x\\,a^{x-1}$",
+    "$a^{x}$",
+    "$\\dfrac{a^{x}}{\\ln a}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "applied the power rule as if $x$ were the base",
+    "left out the factor $\\ln a$",
+    "divided by $\\ln a$ instead of multiplying"
+   ]
+  },
+  "solution": "$a^x=e^{x\\ln a}$, so the derivative is $a^x\\ln a$.",
+  "hints": [
+   "Write $a^x$ as $e^{x\\ln a}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\dfrac{d}{dx}e^{3x}$ at $x=0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "3*math.exp(0)",
+  "solution": "$\\frac{d}{dx}e^{3x}=3e^{3x}$. At $x=0$: $3$.",
+  "hints": [
+   "Chain rule on $3x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\tan x$ at $x=\\dfrac{\\pi}{4}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "1/math.cos(math.pi/4)**2",
+  "solution": "$\\frac{d}{dx}\\tan x=\\sec^2x$. At $x=\\frac\\pi4$: $\\frac{1}{(1/\\sqrt2)^2}=2$.",
+  "hints": [
+   "Use $\\sec^2x=1/\\cos^2x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\arcsin x$ at $x=\\dfrac12$. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1.154701",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "1/math.sqrt(1-0.5**2)",
+  "solution": "$\\frac{d}{dx}\\arcsin x=\\frac{1}{\\sqrt{1-x^2}}$. At $x=\\frac12$: $\\frac{1}{\\sqrt{3/4}}=\\frac{2}{\\sqrt3}\\approx1.154701$.",
+  "hints": [
+   "Put $1-x^2$ under the root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\left(xe^{x}\\right)$ at $x=1$. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5.436564",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "2*math.e",
+  "solution": "Product rule: $e^x+xe^x$. At $x=1$: $2e\\approx5.436564$.",
+  "hints": [
+   "Use the product rule first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\left(e^{x^2}\\ln x\\right)$ for $x>0$. Give the derivative in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*x*exp(x^2)*ln(x)+exp(x^2)/x",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "exp(x^2)*(2*x*ln(x)+1/x)"
+   ]
+  },
+  "check": null,
+  "solution": "Product rule: $2xe^{x^2}\\ln x+\\frac{e^{x^2}}{x}$.",
+  "hints": [
+   "Product rule, with the chain rule on the exponential."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\dfrac{d}{dx}\\log_{10}x$ at $x=10$. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "0.043429",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "1/(10*math.log(10))",
+  "solution": "$\\frac{d}{dx}\\log_{10}x=\\frac{1}{x\\ln10}$. At $x=10$: $\\frac{1}{10\\ln10}\\approx0.043429$.",
+  "hints": [
+   "Convert $\\log_{10}$ to $\\ln$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $x^2+y^2=r^2$ with $r\\neq0$, what is $\\dfrac{dy}{dx}$ when $y\\neq0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\dfrac{x}{y}$",
+    "$\\dfrac{x}{y}$",
+    "$-\\dfrac{y}{x}$",
+    "$-\\dfrac{x}{y^2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign slip",
+    "swapped $x$ and $y$",
+    "squared $y$ in the denominator by mistake"
+   ]
+  },
+  "solution": "Differentiate: $2x+2y\\,y'=0$. Solve to get $y'=-\\frac{x}{y}$.",
+  "hints": [
+   "Differentiate both sides with respect to $x$, using the chain rule on $y$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $y=2$ and $\\dfrac{dy}{dx}=5$ at a point, what is $\\dfrac{d}{dx}(y^3)$ there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 60,
+   "form": "exact"
+  },
+  "check": "3*2**2*5",
+  "solution": "$\\frac{d}{dx}(y^3)=3y^2\\,y'=3\\cdot4\\cdot5=60$.",
+  "hints": [
+   "Apply the chain rule to $y^3$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the correct implicit derivative of $xy=1$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$y'=-\\dfrac{y}{x}$",
+    "$y'=\\dfrac{y}{x}$",
+    "$y'=-\\dfrac{x}{y}$",
+    "$y'=0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign error",
+    "used the pattern from $x^2+y^2=r^2$",
+    "dropped the $y$ term from the product rule"
+   ]
+  },
+  "solution": "Product rule: $y+xy'=0$. So $y'=-\\frac{y}{x}$.",
+  "hints": [
+   "Use the product rule on $xy$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $x^2y+y^3=10$, find $\\dfrac{dy}{dx}$ at $(1,2)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-4/13",
+   "form": "exact"
+  },
+  "check": "Fraction(-2*1*2, 1+3*2**2)",
+  "solution": "Differentiate: $2xy+x^2y'+3y^2y'=0$, so $y'=-\\frac{2xy}{x^2+3y^2}$. At $(1,2)$: $-\\frac{4}{13}$.",
+  "hints": [
+   "Collect the $y'$ terms on one side."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $x^2+y^2=25$, find $\\dfrac{dy}{dx}$ at $(3,4)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-3/4",
+   "form": "exact"
+  },
+  "check": "-Fraction(2*3, 2*4)",
+  "solution": "$y'=-\\frac{x}{y}$. At $(3,4)$: $-\\frac34$.",
+  "hints": [
+   "Use $y'=-x/y$ from the circle."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $x^2+xy=2$, find $\\dfrac{dy}{dx}$ at $(1,1)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -3,
+   "form": "exact"
+  },
+  "check": "-(2*1+1)/1",
+  "solution": "Differentiate: $2x+y+xy'=0$, so $y'=-\\frac{2x+y}{x}$. At $(1,1)$: $-3$.",
+  "hints": [
+   "Use the product rule on $xy$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $\\sin y=x$, find $\\dfrac{dy}{dx}$ at $y=\\dfrac{\\pi}{3}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "1/math.cos(math.pi/3)",
+  "solution": "$\\cos y\\cdot y'=1$, so $y'=\\frac{1}{\\cos y}$. At $y=\\frac\\pi3$: $\\frac{1}{1/2}=2$.",
+  "hints": [
+   "Differentiate $\\sin y$ with the chain rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $x^2-y^2=1$, find $\\dfrac{dy}{dx}$ in terms of $x$ and $y$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x/y",
+   "vars": [
+    "x",
+    "y"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "x*y^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Differentiate: $2x-2y\\,y'=0$. So $y'=\\frac{x}{y}$.",
+  "hints": [
+   "Treat $y$ as a function of $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $y^3+y=x$, find $\\dfrac{dy}{dx}$ at the point where $y=1$ (so $x=2$).",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "form": "exact"
+  },
+  "check": "Fraction(1, 3*1**2+1)",
+  "solution": "$(3y^2+1)y'=1$. At $y=1$: $y'=\\frac14$.",
+  "hints": [
+   "Differentiate both sides, then substitute $y=1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "When is logarithmic differentiation most useful?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "For products or quotients of many factors, or when the exponent is a variable",
+    "For a single power of $x$ with a constant exponent",
+    "For any polynomial",
+    "For integrals of rational functions"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a plain power rule already works",
+    "polynomials need no logarithms",
+    "confused differentiation with integration"
+   ]
+  },
+  "solution": "Logs turn products into sums and powers into products, so the derivative becomes simpler.",
+  "hints": [
+   "Logs turn products into sums and powers into products."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\dfrac{d}{dx}\\ln(x^3)$ at $x=2$?",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact"
+  },
+  "check": "3/2",
+  "solution": "$\\ln(x^3)=3\\ln x$, so the derivative is $\\frac{3}{x}$. At $x=2$: $\\frac32$.",
+  "hints": [
+   "Simplify the logarithm first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $y=x^{x}$ with $x>0$, what is the first step of logarithmic differentiation?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Take logs: $\\ln y=x\\ln x$",
+    "Write $y'=x\\cdot x^{x-1}$ by the power rule",
+    "Take logs: $\\ln y=x+\\ln x$",
+    "Write $y=e^{x}\\ln x$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treated the variable exponent as a constant",
+    "turned the power into a sum",
+    "rewrote the power as a product"
+   ]
+  },
+  "solution": "Taking $\\ln$ of both sides gives $\\ln y=x\\ln x$, a product that is easy to differentiate.",
+  "hints": [
+   "Take $\\ln$ of both sides first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $y=(x+1)^x$. Find $y'$ at $x=1$. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2.386294",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "2*math.log(2)+1",
+  "solution": "$\\ln y=x\\ln(x+1)$, so $\\frac{y'}{y}=\\ln(x+1)+\\frac{x}{x+1}$. At $x=1$: $y=2$ and $\\frac{y'}{y}=\\ln2+\\frac12$, so $y'=2\\ln2+1$.",
+  "hints": [
+   "Differentiate $\\ln y$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $y=\\dfrac{(x+1)^2}{x-1}$ for $x>1$. Find $y'$ at $x=4$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/9",
+   "form": "exact"
+  },
+  "check": "Fraction(25,3)*(Fraction(2,5)-Fraction(1,3))",
+  "solution": "$\\frac{y'}{y}=\\frac{2}{x+1}-\\frac{1}{x-1}$. At $x=4$: $\\frac25-\\frac13=\\frac{1}{15}$ and $y=\\frac{25}{3}$, so $y'=\\frac{25}{45}=\\frac59$.",
+  "hints": [
+   "Expand $\\ln y$ with log rules before differentiating."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $y=x^{\\ln x}$ for $x>0$. Find $y'$ at $x=e$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "math.e*(2*math.log(math.e)/math.e)",
+  "solution": "$\\ln y=(\\ln x)^2$, so $\\frac{y'}{y}=\\frac{2\\ln x}{x}$. At $x=e$: $y=e$ and $\\frac{y'}{y}=\\frac2e$, so $y'=2$.",
+  "hints": [
+   "Take $\\ln$ of both sides first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $y=\\sqrt{x(x+1)}$. Find $y'$ at $x=1$. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1.06066",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "3*math.sqrt(2)/4",
+  "solution": "$\\frac{y'}{y}=\\frac12\\left(\\frac1x+\\frac{1}{x+1}\\right)$. At $x=1$: $y=\\sqrt2$ and $\\frac{y'}{y}=\\frac34$, so $y'=\\frac{3\\sqrt2}{4}\\approx1.06066$.",
+  "hints": [
+   "Take $\\ln$ and expand the product under the root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $y=\\dfrac{x^2}{\\sqrt{x+1}}$ for $x>0$. Find $y'$ in terms of $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x*(3*x+4)/(2*(x+1)^(3/2))",
+   "vars": [
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(3*x^2+4*x)/(2*(x+1)^1.5)"
+   ]
+  },
+  "check": null,
+  "solution": "$\\frac{y'}{y}=\\frac2x-\\frac{1}{2(x+1)}=\\frac{3x+4}{2x(x+1)}$. Multiply by $y=\\frac{x^2}{\\sqrt{x+1}}$ to get $y'=\\frac{x(3x+4)}{2(x+1)^{3/2}}$.",
+  "hints": [
+   "Keep the exponent $\\frac32$ on $x+1$ when you combine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $y=\\dfrac{x^2e^{x}}{(x+1)^3}$. Find $y'$ at $x=1$. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "0.509678",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "3*math.e/16",
+  "solution": "$\\frac{y'}{y}=\\frac2x+1-\\frac{3}{x+1}$. At $x=1$: $\\frac{y'}{y}=\\frac32$ and $y=\\frac{e}{8}$, so $y'=\\frac{3e}{16}\\approx0.509678$.",
+  "hints": [
+   "Log of a product of three factors, with the power of $x+1$ as a coefficient."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which limit forms allow L'Hopital's rule directly?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{0}{0}$ and $\\dfrac{\\infty}{\\infty}$",
+    "$\\dfrac{5}{0}$",
+    "$0\\cdot1$",
+    "$\\dfrac{1}{1}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a nonzero numerator over zero is not indeterminate",
+    "$0\\cdot1$ is simply $0$ with no quotient to differentiate",
+    "$\\frac11$ is a finite ratio, so substitute directly"
+   ]
+  },
+  "solution": "L'Hopital's rule applies to indeterminate quotients $\\frac{0}{0}$ and $\\frac{\\infty}{\\infty}$.",
+  "hints": [
+   "Check the form after substitution."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using L'Hopital's rule, what is $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x}{x}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Differentiate: $\\frac{\\cos x}{1}\\to1$ as $x\\to0$.",
+  "hints": [
+   "Differentiate top and bottom once."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Before applying L'Hopital's rule to $\\displaystyle\\lim_{x\\to a}\\frac{f(x)}{g(x)}$, which conditions are required?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Both $f,g\\to0$ or both $\\to\\pm\\infty$ at $a$, and $\\lim \\frac{f'}{g'}$ exists",
+    "$g$ is continuous at $a$ and $g(a)\\neq0$",
+    "$f(a)=0$ while $g(a)\\neq0$",
+    "$f$ and $g$ are polynomials"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a finite nonzero denominator gives no indeterminate form",
+    "one zero is not enough",
+    "skipped checking for $0/0$ or $\\infty/\\infty$"
+   ]
+  },
+  "solution": "The indeterminate form must be present. The rule then needs the limit of the quotient of derivatives.",
+  "hints": [
+   "The form must be indeterminate first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\displaystyle\\lim_{x\\to0}\\frac{\\ln(1+x)}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Differentiate: $\\frac{1/(1+x)}{1}\\to1$.",
+  "hints": [
+   "Differentiate the numerator and the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\displaystyle\\lim_{x\\to0}\\frac{\\tan 2x}{x}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "Differentiate: $\\frac{2\\sec^2 2x}{1}\\to2$.",
+  "hints": [
+   "Use the chain rule on the numerator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\displaystyle\\lim_{x\\to0}\\frac{x-\\sin x}{x^3}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "form": "exact"
+  },
+  "check": "Fraction(1,6)",
+  "solution": "Apply L'Hopital three times: $\\frac{1-\\cos x}{3x^2}$, then $\\frac{\\sin x}{6x}$, then $\\frac{\\cos x}{6}\\to\\frac16$.",
+  "hints": [
+   "Expect a $0/0$ form after each step."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\displaystyle\\lim_{x\\to\\infty}\\frac{\\ln x}{\\sqrt{x}}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "form": "exact"
+  },
+  "check": "0",
+  "solution": "This is $\\frac{\\infty}{\\infty}$. Differentiate: $\\frac{1/x}{\\frac{1}{2\\sqrt x}}=\\frac{2}{\\sqrt x}\\to0$.",
+  "hints": [
+   "Compare how fast the numerator and denominator grow."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\displaystyle\\lim_{x\\to0^+}x\\ln x$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "form": "exact"
+  },
+  "check": "0",
+  "solution": "Rewrite as $\\frac{\\ln x}{1/x}$, an $\\frac{\\infty}{\\infty}$ form. Then $\\frac{1/x}{-1/x^2}=-x\\to0$.",
+  "hints": [
+   "Move $x$ into the denominator as $1/x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\displaystyle\\lim_{x\\to1}\\frac{x^5-1}{x^2-1}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "form": "exact"
+  },
+  "check": "5*1**4/(2*1)",
+  "solution": "Differentiate: $\\frac{5x^4}{2x}$. At $x=1$: $\\frac52$.",
+  "hints": [
+   "Substitute only after differentiating."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a related-rates problem, which step comes first?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Write an equation linking the quantities, then differentiate with respect to time",
+    "Substitute the given rates before differentiating",
+    "Assume the quantities are constant",
+    "Differentiate with respect to $x$ instead of $t$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "substituted values before differentiating",
+    "assumed the quantities are constant",
+    "differentiated with respect to $x$ instead of $t$"
+   ]
+  },
+  "solution": "Write the linking equation first. Then differentiate every term with respect to time.",
+  "hints": [
+   "Start with an equation that links the quantities."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $V=x^3$ and $x$ depends on time, then $\\dfrac{dV}{dt}=k\\,\\dfrac{dx}{dt}$. What is $k$ at $x=2$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact"
+  },
+  "check": "3*2**2",
+  "solution": "$\\frac{dV}{dt}=3x^2\\frac{dx}{dt}$. At $x=2$, $k=12$.",
+  "hints": [
+   "Differentiate $x^3$ with respect to $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a sphere with $V=\\frac43\\pi r^3$, what is $\\dfrac{dV}{dt}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4\\pi r^2\\dfrac{dr}{dt}$",
+    "$\\dfrac43\\pi r^2\\dfrac{dr}{dt}$",
+    "$4\\pi r^3\\dfrac{dr}{dt}$",
+    "$4\\pi r\\dfrac{dr}{dt}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot the power $3$ as a factor",
+    "kept the original exponent",
+    "lowered the exponent by two"
+   ]
+  },
+  "solution": "Differentiate $r^3$ to get $3r^2\\frac{dr}{dt}$. Multiply by $\\frac43\\pi$ to get $4\\pi r^2\\frac{dr}{dt}$.",
+  "hints": [
+   "Bring the exponent $3$ down before multiplying."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ladder of length $5$ leans on a wall, its foot at distance $x=3$ from the wall and moving away at $\\frac{dx}{dt}=2$. At the moment the top height is $y=4$, find $\\frac{dy}{dt}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-3/2",
+   "form": "exact"
+  },
+  "check": "-3*2/4",
+  "solution": "$x^2+y^2=25$ gives $2x\\,x'+2y\\,y'=0$. So $y'=-\\frac{xx'}{y}=-\\frac{3\\cdot2}{4}=-\\frac32$.",
+  "hints": [
+   "Differentiate $x^2+y^2=25$ with respect to $t$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sphere has radius $r=2$ and $\\dfrac{dr}{dt}=3$. Find $\\dfrac{dV}{dt}$ for $V=\\frac43\\pi r^3$. Give a decimal to 4 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "150.7964",
+   "form": "decimal",
+   "tol": 0.0001
+  },
+  "check": "48*math.pi",
+  "solution": "$\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}=4\\pi\\cdot4\\cdot3=48\\pi\\approx150.7964$.",
+  "hints": [
+   "Use $\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The product $xy=6$ with $x=3$ and $\\dfrac{dx}{dt}=-2$. Find $\\dfrac{dy}{dt}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "4/3",
+   "form": "exact"
+  },
+  "check": "Fraction(-(-2)*2, 3)",
+  "solution": "$x'y+xy'=0$ gives $y'=-\\frac{x'y}{x}=-\\frac{(-2)(2)}{3}=\\frac43$.",
+  "hints": [
+   "Here $y=2$ because $xy=6$ and $x=3$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A square has side $s=10$, growing at $\\dfrac{ds}{dt}=\\dfrac12$. Find $\\dfrac{dA}{dt}$ for $A=s^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "form": "exact"
+  },
+  "check": "2*10*0.5",
+  "solution": "$\\frac{dA}{dt}=2s\\frac{ds}{dt}=2\\cdot10\\cdot\\frac12=10$.",
+  "hints": [
+   "Differentiate $A=s^2$ with respect to $t$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $x^2+y^2=25$, let $v=\\dfrac{dx}{dt}$. Give $\\dfrac{dy}{dt}$ in terms of $x$, $y$, and $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "-x*v/y",
+   "vars": [
+    "x",
+    "y",
+    "v"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "-(x*v)/y"
+   ]
+  },
+  "check": null,
+  "solution": "Differentiate in $t$: $2xv+2y\\frac{dy}{dt}=0$. So $\\frac{dy}{dt}=-\\frac{xv}{y}$.",
+  "hints": [
+   "Differentiate both sides with respect to $t$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A pebble makes a circular ripple with radius $r=3t$. Find $\\dfrac{dA}{dt}$ at $t=2$ for $A=\\pi r^2$. Give a decimal to 4 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "113.0973",
+   "form": "decimal",
+   "tol": 0.0001
+  },
+  "check": "36*math.pi",
+  "solution": "$\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}=2\\pi(6)(3)=36\\pi\\approx113.0973$ at $t=2$.",
+  "hints": [
+   "At $t=2$ the radius is $6$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which condition marks a critical point of $f$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f'(c)=0$ or $f'(c)$ does not exist, with $c$ in the domain",
+    "$f(c)=0$",
+    "$f''(c)=0$",
+    "$f'(c)=f(c)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "confused a critical point with a root",
+    "confused a critical point with an inflection point",
+    "set the derivative equal to the function"
+   ]
+  },
+  "solution": "A critical point is where the derivative is zero or undefined, inside the domain.",
+  "hints": [
+   "Look at the derivative, not the function value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=-x^2+4x$, at which $x$ does the maximum on the reals occur?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "-4/(2*-1)",
+  "solution": "$f'(x)=-2x+4=0$ gives $x=2$. Since $f''=-2<0$, this is a maximum.",
+  "hints": [
+   "Set $f'$ to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a continuous function on a closed interval $[a,b]$, where can the absolute maximum occur?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "At a critical point inside $(a,b)$ or at an endpoint",
+    "Only at critical points inside $(a,b)$",
+    "Only at the endpoints",
+    "Only where $f''=0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot the endpoints",
+    "forgot interior critical points",
+    "confused with inflection points"
+   ]
+  },
+  "solution": "The extreme value theorem gives a max. Check every critical point in $(a,b)$ and both endpoints.",
+  "hints": [
+   "Check interior critical points and endpoints."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two nonnegative numbers have sum $10$. What is the largest possible product?",
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "form": "exact"
+  },
+  "check": "5*5",
+  "solution": "Let the numbers be $x$ and $10-x$. $P=x(10-x)$ has $P'=10-2x=0$ at $x=5$, so $P=25$.",
+  "hints": [
+   "Write the product in one variable."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the minimum of $f(x)=x^2+\\dfrac{16}{x}$ for $x>0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact"
+  },
+  "check": "2**2+16/2",
+  "solution": "$f'=2x-\\frac{16}{x^2}=0$ gives $x^3=8$, so $x=2$. Then $f(2)=4+8=12$.",
+  "hints": [
+   "Solve $f'=0$ for $x^3$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A rectangle has perimeter $40$. What is its maximum area?",
+  "answer": {
+   "kind": "numeric",
+   "value": 100,
+   "form": "exact"
+  },
+  "check": "10*10",
+  "solution": "With sides $x$ and $20-x$, $A=x(20-x)$ is maximal at $x=10$. The area is $100$.",
+  "hints": [
+   "Half the perimeter is the sum of the sides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimize $x^2+y^2$ subject to $x+2y=5$. Give the minimum value.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact"
+  },
+  "check": "1**2+2**2",
+  "solution": "Substitute $x=5-2y$ to get $5y^2-20y+25$. Its derivative $10y-20$ vanishes at $y=2$, so $x=1$ and the value is $5$.",
+  "hints": [
+   "Substitute the constraint into the objective."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For $f(x)=x^3-3x$ on $[-2,2]$, which points give the absolute maximum? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$x=-2$",
+    "$x=-1$",
+    "$x=1$",
+    "$x=2$",
+    "$x=0$"
+   ],
+   "correct": [
+    1,
+    3
+   ]
+  },
+  "solution": "Critical points are $x=\\pm1$. The values are $f(-2)=-2$, $f(-1)=2$, $f(1)=-2$, $f(2)=2$. The maximum $2$ occurs at $x=-1$ and $x=2$.",
+  "hints": [
+   "Compare the critical values with the endpoint values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A rectangle is inscribed in the circle $x^2+y^2=4$ with sides parallel to the axes. What is its maximum area?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact"
+  },
+  "check": "4*(2**2)/2",
+  "solution": "The area is $4xy$ with $y=\\sqrt{4-x^2}$. Its derivative vanishes at $x^2=2$, so $A=4\\sqrt2\\cdot\\sqrt2=8$.",
+  "hints": [
+   "Use $x^2+y^2=4$ to express the area in one variable."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Where does the sign of $f''$ change?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "At inflection points",
+    "At local maxima",
+    "Where $f'=0$",
+    "At $x$-intercepts"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "confused with local extrema",
+    "confused with critical points",
+    "confused with roots"
+   ]
+  },
+  "solution": "An inflection point is where the concavity changes, which is a sign change of $f''$.",
+  "hints": [
+   "Concavity is governed by $f''$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=x^3-3x$, what is $f''(1)$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact"
+  },
+  "check": "6*1",
+  "solution": "$f'=3x^2-3$, so $f''=6x$. At $x=1$: $6$.",
+  "hints": [
+   "Differentiate twice."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "On an interval, $f$ is concave up when",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f''>0$ on the interval",
+    "$f'>0$ on the interval",
+    "$f>0$ on the interval",
+    "$f''<0$ on the interval"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "confused concave up with increasing",
+    "confused concavity with the sign of $f$",
+    "reversed the sign convention"
+   ]
+  },
+  "solution": "Concave up means $f'$ is increasing, which means $f''>0$.",
+  "hints": [
+   "Concave up means the slope is increasing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=x^3-3x$, find the local maximum value.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "(-1)**3-3*(-1)",
+  "solution": "Critical points are $x=\\pm1$. Since $f''=6x<0$ at $x=-1$, that point is a local max, with $f(-1)=2$.",
+  "hints": [
+   "Test $f''$ at each critical point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^4-4x^3$, find the sum of the $x$-coordinates of its inflection points.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "0+2",
+  "solution": "$f''=12x^2-24x=12x(x-2)$ changes sign at $x=0$ and $x=2$. The sum is $2$.",
+  "hints": [
+   "Find where $f''$ is zero and changes sign."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For $f(x)=x^2e^{-x}$, find the local maximum value. Give a decimal to 6 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": "0.541341",
+   "form": "decimal",
+   "tol": 1e-06
+  },
+  "check": "4*math.exp(-2)",
+  "solution": "$f'=x(2-x)e^{-x}$. The sign changes from $+$ to $-$ at $x=2$, so the maximum is $f(2)=4e^{-2}\\approx0.541341$.",
+  "hints": [
+   "Factor $f'$ and check its sign on each side of the root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=\\dfrac{x}{x^2+1}$, find the maximum value.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)",
+  "solution": "$f'=\\frac{1-x^2}{(x^2+1)^2}$ is positive for $|x|<1$ and negative beyond. The maximum is $f(1)=\\frac12$.",
+  "hints": [
+   "Find the sign of $f'$ on each side of its root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^4-4x^3$, on which intervals is $f$ concave up? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(-\\infty,0)$",
+    "$(0,2)$",
+    "$(2,\\infty)$",
+    "$(-\\infty,2)$",
+    "$(0,\\infty)$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "$f''=12x(x-2)$ is positive for $x<0$ and for $x>2$. It is negative on $(0,2)$.",
+  "hints": [
+   "Check the sign of $f''$ on each interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the local minimum value of $f(x)=x+\\dfrac{4}{x}$ for $x>0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "2+4/2",
+  "solution": "$f'=1-\\frac{4}{x^2}=0$ gives $x=2$. Then $f(2)=4$, and $f''=\\frac{8}{x^3}>0$ confirms a minimum.",
+  "hints": [
+   "Find where $f'=0$ and check the sign of $f''$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which hypotheses does Rolle's theorem require on $[a,b]$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Continuous on $[a,b]$, differentiable on $(a,b)$, and $f(a)=f(b)$",
+    "$f'$ is continuous and $f(a)=0$",
+    "Differentiable on $[a,b]$ and $f(a)<f(b)$",
+    "$f''(c)=0$ for some $c$ in $(a,b)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "added a condition that is not required",
+    "required unequal endpoint values",
+    "confused the conclusion with a hypothesis"
+   ]
+  },
+  "solution": "Rolle's theorem needs continuity on $[a,b]$, differentiability inside, and equal endpoint values. It concludes that $f'(c)=0$.",
+  "hints": [
+   "Rolle needs equal endpoint values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=x^2$ on $[0,2]$, the MVT point $c$ satisfies $f'(c)=\\dfrac{f(2)-f(0)}{2}$. What is $c$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "check": "((2**2-0**2)/2)/2",
+  "solution": "The secant slope is $\\frac{4-0}{2}=2$. Then $2c=2$, so $c=1$.",
+  "hints": [
+   "Compute the secant slope first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "On $[0,2]$, which Rolle hypothesis fails for $f(x)=|x-1|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Differentiability at $x=1$, an interior point",
+    "Continuity on $[0,2]$",
+    "Equal endpoint values, since $f(0)\\neq f(2)$",
+    "Differentiability at the endpoints $0$ and $2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "wrongly judged a continuous function as failing",
+    "miscomputed the endpoint values",
+    "wrongly required endpoint differentiability"
+   ]
+  },
+  "solution": "$f(0)=f(2)=1$ and $f$ is continuous. But $|x-1|$ has a corner at $x=1$, so it is not differentiable there.",
+  "hints": [
+   "Look for a corner inside the interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=x^2-4x+3$ on $[1,3]$, find the Rolle point $c$ in $(1,3)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "4/2",
+  "solution": "$f(1)=f(3)=0$. Then $f'(c)=2c-4=0$ gives $c=2$.",
+  "hints": [
+   "Check that the endpoint values match first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t3-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^2$ on $[1,4]$, find the MVT point $c$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "form": "exact"
+  },
+  "check": "(4**2-1**2)/(4-1)/2",
+  "solution": "The secant slope is $\\frac{16-1}{3}=5$. Then $2c=5$, so $c=\\frac52$.",
+  "hints": [
+   "Compute the secant slope first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^3-3x^2$ on $[0,3]$, find the Rolle point $c$ in $(0,3)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "6/3",
+  "solution": "$f(0)=0$ and $f(3)=27-27=0$. Then $f'=3x(x-2)$ vanishes at $x=2$, inside $(0,3)$.",
+  "hints": [
+   "Factor $f'$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=\\sqrt{x}$ on $[1,4]$, find the MVT point $c$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/4",
+   "form": "exact"
+  },
+  "check": "(3/2)**2",
+  "solution": "The secant slope is $\\frac{2-1}{3}=\\frac13$. Then $\\frac{1}{2\\sqrt c}=\\frac13$, so $\\sqrt c=\\frac32$ and $c=\\frac94$.",
+  "hints": [
+   "Set $f'(c)$ equal to the secant slope."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f$ be differentiable with $|f'(x)|\\le3$ for all $x$, and $f(0)=1$. What is the largest possible value of $f(2)$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact"
+  },
+  "check": "1+3*2",
+  "solution": "MVT: $f(2)-f(0)=2f'(c)$ with $|f'(c)|\\le3$. So $f(2)\\le1+6=7$.",
+  "hints": [
+   "Apply the MVT on $[0,2]$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For $f(x)=x^3$ on $[0,t]$ with $t>0$, the MVT point $c$ is positive. Give $c$ in terms of $t$.",
+  "answer": {
+   "kind": "expression",
+   "value": "t/sqrt(3)",
+   "vars": [
+    "t"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "t*sqrt(3)/3"
+   ]
+  },
+  "check": null,
+  "solution": "The secant slope is $\\frac{t^3}{t}=t^2$. Then $3c^2=t^2$, so $c=\\frac{t}{\\sqrt3}$.",
+  "hints": [
+   "Equate $f'(c)$ with the secant slope."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

@@ -1,0 +1,3767 @@
+[
+  {
+    "id": "t2-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Give the exact value of $\\sin\\frac{\\pi}{6}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "$\\frac{\\pi}{6}=30^\\circ$ and the point there has $y=\\frac12$, so $\\sin\\frac{\\pi}{6}=\\frac12$.",
+    "hints": [
+      "Use the 30-60-90 triangle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is the exact value of $\\cos\\frac{\\pi}{4}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{\\sqrt{2}}{4}$",
+        "$\\frac{1}{2}$",
+        "$\\frac{\\sqrt{2}}{2}$",
+        "$\\frac{\\sqrt{3}}{2}$"
+      ],
+      "correct": 2,
+      "why": [
+        "halved the value again",
+        "used the $30^\\circ$ cosine-sine value",
+        "",
+        "used the $30^\\circ$ cosine"
+      ]
+    },
+    "solution": "At $45^\\circ$ both coordinates are equal, each $\\frac{\\sqrt2}{2}$.",
+    "hints": [
+      "The $45^\\circ$ point has equal coordinates."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In which quadrant are $\\cos\\theta<0$ and $\\sin\\theta<0$ both true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Quadrant I",
+        "Quadrant II",
+        "Quadrant III",
+        "Quadrant IV"
+      ],
+      "correct": 2,
+      "why": [
+        "ignored both signs",
+        "took sine as positive",
+        "",
+        "took cosine as positive"
+      ]
+    },
+    "solution": "Cosine is the $x$-coordinate, negative on the left. Sine is the $y$-coordinate, negative below. Both negative is quadrant III.",
+    "hints": [
+      "The left half has $\\cos<0$, the bottom half has $\\sin<0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\cos\\frac{5\\pi}{3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "$\\frac{5\\pi}{3}=300^\\circ$ is in quadrant IV, reference angle $60^\\circ$, so $\\cos=+\\frac12$.",
+    "hints": [
+      "Find the reference angle first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0005",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\sin\\frac{7\\pi}{6}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(-1,2)",
+    "solution": "$\\frac{7\\pi}{6}=210^\\circ$ is in quadrant III, reference angle $30^\\circ$, so $\\sin=-\\frac12$.",
+    "hints": [
+      "Sine is negative in quadrant III."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Give $\\tan\\frac{2\\pi}{3}$ to 4 decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1.7321,
+      "tol": 0.0001,
+      "form": "decimal"
+    },
+    "check": "-math.sqrt(3)",
+    "solution": "$\\tan\\frac{2\\pi}{3}=\\frac{\\sqrt3/2}{-1/2}=-\\sqrt3\\approx-1.7321$.",
+    "hints": [
+      "Tangent is $\\frac{\\sin}{\\cos}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Simplify $\\sin\\left(x+\\frac{\\pi}{2}\\right)$ to a single trig function of $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "cos(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        -2,
+        2
+      ],
+      "also": [
+        "cos(-x)",
+        "-(-cos(x))"
+      ]
+    },
+    "check": null,
+    "solution": "Sine of a sum with $B=\\frac\\pi2$ gives $\\sin x\\cdot0+\\cos x\\cdot1=\\cos x$.",
+    "hints": [
+      "Use the sum formula or sketch the shift."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\sec\\frac{\\pi}{3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$\\sec\\theta=\\frac{1}{\\cos\\theta}=\\frac{1}{1/2}=2$.",
+    "hints": [
+      "Secant is the reciprocal of cosine."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.unit-circle"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A point $P$ on the unit circle is at angle $\\frac{2\\pi}{3}$. Which are the coordinates of $P$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\left(\\frac12,-\\frac{\\sqrt3}{2}\\right)$",
+        "$\\left(-\\frac{\\sqrt3}{2},\\frac12\\right)$",
+        "$\\left(-\\frac12,\\frac{\\sqrt3}{2}\\right)$",
+        "$\\left(\\frac{\\sqrt3}{2},-\\frac12\\right)$"
+      ],
+      "correct": 2,
+      "why": [
+        "reflected through the origin (angle $-\\frac{\\pi}{3}$)",
+        "swapped and sign-flipped (angle $\\frac{5\\pi}{6}$)",
+        "",
+        "swapped the coordinates (angle $-\\frac{\\pi}{6}$)"
+      ]
+    },
+    "solution": "At $120^\\circ$ the point is in quadrant II, so $x<0$ and $y>0$, with $\\cos=-\\frac12$ and $\\sin=\\frac{\\sqrt3}{2}$.",
+    "hints": [
+      "Quadrant II: $x$ negative, $y$ positive."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression equals $\\sin^2\\theta+\\cos^2\\theta$ for every $\\theta$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$0$",
+        "$1$",
+        "$2$",
+        "$\\tan^2\\theta$"
+      ],
+      "correct": 1,
+      "why": [
+        "read as $\\cos^2\\theta-\\sin^2\\theta$, which is $0$ at $45^\\circ$",
+        "",
+        "added $1+1$ instead of using the identity",
+        "mixed up with $1+\\tan^2\\theta$"
+      ]
+    },
+    "solution": "This is the Pythagorean identity, from $x^2+y^2=1$ on the unit circle.",
+    "hints": [
+      "It comes from $x^2+y^2=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write $1+\\tan^2 x$ as a single term in $\\cos x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/cos(x)^2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        1.2
+      ],
+      "also": [
+        "1/(cos(x)*cos(x))",
+        "(cos(x))^(-2)"
+      ]
+    },
+    "check": null,
+    "solution": "$1+\\tan^2x=\\frac{\\cos^2x+\\sin^2x}{\\cos^2x}=\\frac{1}{\\cos^2x}$.",
+    "hints": [
+      "Put everything over $\\cos^2 x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which expression equals $\\cos 2\\theta$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$2\\sin\\theta\\cos\\theta$",
+        "$\\cos^2\\theta-\\sin^2\\theta$",
+        "$\\sin^2\\theta-\\cos^2\\theta$",
+        "$2\\cos^2\\theta$"
+      ],
+      "correct": 1,
+      "why": [
+        "that is $\\sin 2\\theta$",
+        "",
+        "sign error on the difference",
+        "forgot the subtracted square"
+      ]
+    },
+    "solution": "The double angle formula for cosine is $\\cos^2\\theta-\\sin^2\\theta$.",
+    "hints": [
+      "Recall the cosine of a sum with $\\theta+\\theta$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0013",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Given $\\cos\\theta=\\frac{7}{25}$ with $\\theta$ in quadrant IV, find $\\sin\\theta$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-24/25",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(-24,25)",
+    "solution": "$\\sin^2\\theta=1-\\frac{49}{625}=\\frac{576}{625}$. Sine is negative in quadrant IV, so $\\sin\\theta=-\\frac{24}{25}$.",
+    "hints": [
+      "Use $\\sin^2+\\cos^2=1$, then pick the sign."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Given $\\sin\\theta=\\frac{5}{13}$ with $\\cos\\theta>0$, find $\\cos 2\\theta$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "119/169",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1-2*Fraction(5,13)**2",
+    "solution": "$\\cos 2\\theta=1-2\\sin^2\\theta=1-\\frac{50}{169}=\\frac{119}{169}$.",
+    "hints": [
+      "Pick the form of $\\cos 2\\theta$ that uses only $\\sin$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\frac{1-\\cos 2x}{2}$ at $x=\\frac{\\pi}{3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/4",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(3,4)",
+    "solution": "The expression equals $\\sin^2x$, and $\\sin^2\\frac{\\pi}{3}=\\frac34$.",
+    "hints": [
+      "Recognize the half-angle form."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Simplify $\\frac{1-\\cos^2 x}{\\sin x}$ for $0<x<\\pi$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sin(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "sin(x)^2/sin(x)",
+        "sin(x)*1"
+      ]
+    },
+    "check": null,
+    "solution": "Replace $1-\\cos^2x$ by $\\sin^2x$, then cancel one $\\sin x$.",
+    "hints": [
+      "Which identity gives $1-\\cos^2x$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Given $\\sin\\theta=\\frac35$ and $\\cos\\theta=-\\frac45$, find $\\tan\\theta$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-3/4",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(-3,4)",
+    "solution": "$\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}=\\frac{3/5}{-4/5}=-\\frac34$.",
+    "hints": [
+      "Tangent is sine over cosine."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-id"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which expression equals $(\\sin x+\\cos x)^{2}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\sin^2 x+\\cos^2 x$",
+        "$1+2\\sin x\\cos x$",
+        "$2+2\\sin x\\cos x$",
+        "$1-2\\sin x\\cos x$"
+      ],
+      "correct": 1,
+      "why": [
+        "forgot the cross term $2\\sin x\\cos x$",
+        "",
+        "added $1$ twice",
+        "sign error on the cross term"
+      ]
+    },
+    "solution": "Expand to $\\sin^2x+2\\sin x\\cos x+\\cos^2x$, then use $\\sin^2x+\\cos^2x=1$.",
+    "hints": [
+      "Expand the square first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many solutions does $\\sin x=0$ have on $[0,2\\pi)$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "The solutions are $x=0$ and $x=\\pi$.",
+    "hints": [
+      "Sine is zero on the $x$-axis."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the general solution of $\\cos x=\\frac12$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=\\frac{\\pi}{6}+2\\pi k$",
+        "$x=\\frac{\\pi}{3}+\\pi k$",
+        "$x=\\pm\\frac{\\pi}{3}+2\\pi k$",
+        "$x=\\pm\\frac{\\pi}{6}+2\\pi k$"
+      ],
+      "correct": 2,
+      "why": [
+        "used $\\frac{\\pi}{6}$ as the angle, not the reference angle",
+        "used the period of $\\tan$ and one branch only",
+        "",
+        "used $\\frac{\\pi}{6}$ as the reference angle"
+      ]
+    },
+    "solution": "The reference angle is $\\frac\\pi3$. Cosine is positive in quadrants I and IV, and the period is $2\\pi$.",
+    "hints": [
+      "Two branches, period $2\\pi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the general solution of $\\tan x=c$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=\\arcsin c+2\\pi k$",
+        "$x=\\arctan c+2\\pi k$",
+        "$x=\\arccos c+\\pi k$",
+        "$x=\\arctan c+\\pi k$"
+      ],
+      "correct": 3,
+      "why": [
+        "used the inverse of $\\sin$ for $\\tan$",
+        "wrong period: tangent repeats every $\\pi$",
+        "used the inverse of $\\cos$",
+        ""
+      ]
+    },
+    "solution": "Tangent has period $\\pi$, so one principal angle plus $\\pi k$ covers all solutions.",
+    "hints": [
+      "The period of tangent is $\\pi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many solutions does $\\cos 2x=0$ have on $[0,\\pi)$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Let $u=2x\\in[0,2\\pi)$. Then $\\cos u=0$ at $u=\\frac\\pi2,\\frac{3\\pi}2$, so $x=\\frac\\pi4,\\frac{3\\pi}4$.",
+    "hints": [
+      "Substitute $u=2x$ and change the interval."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many solutions does $\\tan x=1$ have on $[0,2\\pi)$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Tangent is $1$ at $x=\\frac\\pi4$ and $x=\\frac{5\\pi}4$, one period apart.",
+    "hints": [
+      "Tangent repeats every $\\pi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many solutions does $2\\sin^2 x-\\sin x=0$ have on $[0,2\\pi)$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "Factor $\\sin x(2\\sin x-1)=0$. Then $\\sin x=0$ gives $0,\\pi$, and $\\sin x=\\frac12$ gives $\\frac\\pi6,\\frac{5\\pi}6$.",
+    "hints": [
+      "Factor out $\\sin x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the general solution of $\\sin x=0$ as $x=\\,$(an expression in $k$), with $k$ an integer.",
+    "answer": {
+      "kind": "expression",
+      "value": "k*pi",
+      "vars": [
+        "k"
+      ],
+      "domain": [
+        -3,
+        3
+      ],
+      "also": [
+        "pi*k"
+      ]
+    },
+    "check": null,
+    "solution": "Sine is zero at $0,\\pi,2\\pi,\\ldots$, so $x=k\\pi$.",
+    "hints": [
+      "Sine is zero every half turn."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many solutions does $\\cos x=-1$ have on $[0,4\\pi)$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Cosine is $-1$ at $\\pi$ and $3\\pi$ in this interval.",
+    "hints": [
+      "There are two periods in $[0,4\\pi)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-eq"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Which set is the solution set of $2\\cos x+\\sqrt3=0$ on $[0,2\\pi)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{2\\pi}{3},\\ \\frac{4\\pi}{3}$",
+        "$\\frac{\\pi}{6},\\ \\frac{11\\pi}{6}$",
+        "$\\frac{5\\pi}{6},\\ \\frac{7\\pi}{6}$",
+        "$\\frac{\\pi}{3},\\ \\frac{5\\pi}{3}$"
+      ],
+      "correct": 2,
+      "why": [
+        "solved $2\\cos x+1=0$, dropping the $\\sqrt3$",
+        "dropped the minus sign: cosine taken as $+\\frac{\\sqrt3}{2}$",
+        "",
+        "used the reference angle of $\\cos x=\\frac12$"
+      ]
+    },
+    "solution": "$\\cos x=-\\frac{\\sqrt3}{2}$. The reference angle is $\\frac\\pi6$, and cosine is negative in quadrants II and III.",
+    "hints": [
+      "Isolate $\\cos x$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $y=\\cos\\frac{x}{2}$, find the period divided by $\\pi$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "The period of $\\cos Bx$ is $\\frac{2\\pi}{B}=4\\pi$, and $\\frac{4\\pi}{\\pi}=4$.",
+    "hints": [
+      "Period is $\\frac{2\\pi}{|B|}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the amplitude and period of $y=3\\sin 2x$.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Amplitude $3$, period $\\pi$",
+        "Amplitude $3$, period $2\\pi$",
+        "Amplitude $2$, period $\\pi$",
+        "Amplitude $3$, period $4\\pi$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "forgot to divide $2\\pi$ by $2$",
+        "read the coefficient $3$ as the amplitude-period swap",
+        "multiplied the period by $2$"
+      ]
+    },
+    "solution": "Amplitude is $|A|=3$. Period is $\\frac{2\\pi}{2}=\\pi$.",
+    "hints": [
+      "Period is $\\frac{2\\pi}{|B|}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which transformation turns $y=\\sin x$ into $y=\\sin\\left(x-\\frac{\\pi}{2}\\right)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Shift left $\\frac{\\pi}{2}$",
+        "Shift right $\\frac{\\pi}{2}$",
+        "Shift up $\\frac{\\pi}{2}$",
+        "Stretch by $\\frac{\\pi}{2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "flipped the sign of the shift",
+        "",
+        "shifted vertically instead of horizontally",
+        "confused a shift with a stretch"
+      ]
+    },
+    "solution": "Replacing $x$ by $x-c$ moves the graph right by $c$.",
+    "hints": [
+      "Subtracting inside shifts right."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the maximum value of $y=2\\cos(3x)+5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "7",
+    "solution": "Cosine has maximum $1$, so $2(1)+5=7$.",
+    "hints": [
+      "Cosine is at most $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many $x$-intercepts does $y=\\sin x$ have on $[0,4\\pi]$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5",
+    "solution": "The zeros are $0,\\pi,2\\pi,3\\pi,4\\pi$.",
+    "hints": [
+      "Sine is zero every $\\pi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the minimum value of $y=-3\\sin(2x)+1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "-2",
+    "solution": "$-3\\sin 2x$ has minimum $-3$ when $\\sin 2x=1$, so $y_{\\min}=-2$.",
+    "hints": [
+      "Where is sine largest?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $\\cos\\left(x-\\frac{\\pi}{2}\\right)$ as a single trig function of $x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "sin(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        -2,
+        2
+      ],
+      "also": [
+        "-cos(x+pi/2)",
+        "sin(x)*1"
+      ]
+    },
+    "check": null,
+    "solution": "Use $\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B$ with $B=\\frac\\pi2$, giving $\\sin x$.",
+    "hints": [
+      "Use the difference formula or shift the graph."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the period of $y=\\tan 2x$, divided by $\\pi$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "Tangent has period $\\frac{\\pi}{|B|}=\\frac\\pi2$, and $\\frac{\\pi/2}{\\pi}=\\frac12$.",
+    "hints": [
+      "Tangent's period is $\\pi$ divided by the coefficient."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.trig-graph"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which is the range of $y=4\\cos x-1$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$[-4,3]$",
+        "$[-3,5]$",
+        "$[-4,4]$",
+        "$[-5,3]$"
+      ],
+      "correct": 3,
+      "why": [
+        "applied the shift to the top only",
+        "flipped the sign of the shift",
+        "forgot the vertical shift",
+        ""
+      ]
+    },
+    "solution": "Cosine is in $[-1,1]$, so $4\\cos x$ is in $[-4,4]$. Subtracting $1$ gives $[-5,3]$.",
+    "hints": [
+      "Find the range of $\\cos$ first, then scale and shift."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Give $\\arcsin\\frac12$ in degrees.",
+    "answer": {
+      "kind": "numeric",
+      "value": 30,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "30",
+    "solution": "$\\sin 30^\\circ=\\frac12$, and $30^\\circ$ is in the principal range.",
+    "hints": [
+      "Use the principal range."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the range of $\\arccos$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\left[-\\frac{\\pi}{2},\\frac{\\pi}{2}\\right]$",
+        "$[0,2\\pi]$",
+        "$[0,\\pi]$",
+        "$\\left(-\\frac{\\pi}{2},\\frac{\\pi}{2}\\right)$"
+      ],
+      "correct": 2,
+      "why": [
+        "range of $\\arcsin$ used for $\\arccos$",
+        "full circle, ignored the principal range",
+        "",
+        "open interval of $\\arctan$"
+      ]
+    },
+    "solution": "$\\arccos$ returns the unique angle in $[0,\\pi]$ with that cosine.",
+    "hints": [
+      "Which half of the circle does cosine's inverse use?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $0\\le x\\le 1$, which equals $\\sin(\\arccos x)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x$",
+        "$\\sqrt{1-x^2}$",
+        "$1-x^2$",
+        "$\\sqrt{1+x^2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "confused with $\\cos(\\arccos x)$",
+        "",
+        "dropped the square root",
+        "sign error inside the root"
+      ]
+    },
+    "solution": "Draw a right triangle with adjacent side $x$ and hypotenuse $1$. The opposite side is $\\sqrt{1-x^2}$.",
+    "hints": [
+      "Draw the triangle with hypotenuse $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\tan\\left(\\arcsin\\frac35\\right)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/4",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(3,4)",
+    "solution": "Opposite $3$, hypotenuse $5$, adjacent $4$, so $\\tan=\\frac34$.",
+    "hints": [
+      "Draw the right triangle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\cos\\left(\\arcsin\\frac{5}{13}\\right)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "12/13",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(12,13)",
+    "solution": "Opposite $5$, hypotenuse $13$, so adjacent $\\sqrt{169-25}=12$ and $\\cos=\\frac{12}{13}$.",
+    "hints": [
+      "Use the triple $5,12,13$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\arccos\\left(\\cos\\frac{7\\pi}{6}\\right)$ in degrees.",
+    "answer": {
+      "kind": "numeric",
+      "value": 150,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "150",
+    "solution": "$\\cos\\frac{7\\pi}{6}=-\\frac{\\sqrt3}{2}$, and $\\arccos$ returns an angle in $[0^\\circ,180^\\circ]$, which is $150^\\circ$.",
+    "hints": [
+      "Is $\\frac{7\\pi}{6}$ in $[0,\\pi]$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $x>0$, simplify $\\arctan x+\\arctan\\frac1x$.",
+    "answer": {
+      "kind": "expression",
+      "value": "pi/2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.5,
+        3
+      ],
+      "also": [
+        "pi/2+0*x",
+        "2*pi/4"
+      ]
+    },
+    "check": null,
+    "solution": "The sum is $\\frac\\pi2$ for every $x>0$. Check $x=1$: $\\frac\\pi4+\\frac\\pi4$.",
+    "hints": [
+      "Try $x=1$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\cos\\left(2\\arcsin\\frac12\\right)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)",
+    "solution": "$\\arcsin\\frac12=\\frac\\pi6$, so $\\cos\\frac\\pi3=\\frac12$.",
+    "hints": [
+      "Evaluate the inside first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.inv-trig"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which is $\\arcsin\\left(\\sin\\frac{2\\pi}{3}\\right)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{2\\pi}{3}$",
+        "$\\frac{\\pi}{6}$",
+        "$\\frac{\\pi}{3}$",
+        "$-\\frac{\\pi}{3}$"
+      ],
+      "correct": 2,
+      "why": [
+        "forgot that $\\arcsin$ returns angles in $\\left[-\\frac\\pi2,\\frac\\pi2\\right]$",
+        "mistook $\\frac{\\sqrt3}{2}$ for $\\sin\\frac\\pi6$",
+        "",
+        "sign error from reading $\\sin$ of the obtuse angle as negative"
+      ]
+    },
+    "solution": "$\\sin\\frac{2\\pi}{3}=\\frac{\\sqrt3}{2}$, and $\\arcsin\\frac{\\sqrt3}{2}=\\frac{\\pi}{3}$ lies in the principal range.",
+    "hints": [
+      "Find the angle in $\\left[-\\frac\\pi2,\\frac\\pi2\\right]$ with that sine."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is the law of cosines for side $c$ opposite angle $C$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$c^2=a^2+b^2-2ab\\sin C$",
+        "$c^2=a^2+b^2+2ab\\cos C$",
+        "$c^2=a^2+b^2-2ab\\cos C$",
+        "$c^2=a^2+b^2-ab\\cos C$"
+      ],
+      "correct": 2,
+      "why": [
+        "swapped $\\sin$ and $\\cos$",
+        "sign error on the cross term",
+        "",
+        "forgot the factor $2$"
+      ]
+    },
+    "solution": "With $C=90^\\circ$ the cross term vanishes, which reduces to Pythagoras.",
+    "hints": [
+      "Check $C=90^\\circ$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A triangle has $a=2$, $b=2$ and included angle $C=60^\\circ$. Find $c$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$c^2=4+4-8\\cdot\\frac12=4$, so $c=2$.",
+    "hints": [
+      "The triangle is equilateral."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the ambiguous SSA case with $A$ acute, when are there two triangles?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$a>b$",
+        "$a<b\\sin A$",
+        "$a=b\\sin A$",
+        "$b\\sin A<a<b$"
+      ],
+      "correct": 3,
+      "why": [
+        "that gives one triangle",
+        "that gives no triangle",
+        "that gives one right triangle",
+        ""
+      ]
+    },
+    "solution": "Side $a$ swings to meet the base at two points only when $b\\sin A<a<b$.",
+    "hints": [
+      "Two intersections of a circle and a ray."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Given $a=4$, $\\sin A=\\frac12$ and $\\sin B=\\frac38$, find $b$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4*Fraction(3,8)/Fraction(1,2)",
+    "solution": "$\\frac{a}{\\sin A}=\\frac{b}{\\sin B}$, so $b=\\frac{4\\cdot\\frac38}{\\frac12}=3$.",
+    "hints": [
+      "Use the law of sines."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Sides $a=5$ and $b=7$ with included angle $C=60^\\circ$. Find $c^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 39,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "25+49-2*5*7*Fraction(1,2)",
+    "solution": "$c^2=25+49-2\\cdot5\\cdot7\\cdot\\frac12=74-35=39$.",
+    "hints": [
+      "Use the law of cosines."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Given $A=60^\\circ$, $B=45^\\circ$ and $a=3$, find $b$ to 4 decimal places.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.4495,
+      "tol": 0.0001,
+      "form": "decimal"
+    },
+    "check": "math.sqrt(6)",
+    "solution": "$b=\\frac{a\\sin B}{\\sin A}=\\frac{3\\cdot\\frac{\\sqrt2}{2}}{\\frac{\\sqrt3}{2}}=\\sqrt6\\approx2.4495$.",
+    "hints": [
+      "Use the law of sines."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In a right triangle with the right angle at $C$, write $c^2$ in terms of $a$ and $b$.",
+    "answer": {
+      "kind": "expression",
+      "value": "a^2+b^2",
+      "vars": [
+        "a",
+        "b"
+      ],
+      "domain": [
+        0.5,
+        3
+      ],
+      "also": [
+        "b^2+a^2",
+        "a*a+b*b"
+      ]
+    },
+    "check": null,
+    "solution": "With $\\cos C=0$, the law of cosines gives $c^2=a^2+b^2$.",
+    "hints": [
+      "What is $\\cos 90^\\circ$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the area of a triangle with $a=b=2$ and $C=30^\\circ$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)*2*2*Fraction(1,2)",
+    "solution": "Area $=\\frac12ab\\sin C=\\frac12\\cdot2\\cdot2\\cdot\\frac12=1$.",
+    "hints": [
+      "Area is $\\frac12 ab\\sin C$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.tri-laws"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Given $a=7$, $b=8$ and $c=13$, which is $\\cos C$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac12$",
+        "$-\\frac{4}{13}$",
+        "$-\\frac14$",
+        "$-\\frac12$"
+      ],
+      "correct": 3,
+      "why": [
+        "dropped the minus sign",
+        "used $2ac$ as the denominator",
+        "used $4ab$ as the denominator",
+        ""
+      ]
+    },
+    "solution": "$\\cos C=\\frac{a^2+b^2-c^2}{2ab}=\\frac{49+64-169}{112}=-\\frac12$.",
+    "hints": [
+      "$C$ is opposite $c$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Evaluate $\\log_{10}1000$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "$10^3=1000$.",
+    "hints": [
+      "Ask what power of $10$ gives $1000$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which equals $\\ln\\left(e^{x}\\right)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$e^{x}$",
+        "$x$",
+        "$\\frac{1}{x}$",
+        "$e\\,x$"
+      ],
+      "correct": 1,
+      "why": [
+        "confused $\\ln$ with $\\exp$",
+        "",
+        "inverted the log",
+        "treated $\\ln e$ as $e$"
+      ]
+    },
+    "solution": "$\\ln$ and $e^{(\\cdot)}$ are inverse functions, so they cancel.",
+    "hints": [
+      "The natural log undoes $e$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $x>0$, which equals $\\log_{10}\\left(x^{2}\\right)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$(\\log_{10}x)^{2}$",
+        "$2\\log_{10}x$",
+        "$\\frac12\\log_{10}x$",
+        "$\\log_{10}x+2$"
+      ],
+      "correct": 1,
+      "why": [
+        "squared the log instead of applying the power rule",
+        "",
+        "inverted the power rule",
+        "added $2$ instead of multiplying"
+      ]
+    },
+    "solution": "Power rule: $\\log_b(x^r)=r\\log_b x$.",
+    "hints": [
+      "The exponent comes out front."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $2^{x}=32$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5",
+    "solution": "$32=2^5$, so $x=5$.",
+    "hints": [
+      "Write $32$ as a power of $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0059",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Evaluate $\\log_{10}0.001+\\ln\\left(e^{4}\\right)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "-3+4",
+    "solution": "$\\log_{10}0.001=-3$ and $\\ln e^4=4$, so the sum is $1$.",
+    "hints": [
+      "Each term is a single power."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Given $\\log_{10}x=2.5$, find $x^{2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 100000,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "10**5",
+    "solution": "$x=10^{2.5}$, so $x^2=10^{5}=100000$.",
+    "hints": [
+      "Square $10^{2.5}$ directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $x>0$, simplify $\\ln\\left(\\frac{x}{e}\\right)$.",
+    "answer": {
+      "kind": "expression",
+      "value": "ln(x)-1",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.5,
+        3
+      ],
+      "also": [
+        "ln(x)-ln(e)",
+        "ln(x)-1+0"
+      ]
+    },
+    "check": null,
+    "solution": "$\\ln\\frac{x}{e}=\\ln x-\\ln e=\\ln x-1$.",
+    "hints": [
+      "Use the quotient rule for logs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $\\log_{10}(x+1)=2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 99,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "99",
+    "solution": "$x+1=10^2=100$, so $x=99$.",
+    "hints": [
+      "Exponentiate both sides."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which is $e^{\\ln 5-\\ln 2}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$3$",
+        "$\\frac{5}{2}$",
+        "$10$",
+        "$\\frac{2}{5}$"
+      ],
+      "correct": 1,
+      "why": [
+        "subtracted the arguments: $5-2$",
+        "",
+        "added the logs instead of subtracting",
+        "reversed the subtraction"
+      ]
+    },
+    "solution": "$e^{\\ln5-\\ln2}=\\frac{e^{\\ln5}}{e^{\\ln2}}=\\frac{5}{2}$.",
+    "hints": [
+      "Turn a difference of logs into a quotient."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $e^{x}=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "0",
+    "solution": "$e^0=1$, and $e^x$ is one-to-one.",
+    "hints": [
+      "What exponent gives $1$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "When solving $\\log_{10}A=\\log_{10}B$, which conclusion is valid?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$A=B$ if $A>0$ and $B>0$",
+        "$A=B$ for all real $A$ and $B$",
+        "$A=10B$",
+        "$A=-B$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ignored the domain of $\\log$",
+        "used the base as a factor",
+        "sign error"
+      ]
+    },
+    "solution": "The log is one-to-one only on positive arguments.",
+    "hints": [
+      "A log needs a positive argument."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solving $\\log x+\\log(x-3)=\\log 4$ gives $x=4$ or $x=-1$. Which value must be discarded?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=4$",
+        "$x=3$",
+        "$x=-4$",
+        "$x=-1$"
+      ],
+      "correct": 3,
+      "why": [
+        "misread the valid root as the bad one",
+        "took the restriction $x-3>0$ as the answer",
+        "sign error in the factoring",
+        ""
+      ]
+    },
+    "solution": "$\\log x$ needs $x>0$, so $x=-1$ is rejected. Check $x=4$: $\\log4+\\log1=\\log4$.",
+    "hints": [
+      "Each log needs a positive input."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $\\log_{10}(2x-1)=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "11/2",
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(11,2)",
+    "solution": "$2x-1=10$, so $x=\\frac{11}{2}$.",
+    "hints": [
+      "Exponentiate once."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $2^{x+1}=8^{x-1}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Write $8=2^3$, so $x+1=3(x-1)$, and $x=2$.",
+    "hints": [
+      "Rewrite $8$ as a power of $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $\\ln x+\\ln(x-2)=\\ln 8$ for $x>2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "$x(x-2)=8$ gives $(x-4)(x+2)=0$. Only $x=4$ satisfies $x>2$.",
+    "hints": [
+      "Combine the logs first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the solution of $e^{x}=c$ as an expression in $c$, for $c>0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "ln(c)",
+      "vars": [
+        "c"
+      ],
+      "domain": [
+        0.5,
+        3
+      ],
+      "also": [
+        "log(c)/log(e)",
+        "2*ln(c)/2"
+      ]
+    },
+    "check": null,
+    "solution": "Take $\\ln$ of both sides: $x=\\ln c$.",
+    "hints": [
+      "Apply $\\ln$ to both sides."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $\\log_{2}x+\\log_{2}(x+2)=3$ for $x>0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$x(x+2)=8$ gives $(x-2)(x+4)=0$, and $x=2$ since $x>0$.",
+    "hints": [
+      "Combine the logs into one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.log-eq"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the solution of $5^{x}=125$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x=25$",
+        "$x=3$",
+        "$x=2$",
+        "$x=\\frac13$"
+      ],
+      "correct": 1,
+      "why": [
+        "divided $125$ by $5$",
+        "",
+        "used $25=5^2$ as the target",
+        "swapped base and argument, giving $\\log_{125}5$"
+      ]
+    },
+    "solution": "$125=5^3$, so $x=3$.",
+    "hints": [
+      "Write $125$ as a power of $5$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the common ratio of $3,\\,6,\\,12,\\ldots$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$\\frac{6}{3}=\\frac{12}{6}=2$.",
+    "hints": [
+      "Divide consecutive terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which formula gives the $n$th term of an arithmetic sequence with first term $a$ and difference $d$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$a\\,d^{\\,n-1}$",
+        "$a+nd$",
+        "$a+(n+1)d$",
+        "$a+(n-1)d$"
+      ],
+      "correct": 3,
+      "why": [
+        "used the geometric formula",
+        "used $n$ steps instead of $n-1$",
+        "used $n+1$ steps",
+        ""
+      ]
+    },
+    "solution": "The $n$th term adds $d$ a total of $n-1$ times to $a$.",
+    "hints": [
+      "How many gaps are there before term $n$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is the sum of the first $n$ terms of a geometric sequence with ratio $r\\neq 1$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\frac{n(a_1+a_n)}{2}$",
+        "$\\frac{a(1-r^{n+1})}{1-r}$",
+        "$\\frac{a(1-r^{n})}{1-r}$",
+        "$a r^{n}$"
+      ],
+      "correct": 2,
+      "why": [
+        "used the arithmetic sum formula on a geometric sequence",
+        "off by one in the exponent",
+        "",
+        "returned the $(n+1)$th term"
+      ]
+    },
+    "solution": "Subtract $rS_n$ from $S_n$, and the middle terms cancel.",
+    "hints": [
+      "Multiply the sum by $r$ and subtract."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "An arithmetic sequence has $a_1=3$ and $d=-2$. Find $a_{20}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -35,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3+19*(-2)",
+    "solution": "$a_{20}=a_1+19d=3-38=-35$.",
+    "hints": [
+      "There are $19$ steps from $a_1$ to $a_{20}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0077",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A geometric sequence has $a_1=5$ and $r=\\frac12$. Find the sum to infinity.",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5/(1-Fraction(1,2))",
+    "solution": "$S_\\infty=\\frac{a_1}{1-r}=\\frac{5}{1/2}=10$.",
+    "hints": [
+      "Valid because $|r|<1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the sum of the first $10$ terms of a geometric sequence with $a_1=2$ and $r=3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 59048,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*(3**10-1)//2",
+    "solution": "$S_{10}=\\frac{2(3^{10}-1)}{3-1}=3^{10}-1=59048$.",
+    "hints": [
+      "Use $S_n=\\frac{a_1(r^n-1)}{r-1}$ for $r\\neq1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write the $n$th term of $2,\\,6,\\,18,\\ldots$ as a formula in $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "2*3^(n-1)",
+      "vars": [
+        "n"
+      ],
+      "domain": [
+        0.5,
+        4
+      ],
+      "also": [
+        "3^(n-1)*2",
+        "2*3^n/3"
+      ]
+    },
+    "check": null,
+    "solution": "The ratio is $3$, so $a_n=a_1r^{n-1}=2\\cdot3^{n-1}$.",
+    "hints": [
+      "Find the ratio first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "An arithmetic sequence has $a_1=4$ and $d=3$. Which $n$ gives $a_n=52$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 17,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "17",
+    "solution": "$4+3(n-1)=52$ gives $n-1=16$, so $n=17$.",
+    "hints": [
+      "Solve the linear equation for $n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.seq-series"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Which is $\\sum_{k=1}^{n}(2k+1)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n^2+n$",
+        "$n^2+2n$",
+        "$n^2+2n+1$",
+        "$2n^2+n$"
+      ],
+      "correct": 1,
+      "why": [
+        "forgot the $+1$ terms",
+        "",
+        "miscounted the terms by one",
+        "wrote $\\sum 2k$ as $2n^2$"
+      ]
+    },
+    "solution": "$\\sum 2k=n(n+1)$ and $\\sum 1=n$, so the total is $n^2+2n$.",
+    "hints": [
+      "Split the sum into two sums."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the coefficient of $x^{2}$ in $(1+x)^{4}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "6",
+    "solution": "$\\binom42=6$.",
+    "hints": [
+      "Use $\\binom{n}{k}$ with $k=2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which equals $\\sum_{k=1}^{n}k$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n(n+1)$",
+        "$\\frac{n(n-1)}{2}$",
+        "$\\frac{n(n+1)}{2}$",
+        "$n^{2}$"
+      ],
+      "correct": 2,
+      "why": [
+        "forgot to divide by $2$",
+        "off by one in the upper factor",
+        "",
+        "treated it as $n$ equal terms of size $n$"
+      ]
+    },
+    "solution": "Pair the terms $k$ and $n+1-k$ to get $n$ pairs of sum $n+1$.",
+    "hints": [
+      "Pair first and last terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is the general term of $(a+b)^{n}$ for $0\\le k\\le n$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\binom{n}{k+1}a^{n-k}b^{k}$",
+        "$\\frac{n!}{k!}a^{n-k}b^{k}$",
+        "$\\binom{n}{k}a^{n-k}b^{k}$",
+        "$a^{n-k}b^{k}$"
+      ],
+      "correct": 2,
+      "why": [
+        "used $\\binom{n}{k+1}$ instead of $\\binom{n}{k}$",
+        "missed the $(n-k)!$ in the denominator",
+        "",
+        "forgot the binomial coefficient"
+      ]
+    },
+    "solution": "Choose which $k$ factors give $b$. That count is $\\binom nk$.",
+    "hints": [
+      "Count the ways to pick $k$ factors."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\sum_{k=1}^{10}k$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 55,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum(range(1,11))",
+    "solution": "$\\frac{10\\cdot11}{2}=55$.",
+    "hints": [
+      "Use $\\frac{n(n+1)}{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the constant term of $\\left(x+\\frac{1}{x}\\right)^{6}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(6,3)",
+    "solution": "The general term is $\\binom6k x^{6-2k}$, constant at $k=3$: $\\binom63=20$.",
+    "hints": [
+      "Set the exponent of $x$ to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\sum_{k=1}^{7}(2k-1)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 49,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum(2*k-1 for k in range(1,8))",
+    "solution": "The first $n$ odd numbers sum to $n^2$, so $7^2=49$.",
+    "hints": [
+      "Use the pattern or compute directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $\\sum_{k=1}^{n}k^{2}$ in factored form as a function of $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "n*(n+1)*(2*n+1)/6",
+      "vars": [
+        "n"
+      ],
+      "domain": [
+        0.5,
+        4
+      ],
+      "also": [
+        "(2*n^3+3*n^2+n)/6",
+        "n*(2*n^2+3*n+1)/6"
+      ]
+    },
+    "check": null,
+    "solution": "The standard formula is $\\frac{n(n+1)(2n+1)}{6}$. Check $n=1$: $1=\\frac{1\\cdot2\\cdot3}{6}$.",
+    "hints": [
+      "Check $n=1$ and $n=2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find the coefficient of $x^{3}$ in $(2x-1)^{5}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 80,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(5,3)*2**3*(-1)**2",
+    "solution": "The term is $\\binom53(2x)^3(-1)^2=10\\cdot8\\,x^3$.",
+    "hints": [
+      "Pick $k=3$ factors that give $2x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.sigma-binom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which equals $\\sum_{k=0}^{n}\\binom{n}{k}$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n!$",
+        "$2^{n}$",
+        "$2^{n+1}-1$",
+        "$n^{2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "confused with permutations",
+        "",
+        "off-by-one geometric sum",
+        "treated it as $n$ terms of size $n$"
+      ]
+    },
+    "solution": "Choosing a subset of $n$ items counts each term once, giving $2^n$.",
+    "hints": [
+      "Count subsets."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the negation of $\\forall x\\,P(x)$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\forall x\\,\\neg P(x)$",
+        "$\\exists x\\,P(x)$",
+        "$\\exists x\\,\\neg P(x)$",
+        "$\\neg\\forall x\\,\\neg P(x)$"
+      ],
+      "correct": 2,
+      "why": [
+        "negated the predicate but kept the quantifier",
+        "dropped the negation",
+        "",
+        "negated the predicate, not the quantifier"
+      ]
+    },
+    "solution": "Negating a universal statement gives an existential one with the predicate negated.",
+    "hints": [
+      "Flip the quantifier and the predicate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Given $|A|=5$, $|B|=7$ and $|A\\cap B|=2$, find $|A\\cup B|$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5+7-2",
+    "solution": "$|A\\cup B|=|A|+|B|-|A\\cap B|=10$.",
+    "hints": [
+      "Do not count the overlap twice."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the contrapositive of $p\\to q$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$q\\to p$",
+        "$\\neg p\\to\\neg q$",
+        "$\\neg q\\to\\neg p$",
+        "$p\\to\\neg q$"
+      ],
+      "correct": 2,
+      "why": [
+        "that is the converse",
+        "that is the inverse",
+        "",
+        "negated only the conclusion"
+      ]
+    },
+    "solution": "A conditional and its contrapositive are logically equivalent.",
+    "hints": [
+      "Swap and negate both parts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many subsets does a set with $5$ elements have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 32,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2**5",
+    "solution": "Each element is in or out, giving $2^5=32$.",
+    "hints": [
+      "Each element has two choices."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Given $|A|=20$, $|B|=15$ and $|A\\cup B|=28$, find $|A\\cap B|$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "20+15-28",
+    "solution": "$|A\\cap B|=20+15-28=7$.",
+    "hints": [
+      "Rearrange the union formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many subsets of $\\{1,2,3\\}$ have at least two elements?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(3,2)+math.comb(3,3)",
+    "solution": "Two-element subsets: $3$. Three-element subsets: $1$. Total $4$.",
+    "hints": [
+      "Count by size."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $|A|=a$ and $|A\\cap B|=c$. Write $|A\\setminus B|$ in terms of $a$ and $c$.",
+    "answer": {
+      "kind": "expression",
+      "value": "a-c",
+      "vars": [
+        "a",
+        "c"
+      ],
+      "domain": [
+        1,
+        5
+      ],
+      "also": [
+        "-c+a",
+        "a-c+0"
+      ]
+    },
+    "check": null,
+    "solution": "$A$ splits into $A\\cap B$ and $A\\setminus B$, so $|A\\setminus B|=a-c$.",
+    "hints": [
+      "Split $A$ into two disjoint parts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many truth assignments to $p,q,r$ make $p\\wedge(q\\vee r)$ true?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum(1 for p in (0,1) for q in (0,1) for r in (0,1) if p and (q or r))",
+    "solution": "$p$ must be true, and $q\\vee r$ fails in only one of the four $(q,r)$ cases, leaving $3$.",
+    "hints": [
+      "Fix $p$ true first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.logic-sets"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Which statements are logically equivalent to $\\neg(p\\wedge q)$?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\neg p\\vee\\neg q$",
+        "$\\neg p\\wedge\\neg q$",
+        "$p\\to\\neg q$",
+        "$\\neg p\\to\\neg q$",
+        "$q\\to\\neg p$"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    "solution": "De Morgan gives $\\neg p\\vee\\neg q$. Also $p\\to\\neg q$ and $q\\to\\neg p$ are equivalent to it.",
+    "hints": [
+      "Rewrite each conditional as an or."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "To prove $p\\to q$ by contradiction, which pair do you assume?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\neg p$ and $q$",
+        "$p$ and $q$",
+        "$p$ and $\\neg q$",
+        "$\\neg p$ and $\\neg q$"
+      ],
+      "correct": 2,
+      "why": [
+        "negated the hypothesis, not the conclusion",
+        "assumed the conclusion",
+        "",
+        "negated both parts"
+      ]
+    },
+    "solution": "Assume the hypothesis and the negation of the conclusion, then derive a contradiction.",
+    "hints": [
+      "Keep $p$, negate $q$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A single example $x_0$ with $P(x_0)$ true proves which statement?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\forall x\\,P(x)$",
+        "$\\exists x\\,P(x)$",
+        "$\\forall x\\,(P(x)\\to Q(x))$",
+        "$\\forall x\\,\\neg P(x)$"
+      ],
+      "correct": 1,
+      "why": [
+        "one case cannot cover every $x$",
+        "",
+        "one case cannot cover every $x$",
+        "one example here would disprove this, not prove it"
+      ]
+    },
+    "solution": "An example $x_0$ with $P(x_0)$ witnesses $\\exists x\\,P(x)$.",
+    "hints": [
+      "Existence needs one witness."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A proof splits into cases $n\\equiv0,1,2\\pmod 3$. How many cases does it have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "There are three residue classes mod $3$, so three cases.",
+    "hints": [
+      "Count the residues mod $3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "To prove that if $n^{2}$ is even then $n$ is even, by contrapositive, which do you assume?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n$ is even",
+        "$n$ is odd",
+        "$n^{2}$ is odd",
+        "$n^{2}$ is even"
+      ],
+      "correct": 1,
+      "why": [
+        "assumed the conclusion",
+        "",
+        "assumed the conclusion you must derive",
+        "assumed the hypothesis"
+      ]
+    },
+    "solution": "Contrapositive: if $n$ is odd, then $n^2$ is odd. Assume $n$ is odd and derive that $n^2$ is odd.",
+    "hints": [
+      "The contrapositive negates both parts and swaps them."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the smallest $n\\ge1$ for which $n^{2}+n+41$ is not prime.",
+    "answer": {
+      "kind": "numeric",
+      "value": 40,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "[n for n in range(1,41) if len([d for d in range(2,n*n+n+41) if (n*n+n+41)%d==0])>0][0]",
+    "solution": "For $n=40$ the value is $1681=41^2$. Every $n<40$ gives a prime.",
+    "hints": [
+      "Test $n=40$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements are logically equivalent to $p\\to q$?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\neg q\\to\\neg p$",
+        "$q\\to p$",
+        "$\\neg p\\vee q$",
+        "$\\neg p\\to\\neg q$",
+        "$p\\wedge\\neg q$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "The contrapositive $\\neg q\\to\\neg p$ and the disjunction $\\neg p\\vee q$ match $p\\to q$. The converse, inverse and negation do not.",
+    "hints": [
+      "Use the truth table for $p\\to q$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $n=2k$ with $k$ an integer. Write $n^{2}=4\\cdot(\\text{something})$, with the something in terms of $k$.",
+    "answer": {
+      "kind": "expression",
+      "value": "k^2",
+      "vars": [
+        "k"
+      ],
+      "domain": [
+        0.5,
+        4
+      ],
+      "also": [
+        "k*k",
+        "k^2+0*k"
+      ]
+    },
+    "check": null,
+    "solution": "$n^2=(2k)^2=4k^2$, so $n^2$ is divisible by $4$.",
+    "hints": [
+      "Square $2k$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find the smallest $n\\ge2$ for which $2^{n}-1$ is not prime.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "[n for n in range(2,8) if len([d for d in range(2,2**n-1) if (2**n-1)%d==0])>0][0]",
+    "solution": "$2^2-1=3$ and $2^3-1=7$ are prime. $2^4-1=15=3\\cdot5$ is not.",
+    "hints": [
+      "Check small $n$ in order."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.proof-methods"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which is the first step of a proof that $\\sqrt2$ is irrational?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Assume $\\sqrt2=\\frac pq$ with $\\gcd(p,q)=1$",
+        "Assume $\\sqrt2=\\frac pq$ for all integers $p,q$",
+        "Assume $\\sqrt2$ is an integer",
+        "Assume $p^{2}=2q^{2}$ directly"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "wrong quantifier: the assumption is about some $p,q$",
+        "$\\sqrt2$ is not an integer, so this is not the negation",
+        "skipped the assumption and used its consequence"
+      ]
+    },
+    "solution": "Assume the negation: $\\sqrt2=\\frac pq$ in lowest terms. Then derive $p^2=2q^2$, a contradiction.",
+    "hints": [
+      "Negate the claim, then reduce the fraction."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What are the two steps of a proof by induction?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Base case and inductive step",
+        "Base case and converse",
+        "Two inductive hypotheses at once",
+        "Contradiction and contrapositive"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the converse is not a step",
+        "not a standard step",
+        "those are proof methods, not induction steps"
+      ]
+    },
+    "solution": "The base case starts the chain. The step passes truth from $k$ to $k+1$.",
+    "hints": [
+      "Start and step."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a claim $P(n)$ that holds for all $n\\ge3$, what is the first value of $n$ to check in the base case?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "The induction starts at the smallest $n$ in the claim, which is $n=3$.",
+    "hints": [
+      "Start where the claim starts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the inductive step, what must you show?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$P(k+1)\\to P(k)$",
+        "$P(1)$",
+        "$P(k)$ for every $k$",
+        "$P(k)\\to P(k+1)$ for an arbitrary $k$"
+      ],
+      "correct": 3,
+      "why": [
+        "the converse of the step",
+        "that is the base case",
+        "assumes the conclusion",
+        ""
+      ]
+    },
+    "solution": "Assume $P(k)$ for a general $k$ and prove $P(k+1)$.",
+    "hints": [
+      "Let $k$ be arbitrary."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Given $\\sum_{k=1}^{n}k^{3}=\\left(\\frac{n(n+1)}{2}\\right)^{2}$, find $\\sum_{k=1}^{10}k^{3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3025,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(10*11//2)**2",
+    "solution": "$\\left(\\frac{10\\cdot11}{2}\\right)^2=55^2=3025$.",
+    "hints": [
+      "Substitute $n=10$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0113",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $a_1=1$ and $a_{n+1}=a_n+2n$. Find $a_5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 21,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum(2*n for n in range(1,5))+1",
+    "solution": "$a_2=3$, $a_3=7$, $a_4=13$, $a_5=21$.",
+    "hints": [
+      "Compute the terms one at a time."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find the smallest $n_0$ such that $2^{n}>n^{3}$ for every $n\\ge n_0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "[n for n in range(1,100) if len([m for m in range(n,100) if not (2**m > m**3)])==0][0]",
+    "solution": "$2^9=512<729$, but $2^{10}=1024>1000$. The inequality then holds for all $n\\ge10$ by induction.",
+    "hints": [
+      "Test values until the inequality stays true."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In the inductive step, write $(k+1)^{2}-k^{2}$ as a polynomial in $k$.",
+    "answer": {
+      "kind": "expression",
+      "value": "2*k+1",
+      "vars": [
+        "k"
+      ],
+      "domain": [
+        0.5,
+        4
+      ],
+      "also": [
+        "1+2*k",
+        "2*k+1+0"
+      ]
+    },
+    "check": null,
+    "solution": "Expand $(k+1)^2=k^2+2k+1$ and subtract $k^2$.",
+    "hints": [
+      "Expand the square."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In proving $7\\mid 8^{n}-1$ by induction, the step uses $8^{4}-1=8(8^{3}-1)+7$. Find $\\frac{8^{4}-1}{7}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 585,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(8**4-1)//7",
+    "solution": "$8^4-1=4095$, and $4095/7=585$.",
+    "hints": [
+      "Compute $8^4$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t2-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.induction"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "A two-step induction proves $P(n)$ for $n\\ge1$ by getting $P(k+1)$ from $P(k)$ and $P(k-1)$, for all $k\\ge2$. How many base cases must be verified?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "The step for $k=2$ needs $P(1)$ and $P(2)$, so both are base cases.",
+    "hints": [
+      "Which values does the first step use?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

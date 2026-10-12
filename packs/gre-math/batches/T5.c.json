@@ -1,0 +1,1643 @@
+[
+ {
+  "id": "t5-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.vec-ops",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Vectors $\\mathbf u,\\mathbf v\\in\\mathbb R^3$ satisfy $|\\mathbf u|=2$, $|\\mathbf v|=3$ and $\\mathbf u\\cdot\\mathbf v=3$. What is the area of the parallelogram spanned by $\\mathbf u+\\mathbf v$ and $\\mathbf u-\\mathbf v$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3\\sqrt3$",
+    "$2\\sqrt{33}$",
+    "$6\\sqrt3$",
+    "$12$",
+    "$6$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "forgot the factor $2$ in $(\\mathbf u+\\mathbf v)\\times(\\mathbf u-\\mathbf v)=-2\\,\\mathbf u\\times\\mathbf v$",
+    "used $|\\mathbf u\\times\\mathbf v|^2=|\\mathbf u|^2|\\mathbf v|^2-\\mathbf u\\cdot\\mathbf v$ without squaring the dot product",
+    "",
+    "took $\\sin\\theta=1$, so $|\\mathbf u\\times\\mathbf v|=6$",
+    "used $2\\,\\mathbf u\\cdot\\mathbf v$ as the area"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Cross product expanded: $(\\mathbf u+\\mathbf v)\\times(\\mathbf u-\\mathbf v)=-2\\,\\mathbf u\\times\\mathbf v$",
+    "weight": 2
+   },
+   {
+    "text": "$|\\mathbf u\\times\\mathbf v|^2=|\\mathbf u|^2|\\mathbf v|^2-(\\mathbf u\\cdot\\mathbf v)^2=27$ via $\\sin^2\\theta=1-\\cos^2\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "Area $=2\\cdot3\\sqrt3=6\\sqrt3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Expand using antisymmetry: $(\\mathbf u+\\mathbf v)\\times(\\mathbf u-\\mathbf v)=-\\mathbf u\\times\\mathbf v+\\mathbf v\\times\\mathbf u=-2\\,\\mathbf u\\times\\mathbf v$ (vec-ops).\nLagrange identity: $|\\mathbf u\\times\\mathbf v|^2=|\\mathbf u|^2|\\mathbf v|^2\\sin^2\\theta=|\\mathbf u|^2|\\mathbf v|^2-(\\mathbf u\\cdot\\mathbf v)^2=36-9=27$ (trig-id).\nSo $|\\mathbf u\\times\\mathbf v|=3\\sqrt3$ and the area is $2\\cdot3\\sqrt3=6\\sqrt3$.",
+  "hints": [
+   "Expand the cross product first; the cross of $\\mathbf u$ with itself vanishes."
+  ],
+  "check": "2*math.sqrt(2**2*3**2-3**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.vec-ops",
+   "t1.geom-formulas"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A=(1,0,0)$, $B=(0,2,0)$, $C=(0,0,3)$ and let $O$ be the origin. What is the distance from $O$ to the plane through $A$, $B$, $C$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{6}{7}$",
+    "$\\frac{2}{7}$",
+    "$\\frac{7}{6}$",
+    "$\\frac{3}{7}$",
+    "$\\frac{12}{7}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used height $=V/\\text{area}$, missing the factor $3$ in $V=\\frac13\\,\\text{area}\\cdot h$",
+    "inverted the ratio",
+    "used triangle area $7$ instead of $\\frac72$ (forgot the $\\tfrac12$)",
+    "used $V=\\frac13|\\det|$ instead of $\\frac16|\\det|$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Triangle area $\\tfrac12|\\overrightarrow{AB}\\times\\overrightarrow{AC}|=\\tfrac72$",
+    "weight": 2
+   },
+   {
+    "text": "Tetrahedron volume $\\tfrac16|\\det|=1$ from the triple product",
+    "weight": 1
+   },
+   {
+    "text": "Height from $V=\\tfrac13\\,\\text{area}\\cdot h$, giving $\\tfrac67$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\overrightarrow{AB}=(-1,2,0)$, $\\overrightarrow{AC}=(-1,0,3)$; cross product $=(6,3,2)$, length $7$ (vec-ops).\nTriangle area $=\\tfrac72$.\nVolume of $OABC$: $\\tfrac16|\\overrightarrow{OA}\\cdot(\\overrightarrow{OB}\\times\\overrightarrow{OC})|=\\tfrac16\\cdot6=1$ (geom-formulas).\n$V=\\tfrac13\\,\\text{area}\\cdot h$ gives $h=3/(7/2)=6/7$.\nCheck: plane $6x+3y+2z=6$, distance $6/\\sqrt{49}$.",
+  "hints": [
+   "Compute the volume of the tetrahedron $OABC$ two ways: triple product and base times height."
+  ],
+  "check": "Fraction(6,7)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.lines-planes",
+   "t5.vec-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Line $L_1$ passes through $(1,0,0)$ with direction $(1,1,0)$. Line $L_2$ passes through $(0,0,2)$ with direction $(0,1,1)$. What is the shortest distance between $L_1$ and $L_2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac13$",
+    "$1$",
+    "$\\sqrt5$",
+    "$\\frac{1}{\\sqrt3}$",
+    "$\\sqrt{\\frac53}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "divided by $|\\mathbf n|^2$ instead of $|\\mathbf n|$",
+    "did not normalise the common normal",
+    "used the distance between the base points",
+    "",
+    "divided the base-point distance by $|\\mathbf n|$ instead of projecting onto $\\mathbf n$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Common normal $\\mathbf n=\\mathbf d_1\\times\\mathbf d_2=(1,-1,1)$",
+    "weight": 2
+   },
+   {
+    "text": "Vector between base points $(-1,0,2)$",
+    "weight": 1
+   },
+   {
+    "text": "Projection $|(\\mathbf p_2-\\mathbf p_1)\\cdot\\mathbf n|/|\\mathbf n|=1/\\sqrt3$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Common normal: $\\mathbf n=(1,1,0)\\times(0,1,1)=(1,-1,1)$, $|\\mathbf n|=\\sqrt3$ (vec-ops).\nBase-point difference: $(0,0,2)-(1,0,0)=(-1,0,2)$.\nDistance $=|(-1,0,2)\\cdot(1,-1,1)|/\\sqrt3=1/\\sqrt3$ (lines-planes: skew-line formula).",
+  "hints": [
+   "The shortest segment is parallel to $\\mathbf d_1\\times\\mathbf d_2$."
+  ],
+  "check": "1/math.sqrt(3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.lines-planes",
+   "t5.vec-ops",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The line $(x,y,z)=(1,0,3)+t(2,-1,1)$ meets the plane $2x-y+3z=19$ at $P$. Let $F$ be the point of that plane closest to the origin. What is $|PF|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{26}$",
+    "$\\sqrt{\\frac{3}{14}}$",
+    "$\\frac{19}{\\sqrt{14}}$",
+    "$\\sqrt7$",
+    "$\\frac{19}{14}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "gave $|OP|$",
+    "",
+    "gave $|OF|$, the distance from the origin to the plane",
+    "subtracted $|OF|$ from $|OP|^2$ without squaring $|OF|$: $\\sqrt{26-19}$",
+    "gave the parameter of $F$ along the normal"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Intersection: $11+8t=19$ gives $t=1$, $P=(3,-1,4)$",
+    "weight": 2
+   },
+   {
+    "text": "Distance to plane $|OF|=19/\\sqrt{14}$ from the normal $(2,-1,3)$",
+    "weight": 1
+   },
+   {
+    "text": "Right triangle $OFP$: $|PF|^2=26-361/14=3/14$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Substitute the line into the plane (lines-planes): $2(1+2t)+t+3(3+t)=11+8t=19$, so $t=1$ and $P=(3,-1,4)$ (lin-eq).\n$|OP|^2=9+1+16=26$.\n$F$ lies along the normal $\\mathbf n=(2,-1,3)$, $|OF|=19/|\\mathbf n|=19/\\sqrt{14}$ (vec-ops: projection).\n$OF\\perp FP$, so $|PF|^2=26-361/14=3/14$.",
+  "hints": [
+   "$OF$ is perpendicular to the plane, so triangle $OFP$ has a right angle at $F$."
+  ],
+  "check": "math.sqrt(26-19**2/14)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.partials",
+   "t3.chain-rule",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(x,y)=y\\,e^{xy}$. What is $\\dfrac{\\partial^2 f}{\\partial y\\,\\partial x}$ at the point $(1,2)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4e^{2}$",
+    "$12e^{2}$",
+    "$6e^{2}$",
+    "$8e^{2}$",
+    "$8e$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "treated $e^{xy}$ as constant when differentiating in $y$, dropping the term $xy^2e^{xy}$",
+    "differentiated $e^{xy}$ with respect to $y$ as $y\\,e^{xy}$ instead of $x\\,e^{xy}$",
+    "differentiated $y^2$ as $2$ instead of $2y$",
+    "",
+    "evaluated the exponent $xy$ at $(1,1)$ instead of $(1,2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$f_x=y^2e^{xy}$ by the chain rule on $e^{xy}$",
+    "weight": 1
+   },
+   {
+    "text": "Product rule in $y$: $f_{xy}=2y\\,e^{xy}+y^2x\\,e^{xy}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluated at $(1,2)$: $4e^2+4e^2=8e^2$",
+    "weight": 1
+   },
+   {
+    "text": "Mixed partials are equal, so either order is allowed",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$f_x=y\\cdot y\\,e^{xy}=y^2e^{xy}$ (chain-rule: $\\partial_x e^{xy}=y\\,e^{xy}$).\n$f_{xy}=\\partial_y\\big(y^2e^{xy}\\big)=2y\\,e^{xy}+y^2\\cdot x\\,e^{xy}$ (deriv-rules: product rule).\nAt $(1,2)$: $4e^2+4e^2=8e^2$.\nThe order does not matter since $f$ is $C^2$ (partials).",
+  "hints": [
+   "Differentiate in $x$ first; then apply the product rule in $y$."
+  ],
+  "check": "8*math.e**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.partials",
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The equation $x^2+yz+z^3=3$ defines $z$ implicitly as a function of $x$ and $y$ near $(1,1,1)$. What is $\\dfrac{\\partial^2 z}{\\partial x^2}$ at $(1,1)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\frac12$",
+    "$-\\frac18$",
+    "$\\frac14$",
+    "$-\\frac{11}{16}$",
+    "$-\\frac78$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "stopped at $z_x$",
+    "sign error in the quotient-rule term: $-\\frac12+\\frac38$",
+    "forgot the factor $z_x$ when differentiating $y+3z^2$",
+    "differentiated $3z^2$ as $3z\\,z_x$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$z_x=-\\dfrac{2x}{y+3z^2}$ from implicit differentiation, $z_x(1,1)=-\\tfrac12$",
+    "weight": 2
+   },
+   {
+    "text": "Differentiate again, treating $z=z(x,y)$ inside $y+3z^2$",
+    "weight": 2
+   },
+   {
+    "text": "Substitute $x=y=z=1$, $z_x=-\\tfrac12$ to get $-\\tfrac78$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Differentiate in $x$ (implicit): $2x+(y+3z^2)z_x=0$, so $z_x=-2x/(y+3z^2)$; at the point $z_x=-2/4=-\\tfrac12$.\nDifferentiate $2x+(y+3z^2)z_x=0$ again in $x$ (partials): $2+6z\\,z_x^2+(y+3z^2)z_{xx}=0$.\nAt $(1,1,1)$: $2+6\\cdot\\tfrac14+4z_{xx}=0$, so $z_{xx}=-\\tfrac{7/2}{4}=-\\tfrac78$.",
+  "hints": [
+   "Differentiate the relation $2x+(y+3z^2)z_x=0$ again; do not solve for $z_x$ first."
+  ],
+  "check": "-(2+6*Fraction(1,4))/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.mv-chain",
+   "t5.partials"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $w=u\\,e^{v}$ with $u=x^2-y$ and $v=xy$. What is $\\dfrac{\\partial w}{\\partial x}$ at $(x,y)=(2,1)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4e^{2}$",
+    "$7e^{2}$",
+    "$10e^{2}$",
+    "$3e^{2}$",
+    "$7e$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "dropped the path through $v$",
+    "",
+    "used $v_x=x$ instead of $v_x=y$",
+    "kept only the path through $v$",
+    "evaluated $e^{v}$ at $v=1$ instead of $v=xy=2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Chain rule with two paths: $w_x=w_u u_x+w_v v_x$",
+    "weight": 2
+   },
+   {
+    "text": "Partials $w_u=e^v$, $w_v=ue^v$, $u_x=2x$, $v_x=y$",
+    "weight": 1
+   },
+   {
+    "text": "Values at $(2,1)$: $u=3$, $v=2$, so $4e^2+3e^2$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "At $(2,1)$: $u=4-1=3$, $v=2$ (mv-chain).\n$w_u=e^{v}=e^2$, $w_v=ue^{v}=3e^2$.\n$u_x=2x=4$, $v_x=y=1$ (partials).\n$w_x=w_uu_x+w_vv_x=4e^2+3e^2=7e^2$.",
+  "hints": [
+   "$x$ reaches $w$ through both $u$ and $v$."
+  ],
+  "check": "7*math.e**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.mv-chain",
+   "t3.related-rates"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The temperature at $(x,y,z)$ is $T=x^2+yz$. A particle moves along $\\mathbf r(t)=(t,\\,t^2,\\,t^3)$. What is $\\dfrac{dT}{dt}$ at $t=2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$84$",
+    "$116$",
+    "$16$",
+    "$52$",
+    "$32$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "swapped $T_y$ and $T_z$ (used $T_y=y$, $T_z=z$)",
+    "added the partials without multiplying by the velocity components",
+    "used $z'=t^2$ instead of $3t^2$",
+    "used the velocity at $t=1$, $(1,2,3)$, with the gradient at $t=2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Chain rule $\\frac{dT}{dt}=T_xx'+T_yy'+T_zz'$",
+    "weight": 2
+   },
+   {
+    "text": "Gradient $(2x,z,y)=(4,8,4)$ and velocity $(1,2t,3t^2)=(1,4,12)$ at $t=2$",
+    "weight": 2
+   },
+   {
+    "text": "Dot product $4+32+48=84$ (or check by substituting: $t^2+t^5$)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Gradient: $\\nabla T=(2x,\\,z,\\,y)$; at $t=2$ the point is $(2,4,8)$, so $\\nabla T=(4,8,4)$ (partials).\nVelocity: $\\mathbf r'(t)=(1,2t,3t^2)=(1,4,12)$.\n$\\frac{dT}{dt}=\\nabla T\\cdot\\mathbf r'=4+32+48=84$ (mv-chain).\nCheck: $T(\\mathbf r(t))=t^2+t^5$, derivative $2t+5t^4=4+80$ (related-rates).",
+  "hints": [
+   "Dot the gradient with the velocity, both evaluated at $t=2$."
+  ],
+  "check": "2*2+5*2**4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.gradient",
+   "t5.partials"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(x,y,z)=x^2y-yz^2$, $P=(1,2,1)$ and $Q=(3,3,0)$. What is the directional derivative of $f$ at $P$ in the direction from $P$ toward $Q$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$4\\sqrt2$",
+    "$2\\sqrt6$",
+    "$2$",
+    "$\\frac{12}{\\sqrt5}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "did not normalise the direction vector",
+    "gave $|\\nabla f(P)|$, the maximal rate",
+    "",
+    "divided by $|\\mathbf v|^2=6$ instead of $|\\mathbf v|$",
+    "computed $|\\mathbf v|$ as $\\sqrt{2^2+1^2}$, dropping the third component"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gradient $\\nabla f=(2xy,\\;x^2-z^2,\\;-2yz)=(4,0,-4)$ at $P$",
+    "weight": 2
+   },
+   {
+    "text": "Direction $\\mathbf v=Q-P=(2,1,-1)$, $|\\mathbf v|=\\sqrt6$",
+    "weight": 1
+   },
+   {
+    "text": "$D_{\\mathbf u}f=\\nabla f\\cdot\\mathbf v/|\\mathbf v|=12/\\sqrt6=2\\sqrt6$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\nabla f=(2xy,\\,x^2-z^2,\\,-2yz)$, so $\\nabla f(P)=(4,0,-4)$ (partials).\n$\\mathbf v=Q-P=(2,1,-1)$, $|\\mathbf v|=\\sqrt6$.\n$D_{\\mathbf u}f=\\nabla f\\cdot\\mathbf v/|\\mathbf v|=(8+0+4)/\\sqrt6=12/\\sqrt6=2\\sqrt6$ (gradient: unit direction).",
+  "hints": [
+   "Normalise $Q-P$ before dotting with the gradient."
+  ],
+  "check": "12/math.sqrt(6)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.gradient",
+   "t5.lines-planes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The tangent plane to the surface $z=x^2+y^2$ at some point is parallel to the plane $2x+4y-z=7$. What is the $z$-intercept of that tangent plane?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$-5$",
+    "$-20$",
+    "$-10$",
+    "$0$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "sign error: wrote the plane as $z=2x+4y+5$",
+    "",
+    "matched $(2x,2y)=(4,8)$, taking the point $(2,4)$",
+    "dropped the height $z_0=5$ of the point from the tangent plane equation",
+    "used $z_0=10$ instead of $x_0^2+y_0^2=5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Normal to the level surface $g=z-x^2-y^2$: $\\nabla g=(-2x,-2y,1)$",
+    "weight": 1
+   },
+   {
+    "text": "Parallel to $(2,4,-1)$ gives $(x_0,y_0)=(1,2)$ and $z_0=5$",
+    "weight": 2
+   },
+   {
+    "text": "Tangent plane $z-5=2(x-1)+4(y-2)$, so intercept $-5$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Level surface $g=z-x^2-y^2=0$ has normal $\\nabla g=(-2x,-2y,1)$ (gradient).\nParallel to $(2,4,-1)$ means $(-2x_0,-2y_0,1)=-(2,4,-1)$, so $x_0=1$, $y_0=2$, $z_0=5$.\nPlane: $z-5=2(x-1)+4(y-2)$ (lines-planes), i.e. $z=2x+4y-5$.\nIntercept at $x=y=0$: $-5$.",
+  "hints": [
+   "Two planes are parallel exactly when their normals are parallel; normalise the $z$-coordinate."
+  ],
+  "check": "5-2-8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.mv-extrema",
+   "t5.partials",
+   "t1.sys-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The function $f(x,y)=x^3-3xy+y^3$ has exactly one local minimum. What is the value of $f$ there?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-1$",
+    "$0$",
+    "$1$",
+    "$-3$",
+    "$3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave the value at the saddle point $(0,0)$",
+    "sign slip: $1-3+1$ read as $1+3-3$",
+    "evaluated only $-3xy$ at $(1,1)$",
+    "evaluated $x^3+y^3+xy$ at $(1,1)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Critical equations $3x^2=3y$, $3y^2=3x$, giving $y=x^2$ and $x^4=x$",
+    "weight": 2
+   },
+   {
+    "text": "Critical points $(0,0)$ and $(1,1)$",
+    "weight": 1
+   },
+   {
+    "text": "Second-derivative test: $D=36xy-9$ is negative at $(0,0)$, positive with $f_{xx}=6>0$ at $(1,1)$",
+    "weight": 1
+   },
+   {
+    "text": "$f(1,1)=-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$f_x=3x^2-3y=0$ and $f_y=3y^2-3x=0$ give $y=x^2$ and $x^4=x$ (partials, sys-eq).\nSolutions: $x=0$ or $x=1$, so the critical points are $(0,0)$ and $(1,1)$.\n$D=f_{xx}f_{yy}-f_{xy}^2=36xy-9$: $D(0,0)=-9<0$ is a saddle; $D(1,1)=27>0$ with $f_{xx}=6>0$ is a local minimum (mv-extrema).\n$f(1,1)=1-3+1=-1$.",
+  "hints": [
+   "Solve $f_x=f_y=0$ by substituting $y=x^2$."
+  ],
+  "check": "1-3+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.mv-extrema",
+   "t3.optimize"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "On the closed disk $x^2+y^2\\le4$, let $f(x,y)=x^2+y^2-2x$. What is the difference between the absolute maximum and the absolute minimum of $f$ on the disk?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$7$",
+    "$10$",
+    "$5$",
+    "$9$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took the minimum $0$ from the boundary and missed the interior critical point",
+    "added the minimum $-1$ to the maximum $8$",
+    "used $-2$ as the minimum, reading only $-2x$ at $x=1$",
+    "compared the interior value $-1$ with the boundary value $4$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Interior critical point $(1,0)$ with $f=-1$",
+    "weight": 2
+   },
+   {
+    "text": "Boundary: $f=4-2x$ on $x\\in[-2,2]$, ranging over $[0,8]$",
+    "weight": 2
+   },
+   {
+    "text": "Compare candidates: max $8$, min $-1$, difference $9$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Interior: $f_x=2x-2=0$, $f_y=2y=0$ give $(1,0)$, which lies in the disk, $f(1,0)=-1$ (mv-extrema).\nBoundary $x^2+y^2=4$: $f=4-2x$ with $x\\in[-2,2]$, so $f$ runs from $0$ (at $x=2$) to $8$ (at $x=-2$) (optimize: closed interval).\nCandidates: $-1$, $0$, $8$. Maximum $8$, minimum $-1$, difference $9$.",
+  "hints": [
+   "Check the interior critical points, then reduce $f$ on the boundary circle to one variable."
+  ],
+  "check": "8-(-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.lagrange",
+   "t5.partials",
+   "t1.sys-eq"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "What is the maximum value of $f(x,y)=xy^2$ subject to $x^2+y^2=12$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6\\sqrt6$",
+    "$8$",
+    "$12$",
+    "$16$",
+    "$24$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "set $y^2=x^2$ instead of $y^2=2x^2$",
+    "took $x=y=2$ (satisfies neither the constraint nor the multiplier equations)",
+    "gave the constraint constant",
+    "",
+    "used $x=2$ with $y^2=12$, the full constraint constant"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Lagrange system $y^2=2\\lambda x$, $2xy=2\\lambda y$, $x^2+y^2=12$",
+    "weight": 2
+   },
+   {
+    "text": "Case $y\\neq0$ gives $x=\\lambda$ and $y^2=2x^2$; case $y=0$ gives $f=0$",
+    "weight": 1
+   },
+   {
+    "text": "$3x^2=12$, $x=2$, $y^2=8$, $f=16$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\nabla f=\\lambda\\nabla g$: $y^2=2\\lambda x$, $2xy=2\\lambda y$ (lagrange).\nIf $y=0$ then $f=0$. Otherwise divide by $y$: $x=\\lambda$, so $y^2=2x^2$.\nConstraint: $x^2+2x^2=12$, so $x=\\pm2$, $y^2=8$ (sys-eq).\n$f=xy^2=\\pm16$; the maximum is $16$ at $x=2$.",
+  "hints": [
+   "Divide the second multiplier equation by $y$ after treating $y=0$ separately."
+  ],
+  "check": "2*8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.lagrange",
+   "t1.sys-eq",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "On the curve $x^2+xy+y^2=3$, what is the maximum value of $x^2+y^2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$6$",
+    "$3$",
+    "$\\sqrt6$",
+    "$5$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "gave the minimum, from the direction $x=y$",
+    "",
+    "gave the constant on the right-hand side",
+    "gave the maximum distance instead of its square",
+    "tested the lattice point $(2,-1)$ on the curve"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Lagrange equations $2x=\\lambda(2x+y)$, $2y=\\lambda(x+2y)$",
+    "weight": 1
+   },
+   {
+    "text": "Eliminate $\\lambda$ to get $y^2=x^2$, so $y=\\pm x$",
+    "weight": 2
+   },
+   {
+    "text": "$x=y$ gives $x^2+y^2=2$; $x=-y$ gives $x^2+y^2=6$",
+    "weight": 1
+   },
+   {
+    "text": "Maximum is $6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Let $g=x^2+xy+y^2$. $\\nabla f=\\lambda\\nabla g$: $2x=\\lambda(2x+y)$, $2y=\\lambda(x+2y)$ (lagrange).\nMultiply the first by $y$, the second by $x$ and subtract: $2xy-2xy=\\lambda(2xy+y^2-x^2-2xy)$, so $\\lambda(y^2-x^2)=0$ (factor).\n$\\lambda=0$ forces $x=y=0$, off the curve, so $y=\\pm x$.\n$y=x$: $3x^2=3$, $x^2+y^2=2$. $y=-x$: $x^2=3$, $x^2+y^2=6$ (sys-eq). The maximum is $6$.",
+  "hints": [
+   "Eliminate $\\lambda$ by cross-multiplying the two gradient equations."
+  ],
+  "check": "3+3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.double-int",
+   "t4.u-sub"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\int_0^1\\!\\!\\int_x^1 e^{y^2}\\,dy\\,dx$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{e-1}{2}$",
+    "$e-1$",
+    "$\\frac e2$",
+    "$\\frac{e+1}{2}$",
+    "$\\frac12$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "integrated $\\int_0^1 2y\\,e^{y^2}dy$, doubling the inner width",
+    "dropped the lower-limit term $-\\tfrac12$ from the antiderivative",
+    "sign error at the lower limit of $\\tfrac12e^{y^2}$",
+    "replaced the integrand by $1$ (area of the triangle)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Recognise that $\\int e^{y^2}dy$ has no elementary form, so swap the order",
+    "weight": 2
+   },
+   {
+    "text": "Region $0\\le x\\le y\\le1$: integral becomes $\\int_0^1 y\\,e^{y^2}dy$",
+    "weight": 2
+   },
+   {
+    "text": "Substitution $u=y^2$ gives $\\tfrac12(e-1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$e^{y^2}$ has no elementary antiderivative in $y$, so swap the order (double-int).\nRegion: $0\\le x\\le y$, $0\\le y\\le1$.\n$\\int_0^1\\!\\int_0^y e^{y^2}dx\\,dy=\\int_0^1 y\\,e^{y^2}dy$.\n$u=y^2$, $du=2y\\,dy$ (u-sub): $\\tfrac12\\int_0^1e^u du=\\tfrac{e-1}{2}$.",
+  "hints": [
+   "Sketch the region and integrate in $x$ first."
+  ],
+  "check": "(math.e-1)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.double-int",
+   "t4.area-volume"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $R$ be the region between $y=x^2$ and $y=\\sqrt x$ for $0\\le x\\le1$. What is $\\displaystyle\\iint_R (x+y)\\,dA$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{3}{20}$",
+    "$\\frac{9}{20}$",
+    "$\\frac{3}{10}$",
+    "$-\\frac{3}{10}$",
+    "$\\frac13$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "integrated only the $x$ part",
+    "lost the factor $\\tfrac12$ from $\\int y\\,dy$",
+    "",
+    "reversed the inner limits",
+    "computed the area of $R$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Limits $x^2\\le y\\le\\sqrt x$, $0\\le x\\le1$ identified",
+    "weight": 1
+   },
+   {
+    "text": "Inner integral $x(\\sqrt x-x^2)+\\tfrac12(x-x^4)$",
+    "weight": 2
+   },
+   {
+    "text": "Outer integral $\\tfrac25-\\tfrac14+\\tfrac14-\\tfrac1{10}=\\tfrac3{10}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "The curves meet at $x=0,1$ and $\\sqrt x\\ge x^2$ on $[0,1]$ (double-int: vertical slices).\nInner: $\\int_{x^2}^{\\sqrt x}(x+y)\\,dy=x(\\sqrt x-x^2)+\\tfrac12(x-x^4)$.\nOuter: $\\int_0^1\\big(x^{3/2}-x^3+\\tfrac x2-\\tfrac{x^4}2\\big)dx=\\tfrac25-\\tfrac14+\\tfrac14-\\tfrac1{10}=\\tfrac3{10}$ (area-volume: region between curves).",
+  "hints": [
+   "Use vertical slices: $y$ from the lower curve to the upper one."
+  ],
+  "check": "Fraction(2,5)-Fraction(1,10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.coord-change",
+   "t5.double-int",
+   "t4.trig-int"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $D=\\{(x,y): 1\\le x^2+y^2\\le4,\\ y\\ge0\\}$. What is $\\displaystyle\\iint_D x^2\\,dA$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{7\\pi}{6}$",
+    "$\\frac{15\\pi}{4}$",
+    "$\\frac{15\\pi}{16}$",
+    "$\\frac{15\\pi}{2}$",
+    "$\\frac{15\\pi}{8}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "forgot the Jacobian factor $r$",
+    "replaced $x^2$ by $r^2$",
+    "used the average $\\tfrac14$ rather than $\\tfrac12$ of $\\cos^2\\theta$",
+    "took $\\int_0^\\pi\\cos^2\\theta\\,d\\theta=\\pi$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Polar substitution $x=r\\cos\\theta$ with $dA=r\\,dr\\,d\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "Radial integral $\\int_1^2 r^3dr=\\tfrac{15}{4}$",
+    "weight": 1
+   },
+   {
+    "text": "Angular integral $\\int_0^\\pi\\cos^2\\theta\\,d\\theta=\\tfrac\\pi2$ via the half-angle identity",
+    "weight": 1
+   },
+   {
+    "text": "Product $\\tfrac{15\\pi}{8}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Polar (coord-change): $x^2\\,dA=r^2\\cos^2\\theta\\cdot r\\,dr\\,d\\theta$, $1\\le r\\le2$, $0\\le\\theta\\le\\pi$.\nRadial: $\\int_1^2 r^3dr=\\tfrac{16-1}{4}=\\tfrac{15}4$.\nAngular: $\\int_0^\\pi\\cos^2\\theta\\,d\\theta=\\int_0^\\pi\\tfrac{1+\\cos2\\theta}{2}d\\theta=\\tfrac\\pi2$ (trig-int).\nProduct: $\\tfrac{15}{4}\\cdot\\tfrac\\pi2=\\tfrac{15\\pi}{8}$.",
+  "hints": [
+   "Use polar coordinates; the integrand picks up $\\cos^2\\theta$ and the area element picks up $r$."
+  ],
+  "check": "15*math.pi/8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.coord-change",
+   "t4.trig-int",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $B$ be the unit ball $x^2+y^2+z^2\\le1$. What is $\\displaystyle\\iiint_B (x^2+y^2)\\,dV$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{8\\pi}{9}$",
+    "$\\frac{8\\pi}{15}$",
+    "$\\frac{\\pi^2}{5}$",
+    "$\\frac{4\\pi}{5}$",
+    "$\\frac{4\\pi}{15}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "forgot the Jacobian $\\rho^2$",
+    "",
+    "forgot the $\\sin\\varphi$ in the Jacobian, integrating $\\sin^2\\varphi$ instead of $\\sin^3\\varphi$",
+    "used $x^2+y^2+z^2$ as the integrand",
+    "dropped a factor $2$ from $\\int_0^\\pi\\sin^3\\varphi\\,d\\varphi$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Spherical form: $x^2+y^2=\\rho^2\\sin^2\\varphi$ and $dV=\\rho^2\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "$\\int_0^1\\rho^4d\\rho=\\tfrac15$ and $\\int_0^{2\\pi}d\\theta=2\\pi$",
+    "weight": 1
+   },
+   {
+    "text": "$\\int_0^\\pi\\sin^3\\varphi\\,d\\varphi=\\tfrac43$ via $\\sin^2\\varphi=1-\\cos^2\\varphi$",
+    "weight": 1
+   },
+   {
+    "text": "Product $\\tfrac{8\\pi}{15}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Spherical (coord-change): $x^2+y^2=\\rho^2\\sin^2\\varphi$, $dV=\\rho^2\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$.\nIntegrand becomes $\\rho^4\\sin^3\\varphi$, so the integral factors into $\\int_0^1\\rho^4d\\rho\\cdot\\int_0^\\pi\\sin^3\\varphi\\,d\\varphi\\cdot\\int_0^{2\\pi}d\\theta$.\n$\\int_0^\\pi\\sin^3\\varphi\\,d\\varphi=\\int_{-1}^{1}(1-u^2)du=\\tfrac43$ with $u=\\cos\\varphi$ (trig-id, trig-int).\nProduct: $\\tfrac15\\cdot\\tfrac43\\cdot2\\pi=\\tfrac{8\\pi}{15}$.",
+  "hints": [
+   "After the substitution the integral separates into three one-variable integrals."
+  ],
+  "check": "2*math.pi/5*4/3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.triple-int",
+   "t4.area-volume"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $T$ be the tetrahedron $x,y,z\\ge0$, $x+y+z\\le1$. What is $\\displaystyle\\iiint_T x\\,dV$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac1{12}$",
+    "$\\frac16$",
+    "$\\frac1{48}$",
+    "$\\frac1{24}$",
+    "$\\frac18$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "forgot the $\\tfrac12$ in the cross-section area $\\tfrac{(1-x)^2}{2}$",
+    "gave the volume of $T$",
+    "halved the cross-section area twice",
+    "",
+    "used $\\bar x=\\tfrac34$ instead of $\\tfrac14$ times volume $\\tfrac16$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Slice at fixed $x$: triangle $y,z\\ge0$, $y+z\\le1-x$ with area $\\tfrac{(1-x)^2}{2}$",
+    "weight": 2
+   },
+   {
+    "text": "Integral reduces to $\\tfrac12\\int_0^1x(1-x)^2dx$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluation $\\tfrac12\\cdot\\tfrac1{12}=\\tfrac1{24}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Slice at fixed $x$ (triple-int): the $(y,z)$ cross-section is a right triangle with legs $1-x$, area $\\tfrac{(1-x)^2}{2}$.\n$\\iiint x\\,dV=\\int_0^1x\\cdot\\tfrac{(1-x)^2}{2}\\,dx=\\tfrac12\\int_0^1(x-2x^2+x^3)dx$.\n$=\\tfrac12\\big(\\tfrac12-\\tfrac23+\\tfrac14\\big)=\\tfrac12\\cdot\\tfrac1{12}=\\tfrac1{24}$ (area-volume: slicing).\nCheck: $\\bar x\\cdot V=\\tfrac14\\cdot\\tfrac16$.",
+  "hints": [
+   "Integrate over a cross-section at fixed $x$ first; its area is a simple function of $x$."
+  ],
+  "check": "Fraction(1,24)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.triple-int",
+   "t5.coord-change",
+   "t4.area-volume"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "What is the volume of the solid enclosed between the paraboloids $z=x^2+y^2$ and $z=8-x^2-y^2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$24\\pi$",
+    "$\\frac{64\\pi}{3}$",
+    "$16\\pi$",
+    "$8\\pi$",
+    "$32\\pi$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "used the plane $z=0$ as the bottom surface",
+    "forgot the Jacobian $r$",
+    "",
+    "integrated $\\theta$ over $[0,\\pi]$ only",
+    "doubled the height, using $2(8-2r^2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Intersection $x^2+y^2=4$, so $r\\le2$",
+    "weight": 1
+   },
+   {
+    "text": "Height $(8-r^2)-r^2=8-2r^2$ and $dV$ includes $r\\,dz\\,dr\\,d\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "$2\\pi\\int_0^2(8-2r^2)r\\,dr=2\\pi\\cdot8=16\\pi$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Intersection: $r^2=8-r^2$, so $r=2$ (coord-change: cylindrical).\n$V=\\int_0^{2\\pi}\\!\\!\\int_0^2\\!\\!\\int_{r^2}^{8-r^2}r\\,dz\\,dr\\,d\\theta$ (triple-int).\n$=2\\pi\\int_0^2(8-2r^2)r\\,dr=2\\pi\\big[4r^2-\\tfrac{r^4}{2}\\big]_0^2=2\\pi(16-8)=16\\pi$ (area-volume).",
+  "hints": [
+   "Use cylindrical coordinates; find where the surfaces meet first."
+  ],
+  "check": "2*math.pi*8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.line-int",
+   "t5.partials",
+   "t5.gradient"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $\\mathbf F=(2xy,\\ x^2+z^2,\\ 2yz)$ and let $C$ be the curve $\\mathbf r(t)=(t,\\,2t^2,\\,3t^3)$, $0\\le t\\le1$. What is $\\displaystyle\\int_C\\mathbf F\\cdot d\\mathbf r$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$20$",
+    "$18$",
+    "$38$",
+    "$6$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used the potential $x^2y$ only, missing the $yz^2$ term",
+    "",
+    "used the potential $yz^2$ only, missing the $x^2y$ term",
+    "used the potential $x^2y+2yz^2$",
+    "added the coordinates of the endpoint $(1,2,3)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Curl is zero (mixed partials agree), so $\\mathbf F$ is conservative",
+    "weight": 2
+   },
+   {
+    "text": "Potential $f=x^2y+yz^2$ with $\\nabla f=\\mathbf F$",
+    "weight": 1
+   },
+   {
+    "text": "Endpoints $(0,0,0)\\to(1,2,3)$ give $f(1,2,3)-f(0,0,0)=20$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Check conservativeness (partials): $\\partial_y(2xy)=2x=\\partial_x(x^2+z^2)$, $\\partial_z(2xy)=0=\\partial_x(2yz)$, $\\partial_z(x^2+z^2)=2z=\\partial_y(2yz)$.\nIntegrate: $f=x^2y+g(y,z)$, $f_y=x^2+z^2$ gives $g=yz^2+h(z)$, and $f_z=2yz$ gives $h'=0$. So $f=x^2y+yz^2$ (line-int: potential function).\nThe path runs from $(0,0,0)$ to $(1,2,3)$, so the integral is $f(1,2,3)-f(0,0,0)=2+18=20$ (gradient: fundamental theorem).",
+  "hints": [
+   "Test whether $\\mathbf F$ is a gradient before parametrising."
+  ],
+  "check": "1**2*2+2*3**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.line-int",
+   "t4.antideriv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $\\mathbf F=(y^2,\\ x)$ and let $C$ be the parabola $y=x^2$ from $(0,0)$ to $(1,1)$. What is $\\displaystyle\\int_C\\mathbf F\\cdot d\\mathbf r$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{13}{15}$",
+    "$\\frac56$",
+    "$\\frac7{10}$",
+    "$\\frac8{15}$",
+    "$1$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "integrated along the straight segment $y=x$",
+    "set $dy=dx$",
+    "set $dy=x\\,dx$ instead of $2x\\,dx$",
+    "evaluated $y^2$ as $x^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\mathbf F$ is not conservative ($\\partial_x x=1\\neq 2y=\\partial_y y^2$), so the path matters",
+    "weight": 1
+   },
+   {
+    "text": "Parametrise $x=t$, $y=t^2$, $dy=2t\\,dt$",
+    "weight": 2
+   },
+   {
+    "text": "Integrand $t^4+2t^2$ and value $\\tfrac15+\\tfrac23=\\tfrac{13}{15}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Curl check: $Q_x-P_y=1-2y\\neq0$, so the value depends on the path (line-int).\nParametrise: $x=t$, $y=t^2$, $dx=dt$, $dy=2t\\,dt$, $0\\le t\\le1$.\n$\\int P\\,dx+Q\\,dy=\\int_0^1\\big(t^4+t\\cdot2t\\big)dt=\\int_0^1(t^4+2t^2)dt$ (antideriv).\n$=\\tfrac15+\\tfrac23=\\tfrac{13}{15}$.",
+  "hints": [
+   "Substitute $y=x^2$ and $dy=2x\\,dx$ into $y^2\\,dx+x\\,dy$."
+  ],
+  "check": "Fraction(1,5)+Fraction(2,3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.green",
+   "t5.coord-change"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $C$ be the circle $x^2+y^2=4$, traversed counterclockwise. What is $\\displaystyle\\oint_C\\big(-y^3\\,dx+x^3\\,dy\\big)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8\\pi$",
+    "$16\\pi$",
+    "$12\\pi$",
+    "$24\\pi$",
+    "$-24\\pi$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "forgot the factor $3$ from $3x^2+3y^2$",
+    "forgot the Jacobian $r$ in the polar integral",
+    "halved the result, using $\\int_0^{\\pi}d\\theta$",
+    "",
+    "traversed the circle clockwise"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Green: $\\oint P\\,dx+Q\\,dy=\\iint(Q_x-P_y)\\,dA$ with $Q_x-P_y=3x^2+3y^2$",
+    "weight": 2
+   },
+   {
+    "text": "Polar form $3r^2\\cdot r\\,dr\\,d\\theta$ over $r\\le2$",
+    "weight": 1
+   },
+   {
+    "text": "$3\\cdot2\\pi\\cdot\\tfrac{2^4}{4}=24\\pi$; sign positive for counterclockwise",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$P=-y^3$, $Q=x^3$: $Q_x-P_y=3x^2+3y^2$ (green).\nCounterclockwise boundary of the disk: $\\oint=\\iint_D3(x^2+y^2)\\,dA$.\nPolar (coord-change): $\\int_0^{2\\pi}\\!\\!\\int_0^23r^2\\cdot r\\,dr\\,d\\theta=2\\pi\\cdot3\\cdot4=24\\pi$.",
+  "hints": [
+   "Convert the circulation to an area integral and then to polar coordinates."
+  ],
+  "check": "3*2*math.pi*4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.green",
+   "t4.param-polar",
+   "t4.trig-int"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The astroid $x=\\cos^3t$, $y=\\sin^3t$, $0\\le t\\le2\\pi$, bounds a region. What is its area?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{3\\pi}{4}$",
+    "$\\frac{3\\pi}{16}$",
+    "$\\pi$",
+    "$\\frac{3\\pi}{2}$",
+    "$\\frac{3\\pi}{8}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "forgot the factor $\\tfrac12$ in $A=\\tfrac12\\oint x\\,dy-y\\,dx$",
+    "integrated $t$ over $[0,\\pi]$ only",
+    "gave the area of the circumscribed unit disk",
+    "took $\\int_0^{2\\pi}\\sin^2t\\cos^2t\\,dt=\\pi$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Area formula $A=\\tfrac12\\oint(x\\,dy-y\\,dx)$ from Green's theorem",
+    "weight": 2
+   },
+   {
+    "text": "$x\\,dy-y\\,dx=3\\sin^2t\\cos^2t\\,(\\cos^2t+\\sin^2t)\\,dt=3\\sin^2t\\cos^2t\\,dt$",
+    "weight": 1
+   },
+   {
+    "text": "$\\sin^2t\\cos^2t=\\tfrac14\\sin^22t$, integral over $[0,2\\pi]$ is $\\tfrac\\pi4$",
+    "weight": 1
+   },
+   {
+    "text": "$A=\\tfrac12\\cdot3\\cdot\\tfrac\\pi4=\\tfrac{3\\pi}8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Green (green): $A=\\tfrac12\\oint(x\\,dy-y\\,dx)$, counterclockwise.\n$dx=-3\\cos^2t\\sin t\\,dt$, $dy=3\\sin^2t\\cos t\\,dt$ (param-polar).\n$x\\,dy-y\\,dx=3\\cos^4t\\sin^2t+3\\sin^4t\\cos^2t=3\\sin^2t\\cos^2t\\,dt$.\n$\\sin^2t\\cos^2t=\\tfrac14\\sin^22t$ with average $\\tfrac18$, so $\\int_0^{2\\pi}=\\tfrac\\pi4$ (trig-int).\n$A=\\tfrac12\\cdot3\\cdot\\tfrac\\pi4=\\tfrac{3\\pi}8$.",
+  "hints": [
+   "Use $A=\\tfrac12\\oint x\\,dy-y\\,dx$ and simplify with $\\cos^2+\\sin^2=1$."
+  ],
+  "check": "1.5*math.pi/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.div-curl",
+   "t5.partials"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The field $\\mathbf F=(a\\,xy+z^3,\\ x^2+2yz,\\ b\\,xz^2+y^2)$ is conservative for suitable constants $a,b$. What is $\\operatorname{div}\\mathbf F$ at $(1,2,1)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9$",
+    "$12$",
+    "$10$",
+    "$8$",
+    "$6$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "differentiated $b\\,xz^2$ in $z$ as $b\\,x\\,z$",
+    "",
+    "evaluated at $(1,1,1)$",
+    "found $b=1$ from the wrong curl component",
+    "dropped $\\partial F_3/\\partial z$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Conservative means $\\operatorname{curl}\\mathbf F=\\mathbf 0$",
+    "weight": 1
+   },
+   {
+    "text": "Components: $F_{1,y}=F_{2,x}$ gives $a=2$; $F_{1,z}=F_{3,x}$ gives $b=3$ (and $F_{2,z}=F_{3,y}$ holds)",
+    "weight": 2
+   },
+   {
+    "text": "$\\operatorname{div}\\mathbf F=ay+2z+2bxz$",
+    "weight": 1
+   },
+   {
+    "text": "Value $4+2+6=12$ at $(1,2,1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Curl-free: $\\partial_yF_1=\\partial_xF_2$ gives $ax=2x$, so $a=2$ (div-curl).\n$\\partial_zF_1=\\partial_xF_3$ gives $3z^2=bz^2$, so $b=3$. The third condition $\\partial_zF_2=2y=\\partial_yF_3$ holds automatically.\n$\\operatorname{div}\\mathbf F=\\partial_x(2xy+z^3)+\\partial_y(x^2+2yz)+\\partial_z(3xz^2+y^2)=2y+2z+6xz$ (partials).\nAt $(1,2,1)$: $4+2+6=12$.",
+  "hints": [
+   "Use the curl conditions to pin down $a$ and $b$ first."
+  ],
+  "check": "2*2+2*1+6*1*1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.div-curl",
+   "t5.coord-change",
+   "t5.double-int"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $S$ be the part of the paraboloid $z=4-x^2-y^2$ with $z\\ge0$, oriented upward. What is the flux $\\displaystyle\\iint_S\\mathbf F\\cdot d\\mathbf S$ of $\\mathbf F=(x,\\,y,\\,1)$ through $S$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$16\\pi$",
+    "$-12\\pi$",
+    "$20\\pi$",
+    "$40\\pi$",
+    "$10\\pi$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "dropped the $+1$ from the $z$-component of $\\mathbf F\\cdot\\mathbf n$",
+    "used $(-2x,-2y,1)$ as the upward normal, so the $x,y$ parts flipped sign",
+    "",
+    "doubled the correct flux",
+    "integrated $\\theta$ over $[0,\\pi]$ only"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Upward normal element $d\\mathbf S=(2x,\\,2y,\\,1)\\,dA$ for $z=g(x,y)$",
+    "weight": 2
+   },
+   {
+    "text": "$\\mathbf F\\cdot d\\mathbf S=(2x^2+2y^2+1)\\,dA$ over the disk $r\\le2$",
+    "weight": 1
+   },
+   {
+    "text": "Polar integral $2\\pi\\int_0^2(2r^2+1)\\,r\\,dr=2\\pi\\cdot10=20\\pi$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "For $z=g(x,y)$ with upward orientation, $d\\mathbf S=(-g_x,-g_y,1)\\,dA=(2x,2y,1)\\,dA$ (div-curl: surface integral).\n$\\mathbf F\\cdot d\\mathbf S=(2x^2+2y^2+1)\\,dA$ over the projection $x^2+y^2\\le4$ (double-int).\nPolar (coord-change): $\\int_0^{2\\pi}\\!\\!\\int_0^2(2r^2+1)\\,r\\,dr\\,d\\theta=2\\pi\\big[\\tfrac{r^4}{2}+\\tfrac{r^2}{2}\\big]_0^2=2\\pi(8+2)=20\\pi$.",
+  "hints": [
+   "Write the surface as a graph and use $d\\mathbf S=(-g_x,-g_y,1)\\,dA$."
+  ],
+  "check": "2*math.pi*(8+2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.stokes-gauss",
+   "t5.div-curl",
+   "t5.coord-change"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $S$ be the unit sphere $x^2+y^2+z^2=1$ with outward orientation. What is $\\displaystyle\\iint_S(x^3,\\,y^3,\\,z^3)\\cdot d\\mathbf S$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{12\\pi}{5}$",
+    "$\\frac{4\\pi}{5}$",
+    "$4\\pi$",
+    "$12\\pi$",
+    "$2\\pi$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot the factor $3$ in $\\operatorname{div}\\mathbf F=3(x^2+y^2+z^2)$",
+    "forgot the Jacobian $\\rho^2$ in the volume integral",
+    "replaced $\\int_0^1\\rho^4d\\rho$ by $1$",
+    "used $\\rho^3$ in place of $\\rho^2$ in the Jacobian"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Divergence theorem applies to the closed surface",
+    "weight": 1
+   },
+   {
+    "text": "$\\operatorname{div}\\mathbf F=3x^2+3y^2+3z^2=3\\rho^2$",
+    "weight": 1
+   },
+   {
+    "text": "Spherical volume integral $\\int_0^{2\\pi}\\!\\!\\int_0^\\pi\\!\\!\\int_0^13\\rho^2\\cdot\\rho^2\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta$",
+    "weight": 2
+   },
+   {
+    "text": "Value $3\\cdot4\\pi\\cdot\\tfrac15=\\tfrac{12\\pi}5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "The surface is closed, so Gauss applies (stokes-gauss): $\\iint_S\\mathbf F\\cdot d\\mathbf S=\\iiint_B\\operatorname{div}\\mathbf F\\,dV$.\n$\\operatorname{div}\\mathbf F=3(x^2+y^2+z^2)=3\\rho^2$ (div-curl).\nSpherical (coord-change): $\\int_0^{2\\pi}\\!\\!\\int_0^\\pi\\!\\!\\int_0^1 3\\rho^2\\cdot\\rho^2\\sin\\varphi\\,d\\rho\\,d\\varphi\\,d\\theta=3\\cdot\\tfrac15\\cdot2\\cdot2\\pi=\\tfrac{12\\pi}{5}$.",
+  "hints": [
+   "Convert the flux through the closed surface into a volume integral of the divergence."
+  ],
+  "check": "3*4*math.pi/5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.stokes-gauss",
+   "t5.div-curl",
+   "t5.double-int"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $C$ be the curve where the cylinder $x^2+y^2=1$ meets the plane $z=x+y$, oriented counterclockwise when viewed from above. What is $\\displaystyle\\oint_C(z\\,dx+x\\,dy+y\\,dz)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\pi$",
+    "$3\\pi$",
+    "$-\\frac{\\pi}{\\sqrt3}$",
+    "$-\\pi$",
+    "$0$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "lost the sign: used $|\\operatorname{curl}\\mathbf F\\cdot\\mathbf n|$",
+    "used the normal $(1,1,1)$ instead of $(-1,-1,1)$",
+    "used the unit normal but the flat disk area $\\pi$ instead of the tilted area $\\sqrt3\\,\\pi$",
+    "",
+    "assumed the field is conservative because $\\mathbf F$ is linear"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Stokes: $\\oint\\mathbf F\\cdot d\\mathbf r=\\iint\\operatorname{curl}\\mathbf F\\cdot d\\mathbf S$ with $\\mathbf F=(z,x,y)$ and $\\operatorname{curl}\\mathbf F=(1,1,1)$",
+    "weight": 2
+   },
+   {
+    "text": "Upward normal element on $z=x+y$: $d\\mathbf S=(-1,-1,1)\\,dA$, so the integrand is $-1$",
+    "weight": 2
+   },
+   {
+    "text": "Projection is the unit disk of area $\\pi$, giving $-\\pi$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\mathbf F=(z,x,y)$ gives $\\operatorname{curl}\\mathbf F=(\\partial_yF_3-\\partial_zF_2,\\ \\partial_zF_1-\\partial_xF_3,\\ \\partial_xF_2-\\partial_yF_1)=(1,1,1)$ (div-curl).\nUse the planar surface $z=x+y$ over the unit disk. Counterclockwise from above means upward normal: $d\\mathbf S=(-z_x,-z_y,1)\\,dA=(-1,-1,1)\\,dA$ (stokes-gauss).\n$\\operatorname{curl}\\mathbf F\\cdot d\\mathbf S=-1\\,dA$, so the integral is $-1\\cdot\\text{area}(\\text{unit disk})=-\\pi$ (double-int).\nDirect check: with $\\mathbf r=(\\cos t,\\sin t,\\cos t+\\sin t)$ the integrand is $\\cos^2t-2\\sin^2t$, which integrates to $\\pi-2\\pi=-\\pi$.",
+  "hints": [
+   "Apply Stokes with the planar surface $z=x+y$ and its upward normal."
+  ],
+  "check": "-math.pi",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

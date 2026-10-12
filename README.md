@@ -71,3 +71,7 @@ Each suite prints one `RESULT` line. The run exits 0 only when every suite passe
 ## Dev loop
 
 No dev server. Edit `engine/` or a pack, rebuild, reload the page. Progress lives in the browser's localStorage under `pe_<key>`, so use a private window for a clean run. `packs/_fixture` is a small pack for tests only.
+
+## Content batches
+
+Authors write per-tier files under `packs/gre-math/batches/` (`T3.ab.json` recall+micro, `T3.c.json` full, `T3.teach.json`), check one with `python3 -I tools/check_items.py --batch=packs/gre-math/batches/T3.ab.json`, then `python3 -I tools/merge_batches.py packs/gre-math` folds them into `items.json`/`techniques.json` (idempotent by id).

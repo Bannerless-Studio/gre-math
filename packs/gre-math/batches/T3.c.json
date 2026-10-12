@@ -1,0 +1,1630 @@
+[
+ {
+  "id": "t3-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra",
+   "t1.factor",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to1}\\frac{\\sqrt{x+3}-2}{x^2-3x+2}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{1}{4}$",
+    "$-\\frac{1}{4}$",
+    "$-\\frac{1}{2}$",
+    "$0$",
+    "$-\\frac{1}{8}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "sign slip: read $x-2$ as $+1$ at $x=1$",
+    "",
+    "evaluated $\\sqrt{x+3}+2$ as $2$ instead of $4$",
+    "stopped at numerator $\\to0$ without cancelling the zero in the denominator",
+    "squared the conjugate sum, giving $8$ in the denominator"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Conjugate multiplication turns the numerator into $x-1$",
+    "weight": 2
+   },
+   {
+    "text": "Denominator factored as $(x-1)(x-2)$ and common factor cancelled",
+    "weight": 1
+   },
+   {
+    "text": "Substitution $x=1$ done with correct signs",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Substituting gives $0/0$, so cancel first (limit-algebra).\nMultiply by the conjugate: numerator becomes $(x+3)-4=x-1$.\nFactor $x^2-3x+2=(x-1)(x-2)$ (factor) and cancel $x-1$ (rational-expr).\nThe limit is $\\dfrac{1}{(x-2)(\\sqrt{x+3}+2)}$ at $x=1$, i.e. $\\dfrac{1}{(-1)(4)}=-\\dfrac14$.",
+  "hints": [
+   "Rationalise the numerator, then factor the quadratic."
+  ],
+  "check": "Fraction(1)/((1-2)*(2+2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.limit-algebra",
+   "t1.exp-rules",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to\\infty}\\left(\\sqrt{4x^2+x}-2x\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$\\frac{1}{2}$",
+    "$1$",
+    "$\\frac{1}{4}$",
+    "$\\frac{1}{6}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "treated $\\infty-\\infty$ as cancelling",
+    "replaced the whole denominator $\\sqrt{4x^2+x}+2x$ by $2x$",
+    "divided the numerator by $x$ but forgot the denominator",
+    "",
+    "wrote $\\sqrt4=4$ in the denominator"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Multiply by the conjugate to get numerator $x$",
+    "weight": 2
+   },
+   {
+    "text": "Divide through by $x$ using $\\sqrt{x^2}=x$ for $x>0$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $\\frac{1}{\\sqrt{4}+2}$ correctly",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The form is $\\infty-\\infty$, so rationalise (limit-algebra).\nMultiply by $\\dfrac{\\sqrt{4x^2+x}+2x}{\\sqrt{4x^2+x}+2x}$: numerator becomes $x$.\nDivide top and bottom by $x$ (exp-rules, $\\sqrt{x^2}=x$): $\\dfrac{1}{\\sqrt{4+1/x}+2}$.\nAs $x\\to\\infty$ this tends to $\\dfrac{1}{2+2}=\\dfrac14$.",
+  "hints": [
+   "Multiply and divide by the conjugate."
+  ],
+  "check": "Fraction(1)/(2+2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special",
+   "t2.trig-id",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to0}\\frac{1-\\cos 3x}{x\\sin 2x}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{9}{4}$",
+    "$\\frac{9}{2}$",
+    "$\\frac{3}{2}$",
+    "$\\frac{3}{4}$",
+    "$\\frac{9}{8}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $1-\\cos u\\sim u^2$, missing the factor $\\tfrac12$",
+    "took the ratio of the coefficients $3$ and $2$ only",
+    "squared the coefficient incorrectly: used $3$ instead of $9$ in the numerator",
+    "used $\\sin2x\\sim4x$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Use $1-\\cos u\\sim u^2/2$ with $u=3x$ to get $9x^2/2$",
+    "weight": 2
+   },
+   {
+    "text": "Use $\\sin 2x\\sim 2x$ in the denominator",
+    "weight": 1
+   },
+   {
+    "text": "Combine to $\\frac{9/2}{2}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Both parts are $0$ at $x=0$ and of order $x^2$ (limit-special).\n$1-\\cos 3x=2\\sin^2(3x/2)\\sim\\dfrac{(3x)^2}{2}=\\dfrac{9x^2}{2}$ (trig-id).\n$x\\sin2x\\sim 2x^2$.\nRatio: $\\dfrac{9/2}{2}=\\dfrac94$.",
+  "hints": [
+   "Use $(1-\\cos u)/u^2\\to\\tfrac12$ and $\\sin u/u\\to1$."
+  ],
+  "check": "Fraction(9,2)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.limit-special",
+   "t2.trig-id",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to0}\\frac{\\tan 2x-\\sin 2x}{x^3}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$2$",
+    "$4$",
+    "$0$",
+    "$\\frac{1}{2}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "dropped the $\\tfrac12$ from $1-\\cos u\\sim u^2/2$",
+    "scaled by $2$ instead of $2^3$",
+    "",
+    "said $\\tan2x$ and $\\sin2x$ are both $\\sim2x$, so the difference vanishes",
+    "ignored the substitution $u=2x$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Factor $\\tan u-\\sin u=\\tan u\\,(1-\\cos u)$",
+    "weight": 2
+   },
+   {
+    "text": "Apply $\\tan u\\sim u$ and $1-\\cos u\\sim u^2/2$",
+    "weight": 1
+   },
+   {
+    "text": "Substitute $u=2x$ and divide by $x^3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Leading terms cancel, so factor (trig-id): $\\tan u-\\sin u=\\tan u\\,(1-\\cos u)$ with $u=2x$.\nSpecial limits (limit-special): $\\tan u\\sim u$, $1-\\cos u\\sim u^2/2$.\nProduct $\\sim \\dfrac{u^3}{2}=\\dfrac{8x^3}{2}=4x^3$.\nDivide by $x^3$: limit $4$.",
+  "hints": [
+   "Write $\\tan u-\\sin u=\\tan u(1-\\cos u)$."
+  ],
+  "check": "Fraction(2)**3/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.continuity",
+   "t3.limit-algebra",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(x)=x^2+bx$ for $x<1$, $f(1)=a$, and $f(x)=\\dfrac{x^3-1}{x-1}$ for $x>1$. If $f$ is continuous at $x=1$, find $ab$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$5$",
+    "$9$",
+    "$3$",
+    "$6$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took the right limit as $2$, so $a=2$, $b=1$",
+    "gave $a+b$ instead of $ab$",
+    "set the left limit equal to $b$ instead of $1+b$, so $b=3$",
+    "found only $a$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Right limit found by factoring: $x^2+x+1\\to3$",
+    "weight": 2
+   },
+   {
+    "text": "Left limit $1+b$ matched to give $b=2$",
+    "weight": 1
+   },
+   {
+    "text": "$a=f(1)=3$ and product computed",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Continuity needs left limit $=f(1)=$ right limit (continuity).\nRight: $\\dfrac{x^3-1}{x-1}=x^2+x+1\\to3$ (factor, limit-algebra).\nSo $a=3$. Left: $1+b=3$ gives $b=2$.\n$ab=6$.",
+  "hints": [
+   "Equate left limit, value, and right limit at $x=1$."
+  ],
+  "check": "3*(3-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.continuity",
+   "t3.limit-special",
+   "t2.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(x)=\\dfrac{\\sin 3x}{x}$ for $x<0$, $f(0)=a$, and $f(x)=\\dfrac{e^{bx}-1}{2x}$ for $x>0$. If $f$ is continuous at $0$, find $a+b$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$9$",
+    "$3$",
+    "$\\frac{9}{2}$",
+    "$18$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "took the right limit as $b$, so $b=3$",
+    "",
+    "found $a$ only",
+    "took the right limit as $2b$, so $b=\\tfrac32$",
+    "answered $ab$ instead of $a+b$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Left limit $\\sin3x/x\\to3$ so $a=3$",
+    "weight": 1
+   },
+   {
+    "text": "Right limit $\\dfrac{e^{bx}-1}{2x}\\to\\dfrac b2$",
+    "weight": 2
+   },
+   {
+    "text": "Set $\\dfrac b2=3$ and add: $a+b=9$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Continuity at $0$ requires both one-sided limits to equal $a$.\nLeft: $\\sin(3x)/x\\to3$ (limit-special), so $a=3$.\nRight: $(e^{bx}-1)/x\\to b$ (exp-log), so the limit is $b/2$; $b/2=3$ gives $b=6$.\n$a+b=9$.",
+  "hints": [
+   "Use $\\sin u/u\\to1$ and $(e^u-1)/u\\to1$."
+  ],
+  "check": "3+2*3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def",
+   "t3.deriv-rules",
+   "t3.limit-algebra"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(x)=x^3-2x$. Evaluate $\\displaystyle\\lim_{h\\to0}\\frac{f(2+h)-f(2-h)}{h}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$40$",
+    "$24$",
+    "$20$",
+    "$0$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "gave $f'(2)$, missing that the symmetric difference doubles it",
+    "doubled twice",
+    "used $f'(2)=12$ (dropped $-2$) and doubled",
+    "",
+    "treated $f(2+h)-f(2-h)$ as cancelling"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Split into two difference quotients, each giving $f'(2)$",
+    "weight": 2
+   },
+   {
+    "text": "Compute $f'(x)=3x^2-2$ and $f'(2)=10$",
+    "weight": 1
+   },
+   {
+    "text": "Combine to $2f'(2)=20$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Write $f(2+h)-f(2-h)=[f(2+h)-f(2)]+[f(2)-f(2-h)]$ (deriv-def).\nEach bracket over $h$ tends to $f'(2)$.\n$f'(x)=3x^2-2$ (deriv-rules), so $f'(2)=10$.\nLimit $=2f'(2)=20$.",
+  "hints": [
+   "Add and subtract $f(2)$."
+  ],
+  "check": "2*(3*2**2-2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-def",
+   "t2.trig-id",
+   "t2.unit-circle"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Evaluate $\\displaystyle\\lim_{h\\to0}\\frac{\\tan\\!\\left(\\frac\\pi4+2h\\right)-1}{h}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$2$",
+    "$1$",
+    "$8$",
+    "$\\frac{1}{2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "dropped the inner factor $2$",
+    "took $\\tan'=1$, forgetting $\\sec^2$",
+    "used $\\sec^2(\\pi/4)=4$ and the factor $2$",
+    "inverted the factor $2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Recognise the limit as a derivative of $\\tan$ at $\\pi/4$ with step $2h$",
+    "weight": 2
+   },
+   {
+    "text": "$\\tan'=\\sec^2$ and $\\sec^2(\\pi/4)=2$",
+    "weight": 1
+   },
+   {
+    "text": "Include the factor $2$: result $4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Since $\\tan(\\pi/4)=1$ (unit-circle), this is $\\lim\\dfrac{g(a+2h)-g(a)}{h}$ with $g=\\tan$, $a=\\pi/4$ (deriv-def).\nThat equals $2g'(a)$, because the step is $2h$.\n$g'=\\sec^2=1+\\tan^2$ (trig-id), so $g'(\\pi/4)=2$.\nLimit $=2\\cdot2=4$.",
+  "hints": [
+   "Match the form $\\frac{g(a+k h)-g(a)}{h}=k\\,g'(a)$."
+  ],
+  "check": "2*(1+1**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules",
+   "t1.rational-expr",
+   "t1.poly-div"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $h(x)=\\dfrac{(x^2+1)(2x-3)}{x+1}$. Find $h'(1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{1}{2}$",
+    "$3$",
+    "$\\frac{3}{2}$",
+    "$6$",
+    "$\\frac{5}{2}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "added instead of subtracted in the quotient rule",
+    "forgot to square the denominator",
+    "",
+    "left off the denominator entirely",
+    "took $(x^2+1)'(2x-3)'$ as the derivative of the numerator"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Product rule on the numerator: $u'(1)=2$",
+    "weight": 2
+   },
+   {
+    "text": "Quotient rule with correct sign and $v^2$",
+    "weight": 1
+   },
+   {
+    "text": "Values $u(1)=-2$, $v=2$, result $\\tfrac32$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $u=(x^2+1)(2x-3)$, $v=x+1$.\nProduct rule: $u'=2x(2x-3)+2(x^2+1)$, so $u'(1)=-2+4=2$; $u(1)=-2$.\n$v(1)=2$, $v'=1$ (deriv-rules).\nQuotient: $h'(1)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{4+2}{4}=\\dfrac32$.",
+  "hints": [
+   "Differentiate the numerator by the product rule first."
+  ],
+  "check": "Fraction((2*1*(2-3)+(1+1)*2)*2-(1+1)*(2-3)*1,2**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.deriv-rules",
+   "t1.func-basics",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $g$ be differentiable with $g(2)=4$ and $g'(2)=-3$. If $F(x)=\\dfrac{x^2g(x)}{g(x)+x}$, find $F'(2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-\\frac{2}{9}$",
+    "$-2$",
+    "$\\frac{32}{9}$",
+    "$2$",
+    "$\\frac{14}{9}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "swapped the sign in the quotient rule",
+    "used $N'/D'$ as the quotient derivative",
+    "skipped the product rule: $N'=2xg$ only",
+    "took $D'=g'$, dropping the derivative of $x$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Numerator derivative by product rule: $N'(2)=4$",
+    "weight": 2
+   },
+   {
+    "text": "Denominator derivative $D'(2)=g'(2)+1=-2$",
+    "weight": 1
+   },
+   {
+    "text": "Quotient rule $\\dfrac{N'D-ND'}{D^2}=\\dfrac{14}{9}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$N=x^2g$: $N(2)=16$, $N'=2xg+x^2g'=16-12=4$ (deriv-rules).\n$D=g+x$: $D(2)=6$, $D'=g'+1=-2$.\nQuotient rule: $F'(2)=\\dfrac{N'D-ND'}{D^2}=\\dfrac{24+32}{36}$.\nSimplify: $\\dfrac{14}{9}$.",
+  "hints": [
+   "Treat numerator and denominator as separate functions with their own derivatives."
+  ],
+  "check": "Fraction((2*2*4+4*(-3))*(4+2)-(4*4)*(-3+1),(4+2)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule",
+   "t3.deriv-rules",
+   "t1.compose"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Given $f(2)=5$, $f'(2)=-1$, $g(1)=2$, $g'(1)=3$, let $K(x)=x\\,f\\big(g(x^2)\\big)$. Find $K'(1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$11$",
+    "$-1$",
+    "$-6$",
+    "$5$",
+    "$2$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "dropped the minus sign on $f'(2)$",
+    "",
+    "forgot the product-rule term $f(g(x^2))$",
+    "dropped the chain-rule term",
+    "forgot the inner factor $2x$ from $x^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Product rule: $K'=f(g(x^2))+x\\cdot\\frac{d}{dx}f(g(x^2))$",
+    "weight": 1
+   },
+   {
+    "text": "Three-layer chain: $f'(g(x^2))\\,g'(x^2)\\,2x$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate at $x=1$: $5+(-1)(3)(2)=-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Product rule (deriv-rules): $K'=f(g(x^2))+x\\,\\dfrac{d}{dx}f(g(x^2))$.\nChain rule through two layers (chain-rule): $\\dfrac{d}{dx}f(g(x^2))=f'(g(x^2))\\,g'(x^2)\\,2x$.\nAt $x=1$: $x^2=1$, $g(1)=2$, so $f(g(1))=f(2)=5$.\n$K'(1)=5+1\\cdot(-1)\\cdot3\\cdot2=-1$.",
+  "hints": [
+   "Peel layers from the outside: $f$, then $g$, then $x^2$."
+  ],
+  "check": "5+1*(-1)*3*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.chain-rule",
+   "t3.deriv-rules",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $P(x)=(x^3-2x)^4$. Find $P''(1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$36$",
+    "$-24$",
+    "$12$",
+    "$-12$",
+    "$-4$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "took $u^3$ as $+1$ in the $4u^3u''$ term",
+    "dropped the $u'^2$ term",
+    "dropped the $u''$ term",
+    "",
+    "stopped at $P'(1)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "First derivative $P'=4u^3u'$ with $u=x^3-2x$",
+    "weight": 1
+   },
+   {
+    "text": "Differentiate again by product and chain rule: $12u^2u'^2+4u^3u''$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $u(1)=-1$, $u'(1)=1$, $u''(1)=6$: $-12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $u=x^3-2x$; $P=u^4$, $P'=4u^3u'$ (chain-rule).\nDifferentiate again (deriv-rules): $P''=12u^2u'^2+4u^3u''$.\nAt $x=1$: $u=-1$, $u'=3x^2-2=1$, $u''=6x=6$.\n$P''(1)=12(1)(1)+4(-1)(6)=-12$.",
+  "hints": [
+   "Use the product rule on $4u^3u'$."
+  ],
+  "check": "12*(-1)**2*1**2+4*(-1)**3*6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv",
+   "t2.exp-log",
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $g(x)=\\ln\\!\\big(e^{x}+e^{-x}\\big)$. Find $g'(\\ln 2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{3}{5}$",
+    "$\\frac{5}{3}$",
+    "$1$",
+    "$\\frac{3}{2}$",
+    "$\\frac{3}{10}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "inverted the ratio",
+    "differentiated the inner function to itself, so the ratio is $1$",
+    "forgot the denominator",
+    "misadded $2+\\tfrac12$ as $5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Chain rule: $g'=\\dfrac{(e^x+e^{-x})'}{e^x+e^{-x}}$",
+    "weight": 1
+   },
+   {
+    "text": "Inner derivative $e^x-e^{-x}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate with $e^{\\ln2}=2$, $e^{-\\ln2}=\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Chain rule with $\\ln$ (trans-deriv): $g'(x)=\\dfrac{e^x-e^{-x}}{e^x+e^{-x}}$.\nAt $x=\\ln2$: $e^x=2$, $e^{-x}=\\tfrac12$ (exp-log).\n$g'=\\dfrac{2-\\frac12}{2+\\frac12}=\\dfrac{3/2}{5/2}=\\dfrac35$.",
+  "hints": [
+   "$\\frac{d}{dx}\\ln u=u'/u$; note $(e^{-x})'=-e^{-x}$."
+  ],
+  "check": "(Fraction(2)-Fraction(1,2))/(Fraction(2)+Fraction(1,2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.trans-deriv",
+   "t3.chain-rule",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(x)=\\ln\\!\\big(x+\\sqrt{x^2+1}\\big)$. Find $f'\\!\\left(\\tfrac34\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{5}{4}$",
+    "$\\frac{16}{25}$",
+    "$\\frac{4}{5}$",
+    "$\\frac{3}{5}$",
+    "$\\frac{1}{5}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "inverted the value",
+    "used $1/(x^2+1)$, dropping the square root",
+    "",
+    "used $x/\\sqrt{x^2+1}$",
+    "used $\\sqrt{x^2+1}=5$ instead of $\\tfrac54$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Chain rule for $\\ln$ with inner derivative $1+\\frac{x}{\\sqrt{x^2+1}}$",
+    "weight": 2
+   },
+   {
+    "text": "Simplify to $f'=\\dfrac1{\\sqrt{x^2+1}}$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate at $x=\\tfrac34$: $\\sqrt{\\tfrac{25}{16}}=\\tfrac54$ so $\\tfrac45$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f'=\\dfrac{1+\\frac{x}{\\sqrt{x^2+1}}}{x+\\sqrt{x^2+1}}$ (trans-deriv, chain-rule).\nNumerator $=\\dfrac{\\sqrt{x^2+1}+x}{\\sqrt{x^2+1}}$, which cancels the denominator (rational-expr).\nSo $f'(x)=\\dfrac1{\\sqrt{x^2+1}}$.\nAt $x=\\tfrac34$: $\\sqrt{\\tfrac9{16}+1}=\\tfrac54$, so $f'=\\tfrac45$.",
+  "hints": [
+   "Put the numerator over $\\sqrt{x^2+1}$ and look for a common factor."
+  ],
+  "check": "1/Fraction(5,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.implicit",
+   "t3.deriv-rules",
+   "t3.chain-rule"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The curve $x^2+xy+y^2=7$ passes through $(2,1)$. Find $\\dfrac{d^2y}{dx^2}$ there.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{21}{32}$",
+    "$-\\frac{17}{64}$",
+    "$-\\frac{5}{4}$",
+    "$-\\frac{21}{16}$",
+    "$-\\frac{21}{32}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "sign error moving terms across",
+    "counted $y'^2$ once instead of $2y'^2$",
+    "gave $y'$ instead of $y''$",
+    "divided by $x=2$ instead of $x+2y=4$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "First derivative $y'=-\\dfrac{2x+y}{x+2y}=-\\tfrac54$",
+    "weight": 1
+   },
+   {
+    "text": "Second implicit differentiation with product and chain rules",
+    "weight": 2
+   },
+   {
+    "text": "Substitute $y'=-\\tfrac54$ and solve: $-\\tfrac{21}{32}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Differentiate: $2x+y+xy'+2yy'=0$, so $y'=-\\dfrac{2x+y}{x+2y}=-\\dfrac54$ at $(2,1)$ (implicit).\nDifferentiate again (product and chain): $2+2y'+2y'^2+(x+2y)y''=0$.\nSubstituting: $2-\\tfrac52+\\tfrac{25}{8}+4y''=0$, so $4y''=-\\tfrac{21}{8}$.\n$y''=-\\dfrac{21}{32}$.",
+  "hints": [
+   "Differentiate $2x+y+xy'+2yy'=0$ again, term by term."
+  ],
+  "check": "(-2-2*(-Fraction(5,4))-2*Fraction(5,4)**2)/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.implicit",
+   "t1.coord-geom",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The curve $y^2=x^3+1$ passes through $(2,3)$. At what $x$ does the tangent line there cross the $x$-axis?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{7}{2}$",
+    "$\\frac{1}{2}$",
+    "$2$",
+    "$\\frac{3}{2}$",
+    "$\\frac{7}{4}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used slope $-2$",
+    "",
+    "gave the point's $x$-coordinate",
+    "computed $y/m$ without subtracting from $x_0$",
+    "forgot the factor $2y$, giving slope $12$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Implicit derivative $2yy'=3x^2$",
+    "weight": 2
+   },
+   {
+    "text": "Slope $m=\\dfrac{12}{6}=2$ at $(2,3)$",
+    "weight": 1
+   },
+   {
+    "text": "Tangent line and $x$-intercept $\\tfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Differentiate implicitly: $2yy'=3x^2$ so $y'=\\dfrac{3x^2}{2y}$ (implicit).\nAt $(2,3)$: $y'=\\dfrac{12}{6}=2$.\nTangent: $y-3=2(x-2)$ (coord-geom).\nSet $y=0$ (lin-eq): $x=2-\\tfrac32=\\tfrac12$.",
+  "hints": [
+   "Find the slope implicitly, then write the line."
+  ],
+  "check": "2-Fraction(3)/(Fraction(3*2**2,2*3))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff",
+   "t3.deriv-rules",
+   "t2.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(x)=\\dfrac{x^3\\sqrt{x+3}}{(x^2+3)^2}$. Find $f'(1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{17}{8}$",
+    "$\\frac{33}{64}$",
+    "$\\frac{1}{8}$",
+    "$\\frac{17}{64}$",
+    "$\\frac{3}{8}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "gave $f'/f$ instead of $f'$",
+    "sign slip: added $\\tfrac{4x}{x^2+3}$ instead of subtracting",
+    "gave $f(1)$",
+    "",
+    "differentiated only the $x^3$ factor"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Take logs and expand: $\\ln f=3\\ln x+\\tfrac12\\ln(x+3)-2\\ln(x^2+3)$",
+    "weight": 1
+   },
+   {
+    "text": "Differentiate: $\\dfrac{f'}{f}=\\dfrac3x+\\dfrac1{2(x+3)}-\\dfrac{4x}{x^2+3}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $\\tfrac{17}{8}$ and multiply by $f(1)=\\tfrac18$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Take logs (log-diff, exp-log): $\\ln f=3\\ln x+\\tfrac12\\ln(x+3)-2\\ln(x^2+3)$.\nDifferentiate: $\\dfrac{f'}{f}=\\dfrac3x+\\dfrac1{2(x+3)}-\\dfrac{4x}{x^2+3}$ (deriv-rules).\nAt $x=1$: $3+\\tfrac18-1=\\tfrac{17}8$; $f(1)=\\tfrac{2}{16}=\\tfrac18$.\n$f'(1)=\\tfrac18\\cdot\\tfrac{17}8=\\tfrac{17}{64}$.",
+  "hints": [
+   "Compute $f'/f$ via logs, then multiply back by $f(1)$."
+  ],
+  "check": "Fraction(1,8)*(3+Fraction(1,8)-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.log-diff",
+   "t2.exp-log",
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $g(x)=x^{\\ln x}$ for $x>0$. Find $g'(e)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2$",
+    "$2e$",
+    "$1$",
+    "$e$",
+    "$\\frac{2}{e}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot to divide by $x$: used $g'/g=2\\ln x$",
+    "used the power rule: $(\\ln x)\\,x^{\\ln x-1}$ at $e$",
+    "gave $g(e)$",
+    "gave $g'/g$ instead of $g'$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Take logs: $\\ln g=(\\ln x)^2$",
+    "weight": 1
+   },
+   {
+    "text": "Differentiate: $\\dfrac{g'}{g}=\\dfrac{2\\ln x}{x}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $g(e)=e$ and $g'/g=\\tfrac2e$ to get $2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The exponent varies, so take logs (log-diff): $\\ln g=(\\ln x)^2$ (exp-log).\nDifferentiate: $\\dfrac{g'}{g}=\\dfrac{2\\ln x}{x}$ (trans-deriv).\nAt $x=e$: $g(e)=e^{1}=e$ and $g'/g=\\dfrac2e$.\n$g'(e)=e\\cdot\\dfrac2e=2$.",
+  "hints": [
+   "Power rule does not apply when the exponent depends on $x$."
+  ],
+  "check": "Fraction(2)*1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital",
+   "t3.trans-deriv",
+   "t3.limit-special"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to0}\\frac{\\sin x-x\\cos x}{x^3}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{1}{6}$",
+    "$0$",
+    "$\\frac{1}{3}$",
+    "$\\frac{1}{2}$",
+    "$1$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "counted only the $-x^3/6$ of $\\sin x$",
+    "said the numerator $\\to0$, so the limit is $0$",
+    "",
+    "used the $x^3/2$ from $x\\cos x$ alone",
+    "applied $\\sin x/x\\to1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Recognise $0/0$ and differentiate top and bottom",
+    "weight": 1
+   },
+   {
+    "text": "Numerator derivative simplifies to $x\\sin x$ (product rule)",
+    "weight": 2
+   },
+   {
+    "text": "Reduce to $\\dfrac{\\sin x}{3x}\\to\\dfrac13$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The form is $0/0$ (lhopital).\nNumerator derivative: $\\cos x-(\\cos x-x\\sin x)=x\\sin x$ (trans-deriv); denominator $3x^2$.\nNew quotient $\\dfrac{x\\sin x}{3x^2}=\\dfrac{\\sin x}{3x}$.\nBy the special limit $\\sin x/x\\to1$ (limit-special) the result is $\\dfrac13$.",
+  "hints": [
+   "Differentiate the numerator once; the cosines cancel."
+  ],
+  "check": "Fraction(1,3*1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.lhopital",
+   "t3.trans-deriv",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Evaluate $\\displaystyle\\lim_{x\\to0}\\left(\\frac1x-\\frac1{e^x-1}\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$1$",
+    "$2$",
+    "$\\frac{1}{3}$",
+    "$\\frac{1}{2}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "treated $\\infty-\\infty$ as cancelling",
+    "stopped after the first step and read the leading ratio as $1$",
+    "inverted the result",
+    "differentiated a denominator of order $x^3$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Combine to $\\dfrac{e^x-1-x}{x(e^x-1)}$ (a $0/0$ form)",
+    "weight": 2
+   },
+   {
+    "text": "Apply L'Hopital twice with correct derivatives",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $\\dfrac{e^x}{2e^x+xe^x}\\to\\dfrac12$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Combine fractions (rational-expr): $\\dfrac{e^x-1-x}{x(e^x-1)}$, a $0/0$ form (lhopital).\nFirst step: $\\dfrac{e^x-1}{(e^x-1)+xe^x}$, still $0/0$.\nSecond step (trans-deriv): $\\dfrac{e^x}{2e^x+xe^x}$.\nAt $x=0$ this is $\\dfrac1{2}$.",
+  "hints": [
+   "Common denominator first, then L'Hopital twice."
+  ],
+  "check": "Fraction(1,1+1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates",
+   "t1.geom-formulas",
+   "t3.implicit"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A conical tank, vertex down, has height $6$ m and top radius $3$ m. Water is pumped in at $3\\pi$ m$^3$/min. How fast (m/min) is the depth rising when the depth is $2$ m?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1$",
+    "$3$",
+    "$9$",
+    "$\\frac{3}{4}$",
+    "$\\frac{3}{2}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "kept the radius fixed at $3$",
+    "",
+    "dropped the factor $3$ from $\\frac{d}{dt}h^3$",
+    "used $r=h$",
+    "used $V=\\pi h^3/6$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Similar triangles give $r=h/2$",
+    "weight": 2
+   },
+   {
+    "text": "$V=\\dfrac{\\pi h^3}{12}$ and $\\dfrac{dV}{dt}=\\dfrac{\\pi h^2}{4}\\dfrac{dh}{dt}$",
+    "weight": 1
+   },
+   {
+    "text": "Solve at $h=2$: $\\dfrac{dh}{dt}=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Similar triangles (geom-formulas): $r=h/2$, so $V=\\tfrac13\\pi r^2h=\\dfrac{\\pi h^3}{12}$.\nDifferentiate in time (related-rates, implicit): $\\dfrac{dV}{dt}=\\dfrac{\\pi h^2}{4}\\dfrac{dh}{dt}$.\nAt $h=2$: $3\\pi=\\pi\\,\\dfrac{dh}{dt}$.\nSo $\\dfrac{dh}{dt}=3$ m/min.",
+  "hints": [
+   "Write $V$ in terms of $h$ alone before differentiating."
+  ],
+  "check": "Fraction(4*3,2**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.related-rates",
+   "t2.trig-id",
+   "t3.trans-deriv"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A balloon rises vertically at $3$ m/s. An observer stands $40$ m from the launch point on level ground, and $\\theta$ is the angle of elevation to the balloon. When the balloon is $30$ m high, how fast (rad/s) is $\\theta$ increasing?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{3}{40}$",
+    "$\\frac{15}{128}$",
+    "$\\frac{27}{1000}$",
+    "$\\frac{6}{125}$",
+    "$\\frac{3}{50}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "forgot the $\\sec^2\\theta$ factor",
+    "multiplied by $\\sec^2\\theta$ instead of dividing",
+    "used $\\sin^2\\theta$ in place of $\\cos^2\\theta$",
+    "",
+    "used the line-of-sight distance $50$ as the base"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Relation $\\tan\\theta=h/40$",
+    "weight": 1
+   },
+   {
+    "text": "Differentiate: $\\sec^2\\theta\\,\\theta'=h'/40$",
+    "weight": 2
+   },
+   {
+    "text": "Use $\\sec^2\\theta=\\tfrac{25}{16}$ and solve $\\theta'=\\tfrac{6}{125}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Set $\\tan\\theta=h/40$ (related-rates).\nDifferentiate in time (trans-deriv): $\\sec^2\\theta\\,\\theta'=\\dfrac{h'}{40}=\\dfrac3{40}$.\nAt $h=30$: $\\tan\\theta=\\tfrac34$, so $\\sec^2\\theta=1+\\tfrac9{16}=\\tfrac{25}{16}$ (trig-id).\n$\\theta'=\\dfrac3{40}\\cdot\\dfrac{16}{25}=\\dfrac6{125}$.",
+  "hints": [
+   "Relate the angle to the height with tangent."
+  ],
+  "check": "Fraction(3,40)/(1+Fraction(30,40)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.optimize",
+   "t3.deriv-rules",
+   "t1.geom-formulas"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A rectangle has its base on the $x$-axis and its two upper vertices on the parabola $y=12-x^2$. What is its maximum area?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$32$",
+    "$16$",
+    "$24$",
+    "$48$",
+    "$64$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used width $x$ instead of $2x$",
+    "took the height as $6$",
+    "used the $y$-intercept $12$ as the height",
+    "used width $=$ height $=8$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Area $A(x)=2x(12-x^2)$ with vertex at $(x,12-x^2)$",
+    "weight": 2
+   },
+   {
+    "text": "Critical point from $A'=24-6x^2=0$, $x=2$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $A(2)=32$ (endpoint check or $A''<0$)",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Vertices at $(\\pm x,\\,12-x^2)$ give $A=2x(12-x^2)=24x-2x^3$ (geom-formulas).\n$A'=24-6x^2=0$ gives $x=2$ (optimize, deriv-rules).\n$A''=-12x<0$, so this is a maximum; $A(0)=A(\\sqrt{12})=0$.\n$A(2)=2\\cdot2\\cdot8=32$.",
+  "hints": [
+   "Use symmetry: the width is $2x$."
+  ],
+  "check": "2*2*(12-2**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.optimize",
+   "t1.coord-geom",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Find the minimum value of the square of the distance from the point $(0,3)$ to a point on the parabola $y=x^2$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$9$",
+    "$\\frac{5}{2}$",
+    "$\\frac{11}{4}$",
+    "$\\frac{1}{4}$",
+    "$3$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "took the critical point $x=0$, a local maximum",
+    "gave the value of $x^2$ at the minimiser",
+    "",
+    "kept only $(y-3)^2$",
+    "used $x=0$ and did not square"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Distance squared $D=x^2+(x^2-3)^2$",
+    "weight": 1
+   },
+   {
+    "text": "Critical points from $D'=2x(2x^2-5)=0$",
+    "weight": 2
+   },
+   {
+    "text": "Reject $x=0$ (larger) and evaluate at $x^2=\\tfrac52$ to get $\\tfrac{11}4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Minimise the squared distance (optimize): $D=x^2+(x^2-3)^2$ (coord-geom).\n$D'=2x+4x(x^2-3)=2x(2x^2-5)$.\nCritical: $x=0$ or $x^2=\\tfrac52$ (quad). $D(0)=9$; $D''>0$ at $x^2=\\tfrac52$.\n$D=\\tfrac52+(\\tfrac52-3)^2=\\tfrac52+\\tfrac14=\\tfrac{11}4$.",
+  "hints": [
+   "Minimise the squared distance to avoid the square root."
+  ],
+  "check": "Fraction(5,2)+(Fraction(5,2)-3)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape",
+   "t3.optimize",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(x)=x^3-6x^2+9x+1$ on $[0,5]$. What is the absolute maximum value minus the absolute minimum value?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$21$",
+    "$16$",
+    "$22$",
+    "$20$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "used local max minus local min: $5-1$",
+    "gave the absolute maximum only",
+    "used $21-5$, missing the minimum at $x=0,3$",
+    "added the extremes $21+1$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Critical points from $f'=3(x-1)(x-3)=0$",
+    "weight": 1
+   },
+   {
+    "text": "Candidate values at $0,1,3,5$ all computed",
+    "weight": 2
+   },
+   {
+    "text": "Max $21$ and min $1$, difference $20$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f'=3x^2-12x+9=3(x-1)(x-3)$ (factor, curve-shape).\nCandidates: $f(0)=1$, $f(1)=5$, $f(3)=1$, $f(5)=21$ (optimize on a closed interval).\nMaximum $21$ at the endpoint $x=5$; minimum $1$ at $x=0$ and $x=3$.\nDifference: $20$.",
+  "hints": [
+   "Compare the critical values with both endpoint values."
+  ],
+  "check": "(lambda f:max(f(x) for x in (0,1,3,5))-min(f(x) for x in (0,1,3,5)))(lambda x:x**3-6*x**2+9*x+1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.curve-shape",
+   "t3.deriv-rules",
+   "t1.factor"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(x)=x^4-8x^3+18x^2$. What is the sum of the $y$-coordinates of all inflection points of its graph?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$11$",
+    "$38$",
+    "$27$",
+    "$4$",
+    "$22$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "kept only $x=1$, thinking $x=3$ is an extremum since $f'(3)=0$",
+    "",
+    "kept only $x=3$",
+    "summed the $x$-coordinates instead",
+    "doubled $f(1)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Second derivative $f''=12(x-1)(x-3)$",
+    "weight": 1
+   },
+   {
+    "text": "Sign change checked at both $x=1$ and $x=3$",
+    "weight": 2
+   },
+   {
+    "text": "Values $f(1)=11$, $f(3)=27$, sum $38$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f''=12x^2-48x+36=12(x-1)(x-3)$ (deriv-rules, factor).\n$f''$ changes sign at both roots, so both are inflection points (curve-shape).\nNote $f'=4x(x-3)^2$ vanishes at $3$ without changing sign: a flat inflection, not an extremum.\n$f(1)=11$, $f(3)=27$, so the sum is $38$.",
+  "hints": [
+   "An inflection needs a sign change of $f''$."
+  ],
+  "check": "(1-8+18)+(81-216+162)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle",
+   "t1.abs-ineq",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f$ be differentiable on $\\mathbb R$ with $f(1)=2$ and $-1\\le f'(x)\\le3$ for all $x$. What is the largest possible value of $f(5)$ minus the smallest possible value of $f(5)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$14$",
+    "$12$",
+    "$8$",
+    "$16$",
+    "$4$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "gave the largest value of $f(5)$ only",
+    "used $3\\cdot4$ only",
+    "used half of the span",
+    "",
+    "gave $3-(-1)$, the slope range"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Apply MVT: $f(5)-f(1)=4f'(c)$ for some $c$",
+    "weight": 2
+   },
+   {
+    "text": "Bound $-4\\le f(5)-f(1)\\le12$ from the slope bounds",
+    "weight": 1
+   },
+   {
+    "text": "Range $[-2,14]$ has length $16$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "MVT on $[1,5]$ (mvt-rolle): $f(5)-f(1)=4f'(c)$ for some $c\\in(1,5)$.\nSince $-1\\le f'(c)\\le3$ (abs-ineq): $-4\\le f(5)-2\\le12$.\nSo $-2\\le f(5)\\le14$ (lin-eq), and both ends are attained by linear functions.\nThe difference is $14-(-2)=16$.",
+  "hints": [
+   "Bound the average rate of change on $[1,5]$."
+  ],
+  "check": "(2+3*4)-(2-1*4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.mvt-rolle",
+   "t3.deriv-rules",
+   "t1.sys-eq"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(x)=x^3+ax^2+bx$. Rolle's theorem applies to $f$ on $[0,3]$, and the point it gives is $c=2$. Find $f(1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-2$",
+    "$2$",
+    "$4$",
+    "$-8$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "sign slip evaluating $f(1)$",
+    "took $a=+3$",
+    "used $f(3)=0$ with $a=0$, ignoring $f'(2)=0$",
+    "assumed $f(1)=0$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Use $f(0)=f(3)$ to get $27+9a+3b=0$",
+    "weight": 1
+   },
+   {
+    "text": "Use $f'(2)=12+4a+b=0$",
+    "weight": 1
+   },
+   {
+    "text": "Solve the system: $a=-3$, $b=0$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $f(1)=1+a+b=-2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f(0)=0$, so Rolle needs $f(3)=27+9a+3b=0$ (mvt-rolle).\n$f'(x)=3x^2+2ax+b$, so $f'(2)=12+4a+b=0$ (deriv-rules).\nSolve (sys-eq): $b=-12-4a$ gives $27+9a-36-12a=0$, so $a=-3$, $b=0$.\n$f(1)=1-3+0=-2$.",
+  "hints": [
+   "Two conditions on two unknowns: $f(3)=0$ and $f'(2)=0$."
+  ],
+  "check": "1+(-3)+(-12-4*(-3))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

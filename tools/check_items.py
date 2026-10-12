@@ -144,9 +144,67 @@ def check_full_mcq(item, errors):
         errors.append(f"check gives {got!r}, correct option is {val}")
 
 
+NODE = os.environ.get("NODE", "/Users/ishmum/.nvm/versions/node/v22.22.2/bin/node")
+_EXPR_QUEUE = []
+
+
+def check_expression(item, errors):
+    """Queue for a single node run: value and every `also` form must pass engine/answer.js check."""
+    ans = item["answer"]
+    if not isinstance(ans.get("value"), str) or not ans["value"].strip():
+        errors.append("expression value must be a non-empty string")
+        return
+    if not isinstance(ans.get("vars"), list) or not ans["vars"]:
+        errors.append("expression needs vars")
+        return
+    forms = [ans["value"]] + list(ans.get("also") or [])
+    _EXPR_QUEUE.append((item["id"], ans, forms))
+
+
+def run_expression_queue(failures):
+    if not _EXPR_QUEUE:
+        return
+    import subprocess, tempfile
+    script = (
+        "const A=require(process.argv[1]);const q=JSON.parse(require('fs').readFileSync(process.argv[2],'utf8'));"
+        "const out=[];for(const [id,spec,forms] of q){for(const f of forms){const r=A.check(spec,f);"
+        "if(!r.ok)out.push([id,f,r.error||'not ok']);}}console.log(JSON.stringify(out));"
+    )
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+        json.dump(_EXPR_QUEUE, fh)
+        qpath = fh.name
+    answer_js = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "engine", "answer.js")
+    r = subprocess.run([NODE, "-e", script, os.path.abspath(answer_js), qpath], capture_output=True, text=True)
+    os.unlink(qpath)
+    if r.returncode != 0:
+        failures.append(("<expression-check>", [f"node failed: {r.stderr.strip()[:200]}"]))
+        return
+    for iid, form, err in json.loads(r.stdout or "[]"):
+        failures.append((iid, [f"expression form {form!r} rejected by engine: {err}"]))
+
+
+def check_multi(item, errors):
+    ans = item["answer"]
+    opts = ans.get("options")
+    cor = ans.get("correct")
+    if not isinstance(opts, list) or len(opts) < 3:
+        errors.append("multi needs >= 3 options")
+        return
+    if len(set(map(str, opts))) != len(opts):
+        errors.append("multi options not distinct")
+    if not isinstance(cor, list) or not cor or not all(isinstance(i, int) and 0 <= i < len(opts) for i in cor):
+        errors.append("multi correct must be a non-empty list of valid indices")
+    elif len(set(cor)) != len(cor):
+        errors.append("multi correct has duplicates")
+    elif len(cor) == len(opts):
+        errors.append("multi correct selects every option")
+
+
 def main():
-    pack = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_PACK
-    items = load(os.path.join(pack, "items.json"))
+    args = [a for a in sys.argv[1:] if not a.startswith("--batch=")]
+    batch = next((a[len("--batch="):] for a in sys.argv[1:] if a.startswith("--batch=")), None)
+    pack = args[0] if args else DEFAULT_PACK
+    items = load(batch) if batch else load(os.path.join(pack, "items.json"))
     techs = {t["id"]: t for t in load(os.path.join(pack, "techniques.json"))}
     failures = []
     seen_ids = set()
@@ -183,6 +241,10 @@ def main():
             check_numeric(item, errors)
         elif kind == "mcq":
             check_mcq(item, errors)
+        elif kind == "expression":
+            check_expression(item, errors)
+        elif kind == "multi":
+            check_multi(item, errors)
         else:
             errors.append(f"unsupported answer kind {kind!r} in this batch")
         if not item.get("hints") or not isinstance(item.get("hints"), list):
@@ -196,6 +258,7 @@ def main():
     for tid in sorted(counts):
         c = counts[tid]
         print(f"{tid:<20}{c['recall/mcq']:>12}{c['micro/numeric']:>12}{c['micro/mcq']:>12}")
+    run_expression_queue(failures)
     total_items = len(items)
     if failures:
         print(f"FAIL {len(failures)} of {total_items} items")

@@ -198,11 +198,15 @@ const ixP = core.index({ pack: synthP.pack, techniques: synthP.techniques, items
   check('gre-math probes are the flagged items', probes.every((p) => p.probe === true && p.tier === 'b'), probes.map((p) => p.id));
   eq('gre-math probes cover the five listed techniques', probes.map((p) => p.tags[0]).sort(),
     ['t1.abs-ineq', 't1.compose', 't1.lin-eq', 't1.poly-div', 't1.quad']);
+  // Content-adaptive: every tier with flagged probes is ready with 5; tiers without are skipped with the short reason.
   const plan = core.placementPlan(ixG, 1);
-  eq('gre-math T2 bucket is skipped', plan[1].status, 'skip');
-  check('gre-math skip reason says no probes yet', /no probes yet/.test(plan[1].reason), plan[1].reason);
+  const flagged = (lvl) => g.items.filter((it) => it.probe === true && it.level === lvl).length;
+  const ready = plan.filter((b) => b.status === 'ready');
+  check('gre-math every ready bucket has exactly five flagged probes', ready.every((b) => flagged(b.tier) === 5), ready.map((b) => [b.tier, flagged(b.tier)]));
+  check('gre-math buckets without probes are skipped with "no probes yet"',
+    plan.filter((b) => b.status === 'skip').every((b) => flagged(b.tier) === 0 && /no probes yet/.test(b.reason)), plan.map((b) => [b.tier, b.status]));
   const sg = core.startPlacement(prog0(), ixG);
-  eq('gre-math placement queues T1 only', sg.queue.length, 5);
+  eq('gre-math placement queues 5 per ready bucket', sg.queue.length, 5 * ready.length);
 }
 // Fallback without flags: the fixture has no probe flag, so each technique's first tier b item is the probe.
 {
