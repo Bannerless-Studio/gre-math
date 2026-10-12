@@ -202,7 +202,7 @@ const ixP = core.index({ pack: synthP.pack, techniques: synthP.techniques, items
   const plan = core.placementPlan(ixG, 1);
   const flagged = (lvl) => g.items.filter((it) => it.probe === true && it.level === lvl).length;
   const ready = plan.filter((b) => b.status === 'ready');
-  check('gre-math every ready bucket has exactly five flagged probes', ready.every((b) => flagged(b.tier) === 5), ready.map((b) => [b.tier, flagged(b.tier)]));
+  check('gre-math every ready bucket has >= 5 flagged probes and queues at most PLACE_PROBES', ready.every((b) => flagged(b.tier) >= 5 && b.cards.length === Math.min(flagged(b.tier), 5)), ready.map((b) => [b.tier, flagged(b.tier), b.cards.length]));
   check('gre-math buckets without probes are skipped with "no probes yet"',
     plan.filter((b) => b.status === 'skip').every((b) => flagged(b.tier) === 0 && /no probes yet/.test(b.reason)), plan.map((b) => [b.tier, b.status]));
   const sg = core.startPlacement(prog0(), ixG);
