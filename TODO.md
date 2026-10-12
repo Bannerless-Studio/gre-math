@@ -44,7 +44,7 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 - Single-slot backups: a second unreadable record overwrites `_invalid_backup`, and a second import overwrites `_pre_import_backup` (F7). Multi-slot backups are a later decision.
 - The page load order bug (store.js read core.js at load) passed the node suites and only showed in the browser. Add a tier check that runs the built page's scripts in a vm with a fake DOM, or keep the browser checks in the release routine.
 - Browser checks are not in the tier: `.cache/m4/browser.js` (Playwright, from the china-harbour install). Run before each publish.
-- `dist/fixture.html` predates sw.js. Pages in one directory share one `sw.js`, so keep one page per directory (README "Offline use").
+- Build output lives at repo root (index.html + sw.js) for Pages; fixture builds go to .cache/. Pages in one directory share one `sw.js`, so keep one page per directory (README "Offline use").
 - Not yet committed: the M4 files are uncommitted, `check_site.sh` reports them untracked until the commit.
 
 ## M5 carry-overs (2026-10-12)

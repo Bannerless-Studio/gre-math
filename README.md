@@ -1,13 +1,13 @@
 # problem-engine
 
-Live: https://bannerless-studio.github.io/gre-math/ (GitHub Pages from `dist/` on `main`; publish = rebuild, commit `dist/index.html` + `dist/sw.js` together, push).
+Live: https://bannerless-studio.github.io/gre-math/ (GitHub Pages from the repo root on `main`; publish = rebuild, commit `index.html` + `sw.js` together, push).
 
 Offline trainer for maths problem packs. Each pack builds into one HTML page that opens from `file://`. The GRE Mathematics Subject Test pack is the first one. Rules live in `docs/SPEC.md` and `docs/DECISIONS.md`. Pack format lives in `docs/PACK_SCHEMA.md`.
 
 ## Build
 
 ```sh
-NODE=/path/to/node ./build.sh packs/gre-math dist/index.html
+NODE=/path/to/node ./build.sh packs/gre-math index.html
 NODE=/path/to/node ./build.sh packs/_fixture .cache/fixture/fixture.html   # one page per directory: sw.js is shared
 ```
 
@@ -41,7 +41,7 @@ Each built page gets a `sw.js` beside it, from `engine/sw.template.js`. The work
 
 - Publish `sw.js` with the page every time. A stale `sw.js` keeps serving the old cached page until a publish changes it.
 - Keep one page per output directory, because each build writes its own `sw.js` there.
-- Before publishing, run `sh tools/check_site.sh packs/gre-math dist/index.html` from the repo root. It rebuilds into a temp dir, compares the page and `sw.js`, and checks that both are tracked and committed.
+- Before publishing, run `sh tools/check_site.sh packs/gre-math index.html` from the repo root. It rebuilds into a temp dir, compares the page and `sw.js`, and checks that both are tracked and committed.
 - Kill switch: never delete a published `sw.js`. To turn the cache off, copy `engine/sw.disable.js` over `sw.js` after `build.sh` and publish. On the next visit it deletes this page's caches and unregisters itself. `check_site.sh` then reports `sw.js` as stale, by design.
 - Rollback: publish the previous page and `sw.js` together. Their build id differs from the live one, so browsers install it.
 

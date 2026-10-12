@@ -1,7 +1,7 @@
 #!/bin/sh
 # Stale-build guard for a published pack page and its sw.js. Run from the repo root (or any directory: paths
 # are resolved from the current directory, so pass the page relative to where you run it):
-#   sh tools/check_site.sh packs/gre-math dist/index.html     # page; sw.js is written beside it
+#   sh tools/check_site.sh packs/gre-math index.html     # page; sw.js is written beside it
 #   sh tools/check_site.sh packs/gre-math                        # page defaults to index.html
 # Fails when:
 #   - a fresh build (into a private mktemp -d, same file name) differs from the page or sw.js on disk
