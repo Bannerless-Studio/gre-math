@@ -28,12 +28,45 @@ S.check('no leftover placeholders', !/<!--PE_|__PE_BUILD__/.test(html));
 S.check('build marker is last', /<!--pe-build:[0-9]+-[0-9]+-->\s*<\/body>/.test(html));
 S.check('no external script or stylesheet', !/<script[^>]+src=|<link[^>]+href=/i.test(html));
 S.check('no network URL in page', !/https?:\/\//.test(html.replace(/https?:\/\/www\.w3\.org[^"' ]*/g, '')));
-S.check('pack JSON never closes its own script', (html.match(/<\/script>/g) || []).length === 7);   // DATA, TEXT, ANSWER, STORE, CORE, APP, BUILD (M7 window.PE_BUILD)
+S.check('pack JSON never closes its own script', (html.match(/<\/script>/g) || []).length === 8);   // DATA, KATEX_JS, TEXT, ANSWER, STORE, CORE, APP, BUILD (M7 window.PE_BUILD)
 S.check('KaTeX CSS inlined with ten core faces as base64 woff2', (html.match(/data:font\/woff2;base64,/g) || []).length === 10);
-S.check('no KaTeX runtime JS in the page', !html.includes('renderToString') && !html.includes('katex.min'));
+const katexJs = fs.readFileSync(path.join(ROOT, 'vendor', 'katex', 'katex.min.js'), 'utf8');
+S.eq('KaTeX 0.16.11 JS is inlined exactly once (runtime rendering)', html.split(katexJs).length - 1, 1);
 S.check('no non-core font face in the page', !/KaTeX_(Fraktur|Script|SansSerif|Typewriter)[-\w]*\.(woff2?|ttf)/.test(html));
-S.check('items carry pre-rendered math', /\n,"tags":\["</.test(html) && !html.includes('<math') && !html.includes('annotation encoding'));
+// Pack data is source only: no html field, no tag dictionary, no private-use chars (U+E100..U+F8FF) in the data.
+const dataJson = (html.match(/window\.PE_DATA=(\{[\s\S]*?\});<\/script>/) || [])[1] || '';
+S.check('PE_DATA is present and parses', dataJson.length > 0 && (() => { try { JSON.parse(dataJson); return true; } catch (e) { return false; } })());
+const dataObj = dataJson ? JSON.parse(dataJson) : { items: [], techniques: [] };
+S.check('items and techniques carry source only, no html field', dataObj.items.length > 0 && dataObj.items.every((i) => !('html' in i)) &&
+  dataObj.techniques.every((t) => !('html' in t)), dataObj.items.length);
+S.check('pack data has no tag dictionary', !('tags' in dataObj));
+S.check('pack data has no private-use chars', !/[\uE100-\uF8FF]/.test(dataJson));
+S.check('items keep their raw Markdown-lite source', dataObj.items[0].prompt === JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', '_fixture', 'items.json'), 'utf8'))[0].prompt);
 S.check('engine text module is inlined', html.includes('window.PEText') || html.includes('PEText') );
+// Runtime math: the page's own KaTeX and text scripts, run in a bare vm context as a browser would, render a fraction,
+// a display integral and a matrix through the same span code the page calls (T.md with T.mathSpan).
+{
+  const vm = require('vm');
+  const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  const iKx = scripts.findIndex((t) => t.trim() === katexJs.trim()), iTxt = scripts.findIndex((t) => /root\.PEText\s*=/.test(t));
+  const win = {}; win.window = win;
+  const ctx = vm.createContext(win);
+  let err = '', out = {};
+  try {
+    vm.runInContext(scripts[iKx], ctx);
+    vm.runInContext(scripts[iTxt], ctx);
+    const md = (src, inline) => win.PEText.md(src, inline, (tex, dsp) => win.PEText.mathSpan(win.katex, tex, dsp));
+    out.frac = md('Fraction $\\frac{a}{b}$', true);
+    out.integral = md('$$\\int_0^1 x e^x\\,dx$$', false);
+    out.matrix = md('$\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$', true);
+    out.version = win.katex && win.katex.version;
+  } catch (e) { err = e.message; }
+  S.check('page KaTeX and text scripts run in a bare context', err === '' && iKx >= 0 && iTxt > iKx, err);
+  S.eq('page KaTeX is 0.16.11', out.version, '0.16.11');
+  S.check('page renders a fraction with role=math', /role="math"/.test(out.frac) && out.frac.includes('frac-line'), out.frac);
+  S.check('page renders a display integral', out.integral.includes('katex-display') && out.integral.includes('op-symbol large-op'), out.integral);
+  S.check('page renders a 2x2 matrix', out.matrix.includes('arraycolsep') && (out.matrix.match(/<span class="vlist-r">/g) || []).length >= 2, out.matrix);
+}
 
 // offline worker (M4): sw.js next to the page, same build id, caches only the marked page
 const swPath = path.join(OUT_DIR, 'sw.js');

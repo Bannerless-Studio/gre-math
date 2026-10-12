@@ -689,7 +689,7 @@
   ],
   "order": 1,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** dot or cross products, lengths, angles, or projections in $\\mathbb R^3$. **Move:** the dot product is a scalar, $\\mathbf u\\cdot\\mathbf v=u_1v_1+u_2v_2+u_3v_3$, and it vanishes for perpendicular vectors. The cross product is perpendicular to both, with magnitude $\\|\\mathbf u\\|\\|\\mathbf v\\|\\sin\\theta$. **Example:** $\\langle1,0,0\\rangle\\times\\langle0,1,0\\rangle=\\langle0,0,1\\rangle$. **Trap:** $\\mathbf u\\times\\mathbf v=-\\mathbf v\\times\\mathbf u$, so order and signs matter."
  },
  {
   "id": "t5.lines-planes",
@@ -701,7 +701,7 @@
   ],
   "order": 2,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** writing a line or plane in $\\mathbb R^3$, or finding an intersection or distance. **Move:** a plane $ax+by+cz=d$ has normal $\\langle a,b,c\\rangle$. A line $\\mathbf r(t)=\\mathbf P+t\\mathbf d$ has direction $\\mathbf d=Q-P$ for two of its points. Substitute the line into the plane to find the parameter. **Example:** the line through $(1,0,2)$ and $(4,3,-1)$ has direction $\\langle3,3,-3\\rangle$. **Trap:** the constant $d$ in the plane is not part of the normal, and a point is not a direction."
  },
  {
   "id": "t5.partials",
@@ -713,7 +713,7 @@
   ],
   "order": 3,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a function of several variables where one variable changes and the rest are fixed. **Move:** differentiate in the chosen variable and treat every other variable as a constant, using the one-variable rules. Mixed partials of smooth functions agree, $f_{xy}=f_{yx}$. **Example:** for $f=x^2y^3$, $f_x=2xy^3$, so $f_x(2,1)=4$. **Trap:** forgetting that $y$ is constant when differentiating in $x$."
  },
  {
   "id": "t5.mv-chain",
@@ -725,7 +725,7 @@
   ],
   "order": 4,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** $z=f(x,y)$ with $x$ and $y$ depending on $t$ or $s$, or a composition $w=g(u)$ with $u=h(x,y)$. **Move:** sum over every path. For $z=f(x(t),y(t))$, $dz/dt=f_x\\,x'+f_y\\,y'$. Evaluate partials at the point and derivatives at the same parameter value. **Example:** $z=x^2+y$ with $x=t$, $y=t^2$ gives $dz/dt=2t+2t=4t$. **Trap:** using $x$ instead of $x'$, or dropping one of the terms."
  },
  {
   "id": "t5.gradient",
@@ -738,7 +738,7 @@
   ],
   "order": 5,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the rate of change of $f$ in a given direction, or the steepest direction. **Move:** $\\nabla f=\\langle f_x,f_y\\rangle$. The directional derivative in a unit direction $\\mathbf u$ is $\\nabla f\\cdot\\mathbf u$. The gradient points uphill, is perpendicular to level curves, and has length equal to the maximum rate. **Example:** for $f=x^2+y^2$ at $(3,4)$, $\\nabla f=\\langle6,8\\rangle$, so the maximum rate is $10$. **Trap:** using a direction that is not a unit vector without dividing by its length."
  },
  {
   "id": "t5.mv-extrema",
@@ -750,7 +750,7 @@
   ],
   "order": 6,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** finding and classifying local extrema of $f(x,y)$. **Move:** solve $f_x=f_y=0$ for critical points. Let $D=f_{xx}f_{yy}-f_{xy}^2$. If $D>0$, the point is a local minimum when $f_{xx}>0$ and a local maximum when $f_{xx}<0$. If $D<0$, it is a saddle. If $D=0$, the test fails. **Example:** $f=x^2+y^2$ has $D=4>0$ and $f_{xx}=2>0$ at the origin. **Trap:** on a closed region, extrema on the boundary are not critical points, so check the boundary too."
  },
  {
   "id": "t5.lagrange",
@@ -762,7 +762,7 @@
   ],
   "order": 7,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** extrema of $f$ on a constraint $g=c$. **Move:** solve $\\nabla f=\\lambda\\nabla g$ together with $g=c$, where $\\nabla g\\neq\\mathbf 0$. Each solution is a candidate. Compare candidate values; this finds the extremes when the constraint set is closed and bounded. **Example:** minimize $x^2+y^2$ with $x+y=4$: $2x=\\lambda=2y$, so $x=y=2$ and the minimum is $8$. **Trap:** dropping the constraint equation, which makes the solution set too large."
  },
  {
   "id": "t5.double-int",
@@ -775,7 +775,7 @@
   ],
   "order": 8,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** integrals over a plane region, such as area, mass, or average value. **Move:** describe the region by its bounds, then integrate the inner variable first. Swap the order only after sketching the region, because the bounds change. **Example:** $\\int_0^1\\int_0^2 xy\\,dy\\,dx=\\int_0^1 2x\\,dx=1$. **Trap:** swapping the order without redrawing the region, so the new bounds are wrong."
  },
  {
   "id": "t5.coord-change",
@@ -788,7 +788,7 @@
   ],
   "order": 9,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** the region or integrand is a disk, cone, sphere, or cylinder. **Move:** replace $dA$ by $r\\,dr\\,d\\theta$ in polar, $dV$ by $r\\,dr\\,d\\theta\\,dz$ in cylindrical, and by $\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta$ in spherical. Substitute $x^2+y^2=r^2$ or $x^2+y^2+z^2=\\rho^2$. **Example:** the unit disk has area $\\int_0^{2\\pi}\\int_0^1 r\\,dr\\,d\\theta=\\pi$. **Trap:** omitting the factor $r$ or $\\rho^2\\sin\\phi$."
  },
  {
   "id": "t5.triple-int",
@@ -800,7 +800,7 @@
   ],
   "order": 10,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a volume, mass, or average over a solid in $\\mathbb R^3$. **Move:** sketch the solid, choose the order of integration, and write bounds from the inside out. Boxes allow any order. Use cylindrical or spherical coordinates if the solid is round. **Example:** the tetrahedron $x,y,z\\ge0$ with $x+y+z\\le1$ has volume $\\int_0^1\\int_0^{1-x}\\int_0^{1-x-y}dz\\,dy\\,dx=\\frac16$. **Trap:** an inner bound that uses a variable not yet fixed by an outer integral."
  },
  {
   "id": "t5.line-int",
@@ -813,7 +813,7 @@
   ],
   "order": 11,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** integrating $\\mathbf F\\cdot d\\mathbf r$ along a curve. **Move:** parametrize $C$ by $\\mathbf r(t)$ and compute $\\int \\mathbf F(\\mathbf r(t))\\cdot\\mathbf r'(t)\\,dt$. If $\\mathbf F=\\nabla\\varphi$, the answer is $\\varphi(B)-\\varphi(A)$, which depends only on the endpoints. Test conservativeness with $Q_x=P_y$ on a simply connected domain. **Example:** $\\int_C 2x\\,dx+y\\,dy$ from $(0,0)$ to $(1,1)$ with $\\varphi=x^2+y^2/2$ is $\\varphi(1,1)-\\varphi(0,0)=\\frac32$. **Trap:** using $\\varphi(A)-\\varphi(B)$."
  },
  {
   "id": "t5.green",
@@ -825,7 +825,7 @@
   ],
   "order": 12,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a line integral $\\oint_C P\\,dx+Q\\,dy$ around a simple closed curve. **Move:** convert to $\\iint_D (Q_x-P_y)\\,dA$ over the enclosed region, with $C$ positively oriented. Compute $Q_x-P_y$ first, then the area or integral over $D$. **Example:** for $P=-y$ and $Q=x$ on the unit square, $Q_x-P_y=2$, so the integral is $2\\cdot1=2$. **Trap:** reversing the sign of $Q_x-P_y$, or applying Green's theorem to an open curve."
  },
  {
   "id": "t5.div-curl",
@@ -838,7 +838,7 @@
   ],
   "order": 13,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a field's divergence or curl, or a flux through a surface. **Move:** $\\nabla\\cdot\\mathbf F=P_x+Q_y+R_z$. $\\nabla\\times\\mathbf F$ has components $R_y-Q_z$, $P_z-R_x$, and $Q_x-P_y$. The curl of a gradient is zero, and the divergence of a curl is zero. **Example:** for $\\mathbf F=\\langle xy,yz,zx\\rangle$, $\\nabla\\cdot\\mathbf F=x+y+z$. **Trap:** mixing up the signs or the order of the curl components."
  },
  {
   "id": "t5.stokes-gauss",
@@ -851,7 +851,7 @@
   ],
   "order": 14,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a circulation, or a flux through a closed surface or a surface with a boundary. **Move:** Stokes: $\\oint_{\\partial S}\\mathbf F\\cdot d\\mathbf r=\\iint_S(\\nabla\\times\\mathbf F)\\cdot d\\mathbf S$. Divergence: outward flux $=\\iiint_E\\nabla\\cdot\\mathbf F\\,dV$. Pick the form whose side is easier: divergence for closed surfaces, Stokes or Green for boundary curves. **Example:** a solid of volume $2$ with $\\nabla\\cdot\\mathbf F=5$ has outward flux $10$. **Trap:** applying Stokes to a closed surface, which has no boundary."
  },
  {
   "id": "t6.matrix-ops",
@@ -863,7 +863,7 @@
   ],
   "order": 1,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a problem combines matrices by sum, product, transpose or trace. **Move:** entry $(i,j)$ of $AB$ is row $i$ of $A$ dotted with column $j$ of $B$. Sizes must match inside: $(m\\times n)(n\\times p)$. Transpose reverses order: $(AB)^T=B^TA^T$. **Example:** $\\operatorname{tr}\\begin{pmatrix}2&7\\\\-3&5\\end{pmatrix}=7$. **Trap:** assuming $AB=BA$, or that $(AB)^T$ equals $A^TB^T$."
  },
  {
   "id": "t6.gauss",
@@ -875,7 +875,7 @@
   ],
   "order": 2,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a linear system, rank, or echelon form is asked. **Move:** use row swaps, nonzero scalings, and adding a multiple of one row to another. Make each pivot lead with zeros below it. **Example:** $x+2y=5$ and $3x+4y=6$ give $-2y=-9$, so $y=\\frac92$. **Trap:** scaling a row by $0$, or applying an operation to only one side. A row reading $0=5$ means no solution."
  },
  {
   "id": "t6.determinant",
@@ -887,7 +887,7 @@
   ],
   "order": 3,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a square matrix needs an invertibility test or a scalar factor. **Move:** for $2\\times2$, use $ad-bc$. For larger matrices, reduce to triangular form and multiply the diagonal, tracking row swaps as sign flips. **Example:** $\\det\\begin{pmatrix}2&0\\\\5&3\\end{pmatrix}=6$. **Trap:** scaling $A$ by $c$ gives $c^n\\det A$, not $c\\det A$."
  },
  {
   "id": "t6.inverse",
@@ -900,7 +900,7 @@
   ],
   "order": 4,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** $A\\mathbf x=\\mathbf b$ must be solved, or $A^{-1}$ found. **Move:** for $2\\times2$, $A^{-1}=\\frac{1}{ad-bc}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$. In general, row-reduce $[A\\mid I]$ to $[I\\mid A^{-1}]$. **Example:** $\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}^{-1}=\\begin{pmatrix}1&-1\\\\-1&2\\end{pmatrix}$. **Trap:** forgetting the $\\frac{1}{\\det}$ factor, or dropping the minus signs on $b$ and $c$. Also, $(AB)^{-1}=B^{-1}A^{-1}$ reverses the order, and only a nonzero determinant gives an inverse."
  },
  {
   "id": "t6.vector-spaces",
@@ -912,7 +912,7 @@
   ],
   "order": 5,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a set is claimed to be a subspace, or a solution set appears. **Move:** check that the set contains $\\mathbf 0$ and is closed under addition and scalar multiplication. Solution sets of $A\\mathbf x=\\mathbf 0$ always pass. **Example:** $\\{(x,y): x+y=0\\}$ is a subspace of $\\mathbb R^2$. The set with $x+y=1$ is not, since it misses $\\mathbf 0$. **Trap:** testing one example instead of checking closure in general."
  },
  {
   "id": "t6.basis-dim",
@@ -925,7 +925,7 @@
   ],
   "order": 6,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a span, independence, or dimension is asked. **Move:** a basis is an independent spanning set. Row-reduce the vectors to count pivots, which gives the dimension. More than $n$ vectors in $\\mathbb R^n$ are always dependent. **Example:** $(1,0,1),(0,1,1),(1,1,2)$ are dependent, since the third is the sum of the first two. **Trap:** counting the vectors instead of the pivots."
  },
  {
   "id": "t6.rank-nullity",
@@ -937,7 +937,7 @@
   ],
   "order": 7,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a kernel, image, rank, or nullity is asked for a matrix or linear map. **Move:** $\\operatorname{rank}T+\\dim\\ker T=\\dim V$. Columns give the domain dimension. Once the rank is known, the nullity follows. **Example:** a $4\\times7$ matrix of rank $3$ has nullity $7-3=4$. **Trap:** using the row count where the column count belongs."
  },
  {
   "id": "t6.lin-maps",
@@ -949,7 +949,7 @@
   ],
   "order": 8,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a map $T$ is given by a formula and needs a matrix, kernel, or image. **Move:** check additivity and homogeneity first. The columns of the matrix are $T(e_1),\\dots,T(e_n)$. **Example:** $T(x,y)=(x+y,\\,x-y)$ has first column $T(e_1)=(1,1)$. **Trap:** a shift like $(x+1,y)$ is not linear, since $T(\\mathbf 0)\\neq\\mathbf 0$. Also read columns, not rows."
  },
  {
   "id": "t6.change-basis",
@@ -962,7 +962,7 @@
   ],
   "order": 9,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** one map must be written in a new basis. **Move:** if $P$ has the new basis vectors as columns, then $B=P^{-1}AP$ represents the same map. Similar matrices share trace, determinant and eigenvalues. **Example:** for $B=\\{(1,1),(1,-1)\\}$, the vector $(3,1)$ has coordinates $(2,1)$, since $2(1,1)+1(1,-1)=(3,1)$. **Trap:** writing $P^TAP$ for $P^{-1}AP$. The transpose gives a different operation."
  },
  {
   "id": "t6.eigen-2x2",
@@ -975,7 +975,7 @@
   ],
   "order": 10,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a $2\\times2$ matrix needs eigenvalues. **Move:** solve $\\lambda^2-(\\operatorname{tr}A)\\lambda+\\det A=0$. The roots sum to the trace and multiply to the determinant. **Example:** $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ has trace $4$ and determinant $3$, so $\\lambda^2-4\\lambda+3=0$ gives $\\lambda=1,3$. **Trap:** a sign slip on the determinant term, or forgetting that the trace enters with a minus sign."
  },
  {
   "id": "t6.diagonalize",
@@ -988,7 +988,7 @@
   ],
   "order": 11,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a power of $A$ is needed, or $A=PDP^{-1}$ must be written. **Move:** find eigenvalues and eigenspaces. $A$ is diagonalizable exactly when each eigenspace has dimension equal to the eigenvalue's multiplicity. Then $A^k=PD^kP^{-1}$. **Example:** eigenvalues $2,5$ give $\\operatorname{tr}(A^3)=2^3+5^3=133$. **Trap:** assuming every $2\\times2$ matrix diagonalizes. A repeated eigenvalue with a one-dimensional eigenspace fails."
  },
  {
   "id": "t6.cayley-ham",
@@ -1000,7 +1000,7 @@
   ],
   "order": 12,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a high power of a matrix, or its inverse, is needed. **Move:** every square matrix satisfies its characteristic polynomial. For $2\\times2$, $A^2=(\\operatorname{tr}A)A-(\\det A)I$. Use this to reduce higher powers. **Example:** if $\\operatorname{tr}A=5$ and $\\det A=6$, then $A^2=5A-6I$. **Trap:** dropping the determinant term, or using $A^2=(\\operatorname{tr}A)A$ alone."
  },
  {
   "id": "t6.inner-product",
@@ -1013,7 +1013,7 @@
   ],
   "order": 13,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** lengths, angles, orthogonality, or projections come up. **Move:** $\\mathbf u\\cdot\\mathbf v=\\sum u_iv_i$. The projection of $\\mathbf v$ onto $\\mathbf u$ is $\\frac{\\mathbf v\\cdot\\mathbf u}{\\mathbf u\\cdot\\mathbf u}\\mathbf u$. Gram-Schmidt subtracts earlier projections. **Example:** $\\mathbf v=(2,1)$ onto $\\mathbf u=(1,1)$ gives $\\frac32(1,1)$. **Trap:** dividing by $\\|\\mathbf v\\|$ instead of $\\mathbf u\\cdot\\mathbf u$."
  },
  {
   "id": "t6.spectral",
@@ -1026,7 +1026,7 @@
   ],
   "order": 14,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** a real symmetric matrix or quadratic form $\\mathbf x^TA\\mathbf x$ is given. **Move:** a real symmetric matrix has real eigenvalues and orthogonal eigenvectors, so $A=QDQ^T$. On the unit circle, $\\mathbf x^TA\\mathbf x$ ranges from the smallest to the largest eigenvalue. **Example:** $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ has eigenvalues $1$ and $3$, so the maximum on the unit circle is $3$. **Trap:** assuming $Q$ can be any invertible matrix. The eigenvectors must be orthonormal."
  },
  {
   "id": "t6.jordan-nilpotent",
@@ -1038,7 +1038,7 @@
   ],
   "order": 15,
   "exam": true,
-  "teach": "TODO: teach card"
+  "teach": "**When:** $N^k=0$ is claimed, or a Jordan form is needed. **Move:** $N$ is nilpotent when some power vanishes. Its only eigenvalue is $0$. For a $3\\times3$ Jordan block, $N^2\\neq0$ but $N^3=0$. **Example:** $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}^2=0$. **Trap:** concluding $N=0$ from $N^2=0$ alone, which is false for nonzero nilpotent matrices."
  },
  {
   "id": "t7.nt-gcd",

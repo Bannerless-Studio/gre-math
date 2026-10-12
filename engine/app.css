@@ -147,3 +147,5 @@ img, table, pre { max-width: 100%; }
 .lvdet > summary, .folded > summary, .sol > summary { cursor: pointer; color: var(--muted); font-size: .92rem; padding: 6px 0; min-height: 40px; }
 .folded > .lv { margin-top: 8px; }
 .sol .prose { margin-top: 6px; }
+
+.reveal .primary{margin-top:12px}

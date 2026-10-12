@@ -1,0 +1,5435 @@
+[
+  {
+    "id": "t9-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The number of orderings of $n$ distinct objects in a row is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n!$",
+        "$n^2$",
+        "$\\binom n2$",
+        "$2^n$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "squared the count instead of multiplying the choices",
+        "counts pairs, not orderings",
+        "counts subsets, not orderings"
+      ]
+    },
+    "check": null,
+    "solution": "Place the first object in $n$ ways, the next in $n-1$, and so on. The product is $n!$.",
+    "hints": [
+      "Each position loses one choice."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "By the multiplication principle, if one step has $m$ choices and an independent second step has $n$, the total is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$m+n$",
+        "$\\binom{m+n}{m}$",
+        "$mn$",
+        "$m!\\,n!$"
+      ],
+      "correct": 2,
+      "why": [
+        "added the choices instead of multiplying",
+        "counted ways to split a set of size $m+n$",
+        "",
+        "factorials count orderings, not choices"
+      ]
+    },
+    "check": null,
+    "solution": "Each choice in step one pairs with each choice in step two, giving $mn$ pairs.",
+    "hints": [
+      "Count pairs of one choice from each step."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many ways are there to choose $3$ people from $8$ when order does not matter?",
+    "answer": {
+      "kind": "numeric",
+      "value": 56,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(8,3)",
+    "solution": "$\\binom83=\\frac{8\\cdot7\\cdot6}{3\\cdot2\\cdot1}=56$.",
+    "hints": [
+      "Divide the ordered count by $3!$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0004",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Five people sit in a row. Two specific people must sit next to each other. How many seatings are possible?",
+    "answer": {
+      "kind": "numeric",
+      "value": 48,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.factorial(4)*2",
+    "solution": "Glue the two people into one block. That gives $4!$ arrangements of the units, times $2$ orders inside the block: $48$.",
+    "hints": [
+      "Treat the pair as a single unit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A committee of $3$ is chosen from $10$ people. How many committees include a given person?",
+    "answer": {
+      "kind": "numeric",
+      "value": 36,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(9,2)",
+    "solution": "Fix that person, then choose the other $2$ from the remaining $9$: $\\binom92=36$.",
+    "hints": [
+      "Remove the fixed person first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many ways are there to give $6$ identical candies to $3$ children, where a child may get none?",
+    "answer": {
+      "kind": "numeric",
+      "value": 28,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(8,2)",
+    "solution": "Stars and bars: $6$ stars and $2$ dividers in a row of $8$ slots, giving $\\binom82=28$.",
+    "hints": [
+      "Use stars and bars with two dividers."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many $4$-digit strings of digits $0$ to $9$ have no repeated digit? Leading zeros are allowed.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5040,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "10*9*8*7",
+    "solution": "Each position loses one digit: $10\\cdot9\\cdot8\\cdot7=5040$.",
+    "hints": [
+      "Each digit removes one choice."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which expressions equal $\\binom{10}{4}$?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\binom{10}{6}$",
+        "$\\frac{10!}{4!\\,6!}$",
+        "$\\frac{10\\cdot 9\\cdot 8\\cdot 7}{4!}$",
+        "$\\frac{10!}{4!}$",
+        "$10^4$"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "check": null,
+    "solution": "$\\binom{10}{6}$ and the factorial form are the same by symmetry. The falling product over $4!$ is also $210$. $\\frac{10!}{4!}$ drops the $6!$, and $10^4$ counts ordered tuples.",
+    "hints": [
+      "Use symmetry and the factorial formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.counting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many distinct arrangements of the letters of MISSISSIPPI are there?",
+    "answer": {
+      "kind": "numeric",
+      "value": 34650,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.factorial(11)//(math.factorial(4)*math.factorial(4)*math.factorial(2))",
+    "solution": "Divide $11!$ by the factorials of the repeat counts: $\\frac{11!}{1!\\,4!\\,4!\\,2!}=34650$.",
+    "hints": [
+      "Divide by the factorial of each letter's count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For finite sets $A$ and $B$, $|A\\cup B|$ equals:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|A|+|B|$",
+        "$|A|\\,|B|-|A\\cap B|$",
+        "$|A\\cap B|-|A|-|B|$",
+        "$|A|+|B|-|A\\cap B|$"
+      ],
+      "correct": 3,
+      "why": [
+        "forgot to subtract the overlap",
+        "product instead of sum",
+        "sign of every term flipped",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "The overlap is counted twice, once in $|A|$ and once in $|B|$, so subtract it once.",
+    "hints": [
+      "Count the overlap once."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Pigeonhole principle: if $n+1$ objects go into $n$ boxes, some box must hold:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "at most one object",
+        "at least two objects",
+        "exactly two objects",
+        "no more than $n$ objects"
+      ],
+      "correct": 1,
+      "why": [
+        "says nothing about a crowded box",
+        "",
+        "claims more than the principle gives",
+        "true but says nothing about crowding"
+      ]
+    },
+    "check": null,
+    "solution": "If every box had at most one object, there would be at most $n$ objects. So some box holds at least two.",
+    "hints": [
+      "Assume every box has at most one object."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many integers from $1$ to $100$ are divisible by $3$ or $5$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 47,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "100//3+100//5-100//15",
+    "solution": "There are $33$ multiples of $3$ and $20$ of $5$. Subtract the $6$ multiples of $15$: $33+20-6=47$.",
+    "hints": [
+      "Subtract the multiples of the lcm."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many integers from $1$ to $200$ are divisible by $2$, $3$, or $7$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 142,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "200//2+200//3+200//7-200//6-200//14-200//21+200//42",
+    "solution": "Singles give $100+66+28$. Subtract pairs $33+14+9$, then add the triple $4$: $142$.",
+    "hints": [
+      "Add singles, subtract pairs, add the triple."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many integers from $1$ to $1000$ are divisible by neither $4$ nor $6$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 667,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1000-(1000//4+1000//6-1000//12)",
+    "solution": "Multiples of $4$ or $6$: $250+166-83=333$. Then $1000-333=667$.",
+    "hints": [
+      "Count the union first, then take the complement."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the least number of people that guarantees at least $3$ share a birth month, with $12$ months?",
+    "answer": {
+      "kind": "numeric",
+      "value": 25,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*12+1",
+    "solution": "Two per month can avoid three in any month, so $25$ people force a month with three.",
+    "hints": [
+      "Find the most people with at most two per month."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many surjections are there from a $4$-element set onto a $2$-element set?",
+    "answer": {
+      "kind": "numeric",
+      "value": 14,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2**4-2*1**4",
+    "solution": "All $2^4=16$ maps, minus the $2$ constant maps: $14$.",
+    "hints": [
+      "Subtract the maps that miss one target."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "How many permutations of $4$ objects leave no object in its original place?",
+    "answer": {
+      "kind": "numeric",
+      "value": 9,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum((-1)**j*(math.factorial(4)//math.factorial(j)) for j in range(5))",
+    "solution": "Inclusion-exclusion gives $24-24+12-4+1=9$.",
+    "hints": [
+      "Alternate the sum over the sets of fixed points."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.incl-excl"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "If $11$ pigeons go into $10$ holes, which statements are guaranteed?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Some hole holds at least two pigeons",
+        "Some hole is empty",
+        "No hole holds more than one pigeon",
+        "Every hole holds at least one pigeon",
+        "There are $11$ pigeons"
+      ],
+      "correct": [
+        0,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "Pigeonhole forces a crowded hole. But the pigeons can fill every hole with $2$ in one, so emptiness is not forced. The pigeon count is $11$ by hypothesis.",
+    "hints": [
+      "Try to fill every hole with at most one pigeon."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The solution of $a_n=3a_{n-1}$ with $a_0=5$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$a_n=5\\cdot 3^n$",
+        "$a_n=3\\cdot 5^n$",
+        "$a_n=5+3n$",
+        "$a_n=15^n$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "swapped the base and the coefficient",
+        "treated the step as arithmetic",
+        "multiplied the constant into the base"
+      ]
+    },
+    "check": null,
+    "solution": "Each step multiplies by $3$, so $a_n=a_0\\cdot 3^n=5\\cdot 3^n$.",
+    "hints": [
+      "Iterate a few terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $a_n=a_{n-1}+2a_{n-2}$, the characteristic equation is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$r^2=2r+1$",
+        "$r=1+2r^2$",
+        "$r^2=r+2$",
+        "$r^2+r=2$"
+      ],
+      "correct": 2,
+      "why": [
+        "swapped the coefficients",
+        "misplaced the squared term",
+        "",
+        "sign error on the linear term"
+      ]
+    },
+    "check": null,
+    "solution": "Set $a_n=r^n$. Then $r^2=r+2$, with roots $2$ and $-1$.",
+    "hints": [
+      "Substitute $r^n$ for $a_n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $a_0=0$ and $a_n=a_{n-1}+n$. Find $a_{10}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 55,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum(range(1,11))",
+    "solution": "Summing gives $a_{10}=1+2+\\cdots+10=55$.",
+    "hints": [
+      "Unroll the recurrence."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $a_0=0$ and $a_n=2a_{n-1}+1$. Find $a_5$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 31,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "sum(2**k for k in range(5))",
+    "solution": "Terms: $1,3,7,15,31$. The closed form is $2^n-1$.",
+    "hints": [
+      "Compute the terms in order."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $a_0=1$, $a_1=3$, and $a_n=4a_{n-1}-3a_{n-2}$. Find $a_3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 27,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4*(4*3-3*1)-3*3",
+    "solution": "$a_2=4\\cdot3-3\\cdot1=9$ and $a_3=4\\cdot9-3\\cdot3=27$.",
+    "hints": [
+      "Compute $a_2$ before $a_3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Binary strings of length $6$ have no two adjacent $1$s. How many are there?",
+    "answer": {
+      "kind": "numeric",
+      "value": 21,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(lambda f: f(f, 6))(lambda f, n: 2 if n == 1 else (3 if n == 2 else f(f, n-1)+f(f, n-2)))",
+    "solution": "Let $f_n$ count length $n$. Then $f_1=2$, $f_2=3$, and $f_n=f_{n-1}+f_{n-2}$. So $f_6=21$.",
+    "hints": [
+      "Split on whether the last symbol is $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A recursive procedure has $T(n)=T(n-1)+3$ and $T(0)=2$. Find $T(10)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 32,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2+3*10",
+    "solution": "Each step adds $3$ to a base of $2$: $T(10)=2+30=32$.",
+    "hints": [
+      "Find the closed form first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $a_0=1$ and $a_n-a_{n-1}=2n$. Give $a_n$ as a function of $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "n^2+n+1",
+      "vars": [
+        "n"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(n+1)+1",
+        "1+n*n+n"
+      ]
+    },
+    "check": null,
+    "solution": "Summing $2k$ from $1$ to $n$ gives $n(n+1)$. Add the initial $1$.",
+    "hints": [
+      "Sum the increments."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recurrence"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which recurrence counts the tilings of a $2\\times n$ board with $1\\times 2$ dominoes?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$c_n=2c_{n-1}$",
+        "$c_n=c_{n-1}+2$",
+        "$c_n=c_{n-1}\\,c_{n-2}$",
+        "$c_n=c_{n-1}+c_{n-2}$"
+      ],
+      "correct": 3,
+      "why": [
+        "ignored the horizontal pair",
+        "added a constant instead of a case",
+        "multiplied the cases instead of adding them",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "The last column is either one vertical domino, leaving $c_{n-1}$, or two stacked horizontal dominoes, leaving $c_{n-2}$.",
+    "hints": [
+      "Split on how the last column is covered."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The sum of all vertex degrees in a graph equals:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|V|$",
+        "$2|E|$",
+        "$|E|^2$",
+        "$|V|+|E|$"
+      ],
+      "correct": 1,
+      "why": [
+        "counted vertices, not edge ends",
+        "",
+        "squared the edge count",
+        "mixed vertices with edges"
+      ]
+    },
+    "check": null,
+    "solution": "Each edge contributes one to the degree of each of its two endpoints.",
+    "hints": [
+      "Count edge ends."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The number of edges in the complete graph $K_n$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\binom n2$",
+        "$n^2$",
+        "$n(n-1)$",
+        "$2n$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "counted all ordered pairs including loops",
+        "counts each edge twice",
+        "twice the vertex count"
+      ]
+    },
+    "check": null,
+    "solution": "Each unordered pair of distinct vertices gives one edge, so $\\binom n2$.",
+    "hints": [
+      "Choose two vertices per edge."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A simple graph has $6$ vertices, $9$ edges, and five vertices of degrees $4,4,3,3,3$. Find the degree of the sixth vertex.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*9-(4+4+3+3+3)",
+    "solution": "The degrees sum to $18$. The five known degrees sum to $17$, so the sixth is $1$.",
+    "hints": [
+      "Use the degree sum."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A graph has $10$ vertices and $22$ edges. Find the average degree.",
+    "answer": {
+      "kind": "numeric",
+      "value": "22/5",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(2*22,10)",
+    "solution": "Average degree is $\\frac{2|E|}{|V|}=\\frac{44}{10}=\\frac{22}{5}$.",
+    "hints": [
+      "Average the degree sum over the vertices."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many edges does $K_7$ have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 21,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(7,2)",
+    "solution": "Choose $2$ of the $7$ vertices: $\\binom72=21$.",
+    "hints": [
+      "Count unordered pairs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many edges does the complete bipartite graph $K_{3,5}$ have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 15,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3*5",
+    "solution": "Every vertex on the left joins every vertex on the right: $3\\cdot5=15$.",
+    "hints": [
+      "Count left-right pairs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A tree has $7$ vertices. How many edges does it have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "7-1",
+    "solution": "A tree on $v$ vertices has $v-1$ edges.",
+    "hints": [
+      "Trees are minimally connected."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which of these graphs are bipartite?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The cycle $C_4$",
+        "The cycle $C_5$",
+        "The complete bipartite graph $K_{2,3}$",
+        "The triangle $K_3$",
+        "A tree on $5$ vertices"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "Bipartite graphs have no odd cycle. $C_4$, $K_{2,3}$, and every tree are bipartite. $C_5$ and $K_3$ have odd cycles.",
+    "hints": [
+      "Try to two-color each graph."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Count the paths with $2$ edges in $K_5$. A path and its reverse count once.",
+    "answer": {
+      "kind": "numeric",
+      "value": 30,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5*math.comb(4,2)",
+    "solution": "Choose the middle vertex in $5$ ways and the two ends from the other $4$ in $\\binom42=6$ ways: $30$.",
+    "hints": [
+      "Fix the middle vertex first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A connected graph has an Euler circuit exactly when:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "every vertex has degree at least $2$",
+        "it has exactly two odd vertices",
+        "every vertex has even degree",
+        "it has a Hamilton cycle"
+      ],
+      "correct": 2,
+      "why": [
+        "a cycle needs degree $2$, not parity",
+        "two odd vertices give an Euler trail, not a circuit",
+        "",
+        "Hamilton and Euler conditions are different"
+      ]
+    },
+    "check": null,
+    "solution": "An Euler circuit uses every edge once and returns to the start. That requires every degree to be even.",
+    "hints": [
+      "Think about entering and leaving each vertex."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The chromatic number of a bipartite graph with at least one edge is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1$",
+        "$3$",
+        "$|V|$",
+        "$2$"
+      ],
+      "correct": 3,
+      "why": [
+        "one color forbids every edge",
+        "odd cycles are the trap, and bipartite graphs have none",
+        "uses the vertex count",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Two colors suffice because the two sides are independent sets. One color fails once an edge exists.",
+    "hints": [
+      "Two sides are enough."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the chromatic number of $K_5$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5",
+    "solution": "Every pair of vertices is adjacent, so each vertex needs its own color.",
+    "hints": [
+      "Every vertex is adjacent to every other."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the chromatic number of the $7$-cycle $C_7$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "An odd cycle needs three colors. Two colors would alternate around an odd cycle and fail.",
+    "hints": [
+      "Try alternating two colors around the cycle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A connected planar graph has $8$ vertices and $12$ edges. How many faces does it have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "12-8+2",
+    "solution": "Euler's formula gives $v-e+f=2$, so $f=2-8+12=6$.",
+    "hints": [
+      "Use Euler's formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the largest number of edges in a simple planar graph on $9$ vertices?",
+    "answer": {
+      "kind": "numeric",
+      "value": 21,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3*9-6",
+    "solution": "A simple planar graph with $v\\ge3$ has $e\\le 3v-6$, so $e\\le21$.",
+    "hints": [
+      "Use the bound $e\\le 3v-6$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The graph $K_{3,3}$ has $6$ vertices and $9$ edges. What is the fewest edges to delete to make it planar?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$K_{3,3}$ is nonplanar. Deleting one edge leaves a planar graph, so the answer is $1$.",
+    "hints": [
+      "Test whether one deleted edge removes all obstructions."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many distinct undirected Hamilton cycles does $K_5$ have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.factorial(4)//2",
+    "solution": "Fix a starting vertex. There are $4!$ orders for the rest, and each cycle is counted twice for direction: $24/2=12$.",
+    "hints": [
+      "Divide the directed count by $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.graph-structure"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statements about $K_5$ are true?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$K_5$ is nonplanar",
+        "$K_5$ has an Euler circuit",
+        "$\\chi(K_5)=5$",
+        "$K_5$ is bipartite",
+        "$K_5$ has $10$ edges"
+      ],
+      "correct": [
+        0,
+        1,
+        2,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "$K_5$ has all degrees $4$, so it is Eulerian. It needs $5$ colors and has $10$ edges. It is not bipartite, and it is nonplanar.",
+    "hints": [
+      "Check the degree of each vertex."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the worst case, binary search on $n$ sorted items takes:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$O(n)$",
+        "$O(\\log n)$",
+        "$O(n\\log n)$",
+        "$O(n^2)$"
+      ],
+      "correct": 1,
+      "why": [
+        "linear scan, not halving",
+        "",
+        "the cost of sorting, not searching",
+        "nested loops"
+      ]
+    },
+    "check": null,
+    "solution": "Each comparison halves the remaining range, so about $\\log_2 n$ steps suffice.",
+    "hints": [
+      "Each step halves the search range."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Dijkstra's algorithm requires its edge weights to be:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "nonnegative",
+        "positive integers only",
+        "distinct",
+        "bounded by $1$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "too strict, since integers are not needed",
+        "distinctness is not a condition",
+        "not a condition"
+      ]
+    },
+    "check": null,
+    "solution": "With a negative edge, a settled vertex can later be improved, so the greedy step fails.",
+    "hints": [
+      "Think about a negative edge after a vertex is settled."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Using the bound $\\lceil \\log_2(n+1)\\rceil$ on comparisons, find the value for $n=1023$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.ceil(math.log2(1024))",
+    "solution": "$\\log_2 1024=10$, so the bound is $10$.",
+    "hints": [
+      "Evaluate $\\log_2(n+1)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Merge sort uses $T(n)=2T(n/2)+n$ with $T(1)=0$. Find $T(8)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 24,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*(2*(2*0+2)+4)+8",
+    "solution": "$T(2)=2$, $T(4)=2\\cdot2+4=8$, and $T(8)=2\\cdot8+8=24$.",
+    "hints": [
+      "Compute $T(2)$, then $T(4)$, then $T(8)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A recurrence has $T(n)=T(n/2)+1$ and $T(1)=5$. Find $T(16)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 9,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5+4",
+    "solution": "Halving from $16$ to $1$ takes $4$ steps, each adding $1$: $5+4=9$.",
+    "hints": [
+      "Count the halvings."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A depth-first search on a connected graph with $9$ vertices produces a spanning tree. How many tree edges does it have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "9-1",
+    "solution": "A spanning tree on $9$ vertices has $8$ edges.",
+    "hints": [
+      "A spanning tree is a tree."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A complete binary tree has levels $0$ through $3$, with the root at level $0$. How many vertices does it have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 15,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2**4-1",
+    "solution": "Level $k$ has $2^k$ vertices. The total is $1+2+4+8=15$.",
+    "hints": [
+      "Sum the level sizes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many pairs $i<j$ are there in $\\{1,\\dots,10\\}$ that a double loop compares?",
+    "answer": {
+      "kind": "numeric",
+      "value": 45,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "math.comb(10,2)",
+    "solution": "Each unordered pair is compared once: $\\binom{10}{2}=45$.",
+    "hints": [
+      "Count unordered pairs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.algorithms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A loop runs $i$ from $1$ to $n$. For each $i$, an inner loop runs $j$ from $1$ to $i$ and does one step. Give the total number of inner steps as a function of $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(n^2+n)/2",
+      "vars": [
+        "n"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(n+1)/2",
+        "n/2*(n+1)"
+      ]
+    },
+    "check": null,
+    "solution": "The inner loop runs $i$ times, so the total is $\\sum_{i=1}^n i=\\frac{n(n+1)}{2}$.",
+    "hints": [
+      "Sum the inner counts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For independent events $A$ and $B$, $P(A\\cap B)$ equals:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$P(A)+P(B)$",
+        "$P(A\\cup B)$",
+        "$P(A)\\,P(B)$",
+        "$P(A)+P(B)-P(A)P(B)$"
+      ],
+      "correct": 2,
+      "why": [
+        "sum rule applied to an intersection",
+        "that is the union, not the intersection",
+        "",
+        "that is the union formula"
+      ]
+    },
+    "check": null,
+    "solution": "Independence means the joint probability is the product of the marginals.",
+    "hints": [
+      "Independence multiplies."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The conditional probability $P(A\\mid B)$ equals:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$P(A\\cap B)/P(A)$",
+        "$P(A)+P(B)$",
+        "$P(B\\mid A)\\,P(B)$",
+        "$P(A\\cap B)/P(B)$"
+      ],
+      "correct": 3,
+      "why": [
+        "divided by the wrong event",
+        "sum rule, not conditioning",
+        "reversed the conditioning",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Restrict to the outcomes in $B$. Then the fraction of those also in $A$ is $P(A\\cap B)/P(B)$.",
+    "hints": [
+      "Restrict the sample space to $B$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Two fair dice are rolled. What is the probability that the sum is $7$?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/6",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(6,36)",
+    "solution": "Six of the $36$ equally likely outcomes give sum $7$, so $P=\\frac{6}{36}=\\frac16$.",
+    "hints": [
+      "List the pairs that sum to $7$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0058",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A fair coin is tossed $3$ times. What is the probability of exactly $2$ heads?",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/8",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(math.comb(3,2),8)",
+    "solution": "There are $\\binom32=3$ head patterns out of $8$ equally likely outcomes: $\\frac38$.",
+    "hints": [
+      "Count sequences with two heads."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two cards are drawn without replacement from a standard $52$-card deck. What is the probability both are aces?",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/221",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(4,52)*Fraction(3,51)",
+    "solution": "The probability is $\\frac{4}{52}\\cdot\\frac{3}{51}=\\frac{1}{221}$.",
+    "hints": [
+      "Multiply the conditional probabilities."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Events $A$ and $B$ are independent with $P(A)=\\frac{3}{10}$ and $P(B)=\\frac12$. Find $P(A\\cup B)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "13/20",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(3,10)+Fraction(1,2)-Fraction(3,10)*Fraction(1,2)",
+    "solution": "$P(A\\cup B)=\\frac{3}{10}+\\frac12-\\frac{3}{20}=\\frac{13}{20}$.",
+    "hints": [
+      "Use the union formula with the product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$P(A)=\\frac35$, $P(B)=\\frac12$, and $P(A\\cap B)=\\frac15$. Find $P(A^c\\cap B^c)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/10",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "1-(Fraction(3,5)+Fraction(1,2)-Fraction(1,5))",
+    "solution": "$P(A\\cup B)=\\frac35+\\frac12-\\frac15=\\frac910$, so the complement has probability $\\frac{1}{10}$.",
+    "hints": [
+      "Take the complement of the union."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Which pairs of events in a fair six-sided die roll are independent?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$A=\\{1,2,3\\},\\ B=\\{3,4\\}$",
+        "$A=\\{2,4,6\\},\\ B=\\{1,2,3\\}$",
+        "$A=\\{1,2\\},\\ B=\\{3,4,5,6\\}$",
+        "$A=\\{1,2,3,4\\},\\ B=\\{1,2,5\\}$",
+        "$A=\\{1,2,3\\},\\ B=\\{1,2,4\\}$"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "check": null,
+    "solution": "Compare $P(A\\cap B)$ with $P(A)P(B)$. The first and fourth pairs match. The others fail.",
+    "hints": [
+      "Compare the joint probability with the product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.prob-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A bag has $3$ red and $2$ blue balls. Two are drawn without replacement. What is the probability both are red?",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/10",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(math.comb(3,2),math.comb(5,2))",
+    "solution": "$P=\\frac{\\binom32}{\\binom52}=\\frac{3}{10}$.",
+    "hints": [
+      "Use combinations over the same total."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a discrete random variable $X$, $E[X]$ equals:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\sum_x P(X=x)$",
+        "$\\sum_x x\\,P(X=x)$",
+        "$\\sum_x x^2 P(X=x)$",
+        "$\\max_x x\\,P(X=x)$"
+      ],
+      "correct": 1,
+      "why": [
+        "sums the probabilities, which always give $1$",
+        "",
+        "that is the second moment",
+        "a maximum, not a sum"
+      ]
+    },
+    "check": null,
+    "solution": "The mean weights each value by its probability and adds.",
+    "hints": [
+      "Weight each value by its probability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The variance of $X$ satisfies:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\operatorname{Var}(X)=E[X^2]-E[X]^2$",
+        "$\\operatorname{Var}(X)=E[X^2]+E[X]^2$",
+        "$\\operatorname{Var}(X)=E[X^2]-E[X]$",
+        "$\\operatorname{Var}(X)=E[(X-1)^2]$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign error",
+        "subtracted $E[X]$ instead of squaring it",
+        "centred at $1$, not at the mean"
+      ]
+    },
+    "check": null,
+    "solution": "Expanding $E[(X-\\mu)^2]$ gives $E[X^2]-\\mu^2$.",
+    "hints": [
+      "Expand the square around the mean."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A fair die shows $X$. Find $E[X]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "7/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(sum(range(1,7)),6)",
+    "solution": "The mean is $\\frac{1+2+\\cdots+6}{6}=\\frac{21}{6}=\\frac72$.",
+    "hints": [
+      "Average the faces."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0067",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "$X$ takes the values $0$, $1$, $2$ with probabilities $\\frac12$, $\\frac13$, $\\frac16$. Find $E[X]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/3",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(1,3)+2*Fraction(1,6)",
+    "solution": "$E[X]=0\\cdot\\frac12+1\\cdot\\frac13+2\\cdot\\frac16=\\frac23$.",
+    "hints": [
+      "Weight each value by its probability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A fair die shows $X$. Find $\\operatorname{Var}(X)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "35/12",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(sum(k*k for k in range(1,7)),6)-Fraction(7,2)**2",
+    "solution": "$E[X^2]=\\frac{91}{6}$ and $E[X]^2=\\frac{49}{4}$, so $\\operatorname{Var}=\\frac{91}{6}-\\frac{49}{4}=\\frac{35}{12}$.",
+    "hints": [
+      "Use $E[X^2]-E[X]^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$X$ is uniform on $\\{1,\\dots,10\\}$. Find $\\operatorname{Var}(X)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "33/4",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(sum(k*k for k in range(1,11)),10)-Fraction(11,2)**2",
+    "solution": "$E[X^2]=\\frac{385}{10}$ and $E[X]^2=\\frac{121}{4}$. The difference is $\\frac{33}{4}$.",
+    "hints": [
+      "Use $E[X^2]-E[X]^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "$E[X]=4$. Find $E[3X-2]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3*4-2",
+    "solution": "By linearity, $E[3X-2]=3E[X]-2=10$.",
+    "hints": [
+      "Linearity holds for constants."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$\\operatorname{Var}(X)=v$. Give $\\operatorname{Var}(aX+b)$ in terms of $a$ and $v$.",
+    "answer": {
+      "kind": "expression",
+      "value": "a^2*v",
+      "vars": [
+        "a",
+        "v"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "v*a^2",
+        "a*a*v"
+      ]
+    },
+    "check": null,
+    "solution": "Adding $b$ does not change the spread, and scaling by $a$ multiplies the variance by $a^2$.",
+    "hints": [
+      "Constants shift the mean but not the spread."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.rand-var"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A fair die shows $X$. Find $E[X^2]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "91/6",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(sum(k*k for k in range(1,7)),6)",
+    "solution": "$E[X^2]=\\frac{1+4+9+16+25+36}{6}=\\frac{91}{6}$.",
+    "hints": [
+      "Square each face before averaging."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A binomial variable $X\\sim B(n,p)$ has mean:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n(1-p)$",
+        "$np(1-p)$",
+        "$np$",
+        "$n/p$"
+      ],
+      "correct": 2,
+      "why": [
+        "the failure count, not the success count",
+        "that is the variance",
+        "",
+        "reciprocal of the geometric mean"
+      ]
+    },
+    "check": null,
+    "solution": "A binomial is a sum of $n$ independent Bernoulli trials, each with mean $p$.",
+    "hints": [
+      "Sum $n$ Bernoulli means."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A geometric variable counts trials until the first success. Its mean is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$p$",
+        "$(1-p)/p$",
+        "$1/p^2$",
+        "$1/p$"
+      ],
+      "correct": 3,
+      "why": [
+        "that is the success probability",
+        "counts failures, not trials",
+        "squared the reciprocal",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Each trial succeeds with probability $p$, so the expected number of trials is $1/p$.",
+    "hints": [
+      "Think about how many trials to expect."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "$X$ is uniform on $[0,4]$. Find $P(1<X<3)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "1/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(3-1,4)",
+    "solution": "The interval has length $2$ out of total length $4$, so $P=\\frac12$.",
+    "hints": [
+      "Uniform probability is length over total length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "$X\\sim B(10,\\tfrac14)$. Find $\\operatorname{Var}(X)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "15/8",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(10)*Fraction(1,4)*Fraction(3,4)",
+    "solution": "$\\operatorname{Var}=np(1-p)=10\\cdot\\frac14\\cdot\\frac34=\\frac{15}{8}$.",
+    "hints": [
+      "Use $np(1-p)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "$X$ is geometric with success probability $\\frac13$, counting trials. Find $E[X]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1)/Fraction(1,3)",
+    "solution": "The mean is $1/p=3$.",
+    "hints": [
+      "Use $1/p$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$X$ is Poisson with mean $4$. Find $E[X^2]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4+4**2",
+    "solution": "For a Poisson, $E[X^2]=\\lambda+\\lambda^2=4+16=20$.",
+    "hints": [
+      "Use $E[X^2]=\\operatorname{Var}+E[X]^2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "$X$ is uniform on $[2,8]$. Find $E[X^2]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 28,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(8**3-2**3,3*(8-2))",
+    "solution": "$E[X^2]=\\frac{1}{6}\\int_2^8 x^2\\,dx=\\frac{504}{18}=28$.",
+    "hints": [
+      "Integrate $x^2$ against the density $\\frac16$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A random variable has density $f(x)=2x$ on $[0,1]$ and $0$ elsewhere. Give its distribution function $F(x)$ for $0\\le x\\le 1$.",
+    "answer": {
+      "kind": "expression",
+      "value": "x^2",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "x*x",
+        "x^(2)"
+      ]
+    },
+    "check": null,
+    "solution": "Integrate the density: $F(x)=\\int_0^x 2t\\,dt=x^2$.",
+    "hints": [
+      "Integrate from $0$ to $x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.distributions"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which functions are probability density functions on the real line?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$f(x)=\\tfrac12 e^{-|x|}$",
+        "$f(x)=x$ on $[0,1]$",
+        "$f(x)=\\dfrac{1}{\\pi(1+x^2)}$",
+        "$f(x)=2$ on $[0,1]$",
+        "$f(x)=e^{x}$ on $(-\\infty,0]$"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "Each correct function is nonnegative and integrates to $1$. $x$ on $[0,1]$ integrates to $\\tfrac12$, and $2$ on $[0,1]$ integrates to $2$.",
+    "hints": [
+      "Check that the total integral is $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Sample variance divides by $n-1$ because that choice makes it:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "always smaller than the population variance",
+        "unbiased for the population variance",
+        "the squared deviation from the sample mean only",
+        "equal to the range"
+      ],
+      "correct": 1,
+      "why": [
+        "it is larger than the population variance, not smaller",
+        "",
+        "describes the centering, not the divisor",
+        "not a relation"
+      ]
+    },
+    "check": null,
+    "solution": "Dividing the sum of squared deviations by $n-1$ removes the bias from using the sample mean.",
+    "hints": [
+      "The sample mean uses up one degree of freedom."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The least-squares regression line always passes through:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "the point $(\\bar x,\\bar y)$",
+        "the origin",
+        "the point $(0,\\bar y)$",
+        "the first data point"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "true only when the intercept is zero",
+        "forces $x=0$, not the means",
+        "not generally true"
+      ]
+    },
+    "check": null,
+    "solution": "The normal equations give $\\bar y=a+b\\bar x$, so the line passes through the means.",
+    "hints": [
+      "Use the normal equation for the intercept."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the mean of $3$, $7$, $8$, $12$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "15/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(3+7+8+12,4)",
+    "solution": "The sum is $30$, so the mean is $\\frac{30}{4}=\\frac{15}{2}$.",
+    "hints": [
+      "Divide the sum by the count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the sample variance of $1,3,5,7$ with divisor $n-1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "20/3",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(sum((x-4)**2 for x in [1,3,5,7]),3)",
+    "solution": "The mean is $4$. The squared deviations sum to $20$, and $\\frac{20}{3}$ is the sample variance.",
+    "hints": [
+      "Find the mean first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the median of $9,2,7,4,10,1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "11/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(4+7,2)",
+    "solution": "Sorted: $1,2,4,7,9,10$. The middle two are $4$ and $7$, so the median is $\\frac{11}{2}$.",
+    "hints": [
+      "Sort first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For the points $(0,1)$, $(1,3)$, $(2,5)$, find the least-squares slope.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(sum((x-1)*(y-3) for x,y in [(0,1),(1,3),(2,5)]),sum((x-1)**2 for x in [0,1,2]))",
+    "solution": "With $\\bar x=1$ and $\\bar y=3$, $S_{xy}=4$ and $S_{xx}=2$, so the slope is $2$.",
+    "hints": [
+      "Use $S_{xy}/S_{xx}$ with centered data."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For the points $(0,1)$, $(1,3)$, $(2,5)$, find the least-squares intercept.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3-2*1",
+    "solution": "The intercept is $\\bar y-b\\bar x=3-2\\cdot1=1$.",
+    "hints": [
+      "Use the means of the line."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a symmetric unimodal distribution, which statements are true?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "The mean equals the median",
+        "The mode equals the mean",
+        "The mean is always larger than the median",
+        "The standard deviation always equals the range",
+        "Adding a constant to every value shifts the mean by that constant"
+      ],
+      "correct": [
+        0,
+        1,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "Symmetry makes the mean and median coincide, and unimodal symmetry puts the mode there too. The mean is not always above the median, and spread is not the range.",
+    "hints": [
+      "Think about a symmetric bell shape."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.stats-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A sample of size $4$ has squared deviations summing to $12$. Find the sample variance with divisor $n-1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(12,4-1)",
+    "solution": "Divide $12$ by $n-1=3$ to get $4$.",
+    "hints": [
+      "Use divisor $n-1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The value of $i^2$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1$",
+        "$i$",
+        "$-1$",
+        "$-i$"
+      ],
+      "correct": 2,
+      "why": [
+        "the sign of the square was dropped",
+        "forgot the rule $i^2=-1$",
+        "",
+        "$i^{-1}$ was mistaken for $i^2$"
+      ]
+    },
+    "check": null,
+    "solution": "By definition $i^2=-1$.",
+    "hints": [
+      "Use the definition of $i$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The modulus of $a+bi$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$a+b$",
+        "$a^2+b^2$",
+        "$\\sqrt{a+b}$",
+        "$\\sqrt{a^2+b^2}$"
+      ],
+      "correct": 3,
+      "why": [
+        "added instead of squaring",
+        "forgot the square root",
+        "placed the square root on the sum",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "The modulus is the length of the vector $(a,b)$, which is $\\sqrt{a^2+b^2}$.",
+    "hints": [
+      "Use the Pythagorean length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the imaginary part of $(1+i)^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "$(1+i)^2=1+2i+i^2=2i$, so the imaginary part is $2$.",
+    "hints": [
+      "Expand the square."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0094",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the real part of $(2+3i)(1-i)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*1-3*(-1)",
+    "solution": "$(2+3i)(1-i)=2-2i+3i-3i^2=5+i$. The real part is $5$.",
+    "hints": [
+      "Expand and use $i^2=-1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $|3+4i|^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 25,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3**2+4**2",
+    "solution": "The modulus is $5$, so $|3+4i|^2=25$.",
+    "hints": [
+      "Square the modulus."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the imaginary part of $\\dfrac{1}{1+i}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "-Fraction(1,2)",
+    "solution": "Multiply by the conjugate: $\\frac{1}{1+i}=\\frac{1-i}{2}$, so the imaginary part is $-\\frac12$.",
+    "hints": [
+      "Multiply top and bottom by the conjugate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $z=-1+\\sqrt3\\,i$. Find $\\arg z$ as a multiple of $\\pi$, using the principal value in $(-\\pi,\\pi]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/3",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "round(math.atan2(math.sqrt(3),-1)/math.pi,12)",
+    "solution": "$z$ lies in the second quadrant with modulus $2$, so $\\arg z=\\frac{2\\pi}{3}$.",
+    "hints": [
+      "Sketch the point and read its angle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $z=re^{i\\theta}$ with $r>0$, give $|z^2|$ in terms of $r$.",
+    "answer": {
+      "kind": "expression",
+      "value": "r^2",
+      "vars": [
+        "r"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "r*r",
+        "r^(2)"
+      ]
+    },
+    "check": null,
+    "solution": "Modulus is multiplicative, so $|z^2|=|z|^2=r^2$.",
+    "hints": [
+      "Modulus multiplies under products."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-arith"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which expressions are the principal square root of $-4$?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$2i$",
+        "$-2i$",
+        "$2\\sqrt{-1}$",
+        "$4i$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "check": null,
+    "solution": "Principal square root has positive imaginary part, so $2i$ and $2\\sqrt{-1}=2i$ are correct. $-2i$ is the other root, and $4i$ squares to $-16$.",
+    "hints": [
+      "Square each candidate and compare with $-4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The Cauchy-Riemann equations for $f=u+iv$ are:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$u_x=v_x$ and $u_y=-v_y$",
+        "$u_x=v_y$ and $u_y=-v_x$",
+        "$u_x=-v_y$ and $u_y=v_x$",
+        "$u_x=v_x$ and $u_y=v_y$"
+      ],
+      "correct": 1,
+      "why": [
+        "paired the wrong partials",
+        "",
+        "both signs flipped",
+        "same partials, no coupling"
+      ]
+    },
+    "check": null,
+    "solution": "Analytic $f$ needs $u_x=v_y$ and $u_y=-v_x$.",
+    "hints": [
+      "Check $f=z$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The function $f(z)=\\bar z$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "nowhere analytic",
+        "analytic everywhere",
+        "analytic only on the real axis",
+        "analytic except at $0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ignored the conjugate",
+        "Cauchy-Riemann fails on every line, not only the real axis",
+        "confused it with a pole"
+      ]
+    },
+    "check": null,
+    "solution": "For $\\bar z$, $u_x=1$ but $v_y=-1$, so Cauchy-Riemann fails everywhere.",
+    "hints": [
+      "Check $u_x$ against $v_y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $f(z)=z^2$, $u=x^2-y^2$. Find $u_x$ at $(1,2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*1",
+    "solution": "$u_x=2x=2$ at $x=1$.",
+    "hints": [
+      "Differentiate in $x$ only."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $f(z)=z^3$, $u=x^3-3xy^2$. Find $u_y$ at $(1,1)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "-6*1*1",
+    "solution": "$u_y=-6xy=-6$ at $(1,1)$.",
+    "hints": [
+      "Differentiate in $y$ only."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $f(z)=z^3$, find $\\operatorname{Im} f'(1+i)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "int((3*(1+1j)**2).imag)",
+    "solution": "$f'(z)=3z^2=3(2i)=6i$, so the imaginary part is $6$.",
+    "hints": [
+      "Compute $f'$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $u=x^2-y^2$ with harmonic conjugate $v$ satisfying $v(0,0)=0$. Find $v(1,2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*1*2",
+    "solution": "Cauchy-Riemann gives $v=2xy$, which vanishes at the origin. At $(1,2)$, $v=4$.",
+    "hints": [
+      "Integrate $v_y=u_x$ in $y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $u=x^2y$. Find $u_{xx}+u_{yy}$ at $(1,3)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*3",
+    "solution": "$u_{xx}=2y=6$ and $u_{yy}=0$, so the sum is $6$.",
+    "hints": [
+      "Differentiate twice in each variable."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "$u=e^x\\cos y$ is the real part of an analytic $f=u+iv$ with $v(0,0)=0$. Give $v(x,y)$.",
+    "answer": {
+      "kind": "expression",
+      "value": "exp(x)*sin(y)",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "sin(y)*exp(x)",
+        "e^x*sin(y)"
+      ]
+    },
+    "check": null,
+    "solution": "Cauchy-Riemann gives $v_y=e^x\\cos y$, so $v=e^x\\sin y$ and $v(0,0)=0$.",
+    "hints": [
+      "Integrate $v_y=u_x$ in $y$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-analytic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which functions are analytic on all of $\\mathbb{C}$?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$e^z$",
+        "$\\bar z$",
+        "$\\sin z$",
+        "$1/z$",
+        "$z^2+3z$"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "The exponential, sine, and polynomials are entire. $\\bar z$ is not analytic anywhere. $1/z$ has a pole at $0$.",
+    "hints": [
+      "Check for poles and failed Cauchy-Riemann equations."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Cauchy's integral theorem: if $f$ is analytic inside and on a simple closed contour $C$, then $\\oint_C f(z)\\,dz$ equals:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$2\\pi i$",
+        "$2\\pi i\\,f(0)$",
+        "$0$",
+        "$\\pi i$"
+      ],
+      "correct": 2,
+      "why": [
+        "needs a pole inside",
+        "the Cauchy formula needs a point inside",
+        "",
+        "half the formula's constant"
+      ]
+    },
+    "check": null,
+    "solution": "With no poles inside, the integral vanishes.",
+    "hints": [
+      "Look for poles inside $C$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $f=g/h$ has a simple pole at $z_0$ with $h(z_0)=0$ and $g(z_0)\\ne0$, the residue is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$h(z_0)/g'(z_0)$",
+        "$g'(z_0)/h(z_0)$",
+        "$g(z_0)\\,h'(z_0)$",
+        "$g(z_0)/h'(z_0)$"
+      ],
+      "correct": 3,
+      "why": [
+        "reciprocal ratio, roles swapped",
+        "derivative placed on the wrong factor",
+        "product, not ratio",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Near $z_0$, $h(z)\\approx h'(z_0)(z-z_0)$, so the residue is $g(z_0)/h'(z_0)$.",
+    "hints": [
+      "Linearize $h$ at $z_0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $C$ be the unit circle counterclockwise. Find $\\frac{1}{2\\pi i}\\oint_C \\frac{dz}{z}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "The integrand has a simple pole at $0$ with residue $1$ inside $C$.",
+    "hints": [
+      "Find the residue at $0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the residue of $\\dfrac{z}{(z-1)(z-2)}$ at $z=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1)/(1-2)",
+    "solution": "The residue is $\\frac{z}{z-2}$ evaluated at $z=1$, giving $\\frac{1}{-1}=-1$.",
+    "hints": [
+      "Cancel the pole and evaluate the rest."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the residue of $\\dfrac{z}{(z-1)(z-2)}$ at $z=2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(2)/(2-1)",
+    "solution": "The residue is $\\frac{z}{z-1}$ at $z=2$, giving $2$.",
+    "hints": [
+      "Cancel the other pole."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $C$ be $|z|=2$. Find $\\frac{1}{2\\pi i}\\oint_C \\frac{dz}{z(z-3)}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1/3",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(1,0-3)",
+    "solution": "Only the pole at $0$ is inside. Its residue is $\\frac{1}{0-3}=-\\frac13$.",
+    "hints": [
+      "Check which poles lie inside the contour."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $C$ be $|z|=1$. Find $\\frac{1}{2\\pi i}\\oint_C \\frac{z^2+1}{z^2-4}\\,dz$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "0",
+    "solution": "Both poles $\\pm2$ lie outside $C$, and the integrand is analytic inside. Cauchy gives $0$.",
+    "hints": [
+      "Check where the poles lie."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $a$ be real. Give the residue at $z=a$ of $\\dfrac{e^{z}}{z-a}$ as a function of $a$.",
+    "answer": {
+      "kind": "expression",
+      "value": "exp(a)",
+      "vars": [
+        "a"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "e^a"
+      ]
+    },
+    "check": null,
+    "solution": "The residue is the numerator evaluated at the pole: $e^a$.",
+    "hints": [
+      "Evaluate the numerator at the pole."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.contour-residue"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Let $C$ be $|z|=2$. Find $\\frac{1}{2\\pi i}\\oint_C \\dfrac{e^{z}}{z^2}\\,dz$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "The residue at $0$ is the coefficient of $z$ in $e^z$, which is $1$.",
+    "hints": [
+      "Expand $e^z$ as a power series."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A Möbius map $f(z)=\\dfrac{az+b}{cz+d}$ with $ad-bc\\ne0$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "defined only on the real line",
+        "a bijection of the Riemann sphere",
+        "always a polynomial",
+        "never one-to-one"
+      ],
+      "correct": 1,
+      "why": [
+        "not restricted to the real line",
+        "",
+        "a polynomial only when $c=0$",
+        "they are injective, so the last option is false"
+      ]
+    },
+    "check": null,
+    "solution": "The condition $ad-bc\\ne0$ makes the map invertible on the extended plane.",
+    "hints": [
+      "Think about the inverse map."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A polynomial of degree $n$ has how many zeros in $\\mathbb{C}$, counted with multiplicity?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n$",
+        "$n-1$",
+        "$n+1$",
+        "depends on the coefficients"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "one fewer than the degree",
+        "counts the constant term as a root",
+        "misreads the fundamental theorem"
+      ]
+    },
+    "check": null,
+    "solution": "The fundamental theorem of algebra gives exactly $n$ zeros with multiplicity.",
+    "hints": [
+      "Factor into linear terms over $\\mathbb C$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $f(0)$ for $f(z)=\\dfrac{z+1}{z-2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-1/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(0+1,0-2)",
+    "solution": "$f(0)=\\frac{1}{-2}=-\\frac12$.",
+    "hints": [
+      "Substitute $z=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $f(1)$ for $f(z)=\\dfrac{2z+1}{z-3}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "-3/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(2*1+1,1-3)",
+    "solution": "$f(1)=\\frac{3}{-2}=-\\frac32$.",
+    "hints": [
+      "Substitute $z=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The map $f(z)=\\dfrac{z+2}{2z+1}$ has fixed point $z=1$. Find its other fixed point.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "-1",
+    "solution": "Solve $z(2z+1)=z+2$, giving $2z^2=2$, so $z=\\pm1$. The other fixed point is $-1$.",
+    "hints": [
+      "Write $f(z)=z$ as a quadratic."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many zeros does $z^4-1$ have in the disk $|z|<2$?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4",
+    "solution": "The four fourth roots of unity all have modulus $1$, so all lie in the disk.",
+    "hints": [
+      "Find the zeros."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the determinant $ad-bc$ of $f(z)=\\dfrac{3z+1}{z+2}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3*2-1*1",
+    "solution": "With $a=3$, $b=1$, $c=1$, $d=2$: $ad-bc=6-1=5$.",
+    "hints": [
+      "Read off $a,b,c,d$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "For $f(z)=\\dfrac{z}{z+1}$, give $f(f(z))$ as a function of $z$.",
+    "answer": {
+      "kind": "expression",
+      "value": "z/(2*z+1)",
+      "vars": [
+        "z"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "z/(z+z+1)"
+      ]
+    },
+    "check": null,
+    "solution": "Substitute to get $\\frac{z/(z+1)}{(2z+1)/(z+1)}=\\frac{z}{2z+1}$.",
+    "hints": [
+      "Combine over the common denominator $z+1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.complex-maps"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which of these are Möbius maps?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\dfrac{z+1}{z-1}$",
+        "$z^2$",
+        "$\\dfrac{2z}{z+3}$",
+        "$\\dfrac{z+1}{z+1}$",
+        "$1+\\dfrac1z$"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "Each Möbius map has $ad-bc\\ne0$. $z^2$ is not of that form. $\\frac{z+1}{z+1}$ has determinant $0$.",
+    "hints": [
+      "Compute $ad-bc$ for each candidate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0127",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "An integrating factor for $y'+p(x)y=q(x)$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$e^{-\\int p\\,dx}$",
+        "$\\int p\\,dx$",
+        "$e^{\\int p\\,dx}$",
+        "$p(x)$"
+      ],
+      "correct": 2,
+      "why": [
+        "sign of the exponent flipped",
+        "forgot the exponential",
+        "",
+        "confused it with the coefficient"
+      ]
+    },
+    "check": null,
+    "solution": "Multiplying by $e^{\\int p}$ makes the left side the derivative of $e^{\\int p}\\,y$.",
+    "hints": [
+      "Find a factor that makes the left side a derivative."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0128",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For the separable equation $y'=g(x)h(y)$, one gets:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\int h(y)\\,dy=\\int g(x)\\,dx$",
+        "$\\int \\frac{dy}{g(y)}=\\int h(x)\\,dx$",
+        "$\\int \\frac{dy}{h(y)}=\\int \\frac{dx}{g(x)}$",
+        "$\\int \\frac{dy}{h(y)}=\\int g(x)\\,dx$"
+      ],
+      "correct": 3,
+      "why": [
+        "forgot to divide by $h(y)$",
+        "swapped the roles of $g$ and $h$",
+        "divided the $x$-side by $g$",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Divide by $h(y)$ and multiply by $dx$, then integrate both sides.",
+    "hints": [
+      "Move all $y$ terms to one side."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0129",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $y'=2x$ with $y(0)=3$. Find $y(2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3+2**2",
+    "solution": "Integrating gives $y=x^2+3$, so $y(2)=7$.",
+    "hints": [
+      "Integrate and fix the constant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0130",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $y'=3x^2$ with $y(1)=5$. Find $y(2)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2**3+(5-1**3)",
+    "solution": "$y=x^3+4$, so $y(2)=12$.",
+    "hints": [
+      "Fix the constant with $y(1)=5$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0131",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $xy'=y$ with $y(1)=4$. Find $y(3)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4*3",
+    "solution": "Separation gives $y=4x$, so $y(3)=12$.",
+    "hints": [
+      "Separate and integrate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0132",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For $y'+\\frac{2}{x}y=x$ with $x>0$, find the integrating factor at $x=2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2**2",
+    "solution": "$\\mu=e^{\\int 2/x\\,dx}=x^2$, so $\\mu(2)=4$.",
+    "hints": [
+      "Integrate $\\frac{2}{x}$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0133",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the nonzero equilibrium of $y'=y(3-y)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "Setting $y(3-y)=0$ gives $y=0$ or $y=3$.",
+    "hints": [
+      "Set the right side to zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0134",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $y'=y+1$ with $y(0)=0$. Give $y(x)$.",
+    "answer": {
+      "kind": "expression",
+      "value": "exp(x)-1",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "e^x-1",
+        "-1+exp(x)"
+      ]
+    },
+    "check": null,
+    "solution": "Then $(y+1)'=y+1$, so $y+1=e^x$ and $y=e^x-1$.",
+    "hints": [
+      "Shift by one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0135",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-first"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which equation is separable?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$y'=x+y$",
+        "$y'=xy$",
+        "$y'=\\sin(x+y)$",
+        "$y'=\\dfrac{y}{x}+1$"
+      ],
+      "correct": 1,
+      "why": [
+        "a sum, not a product, so not separable",
+        "",
+        "the argument mixes $x$ and $y$",
+        "a sum form again, not a product"
+      ]
+    },
+    "check": null,
+    "solution": "Separable means the right side is a product of a function of $x$ and a function of $y$. Only $xy$ has that form.",
+    "hints": [
+      "Look for a product of an $x$-factor and a $y$-factor."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0136",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The characteristic equation of $y''+4y'+3y=0$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$r^2+4r+3=0$",
+        "$r^2-4r+3=0$",
+        "$r^2+3r+4=0$",
+        "$r+4+3=0$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sign of the middle term flipped",
+        "swapped the coefficients",
+        "dropped the square"
+      ]
+    },
+    "check": null,
+    "solution": "Replace $y^{(k)}$ by $r^k$ to get the quadratic $r^2+4r+3=0$.",
+    "hints": [
+      "Replace each derivative by a power of $r$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0137",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Roots $r=\\alpha\\pm\\beta i$ give real solutions:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$e^{\\beta x}$ and $e^{\\alpha x}$",
+        "$\\cos(\\alpha x)$ and $\\sin(\\beta x)$",
+        "$e^{\\alpha x}\\cos\\beta x$ and $e^{\\alpha x}\\sin\\beta x$",
+        "$x e^{\\alpha x}$ and $e^{-\\alpha x}$"
+      ],
+      "correct": 2,
+      "why": [
+        "the roots were put in the exponent",
+        "omits the exponential factor",
+        "",
+        "repeated-root form, not complex roots"
+      ]
+    },
+    "check": null,
+    "solution": "Euler's formula splits $e^{(\\alpha+i\\beta)x}$ into the real and imaginary parts.",
+    "hints": [
+      "Use Euler's formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0138",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The characteristic roots of $r^2-5r+6=0$ are real. Find the larger root.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "max(2,3)",
+    "solution": "$(r-2)(r-3)=0$, so the roots are $2$ and $3$.",
+    "hints": [
+      "Factor the quadratic."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0139",
+    "probe": true,
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Solve $y''-5y'+6y=0$ with $y(0)=3$ and $y'(0)=8$. Write $y=c_1e^{2x}+c_2e^{3x}$. Find $c_1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3-(8-2*3)/(3-2)",
+    "solution": "From $c_1+c_2=3$ and $2c_1+3c_2=8$, we get $c_2=2$ and $c_1=1$.",
+    "hints": [
+      "Solve the two linear equations for the constants."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0140",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $y''-y=0$ with $y(0)=4$ and $y'(0)=2$. Write $y=Ae^x+Be^{-x}$. Find $A$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(4+2)/2",
+    "solution": "$A+B=4$ and $A-B=2$, so $A=3$.",
+    "hints": [
+      "Use $y(0)$ and $y'(0)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0141",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A particular solution of $y''+y'=2$ has the form $y_p=kx$. Find $k$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "With $y_p=kx$, we get $y_p'=k$ and $y_p''=0$. So $k=2$.",
+    "hints": [
+      "Substitute $y_p=kx$ and match the constant term."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0142",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the angular frequency of solutions of $y''+4y=0$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "The roots are $\\pm2i$, so the solutions oscillate with frequency $2$.",
+    "hints": [
+      "Read the imaginary part of the roots."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0143",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $y''=y$ with $y(0)=1$ and $y'(0)=1$. Give $y(x)$.",
+    "answer": {
+      "kind": "expression",
+      "value": "exp(x)",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "e^x"
+      ]
+    },
+    "check": null,
+    "solution": "The initial conditions force $A=1$ and $B=0$ in $Ae^x+Be^{-x}$.",
+    "hints": [
+      "Fix both constants from the two initial values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0144",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-linear"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which functions solve $y''+9y=0$?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\cos 3x$",
+        "$\\sin 3x$",
+        "$e^{3x}$",
+        "$\\cos 9x$",
+        "$2\\sin 3x-\\cos 3x$"
+      ],
+      "correct": [
+        0,
+        1,
+        4
+      ]
+    },
+    "check": null,
+    "solution": "Roots are $\\pm3i$, so solutions are combinations of $\\cos 3x$ and $\\sin 3x$. $e^{3x}$ and $\\cos 9x$ fail.",
+    "hints": [
+      "Check the frequency of each candidate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0145",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $\\mathbf x'=A\\mathbf x$ with real eigenvalues $\\lambda_1<0<\\lambda_2$, the origin is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "a sink",
+        "a source",
+        "a center",
+        "a saddle"
+      ],
+      "correct": 3,
+      "why": [
+        "needs both eigenvalues negative",
+        "needs both eigenvalues positive",
+        "a center needs purely imaginary eigenvalues",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Opposite signs make some directions attract and others repel.",
+    "hints": [
+      "Look at the signs of the eigenvalues."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0146",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Purely imaginary eigenvalues $\\pm bi$ with $b\\ne0$ give:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "spirals that grow",
+        "closed orbits around the origin",
+        "a saddle",
+        "a node"
+      ],
+      "correct": 1,
+      "why": [
+        "the real part must be positive for growth",
+        "",
+        "a saddle needs real eigenvalues of opposite sign",
+        "a node needs real eigenvalues"
+      ]
+    },
+    "check": null,
+    "solution": "With zero real part, solutions neither grow nor decay, so the orbits are closed.",
+    "hints": [
+      "Zero real part means no growth or decay."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0147",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the larger eigenvalue of $\\begin{pmatrix}0&1\\\\-2&-3\\end{pmatrix}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "max(-1,-2)",
+    "solution": "The characteristic polynomial is $\\lambda^2+3\\lambda+2=(\\lambda+1)(\\lambda+2)$. The roots are $-1$ and $-2$.",
+    "hints": [
+      "Find the characteristic polynomial."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0148",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\det A$ for $A=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1*4-2*3",
+    "solution": "$\\det A=1\\cdot4-2\\cdot3=-2$.",
+    "hints": [
+      "Use the $2\\times2$ determinant formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0149",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the sum of the eigenvalues of $\\begin{pmatrix}2&5\\\\0&-7\\end{pmatrix}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": -5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2+(-7)",
+    "solution": "The matrix is triangular, so the eigenvalues are its diagonal entries $2$ and $-7$. Their sum is $-5$.",
+    "hints": [
+      "Read the diagonal of a triangular matrix."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0150",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A real $2\\times2$ matrix has trace $0$ and determinant $4$. Find the imaginary part of the eigenvalue with positive imaginary part.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "The characteristic polynomial is $\\lambda^2+4$, so $\\lambda=\\pm2i$.",
+    "hints": [
+      "Use $\\lambda^2-(\\operatorname{tr})\\lambda+\\det=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0151",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many independent eigenvectors does $\\begin{pmatrix}5&0\\\\0&5\\end{pmatrix}$ have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Every nonzero vector is an eigenvector, so the eigenspace has dimension $2$.",
+    "hints": [
+      "Look at the eigenspace dimension."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0152",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Solve $y'=2y$ with $y(0)=c$. Give $y(t)$.",
+    "answer": {
+      "kind": "expression",
+      "value": "c*exp(2*t)",
+      "vars": [
+        "t",
+        "c"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "c*e^(2*t)",
+        "exp(2*t)*c"
+      ]
+    },
+    "check": null,
+    "solution": "The solution is $y=y(0)e^{2t}$.",
+    "hints": [
+      "Scale the exponential by the initial value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0153",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ode-systems"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which systems have the origin as a saddle?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$x'=x,\\ y'=-y$",
+        "$x'=x,\\ y'=y$",
+        "$x'=-x,\\ y'=-2y$",
+        "$x'=y,\\ y'=x$",
+        "$x'=-y,\\ y'=x$"
+      ],
+      "correct": [
+        0,
+        3
+      ]
+    },
+    "check": null,
+    "solution": "Saddles have one positive and one negative eigenvalue. $x'=x,\\ y'=-y$ and $x'=y,\\ y'=x$ qualify. The others are a source, a sink, and a center.",
+    "hints": [
+      "Find the eigenvalues of each matrix."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0154",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Newton's method for $f(x)=0$ updates the iterate by:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x_{n+1}=x_n-\\dfrac{f(x_n)}{f'(x_n)}$",
+        "$x_{n+1}=x_n-f(x_n)\\,f'(x_n)$",
+        "$x_{n+1}=x_n+\\dfrac{f(x_n)}{f'(x_n)}$",
+        "$x_{n+1}=\\dfrac{f(x_n)}{f'(x_n)}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "multiplied instead of divided",
+        "sign of the step flipped",
+        "dropped the current iterate"
+      ]
+    },
+    "check": null,
+    "solution": "The tangent line at $x_n$ crosses zero at $x_{n+1}$.",
+    "hints": [
+      "Think about where the tangent line crosses zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0155",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The error of the trapezoid rule with step $h$ is of order:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$h^4$",
+        "$h^8$",
+        "$h^2$",
+        "$h$"
+      ],
+      "correct": 2,
+      "why": [
+        "Simpson's order, not the trapezoid's",
+        "far too high",
+        "",
+        "first order, as for the one-sided sums"
+      ]
+    },
+    "check": null,
+    "solution": "The trapezoid error is proportional to $h^2$ for smooth integrands.",
+    "hints": [
+      "Compare it with the midpoint rule."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0156",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Simpson's rule with one panel on $[0,2]$ for $f(x)=x^2$. Give the result.",
+    "answer": {
+      "kind": "numeric",
+      "value": "8/3",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(2,6)*(0+4*1**2+2**2)",
+    "solution": "$\\frac{b-a}{6}\\bigl(f(0)+4f(1)+f(2)\\bigr)=\\frac13(0+4+4)=\\frac83$.",
+    "hints": [
+      "Use $f(0)$, $f(1)$, $f(2)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0157",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find one Newton step for $x^2-2=0$ starting at $x_0=1$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "3/2",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "1-Fraction(1*1-2,2*1)",
+    "solution": "$x_1=1-\\frac{1-2}{2}=\\frac32$.",
+    "hints": [
+      "Use $f'(x)=2x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0158",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Use the trapezoid rule with $n=2$ on $[0,2]$ for $f(x)=x^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,2)*(0+2*1+4)",
+    "solution": "With $h=1$, $T=\\frac{h}{2}(f_0+2f_1+f_2)=\\frac12(0+2+4)=3$.",
+    "hints": [
+      "Set $h=1$ and weight the interior point by $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0159",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Use Simpson's rule with $n=2$ on $[0,2]$ for $f(x)=x^3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1,3)*(0+4*1+2**3)",
+    "solution": "With $h=1$, $S=\\frac{h}{3}(f_0+4f_1+f_2)=\\frac13(0+4+8)=4$.",
+    "hints": [
+      "Simpson is exact for cubics."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0160",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Use the midpoint rule with one interval on $[0,2]$ for $f(x)=x^2$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*1**2",
+    "solution": "The midpoint value is $f(1)=1$, and the interval length is $2$. The estimate is $2$.",
+    "hints": [
+      "Evaluate $f$ at the midpoint."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0161",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "For $f(x)=x^2-a$ with $a>0$, write the Newton map $g(x)$ as an expression in $x$ and $a$.",
+    "answer": {
+      "kind": "expression",
+      "value": "(x+a/x)/2",
+      "vars": [
+        "x",
+        "a"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "x/2+a/(2*x)"
+      ]
+    },
+    "check": null,
+    "solution": "Here $g(x)=x-\\frac{x^2-a}{2x}=\\frac{x+a/x}{2}$.",
+    "hints": [
+      "Use $f'(x)=2x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0162",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.numerical"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which methods have error of order $h^2$ or better for smooth integrands?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "Midpoint rule",
+        "Trapezoid rule",
+        "Left-endpoint rule",
+        "Simpson's rule",
+        "Euler's method, global error"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    },
+    "check": null,
+    "solution": "Midpoint and trapezoid have order $h^2$. Simpson has order $h^4$. The left-endpoint rule has order $h$, and Euler's global error is also order $h$.",
+    "hints": [
+      "Compare the order of each method."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0163",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The $2\\times2$ matrix of a rotation by $\\theta$ counterclockwise is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\begin{pmatrix}\\cos\\theta & \\sin\\theta\\\\ -\\sin\\theta & \\cos\\theta\\end{pmatrix}$",
+        "$\\begin{pmatrix}\\cos\\theta & -\\cos\\theta\\\\ \\sin\\theta & \\sin\\theta\\end{pmatrix}$",
+        "$\\begin{pmatrix}\\sin\\theta & \\cos\\theta\\\\ \\cos\\theta & -\\sin\\theta\\end{pmatrix}$",
+        "$\\begin{pmatrix}\\cos\\theta & -\\sin\\theta\\\\ \\sin\\theta & \\cos\\theta\\end{pmatrix}$"
+      ],
+      "correct": 3,
+      "why": [
+        "the transpose, which rotates by $-\\theta$",
+        "not orthogonal",
+        "a reflection, not a rotation",
+        ""
+      ]
+    },
+    "check": null,
+    "solution": "Columns are the images of the unit vectors: $(\\cos\\theta,\\sin\\theta)$ and $(-\\sin\\theta,\\cos\\theta)$.",
+    "hints": [
+      "Map $(1,0)$ and $(0,1)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0164",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The distance from $(x_0,y_0,z_0)$ to the plane $ax+by+cz=d$ is:",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|ax_0+by_0+cz_0-d|$",
+        "$\\dfrac{|ax_0+by_0+cz_0-d|}{\\sqrt{a^2+b^2+c^2}}$",
+        "$\\dfrac{ax_0+by_0+cz_0-d}{\\sqrt{a^2+b^2+c^2}}$",
+        "$\\dfrac{|ax_0+by_0+cz_0-d|}{a^2+b^2+c^2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "forgot to divide by the normal length",
+        "",
+        "forgot the absolute value",
+        "divided by the squared length"
+      ]
+    },
+    "check": null,
+    "solution": "Divide the signed offset by the length of the normal vector $(a,b,c)$, then take the absolute value.",
+    "hints": [
+      "Divide by the length of the normal."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0165",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A linear map scales $x$ by $2$ and $y$ by $3$. Find the determinant of its matrix.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*3",
+    "solution": "The matrix is $\\operatorname{diag}(2,3)$, with determinant $6$.",
+    "hints": [
+      "Multiply the diagonal entries."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0166",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the distance from $(1,2,3)$ to the plane $x+2y+2z=9$.",
+    "answer": {
+      "kind": "numeric",
+      "value": "2/3",
+      "tol": 0,
+      "form": "fraction"
+    },
+    "check": "Fraction(abs(1+4+6-9),3)",
+    "solution": "The distance is $\\frac{|1+4+6-9|}{\\sqrt{1+4+4}}=\\frac{2}{3}$.",
+    "hints": [
+      "The normal length is $3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0167",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Reflect $(1,5)$ across the line $y=x$, then rotate $90^\\circ$ counterclockwise about the origin. Find the $x$-coordinate of the result.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "-1",
+    "solution": "Reflection gives $(5,1)$. The $90^\\circ$ rotation sends $(x,y)$ to $(-y,x)$, giving $(-1,5)$.",
+    "hints": [
+      "Apply the reflection first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0168",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the area of the triangle with vertices $(0,0)$, $(4,0)$, $(1,3)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(abs(4*3-0*1),2)",
+    "solution": "Area is $\\frac12|\\det|$ of the edge vectors: $\\frac12|4\\cdot3-0\\cdot1|=6$.",
+    "hints": [
+      "Use half the absolute determinant."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0169",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the slope of the line through $(1,2)$ and $(3,8)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(8-2,3-1)",
+    "solution": "The slope is $\\frac{8-2}{3-1}=3$.",
+    "hints": [
+      "Rise over run."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0170",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The shear $(x,y)\\mapsto(x+2y,\\ y)$ sends $(x,y)$ to a point. Give its first coordinate as a function of $x$ and $y$.",
+    "answer": {
+      "kind": "expression",
+      "value": "x+2*y",
+      "vars": [
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "2*y+x",
+        "y*2+x"
+      ]
+    },
+    "check": null,
+    "solution": "Read the first output coordinate of the shear formula.",
+    "hints": [
+      "Read the first output coordinate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0171",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.geometry-misc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which pairs of lines in $\\mathbb R^2$ are perpendicular?",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$y=2x$ and $y=-\\tfrac12 x$",
+        "$y=2x$ and $y=2x+1$",
+        "$y=3x+1$ and $y=-\\tfrac13 x$",
+        "$y=x$ and $y=-x$",
+        "$y=x$ and $y=x+2$"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ]
+    },
+    "check": null,
+    "solution": "Perpendicular lines have slopes with product $-1$. The first, third, and fourth pairs qualify. Parallel pairs have equal slopes and are not perpendicular.",
+    "hints": [
+      "Multiply the two slopes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

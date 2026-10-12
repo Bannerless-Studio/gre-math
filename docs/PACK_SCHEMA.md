@@ -2,7 +2,7 @@
 
 Authoritative for what `engine/core.js` and `tools/validate_pack.js` accept. Change this file in the same commit as any field change.
 
-A pack is three UTF-8 JSON files in one directory: `pack.json`, `techniques.json`, `items.json`. Prose fields are Markdown with `$...$` (inline) and `$$...$$` (display) LaTeX. The build renders them; see Rendering (M2).
+A pack is three UTF-8 JSON files in one directory: `pack.json`, `techniques.json`, `items.json`. Prose fields are Markdown with `$...$` (inline) and `$$...$$` (display) LaTeX. The build validates their math and the page renders it; see Rendering (M2).
 
 ## pack.json
 
@@ -52,7 +52,7 @@ Array of item objects.
 | `difficulty` | yes | none | Integer 1 to 5. Orders Learn micro problems (easiest first). |
 | `prompt` | yes | none | Markdown, non-empty. |
 | `solution` | yes | none | Markdown, non-empty. Shown after every answer. Mandatory for tier c. |
-| `hints` | no | `[]` | Markdown strings. Rendered at build into `html.hints` (see Rendering). Not shown in the page yet. |
+| `hints` | no | `[]` | Markdown strings. Math is rendered by the page (see Rendering). Not shown in the page yet. |
 | `answer` | yes | none | See below. |
 | `source` | yes | none | `{type, ...}`. `type` is `original`, `adapted` or `public-domain`. |
 
@@ -85,7 +85,7 @@ A full item is a multi-step problem. The learner commits an answer under a timer
 |---|---|
 | `tier` | `c`. `type`, if present, is `full`. |
 | `answer.kind` | `mcq` with exactly 5 options (`correct` indexes them), or `numeric`. Not `self`, `expression`, `multi`. |
-| `rubric` | Non-empty list of `{text, weight}`. `text` is Markdown with LaTeX (rendered at build). `weight` is a number above 0. |
+| `rubric` | Non-empty list of `{text, weight}`. `text` is Markdown with LaTeX (rendered by the page). `weight` is a number above 0. |
 | `pass` | Number above 0, at most the total rubric weight. Rubric weight at or above `pass` is the rubric level 2. |
 | `solution` | Mandatory. Shown after the commit. |
 | `difficulty` | 1 to 5. Picks the budget (`full.budgetSec`). |
@@ -153,7 +153,7 @@ Expression grammar: numbers, declared vars, `pi`, `e`, `+ - * / ^`, unary minus 
 
 ## Rendering (M2)
 
-The build (`tools/render_pack.js`, run by `build.sh`) renders every `prompt`, `solution`, `hints[]`, `answer.options[]`, `answer.display` and technique `teach` through `katex.renderToString` (KaTeX 0.16.11, vendored in `vendor/katex/`). Raw files stay the source of truth. Each record in the page data gains an `html` object with `prompt`, `solution`, `hints`, `options`, `display` (items) or `teach` (techniques). The page shows `html` when present and falls back to the raw Markdown-lite text when a field has no rendered version.
+The page renders every `prompt`, `solution`, `hints[]`, `answer.options[]`, `answer.display`, `rubric[].text` and technique `teach` at run time, through `katex.renderToString` (KaTeX 0.16.11, vendored in `vendor/katex/`, inlined by `build.sh`). The page data is the raw pack, with no `html` field and no tag dictionary. Each distinct field string renders once and is cached for the page. The build (`tools/render_pack.js`, run by `build.sh`) validates the same fields and writes no rendered HTML.
 
 Markup rules (shared module `engine/text.js`):
 
@@ -162,14 +162,14 @@ Markup rules (shared module `engine/text.js`):
 - Other text is escaped (`&`, `<`, `>`, `"`), then `` `code` `` and `**bold**` apply, and blank lines split paragraphs.
 - A JSON escape misread (a single backslash before a letter, such as `\frac` written as `\f` followed by `rac`) lands as a control character. The validator rejects any control character in a string.
 
-The validator renders the same fields. It fails a pack on:
+The build validates the same fields with `throwOnError` and strict warnings on. It fails a pack on:
 
 - any LaTeX that KaTeX rejects (`throwOnError`), or any KaTeX strict warning;
 - any math span that asks for a font face outside the core subset.
 
 Core subset (the only fonts in the page; the list is `CORE_FONTS` in `tools/render.js`): KaTeX Main Regular, Bold, Italic; Math Italic; AMS Regular; Size1 to Size4; Caligraphic Regular. Not in the subset, so these fail the pack: `\mathfrak` (Fraktur), `\mathscr` (Script), `\mathsf` (SansSerif), `\mathtt` (Typewriter), `\boldsymbol` and bold-italic math letters (Math BoldItalic). Use `\mathbf` for bold Latin letters and `\mathbb` for blackboard bold. Adding a face is a rule change: vendor the woff2, add it to `CORE_FONTS`, and update this section in the same commit.
 
-The page carries the KaTeX CSS with the core faces as base64 woff2. It carries no KaTeX JavaScript.
+The page carries the KaTeX JavaScript once, and the KaTeX CSS with the core faces as base64 woff2. Typed learner answers are shown as typed, escaped, and never reach KaTeX.
 
 ## Warnings (not errors)
 

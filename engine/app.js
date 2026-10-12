@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  var PE = window.PE, A = window.PEAnswer, ST = window.PEStore, T = window.PEText, DATA = T.unpackData(window.PE_DATA);
+  var PE = window.PE, A = window.PEAnswer, ST = window.PEStore, T = window.PEText, DATA = window.PE_DATA;
   var KEY = 'pe_' + DATA.pack.key;
   var IX = PE.index(DATA);
   var root = document.getElementById('root');
@@ -13,31 +13,29 @@
   function p2(n) { return (n < 10 ? '0' : '') + n; }
   function today() { var d = new Date(); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
   var esc = T.esc;
-  // Fallback only: Markdown-lite with $...$ left as typed. The build pre-renders math into item.html and techniques[].html.
-  function md(s, inline) { return T.md(s, inline); }
-  // Rendered HTML when the build supplied it, else the raw fallback.
-  function field(item, name, inline) {
-    if (item && item.html && item.html[name] != null) return item.html[name];
-    return md(item ? item[name] : '', inline);
+  // Math renders in the page, once per distinct field string (the cache lasts for the page). The KaTeX global is
+  // inlined ahead of this script by the build. If it is missing, the TeX shows as typed.
+  var mathCache = Object.create(null);
+  function mathFn(tex, display) { return window.katex ? T.mathSpan(window.katex, tex, display) : esc(tex); }
+  function md(s, inline) {
+    var key = (inline ? 'i' : 'b') + (s == null ? '' : String(s));
+    if (!(key in mathCache)) mathCache[key] = T.md(s, inline, mathFn);
+    return mathCache[key];
   }
+  function field(item, name, inline) { return md(item ? item[name] : '', inline); }
   // i is the authored (original) option index.
-  function optHtml(item, i) {
-    if (item.html && item.html.options && item.html.options[i] != null) return item.html.options[i];
-    return md(item.answer.options[i], true);
-  }
+  function optHtml(item, i) { return md(item.answer.options[i], true); }
   // Mirrors core answerText: display, else the correct option(s) for mcq and multi, else the typed value.
+  // The typed value is shown as typed (escaped, no math), so a learner's text never reaches KaTeX.
   function ansHtml(item, text) {
-    var a = item.answer, h = item.html || {};
-    if (a.display != null) return h.display != null ? h.display : md(a.display, true);
+    var a = item.answer;
+    if (a.display != null) return md(a.display, true);
     var kind = PE.itemKind(item);
     if (kind === 'mcq') return optHtml(item, a.correct);
     if (kind === 'multi') return a.correct.map(function (i) { return optHtml(item, i); }).join(', ');
-    return md(text, true);
+    return T.md(text, true);
   }
-  function techHtml(card) {
-    var t = IX.techById[card.tech];
-    return t && t.html && t.html.teach != null ? t.html.teach : md(card.markdown);
-  }
+  function techHtml(card) { return md(card.markdown); }
   function techName(id) { return IX.techById[id] ? IX.techById[id].name : id; }
   function levelLabel(id) {
     var lv = IX.levels.filter(function (l) { return l.id === id; })[0];
@@ -213,10 +211,7 @@
   document.addEventListener('visibilitychange', tickClock);
   document.addEventListener('visibilitychange', function () { if (document.hidden && draftTimer) syncSession(); });
   window.addEventListener('pagehide', function () { if (draftTimer) syncSession(); });
-  function rubricHtml(item, i) {
-    var h = item.html && item.html.rubric && item.html.rubric[i];
-    return h != null ? h : md(item.rubric[i].text, true);
-  }
+  function rubricHtml(item, i) { return md(item.rubric[i].text, true); }
   function viewFull(card) {
     var item = card.item, c = card.commit, g = card.graded, budget = card.budgetSec;
     var numeric = card.kind !== 'mcq';
@@ -269,7 +264,7 @@
     var s = S.summary, miss = s.missed.map(function (m) {
       var it = IX.itemById[m.id];
       var prompt = it ? field(it, 'prompt') : md(m.prompt), sol = it ? field(it, 'solution') : md(m.solution);
-      var ans = it ? ansHtml(it, m.answer) : md(m.answer, true);
+      var ans = it ? ansHtml(it, m.answer) : T.md(m.answer, true);
       return '<article class="card"><div class="prose">' + prompt + '</div>' +
         '<p class="answer">Answer: ' + ans + '</p><details class="sol"><summary>Solution</summary><div class="prose">' + sol + '</div></details></article>';
     }).join('');

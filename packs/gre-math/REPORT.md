@@ -132,3 +132,90 @@ Author-flagged ids checked: t4-0030 (key 2 correct, others fail), t4-0102 (limit
 - No MCQ with two defensible options, no distractor equal to key, no micro prompt over 2 sentences, no non-core LaTeX font (all 1888 math spans render under KaTeX strict).
 
 Checks: `check_items.py --batch=T4.ab.json` OK 144 items; `--batch=T4.c.json` OK 32 items; all 38 expression forms (value plus also) check ok:true.
+
+## T5 review (sonnet-5.5)
+
+Counts: ab 126 items (28 recall mcq/numeric/expression, 98 micro), c 28 full, teach 14 cards. Probes: 6 (partials, gradient, lagrange, double-int, line-int, green), all tier b numeric, one per CURRICULUM §4 T5 technique. MCQ/multi `shuffle` defaults to true in engine/core.js (confirmed).
+
+Blind-solve agreement: ab 126/126 keys agree (0 key errors); c 28/28 agree. Author-flagged ids (t5-0033, 0050, 0054, 0063, 0080; f004, f012, f028) all correct and well-posed. Full items: each uses at least 2 techniques; rubrics follow solution steps; pass 3.5 of 5 (70%) on all 28.
+
+| id | class | change |
+|---|---|---|
+| t5-0044 | ill-posed (D_v with non-unit v ambiguous: -14 vs -7) | prompt now asks for derivative "in the direction of v"; key -7 unchanged |
+| t5-0061 | ill-posed (lambda sign depends on convention) | prompt states "Using grad f = lambda grad g"; key 4 unchanged |
+| t5-0090 | two defensible options | option 3 changed to upper limit 1-x on dz (value 1/3, was 1/6 = tetrahedron volume); key [0,2] unchanged |
+| teach lines-planes | ambiguous symbol d | trap clarifies plane constant d vs normal |
+| teach mv-extrema | unclear trap | trap now says check boundary of closed region |
+| teach lagrange | inaccurate claim (boundary of non-closed set) | now "finds the extremes when constraint set is closed and bounded" |
+| teach triple-int | convoluted trap | rewritten: inner bound using a variable not yet fixed |
+| teach line-int | example missing path | added "from (0,0) to (1,1)" |
+| teach green | example clarity | integral shown as 2*1=2 |
+
+Left as is: t5-0003 (angle domain [0.3,2.7] keeps sin>0, abs(sin) form equal but natural); t5-0045 option 3 true by definition of critical point for differentiable f; t5-0048 D=0 (asks only for D); f008 second tag t3.related-rates is light (check step) but acceptable; f013 second tag t5.partials is light; f001 trig-id tag is the Lagrange identity step. No LaTeX outside KaTeX core; no micro prompt over 2 sentences. Teach cards all <= 80 words.
+
+Checkers: `check_items.py --batch=T5.ab.json` OK 126 items; `--batch=T5.c.json` OK 28 items; expression value + also forms via engine/answer.js check: 54 forms, 0 failures.
+
+## T6 review (sonnet-5.5)
+
+| File | Items | Key agreement (blind) |
+|---|---|---|
+| T6.ab.json | 135 (45 recall, 90 micro) | 135/135 (100%) |
+| T6.c.json | 30 | 30/30 (100%) |
+
+Author-flagged ids checked: t6-0076 (c1=2, correct), t6-0079 (similar to diag(1,2): options 0,1,2; the upper triangular one has distinct eigenvalues), t6-0099 (char poly (x-2)^2, eigenspace dim 1), t6-0107 (options 0 and 3 only), t6-0125 (A11=1), t6-f028 (|k|<=2 gives 5), t6-f020 (k=-10..-2 gives 9), t6-f014 (max rank 4, blocks 3,3,1). All keys correct. All distractor why-notes in the 30 full items recomputed; each numeric claim checked.
+
+### Changed items
+
+| id | class | change |
+|---|---|---|
+| t6-0084 | ill-posed | "Which is an eigenvalue" made option "2 only" defensible-looking; prompt now "Which lists all the eigenvalues" |
+| t6-0073 | distractor note | congruence note said P must be orthogonal; now "matches similarity only when P is orthogonal" |
+| t6-f003 | distractor note | why[1] and why[4] described errors that do not give 6 and 9; rewritten (set m-2=0 instead of m-4=0; used unreduced constant 3) |
+| t6-f006 | distractor note | why for 89 and 233 claimed recurrence slips that do not produce them; now Fibonacci mis-indexing (F11, F13 vs D5=F12) |
+| t6-f024 | distractor note | -27 is (0-3)^3, note now says (x-3)^3 leaving out eigenvalue 5 |
+| t6-f027 | distractor note | "averaged the eigenvalues" gives 2 not 3; now Q at unit vector (1,1,0)/sqrt2, which violates the constraint |
+
+### Left as is
+- t6-f010: techniques logic-sets and proof-methods are thin; the item is essentially one vector-spaces check, five times. Kept.
+- t6-f025: determinant tag is only a cross-check in the solution, not a required step. Kept.
+- t6-0047: option "no vector is a multiple of another" is wrong only for three or more vectors; stem not restricted, key unambiguous. Kept.
+- All 30 full items: total weight 5, pass 3.5 (70%). Rubric lines match solution steps.
+- Probes: one per technique in the T6 list (gauss t6-0013, determinant t6-0022, rank-nullity t6-0058, eigen-2x2 t6-0085, diagonalize t6-0094, spectral t6-0121); all tier b numeric.
+- Teach cards: all 15 at most 70 words, each states move and trap; no errors, no edits.
+- No micro prompt over 2 sentences, no non-core LaTeX font, no distractor equal to key.
+
+Checks: `check_items.py --batch=T6.ab.json` OK 135 items; `--batch=T6.c.json` OK 30 items; all 45 expression forms (value plus `also`) check ok:true.
+
+## T7 review (sonnet-5.5)
+
+| File | Items | Key agreement (blind) |
+|---|---|---|
+| T7.ab.json | 144 (48 recall, 96 micro) | 144/144 (100%) |
+| T7.c.json | 32 | 32/32 (100%) |
+
+Every countable claim was recomputed by brute force in Python (gcd/lcm counts, Z_n orders and subgroup counts, Z_n^x orders, S_n/A_n cycle counts and orders, D_n involutions and conjugacy classes, S_3 normal subgroups and cosets, Sylow-3 count in S_4, abelian partition counts, nilpotents in Z_72, ring homomorphisms Z_12 to Z_18, monic irreducibles over F_2 and F_5, F_81 generators via an explicit F_81 construction, all 4-element group tables with fixed identity). All matched the keys. Author-flagged ids checked: t7-0051 (8 divisors of 24, key right; wording ambiguous), t7-0080 (2), t7-0029 (1), t7-0140 (3), t7-0096 (2, literal-free check re-run), t7-f028 (2 PIDs: Z[i], Q[x]), t7-f018 (|HK|=72; configuration exists, e.g. Z4xZ2xZ9), t7-f031 (degree 6). Also checked the literal checks t7-0074, 0076, 0085, 0087, 0103, f014.
+
+### Changed items
+
+| id | class | change |
+|---|---|---|
+| t7-0051 | ill-posed | "how many values can the order take" could read as one group's subgroup orders; now "How many positive integers does Lagrange's theorem allow as the order of a subgroup of a group of order 24" |
+| t7-0129 | ill-posed | "when is a cubic reducible" had several sufficient options; now "reducible exactly when which condition holds" |
+| t7-f004 | rubric mismatch | rubric said x=2+5k and variables k, m; solution starts from x=4+9a with a, b; rubric now matches |
+| t7-f009 | distractor note | "4" was said to count divisors of 12 (that is 6); now divisors of 6 |
+| t7-f014 | distractor note | "40" note spoke of 2-cycle orientations; now "doubled again for the 2-cycle" |
+| t7-f019 | distractor note | "3" was said to count elements of order 3 (that is 2); now maps with image of order dividing 3 |
+| t7-f021 | distractor note | "4" said to count prime factors of 720; now the exponent 4 of the 2-part |
+| t7-f028 | distractor note | "5" note blamed UFD/PID confusion although Z[sqrt-5] is no UFD; now "counted every ring in the list" |
+| t7-f029 | distractor note | "20" was said to count reducible ones (15); now 25 minus the five squares. "5" was said to count irreducibles with zero linear term (2); now counts monic quadratics with zero linear term |
+
+### Left as is
+- t7-f018: second tag nt-gcd is only a sanity check (intersection order divides gcd). Essentially one technique (cosets-normal product formula). Kept.
+- All 32 full items: total weight 4, pass 3 (75%). Same 4/3 convention as T3 and T4; cannot reach 70% with integer weights on 2/1/1. Rubric lines otherwise match solutions.
+- t7-0052 prompt has three short sentences, the third is "Select all that apply". Kept.
+- t7-0129 options 0 and 3 stay as distractors; with the new wording only the root criterion is necessary and sufficient.
+- Probes: one per technique in the T7 list (nt-mod t7-0013, order-lagrange t7-0049, perm-groups t7-0058, quotient-hom t7-0085, sylow-action t7-0103, poly-irred t7-0130); all tier b numeric.
+- Teach cards: all 16 at most 72 words (math counted as words), each states move and trap; examples recomputed; no edits.
+- No distractor equals the key, no non-core LaTeX font, expression domains admit no wrong-but-sample-equal answer (all 17 expression items are polynomial or rational identities).
+
+Checks: `check_items.py --batch=T7.ab.json` OK 144 items; `--batch=T7.c.json` OK 32 items; all 38 expression forms (value plus `also`) check ok:true.

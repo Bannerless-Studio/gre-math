@@ -94,35 +94,33 @@ S.eq('paragraphs split on blank lines', T.md('a\n\nb'), '<p>a</p><p>b</p>');
 {
   const d = load();
   const it = Object.assign({}, d.items.find((i) => i.answer.kind === 'mcq'), {});
-  const ri = R.renderItem(it, 'fixture item');
-  S.check('renderItem gives prompt, solution and options html', typeof ri.html.prompt === 'string' && typeof ri.html.solution === 'string' &&
-    ri.html.options.length === it.answer.options.length && ri.html.options.every((h) => typeof h === 'string'), ri.errors);
   const fixtureErrs = d.items.reduce((acc, i) => acc.concat(R.renderItem(i, i.id).errors), []).concat(
     d.techniques.reduce((acc, t) => acc.concat(R.renderTechnique(t, t.id).errors), []));
   S.eq('fixture pack renders with no errors', fixtureErrs, []);
   const tech = R.renderTechnique(d.techniques[0], 'x');
-  S.check('technique teach card renders', tech.html.teach.includes('<p>') && tech.errors.length === 0);
+  S.check('technique teach card validates', tech.errors.length === 0, tech.errors);
+  const ri = R.renderItem(it, 'fixture item');
+  S.check('renderItem returns errors only, no html field', ri.errors.length === 0 && !('html' in ri), ri);
 }
 
-// tag dictionary round trip and size
+// runtime (page) rendering: same span and markup as the build validates; bad TeX never throws in the page
 {
-  const recs = [{ html: { prompt: '<p>a</p><span class="x">1</span>', options: ['<span class="x">2</span>', '<p>b</p>'] } },
-    { html: { prompt: '<p>c</p><span class="x">3</span>' } }];
-  const before = JSON.parse(JSON.stringify(recs));
-  const tags = R.packHtml(recs);
-  S.check('packHtml shortens html and builds a dictionary', tags.length > 0 && recs[0].html.prompt.length < before[0].html.prompt.length, tags);
-  const data = { items: recs, techniques: [], tags: tags };
-  T.unpackData(data);
-  S.eq('unpackData restores the html exactly', recs, before);
-  S.check('private-use char in html is refused', (() => { try { R.packHtml([{ html: { prompt: '\uE105' } }]); return false; } catch (e) { return true; } })());
-  const d = load();
-  const items = d.items.map((it) => Object.assign({}, it, { html: R.renderItem(it, it.id).html }));
-  const ref = JSON.stringify(items.map((i) => i.html));
-  const t2 = R.packHtml(items);
-  const packed = JSON.stringify(items.map((i) => i.html)) + JSON.stringify(t2);
-  S.check('fixture html packs to under a third', packed.length * 3 < ref.length, [packed.length, ref.length]);
-  T.unpackData({ items: items, techniques: [], tags: t2 });
-  S.eq('fixture html round-trips', JSON.stringify(items.map((i) => i.html)), ref);
+  const samples = [['$\\frac{a}{b}$', true], ['$$\\int_0^1 x e^x\\,dx$$', false], ['$\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$', true],
+    ['costs \\$5 and `$x$` code, <b>tag</b> & "q"', true], ['**bold $x^2$** and $$\\sum_{i=1}^n i$$', false]];
+  samples.forEach(([src, inline]) => {
+    const built = R.renderText(src, inline, 'parity').html;
+    const runtime = T.md(src, inline, (tex, dsp) => T.mathSpan(R.katex, tex, dsp));
+    S.check('runtime and build markup match: ' + src, built === runtime, { built, runtime });
+  });
+  const bad = T.mathSpan(R.katex, '\\frac{a', false);
+  S.check('runtime bad TeX draws as red text, no throw', bad.includes('katex-error') && !bad.includes('<math'), bad);
+  ['\\href{http://x.y}{z}', '\\url{http://x.y}', '\\htmlClass{c}{z}'].forEach((tex) => {
+    const h = T.mathSpan(R.katex, tex, false);
+    S.check('runtime trust off: ' + tex + ' is red error text, not a link', h.includes('color:#cc0000') && !/<a |href=/.test(h), h);
+  });
+  const xss = T.md('<img src=x onerror=alert(1)> and $x$ and `$y$`', true, (tex, dsp) => T.mathSpan(R.katex, tex, dsp));
+  S.check('runtime escapes non-math text before splicing math', !/<img/.test(xss) && xss.includes('&lt;img') && xss.includes('<code>$y$</code>'), xss);
+  S.check('no tag dictionary left in the text module', !('unpackData' in T) && !('unpack' in T) && !('packHtml' in R));
 }
 
 const res = S.done();

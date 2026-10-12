@@ -1369,7 +1369,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "Let $f=x^2y+y^3$. Find $D_{\\mathbf v}f(2,1)$ for $\\mathbf v=\\langle 0,-2\\rangle$.",
+    "prompt": "Let $f=x^2y+y^3$. Find the directional derivative of $f$ at $(2,1)$ in the direction of $\\mathbf v=\\langle 0,-2\\rangle$.",
     "answer": {
       "kind": "numeric",
       "value": "-7",
@@ -1895,7 +1895,7 @@
     ],
     "critical": [],
     "difficulty": 2,
-    "prompt": "Minimize $x^2+y^2$ subject to $x+y=4$. Find the multiplier $\\lambda$ at the optimum.",
+    "prompt": "Minimize $x^2+y^2$ subject to $x+y=4$. Using $\\nabla f=\\lambda\\nabla g$, find the multiplier $\\lambda$ at the optimum.",
     "answer": {
       "kind": "numeric",
       "value": "4",
@@ -2830,7 +2830,7 @@
         "$\\displaystyle\\int_0^1\\int_0^{1-x}\\int_0^{1-x-y}dz\\,dy\\,dx$",
         "$\\displaystyle\\int_0^1\\int_0^1\\int_0^1 dz\\,dy\\,dx$",
         "$\\displaystyle\\int_0^1\\int_0^{1-y}\\int_0^{1-x-y}dz\\,dx\\,dy$",
-        "$\\displaystyle\\int_0^1\\int_0^{1-x}\\int_0^{x}dz\\,dy\\,dx$"
+        "$\\displaystyle\\int_0^1\\int_0^{1-x}\\int_0^{1-x}dz\\,dy\\,dx$"
       ],
       "correct": [
         0,

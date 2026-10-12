@@ -140,10 +140,10 @@
    "shuffle": true,
    "why": [
     "stopped after clearing only the first column, reading off $k-2=0$ and $m-2=0$",
-    "found $k=4$ but forgot the second-row constant became $2$, so got $m=2$",
+    "found $k=4$ but set $m-2=0$ instead of $m-4=0$, giving $m=2$",
     "",
     "reported $km$ instead of $k+m$",
-    "used constant $1$ rather than $2$ when subtracting row 2, giving $m=5$"
+    "subtracted the unreduced constant $3$ of row 2 instead of $2$, giving $m=5$"
    ]
   },
   "rubric": [
@@ -314,9 +314,9 @@
    "why": [
     "took the product of the diagonal entries",
     "used $D_n=3D_{n-1}+D_{n-2}$, a sign error in the recurrence",
-    "stopped one step early in the recurrence",
+    "read the Fibonacci number one place early: $F_{11}$ instead of $D_5=F_{12}$",
     "",
-    "ran the recurrence one step too far"
+    "read the Fibonacci number one place late: $F_{13}$ instead of $D_5=F_{12}$"
    ]
   },
   "rubric": [
@@ -1359,7 +1359,7 @@
     "evaluated the characteristic polynomial $(x-3)^3(x-5)$ instead",
     "assumed diagonalizable, giving $p=(x-3)(x-5)$",
     "dropped the sign of the factor $(0-5)$",
-    "left out the eigenvalue $5$",
+    "used $(x-3)^3$, leaving out the eigenvalue $5$ and overstating the block size",
     ""
    ]
   },
@@ -1534,7 +1534,7 @@
     "ignored the constraint and took the top eigenvalue",
     "read off the diagonal coefficient",
     "reported the trace of the matrix",
-    "averaged the eigenvalues"
+    "evaluated $Q$ at the unit vector $(1,1,0)/\\sqrt2$, which violates $x+y+z=0$"
    ]
   },
   "rubric": [

@@ -1,8 +1,9 @@
-/* Build-time math rendering for problem packs (M2). Pure Node: no DOM, no network.
- * Used by tools/validate_pack.js (errors) and tools/render_pack.js (rendered JSON + CSS).
+/* Build-time math validation for problem packs (M2). Pure Node: no DOM, no network.
+ * Used by tools/validate_pack.js and tools/render_pack.js (errors + inlined CSS). The page renders math itself at run
+ * time (engine/text.js mathSpan); this file only proves every field renders, so the build fails before the page does.
  *
- * - renderText / renderItem / renderTechnique: Markdown-lite + $...$ / $$...$$ via katex.renderToString
- *   (throwOnError; KaTeX strict warnings are collected as errors, not printed).
+ * - renderText / renderItem / renderTechnique: Markdown-lite + $...$ / $$...$$ via text.mathSpan with throwOnError;
+ *   KaTeX strict warnings are collected as errors, not printed. renderItem and renderTechnique return errors only.
  * - glyphIssues(html): flags math spans whose requested font face is not in the vendored core subset.
  *   The face is worked out from KaTeX's own katex.min.css (font-family/style/weight per class rule).
  *   Rules whose selector ends in a child combinator (`.delim-size1>span`) are skipped; they are Size faces, which are core.
@@ -93,19 +94,9 @@ function glyphIssues(html) {
   return out;
 }
 
+// Same span the page renders (text.mathSpan), with errors collected instead of drawn.
 function katexOne(tex, display, errs, where) {
-  const sink = function (code, msg) { errs.push(where + ': LaTeX warning ' + code + ': ' + msg); return 'ignore'; };
-  try {
-    // output "html": no MathML twin (halves the bytes). The spoken form is the raw TeX in aria-label; the glyph tree is aria-hidden.
-    // trust stays false: \href, \url, \htmlClass and friends throw instead of emitting links or attributes.
-    const h = katex.renderToString(tex, { displayMode: display, throwOnError: true, strict: sink, output: 'html',
-      // A function that returns false: KaTeX then draws the command as red text instead of a link, and the build records an error.
-      trust: function (ctx) { errs.push(where + ': LaTeX command ' + ctx.command + ' is not allowed in packs (trust is off)'); return false; } });
-    return '<span role="math" aria-label="' + text.esc(tex.replace(/\s+/g, ' ').trim()) + '">' + h + '</span>';
-  } catch (e) {
-    errs.push(where + ': LaTeX error in ' + (display ? '$$' : '$') + tex + (display ? '$$' : '$') + ': ' + e.message.split('\n')[0]);
-    return text.esc(tex);
-  }
+  return text.mathSpan(katex, tex, display, (msg) => errs.push(where + ': ' + msg));
 }
 
 // Renders one Markdown-lite field. Returns {html, errors}. Errors name `where` and the field.
@@ -118,29 +109,22 @@ function renderText(src, inline, where) {
   return { html: html, errors: errs };
 }
 
+// Every prose field of an item, validated. Returns {errors}; the rendered HTML is not kept (the page renders it).
 function renderItem(item, where) {
-  const errors = [], html = {};
-  const put = (name, src, inline) => {
-    if (src === undefined || src === null) return;
-    const r = renderText(String(src), inline, where + ' ' + name);
-    html[name] = r.html; errors.push(...r.errors);
-  };
-  put('prompt', item.prompt, false);
-  put('solution', item.solution, false);
-  if (Array.isArray(item.hints)) html.hints = item.hints.map((h, i) => { const r = renderText(String(h), false, where + ' hints[' + i + ']'); errors.push(...r.errors); return r.html; });
+  const errors = [];
+  const check = (src, inline, name) => { if (src !== undefined && src !== null) errors.push(...renderText(String(src), inline, where + ' ' + name).errors); };
+  check(item.prompt, false, 'prompt');
+  check(item.solution, false, 'solution');
+  if (Array.isArray(item.hints)) item.hints.forEach((h, i) => check(h, false, 'hints[' + i + ']'));
   const a = item.answer || {};
-  if (Array.isArray(a.options)) html.options = a.options.map((o, i) => { const r = renderText(String(o), true, where + ' options[' + i + ']'); errors.push(...r.errors); return r.html; });
-  if (a.display !== undefined) put('display', a.display, true);
-  if (Array.isArray(item.rubric)) html.rubric = item.rubric.map((r, i) => {
-    const rr = renderText(String(r && r.text != null ? r.text : ''), true, where + ' rubric[' + i + ']');
-    errors.push(...rr.errors); return rr.html;
-  });
-  return { html: html, errors: errors };
+  if (Array.isArray(a.options)) a.options.forEach((o, i) => check(o, true, 'options[' + i + ']'));
+  if (a.display !== undefined) check(a.display, true, 'display');
+  if (Array.isArray(item.rubric)) item.rubric.forEach((r, i) => check(r && r.text != null ? r.text : '', true, 'rubric[' + i + ']'));
+  return { errors: errors };
 }
 
 function renderTechnique(tech, where) {
-  const r = renderText(String(tech.teach == null ? '' : tech.teach), false, where + ' teach');
-  return { html: { teach: r.html }, errors: r.errors };
+  return { errors: renderText(String(tech.teach == null ? '' : tech.teach), false, where + ' teach').errors };
 }
 
 // Core subset @font-face rules with the woff2 inlined as base64. Non-core faces are dropped.
@@ -156,21 +140,4 @@ function inlineCss() {
   return out;
 }
 
-// Tag dictionary for the shipped JSON (see text.js unpack). Mutates the `html` of the given records.
-// Throws if authored/rendered html already holds a char in the dictionary range, so expansion is unambiguous.
-function packHtml(records) {
-  const each = (fn) => records.forEach((rec) => { const h = rec.html || {}; Object.keys(h).forEach((k) => { h[k] = Array.isArray(h[k]) ? h[k].map(fn) : fn(h[k]); }); });
-  const cnt = {};
-  each((s) => {
-    if (new RegExp('[\\u' + text.TAG0.toString(16) + '-\\uF8FF]').test(s)) throw new Error('html contains a private-use char reserved for the tag dictionary');
-    (s.match(/<[^>]+>/g) || []).forEach((t) => { cnt[t] = (cnt[t] || 0) + 1; });
-    return s;
-  });
-  const tags = Object.keys(cnt).filter((t) => cnt[t] >= 3 && t.length > 3)
-    .sort((a, b) => cnt[b] * b.length - cnt[a] * a.length).slice(0, text.TAGN);
-  const idx = new Map(tags.map((t, i) => [t, String.fromCharCode(text.TAG0 + i)]));
-  each((s) => s.replace(/<[^>]+>/g, (t) => (idx.has(t) ? idx.get(t) : t)));
-  return tags;
-}
-
-module.exports = { packHtml, renderText, renderItem, renderTechnique, glyphIssues, inlineCss, CORE_FONTS, FACES, CORE_FACE_KEYS, katex };
+module.exports = { renderText, renderItem, renderTechnique, glyphIssues, inlineCss, CORE_FONTS, FACES, CORE_FACE_KEYS, katex };

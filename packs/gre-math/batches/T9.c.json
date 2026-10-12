@@ -1,0 +1,2257 @@
+[
+ {
+  "id": "t9-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.counting",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many distinct arrangements of the letters of MISSISSIPPI have no two I's adjacent?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7350$",
+    "$34650$",
+    "$3675$",
+    "$176400$",
+    "$175$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored the adjacency rule: $\\frac{11!}{4!\\,4!\\,2!}$",
+    "counted only $7$ gaps and forgot the two ends: $105\\binom74$",
+    "treated the four I's as distinguishable: $105\\cdot P(8,4)$",
+    "added $105+70$ instead of multiplying"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Place the non-I letters first and count them as $\\frac{7!}{4!\\,2!}=105$",
+    "weight": 2
+   },
+   {
+    "text": "Identify $8$ gaps, including both ends, for the I's",
+    "weight": 1
+   },
+   {
+    "text": "Choose $4$ gaps with $\\binom84$ and multiply to get $7350$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Arrange the seven other letters (M, four S, two P) first: $\\frac{7!}{4!\\,2!}=105$ ways (counting, repeated letters).\nThey leave $8$ gaps, including both ends.\nChoose $4$ distinct gaps for the identical I's: $\\binom84=70$ (sigma-binom).\nTotal $105\\cdot70=7350$.",
+  "hints": [
+   "Seat the letters that are not I first, then drop the I's into the gaps."
+  ],
+  "check": "math.factorial(7)//(math.factorial(4)*math.factorial(2))*math.comb(8,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.counting",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many ordered quadruples $(a,b,c,d)$ of integers satisfy $a+b+c+d=15$ with $a\\ge3$, $1\\le b\\le4$, $c\\ge0$, $d\\ge0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$364$",
+    "$335$",
+    "$199$",
+    "$455$",
+    "$244$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "ignored the bound $b\\le4$",
+    "let $b$ run from $0$, not $1$",
+    "stopped at $b=3$ (read $b\\le4$ as $b<4$)",
+    "shifted only $a$ and ignored both $b\\ge1$ and $b\\le4$: $\\binom{15}{3}$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Case on $b\\in\\{1,2,3,4\\}$ to respect the upper bound",
+    "weight": 1
+   },
+   {
+    "text": "Shift $a'=a-3$ so that $a'+c+d=12-b$",
+    "weight": 1
+   },
+   {
+    "text": "Stars and bars $\\binom{14-b}{2}$ for each case",
+    "weight": 1
+   },
+   {
+    "text": "Add the four cases to get $244$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Fix $b\\in\\{1,2,3,4\\}$ (counting by cases).\nPut $a'=a-3\\ge0$, so $a'+c+d=12-b$.\nStars and bars gives $\\binom{14-b}{2}$ solutions for each $b$ (sigma-binom).\nSum: $\\binom{13}2+\\binom{12}2+\\binom{11}2+\\binom{10}2=78+66+55+45=244$.",
+  "hints": [
+   "Fix $b$ first, then shift the variable with a lower bound."
+  ],
+  "check": "sum(math.comb(14-b,2) for b in range(1,5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.incl-excl",
+   "t2.logic-sets"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many integers from $1$ to $1000$ are divisible by none of $2$, $3$, $5$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$333$",
+    "$266$",
+    "$299$",
+    "$332$",
+    "$267$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "ignored the prime $5$ and removed only multiples of $2$ or $3$",
+    "",
+    "stopped before subtracting the triple overlap",
+    "added the triple overlap instead of subtracting it",
+    "rounded $1000\\cdot\\frac{4}{15}$ up"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Set up the union of multiples of $2$, $3$, $5$ and use inclusion-exclusion",
+    "weight": 1
+   },
+   {
+    "text": "Singles $1033$ and pairs $332$ computed with floors",
+    "weight": 1
+   },
+   {
+    "text": "Triple overlap $\\lfloor1000/30\\rfloor=33$ with the right sign",
+    "weight": 1
+   },
+   {
+    "text": "Complement: $1000-734=266$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $A_2,A_3,A_5$ be the multiples of $2,3,5$ in $[1,1000]$; we want the complement of the union (logic-sets).\nSingles: $500+333+200=1033$.\nPairs (multiples of $6,10,15$): $166+100+66=332$.\nTriple (multiples of $30$): $33$.\nUnion $=1033-332+33=734$ (incl-excl), so the answer is $1000-734=266$.",
+  "hints": [
+   "Count the union with inclusion-exclusion, then take the complement."
+  ],
+  "check": "1000-(500+333+200)+(166+100+66)-33",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.incl-excl",
+   "t9.counting",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many functions from $\\{1,2,3,4,5,6\\}$ onto $\\{a,b,c\\}$ exist, that is, functions in which every one of $a,b,c$ is used?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$729$",
+    "$537$",
+    "$90$",
+    "$540$",
+    "$120$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "counted all functions $3^6$",
+    "subtracted the three one-value-missing sets but forgot to add back the overlaps",
+    "counted partitions into $3$ blocks and forgot to label them by $3!$",
+    "",
+    "counted injections from a $3$-set into a $6$-set"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Total functions $3^6=729$",
+    "weight": 1
+   },
+   {
+    "text": "Define the bad events (a value is missed) and apply inclusion-exclusion",
+    "weight": 2
+   },
+   {
+    "text": "Correct terms $3\\cdot2^6-3\\cdot1^6+0$ and subtraction to get $540$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "All functions: $3^6=729$ (counting).\nLet $E_x$ be the functions that never use value $x$ (incl-excl). $|E_x|=2^6=64$, $|E_x\\cap E_y|=1$, and the triple intersection is empty.\nNon-onto functions: $3\\cdot64-3\\cdot1+0=189$.\nOnto: $729-189=540$ (sigma-binom form: $\\sum_k(-1)^k\\binom3k(3-k)^6$).",
+  "hints": [
+   "Count the functions that miss at least one value and subtract."
+  ],
+  "check": "3**6-3*2**6+3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.recurrence",
+   "t1.quad",
+   "t1.sys-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A sequence satisfies $a_n=5a_{n-1}-6a_{n-2}$ with $a_0=1$ and $a_1=4$. Find $a_6$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1522$",
+    "$1330$",
+    "$1394$",
+    "$1458$",
+    "$3146$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "sign slip: wrote $a_n=2\\cdot3^n+2^n$",
+    "doubled the $2^n$ coefficient: $2\\cdot3^n-2\\cdot2^n$",
+    "",
+    "dropped the $2^n$ term",
+    "sign slip: iterated $5a_{n-1}+6a_{n-2}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Characteristic equation $r^2-5r+6=0$ with roots $2,3$",
+    "weight": 1
+   },
+   {
+    "text": "General solution $A2^n+B3^n$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $A+B=1$, $2A+3B=4$ to get $A=-1$, $B=2$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $a_6=2\\cdot3^6-2^6=1394$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Characteristic equation $r^2-5r+6=0$ has roots $2$ and $3$ (quad), so $a_n=A2^n+B3^n$ (recurrence).\nInitial values: $A+B=1$ and $2A+3B=4$ (sys-eq), giving $B=2$, $A=-1$.\nSo $a_n=2\\cdot3^n-2^n$ and $a_6=1458-64=1394$.\nCheck by iterating: $a_2=14,a_3=46,a_4=146,a_5=454,a_6=5\\cdot454-6\\cdot146=1394$.",
+  "hints": [
+   "Solve the characteristic equation, then fit the two initial values."
+  ],
+  "check": "2*3**6-2**6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.recurrence",
+   "t9.counting",
+   "t2.seq-series"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many binary strings of length $10$ contain no three consecutive $1$'s?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$504$",
+    "$274$",
+    "$548$",
+    "$520$",
+    "$144$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "index shift: gave the count for length $9$",
+    "started with $g_3=8$, forgetting to exclude $111$",
+    "counted strings that do contain $111$: $1024-504$",
+    "solved the no-two-consecutive-$1$'s problem instead"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Split by the ending $0$, $01$, $011$ to get $g_n=g_{n-1}+g_{n-2}+g_{n-3}$",
+    "weight": 2
+   },
+   {
+    "text": "Correct initial values $g_1=2$, $g_2=4$, $g_3=7$",
+    "weight": 1
+   },
+   {
+    "text": "Iterate to $g_{10}=504$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $g_n$ count valid strings of length $n$. Sort by how the string ends: $0$, $01$ or $011$ (counting).\nThen $g_n=g_{n-1}+g_{n-2}+g_{n-3}$ (recurrence).\nInitial values: $g_1=2$, $g_2=4$, $g_3=8-1=7$ (the string $111$ is excluded).\nIterate (seq-series): $13,24,44,81,149,274,504$.\nSo $g_{10}=504$.",
+  "hints": [
+   "Classify valid strings by their last block of $1$'s."
+  ],
+  "check": "sum(1 for s in range(1024) if (s&(s>>1)&(s>>2))==0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.graph-basics",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A tree has $2$ vertices of degree $4$, $3$ vertices of degree $3$, $4$ vertices of degree $2$, and every other vertex has degree $1$. How many vertices of degree $1$ does it have?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$7$",
+    "$11$",
+    "$17$",
+    "$18$",
+    "$9$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "used $E=n$ edges (as for a cycle) instead of $n-1$",
+    "counted only one of the two degree-$4$ vertices in $n$",
+    "reported the number of edges",
+    "reported the number of vertices",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Let $L$ be the leaf count and write $n=9+L$",
+    "weight": 1
+   },
+   {
+    "text": "Use $E=n-1$ for a tree",
+    "weight": 1
+   },
+   {
+    "text": "Handshake: degree sum $25+L=2(8+L)$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $L=9$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $L$ be the number of leaves, so $n=2+3+4+L=9+L$ vertices.\nA tree has $n-1=8+L$ edges (graph-basics).\nHandshake: degree sum $=2E$. Degree sum $=2\\cdot4+3\\cdot3+4\\cdot2+L=25+L$.\nSolve $25+L=2(8+L)$ (lin-eq): $L=9$.",
+  "hints": [
+   "Combine the handshake lemma with $E=n-1$."
+  ],
+  "check": "(2*4+3*3+4*2)-2*(2+3+4-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.graph-basics",
+   "t9.counting",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "What is the maximum number of edges in a disconnected simple graph on $8$ vertices?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$28$",
+    "$21$",
+    "$12$",
+    "$27$",
+    "$20$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used $K_8$, which is connected",
+    "",
+    "split evenly into two copies of $K_4$",
+    "took $K_8$ minus one edge, which is still connected",
+    "took $K_7$ minus an edge"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "A disconnected graph lies inside two disjoint vertex groups",
+    "weight": 1
+   },
+   {
+    "text": "Edge bound $\\binom a2+\\binom{8-a}2$ for group sizes $a,8-a$",
+    "weight": 2
+   },
+   {
+    "text": "Compare splits (convexity) and pick $1+7$ to get $21$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A disconnected graph has its vertices in two nonempty groups with no edges between them; adding edges inside groups keeps it disconnected (graph-basics).\nWith group sizes $a$ and $8-a$ the maximum is $\\binom a2+\\binom{8-a}2$ (counting).\nThis is convex in $a$, so it is largest at the extremes.\n$a=1$: $0+\\binom72=21$ (sigma-binom). Other splits are smaller: $a=2$ gives $16$, $a=4$ gives $12$.",
+  "hints": [
+   "Split the vertices into two groups and maximise inside each."
+  ],
+  "check": "max(math.comb(a,2)+math.comb(8-a,2) for a in range(1,8))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.graph-structure",
+   "t9.graph-basics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What is the minimum number of edges that must be deleted from the complete graph $K_6$ so that the remaining graph has an Euler circuit?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$5$",
+    "$2$",
+    "$3$",
+    "$4$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "deleted one edge per vertex, forgetting each edge fixes two vertices",
+    "deleted all edges at a single vertex",
+    "assumed two deletions can fix six odd vertices",
+    "",
+    "added an unneeded edge to restore connectivity"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "State the Euler circuit criterion: connected with all degrees even",
+    "weight": 1
+   },
+   {
+    "text": "Every vertex of $K_6$ has odd degree $5$; each deletion changes two degrees, so at least $3$",
+    "weight": 2
+   },
+   {
+    "text": "Show a perfect matching removal leaves a connected even graph",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "An Euler circuit exists iff the graph is connected and every degree is even (graph-structure).\nIn $K_6$ all six degrees equal $5$, which is odd.\nEach deleted edge changes the degree of exactly two vertices (graph-basics, handshake), so at least $6/2=3$ deletions are needed.\nDeleting a perfect matching ($3$ edges) works: the rest is $K_{2,2,2}$, connected with all degrees $4$.\nMinimum $=3$.",
+  "hints": [
+   "An edge touches two vertices; count the odd ones."
+  ],
+  "check": "6//2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.graph-structure",
+   "t9.counting",
+   "t9.recurrence"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many proper colorings of the labelled $5$-cycle $C_5$ use colors from a set of $3$ colors (adjacent vertices must differ)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$48$",
+    "$32$",
+    "$30$",
+    "$24$",
+    "$34$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "colored a path $P_5$, ignoring the closing edge",
+    "used $(k-1)^n$ without the correction term",
+    "",
+    "forced the last vertex to a single color",
+    "used $(k-1)^n+(k-1)$, a sign error"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Relate cycle and path colorings by deletion-contraction",
+    "weight": 2
+   },
+   {
+    "text": "Path count $3\\cdot2^{n-1}$ and base $\\chi(C_3)=6$",
+    "weight": 1
+   },
+   {
+    "text": "Run the recurrence to $\\chi(C_5)=30$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Delete one edge of $C_n$: colorings of the path $P_n$ either have equal ends (colorings of $C_{n-1}$, by contracting) or proper ends (colorings of $C_n$).\nSo $\\chi(C_n)=\\chi(P_n)-\\chi(C_{n-1})$ (recurrence, graph-structure).\nPaths with $3$ colors: $3\\cdot2^{n-1}$ (counting).\n$\\chi(C_3)=6$, $\\chi(C_4)=24-6=18$, $\\chi(C_5)=48-18=30$.",
+  "hints": [
+   "Delete one edge to get a path, then correct for the edge."
+  ],
+  "check": "3*2**4-(3*2**3-6)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.algorithms",
+   "t2.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sorted array has $1000$ entries. Binary search probes the middle entry of the current range at each step and stops when the target is found or the range is empty. What is the worst-case number of probes?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$10$",
+    "$9$",
+    "$11$",
+    "$500$",
+    "$1000$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $\\lfloor\\log_21000\\rfloor$ and forgot the last probe",
+    "used $\\lceil\\log_2 1000\\rceil+1$",
+    "counted half the array",
+    "gave the linear-scan bound"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Each probe leaves at most half the range (floor)",
+    "weight": 1
+   },
+   {
+    "text": "Need $2^k>1000$ so that the range can reach empty",
+    "weight": 2
+   },
+   {
+    "text": "Conclude $\\lfloor\\log_21000\\rfloor+1=10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Each probe removes the probed entry and leaves a range of at most half the size (algorithms).\nAfter $k$ probes at most $\\lfloor1000/2^k\\rfloor$ entries remain.\nThe range is empty only when $2^k>1000$ (exp-log).\nSince $2^9=512\\le1000<1024=2^{10}$, the worst case needs $k=10$ probes, that is $\\lfloor\\log_21000\\rfloor+1$.",
+  "hints": [
+   "Track the size of the remaining range after each probe."
+  ],
+  "check": "int(math.log2(1000))+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.algorithms",
+   "t2.seq-series",
+   "t2.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Pseudocode: for $i=1,2,\\dots,n$, set $j\\leftarrow i$, then while $j\\le n$ repeat $j\\leftarrow 2j$. For $n=16$, how many times in total is the update $j\\leftarrow2j$ executed?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$80$",
+    "$64$",
+    "$32$",
+    "$30$",
+    "$31$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took $n(\\log_2n+1)$ as an exact count",
+    "took $n\\log_2n$ as an exact count",
+    "guessed $2n$",
+    "off by one: missed a pass in the sum",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Count doublings per $i$: number of $k\\ge0$ with $i2^k\\le16$",
+    "weight": 2
+   },
+   {
+    "text": "Tabulate counts for $i=1..16$ ($5,4,3,3,2,2,2,2,1,\\dots$)",
+    "weight": 1
+   },
+   {
+    "text": "Sum to $31$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "For a fixed $i$ the update runs once for each $k\\ge0$ with $i\\,2^k\\le16$, that is $\\lfloor\\log_2(16/i)\\rfloor+1$ times (algorithms, exp-log).\nCounts: $i=1$: $5$; $i=2$: $4$; $i=3,4$: $3$ each; $i=5..8$: $2$ each; $i=9..16$: $1$ each.\nSum (seq-series): $5+4+6+8+8=31$.\nThe total is about $2n$, not $n\\log n$, since most $i$ are large.",
+  "hints": [
+   "For each $i$, count how many doublings stay at or below $16$."
+  ],
+  "check": "sum(len([1 for k in range(0,6) if i*2**k<=16]) for i in range(1,17))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.prob-basics",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A disease affects $1\\%$ of a population. A test is positive for $90\\%$ of people with the disease and for $5\\%$ of people without it. A randomly chosen person tests positive. What is the probability that they have the disease?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{9}{10}$",
+    "$\\frac{2}{13}$",
+    "$\\frac{18}{19}$",
+    "$\\frac{9}{59}$",
+    "$\\frac1{20}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "gave $P(+\\mid D)$, reversing the conditional",
+    "",
+    "ignored the $1\\%$ prior: $\\frac{0.9}{0.9+0.05}$",
+    "did not weight the false positives by $0.99$",
+    "gave the false-positive rate"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Bayes' rule with the right prior $0.01$",
+    "weight": 1
+   },
+   {
+    "text": "Total probability for $P(+)=0.009+0.0495$",
+    "weight": 2
+   },
+   {
+    "text": "Simplify $\\frac{0.009}{0.0585}=\\frac2{13}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Bayes (prob-basics): $P(D\\mid +)=\\dfrac{P(+\\mid D)P(D)}{P(+)}$.\nTotal probability: $P(+)=0.9\\cdot0.01+0.05\\cdot0.99=0.009+0.0495=0.0585$.\nRatio: $\\dfrac{0.009}{0.0585}=\\dfrac{90}{585}$ (rational-expr).\nDivide by $45$: $\\dfrac{2}{13}$.",
+  "hints": [
+   "Compare the true-positive mass with the total positive mass."
+  ],
+  "check": "Fraction(9,1000)/(Fraction(9,1000)+Fraction(99,100)*Fraction(5,100))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.prob-basics",
+   "t9.counting",
+   "t9.incl-excl"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two fair six-sided dice are rolled. Given that at least one die shows a $6$, what is the probability that the sum is $8$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{5}{36}$",
+    "$\\frac1{18}$",
+    "$\\frac16$",
+    "$\\frac{2}{11}$",
+    "$\\frac1{11}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "gave the unconditional probability of sum $8$",
+    "divided by all $36$ outcomes instead of the conditioned $11$",
+    "used only the six outcomes with the first die equal to $6$",
+    "",
+    "counted one favourable outcome, missing $(2,6)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Count outcomes with at least one $6$ by complement: $36-25=11$",
+    "weight": 1
+   },
+   {
+    "text": "Count favourable outcomes $(6,2),(2,6)$",
+    "weight": 2
+   },
+   {
+    "text": "Conditional probability $=\\frac{2}{11}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Condition: at least one $6$. Complement count (incl-excl): $36-5^2=11$ outcomes.\nWithin these, sum $8$ requires a $6$ and a $2$: $(6,2)$ and $(2,6)$, so $2$ outcomes (counting).\nOutcomes are equally likely, so $P=\\dfrac2{11}$ (prob-basics).",
+  "hints": [
+   "Restrict the sample space to the conditioning event first."
+  ],
+  "check": "Fraction(2,36-25)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.rand-var",
+   "t9.prob-basics",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A fair coin is flipped $6$ times. Let $Y$ be the number of positions $i\\in\\{1,\\dots,5\\}$ at which flips $i$ and $i+1$ are both heads. Find $\\operatorname{Var}(Y)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{15}{16}$",
+    "$\\frac{19}{16}$",
+    "$\\frac{23}{16}$",
+    "$\\frac54$",
+    "$\\frac{31}{16}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "assumed the indicators are independent",
+    "forgot the factor $2$ on the covariances",
+    "",
+    "gave $E[Y]$",
+    "used $E[I_iI_{i+1}]=\\frac18$ as the covariance without subtracting $\\frac1{16}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Write $Y$ as a sum of five indicators with $P=\\frac14$",
+    "weight": 1
+   },
+   {
+    "text": "Variance of each indicator $\\frac3{16}$; non-adjacent pairs independent",
+    "weight": 1
+   },
+   {
+    "text": "Adjacent covariance $\\frac18-\\frac1{16}=\\frac1{16}$ for $4$ pairs",
+    "weight": 2
+   },
+   {
+    "text": "Combine with the factor $2$ to get $\\frac{23}{16}$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Write $Y=\\sum_{i=1}^5I_i$, where $I_i=1$ if flips $i,i+1$ are both heads (rand-var, indicator sum).\n$P(I_i=1)=\\tfrac14$, so $\\operatorname{Var}(I_i)=\\tfrac14\\cdot\\tfrac34=\\tfrac3{16}$.\nIndicators $I_i,I_j$ with $|i-j|\\ge2$ use disjoint flips, so they are independent.\nAdjacent: $P(I_iI_{i+1}=1)=P(HHH)=\\tfrac18$ (prob-basics), so the covariance is $\\tfrac18-\\tfrac1{16}=\\tfrac1{16}$.\nThere are $4$ adjacent pairs, each appearing twice in the double sum (sigma-binom).\n$\\operatorname{Var}(Y)=\\tfrac{15}{16}+2\\cdot4\\cdot\\tfrac1{16}=\\tfrac{23}{16}$.",
+  "hints": [
+   "Which pairs of indicators share a coin flip?"
+  ],
+  "check": "Fraction(15,16)+2*4*(Fraction(1,8)-Fraction(1,16))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.rand-var",
+   "t4.power-series",
+   "t9.prob-basics"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A fair die is rolled repeatedly until the first $6$ appears. Let $X$ be the number of rolls. Find $E[X^2]$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$66$",
+    "$36$",
+    "$30$",
+    "$72$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "squared the mean: $E[X]^2$",
+    "gave the variance",
+    "used $2/p^2$ from a misremembered formula",
+    "gave $E[X]$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Geometric pmf $P(X=k)=(\\frac56)^{k-1}\\frac16$",
+    "weight": 1
+   },
+   {
+    "text": "Differentiate the geometric series to obtain $\\sum k^2x^{k-1}=\\frac{1+x}{(1-x)^3}$",
+    "weight": 2
+   },
+   {
+    "text": "Substitute $x=\\frac56$ and simplify to $66$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$P(X=k)=\\left(\\tfrac56\\right)^{k-1}\\tfrac16$ for $k\\ge1$ (prob-basics).\n$E[X^2]=\\tfrac16\\sum_{k\\ge1}k^2x^{k-1}$ with $x=\\tfrac56$ (rand-var).\nFrom $\\sum x^k=\\frac1{1-x}$, differentiating gives $\\sum kx^{k-1}=\\frac1{(1-x)^2}$ and $\\sum k^2x^{k-1}=\\frac{1+x}{(1-x)^3}$ (power-series).\nSo $E[X^2]=\\tfrac16\\cdot\\dfrac{11/6}{(1/6)^3}=\\tfrac16\\cdot\\tfrac{11}6\\cdot216=66$.\nCheck: $E[X]=6$, $\\operatorname{Var}(X)=\\frac{1-p}{p^2}=30$, and $30+36=66$.",
+  "hints": [
+   "Differentiate the geometric series twice, or use Var plus mean squared."
+  ],
+  "check": "(2-Fraction(1,6))*36",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.distributions",
+   "t9.prob-basics",
+   "t1.exp-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Calls reach a help desk as a Poisson process at rate $3$ per hour. What is the probability of exactly $2$ calls in a given $30$-minute window?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac94e^{-3/2}$",
+    "$\\frac92e^{-3}$",
+    "$\\frac98e^{-3}$",
+    "$\\frac34e^{-3/2}$",
+    "$\\frac98e^{-3/2}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "forgot the $\\frac1{2!}$",
+    "used the hourly mean $3$ for a half-hour window",
+    "used mean $\\frac32$ in the power but $3$ in the exponential",
+    "used $\\lambda^1/2!$ in place of $\\lambda^2/2!$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Scale the rate to the window: $\\lambda=\\frac32$",
+    "weight": 2
+   },
+   {
+    "text": "Poisson pmf $e^{-\\lambda}\\lambda^2/2!$",
+    "weight": 1
+   },
+   {
+    "text": "Simplify to $\\frac98e^{-3/2}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Counts in a window of length $t$ are Poisson with mean $\\lambda=3t$ (distributions). For $t=\\tfrac12$ hour, $\\lambda=\\tfrac32$.\n$P(N=2)=e^{-\\lambda}\\dfrac{\\lambda^2}{2!}$ (prob-basics).\n$\\dfrac{\\lambda^2}{2}=\\dfrac{9/4}{2}=\\dfrac98$, and the exponential is $e^{-3/2}$ (exp-rules).\nSo $P=\\tfrac98e^{-3/2}$.",
+  "hints": [
+   "Convert the rate to the mean for a half hour first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.distributions",
+   "t9.rand-var",
+   "t2.sigma-binom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $Y$ be binomial with $n=12$ trials and success probability $p=\\tfrac13$. Find $E[Y(Y-1)]$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{56}{3}$",
+    "$\\frac{44}{3}$",
+    "$\\frac83$",
+    "$44$",
+    "$16$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "gave $E[Y^2]$",
+    "",
+    "gave the variance",
+    "used $n(n-1)p$ instead of $n(n-1)p^2$",
+    "squared the mean"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Write $Y$ as a sum of $12$ Bernoulli indicators",
+    "weight": 1
+   },
+   {
+    "text": "$E[Y(Y-1)]$ equals the sum over ordered pairs of distinct trials of $p^2$",
+    "weight": 2
+   },
+   {
+    "text": "Count $12\\cdot11$ pairs and multiply by $\\frac19$ to get $\\frac{44}3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Write $Y=\\sum_{j=1}^{12}I_j$ with independent Bernoulli$(\\tfrac13)$ indicators (distributions).\n$Y(Y-1)=\\sum_{j\\ne k}I_jI_k$, a sum over ordered pairs of distinct trials (rand-var).\nThere are $12\\cdot11=132$ such pairs (sigma-binom), each with $E[I_jI_k]=p^2=\\tfrac19$.\n$E[Y(Y-1)]=\\tfrac{132}9=\\tfrac{44}3$.\nCheck: $E[Y^2]=\\operatorname{Var}+E[Y]^2=\\tfrac83+16=\\tfrac{56}3$, and $\\tfrac{56}3-4=\\tfrac{44}3$.",
+  "hints": [
+   "Expand $Y(Y-1)$ as a sum over ordered pairs of different trials."
+  ],
+  "check": "Fraction(12*11,9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.stats-basics",
+   "t1.coord-geom",
+   "t1.lin-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The data points $(x,y)$ are $(1,2),\\ (2,3),\\ (3,5),\\ (4,6)$. The least-squares line is used to predict $y$ at $x=6$. What is the prediction?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{42}{5}$",
+    "$\\frac{26}{3}$",
+    "$\\frac{62}{5}$",
+    "$\\frac{89}{10}$",
+    "$\\frac{48}{5}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "dropped the intercept: $1.4\\cdot6$",
+    "used the line through the first and last points",
+    "forgot to center: $4+1.4\\cdot6$",
+    "",
+    "computed the intercept with the wrong mean of $x$ ($2$ in place of $\\frac52$)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Means $\\bar x=\\frac52$, $\\bar y=4$",
+    "weight": 1
+   },
+   {
+    "text": "Slope $S_{xy}/S_{xx}=\\frac75$ from deviation sums $7$ and $5$",
+    "weight": 2
+   },
+   {
+    "text": "Line through $(\\bar x,\\bar y)$ and prediction $\\frac{89}{10}$ at $x=6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Means: $\\bar x=\\tfrac52$, $\\bar y=4$ (stats-basics).\n$S_{xy}=\\sum(x-\\bar x)(y-\\bar y)=3+\\tfrac12+\\tfrac12+3=7$ and $S_{xx}=\\tfrac94+\\tfrac14+\\tfrac14+\\tfrac94=5$.\nSlope $b=S_{xy}/S_{xx}=\\tfrac75$.\nThe line passes through $(\\bar x,\\bar y)$ (coord-geom): $y=4+\\tfrac75\\left(x-\\tfrac52\\right)$.\nAt $x=6$: $4+\\tfrac75\\cdot\\tfrac72=4+\\tfrac{49}{10}=\\tfrac{89}{10}$ (lin-eq).",
+  "hints": [
+   "The least-squares line always passes through the point of means."
+  ],
+  "check": "Fraction(4)+Fraction(7,5)*(6-Fraction(5,2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.stats-basics",
+   "t9.rand-var",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Group $A$ has $10$ values with mean $20$ and variance $4$. Group $B$ has $30$ values with mean $40$ and variance $9$. (Variances divide by the group size.) What is the variance of the combined $40$ values?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{31}{4}$",
+    "$75$",
+    "$\\frac{331}{4}$",
+    "$\\frac{13}{2}$",
+    "$\\frac{431}{4}$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "within-group part only",
+    "between-group part only",
+    "",
+    "averaged the two variances without weights",
+    "used the unweighted mean $30$ of the group means"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Law of total variance: within plus between",
+    "weight": 1
+   },
+   {
+    "text": "Within part $\\frac14\\cdot4+\\frac34\\cdot9=\\frac{31}4$",
+    "weight": 1
+   },
+   {
+    "text": "Combined mean $35$ and between part $75$",
+    "weight": 2
+   },
+   {
+    "text": "Add to get $\\frac{331}4$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Pool by the law of total variance (rand-var): total $=$ weighted mean of group variances $+$ variance of group means. Weights are $\\tfrac14,\\tfrac34$.\nWithin: $\\tfrac14\\cdot4+\\tfrac34\\cdot9=\\tfrac{31}4$ (stats-basics).\nCombined mean: $\\tfrac14\\cdot20+\\tfrac34\\cdot40=35$.\nBetween: $\\tfrac14(15)^2+\\tfrac34(5)^2=\\tfrac{225+75}4=75$.\nTotal: $\\tfrac{31}4+75=\\tfrac{331}4$ (rational-expr).",
+  "hints": [
+   "Total variance equals within-group variance plus between-group variance."
+  ],
+  "check": "Fraction(10*4+30*9,40)+Fraction(1,4)*(35-20)**2+Fraction(3,4)*(40-35)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.complex-arith",
+   "t2.unit-circle",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find $\\operatorname{Im}\\big((\\sqrt3-i)^{10}\\big)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$512\\sqrt3$",
+    "$-512\\sqrt3$",
+    "$512$",
+    "$1024\\sqrt3$",
+    "$256\\sqrt3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used argument $+\\frac\\pi6$ instead of $-\\frac\\pi6$",
+    "took the cosine instead of the sine",
+    "used $\\sin\\frac\\pi3=\\sqrt3$ instead of $\\frac{\\sqrt3}{2}$",
+    "used modulus $2^9$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Polar form: modulus $2$, argument $-\\frac\\pi6$",
+    "weight": 1
+   },
+   {
+    "text": "De Moivre gives modulus $2^{10}$ and angle $-\\frac{10\\pi}6$",
+    "weight": 1
+   },
+   {
+    "text": "Reduce the angle to $\\frac\\pi3$",
+    "weight": 1
+   },
+   {
+    "text": "Imaginary part $1024\\sin\\frac\\pi3=512\\sqrt3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\sqrt3-i$ has modulus $2$ and argument $-\\tfrac\\pi6$ (complex-arith, polar form from the unit circle).\nDe Moivre: $(\\sqrt3-i)^{10}=2^{10}\\left[\\cos\\left(-\\tfrac{10\\pi}6\\right)+i\\sin\\left(-\\tfrac{10\\pi}6\\right)\\right]$.\nReduce: $-\\tfrac{5\\pi}3+2\\pi=\\tfrac\\pi3$ (trig-id).\nImaginary part: $1024\\sin\\tfrac\\pi3=1024\\cdot\\tfrac{\\sqrt3}2=512\\sqrt3$.",
+  "hints": [
+   "Convert to polar form before raising to the tenth power."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.complex-arith",
+   "t1.geom-formulas",
+   "t2.unit-circle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The six roots of $z^6=64$ are the vertices of a convex polygon. What is its area?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12\\sqrt3$",
+    "$3\\sqrt3$",
+    "$12$",
+    "$2\\sqrt3$",
+    "$6\\sqrt3$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "dropped the factor $\\frac12$ in each triangle area",
+    "used three of the six triangles",
+    "used $\\sin\\frac\\pi2$ for the central angle",
+    "used two triangles",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Roots are $2e^{ik\\pi/3}$, six points on a circle of radius $2$",
+    "weight": 2
+   },
+   {
+    "text": "Central angle $\\frac\\pi3$, triangle area $\\frac12\\cdot2\\cdot2\\sin\\frac\\pi3=\\sqrt3$",
+    "weight": 1
+   },
+   {
+    "text": "Multiply by $6$ to get $6\\sqrt3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$z^6=64$ gives $z=2e^{ik\\pi/3}$, $k=0,\\dots,5$ (complex-arith): six points spaced $\\tfrac\\pi3$ apart on a circle of radius $2$ (unit-circle).\nJoin them to the centre to get six congruent triangles (geom-formulas).\nEach has area $\\tfrac12\\cdot2\\cdot2\\cdot\\sin\\tfrac\\pi3=\\sqrt3$.\nTotal area $=6\\sqrt3$.",
+  "hints": [
+   "Cut the polygon into triangles from the origin."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.complex-analytic",
+   "t5.partials",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f=u+iv$ be entire with $u(x,y)=e^x(x\\cos y-y\\sin y)$ and $v(0,0)=0$. Find $v\\!\\left(1,\\tfrac\\pi2\\right)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-e$",
+    "$e$",
+    "$\\frac{\\pi e}{2}$",
+    "$e\\left(1+\\frac\\pi2\\right)$",
+    "$0$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "sign slip: used $v_x=u_y$",
+    "",
+    "read off $-u\\left(1,\\frac\\pi2\\right)$, confusing $u$ and $v$",
+    "evaluated $\\cos\\frac\\pi2$ as $1$",
+    "dropped the $x\\sin y$ term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "State the Cauchy-Riemann equations $v_y=u_x$, $v_x=-u_y$",
+    "weight": 1
+   },
+   {
+    "text": "Compute $u_x$ (product rule) and integrate in $y$",
+    "weight": 1
+   },
+   {
+    "text": "Fix the $x$-only term using $v_x=-u_y$ and $v(0,0)=0$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $v=e^x(x\\sin y+y\\cos y)$ at $(1,\\frac\\pi2)$ to get $e$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Cauchy-Riemann (complex-analytic): $v_y=u_x$ and $v_x=-u_y$.\n$u_x=e^x(x\\cos y-y\\sin y+\\cos y)$ (partials, product rule).\nIntegrate in $y$, using $\\int-y\\sin y\\,dy=y\\cos y-\\sin y$: $v=e^x(x\\sin y+y\\cos y)+\\varphi(x)$.\n$-u_y=e^x(x\\sin y+y\\cos y+\\sin y)$ equals $v_x$ with $\\varphi'=0$ (deriv-rules), and $v(0,0)=0$ gives $\\varphi=0$.\nThis is $f(z)=ze^z$. At $(1,\\tfrac\\pi2)$: $v=e(1\\cdot1+0)=e$.",
+  "hints": [
+   "Integrate $u_x$ with respect to $y$ and fix the leftover function of $x$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.complex-analytic",
+   "t5.partials"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The function $u(x,y)=x^3+axy^2+x$ is harmonic for exactly one real $a$. For that $a$, let $v$ be the harmonic conjugate of $u$ with $v(0,0)=0$. Find $v(1,1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-3$",
+    "$5$",
+    "$2$",
+    "$3$",
+    "$4$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "swapped the sign in the Cauchy-Riemann equations",
+    "gave the $y^3$ term the wrong sign",
+    "dropped the conjugate of the linear term $x$",
+    "",
+    "dropped the $-y^3$ term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Laplace equation $6x+2ax=0$ gives $a=-3$",
+    "weight": 1
+   },
+   {
+    "text": "Recognise $u=\\operatorname{Re}(z^3+z)$",
+    "weight": 1
+   },
+   {
+    "text": "Take the imaginary part $3x^2y-y^3+y$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate at $(1,1)$ to get $3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Harmonic means $u_{xx}+u_{yy}=0$: $6x+2ax=0$ for all $x$, so $a=-3$ (partials).\nThen $u=(x^3-3xy^2)+x=\\operatorname{Re}(z^3+z)$.\nSo $f(z)=z^3+z$ is analytic with real part $u$, and $v=\\operatorname{Im}f$ up to a constant (complex-analytic, Cauchy-Riemann).\n$\\operatorname{Im}(z^3)=3x^2y-y^3$ and $\\operatorname{Im}(z)=y$, so $v=3x^2y-y^3+y$, which vanishes at the origin.\n$v(1,1)=3-1+1=3$.",
+  "hints": [
+   "Find $a$ from the Laplace equation, then recognise $u$ as a real part."
+  ],
+  "check": "3*1*1-1+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.contour-residue",
+   "t4.power-series",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\oint_{|z|=2}\\frac{e^z}{z^2(z-1)}\\,dz$, with the circle traversed counterclockwise.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\pi i\\,e$",
+    "$-4\\pi i$",
+    "$2\\pi i\\,(e-2)$",
+    "$2\\pi i\\,(e+2)$",
+    "$2\\pi i\\,(e-1)$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "counted only the pole at $z=1$",
+    "counted only the pole at $z=0$",
+    "",
+    "sign error in the residue at $0$",
+    "treated $z=0$ as a simple pole, residue $-1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Both poles ($0$ double, $1$ simple) lie inside $|z|=2$",
+    "weight": 1
+   },
+   {
+    "text": "Residue $e$ at $z=1$",
+    "weight": 1
+   },
+   {
+    "text": "Residue $-2$ at $z=0$ via derivative or series",
+    "weight": 1
+   },
+   {
+    "text": "Total $2\\pi i(e-2)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The poles $z=0$ (order $2$) and $z=1$ (order $1$) both lie inside $|z|=2$ (contour-residue).\n$\\operatorname{Res}_{z=1}=\\dfrac{e^1}{1^2}=e$.\n$\\operatorname{Res}_{z=0}=\\dfrac d{dz}\\dfrac{e^z}{z-1}\\Big|_{0}=\\dfrac{e^z(z-1)-e^z}{(z-1)^2}\\Big|_0=-2$ (deriv-rules).\nSeries check: $\\dfrac{e^z}{z-1}=-(1+z+\\dots)(1+z+\\dots)=-1-2z-\\dots$ (power-series), so the coefficient of $z^1$ is $-2$.\nIntegral $=2\\pi i\\,(e-2)$.",
+  "hints": [
+   "Find the residue at each pole inside the circle."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.contour-residue",
+   "t4.partial-frac",
+   "t4.improper-int"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Evaluate $\\displaystyle\\int_{-\\infty}^{\\infty}\\frac{dx}{(x^2+1)(x^2+4)}$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac\\pi6$",
+    "$\\frac\\pi3$",
+    "$\\frac\\pi{12}$",
+    "$\\frac\\pi2$",
+    "$\\frac\\pi8$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "kept only the pole at $i$",
+    "used $\\pi i$ instead of $2\\pi i$",
+    "sign error in the residue at $2i$",
+    "used partial-fraction coefficient $\\frac14$ instead of $\\frac13$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Close in the upper half-plane and justify that the arc vanishes",
+    "weight": 1
+   },
+   {
+    "text": "Residues $\\frac1{6i}$ at $i$ and $-\\frac1{12i}$ at $2i$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply the sum $\\frac1{12i}$ by $2\\pi i$ to get $\\frac\\pi6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Close the contour in the upper half-plane. The integrand is $O(R^{-4})$, so the arc contributes $0$ (improper-int).\nPoles inside: $i$ and $2i$. $\\operatorname{Res}_{i}=\\dfrac1{2i\\,(4-1)}=\\dfrac1{6i}$ and $\\operatorname{Res}_{2i}=\\dfrac1{(1-4)\\,4i}=-\\dfrac1{12i}$ (contour-residue).\nSum $=\\dfrac1{12i}$; times $2\\pi i$ gives $\\dfrac\\pi6$.\nCheck by partial fractions: $\\dfrac13\\left(\\dfrac1{x^2+1}-\\dfrac1{x^2+4}\\right)$ integrates to $\\dfrac13\\left(\\pi-\\dfrac\\pi2\\right)=\\dfrac\\pi6$ (partial-frac).",
+  "hints": [
+   "Use the upper half-plane poles $i$ and $2i$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.complex-maps",
+   "t9.complex-arith",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A Möbius transformation $T$ satisfies $T(1)=0$, $T(-1)=\\infty$ and $T(i)=1$. Find $T(2i)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{4+3i}{5}$",
+    "$\\frac{3-4i}{5}$",
+    "$\\frac{-4+3i}{5}$",
+    "$\\frac{3+4i}{5}$",
+    "$\\frac{4-3i}{5}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "conjugated the final quotient",
+    "swapped real and imaginary parts",
+    "took $k=i$ instead of $k=-i$",
+    "left out the constant $k$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Zero at $1$ and pole at $-1$ give $T=k\\frac{z-1}{z+1}$",
+    "weight": 1
+   },
+   {
+    "text": "Find $k=-i$ from $T(i)=1$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $T(2i)$ by rationalising to $\\frac{4-3i}5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A zero at $1$ and a pole at $-1$ force $T(z)=k\\,\\dfrac{z-1}{z+1}$ (complex-maps).\n$\\dfrac{i-1}{i+1}=\\dfrac{(i-1)^2}{i^2-1}=\\dfrac{-2i}{-2}=i$ (complex-arith), so $T(i)=ki=1$ gives $k=-i$.\n$T(2i)=-i\\,\\dfrac{2i-1}{2i+1}$. Multiply top and bottom by $1-2i$: $(2i-1)(1-2i)=3+4i$ and $(2i+1)(1-2i)=5$ (rational-expr).\n$T(2i)=-i\\cdot\\dfrac{3+4i}5=\\dfrac{4-3i}5$.",
+  "hints": [
+   "A zero at one point and a pole at another fix the shape up to a constant."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.complex-maps",
+   "t9.complex-analytic"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "How many zeros, counted with multiplicity, does $p(z)=z^5+3z+1$ have in the annulus $1<|z|<2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$4$",
+    "$1$",
+    "$3$",
+    "$2$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "counted all zeros in $|z|<2$",
+    "",
+    "counted only the zeros in $|z|<1$",
+    "subtracted $2$ for a guessed pair on $|z|=1$",
+    "split the zeros evenly between the regions"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rouché on $|z|=2$: $|z^5|=32>|3z+1|$ gives $5$ zeros inside",
+    "weight": 1
+   },
+   {
+    "text": "Rouché on $|z|=1$: $|3z|=3>|z^5+1|$ gives $1$ zero inside",
+    "weight": 2
+   },
+   {
+    "text": "Check no zero on $|z|=1$ and subtract to get $4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Apply Rouché's theorem (complex-maps, zero counting).\nOn $|z|=2$: $|z^5|=32>7\\ge|3z+1|$, so $p$ has as many zeros in $|z|<2$ as $z^5$, namely $5$.\nOn $|z|=1$: $|3z|=3>2\\ge|z^5+1|$, so $p$ has as many zeros in $|z|<1$ as $3z$, namely $1$ (complex-analytic).\nAlso $|p|\\ge3-2>0$ on $|z|=1$, so no zero lies on that circle.\nAnnulus: $5-1=4$.",
+  "hints": [
+   "Compare the dominant term of $p$ on each circle."
+  ],
+  "check": "5-1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ode-first",
+   "t4.antideriv",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Solve $y'+\\dfrac2xy=x$ for $x>0$ with $y(1)=1$. Find $y(2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac74$",
+    "$\\frac54$",
+    "$1$",
+    "$\\frac{19}{16}$",
+    "$4(1+\\ln2)$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "forgot to divide the constant by $x^2$",
+    "used $C=1$ from $x^2y=\\frac{x^4}4+1$",
+    "dropped the constant of integration",
+    "",
+    "used the integrating factor $x^{-2}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Integrating factor $\\mu=x^2$",
+    "weight": 1
+   },
+   {
+    "text": "$(x^2y)'=x^3$ and integrate to $x^2y=\\frac{x^4}4+C$",
+    "weight": 1
+   },
+   {
+    "text": "Use $y(1)=1$ to get $C=\\frac34$",
+    "weight": 1
+   },
+   {
+    "text": "Divide by $x^2$ and evaluate $y(2)=\\frac{19}{16}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Integrating factor $\\mu=e^{\\int2/x\\,dx}=x^2$ (ode-first).\nThen $(x^2y)'=x^2y'+2xy=x^3$ (deriv-rules).\nIntegrate: $x^2y=\\dfrac{x^4}4+C$ (antideriv).\n$y(1)=1$ gives $C=\\tfrac34$, so $y=\\dfrac{x^2}4+\\dfrac3{4x^2}$.\n$y(2)=1+\\dfrac3{16}=\\dfrac{19}{16}$.",
+  "hints": [
+   "Multiply by $x^2$ so that the left side is an exact derivative."
+  ],
+  "check": "(Fraction(16,4)+Fraction(3,4))/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ode-first",
+   "t5.partials",
+   "t1.quad"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The solution of $(2xy+y^2)\\,dx+(x^2+2xy)\\,dy=0$ with $y(1)=1$ is a function $y(x)$. Find $y(2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-1-\\sqrt2$",
+    "$1+\\sqrt2$",
+    "$\\sqrt2-1$",
+    "$\\frac12$",
+    "$1$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "took the other root of the quadratic, not the branch through $(1,1)$",
+    "sign error solving $y^2+2y-1=0$",
+    "",
+    "kept only the $x^2y$ part of the potential",
+    "kept only the $xy^2$ part of the potential"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Check exactness: $M_y=2x+2y=N_x$",
+    "weight": 1
+   },
+   {
+    "text": "Find the potential $F=x^2y+xy^2$ and the constant $F(1,1)=2$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $y^2+2y-1=0$ at $x=2$ and choose the branch $y=\\sqrt2-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "With $M=2xy+y^2$ and $N=x^2+2xy$, $M_y=2x+2y=N_x$, so the equation is exact (ode-first, partials).\nA potential is $F=x^2y+xy^2$, since $F_x=M$ and $F_y=N$. Solutions satisfy $F=C$, and $F(1,1)=2$.\nAt $x=2$: $4y+2y^2=2$, so $y^2+2y-1=0$ (quad) and $y=-1\\pm\\sqrt2$.\nOn the solution curve $F=2\\ne0$, so $y$ never crosses $0$ and stays positive from $y(1)=1$.\nHence $y(2)=\\sqrt2-1$.",
+  "hints": [
+   "Test exactness, then solve $F(x,y)=F(1,1)$ at $x=2$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f031",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ode-linear",
+   "t1.quad",
+   "t3.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Solve $y''-4y'+4y=e^{2x}$ with $y(0)=0$ and $y'(0)=1$. Find $y(1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac32e^{2}$",
+    "$2e^{2}$",
+    "$e^{2}$",
+    "$\\frac12e^{2}$",
+    "$\\frac54e^{2}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $y_p=x^2e^{2x}$ with coefficient $1$",
+    "kept only the homogeneous part $xe^{2x}$",
+    "kept only the particular solution",
+    "used $y_p=\\frac14x^2e^{2x}$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Characteristic polynomial $(r-2)^2$ with double root $2$",
+    "weight": 1
+   },
+   {
+    "text": "Resonant particular solution $\\frac12x^2e^{2x}$",
+    "weight": 2
+   },
+   {
+    "text": "Fit $A=0$, $B=1$ from the initial values",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $y(1)=\\frac32e^2$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "Characteristic polynomial $r^2-4r+4=(r-2)^2$: double root $2$ (ode-linear, quad). Homogeneous solutions: $e^{2x}$ and $xe^{2x}$.\nThe forcing $e^{2x}$ resonates twice, so try $y_p=cx^2e^{2x}$.\n$(D-2)^2(x^2e^{2x})=e^{2x}(x^2)''=2e^{2x}$ (deriv-rules), so $c=\\tfrac12$.\nGeneral solution $y=(A+Bx+\\tfrac12x^2)e^{2x}$.\n$y(0)=A=0$ and $y'(0)=2A+B=1$, so $B=1$.\n$y(1)=e^2\\left(1+\\tfrac12\\right)=\\tfrac32e^2$.",
+  "hints": [
+   "The forcing term solves the homogeneous equation twice over."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f032",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ode-linear",
+   "t2.trig-eq",
+   "t2.trig-id"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The solution of $y''+2y'+5y=0$ with $y(0)=1$ and $y'(0)=1$ first vanishes at some $x_0>0$. Find $x_0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac\\pi8$",
+    "$\\frac{3\\pi}{4}$",
+    "$\\frac\\pi4$",
+    "$\\frac{\\pi-\\arctan2}{2}$",
+    "$\\frac{3\\pi}{8}$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "took the first-quadrant solution of $\\tan2x=1$",
+    "forgot to halve after solving for $2x$",
+    "used the zero of $\\cos2x$ alone",
+    "took $B=\\frac12$, ignoring the $-A$ in $y'(0)$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Roots $-1\\pm2i$ and form $e^{-x}(A\\cos2x+B\\sin2x)$",
+    "weight": 1
+   },
+   {
+    "text": "$A=1$ and $-A+2B=1$ give $B=1$",
+    "weight": 1
+   },
+   {
+    "text": "Reduce to $\\tan2x=-1$ (or $\\sqrt2\\sin(2x+\\frac\\pi4)=0$)",
+    "weight": 1
+   },
+   {
+    "text": "First positive solution $x_0=\\frac{3\\pi}8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Roots of $r^2+2r+5$: $r=-1\\pm2i$ (ode-linear), so $y=e^{-x}(A\\cos2x+B\\sin2x)$.\n$y(0)=A=1$. $y'(0)=-A+2B=1$, so $B=1$.\nZeros: $\\cos2x+\\sin2x=\\sqrt2\\sin\\left(2x+\\tfrac\\pi4\\right)=0$ (trig-id, phase shift).\nSo $2x+\\tfrac\\pi4=n\\pi$ (trig-eq); the first positive solution is $2x=\\tfrac{3\\pi}4$.\n$x_0=\\tfrac{3\\pi}8$.",
+  "hints": [
+   "Write the solution as a damped sinusoid and find its first zero."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f033",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ode-systems",
+   "t6.eigen-2x2",
+   "t6.gauss"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Solve $\\mathbf x'=\\begin{pmatrix}1&4\\\\1&1\\end{pmatrix}\\mathbf x$ with $\\mathbf x(0)=\\begin{pmatrix}4\\\\0\\end{pmatrix}$. Find the second component of $\\mathbf x(\\ln2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{17}{2}$",
+    "$\\frac{15}{2}$",
+    "$17$",
+    "$7$",
+    "$\\frac{31}{4}$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "swapped the sign of the $e^{-t}$ term",
+    "",
+    "gave the first component",
+    "evaluated $e^{-\\ln2}$ as $1$",
+    "evaluated $e^{-\\ln2}$ as $\\frac14$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Eigenvalues $3$ and $-1$ from $(1-\\lambda)^2=4$",
+    "weight": 1
+   },
+   {
+    "text": "Eigenvectors $(2,1)^T$ and $(2,-1)^T$",
+    "weight": 1
+   },
+   {
+    "text": "Initial-value system gives $c_1=c_2=1$",
+    "weight": 1
+   },
+   {
+    "text": "Second component $e^{3t}-e^{-t}$ at $\\ln2$ equals $\\frac{15}2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Eigenvalues: $(1-\\lambda)^2=4$, so $\\lambda=3,-1$ (ode-systems, eigen-2x2).\n$\\lambda=3$: $(-2)a+4b=0$ gives $(2,1)^T$. $\\lambda=-1$: $2a+4b=0$ gives $(2,-1)^T$.\nWrite $(4,0)^T=c_1(2,1)^T+c_2(2,-1)^T$: $2c_1+2c_2=4$ and $c_1-c_2=0$ (gauss), so $c_1=c_2=1$.\nThe second component is $y(t)=e^{3t}-e^{-t}$.\n$y(\\ln2)=8-\\tfrac12=\\tfrac{15}2$.",
+  "hints": [
+   "Diagonalise: eigenvalues first, then fit the initial vector."
+  ],
+  "check": "Fraction(8)-Fraction(1,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f034",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ode-systems",
+   "t5.partials",
+   "t6.eigen-2x2"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The predator-prey system $x'=x(1-y)$, $y'=y(x-2)$ has a positive equilibrium. Small oscillations about it have period (approximately)",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\pi$",
+    "$2\\pi\\sqrt2$",
+    "$2\\pi$",
+    "$\\pi\\sqrt2$",
+    "$\\frac{\\pi}{\\sqrt2}$"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "used angular frequency $2$",
+    "multiplied by $\\omega$ instead of dividing",
+    "assumed frequency $1$",
+    "",
+    "used $\\pi/\\omega$ for the period"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Equilibrium $(2,1)$ from $1-y=0$, $x-2=0$",
+    "weight": 1
+   },
+   {
+    "text": "Jacobian $\\begin{pmatrix}0&-2\\\\1&0\\end{pmatrix}$ at the equilibrium",
+    "weight": 2
+   },
+   {
+    "text": "Eigenvalues $\\pm i\\sqrt2$ and period $2\\pi/\\sqrt2=\\pi\\sqrt2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Equilibrium: $1-y=0$ and $x-2=0$, so $(x,y)=(2,1)$ (ode-systems).\nJacobian (partials): $\\begin{pmatrix}1-y&-x\\\\y&x-2\\end{pmatrix}$, which at $(2,1)$ is $\\begin{pmatrix}0&-2\\\\1&0\\end{pmatrix}$.\nCharacteristic equation $\\lambda^2+2=0$ gives $\\lambda=\\pm i\\sqrt2$ (eigen-2x2): a centre in the linearisation with angular frequency $\\omega=\\sqrt2$.\nPeriod $2\\pi/\\omega=\\pi\\sqrt2$.",
+  "hints": [
+   "Linearise at the equilibrium and read the frequency off the eigenvalues."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f035",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.numerical",
+   "t3.deriv-rules",
+   "t1.rational-expr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Newton's method is applied to $f(x)=x^3-2$ with $x_0=1$. What is $x_2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{98}{81}$",
+    "$\\frac{101}{72}$",
+    "$\\frac{91}{72}$",
+    "$\\frac{59}{48}$",
+    "$\\frac43$"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "reused the first derivative $f'(x_0)=3$ in the second step",
+    "added the correction instead of subtracting it in step $2$",
+    "",
+    "used $f'(x)=2x^2$ in step $2$",
+    "stopped after one step"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Newton update $x-\\frac{x^3-2}{3x^2}$",
+    "weight": 1
+   },
+   {
+    "text": "$x_1=\\frac43$",
+    "weight": 1
+   },
+   {
+    "text": "Second step with exact fractions: correction $\\frac5{72}$",
+    "weight": 1
+   },
+   {
+    "text": "$x_2=\\frac{91}{72}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Newton update: $x_{n+1}=x_n-\\dfrac{x_n^3-2}{3x_n^2}$ (numerical, deriv-rules).\n$x_1=1-\\dfrac{-1}{3}=\\dfrac43$.\n$f(\\tfrac43)=\\tfrac{64}{27}-2=\\tfrac{10}{27}$ and $f'(\\tfrac43)=3\\cdot\\tfrac{16}9=\\tfrac{16}3$ (rational-expr).\nCorrection $=\\tfrac{10}{27}\\cdot\\tfrac3{16}=\\tfrac5{72}$.\n$x_2=\\tfrac43-\\tfrac5{72}=\\tfrac{96-5}{72}=\\tfrac{91}{72}$.",
+  "hints": [
+   "Recompute both $f$ and $f'$ at the new iterate each time."
+  ],
+  "check": "Fraction(4,3)-(Fraction(4,3)**3-2)/(3*Fraction(4,3)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f036",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.numerical",
+   "t4.ftc",
+   "t4.antideriv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Simpson's rule with $n=2$ subintervals is applied to $\\displaystyle\\int_0^2x^4\\,dx$. What is (Simpson approximation) $-$ (exact value)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{4}{15}$",
+    "$\\frac{20}{3}$",
+    "$\\frac{13}{5}$",
+    "$\\frac{32}{5}$",
+    "$-\\frac{4}{15}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "gave the approximation itself",
+    "gave the trapezoid-rule error instead",
+    "gave the exact value",
+    "reversed the sign of the difference"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Simpson formula with $h=1$: $\\frac13[f(0)+4f(1)+f(2)]=\\frac{20}3$",
+    "weight": 2
+   },
+   {
+    "text": "Exact value $\\frac{32}5$ by the antiderivative",
+    "weight": 1
+   },
+   {
+    "text": "Difference $\\frac4{15}$ with the correct sign",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Here $h=1$. Simpson (numerical): $\\dfrac h3\\left[f(0)+4f(1)+f(2)\\right]=\\dfrac13[0+4+16]=\\dfrac{20}3$.\nExact (antideriv, ftc): $\\left.\\dfrac{x^5}5\\right|_0^2=\\dfrac{32}5$.\nDifference: $\\dfrac{20}3-\\dfrac{32}5=\\dfrac{100-96}{15}=\\dfrac4{15}$.\nSign check: $f^{(4)}>0$, so the Simpson error (exact minus approximation) $-\\frac{(b-a)h^4}{180}f^{(4)}$ is negative and the approximation overshoots.",
+  "hints": [
+   "Compute the Simpson value and the exact value separately, then subtract."
+  ],
+  "check": "Fraction(20,3)-Fraction(32,5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f037",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.geometry-misc",
+   "t1.transforms",
+   "t1.coord-geom"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The point $P=(3,2)$ is rotated $90^\\circ$ counterclockwise about the point $(1,2)$. The image is then reflected across the $x$-axis. Where does $P$ end up?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(1,4)$",
+    "$(1,0)$",
+    "$(5,4)$",
+    "$(-2,-3)$",
+    "$(1,-4)$"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "omitted the reflection",
+    "rotated clockwise",
+    "applied the reflection first and then the rotation",
+    "rotated about the origin instead of $(1,2)$",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Translate the centre $(1,2)$ to the origin: $P\\mapsto(2,0)$",
+    "weight": 1
+   },
+   {
+    "text": "Rotate $90^\\circ$ counterclockwise by $(x,y)\\mapsto(-y,x)$ and translate back to $(1,4)$",
+    "weight": 2
+   },
+   {
+    "text": "Reflect across the $x$-axis to $(1,-4)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Shift so the centre is the origin: $P-(1,2)=(2,0)$ (transforms).\nA $90^\\circ$ counterclockwise rotation sends $(x,y)\\mapsto(-y,x)$, so $(2,0)\\mapsto(0,2)$.\nShift back: $(0,2)+(1,2)=(1,4)$ (coord-geom).\nReflect across the $x$-axis, $(x,y)\\mapsto(x,-y)$: $(1,-4)$.",
+  "hints": [
+   "Move the rotation centre to the origin before rotating."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f038",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.geometry-misc",
+   "t1.geom-formulas",
+   "t1.coord-geom"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A right triangle has vertices $(0,0)$, $(6,0)$ and $(0,8)$. What is the distance between its incenter and its circumcenter?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac23$",
+    "$\\sqrt5$",
+    "$1$",
+    "$3$",
+    "$5$"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "used the centroid in place of the circumcenter",
+    "",
+    "computed $R-2r$",
+    "computed $R-r$",
+    "gave the circumradius"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Circumcenter is the midpoint of the hypotenuse: $(3,4)$, $R=5$",
+    "weight": 1
+   },
+   {
+    "text": "Inradius $r=\\frac{\\text{area}}{s}=2$ and incenter $(2,2)$",
+    "weight": 2
+   },
+   {
+    "text": "Distance $\\sqrt{1+4}=\\sqrt5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "The hypotenuse joins $(6,0)$ and $(0,8)$ and has length $10$. In a right triangle the circumcenter is its midpoint: $(3,4)$, with $R=5$ (geom-formulas).\nArea $=24$ and semiperimeter $s=12$, so the inradius is $r=24/12=2$. The incenter is at distance $2$ from both legs: $(2,2)$.\nDistance: $\\sqrt{(3-2)^2+(4-2)^2}=\\sqrt5$ (coord-geom).\nCheck with Euler's formula: $OI^2=R(R-2r)=5\\cdot1=5$.",
+  "hints": [
+   "Place the two centres with coordinates, then use the distance formula."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

@@ -2374,7 +2374,7 @@
         "",
         "added instead of conjugating",
         "inverse is not similarity",
-        "congruence needs orthogonal $P$"
+        "congruence $P^TAP$ matches similarity only when $P$ is orthogonal"
       ]
     },
     "check": null,
@@ -2726,7 +2726,7 @@
     ],
     "critical": [],
     "difficulty": 1,
-    "prompt": "Which is an eigenvalue of $\\begin{pmatrix}2&0\\\\0&5\\end{pmatrix}$?",
+    "prompt": "Which lists all the eigenvalues of $\\begin{pmatrix}2&0\\\\0&5\\end{pmatrix}$?",
     "answer": {
       "kind": "mcq",
       "options": [

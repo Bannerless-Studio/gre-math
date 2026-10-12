@@ -11,11 +11,11 @@ NODE=/path/to/node ./build.sh packs/gre-math index.html
 NODE=/path/to/node ./build.sh packs/_fixture .cache/fixture/fixture.html   # one page per directory: sw.js is shared
 ```
 
-The build runs the pack validator first, then renders the math (`tools/render_pack.js`), then writes one page and `sw.js` beside it. Set `NODE` when `node` is not on PATH. Open the output file in a browser. Nothing is loaded from the network.
+The build runs the pack validator first, then validates the math (`tools/render_pack.js`), then writes one page and `sw.js` beside it. Set `NODE` when `node` is not on PATH. Open the output file in a browser. Nothing is loaded from the network.
 
 ## Math rendering (M2)
 
-KaTeX 0.16.11 is vendored in `vendor/katex/` (version, file list and licence in `vendor/katex/VERSION`). The build renders math to HTML at build time, so the page needs only the core font subset as inline CSS. No KaTeX JavaScript ships in the page. Rendering rules and the font subset are in `docs/PACK_SCHEMA.md` under Rendering (M2).
+KaTeX 0.16.11 is vendored in `vendor/katex/` (version, file list and licence in `vendor/katex/VERSION`). The build inlines KaTeX's JavaScript and its CSS with the core font subset, and the page renders math at run time from the pack source. Rendering rules and the font subset are in `docs/PACK_SCHEMA.md` under Rendering (M2). Why runtime rendering: `docs/SPEC.md` section 4.
 
 To check a pack's math without a build:
 

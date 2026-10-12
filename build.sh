@@ -1,8 +1,9 @@
 #!/bin/sh
-# Builds one self-contained HTML page for a pack: engine/text.js, core.js, app.css, app.js and the
-# pack's JSON inlined into engine/app.html, plus KaTeX CSS with the core font subset inlined (M2).
-# Math in prompts, options, solutions, hints and teach cards is pre-rendered to HTML at build time, so the
-# page needs no KaTeX JavaScript. Opens from file://.
+# Builds one self-contained HTML page for a pack: engine/text.js, core.js, app.css, app.js and the pack's JSON inlined
+# into engine/app.html, plus KaTeX 0.16.11 (JS and CSS; the CSS has the core font subset inlined) from vendor/katex/.
+# Math is rendered in the page at run time from the Markdown-lite source (M2 pre-rendering was replaced 2026-10-12;
+# docs/SPEC.md section 4). The build only validates math: tools/render_pack.js fails the build on any LaTeX error.
+# Opens from file://.
 #
 # Also writes sw.js next to <out.html> (engine/sw.template.js with the build id and the page file name). The page
 # carries the marker <!--pe-build:<id>--> that sw.js checks before caching it. Publish sw.js together with the page;
@@ -28,25 +29,22 @@ for f in "$ROOT/engine/app.html" "$ROOT/engine/text.js" "$ROOT/engine/answer.js"
   if [ ! -f "$f" ]; then echo "build.sh: missing $f" >&2; exit 1; fi
 done
 "$NODE" "$ROOT/tools/validate_pack.js" "$PACKDIR"
-# JSON goes inside a <script>; a literal closing tag there would end the script early.
-if grep -l '</script' "$PACKDIR/pack.json" "$PACKDIR/techniques.json" "$PACKDIR/items.json" >/dev/null 2>&1; then
-  echo "build.sh: pack JSON contains a closing script tag; refusing to build" >&2; exit 1
+# JSON and KaTeX JS go inside <script>; a literal closing tag there would end the script early.
+if grep -l '</script' "$PACKDIR/pack.json" "$PACKDIR/techniques.json" "$PACKDIR/items.json" "$ROOT/vendor/katex/katex.min.js" >/dev/null 2>&1; then
+  echo "build.sh: pack JSON or katex.min.js contains a closing script tag; refusing to build" >&2; exit 1
 fi
 # Same for an HTML comment opener: "<!--" followed by "<script" switches the parser into double-escaped state.
-if grep -l '<!--' "$PACKDIR/pack.json" >/dev/null 2>&1; then
-  echo "build.sh: pack.json contains an HTML comment opener; refusing to build" >&2; exit 1
+if grep -l '<!--' "$PACKDIR/pack.json" "$PACKDIR/techniques.json" "$PACKDIR/items.json" "$ROOT/vendor/katex/katex.min.js" >/dev/null 2>&1; then
+  echo "build.sh: pack JSON or katex.min.js contains an HTML comment opener; refusing to build" >&2; exit 1
 fi
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 "$NODE" "$ROOT/tools/render_pack.js" "$PACKDIR" "$WORK"
-if grep -l '</script' "$WORK/items.json" "$WORK/techniques.json" "$WORK/tags.json" >/dev/null 2>&1; then
-  echo "build.sh: rendered JSON contains a closing script tag; refusing to build" >&2; exit 1
-fi
 mkdir -p "$(dirname "$OUT")"
 TMP="$OUT.tmp.$$"
-BUILD_ID="$(cat "$ROOT/engine/app.html" "$ROOT/engine/text.js" "$ROOT/engine/answer.js" "$ROOT/engine/store.js" "$ROOT/engine/core.js" \
+BUILD_ID="$(cat "$ROOT/engine/app.html" "$ROOT/vendor/katex/katex.min.js" "$ROOT/engine/text.js" "$ROOT/engine/answer.js" "$ROOT/engine/store.js" "$ROOT/engine/core.js" \
   "$ROOT/engine/app.css" "$ROOT/engine/app.js" "$PACKDIR/pack.json" \
-  "$WORK/katex.css" "$WORK/items.json" "$WORK/techniques.json" "$WORK/tags.json" | cksum | awk '{ printf "%s-%s", $1, $2 }')"
+  "$WORK/katex.css" "$PACKDIR/items.json" "$PACKDIR/techniques.json" | cksum | awk '{ printf "%s-%s", $1, $2 }')"
 export PE_ROOT="$ROOT" PE_PACK="$PACKDIR" PE_BUILD="$BUILD_ID" PE_WORK="$WORK"
 awk '
   function emit(f,   line) { while ((getline line < f) > 0) print line; close(f) }
@@ -54,6 +52,7 @@ awk '
     root = ENVIRON["PE_ROOT"]; pack = ENVIRON["PE_PACK"]; build = ENVIRON["PE_BUILD"]; work = ENVIRON["PE_WORK"]
   }
   /^<!--PE_KATEX-->$/ { print "<style>"; emit(work "/katex.css"); print "</style>"; next }
+  /^<!--PE_KATEX_JS-->$/ { print "<script>"; emit(root "/vendor/katex/katex.min.js"); print "</script>"; next }
   /^<!--PE_CSS-->$/  { print "<style>"; emit(root "/engine/app.css"); print "</style>"; next }
   /^<!--PE_TEXT-->$/ { print "<script>"; emit(root "/engine/text.js"); print "</script>"; next }
   /^<!--PE_ANSWER-->$/ { print "<script>"; emit(root "/engine/answer.js"); print "</script>"; next }
@@ -62,9 +61,8 @@ awk '
   /^<!--PE_APP-->$/  { print "<script>"; emit(root "/engine/app.js"); print "</script>"; next }
   /^<!--PE_DATA-->$/ {
     printf "<script>window.PE_DATA={\"pack\":"; emit(pack "/pack.json")
-    printf ",\"techniques\":"; emit(work "/techniques.json")
-    printf ",\"items\":"; emit(work "/items.json")
-    printf ",\"tags\":"; emit(work "/tags.json")
+    printf ",\"techniques\":"; emit(pack "/techniques.json")
+    printf ",\"items\":"; emit(pack "/items.json")
     print "};</script>"; next
   }
   { gsub(/__PE_BUILD__/, build); print }

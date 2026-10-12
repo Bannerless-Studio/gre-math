@@ -1,0 +1,4350 @@
+[
+ {
+  "id": "t8-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\sup\\left\\{1-\\frac{1}{n}: n\\in\\mathbb{N}\\right\\}$, where $\\mathbb{N}=\\{1,2,3,\\dots\\}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "The terms rise toward $1$ but never reach it, since $1-\\frac1n<1$. So $\\sup=1$.",
+  "hints": [
+   "Ask what the terms approach, not what they reach."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\sup\\{x\\in\\mathbb{R}: x^2<2\\}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sqrt{2}$",
+    "$2$",
+    "$1$",
+    "$\\infty$, since the set is unbounded"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "used $x^2<2$ as $x<2$",
+    "used the integer part of $\\sqrt{2}$",
+    "the set is bounded, so its sup is finite"
+   ]
+  },
+  "check": null,
+  "solution": "The set is $(-\\sqrt2,\\sqrt2)$, so its least upper bound is $\\sqrt2$.",
+  "hints": [
+   "Find the endpoint of the interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which property of $\\mathbb{R}$ fails for $\\mathbb{Q}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Between two rationals there is a rational.",
+    "Every nonzero rational has a rational inverse.",
+    "The Archimedean property holds.",
+    "Every nonempty set bounded above has a supremum."
+   ],
+   "correct": 3,
+   "why": [
+    "holds in $\\mathbb{Q}$, so not the answer",
+    "holds in $\\mathbb{Q}$, so not the answer",
+    "holds in $\\mathbb{Q}$, so not the answer",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "The set $\\{x\\in\\mathbb{Q}: x^2<2\\}$ has no rational supremum. The other three hold in $\\mathbb{Q}$.",
+  "hints": [
+   "Look for a bounded set with no rational endpoint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\inf\\left\\{2+\\frac{1}{n}: n\\in\\mathbb{N}\\right\\}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "$2+\\frac1n$ decreases toward $2$ but never equals $2$. So $\\inf=2$.",
+  "hints": [
+   "The terms decrease. Find the limit they approach."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $A=\\left\\{\\frac{m}{n}: m,n\\in\\mathbb{N},\\ m+n\\le 4\\right\\}$. Find $\\sup A+\\inf A$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "10/3",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3)+Fraction(1,3)",
+  "solution": "The pairs give $1,\\frac12,2,\\frac13,1,3$. So $\\sup A=3$, $\\inf A=\\frac13$, and the sum is $\\frac{10}{3}$.",
+  "hints": [
+   "List the pairs with $m+n\\le 4$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sup\\left\\{\\frac{n^2}{2^n}: n\\in\\mathbb{N}\\right\\}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/8",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(9,8)",
+  "solution": "The ratio of consecutive terms is $\\frac{(n+1)^2}{2n^2}<1$ for $n\\ge3$. So the maximum is at $n=3$, equal to $\\frac98$.",
+  "hints": [
+   "Compare consecutive terms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $a>0$, find $\\inf\\{ax+\\frac{1}{x}: x>0\\}$ as a function of $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*sqrt(a)",
+   "vars": [
+    "a"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "2*a^(1/2)",
+    "sqrt(4*a)"
+   ]
+  },
+  "check": null,
+  "solution": "By AM-GM, $ax+\\frac1x\\ge 2\\sqrt a$, with equality at $x=a^{-1/2}$.",
+  "hints": [
+   "Apply AM-GM to the two terms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about subsets of $\\mathbb{R}$ are true?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Every nonempty bounded-above subset of $\\mathbb{R}$ has a supremum.",
+    "Every nonempty subset of $\\mathbb{R}$ has a supremum.",
+    "A finite nonempty set contains its supremum.",
+    "The supremum of every set belongs to the set.",
+    "If $s=\\sup A$, then for each $\\varepsilon>0$ some $a\\in A$ satisfies $a>s-\\varepsilon$."
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "Completeness gives the first. A finite set has a maximum. The last is the approximation property. The second fails for unbounded sets, and the fourth fails for $(0,1)$.",
+  "hints": [
+   "Test the open interval $(0,1)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.real-axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $A=\\{x\\in\\mathbb{R}: 1<x^2\\le 9\\}$. Find $\\sup A-\\inf A$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3-(-3)",
+  "solution": "$A=[-3,-1)\\cup(1,3]$, so $\\sup A=3$ and $\\inf A=-3$.",
+  "hints": [
+   "Solve $x^2\\le 9$ and $x^2>1$ separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\lim_{n\\to\\infty}\\frac{3n^2+n}{2n^2-5}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,2)",
+  "solution": "Divide top and bottom by $n^2$. The terms $\\frac1n$ and $\\frac{5}{n^2}$ vanish, leaving $\\frac32$.",
+  "hints": [
+   "Divide by the highest power of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement is the definition of $a_n\\to L$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "For some $\\varepsilon>0$ there is $N$ with $|a_n-L|<\\varepsilon$ for all $n\\ge N$.",
+    "For every $\\varepsilon>0$ there is $N$ with $|a_n-L|<\\varepsilon$ for all $n\\ge N$.",
+    "For every $\\varepsilon>0$, $|a_n-L|<\\varepsilon$ for some $n$.",
+    "For every $n$, $|a_n-L|<\\varepsilon$ for one fixed $\\varepsilon$."
+   ],
+   "correct": 1,
+   "why": [
+    "swapped every and some for $\\varepsilon$",
+    "",
+    "no tail condition: only one $n$ is needed",
+    "dropped $N$ and the arbitrary $\\varepsilon$"
+   ]
+  },
+  "check": null,
+  "solution": "The definition takes $\\varepsilon$ first, then gives $N$ depending on $\\varepsilon$, then needs the bound for all $n\\ge N$.",
+  "hints": [
+   "Read the quantifiers in order."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $a_n\\to L$, which must also hold?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a_n$ is eventually constant.",
+    "$a_n=L$ for all $n$.",
+    "$|a_n|\\to|L|$.",
+    "$\\sum a_n$ converges."
+   ],
+   "correct": 2,
+   "why": [
+    "convergence does not force constancy",
+    "a convergent sequence need not be constant",
+    "",
+    "$\\sum\\frac1n$ diverges even though $\\frac1n\\to0$"
+   ]
+  },
+  "check": null,
+  "solution": "Since $\\bigl||a_n|-|L|\\bigr|\\le|a_n-L|$, the absolute values converge. The other three fail for $a_n=\\frac1n$.",
+  "hints": [
+   "Use the reverse triangle inequality."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the least $N$ such that $\\left|\\frac1n\\right|<0.01$ for all $n\\ge N$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 101,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "101",
+  "solution": "$\\frac1n<0.01$ needs $n>100$. At $n=100$ the value is exactly $0.01$, so $N=101$.",
+  "hints": [
+   "Solve $\\frac1n<0.01$ for $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t8-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\lim_{n\\to\\infty}\\frac{\\sin n}{n}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "0",
+  "solution": "$|\\sin n|\\le1$, so $\\left|\\frac{\\sin n}{n}\\right|\\le\\frac1n\\to0$ by squeezing.",
+  "hints": [
+   "Bound $|\\sin n|$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\lim_{n\\to\\infty}\\left(\\sqrt{n^2+3n}-n\\right)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,2)",
+  "solution": "Multiply by the conjugate: $\\frac{3n}{\\sqrt{n^2+3n}+n}\\to\\frac32$.",
+  "hints": [
+   "Rationalise the numerator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\lim_{n\\to\\infty}\\frac{a n^2+n}{b n^2+3}$ as a function of $a$ and $b$, where $b\\neq0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a/b",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "a*b^(-1)",
+    "(a)/(b)"
+   ]
+  },
+  "check": null,
+  "solution": "Divide by $n^2$. The terms in $\\frac1n$ and $\\frac{3}{n^2}$ vanish, leaving $\\frac ab$.",
+  "hints": [
+   "Divide top and bottom by $n^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which sequences converge?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\left\\{\\frac{(-1)^n}{n}\\right\\}$",
+    "$\\{(-1)^n\\}$",
+    "$\\left\\{\\frac{n}{n+1}\\right\\}$",
+    "$\\{n\\}$",
+    "$\\left\\{\\sin\\frac{\\pi n}{2}\\right\\}$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "check": null,
+  "solution": "The first tends to $0$ and the third to $1$. The second alternates, the fourth grows without bound, and the fifth cycles through $1,0,-1,0$.",
+  "hints": [
+   "Check the limit of each sequence, not one subsequence."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.seq-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\lim_{n\\to\\infty}\\frac{4n^3-n}{n^3+2n^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "Divide by $n^3$. The limit is $\\frac{4-0}{1+0}=4$.",
+  "hints": [
+   "Divide by the highest power."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many subsequential limits does $\\{(-1)^n\\}$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The even terms tend to $1$ and the odd terms to $-1$. Those are the only two limits.",
+  "hints": [
+   "Split into even and odd indices."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which property of $\\mathbb{R}$ makes Cauchy sequences converge?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Completeness",
+    "Density of the rationals",
+    "Archimedean property",
+    "Countability"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "holds in $\\mathbb{Q}$, which has non-convergent Cauchy sequences",
+    "holds in $\\mathbb{Q}$ too",
+    "$\\mathbb{R}$ is uncountable, so countability is the wrong property"
+   ]
+  },
+  "check": null,
+  "solution": "Completeness says every Cauchy sequence has a limit in $\\mathbb{R}$. The rationals lack this, since $\\sqrt2$ is a limit of rational Cauchy terms.",
+  "hints": [
+   "Which property fills the gaps?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does Bolzano-Weierstrass say about a bounded sequence in $\\mathbb{R}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It converges.",
+    "It has exactly one limit point.",
+    "It is eventually constant.",
+    "It has a convergent subsequence."
+   ],
+   "correct": 3,
+   "why": [
+    "$(-1)^n$ is bounded and does not converge",
+    "$(-1)^n$ has two limit points",
+    "$(-1)^n$ is not eventually constant",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "Bolzano-Weierstrass gives a convergent subsequence, not convergence of the whole sequence. The alternating sequence has two limit points.",
+  "hints": [
+   "Think about $(-1)^n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many subsequential limits does $(-1)^n+\\frac1n$ have in $\\mathbb{R}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "Even-indexed terms approach $1$ and odd-indexed terms approach $-1$. So there are two limits.",
+  "hints": [
+   "Each parity class gives one limit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\limsup_{n\\to\\infty}\\sin\\frac{n\\pi}{2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "The subsequential limits are $-1$, $0$ and $1$. The largest is $1$.",
+  "hints": [
+   "Compute the first four terms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\liminf_{n\\to\\infty}(-1)^n\\left(2+\\frac1n\\right)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-2",
+  "solution": "Odd terms tend to $-2$ and even terms to $2$. The smallest limit point is $-2$.",
+  "hints": [
+   "Find the smallest subsequential limit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $c>0$ and $a_n=\\frac{c}{n}$, find $|a_{n+1}-a_n|$ as a function of $c$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "c/(n*(n+1))",
+   "vars": [
+    "c",
+    "n"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "c/(n^2+n)",
+    "c/n-c/(n+1)"
+   ]
+  },
+  "check": null,
+  "solution": "$\\frac cn-\\frac c{n+1}=\\frac{c}{n(n+1)}$, which tends to $0$.",
+  "hints": [
+   "Subtract the two fractions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which sequences are Cauchy in $\\mathbb{R}$?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\left\\{\\frac1n\\right\\}$",
+    "$\\{(-1)^n\\}$",
+    "$\\left\\{\\sum_{k=1}^n\\frac{1}{k^2}\\right\\}$",
+    "$\\left\\{\\sum_{k=1}^n\\frac1k\\right\\}$",
+    "$\\left\\{\\frac{\\sin n}{n}\\right\\}$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "The first and fifth converge. The third converges since $\\sum\\frac1{k^2}$ converges. The alternating sequence and the harmonic partial sums do not.",
+  "hints": [
+   "Convergent sequences are Cauchy in $\\mathbb{R}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cauchy-bw"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $x_1=0$ and $x_{n+1}=\\frac12x_n+1$. Find $\\lim_{n\\to\\infty}x_n$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "If the limit $L$ exists, then $L=\\frac L2+1$, so $L=2$. The sequence is increasing and bounded by $2$, so the limit exists.",
+  "hints": [
+   "Find the fixed point of the update."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=3x$ and $\\varepsilon=0.6$, which $\\delta$ works at every point $c$?",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,5)",
+  "solution": "$|f(x)-f(c)|=3|x-c|<\\varepsilon$ needs $|x-c|<\\varepsilon/3=0.2$.",
+  "hints": [
+   "Compare $3|x-c|$ with $\\varepsilon$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement is the $\\varepsilon$-$\\delta$ definition of continuity of $f$ at $c$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "For every $\\delta>0$ there is $\\varepsilon>0$ with $|f(x)-f(c)|<\\varepsilon$ whenever $|x-c|<\\delta$.",
+    "For every $\\varepsilon>0$ there is $\\delta>0$ with $|f(x)-f(c)|<\\varepsilon$ whenever $|x-c|<\\delta$.",
+    "For every $\\varepsilon>0$ there is $\\delta>0$ with $|x-c|<\\delta$ whenever $|f(x)-f(c)|<\\varepsilon$.",
+    "For every $\\varepsilon>0$ there is $\\delta>0$ with $|f(x)-f(c)|<\\varepsilon$ for all $x$."
+   ],
+   "correct": 1,
+   "why": [
+    "swapped the quantifiers on $\\varepsilon$ and $\\delta$",
+    "",
+    "reversed the implication",
+    "dropped the restriction $|x-c|<\\delta$"
+   ]
+  },
+  "check": null,
+  "solution": "Continuity at $c$ means each $\\varepsilon$ is matched by some $\\delta$ that works for all $x$ near $c$.",
+  "hints": [
+   "The $\\delta$ may depend on $\\varepsilon$ and $c$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which function is discontinuous at $0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f(x)=|x|$",
+    "$f(x)=\\sin x$",
+    "$f(x)=\\chi_{(0,\\infty)}(x)$",
+    "$f(x)=e^x$"
+   ],
+   "correct": 2,
+   "why": [
+    "continuous at $0$",
+    "continuous at $0$",
+    "",
+    "continuous at $0$"
+   ]
+  },
+  "check": null,
+  "solution": "The indicator is $0$ at $x=0$ and $1$ just to the right, so $\\lim_{x\\to0}f(x)$ does not exist.",
+  "hints": [
+   "Compare the left and right limits at $0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^2$ at $c=1$, use the bound $|x^2-1|<3|x-1|$ valid for $|x-1|<1$. Find the $\\delta\\le1$ this bound yields for $\\varepsilon=0.3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/10",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "min(Fraction(1), Fraction(3,10)/3)",
+  "solution": "$3\\delta\\le0.3$ gives $\\delta\\le0.1$, which also satisfies $\\delta\\le1$.",
+  "hints": [
+   "Solve $3\\delta\\le\\varepsilon$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t8-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=\\frac1x$ and $c=2$. Find the largest $\\delta\\le1$ such that $|x-2|<\\delta$ implies $\\left|\\frac1x-\\frac12\\right|<\\frac14$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/3",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,3)",
+  "solution": "The condition means $x\\in\\left(\\frac43,4\\right)$. The interval $(2-\\delta,2+\\delta)$ fits inside it exactly when $\\delta\\le\\frac23$.",
+  "hints": [
+   "Solve the inequality for $x$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=ax+b$ with $a\\neq0$, find a $\\delta$ depending on $\\varepsilon$ and $a$ that works at every $c$. Write $t$ for $\\varepsilon$.",
+  "answer": {
+   "kind": "expression",
+   "value": "t/abs(a)",
+   "vars": [
+    "t",
+    "a"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "t/a"
+   ]
+  },
+  "check": null,
+  "solution": "$|f(x)-f(c)|=|a||x-c|<\\varepsilon$ when $|x-c|<\\varepsilon/|a|$. The constant $b$ cancels.",
+  "hints": [
+   "Only the slope enters the bound."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which functions are continuous on all of $\\mathbb{R}$?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$f(x)=\\frac1x$",
+    "$f(x)=|x|$",
+    "$f(x)=\\lfloor x\\rfloor$",
+    "$f(x)=\\sqrt{x^2+1}$",
+    "$f(x)=\\chi_{[0,\\infty)}(x)$"
+   ],
+   "correct": [
+    1,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "$|x|$ and $\\sqrt{x^2+1}$ are compositions of continuous functions. The others jump or are undefined at $0$.",
+  "hints": [
+   "Compositions of continuous functions stay continuous."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many points of discontinuity does $f(x)=\\lfloor x\\rfloor$ have in the open interval $(0,3)$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The floor function jumps at each integer. The integers in $(0,3)$ are $1$ and $2$.",
+  "hints": [
+   "Jumps occur at integers."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-eps"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=\\frac{x^2-4}{x-2}$ for $x\\neq2$. For which value $k$ does defining $f(2)=k$ make $f$ continuous at $2$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "For $x\\neq2$, $f(x)=x+2$, which tends to $4$ as $x\\to2$.",
+  "hints": [
+   "Cancel the common factor first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the least Lipschitz constant $L$ with $|x^2-y^2|\\le L|x-y|$ for all $x,y\\in[0,1]$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The derivative $2x$ is at most $2$ on $[0,1]$, so $L=2$ works, and no smaller $L$ does.",
+  "hints": [
+   "Bound the derivative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What separates uniform continuity from continuity?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\delta$ depends only on $\\varepsilon$, not on the point",
+    "$\\delta$ may depend on the point but not on $\\varepsilon$",
+    "Uniform continuity requires differentiability",
+    "Uniform continuity is weaker than continuity"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reversed the roles of $\\varepsilon$ and the point",
+    "confused it with differentiability",
+    "uniform continuity is strictly stronger"
+   ]
+  },
+  "check": null,
+  "solution": "A uniformly continuous function has one $\\delta$ that serves all points at once.",
+  "hints": [
+   "Ask whether one $\\delta$ works everywhere."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which function is uniformly continuous on $\\mathbb{R}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$x^2$",
+    "$e^x$",
+    "$x\\sin x$",
+    "$\\sin x$"
+   ],
+   "correct": 3,
+   "why": [
+    "unbounded derivative",
+    "unbounded derivative",
+    "unbounded derivative",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "$\\sin x$ has derivative bounded by $1$, so it is Lipschitz. The others have derivatives that grow without bound.",
+  "hints": [
+   "A bounded derivative gives a Lipschitz bound."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sup_{x\\in[-2,2]}|f'(x)|$ for $f(x)=x^3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "12",
+  "solution": "$f'(x)=3x^2$ is largest at the endpoints, where it equals $12$.",
+  "hints": [
+   "Check the endpoints of $[-2,2]$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sup_{x\\ge1}|f'(x)|$ for $f(x)=\\frac1x$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "$|f'(x)|=\\frac1{x^2}$ decreases on $[1,\\infty)$, so its supremum is $1$ at $x=1$.",
+  "hints": [
+   "Differentiate and find the largest value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=ax^2$ on $[0,M]$ with $a,M>0$, find the best Lipschitz constant as a function of $a$ and $M$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*a*M",
+   "vars": [
+    "a",
+    "M"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "2*M*a"
+   ]
+  },
+  "check": null,
+  "solution": "The derivative $2ax$ is largest at $x=M$, where it equals $2aM$.",
+  "hints": [
+   "Find the supremum of $|f'|$ on the interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which functions are uniformly continuous on $(0,1)$?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$x^2$",
+    "$\\sin\\frac1x$",
+    "$\\sqrt{x}$",
+    "$\\frac1x$",
+    "$x\\sin x$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "$x^2$ and $x\\sin x$ have bounded derivatives on $(0,1)$. $\\sqrt x$ is uniformly continuous on $[0,1]$. $\\sin\\frac1x$ and $\\frac1x$ oscillate or blow up near $0$.",
+  "hints": [
+   "Look at the behaviour near $0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sup_{x\\in\\mathbb{R}}|f'(x)|$ for $f(x)=\\frac{x}{1+x^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "$f'(x)=\\frac{1-x^2}{(1+x^2)^2}$ equals $1$ at $x=0$ and has absolute value at most $1$ everywhere.",
+  "hints": [
+   "Differentiate with the quotient rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-cont"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the Lipschitz constant of $f(x)=x^2$ on $[0,3]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "6",
+  "solution": "The derivative $2x$ has largest absolute value $6$ at $x=3$.",
+  "hints": [
+   "Find the largest $|f'|$ on the interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many real roots does $x^3-x$ have in $(-2,2)$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "$x^3-x=x(x-1)(x+1)$, with roots $-1$, $0$ and $1$, all inside $(-2,2)$.",
+  "hints": [
+   "Factor the polynomial."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which hypothesis is needed for the extreme value theorem?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Differentiability on the domain",
+    "Continuity on a closed, bounded interval",
+    "Monotonicity",
+    "The domain is open"
+   ],
+   "correct": 1,
+   "why": [
+    "continuity alone is enough",
+    "",
+    "continuity alone is enough",
+    "open domains can fail to attain extremes"
+   ]
+  },
+  "check": null,
+  "solution": "A continuous function on $[a,b]$ attains its maximum and minimum. Monotonicity is not assumed.",
+  "hints": [
+   "Closed and bounded is the key."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does the intermediate value theorem guarantee for continuous $f$ on $[a,b]$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f$ attains a maximum on $[a,b]$.",
+    "$f$ is differentiable somewhere in $(a,b)$.",
+    "$f$ takes every value between $f(a)$ and $f(b)$.",
+    "$f$ is bounded on $[a,b]$."
+   ],
+   "correct": 2,
+   "why": [
+    "that is the extreme value theorem",
+    "that is the mean value theorem",
+    "",
+    "true, but a consequence of the extreme value theorem"
+   ]
+  },
+  "check": null,
+  "solution": "The theorem says every value between $f(a)$ and $f(b)$ is attained somewhere in $[a,b]$.",
+  "hints": [
+   "Think of a continuous path."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the maximum of $f(x)=-x^2+4x$ on $[0,3]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "The vertex at $x=2$ gives $f(2)=4$. The endpoints give $f(0)=0$ and $f(3)=3$.",
+  "hints": [
+   "Find the vertex."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the minimum of $f(x)=x^3-3x$ on $[-2,2]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-2",
+  "solution": "Critical points $\\pm1$ give $f(-1)=2$ and $f(1)=-2$. The endpoints give $f(-2)=-2$ and $f(2)=2$, so the minimum is $-2$.",
+  "hints": [
+   "Compare critical values with endpoint values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $a>0$, find the maximum of $-x^2+2ax$ over all real $x$, as a function of $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a^2",
+   "vars": [
+    "a"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "a*a"
+   ]
+  },
+  "check": null,
+  "solution": "Complete the square: $-x^2+2ax=a^2-(x-a)^2\\le a^2$, with equality at $x=a$.",
+  "hints": [
+   "Complete the square."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f$ be continuous on $[0,1]$. Which statements must hold?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$f$ attains a maximum and a minimum on $[0,1]$.",
+    "$f$ takes every value between $f(0)$ and $f(1)$.",
+    "$f$ is differentiable on $(0,1)$.",
+    "$f$ attains a maximum on $(0,1)$.",
+    "$f$ is uniformly continuous on $[0,1]$."
+   ],
+   "correct": [
+    0,
+    1,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "The extreme value and intermediate value theorems give the first two. Compactness gives uniform continuity. $|x-\\tfrac12|$ is not differentiable at $\\tfrac12$, and $f(x)=x$ has no maximum on $(0,1)$.",
+  "hints": [
+   "Compactness is the key for the first and last."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many real solutions does $x^3+x-1=0$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "$f(x)=x^3+x-1$ has $f'(x)=3x^2+1>0$, so $f$ is strictly increasing and crosses zero once.",
+  "hints": [
+   "Show the function is monotone."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cont-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\max_{x\\in[-1,2]}(x^2-x)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The endpoints give $f(-1)=2$ and $f(2)=2$. The interior critical point $x=\\frac12$ gives the minimum $-\\frac14$.",
+  "hints": [
+   "Check the endpoints first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=x^2$ on $[0,2]$, find the point $c$ given by the mean value theorem.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "The average slope is $\\frac{4-0}{2}=2$. Since $f'(c)=2c=2$, we get $c=1$.",
+  "hints": [
+   "Compute the average slope first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which set of hypotheses gives Rolle's theorem?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f(a)=f(b)$",
+    "$f$ is monotone on $[a,b]$",
+    "$f(a)<f(b)$",
+    "$f'$ is continuous on $[a,b]$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "monotonicity does not force a zero derivative",
+    "gives a slope, not a zero",
+    "continuity of $f'$ is not needed"
+   ]
+  },
+  "check": null,
+  "solution": "Rolle's theorem needs equal endpoint values, plus continuity and differentiability. These force an interior point with $f'=0$.",
+  "hints": [
+   "Think of an extreme point inside the interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A function with $f'=0$ on an interval must be:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "increasing",
+    "equal to $0$ everywhere",
+    "zero at some point",
+    "constant"
+   ],
+   "correct": 3,
+   "why": [
+    "zero slope is not increasing",
+    "a constant can be nonzero",
+    "a nonzero constant has no zero",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "Zero derivative forces zero change, so $f$ is constant, not necessarily $0$.",
+  "hints": [
+   "Use the mean value theorem."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find a point $c\\in(1,3)$ with $f'(c)=0$ for $f(x)=x^2-4x+3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "$f(1)=f(3)=0$, and $f'(x)=2x-4$ vanishes at $x=2$.",
+  "hints": [
+   "Check the endpoint values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^2$ on $[1,4]$, find $c\\in(1,4)$ with $f'(c)=\\frac{f(4)-f(1)}{4-1}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(5,2)",
+  "solution": "The average slope is $\\frac{16-1}{3}=5$. Then $2c=5$, so $c=\\frac52$.",
+  "hints": [
+   "Compare $2c$ with the average slope."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^2$ on $[0,b]$ with $b>0$, find the mean value point $c$ as a function of $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "b/2",
+   "vars": [
+    "b"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "0.5*b",
+    "b*(1/2)"
+   ]
+  },
+  "check": null,
+  "solution": "The average slope is $b$, and $f'(c)=2c$, so $c=\\frac b2$.",
+  "hints": [
+   "Set $2c$ equal to the average slope."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about differentiable functions are true?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "If $f'>0$ on an interval, then $f$ is strictly increasing there.",
+    "$f'$ can have a jump discontinuity.",
+    "If $f'(c)=0$, then $f$ has a local extremum at $c$.",
+    "$f'$ has the intermediate value property.",
+    "$f(x)=|x|$ is differentiable on $\\mathbb{R}$."
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "Darboux's theorem gives the intermediate value property for $f'$, so derivatives cannot jump. The function $x^3$ has zero slope at $0$ with no extremum, and $|x|$ has a corner at $0$.",
+  "hints": [
+   "Darboux's theorem covers derivatives."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=\\frac1x$ on $[1,4]$, find $c\\in(1,4)$ given by the mean value theorem.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The average slope is $\\frac{\\frac14-1}{3}=-\\frac14$. Since $f'(c)=-\\frac1{c^2}$, we get $c^2=4$, so $c=2$.",
+  "hints": [
+   "Set $-\\frac{1}{c^2}$ equal to the average slope."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.diff-thms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many real $x$ satisfy $f'(x)=0$ for $f(x)=x^4-2x^2$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "$f'(x)=4x^3-4x=4x(x-1)(x+1)$, with zeros at $-1$, $0$ and $1$.",
+  "hints": [
+   "Factor $f'$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using left endpoints and $n=2$, find the Riemann sum for $f(x)=x$ on $[0,1]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)",
+  "solution": "The width is $\\frac12$. The left endpoints are $0$ and $\\frac12$, giving $\\frac12\\left(0+\\frac12\\right)=\\frac14$.",
+  "hints": [
+   "Sample at the left endpoints."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which class of functions on $[a,b]$ is Riemann integrable?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "All functions with a derivative",
+    "Bounded functions whose set of discontinuities has measure zero",
+    "Functions continuous at $a$ only",
+    "All unbounded functions"
+   ],
+   "correct": 1,
+   "why": [
+    "a derivative can be unbounded, so this class is too large",
+    "",
+    "continuity at one point says nothing about the rest",
+    "unbounded functions have infinite upper sums"
+   ]
+  },
+  "check": null,
+  "solution": "This is Lebesgue's criterion. Bounded functions with negligible discontinuities are integrable, and unbounded functions are not.",
+  "hints": [
+   "Recall Lebesgue's criterion."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which function is NOT Riemann integrable on $[0,1]$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sin x$",
+    "$\\sqrt x$",
+    "$\\mathbf{1}_{\\mathbb{Q}}$",
+    "A monotone function"
+   ],
+   "correct": 2,
+   "why": [
+    "continuous, so integrable",
+    "continuous, so integrable",
+    "",
+    "bounded monotone functions are integrable"
+   ]
+  },
+  "check": null,
+  "solution": "The Dirichlet function is discontinuous everywhere, so its upper sums are $1$ and lower sums are $0$ for every partition.",
+  "hints": [
+   "Every subinterval contains rationals and irrationals."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the upper Darboux sum for $f(x)=x^2$ on $[0,1]$ with the partition $\\left\\{0,\\frac12,1\\right\\}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/8",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(5,8)",
+  "solution": "The sup on $\\left[0,\\frac12\\right]$ is $\\frac14$ and on $\\left[\\frac12,1\\right]$ is $1$. So $U=\\frac12\\left(\\frac14+1\\right)=\\frac58$.",
+  "hints": [
+   "The sup of an increasing function is at the right endpoint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the lower Darboux sum for $f(x)=x^2$ on $[0,1]$ with the partition $\\left\\{0,\\frac12,1\\right\\}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/8",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,8)",
+  "solution": "The inf on the two pieces is $0$ and $\\frac14$. So $L=\\frac12\\cdot\\frac14=\\frac18$.",
+  "hints": [
+   "The inf of an increasing function is at the left endpoint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the lower Riemann sum for $f(x)=x$ on $[0,1]$ with four equal subintervals.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/8",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,8)",
+  "solution": "The left endpoints are $0,\\frac14,\\frac12,\\frac34$, with total $\\frac32$. Times the width $\\frac14$ gives $\\frac38$.",
+  "hints": [
+   "The infimum of an increasing function is at the left endpoint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x$ on $[0,1]$ split into $n$ equal parts, find $U_n-L_n$ as a function of $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/n",
+   "vars": [
+    "n"
+   ],
+   "domain": [
+    1,
+    10
+   ],
+   "also": [
+    "n^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Each piece has width $\\frac1n$ and oscillation $\\frac1n$. The sum over $n$ pieces is $n\\cdot\\frac1n\\cdot\\frac1n=\\frac1n$.",
+  "hints": [
+   "Each subinterval adds width times oscillation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which functions are Riemann integrable on $[0,1]$?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Every continuous function on $[0,1]$.",
+    "A step function with finitely many jumps.",
+    "The Dirichlet function $\\mathbf{1}_{\\mathbb{Q}}$.",
+    "$f(x)=\\frac1x$ on $(0,1]$.",
+    "A bounded function discontinuous only at the points $\\frac1n$, $n\\ge1$."
+   ],
+   "correct": [
+    0,
+    1,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "Continuous and step functions are integrable. The Dirichlet function is not. The function $\\frac1x$ is unbounded. The last has countably many discontinuities, which is measure zero.",
+  "hints": [
+   "Use Lebesgue's criterion."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.riemann"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $U-L$ for $f(x)=x^2$ on $[0,1]$ with the partition $\\left\\{0,\\frac12,1\\right\\}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(5,8)-Fraction(1,8)",
+  "solution": "From the two previous sums, $U-L=\\frac58-\\frac18=\\frac12$.",
+  "hints": [
+   "Subtract the lower sum from the upper sum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\sum_{n=0}^{\\infty}\\left(\\frac13\\right)^n$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,2)",
+  "solution": "A geometric series with ratio $\\frac13$ sums to $\\frac{1}{1-\\frac13}=\\frac32$.",
+  "hints": [
+   "Use $\\frac{1}{1-r}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $\\sum a_n$ converges, which must be true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a_n\\to0$.",
+    "$\\sum a_n^2$ diverges.",
+    "$a_n$ is increasing.",
+    "$\\sum |a_n|$ converges."
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "false for $a_n=\\frac1{n^2}$",
+    "false for $a_n=\\frac{(-1)^n}{n}$",
+    "false for $a_n=\\frac{(-1)^n}{n}$"
+   ]
+  },
+  "check": null,
+  "solution": "Terms of a convergent series tend to $0$. The alternating harmonic series refutes monotonicity and absolute convergence.",
+  "hints": [
+   "Test a series with alternating signs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "When the ratio limit $\\left|\\frac{a_{n+1}}{a_n}\\right|\\to1$, what can you conclude?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The series converges",
+    "The series diverges",
+    "The terms do not tend to $0$.",
+    "Nothing; the test is inconclusive"
+   ],
+   "correct": 3,
+   "why": [
+    "the ratio test does not decide convergence at $1$",
+    "the ratio test does not decide divergence at $1$",
+    "terms can still tend to $0$, e.g. $\\frac1n$",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "A limit of $1$ gives no information. Both $\\sum\\frac1n$ and $\\sum\\frac1{n^2}$ have ratio limit $1$.",
+  "hints": [
+   "Test with $\\sum\\frac1n$ and $\\sum\\frac1{n^2}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sum_{n=1}^{\\infty}\\frac{1}{n(n+1)}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Partial fractions give $\\frac1n-\\frac1{n+1}$, which telescopes to $1$.",
+  "hints": [
+   "Split into partial fractions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sum_{n=0}^{\\infty}5\\left(-\\frac12\\right)^n$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "10/3",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(10,3)",
+  "solution": "The ratio is $-\\frac12$, so the sum is $\\frac{5}{1+\\frac12}=\\frac{10}{3}$.",
+  "hints": [
+   "Use $\\frac{a}{1-r}$ with $r=-\\frac12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the least $N$ such that $\\sum_{n>N}\\frac{1}{2^n}<0.01$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "7",
+  "solution": "The tail after $N$ equals $\\frac{1}{2^N}$. Since $2^{-6}\\approx0.0156$ and $2^{-7}\\approx0.0078$, $N=7$.",
+  "hints": [
+   "The tail from $N+1$ is $\\frac{1}{2^N}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $|x|<1$, find $\\sum_{n=1}^{\\infty} a x^n$ as a function of $a$ and $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a*x/(1-x)",
+   "vars": [
+    "a",
+    "x"
+   ],
+   "domain": [
+    0.1,
+    0.8
+   ],
+   "also": [
+    "a*x*(1/(1-x))"
+   ]
+  },
+  "check": null,
+  "solution": "The geometric series starting at $n=1$ equals $\\frac{ax}{1-x}$.",
+  "hints": [
+   "Factor out one power of $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which series converge?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\sum_{n\\ge1}\\frac{(-1)^n}{n}$",
+    "$\\sum_{n\\ge1}(-1)^n$",
+    "$\\sum_{n\\ge1}\\frac{1}{n^2}$",
+    "$\\sum_{n\\ge1}\\frac{n}{n+1}$",
+    "$\\sum_{n\\ge1}\\frac{(-1)^n}{n^2}$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "The first converges by the alternating series test. The third and fifth converge by $p$-series comparison. The second oscillates and the fourth has terms tending to $1$.",
+  "hints": [
+   "Check the terms first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.series-formal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sum_{n=1}^{\\infty}\\frac{1}{n^2+3n+2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)",
+  "solution": "$\\frac{1}{(n+1)(n+2)}=\\frac1{n+1}-\\frac1{n+2}$ telescopes to $\\frac12$.",
+  "hints": [
+   "Factor the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\sup_{x\\in[0,1)}|x^n|$ for $n\\ge1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Values of $x^n$ approach $1$ as $x\\to1^-$ without reaching it. So the supremum is $1$, and the convergence to $0$ is not uniform.",
+  "hints": [
+   "Find what $x^n$ approaches near $1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which condition characterises uniform convergence $f_n\\to f$ on $A$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f_n(x)\\to f(x)$ for each $x\\in A$",
+    "$\\sup_{x\\in A}|f_n(x)-f(x)|\\to0$",
+    "Each $f_n$ is continuous",
+    "$f_n(x_0)=f(x_0)$ for one $x_0$"
+   ],
+   "correct": 1,
+   "why": [
+    "that is pointwise convergence, which is weaker",
+    "",
+    "continuity says nothing about the rate",
+    "one point says nothing about the whole set"
+   ]
+  },
+  "check": null,
+  "solution": "Uniform convergence means the largest gap over all $x$ tends to $0$.",
+  "hints": [
+   "Measure the worst gap."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The Weierstrass M-test: if $|a_n(x)|\\le M_n$ with $\\sum M_n<\\infty$, then $\\sum a_n(x)$:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "converges only pointwise",
+    "diverges",
+    "converges uniformly",
+    "is a power series with radius $0$"
+   ],
+   "correct": 2,
+   "why": [
+    "the M-test gives uniform, not just pointwise, convergence",
+    "the bounds are summable, so the series cannot diverge",
+    "",
+    "the radius is not implied"
+   ]
+  },
+  "check": null,
+  "solution": "The bound is independent of $x$, so the tails are uniformly small.",
+  "hints": [
+   "Compare tails with $\\sum M_n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f_n(x)=\\frac{x}{n}$ on $[0,1]$, find $\\sup_{x\\in[0,1]}|f_n(x)|$ at $n=4$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)",
+  "solution": "$\\frac x4$ increases on $[0,1]$, so its supremum is $\\frac14$ at $x=1$.",
+  "hints": [
+   "Find the largest value on $[0,1]$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t8-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f_2(x)=x^2(1-x)$ on $[0,1]$, find $\\sup|f_2|$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "4/27",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(4,27)",
+  "solution": "$f_2'=2x-3x^2=0$ at $x=\\frac23$, giving $\\frac49\\cdot\\frac13=\\frac4{27}$.",
+  "hints": [
+   "Find the critical point in $(0,1)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sup_{x\\ge0}\\frac{x}{1+4x^2}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)",
+  "solution": "The derivative $1-4x^2$ vanishes at $x=\\frac12$, giving $\\frac{1/2}{2}=\\frac14$.",
+  "hints": [
+   "Differentiate the quotient."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f_n(x)=x^n(1-x)$ on $[0,1]$, find $\\sup_x|f_n(x)|$ as a function of $n\\ge1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(n/(n+1))^n/(n+1)",
+   "vars": [
+    "n"
+   ],
+   "domain": [
+    1,
+    4
+   ],
+   "also": [
+    "n^n/(n+1)^(n+1)"
+   ]
+  },
+  "check": null,
+  "solution": "The maximum occurs at $x=\\frac{n}{n+1}$. Substituting gives $\\frac{n^n}{(n+1)^{n+1}}$.",
+  "hints": [
+   "Find where the derivative vanishes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about uniform convergence are true?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Uniform convergence implies pointwise convergence.",
+    "Pointwise convergence implies uniform convergence.",
+    "If $f_n\\to f$ uniformly on $\\mathbb{R}$ and each $f_n$ is continuous, then $f$ is continuous.",
+    "A uniform limit of bounded functions on $A$ is bounded on $A$.",
+    "A uniform limit of differentiable functions is differentiable."
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "Uniform convergence implies pointwise convergence and preserves continuity and boundedness. Pointwise convergence does not imply uniform convergence, and derivatives can fail to converge, e.g. $\\frac{\\sin(nx)}{n}$.",
+  "hints": [
+   "Check which properties survive uniform limits."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.unif-conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f_n(x)=nx(1-x)$ on $[0,1]$. Find $\\sup_x|f_8(x)|$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "$8x(1-x)$ peaks at $x=\\frac12$ with value $2$. In general the sup is $\\frac n4$, which grows, so there is no uniform convergence to $0$.",
+  "hints": [
+   "Find the peak at $x=\\frac12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In $\\mathbb{Z}$ with the usual metric, how many points lie in the closed ball of radius $1$ about $0$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "The closed ball is $\\{-1,0,1\\}$, which has $3$ points.",
+  "hints": [
+   "Points at distance at most $1$ from $0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which subset of $\\mathbb{R}$ is open?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(0,1)$",
+    "$[0,1)$",
+    "$\\{0\\}$",
+    "$[0,1]$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the endpoint $0$ has no ball inside",
+    "a single point is closed, not open",
+    "the endpoints have no ball inside"
+   ]
+  },
+  "check": null,
+  "solution": "Every point of $(0,1)$ has a small ball inside the set. The other three each have an endpoint or an isolated point.",
+  "hints": [
+   "Check whether each point has a ball inside."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In any metric space, a finite union of closed sets is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "open",
+    "neither open nor closed",
+    "closed only if the sets are open",
+    "closed"
+   ],
+   "correct": 3,
+   "why": [
+    "a closed set need not be open",
+    "closedness survives finite unions",
+    "closed sets need not be open, so this condition is never needed",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "Complements of finite unions are finite intersections of open sets, which are open.",
+  "hints": [
+   "Take complements."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $A=\\left\\{\\frac1n: n\\ge1\\right\\}$ in $\\mathbb{R}$. How many points lie in $\\overline{A}$ but not in $A$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "The closure adds only the limit point $0$, so there is exactly one such point.",
+  "hints": [
+   "Ask which limit points are missing from $A$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t8-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many connected components does $\\mathbb{R}\\setminus\\{0,1,2\\}$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "Removing $0,1,2$ leaves $(-\\infty,0)$, $(0,1)$, $(1,2)$ and $(2,\\infty)$.",
+  "hints": [
+   "Each removed point separates the line."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the diameter of $\\{(x,y)\\in\\mathbb{R}^2: \\max(|x|,|y|)\\le1\\}$ in the metric $d=\\max(|x_1-x_2|,|y_1-y_2|)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The farthest pair are opposite corners, $(-1,-1)$ and $(1,1)$, at distance $\\max(2,2)=2$.",
+  "hints": [
+   "Test opposite corners."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In $\\mathbb{R}$ with the usual metric, find the length of the open ball $B(a,r)$ as a function of $r>0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*r",
+   "vars": [
+    "r"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "r*2",
+    "r+r"
+   ]
+  },
+  "check": null,
+  "solution": "$B(a,r)=(a-r,a+r)$ has length $2r$.",
+  "hints": [
+   "Find the two endpoints."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which subsets of $\\mathbb{R}$ are open?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(0,1)\\cup(2,3)$",
+    "$[0,1)$",
+    "$\\mathbb{Q}$",
+    "$\\mathbb{R}\\setminus\\{0\\}$",
+    "$\\mathbb{Z}$"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "Each point of the first and fourth sets has a small ball inside. $[0,1)$ fails at $0$. $\\mathbb{Q}$ and $\\mathbb{Z}$ fail at every point.",
+  "hints": [
+   "Test whether each point has a ball inside the set."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.metric-open"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In $\\mathbb{R}$, how many boundary points does $(0,1]$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The closure is $[0,1]$ and the interior is $(0,1)$, so the boundary is $\\{0,1\\}$.",
+  "hints": [
+   "Boundary equals closure minus interior."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many connected components does $\\{x\\in\\mathbb{R}: x^2\\neq1\\}$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3",
+  "solution": "Removing $\\pm1$ leaves $(-\\infty,-1)$, $(-1,1)$ and $(1,\\infty)$.",
+  "hints": [
+   "Remove the two points from the line."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A compact set is always open.",
+    "A continuous image of a compact set is compact.",
+    "A continuous image of a compact set is open.",
+    "Every closed set is compact."
+   ],
+   "correct": 1,
+   "why": [
+    "compact sets in $\\mathbb{R}$ are closed and bounded, not open",
+    "",
+    "images need not be open",
+    "closed sets such as $\\mathbb{R}$ need not be bounded"
+   ]
+  },
+  "check": null,
+  "solution": "Continuous maps preserve compactness, which is why the extreme value theorem holds.",
+  "hints": [
+   "Think about the extreme value theorem."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which set is connected in $\\mathbb{R}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mathbb{Q}$",
+    "$[0,1]\\cup[2,3]$",
+    "$[0,1]$",
+    "$(0,1)\\cup\\{2\\}$"
+   ],
+   "correct": 2,
+   "why": [
+    "rationals are totally disconnected",
+    "two pieces with a gap",
+    "",
+    "the isolated point $2$ disconnects"
+   ]
+  },
+  "check": null,
+  "solution": "Intervals are connected. The other sets split into pieces with no connecting path.",
+  "hints": [
+   "A gap or isolated point disconnects."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=x^2$ and $K=[-2,3]$. Find $\\max_K f-\\min_K f$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "9",
+  "solution": "The maximum is $f(3)=9$ and the minimum is $f(0)=0$, so the difference is $9$.",
+  "hints": [
+   "Check the endpoints and the zero of $f'$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many points lie in $\\bigcap_{n\\ge1}\\left[0,\\frac1n\\right]$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Each interval contains $0$, and any positive $x$ fails once $\\frac1n<x$. So the intersection is $\\{0\\}$.",
+  "hints": [
+   "Find a point every interval contains."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t8-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many connected components does $\\{x\\in[0,4]: \\sin(\\pi x)\\neq0\\}$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "The zeros in $[0,4]$ are $0,1,2,3,4$. The remaining set is $(0,1)\\cup(1,2)\\cup(2,3)\\cup(3,4)$.",
+  "hints": [
+   "Find all zeros of $\\sin(\\pi x)$ in the interval."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $a>0$ and $K=[0,a]$, find $\\max_K(x^2+x)$ as a function of $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a^2+a",
+   "vars": [
+    "a"
+   ],
+   "domain": [
+    0.5,
+    2
+   ],
+   "also": [
+    "a+a^2"
+   ]
+  },
+  "check": null,
+  "solution": "The function is increasing on $[0,\\infty)$, so the maximum is at $x=a$.",
+  "hints": [
+   "Check monotonicity on $[0,a]$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which subsets of $\\mathbb{R}$ are compact?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$[0,1]$",
+    "$(0,1]$",
+    "$\\{0,1,2,\\dots,10\\}$",
+    "$\\mathbb{R}$",
+    "$\\left\\{\\frac1n: n\\ge1\\right\\}\\cup\\{0\\}$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "Compact sets in $\\mathbb{R}$ are the closed and bounded ones. $(0,1]$ is not closed, and $\\mathbb{R}$ is unbounded.",
+  "hints": [
+   "Use Heine-Borel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.compact-conn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $K=\\left\\{\\frac1n: n\\ge1\\right\\}\\cup\\{0\\}$ and $g(x)=x+1$. Find $\\max_K g$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The largest point of $K$ is $1$, so $\\max_K g=g(1)=2$.",
+  "hints": [
+   "Find the largest point of $K$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many open sets does the indiscrete topology on $\\{a,b,c\\}$ contain?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The indiscrete topology is $\\{\\emptyset,\\{a,b,c\\}\\}$, which has two open sets.",
+  "hints": [
+   "Only the trivial sets are open."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which family is a topology on $X=\\{1,2,3\\}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\{\\emptyset,\\{1\\},\\{1,2\\},X\\}$",
+    "$\\{\\emptyset,\\{1\\},\\{2\\},X\\}$",
+    "$\\{\\emptyset,\\{1\\},\\{2,3\\}\\}$",
+    "$\\{\\{1\\},\\{1,2\\},X\\}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$\\{1\\}\\cup\\{2\\}=\\{1,2\\}$ is missing",
+    "$X$ is missing",
+    "$\\emptyset$ is missing"
+   ]
+  },
+  "check": null,
+  "solution": "A topology must contain $\\emptyset$ and $X$, and be closed under arbitrary unions and finite intersections.",
+  "hints": [
+   "Check $\\emptyset$, $X$ and unions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which property holds in every metric space but not in every topological space?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The empty set is open",
+    "Any union of open sets is open",
+    "Finite intersections of open sets are open",
+    "Points are closed"
+   ],
+   "correct": 3,
+   "why": [
+    "holds in every topological space",
+    "holds in every topological space",
+    "holds in every topological space",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "Metric spaces are $T_1$, so singletons are closed. General topologies need not satisfy this.",
+  "hints": [
+   "Think of the indiscrete topology on two points."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many open sets does the discrete topology on $\\{1,2,3,4\\}$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "16",
+  "solution": "In the discrete topology every subset is open, so there are $2^4=16$ open sets.",
+  "hints": [
+   "Count all subsets."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many topologies are there on a two-point set?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "They are the indiscrete topology, the discrete topology, and the two Sierpinski topologies $\\{\\emptyset,\\{a\\},X\\}$ and $\\{\\emptyset,\\{b\\},X\\}$.",
+  "hints": [
+   "List the possible open sets by hand."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For the topology $\\{\\emptyset,\\{1\\},\\{1,2\\},X\\}$ on $\\{1,2,3\\}$, how many open sets contain $2$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "The open sets containing $2$ are $\\{1,2\\}$ and $X$.",
+  "hints": [
+   "List the open sets and filter for $2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the number of open sets in the discrete topology on an $n$-element set, as a function of $n\\ge1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2^n",
+   "vars": [
+    "n"
+   ],
+   "domain": [
+    1,
+    5
+   ],
+   "also": [
+    "exp(n*ln(2))"
+   ]
+  },
+  "check": null,
+  "solution": "Every subset is open, and there are $2^n$ subsets.",
+  "hints": [
+   "Choose each element in or out."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which families are topologies on $X=\\{a,b,c\\}$?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\{\\emptyset,\\{a\\},X\\}$",
+    "$\\{\\emptyset,\\{a\\},\\{b\\},X\\}$",
+    "$\\{\\emptyset,\\{a\\},\\{a,b\\},X\\}$",
+    "$\\{\\{a\\},\\{a,b\\},X\\}$",
+    "$\\{\\emptyset,\\{a,b\\},X\\}$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "The first, third and fifth contain $\\emptyset$ and $X$ and are closed under unions and intersections. The second fails since $\\{a\\}\\cup\\{b\\}$ is missing. The fourth lacks $\\emptyset$.",
+  "hints": [
+   "Check that unions of members stay in the family."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.top-general"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In the discrete topology on a $3$-point set, how many closed sets are there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "8",
+  "solution": "A set is closed when its complement is open. Every subset is open, so there are $2^3=8$ closed sets.",
+  "hints": [
+   "Complements of open sets."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many subsets does a set with four elements have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "16",
+  "solution": "Each element is either in or out of a subset, giving $2^4=16$ subsets.",
+  "hints": [
+   "Each element has two choices."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which set is countable?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(0,1)$",
+    "$\\mathbb{Q}$",
+    "The irrational numbers",
+    "$\\mathbb{R}$"
+   ],
+   "correct": 1,
+   "why": [
+    "uncountable",
+    "",
+    "uncountable",
+    "uncountable"
+   ]
+  },
+  "check": null,
+  "solution": "$\\mathbb{Q}$ is countable since it can be listed as a sequence. The others are uncountable.",
+  "hints": [
+   "Can you list the elements?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which argument shows $\\mathbb{R}$ is uncountable?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Euler's identity",
+    "The mean value theorem",
+    "Cantor's diagonal argument",
+    "The Dedekind cut construction"
+   ],
+   "correct": 2,
+   "why": [
+    "not about cardinality",
+    "not about cardinality",
+    "",
+    "constructs $\\mathbb{R}$, does not count it"
+   ]
+  },
+  "check": null,
+  "solution": "Given a list of reals, changing the diagonal digits builds a real missing from the list.",
+  "hints": [
+   "Change one digit per listed number."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many subsets does $\\{1,2,3,4,5\\}$ have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 32,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "32",
+  "solution": "$2^5=32$ subsets, one for each choice of membership.",
+  "hints": [
+   "Use $2^n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  },
+  "probe": true
+ },
+ {
+  "id": "t8-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many injective functions are there from $\\{1,2,3\\}$ into $\\{a,b,c,d\\}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 24,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*3*2",
+  "solution": "Choose images for $1,2,3$ in turn: $4\\cdot3\\cdot2=24$.",
+  "hints": [
+   "Count the choices in order."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many functions are there from $\\{1,2\\}$ to $\\{1,2,3\\}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3**2",
+  "solution": "Each of the two inputs has three possible outputs, so $3^2=9$.",
+  "hints": [
+   "Each input chooses independently."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the number of nonempty subsets of an $n$-element set as a function of $n\\ge1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2^n-1",
+   "vars": [
+    "n"
+   ],
+   "domain": [
+    1,
+    5
+   ],
+   "also": [
+    "2^n+(-1)",
+    "exp(n*ln(2))-1"
+   ]
+  },
+  "check": null,
+  "solution": "All $2^n$ subsets, minus the empty set.",
+  "hints": [
+   "Remove one subset from the total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which sets are countable?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\mathbb{Z}\\times\\mathbb{Z}$",
+    "The set of real algebraic numbers",
+    "$\\mathbb{R}$",
+    "The set of all sequences in $\\{0,1\\}$",
+    "The set of finite subsets of $\\mathbb{N}$"
+   ],
+   "correct": [
+    0,
+    1,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "$\\mathbb{Z}\\times\\mathbb{Z}$, the algebraic numbers, and the finite subsets of $\\mathbb{N}$ are countable. $\\mathbb{R}$ and the binary sequences are uncountable.",
+  "hints": [
+   "Use countable unions or products of countable sets."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cardinality"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many ordered pairs $(m,n)$ of positive integers satisfy $mn=12$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "6",
+  "solution": "The divisors of $12$ are $1,2,3,4,6,12$, and each gives one pair $(d,12/d)$, so there are $6$ pairs.",
+  "hints": [
+   "List the divisors of $12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0127",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f_n(x)=\\frac{nx}{1+nx}$ on $[0,\\infty)$. Find $\\lim_{n\\to\\infty}f_n(0)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "0",
+  "solution": "$f_n(0)=0$ for every $n$, so the limit is $0$.",
+  "hints": [
+   "Substitute $x=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0128",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which function is continuous at $0$ but not differentiable there?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$|x|$",
+    "$x^2$",
+    "$\\sin x$",
+    "$e^x$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "differentiable at $0$",
+    "differentiable at $0$",
+    "differentiable at $0$"
+   ]
+  },
+  "check": null,
+  "solution": "$|x|$ has a corner at $0$: the one-sided slopes are $-1$ and $1$.",
+  "hints": [
+   "Compare left and right slopes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0129",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which function is differentiable at $0$ but has a discontinuous derivative there?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$x\\sin\\frac1x$",
+    "$|x|$",
+    "$x^3$",
+    "$x^2\\sin\\frac1x$"
+   ],
+   "correct": 3,
+   "why": [
+    "not differentiable at $0$",
+    "not differentiable at $0$",
+    "its derivative is continuous",
+    ""
+   ]
+  },
+  "check": null,
+  "solution": "The difference quotient $\\frac{f(h)}{h}=h\\sin\\frac1h$ tends to $0$, so $f'(0)=0$. But $f'(x)$ oscillates near $0$.",
+  "hints": [
+   "Compute the difference quotient at $0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0130",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f_n(x)=\\frac{nx}{1+nx}$ on $[0,\\infty)$, find $\\lim_{n\\to\\infty}f_n\\left(\\frac12\\right)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "$\\frac{n/2}{1+n/2}\\to1$.",
+  "hints": [
+   "Divide top and bottom by $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\lim_{n\\to\\infty}\\int_0^1 f_n(x)\\,dx$ for $f_n=n\\,\\mathbf{1}_{[0,1/n]}$ on $[0,1]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1",
+  "solution": "Each integral is $n\\cdot\\frac1n=1$, while the pointwise limit is $0$.",
+  "hints": [
+   "Compute the integral of each $f_n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many points of continuity does the Dirichlet function $\\mathbf{1}_{\\mathbb{Q}}$ have on $[0,1]$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "0",
+  "solution": "Every interval contains rationals and irrationals, so the function is discontinuous at every point.",
+  "hints": [
+   "Each interval has both kinds of point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $0<a<1$ and $n>0$, find $\\sup_{x\\in[0,a]}|x^n|$ as a function of $a$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a^n",
+   "vars": [
+    "a",
+    "n"
+   ],
+   "domain": [
+    0.2,
+    0.9
+   ],
+   "also": [
+    "exp(n*ln(a))"
+   ]
+  },
+  "check": null,
+  "solution": "The function $x^n$ increases, so its supremum on $[0,a]$ is $a^n$.",
+  "hints": [
+   "Check where $x^n$ is largest."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements are true?",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The pointwise limit of continuous functions is continuous.",
+    "The uniform limit of continuous functions is continuous.",
+    "A continuous function on $[0,1]$ is uniformly continuous.",
+    "Every bounded function on $[0,1]$ is Riemann integrable.",
+    "$\\sum_{n\\ge0}x^n$ converges uniformly on $[0,1)$."
+   ],
+   "correct": [
+    1,
+    2
+   ]
+  },
+  "check": null,
+  "solution": "Uniform limits preserve continuity, and continuity on a compact interval gives uniform continuity. $x^n$ on $[0,1]$ shows that pointwise limits can jump. The Dirichlet function is bounded but not integrable, and the geometric tails are unbounded near $1$.",
+  "hints": [
+   "Use compactness and the uniform limit theorem."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.counterexamples"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f_n(x)=\\frac{\\sin(n^2x)}{n}$ on $\\mathbb{R}$. Find $\\sup_x|f_n'(x)|$ for $n=5$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "5",
+  "solution": "$f_n'(x)=n\\cos(n^2x)$, whose supremum is $n=5$, even though $f_n\\to0$ uniformly.",
+  "hints": [
+   "Differentiate and track the factor $\\frac{n^2}{n}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-12/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

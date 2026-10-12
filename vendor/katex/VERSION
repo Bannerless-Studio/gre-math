@@ -2,7 +2,7 @@ katex 0.16.11
 source: npm tarball katex@0.16.11 (npm pack, not executed), sha512 as reported by npm pack at vendoring time
 license: MIT (LICENSE in this folder)
 files:
-  katex.min.js          dist/katex.min.js (Node render step only; not inlined into the page)
+  katex.min.js          dist/katex.min.js (inlined once into the page by build.sh; the page renders math at run time, and tools/render.js validates with it)
   katex.min.css         dist/katex.min.css (build inlines core @font-face rules only)
   fonts/KaTeX_Main-Regular.woff2
   fonts/KaTeX_Main-Bold.woff2

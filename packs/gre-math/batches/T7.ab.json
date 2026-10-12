@@ -1,0 +1,4551 @@
+[
+  {
+    "id": "t7-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For positive integers $a$ and $b$, which identity always holds?",
+    "solution": "Each prime's exponent in $\\gcd$ is the smaller one and in $\\operatorname{lcm}$ the larger, so the two exponents add to those of $ab$.",
+    "hints": [
+      "Test the identity on $a=2$, $b=3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\gcd(a,b)+\\operatorname{lcm}(a,b)=a+b$",
+        "$\\gcd(a,b)\\cdot\\operatorname{lcm}(a,b)=ab$",
+        "$\\gcd(a,b)=\\operatorname{lcm}(a,b)$",
+        "$\\gcd(a,b)=ab$ when $a$ and $b$ are coprime"
+      ],
+      "correct": 1,
+      "why": [
+        "the identity uses a product, not a sum",
+        "",
+        "gcd and lcm are equal only when $a=b$",
+        "coprime means the gcd is $1$, not $ab$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which pair of integers is relatively prime?",
+    "solution": "$9=3^{2}$ and $28=2^{2}\\cdot 7$ share no prime, so $\\gcd=1$. Each other pair shares $4$, $3$, or $5$.",
+    "hints": [
+      "Factor each number into primes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\{8,12\\}$",
+        "$\\{9,28\\}$",
+        "$\\{6,15\\}$",
+        "$\\{10,25\\}$"
+      ],
+      "correct": 1,
+      "why": [
+        "both are divisible by $4$",
+        "",
+        "both are divisible by $3$",
+        "both are divisible by $5$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $d=\\gcd(a,b)$. Write $\\operatorname{lcm}(a,b)$ as an expression in $a$, $b$, and $d$.",
+    "solution": "$\\gcd(a,b)\\cdot\\operatorname{lcm}(a,b)=ab$, so $\\operatorname{lcm}(a,b)=\\frac{ab}{d}$.",
+    "hints": [
+      "Use the product identity for gcd and lcm."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "a*b/d",
+      "vars": [
+        "a",
+        "b",
+        "d"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "a*(b/d)",
+        "(b*a)/d"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $\\gcd(252,198)$.",
+    "solution": "$252=2^{2}\\cdot 3^{2}\\cdot 7$ and $198=2\\cdot 3^{2}\\cdot 11$, so $\\gcd=2\\cdot 3^{2}=18$.",
+    "hints": [
+      "Factor both numbers into primes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "18",
+      "form": "exact"
+    },
+    "check": "math.gcd(252,198)"
+  },
+  {
+    "id": "t7-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\operatorname{lcm}(252,198)$.",
+    "solution": "$\\operatorname{lcm}=\\frac{252\\cdot198}{18}=2772$.",
+    "hints": [
+      "Divide the product by the gcd."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2772",
+      "form": "exact"
+    },
+    "check": "252*198//math.gcd(252,198)"
+  },
+  {
+    "id": "t7-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many integers $n$ with $1\\le n\\le 100$ satisfy $\\gcd(n,30)=1$?",
+    "solution": "Coprime to $30$ means not divisible by $2$, $3$, or $5$. Each block of $30$ has $8$ such numbers, so $1$ to $90$ gives $24$. Then $91$ and $97$ add $2$, for $26$.",
+    "hints": [
+      "Count one full period of $30$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "26",
+      "form": "exact"
+    },
+    "check": "sum(1 for n in range(1,101) if math.gcd(n,30)==1)"
+  },
+  {
+    "id": "t7-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\gcd\\left(2^{5}\\cdot 3^{2}\\cdot 7,\\ 2^{3}\\cdot 3^{4}\\cdot 5\\right)$.",
+    "solution": "Take the smaller exponent of each shared prime: $2^{3}\\cdot 3^{2}=72$.",
+    "hints": [
+      "Only shared primes contribute."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "72",
+      "form": "exact"
+    },
+    "check": "2**3*3**2"
+  },
+  {
+    "id": "t7-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For every positive integer $n$, what is $\\gcd(n^{2}+n,\\ 2n+1)$?",
+    "solution": "$\\gcd(n,2n+1)=\\gcd(n,1)=1$ and $\\gcd(n+1,2n+1)=\\gcd(n+1,-1)=1$, so $n(n+1)$ is coprime to $2n+1$.",
+    "hints": [
+      "Use the Euclidean step $(2n+1)-2n=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n$",
+        "$2$",
+        "$1$",
+        "$2n+1$"
+      ],
+      "correct": 2,
+      "why": [
+        "assumed $n$ divides both numbers",
+        "took the even factor as a common divisor",
+        "",
+        "treated the whole second number as the gcd"
+      ]
+    }
+  },
+  {
+    "id": "t7-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-gcd"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Let $d=\\gcd(a,b)$, $a=dx$, $b=dy$ with $\\gcd(x,y)=1$. Write $\\operatorname{lcm}(a,b)$ in terms of $d$, $x$, $y$.",
+    "solution": "$\\operatorname{lcm}(a,b)=\\frac{ab}{d}=\\frac{d^{2}xy}{d}=dxy$.",
+    "hints": [
+      "Substitute $a=dx$ and $b=dy$ into $ab/d$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "d*x*y",
+      "vars": [
+        "d",
+        "x",
+        "y"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "x*y*d",
+        "d*(x*y)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $a\\equiv b$ and $c\\equiv d \\pmod n$, which congruence is valid in general?",
+    "solution": "Congruences respect sums and products: $a+c\\equiv b+d$ and $ac\\equiv bd$.",
+    "hints": [
+      "Multiply the two congruences."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$a/c\\equiv b/d\\pmod n$",
+        "$a^{c}\\equiv b^{d}\\pmod n$",
+        "$ac\\equiv bd\\pmod n$",
+        "$ac\\equiv b+d\\pmod n$"
+      ],
+      "correct": 2,
+      "why": [
+        "division is not defined modulo $n$ in general",
+        "exponents respect congruence only modulo $\\varphi(n)$",
+        "",
+        "sums and products were mixed up"
+      ]
+    }
+  },
+  {
+    "id": "t7-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the least nonnegative residue of $-17$ modulo $5$.",
+    "solution": "$-17=-20+3$, so the residue is $3$.",
+    "hints": [
+      "Add a multiple of $5$ until the result lies in $0$ to $4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "(-17)%5"
+  },
+  {
+    "id": "t7-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which number is the inverse of $3$ modulo $7$, taken in $\\{0,\\dots,6\\}$?",
+    "solution": "$3\\cdot 5=15=2\\cdot 7+1$, so $3^{-1}\\equiv 5\\pmod 7$.",
+    "hints": [
+      "Test $3x\\equiv 1$ for $x=1,\\dots,6$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$2$",
+        "$4$",
+        "$5$",
+        "$3$"
+      ],
+      "correct": 2,
+      "why": [
+        "$3\\cdot 2=6$, not $1$",
+        "$3\\cdot 4=12\\equiv 5$, not $1$",
+        "",
+        "$3\\cdot 3=9\\equiv 2$, not $1$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $2^{100}\\bmod 7$.",
+    "solution": "$2^{3}\\equiv 1\\pmod 7$ and $100=3\\cdot 33+1$, so $2^{100}\\equiv 2$.",
+    "hints": [
+      "Reduce the exponent modulo $3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "2**100%7"
+  },
+  {
+    "id": "t7-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $(37\\cdot 58)\\bmod 11$.",
+    "solution": "$37\\equiv 4$ and $58\\equiv 3\\pmod{11}$, so $4\\cdot 3=12\\equiv 1$.",
+    "hints": [
+      "Reduce each factor first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "37*58%11"
+  },
+  {
+    "id": "t7-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the last digit of $7^{2025}$.",
+    "solution": "$7^{4}\\equiv 1\\pmod{10}$ and $2025\\equiv 1\\pmod 4$, so $7^{2025}\\equiv 7$.",
+    "hints": [
+      "Find the cycle of the powers of $7$ modulo $10$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "7",
+      "form": "exact"
+    },
+    "check": "7**2025%10"
+  },
+  {
+    "id": "t7-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $5^{99}\\bmod 13$.",
+    "solution": "$5^{2}\\equiv -1$, so $5^{4}\\equiv 1$. Since $99\\equiv 3\\pmod 4$, $5^{99}\\equiv 5^{3}=125\\equiv 8$.",
+    "hints": [
+      "Square $5$ to find a short cycle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "5**99%13"
+  },
+  {
+    "id": "t7-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many solutions $x$ with $0\\le x\\le 8$ satisfy $3x\\equiv 6\\pmod 9$?",
+    "solution": "Since $\\gcd(3,9)=3$ divides $6$, there are $3$ solutions modulo $9$: $x=2,5,8$.",
+    "hints": [
+      "Divide by $\\gcd(3,9)$ and also divide the modulus."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1$",
+        "$2$",
+        "$3$",
+        "$0$"
+      ],
+      "correct": 2,
+      "why": [
+        "divided by $3$ but kept the modulus $9$, leaving only $x\\equiv 2$",
+        "missed one of the roots",
+        "",
+        "claimed $3$ is not invertible, so none"
+      ]
+    }
+  },
+  {
+    "id": "t7-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-mod"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "If $a\\equiv r\\pmod n$ with $0\\le r<n$ and $q=\\lfloor a/n\\rfloor$, write $r$ in terms of $a$, $n$, and $q$.",
+    "solution": "$a=qn+r$, so $r=a-qn$.",
+    "hints": [
+      "Write $a$ as $qn$ plus the remainder."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "a-n*q",
+      "vars": [
+        "a",
+        "n",
+        "q"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "a-q*n",
+        "-(n*q)+a"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is Fermat's little theorem?",
+    "solution": "If $p\\nmid a$, then $a^{p-1}\\equiv 1\\pmod p$.",
+    "hints": [
+      "Look for the hypothesis that $a$ is coprime to $p$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$a^{p}\\equiv 1\\pmod p$",
+        "$a^{p-1}\\equiv 1\\pmod p$ for every integer $a$",
+        "$a^{p-1}\\equiv 1\\pmod p$ when $p\\nmid a$",
+        "$a^{p-1}\\equiv 0\\pmod p$"
+      ],
+      "correct": 2,
+      "why": [
+        "wrong exponent: $p$ instead of $p-1$",
+        "dropped the hypothesis $p\\nmid a$",
+        "",
+        "confused with divisibility by $p$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\varphi(72)$.",
+    "solution": "$72=2^{3}\\cdot 3^{2}$, so $\\varphi(72)=(8-4)(9-3)=24$.",
+    "hints": [
+      "Apply the prime-power formula to each factor."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "24",
+      "form": "exact"
+    },
+    "check": "(8-4)*(9-3)"
+  },
+  {
+    "id": "t7-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a prime $p$, what is $(p-1)!$ modulo $p$?",
+    "solution": "Wilson's theorem: $(p-1)!\\equiv -1\\pmod p$.",
+    "hints": [
+      "Pair each element with its inverse modulo $p$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$0$",
+        "$-1$",
+        "$1$",
+        "$2$"
+      ],
+      "correct": 1,
+      "why": [
+        "claimed $p$ divides $(p-1)!$, but $p$ is not a factor",
+        "",
+        "confused with Fermat's $a^{p-1}\\equiv 1$",
+        "true only for $p=3$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $3^{2027}\\bmod 11$.",
+    "solution": "$3^{5}\\equiv 1\\pmod{11}$ and $2027\\equiv 2\\pmod 5$, so $3^{2027}\\equiv 3^{2}=9$.",
+    "hints": [
+      "Find the order of $3$ modulo $11$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "9",
+      "form": "exact"
+    },
+    "check": "3**2027%11"
+  },
+  {
+    "id": "t7-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $\\varphi(360)$.",
+    "solution": "$360=2^{3}\\cdot 3^{2}\\cdot 5$, so $\\varphi=4\\cdot 6\\cdot 4=96$.",
+    "hints": [
+      "Multiply the prime-power values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "96",
+      "form": "exact"
+    },
+    "check": "(8-4)*(9-3)*(5-1)"
+  },
+  {
+    "id": "t7-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $12!\\bmod 13$.",
+    "solution": "By Wilson's theorem, $12!\\equiv -1\\equiv 12\\pmod{13}$.",
+    "hints": [
+      "Apply Wilson's theorem with $p=13$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "math.factorial(12)%13"
+  },
+  {
+    "id": "t7-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $2^{50}\\bmod 7$.",
+    "solution": "$2^{6}\\equiv 1\\pmod 7$ and $50\\equiv 2\\pmod 6$, so $2^{50}\\equiv 2^{2}=4$.",
+    "hints": [
+      "Reduce $50$ modulo the order of $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "2**50%7"
+  },
+  {
+    "id": "t7-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a prime $p$, what is $\\varphi(p^{2})$?",
+    "solution": "The numbers up to $p^{2}$ not coprime to $p$ are $p,2p,\\dots,p^{2}$, which are $p$ numbers. So $\\varphi(p^{2})=p^{2}-p$.",
+    "hints": [
+      "Count the multiples of $p$ in $\\{1,\\dots,p^{2}\\}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$p-1$",
+        "$(p-1)^{2}$",
+        "$p^{2}-1$",
+        "$p^{2}-p$"
+      ],
+      "correct": 3,
+      "why": [
+        "used $\\varphi(p)$, forgetting the prime power",
+        "squared the prime formula",
+        "subtracted only $1$, missing the multiples of $p$",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "t7-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.nt-euler"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a prime $p$ and $k\\ge 1$, write $\\varphi(p^{k})$ in terms of $p$ and $k$.",
+    "solution": "Remove the multiples of $p$: $\\varphi(p^{k})=p^{k}-p^{k-1}=p^{k-1}(p-1)$.",
+    "hints": [
+      "Count the multiples of $p$ up to $p^{k}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "p^k-p^(k-1)",
+      "vars": [
+        "p",
+        "k"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "p^(k-1)*(p-1)",
+        "p^k*(1-1/p)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which of these is a group under the stated operation?",
+    "solution": "$(\\mathbb{Z},+)$ has identity $0$ and inverse $-a$ for each $a$. The others fail an axiom.",
+    "hints": [
+      "Check the identity and inverses for each set."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$(\\mathbb{Z}^{+},+)$",
+        "$(\\mathbb{Z},\\cdot)$",
+        "$(\\mathbb{Z},+)$",
+        "$(\\mathbb{Q},\\cdot)$"
+      ],
+      "correct": 2,
+      "why": [
+        "no identity: $0\\notin\\mathbb{Z}^{+}$",
+        "no inverse for $2$",
+        "",
+        "$0$ has no multiplicative inverse"
+      ]
+    }
+  },
+  {
+    "id": "t7-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the identity element of $(\\mathbb{Q}^{\\times},\\cdot)$?",
+    "solution": "Multiplying any $x$ by $1$ leaves $x$ unchanged.",
+    "hints": [
+      "Find $e$ with $xe=x$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "1"
+  },
+  {
+    "id": "t7-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "On $\\mathbb{Z}$, define $a*b=a+b+1$. Which statement is true?",
+    "solution": "Solve $a*e=a$: $a+e+1=a$ gives $e=-1$. Inverses $b=-2-a$ exist, and $*$ is associative.",
+    "hints": [
+      "Solve $a*e=a$ for $e$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "not a group, since $0$ is not an identity",
+        "a group with identity $-1$",
+        "a group with identity $0$",
+        "not associative"
+      ],
+      "correct": 1,
+      "why": [
+        "$0$ is not the identity, but $-1$ is, so a group exists",
+        "",
+        "$a*0=a+1\\neq a$",
+        "$(a*b)*c=a+b+c+2$ both ways"
+      ]
+    }
+  },
+  {
+    "id": "t7-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In $(\\mathbb{Z}_{10},+)$, what is the inverse of $7$? Give the residue in $\\{0,\\dots,9\\}$.",
+    "solution": "$7+3=10\\equiv 0\\pmod{10}$.",
+    "hints": [
+      "Add a number to $7$ to reach $0$ modulo $10$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "(10-7)%10"
+  },
+  {
+    "id": "t7-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}_{7}^{\\times}$ under multiplication, what is the inverse of $3$? Give the residue in $\\{1,\\dots,6\\}$.",
+    "solution": "$3\\cdot 5=15\\equiv 1\\pmod 7$.",
+    "hints": [
+      "Try $x$ with $3x\\equiv 1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "[x for x in range(1,7) if 3*x%7==1][0]"
+  },
+  {
+    "id": "t7-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many elements does $(\\mathbb{Z}_{15})^{\\times}$ have?",
+    "solution": "The units are $1,2,4,7,8,11,13,14$.",
+    "hints": [
+      "A residue is a unit when it is coprime to $15$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(15) if math.gcd(x,15)==1)"
+  },
+  {
+    "id": "t7-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Select all sets that are groups under the given operation.",
+    "solution": "$\\mathbb{Z}$ under multiplication lacks inverses, for example for $2$. The other three satisfy every axiom.",
+    "hints": [
+      "Check inverses first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$(\\mathbb{Z},+)$",
+        "$(\\mathbb{Z},\\cdot)$",
+        "$(\\{1,-1\\},\\cdot)$",
+        "$(\\mathbb{R}^{\\times},\\cdot)$"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "id": "t7-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "On $\\mathbb{Z}$ define $a*b=a+b-2$. What is the inverse of $5$ under $*$?",
+    "solution": "The identity is $e=2$. Solve $5+b-2=2$ to get $b=-1$.",
+    "hints": [
+      "Find the identity first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "-1",
+      "form": "exact"
+    },
+    "check": "4-5"
+  },
+  {
+    "id": "t7-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.group-axioms"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $(\\mathbb{R}^{\\times},\\cdot)$, write the inverse of $x$ as an expression in $x$.",
+    "solution": "Since $x\\cdot x^{-1}=1$, the inverse is $1/x$.",
+    "hints": [
+      "The identity of this group is $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "1/x",
+      "vars": [
+        "x"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "x^(-1)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which subset of $(\\mathbb{Z},+)$ is a subgroup?",
+    "solution": "$3\\mathbb{Z}$ contains $0$, and sums and negatives of multiples of $3$ are multiples of $3$.",
+    "hints": [
+      "Test closure, identity, and inverses."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\{n: n\\ge 0\\}$",
+        "$\\{2n+1: n\\in\\mathbb{Z}\\}$",
+        "$\\{3n: n\\in\\mathbb{Z}\\}$",
+        "$\\{0,1\\}$"
+      ],
+      "correct": 2,
+      "why": [
+        "no inverses: $-1$ is missing",
+        "no identity: $0$ is not odd",
+        "",
+        "not closed: $1+1=2$ is missing"
+      ]
+    }
+  },
+  {
+    "id": "t7-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many generators does the cyclic group $\\mathbb{Z}_{12}$ have?",
+    "solution": "Generators are the units modulo $12$: $1,5,7,11$.",
+    "hints": [
+      "Count residues coprime to $12$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(12) if math.gcd(x,12)==1)"
+  },
+  {
+    "id": "t7-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}$, what generates $\\langle 4\\rangle\\cap\\langle 6\\rangle$?",
+    "solution": "Multiples of both $4$ and $6$ are the multiples of $\\operatorname{lcm}(4,6)=12$.",
+    "hints": [
+      "A common multiple of $4$ and $6$ must be a multiple of their lcm."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$2$",
+        "$10$",
+        "$12$",
+        "$24$"
+      ],
+      "correct": 2,
+      "why": [
+        "that is $\\gcd(4,6)$, which is too big a subgroup",
+        "$10$ is not a multiple of $4$",
+        "",
+        "$24$ generates a proper subgroup of the intersection"
+      ]
+    }
+  },
+  {
+    "id": "t7-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the order of $8$ in $\\mathbb{Z}_{12}$ under addition?",
+    "solution": "The multiples $8,4,0$ form the cycle, so the order is $3$.",
+    "hints": [
+      "The order of $a$ in $\\mathbb{Z}_n$ is $n/\\gcd(a,n)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "12//math.gcd(8,12)"
+  },
+  {
+    "id": "t7-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many elements of order $6$ does $\\mathbb{Z}_{18}$ have?",
+    "solution": "Order $6$ means $\\gcd(x,18)=3$, which gives $x=3$ and $x=15$.",
+    "hints": [
+      "Set $18/\\gcd(x,18)=6$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(18) if 18//math.gcd(x,18)==6)"
+  },
+  {
+    "id": "t7-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}$, what is the largest positive integer $n$ such that $4$ and $6$ both lie in $\\langle n\\rangle$?",
+    "solution": "$4,6\\in\\langle n\\rangle$ exactly when $n\\mid 4$ and $n\\mid 6$, so the largest such $n$ is $\\gcd(4,6)=2$.",
+    "hints": [
+      "An element $a$ lies in $\\langle n\\rangle$ exactly when $n\\mid a$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "math.gcd(4,6)"
+  },
+  {
+    "id": "t7-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many subgroups does $\\mathbb{Z}_{12}$ have?",
+    "solution": "Subgroups of $\\mathbb{Z}_n$ correspond to divisors of $n$: $1,2,3,4,6,12$.",
+    "hints": [
+      "There is one subgroup per divisor."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "sum(1 for d in range(1,13) if 12%d==0)"
+  },
+  {
+    "id": "t7-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which elements lie in the subgroup $\\langle 10\\rangle$ of $\\mathbb{Z}_{30}$? Select all that apply.",
+    "solution": "$\\langle 10\\rangle=\\{0,10,20\\}$. The elements $5$ and $15$ are not in it.",
+    "hints": [
+      "List the multiples of $10$ modulo $30$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$5$",
+        "$10$",
+        "$20$",
+        "$15$"
+      ],
+      "correct": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "id": "t7-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.subgroup-cyclic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}_{n}$, let $d=\\gcd(a,n)$. Write the order of $a$ in terms of $n$ and $d$.",
+    "solution": "The order is $n/\\gcd(a,n)=n/d$.",
+    "hints": [
+      "Use the order formula $n/\\gcd(a,n)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "n/d",
+      "vars": [
+        "n",
+        "d"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(1/d)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a finite group $G$ and subgroup $H$, which statement is Lagrange's theorem?",
+    "solution": "The cosets of $H$ partition $G$, and each has $|H|$ elements, so $|G|=|H|\\cdot[G:H]$.",
+    "hints": [
+      "Count the cosets."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|G|=|H|+[G:H]$",
+        "$|G|=|H|\\cdot[G:H]$",
+        "$|G|=|H|^{[G:H]}$",
+        "$|G|\\cdot|H|=[G:H]$"
+      ],
+      "correct": 1,
+      "why": [
+        "added instead of multiplied",
+        "",
+        "exponent instead of product",
+        "reversed and mixed the relation"
+      ]
+    }
+  },
+  {
+    "id": "t7-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the order of $2$ in $\\mathbb{Z}_{7}^{\\times}$?",
+    "solution": "The powers $2,4,1$ return to $1$ after $3$ steps.",
+    "hints": [
+      "Keep multiplying by $2$ until you return to $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "min(k for k in range(1,7) if 2**k%7==1)"
+  },
+  {
+    "id": "t7-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statement about the order of an element $g$ in a finite group is always true?",
+    "solution": "$\\langle g\\rangle$ is a subgroup, so by Lagrange its order divides $|G|$.",
+    "hints": [
+      "Apply Lagrange's theorem to $\\langle g\\rangle$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "the order of $g$ equals $|G|$",
+        "the order of $g^{2}$ always equals the order of $g$",
+        "the order of $g$ divides $|G|$",
+        "the order of $g$ is at least $|G|/2$"
+      ],
+      "correct": 2,
+      "why": [
+        "true only for cyclic groups",
+        "fails when $g$ has order $4$, since $g^{2}$ has order $2$",
+        "",
+        "no such bound holds in general"
+      ]
+    }
+  },
+  {
+    "id": "t7-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the order of $3$ in $\\mathbb{Z}_{10}^{\\times}$?",
+    "solution": "The powers $3,9,7,1$ give order $4$.",
+    "hints": [
+      "Multiply by $3$ until you return to $1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "min(k for k in range(1,20) if 3**k%10==1)"
+  },
+  {
+    "id": "t7-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A cyclic group of order $36$ has how many elements of order $9$?",
+    "solution": "Elements of order $9$ are $4,8,16,20,28,32$, six in total.",
+    "hints": [
+      "Order $9$ means $\\gcd(x,36)=4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(36) if 36//math.gcd(x,36)==9)"
+  },
+  {
+    "id": "t7-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many positive integers does Lagrange's theorem allow as the order of a subgroup of a group of order $24$?",
+    "solution": "Each subgroup order divides $24$: $1,2,3,4,6,8,12,24$.",
+    "hints": [
+      "List the divisors of 24."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "sum(1 for d in range(1,25) if 24%d==0)"
+  },
+  {
+    "id": "t7-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A group $G$ has order $35$. Which orders can a nontrivial proper subgroup have? Select all that apply.",
+    "solution": "Subgroup orders divide $35$, so they are $1,5,7,35$. Nontrivial and proper leaves $5$ and $7$.",
+    "hints": [
+      "List the divisors of 35."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$2$",
+        "$5$",
+        "$7$",
+        "$10$"
+      ],
+      "correct": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "id": "t7-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the order of $(1\\,2\\,3)(4\\,5)$ in $S_{5}$.",
+    "solution": "Disjoint cycles of lengths $3$ and $2$ give order $\\operatorname{lcm}(3,2)=6$.",
+    "hints": [
+      "The order of disjoint cycles is the lcm of their lengths."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "3*2//math.gcd(3,2)"
+  },
+  {
+    "id": "t7-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.order-lagrange"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "If $g$ has order $n$ and $k$ divides $n$, write the order of $g^{k}$ in terms of $n$ and $k$.",
+    "solution": "$\\operatorname{ord}(g^{k})=n/\\gcd(n,k)=n/k$ when $k\\mid n$.",
+    "hints": [
+      "Use the order formula $n/\\gcd(n,k)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "n/k",
+      "vars": [
+        "n",
+        "k"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(1/k)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many elements does $S_{n}$ have?",
+    "solution": "A permutation is a bijection of $\\{1,\\dots,n\\}$, and there are $n!$ of them.",
+    "hints": [
+      "Count choices for the image of $1$, then $2$, and so on."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n$",
+        "$n^{2}$",
+        "$n!$",
+        "$2^{n}$"
+      ],
+      "correct": 2,
+      "why": [
+        "counted the points, not the arrangements",
+        "counted ordered pairs of points",
+        "",
+        "counted subsets instead"
+      ]
+    }
+  },
+  {
+    "id": "t7-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many elements does $A_{5}$ have?",
+    "solution": "$A_n$ has index $2$ in $S_n$, so $|A_5|=5!/2=60$.",
+    "hints": [
+      "Half of the permutations are even."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "60",
+      "form": "exact"
+    },
+    "check": "math.factorial(5)//2"
+  },
+  {
+    "id": "t7-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which describes a transposition?",
+    "solution": "A transposition is a $2$-cycle $(a\\,b)$.",
+    "hints": [
+      "A transposition is a two-element cycle."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "it moves every point",
+        "it swaps two points and fixes the rest",
+        "it is a $3$-cycle",
+        "it is the identity"
+      ],
+      "correct": 1,
+      "why": [
+        "that describes a derangement, not a transposition",
+        "",
+        "a $3$-cycle moves three points",
+        "the identity fixes every point"
+      ]
+    }
+  },
+  {
+    "id": "t7-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the sign of the permutation $(1\\,2\\,3\\,4)$ in $S_{4}$? Answer $+1$ or $-1$.",
+    "solution": "A $4$-cycle is a product of $3$ transpositions, so it is odd: sign $-1$.",
+    "hints": [
+      "A $k$-cycle is a product of $k-1$ transpositions."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "answer": {
+      "kind": "numeric",
+      "value": "-1",
+      "form": "exact"
+    },
+    "check": "(-1)**3"
+  },
+  {
+    "id": "t7-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many $3$-cycles are there in $A_{4}$?",
+    "solution": "Choose $3$ points ($4$ ways) and one of $2$ cyclic orders: $8$. All $3$-cycles are even.",
+    "hints": [
+      "A $3$-cycle is set by its three points and its orientation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "math.comb(4,3)*2"
+  },
+  {
+    "id": "t7-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many $5$-cycles are there in $S_{5}$?",
+    "solution": "A $5$-cycle is a cyclic arrangement of $5$ points, so there are $(5-1)!=24$.",
+    "hints": [
+      "Count cyclic orders of $5$ points."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "24",
+      "form": "exact"
+    },
+    "check": "math.factorial(4)"
+  },
+  {
+    "id": "t7-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find the order of $(1\\,2)(3\\,4\\,5)(6\\,7\\,8\\,9)$.",
+    "solution": "Cycle lengths $2,3,4$ give order $\\operatorname{lcm}(2,3,4)=12$.",
+    "hints": [
+      "Take the lcm of the cycle lengths."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "2*3*4//2"
+  },
+  {
+    "id": "t7-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which permutation of $\\{1,2,3,4\\}$ is odd?",
+    "solution": "A $4$-cycle has sign $-1$. The others are products of an even number of transpositions.",
+    "hints": [
+      "Count the transpositions in each."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$(1\\,2)(3\\,4)$",
+        "$(1\\,2\\,3)$",
+        "$(1\\,2\\,3\\,4)$",
+        "$(1\\,3)(2\\,4)$"
+      ],
+      "correct": 2,
+      "why": [
+        "two transpositions cancel, so even",
+        "a $3$-cycle is even",
+        "",
+        "two transpositions cancel, so even"
+      ]
+    }
+  },
+  {
+    "id": "t7-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.perm-groups"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write the number of $3$-cycles in $S_{n}$ as a polynomial in $n$.",
+    "solution": "Choose $3$ points in $\\binom{n}{3}$ ways and then $2$ cyclic orders: $2\\binom{n}{3}=\\frac{n(n-1)(n-2)}{3}$.",
+    "hints": [
+      "Use $\\binom{n}{3}=\\frac{n(n-1)(n-2)}{6}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "n*(n-1)*(n-2)/3",
+      "vars": [
+        "n"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "(n^3-3*n^2+2*n)/3"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The dihedral group $D_{n}$ is the symmetry group of a regular $n$-gon. How many elements does it have?",
+    "solution": "There are $n$ rotations and $n$ reflections, so $|D_{n}|=2n$.",
+    "hints": [
+      "Count rotations and reflections separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$n$",
+        "$2n$",
+        "$n!$",
+        "$n^{2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "counted rotations only",
+        "",
+        "confused with the symmetric group",
+        "counted ordered pairs"
+      ]
+    }
+  },
+  {
+    "id": "t7-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many reflections does $D_{6}$ have?",
+    "solution": "A regular hexagon has $6$ reflection axes.",
+    "hints": [
+      "Reflections correspond to axes of symmetry."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "2*6//2"
+  },
+  {
+    "id": "t7-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which group of order $4$ is not cyclic?",
+    "solution": "Every nonidentity element of $\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}$ has order $2$, so no element generates the group.",
+    "hints": [
+      "Look at the element orders."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathbb{Z}_{4}$",
+        "$\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}$",
+        "$\\mathbb{Z}_{3}$",
+        "$\\mathbb{Z}_{2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "cyclic of order $4$",
+        "",
+        "wrong order: $3\\neq 4$",
+        "wrong order: $2\\neq 4$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many elements of order $2$ does $D_{5}$ have?",
+    "solution": "$D_5$ has $5$ reflections, each of order $2$. It has no rotation of order $2$ because $5$ is odd.",
+    "hints": [
+      "An odd polygon has no half-turn rotation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "5*1"
+  },
+  {
+    "id": "t7-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many elements of order $2$ does $D_{6}$ have?",
+    "solution": "The half-turn $r^{3}$ plus the $6$ reflections gives $7$.",
+    "hints": [
+      "Include the rotation by $180^\\circ$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "7",
+      "form": "exact"
+    },
+    "check": "1+6"
+  },
+  {
+    "id": "t7-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $D_{8}$, $r$ has order $8$. What is the order of $r^{3}$?",
+    "solution": "$\\operatorname{ord}(r^{3})=8/\\gcd(3,8)=8$.",
+    "hints": [
+      "The order of $r^{k}$ is $n/\\gcd(k,n)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "8",
+      "form": "exact"
+    },
+    "check": "8//math.gcd(3,8)"
+  },
+  {
+    "id": "t7-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statement about $D_{4}$ is correct?",
+    "solution": "In $D_{4}$, $sr=r^{-1}s\\neq rs$, since $r^{2}\\neq e$.",
+    "hints": [
+      "Test whether $s$ and $r$ commute."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "abelian, since every element is a rotation or a reflection",
+        "cyclic of order $8$",
+        "isomorphic to $\\mathbb{Z}_{2}^{3}$",
+        "nonabelian, since $sr\\neq rs$"
+      ],
+      "correct": 3,
+      "why": [
+        "rotations commute with each other, but reflections do not commute with rotations",
+        "no element has order $8$, since $r$ has order $4$",
+        "$\\mathbb{Z}_{2}^{3}$ is abelian",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "t7-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many subgroups of order $2$ does $D_{4}$ have?",
+    "solution": "$D_4$ has five elements of order $2$: $r^{2}$ and four reflections. Each gives one subgroup.",
+    "hints": [
+      "Each element of order $2$ generates one subgroup of order $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "1+4"
+  },
+  {
+    "id": "t7-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.dihedral-small"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "In $D_{n}$, $r$ has order $n$ and $srs^{-1}=r^{-1}$. Write the exponent $m$ in $(sr^{k})(sr^{j})=r^{m}$ in terms of $j$ and $k$.",
+    "solution": "$(sr^{k})(sr^{j})=(sr^{k}s)r^{j}=r^{-k}r^{j}=r^{j-k}$.",
+    "hints": [
+      "Move $s$ past $r^{k}$ using $srs=r^{-1}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "j-k",
+      "vars": [
+        "j",
+        "k"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "-k+j"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which property defines a normal subgroup $N$ of $G$?",
+    "solution": "Normal means left and right cosets agree, so $gNg^{-1}=N$ for all $g$.",
+    "hints": [
+      "Compare $gN$ with $Ng$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$gN=Ng$ for every $g\\in G$",
+        "$N$ is abelian",
+        "$gN=N$ for every $g\\in G$",
+        "$N$ has index $2$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "abelian is not required",
+        "holds only when $g\\in N$",
+        "normal subgroups need not have index $2$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A subgroup of order $3$ in a group of order $12$ has how many left cosets?",
+    "solution": "The index is $|G|/|H|=12/3=4$.",
+    "hints": [
+      "Each coset has $|H|$ elements."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "12//3"
+  },
+  {
+    "id": "t7-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "If $N$ has index $2$ in $G$, which describes its cosets?",
+    "solution": "With index $2$, the two cosets are $N$ and its complement.",
+    "hints": [
+      "Count the cosets of an index-$2$ subgroup."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "there are $|N|$ cosets",
+        "the cosets are singletons $\\{g\\}$",
+        "there are $|G|$ cosets",
+        "there are two cosets, $N$ and $G\\setminus N$"
+      ],
+      "correct": 3,
+      "why": [
+        "confused the index with the subgroup order",
+        "a coset has $|N|$ elements, not one",
+        "one coset per element holds only when $N$ is trivial",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "t7-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Let $G=S_{3}$ and $H=\\langle(1\\,2)\\rangle$. How many left cosets does $H$ have?",
+    "solution": "$|S_{3}|/|H|=6/2=3$.",
+    "hints": [
+      "The index equals $|G|/|H|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "6//2"
+  },
+  {
+    "id": "t7-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $G=\\mathbb{Z}_{24}$ and $H=\\langle 6\\rangle$. How many elements does $G/H$ have?",
+    "solution": "$|H|=24/\\gcd(6,24)=4$, so $|G/H|=24/4=6$.",
+    "hints": [
+      "Find $|H|$ first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "24//(24//math.gcd(6,24))"
+  },
+  {
+    "id": "t7-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $H=\\{0,4,8\\}$ in $\\mathbb{Z}_{12}$. How many elements lie in the coset $5+H$?",
+    "solution": "$5+H=\\{5,9,1\\}$, which has $3$ elements.",
+    "hints": [
+      "Add $5$ to each element of $H$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "len({(5+h)%12 for h in [0,4,8]})"
+  },
+  {
+    "id": "t7-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which subgroups of $S_{3}$ are normal? Select all that apply.",
+    "solution": "The trivial group and $S_{3}$ are always normal. $A_{3}$ has index $2$, so it is normal. $\\langle(1\\,2)\\rangle$ is not normal.",
+    "hints": [
+      "Index-$2$ subgroups are normal."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\{e\\}$",
+        "$A_{3}=\\langle(1\\,2\\,3)\\rangle$",
+        "$\\langle(1\\,2)\\rangle$",
+        "$S_{3}$"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "id": "t7-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $G=S_{3}$ and $H=\\langle(1\\,2)\\rangle$. How many $g\\in G$ satisfy $gH=H$?",
+    "solution": "$gH=H$ exactly when $g\\in H$, so there are $|H|=2$ such $g$.",
+    "hints": [
+      "Which $g$ lie in $H$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "len([0,1])"
+  },
+  {
+    "id": "t7-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.cosets-normal"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A subgroup of index $m$ in a group of order $n$ has how many elements? Write it in terms of $n$ and $m$.",
+    "solution": "By Lagrange, $|H|=|G|/[G:H]=n/m$.",
+    "hints": [
+      "Index times subgroup order equals group order."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "n/m",
+      "vars": [
+        "n",
+        "m"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(1/m)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "By the first isomorphism theorem, for a homomorphism $\\varphi:G\\to H$, $G/\\ker\\varphi$ is isomorphic to which group?",
+    "solution": "$\\varphi$ induces a bijection $G/\\ker\\varphi\\to\\operatorname{im}\\varphi$ that preserves the operation.",
+    "hints": [
+      "What does $\\varphi$ actually hit?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\ker\\varphi$",
+        "$\\operatorname{im}\\varphi$",
+        "$H/\\ker\\varphi$",
+        "$G$"
+      ],
+      "correct": 1,
+      "why": [
+        "that is the kernel itself, not the quotient",
+        "",
+        "the kernel lies in $G$, so $H/\\ker\\varphi$ is not defined",
+        "the quotient is smaller than $G$ unless the kernel is trivial"
+      ]
+    }
+  },
+  {
+    "id": "t7-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $|\\mathbb{Z}_{12}/\\langle 4\\rangle|$?",
+    "solution": "$|\\langle 4\\rangle|=3$, so the quotient has $12/3=4$ elements.",
+    "hints": [
+      "The quotient size is $|G|/|H|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "12//(12//math.gcd(4,12))"
+  },
+  {
+    "id": "t7-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which map $\\mathbb{Z}\\to\\mathbb{Z}$ is a homomorphism for addition?",
+    "solution": "$\\varphi(x+y)=2x+2y=\\varphi(x)+\\varphi(y)$.",
+    "hints": [
+      "Test $\\varphi(x+y)$ against $\\varphi(x)+\\varphi(y)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x\\mapsto x+1$",
+        "$x\\mapsto 2x$",
+        "$x\\mapsto x^{2}$",
+        "$x\\mapsto |x|$"
+      ],
+      "correct": 1,
+      "why": [
+        "$\\varphi(0)=1\\neq 0$",
+        "",
+        "$(x+y)^{2}\\neq x^{2}+y^{2}$",
+        "$|x+y|\\neq |x|+|y|$ in general"
+      ]
+    }
+  },
+  {
+    "id": "t7-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\varphi:\\mathbb{Z}_{12}\\to\\mathbb{Z}_{4}$, $\\varphi(x)=x\\bmod 4$. What is $|\\ker\\varphi|$?",
+    "solution": "The kernel is $\\{0,4,8\\}$, so $|\\ker\\varphi|=3$.",
+    "hints": [
+      "Find the $x$ with $x\\equiv 0\\pmod 4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "12//4"
+  },
+  {
+    "id": "t7-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\varphi:\\mathbb{Z}\\to\\mathbb{Z}_{5}$, $\\varphi(x)=3x\\bmod 5$. What is $|\\operatorname{im}\\varphi|$?",
+    "solution": "The values $0,3,1,4,2$ cover all of $\\mathbb{Z}_{5}$.",
+    "hints": [
+      "Compute $3x\\bmod 5$ for $x=0,\\dots,4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "len({(3*x)%5 for x in range(5)})"
+  },
+  {
+    "id": "t7-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $|S_{4}/A_{4}|$?",
+    "solution": "$A_{4}$ has index $2$ in $S_{4}$.",
+    "hints": [
+      "Use $|G|/|N|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "24//12"
+  },
+  {
+    "id": "t7-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\varphi:G\\to H$ be a homomorphism with kernel $K$. Which statement is true?",
+    "solution": "$\\varphi$ is injective exactly when its kernel is $\\{e\\}$.",
+    "hints": [
+      "The kernel is the preimage of the identity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\varphi$ is injective iff $K=G$",
+        "$\\varphi(e)\\neq e$ is possible",
+        "$\\varphi$ is injective iff $K$ is trivial",
+        "$K$ always has index $2$"
+      ],
+      "correct": 2,
+      "why": [
+        "$K=G$ means $\\varphi$ is trivial",
+        "a homomorphism always sends $e$ to $e$",
+        "",
+        "index $2$ is not forced"
+      ]
+    }
+  },
+  {
+    "id": "t7-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\varphi:\\mathbb{Z}_{12}\\to\\mathbb{Z}_{12}$, $\\varphi(x)=3x$. What is $|\\operatorname{im}\\varphi|$?",
+    "solution": "The kernel has $\\gcd(3,12)=3$ elements, so the image has $12/3=4$.",
+    "hints": [
+      "The image size is $|G|/|\\ker\\varphi|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "12//math.gcd(3,12)"
+  },
+  {
+    "id": "t7-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.quotient-hom"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "If $|G|=n$ and $|\\ker\\varphi|=k$, write $|\\operatorname{im}\\varphi|$ in terms of $n$ and $k$.",
+    "solution": "First isomorphism theorem: $|\\operatorname{im}\\varphi|=|G|/|\\ker\\varphi|=n/k$.",
+    "hints": [
+      "Use $G/\\ker\\varphi\\cong\\operatorname{im}\\varphi$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "n/k",
+      "vars": [
+        "n",
+        "k"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(1/k)"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many abelian groups of order $8$ are there, up to isomorphism?",
+    "solution": "$\\mathbb{Z}_{8}$, $\\mathbb{Z}_{4}\\times\\mathbb{Z}_{2}$, and $\\mathbb{Z}_{2}^{3}$: one per partition of $3$.",
+    "hints": [
+      "Count the partitions of the exponent $3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1$",
+        "$2$",
+        "$3$",
+        "$5$"
+      ],
+      "correct": 2,
+      "why": [
+        "counted only the cyclic group",
+        "missed one of the types",
+        "",
+        "counted ordered factorizations"
+      ]
+    }
+  },
+  {
+    "id": "t7-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many abelian groups of order $16$ are there, up to isomorphism?",
+    "solution": "The count is the number of partitions of $4$, which is $5$.",
+    "hints": [
+      "Count partitions of $4$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "sum(1 for a in range(5) for b in range(a+1) for c in range(b+1) for d in range(c+1) if a+b+c+d==4)"
+  },
+  {
+    "id": "t7-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which group is $\\mathbb{Z}_{2}\\times\\mathbb{Z}_{6}$ isomorphic to?",
+    "solution": "$\\mathbb{Z}_{6}\\cong\\mathbb{Z}_{2}\\times\\mathbb{Z}_{3}$, so $\\mathbb{Z}_{2}\\times\\mathbb{Z}_{6}\\cong\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}\\times\\mathbb{Z}_{3}$.",
+    "hints": [
+      "Split $\\mathbb{Z}_{6}$ into its primary parts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathbb{Z}_{12}$",
+        "$\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}\\times\\mathbb{Z}_{3}$",
+        "$\\mathbb{Z}_{2}\\times\\mathbb{Z}_{4}\\times\\mathbb{Z}_{3}$",
+        "$\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "not cyclic, since $2\\mid 6$",
+        "",
+        "order $24$, not $12$",
+        "order $8$, not $12$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many elements of order $2$ does $\\mathbb{Z}_{2}\\times\\mathbb{Z}_{4}$ have?",
+    "solution": "The elements killed by $2$ have $y\\in\\{0,2\\}$: $4$ of them, minus the identity.",
+    "hints": [
+      "Find the $(x,y)$ with $2(x,y)=0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(2) for y in range(4) if 2*y%4==0 and (x,y)!=(0,0))"
+  },
+  {
+    "id": "t7-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many elements of order $4$ does $\\mathbb{Z}_{4}\\times\\mathbb{Z}_{2}$ have?",
+    "solution": "An element $(x,y)$ has order $4$ exactly when $x$ is odd: $2\\cdot 2=4$ elements.",
+    "hints": [
+      "Check $2(x,y)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(4) for y in range(2) if x%2==1)"
+  },
+  {
+    "id": "t7-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "How many elements of order $6$ does $\\mathbb{Z}_{2}\\times\\mathbb{Z}_{9}$ have?",
+    "solution": "Order $6$ needs order $2$ in $\\mathbb{Z}_{2}$ (so $x=1$) and order $3$ in $\\mathbb{Z}_{9}$ ($y=3,6$).",
+    "hints": [
+      "The order of $(x,y)$ is the lcm of the component orders."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(2) for y in range(9) for a in [1 if x==0 else 2] for b in [9//math.gcd(y,9)] if a*b//math.gcd(a,b)==6)"
+  },
+  {
+    "id": "t7-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which groups are cyclic? Select all that apply.",
+    "solution": "$\\mathbb{Z}_{3}\\times\\mathbb{Z}_{5}\\cong\\mathbb{Z}_{15}$ is cyclic. The other two have a common factor $2$ in their invariant factors, so they are not cyclic.",
+    "hints": [
+      "A product is cyclic when its orders are coprime."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$\\mathbb{Z}_{6}$",
+        "$\\mathbb{Z}_{2}\\times\\mathbb{Z}_{2}$",
+        "$\\mathbb{Z}_{3}\\times\\mathbb{Z}_{5}$",
+        "$\\mathbb{Z}_{4}\\times\\mathbb{Z}_{6}$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    }
+  },
+  {
+    "id": "t7-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many abelian groups of order $36$ are there, up to isomorphism?",
+    "solution": "$36=2^{2}\\cdot 3^{2}$. Each prime contributes $p(2)=2$ choices, so there are $2\\cdot 2=4$.",
+    "hints": [
+      "Count the types for each prime separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "2*2"
+  },
+  {
+    "id": "t7-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.abelian-class"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write $|\\mathbb{Z}_{m}\\times\\mathbb{Z}_{n}|$ as an expression in $m$ and $n$.",
+    "solution": "The order of a direct product is the product of the orders.",
+    "hints": [
+      "Count pairs $(x,y)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "m*n",
+      "vars": [
+        "m",
+        "n"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*m"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For $|G|=p^{a}m$ with $p\\nmid m$, which is Sylow's first theorem?",
+    "solution": "Sylow's first theorem guarantees a subgroup of order $p^{a}$. It does not claim uniqueness.",
+    "hints": [
+      "Sylow gives existence, not uniqueness."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$G$ has a subgroup of order $p^{a}$",
+        "$G$ has a subgroup of order $p^{a+1}$",
+        "every subgroup of $G$ has order $p$",
+        "$G$ has exactly one subgroup of order $p^{a}$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "exceeds the $p$-part of $|G|$",
+        "fails for $G$ itself, which has order $p^{a}m$",
+        "uniqueness fails, for example $\\mathbb{Z}_{2}^{2}$ has three subgroups of order $2$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many Sylow $2$-subgroups does $S_{3}$ have?",
+    "solution": "Each order-$2$ subgroup is generated by one transposition, and $S_{3}$ has $3$ transpositions.",
+    "hints": [
+      "Sylow $2$-subgroups of $S_{3}$ have order $2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "len([(1,2),(1,3),(2,3)])"
+  },
+  {
+    "id": "t7-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which is the orbit–stabilizer relation for a group $G$ acting on a set $X$?",
+    "solution": "The orbit corresponds to the cosets of the stabilizer, so $|G|=|\\text{orbit}|\\cdot|\\text{stab}|$.",
+    "hints": [
+      "The orbit corresponds to cosets of the stabilizer."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|G|=|\\text{orbit}|+|\\text{stab}|$",
+        "$|G|=|\\text{orbit}|\\cdot|\\text{stab}|$",
+        "$|\\text{orbit}|=|G|\\cdot|\\text{stab}|$",
+        "$|\\text{stab}|=|X|$"
+      ],
+      "correct": 1,
+      "why": [
+        "added instead of multiplied",
+        "",
+        "reversed the relation",
+        "the stabilizer is a subgroup of $G$, not the whole set"
+      ]
+    }
+  },
+  {
+    "id": "t7-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many Sylow $3$-subgroups does $S_{4}$ have?",
+    "solution": "The eight $3$-cycles form $4$ subgroups of order $3$, two cycles per subgroup.",
+    "hints": [
+      "Each subgroup of order $3$ contains two $3$-cycles."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "8//2"
+  },
+  {
+    "id": "t7-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many Sylow $5$-subgroups does a group of order $15$ have?",
+    "solution": "$n_5$ divides $3$ and is $\\equiv 1\\pmod 5$, so $n_5=1$.",
+    "hints": [
+      "Sylow counts are congruent to $1$ modulo $p$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "min(d for d in [1,3] if d%5==1)"
+  },
+  {
+    "id": "t7-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For groups of order $12$, how many values can $n_{3}$ take?",
+    "solution": "$n_3$ divides $4$ and is $\\equiv 1\\pmod 3$, so the possible values are $1$ and $4$.",
+    "hints": [
+      "List the divisors of $4$ and test them mod $3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "sum(1 for d in range(1,5) if 4%d==0 and d%3==1)"
+  },
+  {
+    "id": "t7-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a group of order $6$, which values can the number of Sylow $2$-subgroups take? Select all that apply.",
+    "solution": "$n_2$ divides $3$ and is odd, so $n_2\\in\\{1,3\\}$.",
+    "hints": [
+      "$n_2$ must divide the odd part of $|G|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$1$",
+        "$2$",
+        "$3$",
+        "$6$"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    }
+  },
+  {
+    "id": "t7-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many orbits does $\\langle(1\\,2\\,3\\,4)\\rangle$ have on $\\{1,2,3,4\\}$?",
+    "solution": "The cycle sends each point to the next, so all four points form one orbit.",
+    "hints": [
+      "Can you reach every point from $1$?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$2$",
+        "$4$",
+        "$1$",
+        "$3$"
+      ],
+      "correct": 2,
+      "why": [
+        "split into odd and even points",
+        "each point is its own orbit",
+        "",
+        "miscounted the cycle as three pieces"
+      ]
+    }
+  },
+  {
+    "id": "t7-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.sylow-action"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $G$ act on a set. If an orbit has size $k$ and a point stabilizer has size $s$, write $|G|$ in terms of $k$ and $s$.",
+    "solution": "Orbit–stabilizer gives $|G|=|\\text{orbit}|\\cdot|\\text{stab}|=ks$.",
+    "hints": [
+      "Use $|G|=|\\text{orbit}|\\cdot|\\text{stab}|$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "k*s",
+      "vars": [
+        "k",
+        "s"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "s*k"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which is an ideal of $(\\mathbb{Z},+,\\cdot)$?",
+    "solution": "$3\\mathbb{Z}$ is closed under addition and under multiplication by any integer.",
+    "hints": [
+      "An ideal must absorb multiplication by every element of the ring."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "the nonnegative integers",
+        "the odd integers",
+        "$3\\mathbb{Z}$",
+        "the nonzero integers"
+      ],
+      "correct": 2,
+      "why": [
+        "not closed under negation",
+        "not closed under addition: odd plus odd is even",
+        "",
+        "missing $0$, and $1+(-1)=0$ falls outside"
+      ]
+    }
+  },
+  {
+    "id": "t7-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many units does $\\mathbb{Z}_{9}$ have?",
+    "solution": "The units are the residues coprime to $9$: $1,2,4,5,7,8$.",
+    "hints": [
+      "Units are residues coprime to $n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(9) if math.gcd(x,9)==1)"
+  },
+  {
+    "id": "t7-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which ring is not an integral domain?",
+    "solution": "In $\\mathbb{Z}_{6}$, $2\\cdot 3=0$ with $2,3\\neq 0$.",
+    "hints": [
+      "Look for two nonzero elements with product $0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathbb{Z}$",
+        "$\\mathbb{Z}_{7}$",
+        "$\\mathbb{Z}_{6}$",
+        "$\\mathbb{Q}[x]$"
+      ],
+      "correct": 2,
+      "why": [
+        "a domain: no zero divisors",
+        "a field, so a domain",
+        "",
+        "a domain: a product of nonzero polynomials is nonzero"
+      ]
+    }
+  },
+  {
+    "id": "t7-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many elements does the ideal $\\langle 4\\rangle$ of $\\mathbb{Z}_{20}$ have?",
+    "solution": "$\\langle 4\\rangle=\\{0,4,8,12,16\\}$.",
+    "hints": [
+      "Multiply $4$ by each element of $\\mathbb{Z}_{20}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "5",
+      "form": "exact"
+    },
+    "check": "len({(4*k)%20 for k in range(20)})"
+  },
+  {
+    "id": "t7-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many nonzero zero divisors does $\\mathbb{Z}_{12}$ have?",
+    "solution": "The nonzero zero divisors are the nonzero nonunits: $2,3,4,6,8,9,10$.",
+    "hints": [
+      "In $\\mathbb{Z}_{n}$, zero divisors are the nonunits."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "7",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(1,12) if math.gcd(x,12)>1)"
+  },
+  {
+    "id": "t7-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the degree of $(x^{2}+1)(2x-3)$ in $\\mathbb{Z}[x]$?",
+    "solution": "Degrees add in an integral domain: $2+1=3$.",
+    "hints": [
+      "Degrees add under multiplication in $\\mathbb{Z}[x]$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "2+1"
+  },
+  {
+    "id": "t7-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which sets are ideals of $\\mathbb{Z}$? Select all that apply.",
+    "solution": "$\\mathbb{N}$ is not closed under negation. $2\\mathbb{Z}+3\\mathbb{Z}$ contains $3-2=1$, so it is all of $\\mathbb{Z}$.",
+    "hints": [
+      "Test closure under addition and under multiplication by $\\mathbb{Z}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$4\\mathbb{Z}$",
+        "$\\mathbb{N}$",
+        "$2\\mathbb{Z}+3\\mathbb{Z}$",
+        "$\\{0\\}$"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "id": "t7-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many ideals does $\\mathbb{Z}_{6}$ have?",
+    "solution": "Ideals of $\\mathbb{Z}_{n}$ correspond to divisors of $n$: $1,2,3,6$.",
+    "hints": [
+      "Ideals of $\\mathbb{Z}_{n}$ are $\\langle d\\rangle$ for $d\\mid n$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "sum(1 for d in range(1,7) if 6%d==0)"
+  },
+  {
+    "id": "t7-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.ring-basics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}$, $\\langle a\\rangle\\cdot\\langle b\\rangle=\\langle c\\rangle$. Write $c$ in terms of $a$ and $b$.",
+    "solution": "The product of principal ideals in $\\mathbb{Z}$ is generated by the product of the generators.",
+    "hints": [
+      "Multiply the generators."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "a*b",
+      "vars": [
+        "a",
+        "b"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "b*a"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which ring is a PID but not a field?",
+    "solution": "$\\mathbb{Z}$ is a PID by division with remainder, and $2$ is not a unit.",
+    "hints": [
+      "Ask first whether it is a PID, then whether it has nonunits."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathbb{Q}$",
+        "$\\mathbb{Z}[x]$",
+        "$\\mathbb{Z}$",
+        "$\\mathbb{Z}_{6}$"
+      ],
+      "correct": 2,
+      "why": [
+        "a field, so it is not a ring that fails to be a field",
+        "a UFD but not a PID: $\\langle 2,x\\rangle$ is not principal",
+        "",
+        "not a domain: $2\\cdot 3=0$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many units does $\\mathbb{Z}$ have?",
+    "solution": "The units of $\\mathbb{Z}$ are $\\pm 1$.",
+    "hints": [
+      "A unit has an inverse in $\\mathbb{Z}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "len([1,-1])"
+  },
+  {
+    "id": "t7-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statement is true for every UFD?",
+    "solution": "That is the definition of a UFD. $\\mathbb{Z}[x]$ shows that not every UFD is a PID.",
+    "hints": [
+      "Recall the definition of a UFD."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "every nonzero nonunit factors into irreducibles, uniquely up to order and units",
+        "every ideal is principal",
+        "every nonzero element is a unit",
+        "every irreducible generates a maximal ideal"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "true for PIDs, but $\\mathbb{Z}[x]$ is a UFD that is not a PID",
+        "a field property, not a UFD property",
+        "false in $\\mathbb{Z}[x]$: $\\langle 2\\rangle$ is not maximal"
+      ]
+    }
+  },
+  {
+    "id": "t7-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many positive divisors does $360$ have?",
+    "solution": "$360=2^{3}\\cdot 3^{2}\\cdot 5$, so the count is $(3+1)(2+1)(1+1)=24$.",
+    "hints": [
+      "Use the exponents of the prime factorization."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "24",
+      "form": "exact"
+    },
+    "check": "sum(1 for d in range(1,361) if 360%d==0)"
+  },
+  {
+    "id": "t7-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}[\\sqrt{-5}]$, let $N(a+b\\sqrt{-5})=a^{2}+5b^{2}$. Find $N(2+\\sqrt{-5})$.",
+    "solution": "$N=2^{2}+5\\cdot 1^{2}=9$.",
+    "hints": [
+      "Plug $a=2$ and $b=1$ into the norm."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "9",
+      "form": "exact"
+    },
+    "check": "2**2+5*1**2"
+  },
+  {
+    "id": "t7-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "How many units does $\\mathbb{Z}[i]$ have?",
+    "solution": "The units are $\\pm 1$ and $\\pm i$, since each has norm $1$.",
+    "hints": [
+      "Units have norm $1$, where $N(a+bi)=a^{2}+b^{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "len([1,-1,1j,-1j])"
+  },
+  {
+    "id": "t7-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In $\\mathbb{Z}[x]$, which statement about the element $x$ is correct?",
+    "solution": "$\\mathbb{Z}[x]/(x)\\cong\\mathbb{Z}$ is a domain, so $(x)$ is a prime ideal and $x$ is prime.",
+    "hints": [
+      "Compute the quotient by $(x)$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x$ is not prime, since $\\mathbb{Z}[x]$ is not a PID",
+        "$2$ is prime, since $\\mathbb{Z}[x]/(2)$ is a field",
+        "$x$ is irreducible but not prime, since $x$ is not a unit",
+        "$x$ is prime, since $\\mathbb{Z}[x]/(x)\\cong\\mathbb{Z}$ is a domain"
+      ],
+      "correct": 3,
+      "why": [
+        "mixed up prime with the PID property",
+        "$\\mathbb{Z}_{2}[x]$ is a domain, not a field",
+        "non-units need not be prime, so check the quotient",
+        ""
+      ]
+    }
+  },
+  {
+    "id": "t7-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is the largest positive integer $d$ with $d^{2}\\mid 360$?",
+    "solution": "$360=2^{3}\\cdot 3^{2}\\cdot 5$, so $d^{2}\\mid 360$ forces $d\\mid 6$. The largest is $6$.",
+    "hints": [
+      "Each prime's exponent in $d$ is at most half its exponent in $360$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "max(d for d in range(1,361) if 360%(d*d)==0)"
+  },
+  {
+    "id": "t7-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.domain-ufd"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "If $n=p^{i}q^{j}$ for distinct primes $p$ and $q$, write the number of positive divisors of $n$ in terms of $i$ and $j$.",
+    "solution": "Each divisor is $p^{s}q^{t}$ with $0\\le s\\le i$ and $0\\le t\\le j$, so there are $(i+1)(j+1)$.",
+    "hints": [
+      "Choose an exponent for each prime."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "(i+1)*(j+1)",
+      "vars": [
+        "i",
+        "j"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "i*j+i+j+1"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0127",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which polynomial is irreducible over $\\mathbb{Q}$?",
+    "solution": "$x^{2}+1$ has no real roots, so it has no rational root and no linear factor over $\\mathbb{Q}$.",
+    "hints": [
+      "A quadratic is reducible exactly when it has a root."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$x^{2}-1$",
+        "$x^{2}+1$",
+        "$x^{2}-4$",
+        "$x^{2}-2x$"
+      ],
+      "correct": 1,
+      "why": [
+        "$(x-1)(x+1)$",
+        "",
+        "$(x-2)(x+2)$",
+        "$x(x-2)$ has the root $0$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0128",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Over $\\mathbb{Z}_{2}$, how many monic irreducible quadratics are there?",
+    "solution": "Only $x^{2}+x+1$ has no root in $\\mathbb{Z}_{2}$.",
+    "hints": [
+      "Test $x=0$ and $x=1$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "1",
+      "form": "exact"
+    },
+    "check": "sum(1 for a in range(2) for b in range(2) if b%2==1 and (1+a+b)%2==1)"
+  },
+  {
+    "id": "t7-0129",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Over a field, a cubic polynomial is reducible exactly when which condition holds?",
+    "solution": "A cubic with no root has no linear factor, so it is irreducible. A root gives a linear factor.",
+    "hints": [
+      "A cubic factors as a linear times a quadratic exactly when it has a root."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "it has a repeated root",
+        "it has a root in the field",
+        "its leading coefficient is $1$",
+        "its constant term is $0$"
+      ],
+      "correct": 1,
+      "why": [
+        "a root can be simple, so a repeated root is not required",
+        "",
+        "monic only means the leading coefficient is $1$",
+        "a zero constant gives a root, but not every reducible cubic has that form"
+      ]
+    }
+  },
+  {
+    "id": "t7-0130",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many roots does $x^{2}+1$ have in $\\mathbb{Z}_{3}$?",
+    "solution": "$f(0)=1$, $f(1)=2$, $f(2)=5\\equiv 2$. There are no roots, so $x^{2}+1$ is irreducible over $\\mathbb{Z}_{3}$.",
+    "hints": [
+      "Evaluate at $0,1,2$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "probe": true,
+    "answer": {
+      "kind": "numeric",
+      "value": "0",
+      "form": "exact"
+    },
+    "check": "sum(1 for x in range(3) if (x*x+1)%3==0)"
+  },
+  {
+    "id": "t7-0131",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Over $\\mathbb{Z}_{2}$, how many monic irreducible cubics are there?",
+    "solution": "Monic cubics with no root need $c=1$ and $a+b$ odd, giving $x^{3}+x+1$ and $x^{3}+x^{2}+1$.",
+    "hints": [
+      "Make $f(0)\\neq 0$ and $f(1)\\neq 0$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "2",
+      "form": "exact"
+    },
+    "check": "sum(1 for a in range(2) for b in range(2) for c in range(2) if c%2==1 and (1+a+b+c)%2==1)"
+  },
+  {
+    "id": "t7-0132",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "How many irreducible factors does $x^{4}-1$ have over $\\mathbb{Q}$?",
+    "solution": "$x^{4}-1=(x-1)(x+1)(x^{2}+1)$, which has three irreducible factors.",
+    "hints": [
+      "Factor the difference of squares twice."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "2+1"
+  },
+  {
+    "id": "t7-0133",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which is the factorization of $x^{2}+x+1$ over $\\mathbb{Z}_{3}$?",
+    "solution": "$f(1)=3\\equiv 0$, so $x=1$ is a root. Also $(x+2)^{2}=x^{2}+4x+4\\equiv x^{2}+x+1 \\pmod 3$.",
+    "hints": [
+      "Evaluate $x^{2}+x+1$ at $x=0,1,2$ modulo $3$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "irreducible over $\\mathbb{Z}_{3}$",
+        "$(x-1)(x+1)$",
+        "$(x+2)^{2}$",
+        "$(x+1)^{2}$"
+      ],
+      "correct": 2,
+      "why": [
+        "missed that $x=1$ is a root modulo $3$",
+        "gives $x^{2}-1$, not $x^{2}+x+1$",
+        "",
+        "gives $x^{2}+2x+1$, not $x^{2}+x+1$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0134",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which polynomials are irreducible over $\\mathbb{Q}$? Select all that apply.",
+    "solution": "$x^{2}-9=(x-3)(x+3)$ is reducible. $x^{3}-2$ is irreducible by Eisenstein at $2$. $x^{2}+4$ and $x^{4}+1$ have no rational factorization.",
+    "hints": [
+      "Test small rational roots, then Eisenstein's criterion."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "$x^{2}+4$",
+        "$x^{3}-2$",
+        "$x^{2}-9$",
+        "$x^{4}+1$"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "id": "t7-0135",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.poly-irred"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Over a field, if $\\deg f=m$ and $\\deg g=n$, write $\\deg(fg)$ in terms of $m$ and $n$.",
+    "solution": "Degrees add under multiplication in a polynomial ring over a field.",
+    "hints": [
+      "Compare leading terms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "m+n",
+      "vars": [
+        "m",
+        "n"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n+m"
+      ]
+    },
+    "check": null
+  },
+  {
+    "id": "t7-0136",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is $[\\mathbb{Q}(\\sqrt{2}):\\mathbb{Q}]$?",
+    "solution": "$\\sqrt{2}$ is a root of $x^{2}-2$, which is irreducible over $\\mathbb{Q}$, so the degree is $2$.",
+    "hints": [
+      "Find the minimal polynomial of $\\sqrt{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1$",
+        "$2$",
+        "$4$",
+        "$\\infty$"
+      ],
+      "correct": 1,
+      "why": [
+        "ignored that $\\sqrt{2}\\notin\\mathbb{Q}$",
+        "",
+        "squared the degree",
+        "treated $\\sqrt{2}$ as transcendental"
+      ]
+    }
+  },
+  {
+    "id": "t7-0137",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "If $[E:F]=3$ and $[K:E]=4$, what is $[K:F]$?",
+    "solution": "Tower law: $[K:F]=[K:E][E:F]=12$.",
+    "hints": [
+      "Multiply the degrees."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "12",
+      "form": "exact"
+    },
+    "check": "3*4"
+  },
+  {
+    "id": "t7-0138",
+    "tier": "a",
+    "type": "recall",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "What is $\\mathbb{R}[x]/(x^{2}+1)$ isomorphic to?",
+    "solution": "$x^{2}+1$ is irreducible over $\\mathbb{R}$, so the quotient is a field of degree $2$ over $\\mathbb{R}$, namely $\\mathbb{C}$.",
+    "hints": [
+      "Set $x^{2}=-1$ in the quotient."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\mathbb{R}$",
+        "$\\mathbb{C}$",
+        "$\\mathbb{R}\\times\\mathbb{R}$",
+        "$\\mathbb{Z}_{2}$"
+      ],
+      "correct": 1,
+      "why": [
+        "$x^{2}+1$ has no real root, so the quotient is not $\\mathbb{R}$",
+        "",
+        "$x^{2}+1$ is irreducible over $\\mathbb{R}$, so the quotient is a field, not a product",
+        "it is a field of characteristic $0$, not $2$"
+      ]
+    }
+  },
+  {
+    "id": "t7-0139",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $[\\mathbb{Q}(\\sqrt{3},\\sqrt{5}):\\mathbb{Q}]$.",
+    "solution": "Each square root contributes a factor $2$, and the tower gives $2\\cdot 2=4$.",
+    "hints": [
+      "Adjoin $\\sqrt{3}$, then $\\sqrt{5}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "4",
+      "form": "exact"
+    },
+    "check": "2*2"
+  },
+  {
+    "id": "t7-0140",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Find $[\\mathbb{Q}(\\sqrt[3]{2}):\\mathbb{Q}]$.",
+    "solution": "$x^{3}-2$ is irreducible over $\\mathbb{Q}$ by Eisenstein at $2$, so the degree is $3$.",
+    "hints": [
+      "Find the minimal polynomial of $\\sqrt[3]{2}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "3"
+  },
+  {
+    "id": "t7-0141",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Find $[\\mathbb{Q}(\\sqrt[3]{2},\\sqrt{2}):\\mathbb{Q}]$.",
+    "solution": "The field contains $\\sqrt[6]{2}=\\sqrt{2}/\\sqrt[3]{2}$, and $x^{6}-2$ is Eisenstein, so the degree is $6$.",
+    "hints": [
+      "Combine the degrees $3$ and $2$ in a tower."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "6",
+      "form": "exact"
+    },
+    "check": "3*2"
+  },
+  {
+    "id": "t7-0142",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find $[\\mathbb{F}_{8}:\\mathbb{F}_{2}]$.",
+    "solution": "$|\\mathbb{F}_{8}|=2^{3}$, so the degree over $\\mathbb{F}_{2}$ is $3$.",
+    "hints": [
+      "Use $|\\mathbb{F}_{p^{n}}|=p^{n}$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "numeric",
+      "value": "3",
+      "form": "exact"
+    },
+    "check": "round(math.log(8,2))"
+  },
+  {
+    "id": "t7-0143",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $\\alpha$ be a root of $x^{3}-x-1$, which is irreducible over $\\mathbb{Q}$. What is $[\\mathbb{Q}(\\alpha):\\mathbb{Q}]$?",
+    "solution": "The degree equals the degree of the minimal polynomial, which is $3$.",
+    "hints": [
+      "The degree of $\\mathbb{Q}(\\alpha)$ equals the degree of the minimal polynomial of $\\alpha$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$1$",
+        "$2$",
+        "$3$",
+        "$6$"
+      ],
+      "correct": 2,
+      "why": [
+        "assumed $\\alpha$ is rational",
+        "a cubic cannot give an extension of degree $2$",
+        "",
+        "multiplied degrees of unrelated towers"
+      ]
+    }
+  },
+  {
+    "id": "t7-0144",
+    "tier": "b",
+    "type": "micro",
+    "level": "T7",
+    "tags": [
+      "t7.field-ext"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "If $[K:F]=n$ and $[K:E]=m$, write $[E:F]$ in terms of $n$ and $m$.",
+    "solution": "Tower law: $n=m\\cdot[E:F]$, so $[E:F]=n/m$.",
+    "hints": [
+      "Apply the tower law $[K:F]=[K:E][E:F]$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-12/haiku-5.5",
+      "ver": "checker"
+    },
+    "answer": {
+      "kind": "expression",
+      "value": "n/m",
+      "vars": [
+        "n",
+        "m"
+      ],
+      "domain": [
+        0.3,
+        2.7
+      ],
+      "also": [
+        "n*(1/m)"
+      ]
+    },
+    "check": null
+  }
+]

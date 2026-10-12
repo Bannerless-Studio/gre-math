@@ -28,7 +28,8 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 
 ## M2/M3 review changes (2026-10-12)
 - Render: KaTeX `output: "html"` (no MathML), wrapper `<span role="math" aria-label="TEX">`, `trust` callback records an error and refuses \href/\url/\htmlClass/\includegraphics (KaTeX otherwise draws them as red text without throwing). Code spans keep `$` literal.
-- Size: tag dictionary in shipped JSON (text.js unpack, render.js packHtml). gre-math item data 1.17 MB (MathML+HTML) -> 0.85 MB (html only) -> 0.21 MB (packed) = 1.8 KB/item incl. source fields; dist 1.43 MB -> 0.53 MB (gzip 196 KB). Fixture 388 KB -> 293 KB. Runtime option if packs grow past ~1000 items: ship katex.min.js (275 KB) and render from source (0.7 KB/item).
+- Size: superseded 2026-10-12. The page now renders math at run time from source (no tag dictionary, no `html`), with katex.min.js inlined once. Sizes: 616 items 2.29 MB -> 1.17 MB; 935 items 3.30 MB -> 1.46 MB (docs/SPEC.md section 4).
+- Open: the 1.1 MB target at 616 items is not met (1.17 MB). The rest is pack JSON 560 KB, KaTeX CSS and fonts 205 KB, KaTeX JS 275 KB, engine JS 114 KB. Options if needed: minify engine JS, or shorten per-item source fields. Neither is done.
 - Answer: typed side thin/NaN (target fine) is now a wrong answer (attempt counted, error no-valid-points), not a no-attempt error. Exact numeric with rational target accepts typed rational arithmetic ((1/2), 1/3+1/6). `x2`/`(x+1)2` rejected (number must come first). Unicode minus/times/pi and `**` normalised. `2e-1` stays a parse error (ambiguous with scientific notation).
 - F1: buildPlan no longer plans Review/Micro for a technique that is started but unanswered (teach card comes first).
 - Open (M4 carry-over): `1/2x` parses as (1/2)*x; `sin x` and `sin^2(x)` are parse errors (no attempt).

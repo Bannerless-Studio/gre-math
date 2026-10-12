@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-/* Renders a pack's math for the build. Source JSON stays the truth; this writes copies.
+/* Build-time math gate for a pack. The page renders math at run time from the source (docs/SPEC.md section 4),
+ * so this writes no rendered HTML. It renders every prose field with the page's own span code (throwOnError on)
+ * and exits 1 on any LaTeX error, KaTeX strict warning, or glyph outside the core font subset.
+ * Writes katex.css (KaTeX CSS with the core font subset inlined as base64 woff2) into outdir.
  * Usage: node tools/render_pack.js <packdir> <outdir>
- * Writes into outdir: items.json and techniques.json (each record gains `html`, tag-packed), tags.json (the dictionary), katex.css (core subset inlined).
- * Exits 1 on any LaTeX or font-subset error. build.sh runs the validator first, so this is a second gate. */
+ * build.sh runs the validator first, so this is a second gate. */
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -14,22 +16,10 @@ if (!packDir || !outDir) { console.error('usage: node tools/render_pack.js <pack
 const data = loadDir(packDir);
 const errors = [];
 
-const items = data.items.map((it, i) => {
-  const r = render.renderItem(it, `items[${i}] ${it.id}`);
-  errors.push(...r.errors);
-  return Object.assign({}, it, { html: r.html });
-});
-const techniques = data.techniques.map((t, i) => {
-  const r = render.renderTechnique(t, `techniques[${i}] ${t.id}`);
-  errors.push(...r.errors);
-  return Object.assign({}, t, { html: r.html });
-});
+data.items.forEach((it, i) => errors.push(...render.renderItem(it, `items[${i}] ${it.id}`).errors));
+data.techniques.forEach((t, i) => errors.push(...render.renderTechnique(t, `techniques[${i}] ${t.id}`).errors));
 if (errors.length) { console.error(`FAIL render ${packDir}: ${errors.length} error(s)\n  ` + errors.join('\n  ')); process.exit(1); }
 
-const tags = render.packHtml(items.concat(techniques));
 fs.mkdirSync(outDir, { recursive: true });
-fs.writeFileSync(path.join(outDir, 'items.json'), JSON.stringify(items));
-fs.writeFileSync(path.join(outDir, 'techniques.json'), JSON.stringify(techniques));
-fs.writeFileSync(path.join(outDir, 'tags.json'), JSON.stringify(tags));
 fs.writeFileSync(path.join(outDir, 'katex.css'), render.inlineCss());
-console.log(`rendered ${items.length} items, ${techniques.length} techniques -> ${outDir}`);
+console.log(`math ok: ${data.items.length} items, ${data.techniques.length} techniques (validation only) -> ${outDir}/katex.css`);

@@ -203,11 +203,11 @@
   },
   "rubric": [
    {
-    "text": "Write $x=2+5k$ and impose the next congruence",
+    "text": "Write $x=4+9a$ and impose the mod $7$ congruence",
     "weight": 2
    },
    {
-    "text": "Solve the linear congruences in $k$ and $m$ correctly",
+    "text": "Solve the linear congruences in $a$ and $b$ correctly",
     "weight": 1
    },
    {
@@ -481,7 +481,7 @@
    "why": [
     "counted all subgroups",
     "counted subgroups of even order",
-    "counted divisors of $12$ only",
+    "counted divisors of $6$ instead of multiples of $6$ dividing $72$",
     "counted elements of order $6$",
     ""
    ]
@@ -765,7 +765,7 @@
    "shuffle": true,
    "why": [
     "forgot the two orientations of the $3$-cycle",
-    "counted the $2$-cycle in both orientations",
+    "doubled again for the $2$-cycle, which has only one orientation",
     "used $\\binom52\\cdot3$",
     "used $5!/2$",
     ""
@@ -1051,7 +1051,7 @@
    "why": [
     "used the domain order",
     "allowed any image of $1$ with no constraint",
-    "counted only elements of order $3$",
+    "counted only the maps with image of order dividing $3$",
     "assumed only the trivial map",
     ""
    ]
@@ -1168,7 +1168,7 @@
     "added $5+2$ instead of multiplying",
     "used $5\\cdot2\\cdot2$ counting two types for $5^1$",
     "",
-    "counted prime factors of $720$"
+    "took the exponent $4$ of the $2$-part as the count"
    ]
   },
   "rubric": [
@@ -1568,7 +1568,7 @@
     "counted only $\\mathbb Q[x]$",
     "",
     "counted every ring except $\\mathbb Z[\\sqrt{-5}]$",
-    "counted all, confusing UFD with PID"
+    "counted every ring in the list"
    ]
   },
   "rubric": [
@@ -1621,9 +1621,9 @@
    "correct": 4,
    "shuffle": true,
    "why": [
-    "counted reducible ones",
+    "subtracted only the five squares $(x-a)^2$ from $25$",
     "counted reducible monic quadratics",
-    "counted irreducibles with zero linear term only",
+    "counted the monic quadratics with zero linear term",
     "counted all monic quadratics",
     ""
    ]
