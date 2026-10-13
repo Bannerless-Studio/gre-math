@@ -137,3 +137,11 @@ Measured effect on T1: gate opens at session 9 / 10 / 18 / 45 for 95 / 90 / 80 /
 
 Why not more: Full x2 or x3 adds a 5 to 18 minute timed problem per session for a small gain; bigger early intro cap and `gate s2` do not help once reset and fp are fixed; `verdict` needs per-session tallies and does worse at 95%.
 Risks to weigh: (a) the 70% learner still opens T2 at session 45 because each 3-credit run is easier with `dec`; if that is too lenient, use `rec_cons` (T1 gate 16 / 20 / 30 / 131) and accept a slower pack (K 168 at 95%). (b) fpprod weakens SPEC 2.6's "solve a full problem" wording; the exam rule then only checks typed production. (c) the sim answers every card with the same p, so hard full problems are not modelled. (d) T2 to T10 have no items yet; the whole-pack table clones T1 and says nothing about content difficulty.
+
+## algo-discovery (ladder kind) — 2026-10-13
+- Live: https://bannerless-studio.github.io/algo-discovery/ (site repo ../algo-discovery-site). 7 ladders, CF 1400–1700, techniques = mental moves.
+- Owner acceptance pending: play `ld.1213g` (unfamiliar problem). Failure signal: passing stages by elimination rather than reasoning → drop choose gates in favour of counterexample/typed gates.
+- [ ] Journal view: surface prog.items[id].st per move (bottleneck = lowest mean stage grade per `move`) and pick next items by it.
+- [ ] Counterexample stages have no hints (only Show me after an attempt); consider one hint each.
+- [ ] Ladder-only packs have no exam/placement path (DECISIONS 17); design a ladder exam later.
+- [ ] More ladders: seed corpus + authoring notes in .cache/algo-discovery-seed.md and .cache/ladder-spec.md (copy into docs/ if the kind sticks).
