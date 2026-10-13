@@ -1,0 +1,74 @@
+[
+ {
+  "id": "mv.monotone-boundary",
+  "name": "Find the boundary of a monotone pattern",
+  "level": "1400",
+  "area": "move",
+  "prereq": [],
+  "order": 1,
+  "exam": true,
+  "teach": "When you must list every element meeting a condition tied to its sorted position, do not test elements one by one. Sort, then ask whether passing at one position forces passing at every later position. If so, the passing elements form a suffix and you only need its boundary. Scan from the far end and stop at the first failure.\n$$\\text{passes at } i \\;\\Rightarrow\\; \\text{passes at every } j > i$$\n\nThe core intuition here is that a monotone yes/no pattern changes only once. One boundary replaces $n$ separate checks.\n\n*Example:* Mice weigh 2, 3, 5, 20, 21. A mouse can be the last survivor if, for every heavier mouse, the total of it and all lighter mice reaches that mouse. Totals are 2, 5, 10, 30, 51. From the right, 21 and 20 pass. Weight 5 fails, since 10 does not cover 20. Survivors: 20 and 21.\n$$10 < 20 \\;\\Rightarrow\\; \\text{stop after the mouse of weight } 5$$\n\n*Trap:* Checking only the gap next to each element. A pass counts only if every later gap passes too.\n\n*Check:* Say why failing at $i$ forces failing below it."
+ },
+ {
+  "id": "mv.final-state",
+  "name": "Describe the reachable end states",
+  "level": "1400",
+  "area": "move",
+  "prereq": [],
+  "order": 2,
+  "exam": true,
+  "teach": "When operations look too messy to plan, describe the arrays that can come out. Ask what every end state keeps, such as the total $S$, and what structure the operations force, such as which elements stay neighbours. Then list candidates by the final length $k$ and test each with a scan.\n$$\\text{end state} = k \\text{ contiguous blocks},\\qquad \\text{block sum} = \\frac{S}{k}$$\n\nThe core intuition here is that many operation orders reach the same final array, so final arrays are far fewer than plans. The invariant prunes candidates and the structure turns each test into a scan.\n\n*Example:* Merge neighbours into their sum until all values match, for 2, 1, 3, 2, 4, where $S=12$. Larger $k$ costs fewer merges. For $k=4$ the target is 3 and the scan fails at $2+4$. For $k=3$ the target is 4 and it overshoots at $2+1+3$. For $k=2$ the target is 6 and both blocks fit, so the cost is 3.\n\n*Trap:* Imposing an invariant the problem never gave, such as symmetry.\n\n*Check:* Rebuild one tested end state by real operations."
+ },
+ {
+  "id": "mv.threshold-search",
+  "name": "Search the threshold, not the optimum",
+  "level": "1400",
+  "area": "move",
+  "prereq": [],
+  "order": 3,
+  "exam": true,
+  "teach": "When you must maximize a value and checking whether one given value is achievable is easy, stop constructing the optimum. Write the check as a function of a candidate $m$, confirm that if $m$ works then every easier value works, and binary search the boundary. Compute the cost of reaching $m$ as a sum you can evaluate in one pass.\n$$\\text{ok}(m) \\;\\Rightarrow\\; \\text{ok}(m-1), \\qquad \\text{answer} = \\max\\{m : \\text{ok}(m)\\}$$\n\nThe core intuition here is that a yes/no question is easier than an optimisation. Monotonicity means one failed value rules out every harder one, so each check halves the range.\n\n*Example:* Cut ropes of lengths 5, 8, 12 into pieces of one length $m$ and find the largest $m$ giving at least 4 pieces. The piece count is the sum of the floors of length over $m$.\n$$m=5:\\; 1+1+2=4 \\ \\checkmark \\qquad m=6:\\; 0+1+2=3 \\ \\times$$\nSo the answer is 5.\n\n*Trap:* Searching before proving monotonicity.\n\n*Check:* The answer passes and the next value fails."
+ },
+ {
+  "id": "mv.fix-the-unknown",
+  "name": "Fix the global unknown",
+  "level": "1500",
+  "area": "move",
+  "prereq": [
+   "mv.threshold-search"
+  ],
+  "order": 4,
+  "exam": true,
+  "teach": "When each element's condition mentions a global unknown, such as the final size, you cannot scan and decide at once. Fix that quantity as $k$. Let element $i$ tolerate at most $a_i$ chosen elements after it and $b_i$ before it. Slot $j$ of $k$, counting from 0, suits element $i$ exactly when\n$$j \\le b_i \\ \\text{ and } \\ k-1-j \\le a_i$$\nso one pass tests $k$. Then search over $k$, since a valid set stays valid when its last member is dropped.\n\nThe core intuition here is that an unknown in every condition blocks a scan, but a guess turns it into a constant.\n\n*Example:* Let $b_i=2$ for all and $a=[0,2,1,2,0]$. For $k=3$ slot 0 needs $a_i\\ge2$, so element 2 goes first. Slot 1 needs $a_i\\ge1$, so element 3. Slot 2 needs $a_i\\ge0$ and $j=2\\le b_i$, so element 4. Size 3 works. Size 4 fails: slot 0 needs $a_i\\ge3$.\n\n*Trap:* Thinking an early pick changes what a later element needs. Only the slot matters.\n\n*Check:* Test $k$ and $k+1$ around the answer."
+ },
+ {
+  "id": "mv.local-condition",
+  "name": "Replace a global shape with a local rule",
+  "level": "1500",
+  "area": "move",
+  "prereq": [],
+  "order": 5,
+  "exam": true,
+  "teach": "When a problem asks whether a whole component has a global shape, such as a single ring, look for a rule each element can check alone. First try the obvious global description on a small near-miss. Then find the per-element quantity, such as a neighbour count, that separates the shape from the near-misses. If it holds everywhere, check connectedness once per component.\n$$\\text{connected and every degree} = 2 \\;\\Longleftrightarrow\\; \\text{one ring}$$\n\nThe core intuition here is that a global shape is often forced by local rules plus connectedness. Walking around and coming back is hard to check, while having exactly two neighbours is one comparison per element.\n\n*Example:* Is a connected graph a simple path? A path has exactly two vertices of degree 1, the rest degree 2. Edges 1-2, 2-3, 3-4 give degrees 1, 2, 2, 1, so yes. Adding edge 2-4 gives 1, 3, 2, 2, and the 3 rules it out.\n\n*Trap:* Skipping connectedness. Two separate rings pass the degree test together.\n\n*Check:* Build the smallest near-miss and see the rule reject it."
+ },
+ {
+  "id": "mv.incremental-eval",
+  "name": "Evaluate by small changes",
+  "level": "1600",
+  "area": "move",
+  "prereq": [],
+  "order": 6,
+  "exam": true,
+  "teach": "When you must evaluate many overlapping candidates, such as every substring or every reversal, ask how two neighbouring candidates differ. Order the candidates in chains where each comes from the previous by a small change, and update the value with only the changed terms. Then check that the chains cover every candidate.\n$$\\text{value}(\\text{next}) = \\text{value}(\\text{prev}) + \\Delta, \\qquad \\Delta \\text{ has } O(1) \\text{ terms}$$\n\nThe core intuition here is that neighbouring candidates share almost all their work. Paying only for the difference turns quadratically many linear evaluations into quadratic work in total.\n\n*Example:* Count palindromic substrings of abaab by growing a window from each centre. The window stays a palindrome only if its two new end letters match. The centre letter b (second letter) gives b and aba. The gap between the two a letters gives aa and baab. The five single letters add 5, so the total is $5+1+2=8$.\n\n*Trap:* Chains that start from one side only, so some candidates are never visited.\n\n*Check:* The count of candidates visited equals the count of candidates."
+ },
+ {
+  "id": "mv.offline-merge",
+  "name": "Reorder queries into a growing structure",
+  "level": "1700",
+  "area": "move",
+  "prereq": [],
+  "order": 7,
+  "exam": true,
+  "teach": "When many queries ask about a structure under a threshold, stop answering them in the order given. Sort queries and changes by the threshold, so the structure only grows. Each change joins two groups of sizes $s_A$ and $s_B$, so keep a running answer and add the new pairs.\n$$\\text{pairs gained by a merge} = s_A \\cdot s_B$$\nFinding a group and joining two must not relabel members, so give every element a parent pointer and attach the smaller group under the larger.\n\nThe core intuition here is that sorting turns a dynamic question into a monotone run of merges, and cheap find-and-join forces the parent-pointer forest.\n\n*Example:* Five points in a row, linked by weights 3, 1, 2, 1. Query: how many pairs are connected by links of weight at most 2? The two weight-1 links each merge sizes 1 and 1, and the weight-2 link merges 2 and 2. The running answer is 1, 2, 6, so the query gets 6.\n\n*Trap:* Relabelling every member on each merge.\n\n*Check:* Using all links gives $\\binom{n}{2}$ pairs."
+ }
+]

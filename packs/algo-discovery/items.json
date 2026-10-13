@@ -1,0 +1,1084 @@
+[
+  {
+    "id": "ld.1490e",
+    "tier": "b",
+    "type": "micro",
+    "level": "1400",
+    "tags": [
+      "mv.monotone-boundary"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 2,
+    "prompt": "**Accidental victory.** Source: Codeforces 1490E, paraphrased.\n\n$n$ players hold $a_1,\\dots,a_n$ tokens. While more than one player remains, two remaining players are chosen by chance and play. The player with more tokens wins and takes the other's tokens, and the loser leaves. On a tie either player may win. Print how many players can possibly be the last one remaining, then their indices in increasing order.\n\nLimits: $n \\le 2\\cdot10^{5}$, $1 \\le a_i \\le 10^{9}$.\n\nSample 1: `a = 1 2 4 3`. Answer: 3 players, `2 3 4`.\n\nSample 2: `a = 5 5 5`. Answer: 3 players, `1 2 3`.",
+    "solution": "Sort the players by (tokens, index). Let $p_i$ be the running token total through sorted position $i$. Scan $i$ from $n-2$ down to $0$ and stop at the first $i$ with $p_i < a_{i+1}$. The winners are the players at positions $i+1$ to $n-1$, or everyone if no gap fails. Print their original indices in increasing order.\n\nA player absorbs rivals smallest first, so their total at that point is $p_i$ and they need $p_i \\ge a_{i+1}$ at every later gap. If the gap after $i$ fails, nobody at or below $i$ can cross it, and everyone above sees only gaps that already passed.\n\nTime $O(n\\log n)$ for the sort, $O(n)$ for the scan.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Accidental Victory",
+      "url": "https://codeforces.com/problemset/problem/1490/E",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 1490E"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.monotone-boundary",
+        "type": "choose",
+        "ask": "Purpose: decide what to compute before computing anything. What decides whether a given player can be the last one standing?",
+        "options": [
+          {
+            "text": "Only the token values; the positions in the list play no role.",
+            "ok": true,
+            "feedback": "Yes. Any two remaining players may meet, so the list order never enters the rules, and we can sort."
+          },
+          {
+            "text": "The original list order, since earlier players tend to be paired first.",
+            "ok": false,
+            "feedback": "Nothing pairs players by position: any two remaining players may meet. Tokens `1 2 4 3` and `3 1 2 4` give the same winning values."
+          },
+          {
+            "text": "Only each player's rank by value; the exact gaps between values do not matter.",
+            "ok": false,
+            "feedback": "The gaps matter. `1 2 4` and `1 2 3` have the same ranks, but in `1 2 3` the player with 2 can win (1 + 2 ties 3), while in `1 2 4` they cannot (3 < 4)."
+          }
+        ],
+        "reveal": "Only the multiset of token values matters. Sort the players by tokens, keeping each player's index for the output."
+      },
+      {
+        "id": "s2",
+        "move": "mv.monotone-boundary",
+        "type": "choose",
+        "ask": "A player holds $T$ tokens and the smallest rival still in the game holds $v$. Purpose: write the exact condition under which this player can take that rival's tokens in some game.",
+        "hint": "Ask whether there is some order of events in which this player wins the tie. That is all 'can possibly win' requires.",
+        "options": [
+          {
+            "text": "$T \\ge v$: ties count, because a tie can go either way.",
+            "ok": true,
+            "feedback": "Yes. We ask whether a win is possible, and a tie can go either way. With tokens `5 5 5` every player can win."
+          },
+          {
+            "text": "$T > v$: a tie is a coin flip, so it is not a sure win.",
+            "ok": false,
+            "feedback": "The question is whether the player can win, not whether they must. With tokens `5 5 5` all three players are answers, so a tie has to count."
+          },
+          {
+            "text": "$T + v \\ge$ the largest token count: the merged pile must stand up to the strongest player.",
+            "ok": false,
+            "feedback": "That is a condition for a later gap, not for this absorption. One absorption needs only $T \\ge v$; the strongest player is faced when the sorted scan reaches them."
+          }
+        ],
+        "reveal": "A player with $T$ tokens can absorb a rival with $v$ tokens when $T \\ge v$. Ties count because we ask for a possible win. A player's best plan is to absorb the smallest remaining rival each time: absorbing only adds tokens, so any rival beatable now stays beatable."
+      },
+      {
+        "id": "s3",
+        "move": "mv.monotone-boundary",
+        "type": "counterexample",
+        "ask": "Purpose: see why a single gap check is not enough. Find token values where the check below passes for a player who still cannot win.",
+        "claim": "A player can win exactly when the total of all tokens at or below their own reaches the smallest larger value. Players with the maximum count as passing.",
+        "input_hint": "space-separated whole numbers, 1 to 8 players, each between 1 and 100",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        a = [int(t) for t in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers separated by spaces\")\n    if not 1 <= len(a) <= 8:\n        raise ValueError(\"enter 1 to 8 numbers\")\n    if any(x < 1 or x > 100 for x in a):\n        raise ValueError(\"values must be between 1 and 100\")\n    seen = {}\n\n    def winners(state):\n        # state: sorted tuple of (player, tokens) still alive\n        if state in seen:\n            return seen[state]\n        if len(state) == 1:\n            res = frozenset([state[0][0]])\n        else:\n            out = set()\n            for i in range(len(state)):\n                for j in range(i + 1, len(state)):\n                    (pi, ti), (pj, tj) = state[i], state[j]\n                    rest = [s for k, s in enumerate(state) if k != i and k != j]\n                    if ti >= tj:\n                        out |= winners(tuple(sorted(rest + [(pi, ti + tj)])))\n                    if tj >= ti:\n                        out |= winners(tuple(sorted(rest + [(pj, ti + tj)])))\n            res = frozenset(out)\n        seen[state] = res\n        return res\n\n    truth = winners(tuple(sorted(enumerate(a))))\n    for p in range(len(a)):\n        higher = [x for x in a if x > a[p]]\n        local = (not higher) or sum(x for x in a if x <= a[p]) >= min(higher)\n        if local != (p in truth):\n            return True\n    return False\n",
+        "examples": [
+          {
+            "inp": "1 2 3 50 51",
+            "breaks": true
+          },
+          {
+            "inp": "1 2 4 3",
+            "breaks": false
+          },
+          {
+            "inp": "5 5 20",
+            "breaks": false
+          }
+        ],
+        "reveal": "With `1 2 3 50 51` the player holding 2 passes the check, since the total 3 reaches the next value 3. After absorbing the 3 that player holds 6, and 50 is out of reach. Winning needs every later gap covered, not only the next one."
+      },
+      {
+        "id": "s4",
+        "move": "mv.monotone-boundary",
+        "type": "choose",
+        "ask": "Sort the players by tokens. Purpose: describe the set of winners so you can find it without testing each player.",
+        "options": [
+          {
+            "text": "A block at the top: whenever a value can win, every larger value can win too.",
+            "ok": true,
+            "feedback": "Yes. A larger player has only a subset of the later gaps to cross, each with at least as large a running total."
+          },
+          {
+            "text": "A block in the middle: very strong players can be blocked, for instance by ties with equally strong rivals.",
+            "ok": false,
+            "feedback": "The strongest player always wins: nobody is above them, so no gap is left to cross. Winners cannot stop at some value and be missing above it."
+          },
+          {
+            "text": "Every player whose tokens are at least the average over all players.",
+            "ok": false,
+            "feedback": "Take `10 10 10 10 40`. The average is 16, so the rule keeps only the 40, yet each 10 can win: four tens total 40, which ties the 40."
+          }
+        ],
+        "reveal": "The winners are the players from some sorted position to the top. Find the last failing gap while scanning from the top down, and everything above it wins."
+      },
+      {
+        "id": "s5",
+        "move": "mv.monotone-boundary",
+        "type": "choose",
+        "ask": "Purpose: fix a method for $n=2\\cdot10^{5}$ that also handles repeated values. Which one works?",
+        "options": [
+          {
+            "text": "Sort (tokens, index) pairs, take prefix sums, scan down for the first failing gap: $O(n\\log n)$.",
+            "ok": true,
+            "feedback": "Yes. One sort and one pass, and equal values keep separate entries."
+          },
+          {
+            "text": "For each player, simulate absorbing everyone smaller in order: $O(n^2)$, roughly $4\\cdot10^{10}$ steps at the limit.",
+            "ok": false,
+            "feedback": "Correct but far too slow at $n=2\\cdot10^{5}$. Monotonicity makes the per-player test unnecessary."
+          },
+          {
+            "text": "Keep a dictionary from token value to index and walk the keys in order: $O(n)$ after hashing.",
+            "ok": false,
+            "feedback": "Equal values collapse into one key. With `5 5 5` the dictionary holds one entry and two players are lost. Keep (value, index) pairs."
+          }
+        ],
+        "reveal": "Sort by (tokens, index), prefix sums $p$, scan $i$ downward and stop at the first $i$ with $p_i < a_{i+1}$."
+      }
+    ],
+    "lesson": "When the answer is every element that passes some test along a sorted order, ask whether passing at one position forces passing at every later one. Here a larger player faces only a subset of the gaps a smaller winner faces, so the winners are a suffix of the sorted list.\n\nYou then find one boundary by scanning with running totals, instead of testing each of the $n$ players. Sort by (value, index) so repeated values stay distinct.\n\n*Trap:* Checking one gap only. A pass at the next gap says nothing about the gaps beyond it."
+  },
+  {
+    "id": "ld.1462d",
+    "tier": "b",
+    "type": "micro",
+    "level": "1400",
+    "tags": [
+      "mv.final-state"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 3,
+    "prompt": "**Add to neighbour and remove.** Source: Codeforces 1462D, paraphrased.\n\nYou have an array of $n$ positive integers. One operation picks an index $i$, adds $a_i$ to one of its neighbours (the left or the right one, which must exist), and deletes $a_i$ from the array. Find the minimum number of operations that makes all elements equal. If they already are, the answer is 0.\n\nLimits: the sum of $n$ over all arrays is at most $3000$, $1 \\le a_i \\le 10^{5}$.\n\nSamples: `3 1 6 6 2` gives 4. `1 2 2 1` gives 2. `2 2 2` gives 0. `6 3 2 1` gives 2.",
+    "solution": "Let $S$ be the total. For each $k$ from $n$ down to $1$ with $k \\mid S$, set $T=S/k$ and scan: add elements into a running sum, reset to 0 when it equals $T$, fail if it exceeds $T$. The first $k$ that finishes with sum 0 gives the answer $n-k$. For $k=1$ the scan always passes, so the loop ends.\n\nReachable end states are exactly the contiguous splits, because an operation moves one value onto a neighbour. With positive values the prefix sums rise strictly, so the cut for a fixed $T$ is forced and the scan is a complete test.\n\nTime $O(n^2)$, memory $O(1)$.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Add to Neighbour and Remove",
+      "url": "https://codeforces.com/problemset/problem/1462/D",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 1462D"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.final-state",
+        "type": "counterexample",
+        "ask": "Purpose: test a tempting shortcut. Find an array where one number is larger than all the others and yet fewer than $n-1$ operations suffice.",
+        "claim": "If one number is strictly larger than all the others, the only way to finish is to merge everything into one element, costing $n-1$ operations.",
+        "input_hint": "space-separated positive whole numbers, 1 to 8 numbers, each at most 100",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        a = [int(t) for t in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers separated by spaces\")\n    if not 1 <= len(a) <= 8:\n        raise ValueError(\"enter 1 to 8 numbers\")\n    if any(x < 1 or x > 100 for x in a):\n        raise ValueError(\"values must be between 1 and 100\")\n    def min_ops(a):\n        start = tuple(a)\n        seen = {start}\n        frontier = [start]\n        d = 0\n        while True:\n            for s in frontier:\n                if len(set(s)) == 1:\n                    return d\n            nxt = []\n            for s in frontier:\n                for i in range(len(s)):\n                    for j in (i - 1, i + 1):\n                        if 0 <= j < len(s):\n                            t = list(s)\n                            t[j] += t[i]\n                            del t[i]\n                            t = tuple(t)\n                            if t not in seen:\n                                seen.add(t)\n                                nxt.append(t)\n            frontier = nxt\n            d += 1\n    n = len(a)\n    m = max(a)\n    return n > 1 and a.count(m) == 1 and min_ops(a) < n - 1\n",
+        "examples": [
+          {
+            "inp": "2 3 5 4 1",
+            "breaks": true
+          },
+          {
+            "inp": "1 1 5",
+            "breaks": false
+          },
+          {
+            "inp": "3 1 6 6 2",
+            "breaks": false
+          }
+        ],
+        "reveal": "With `2 3 5 4 1` the groups `[2 3]`, `[5]`, `[4 1]` all sum to 5, so 2 operations suffice. A large number only fixes the target if it must sit alone, and nothing forces that."
+      },
+      {
+        "id": "s2",
+        "move": "mv.final-state",
+        "type": "counterexample",
+        "ask": "Purpose: test a second shortcut, working inward from both ends. Find an array where the claimed count is wrong.",
+        "claim": "Fix the ends first: make $a_1$ and $a_n$ equal, then $a_2$ and $a_{n-1}$, and so on inward. The minimum number of operations equals the number of mirrored pairs $(a_i, a_{n+1-i})$ that differ.",
+        "input_hint": "space-separated positive whole numbers, 1 to 8 numbers, each at most 100",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        a = [int(t) for t in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers separated by spaces\")\n    if not 1 <= len(a) <= 8:\n        raise ValueError(\"enter 1 to 8 numbers\")\n    if any(x < 1 or x > 100 for x in a):\n        raise ValueError(\"values must be between 1 and 100\")\n    def min_ops(a):\n        start = tuple(a)\n        seen = {start}\n        frontier = [start]\n        d = 0\n        while True:\n            for s in frontier:\n                if len(set(s)) == 1:\n                    return d\n            nxt = []\n            for s in frontier:\n                for i in range(len(s)):\n                    for j in (i - 1, i + 1):\n                        if 0 <= j < len(s):\n                            t = list(s)\n                            t[j] += t[i]\n                            del t[i]\n                            t = tuple(t)\n                            if t not in seen:\n                                seen.add(t)\n                                nxt.append(t)\n            frontier = nxt\n            d += 1\n    n = len(a)\n    mismatched = sum(1 for i in range(n // 2) if a[i] != a[n - 1 - i])\n    return min_ops(a) != mismatched\n",
+        "examples": [
+          {
+            "inp": "1 2 1",
+            "breaks": true
+          },
+          {
+            "inp": "1 2 2 1",
+            "breaks": true
+          },
+          {
+            "inp": "2 2 2",
+            "breaks": false
+          }
+        ],
+        "reveal": "The array `1 2 1` is a mirror image, so the claim says 0 operations, but its elements are not equal. The true answer is 2. Symmetry is an invariant you chose, not one the problem gives you."
+      },
+      {
+        "id": "s3",
+        "move": "mv.final-state",
+        "type": "choose",
+        "ask": "Purpose: describe every array that operations can produce, in terms of the original. What does a reachable final array look like?",
+        "options": [
+          {
+            "text": "The original cut into contiguous blocks, each final element being the sum of its block.",
+            "ok": true,
+            "feedback": "Yes. An operation moves a value onto an adjacent element, so merged elements always form contiguous groups in the same order."
+          },
+          {
+            "text": "Any grouping of the original elements into groups, whether or not they touch, each final element a group's sum.",
+            "ok": false,
+            "feedback": "Values only move onto neighbours. In `1 3 2` the grouping {1, 2}, {3} would give `3 3`, but 1 and 2 cannot meet across the 3. The real minimum is 2."
+          },
+          {
+            "text": "The original array sorted first, then some neighbours added together to shorten it.",
+            "ok": false,
+            "feedback": "Order is preserved, not sorted. Sorting changes adjacency: `1 2 3` needs 1 operation, while `1 3 2` needs 2."
+          }
+        ],
+        "reveal": "Every reachable end state is the original split into contiguous blocks, each replaced by its sum. The total $S$ never changes."
+      },
+      {
+        "id": "s4",
+        "move": "mv.final-state",
+        "type": "typed",
+        "ask": "Suppose the final array has $k$ elements. All final elements are equal and the total is still $S$. Purpose: pin the target value. Type each final element in terms of $S$ and $k$.",
+        "hint": "Every element is a block sum and all are equal, so $k$ equal numbers must add up to $S$.",
+        "answer": {
+          "kind": "expression",
+          "value": "S/k",
+          "vars": [
+            "S",
+            "k"
+          ]
+        },
+        "reveal": "Each final element is $S/k$. So $k$ must divide $S$, and the candidates are the divisors of $S$ up to $n$."
+      },
+      {
+        "id": "s5",
+        "move": "mv.final-state",
+        "type": "choose",
+        "ask": "Purpose: choose a test for one fixed $k$ with target $T=S/k$, in one $O(n)$ pass. How do you check whether the array splits into blocks of sum $T$?",
+        "options": [
+          {
+            "text": "Scan left to right with a running sum; cut when it equals $T$, fail when it passes $T$.",
+            "ok": true,
+            "feedback": "Yes. All elements are positive, so the running sum strictly increases and the only possible cut is where it hits $T$. There is no choice to remember."
+          },
+          {
+            "text": "Cut the array into $k$ blocks of equal length $n/k$ and then compare the sums of those blocks.",
+            "ok": false,
+            "feedback": "Blocks need equal sums, not equal lengths. In `2 2 4` with $k=2$ and $T=4$ the blocks are `2 2` and `4`, of different lengths."
+          },
+          {
+            "text": "Check that $k$ divides $S$ and that no single element exceeds the target $T$.",
+            "ok": false,
+            "feedback": "Necessary but not enough. In `3 2 3` with $k=2$ and $T=4$ every element is at most 4, yet the blocks are `3 | 2 3` or `3 2 | 3`, with sums 3 and 5, or 5 and 3."
+          }
+        ],
+        "reveal": "For fixed $k$ run one scan with target $T=S/k$. A failure means this $k$ is impossible. The answer is $n-k$ for the largest $k$ that passes."
+      },
+      {
+        "id": "s6",
+        "move": "mv.final-state",
+        "type": "choose",
+        "ask": "Purpose: connect the limit $\\sum n \\le 3000$ to the method. What does it tell you about the intended cost of trying the candidate values of $k$?",
+        "options": [
+          {
+            "text": "A quadratic method fits: about $n$ values of $k$, each with an $O(n)$ scan, is $9\\cdot10^{6}$ steps.",
+            "ok": true,
+            "feedback": "Yes. The small limit is a hint that $O(n^2)$ is intended. Only divisors of $S$ need a scan, so it is often faster."
+          },
+          {
+            "text": "A cubic method fits: $3000^3 = 2.7\\cdot10^{10}$ simple steps pass within the usual limit, given an efficient implementation.",
+            "ok": false,
+            "feedback": "$2.7\\cdot10^{10}$ steps is far over a one-second limit. The bound hints at a quadratic method, not a cubic one."
+          },
+          {
+            "text": "Only a linear method fits, because the limit sums $n$ over all tests and the total is small.",
+            "ok": false,
+            "feedback": "A summed limit of 3000 allows quadratic work easily: $3000^2 = 9\\cdot10^{6}$. Linear is not required."
+          }
+        ],
+        "reveal": "Time is $O(n)$ per divisor $k$ of $S$ with $k \\le n$, at most $O(n^2)$ overall."
+      }
+    ],
+    "lesson": "When the operations are messy, stop planning them and describe the arrays that can come out. Here the total never changes and merged elements stay contiguous, so a final array is a split into blocks.\n\nThen list the candidates by one parameter, the block count $k$, and test each with a forced scan. An invariant you invent, such as symmetry, prunes candidates the problem never ruled out.\n\n*Trap:* Believing the largest element dictates the target. Only the block structure does."
+  },
+  {
+    "id": "ld.1201c",
+    "tier": "b",
+    "type": "micro",
+    "level": "1400",
+    "tags": [
+      "mv.threshold-search"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 3,
+    "prompt": "**Maximum median.** Source: Codeforces 1201C, paraphrased.\n\nYou have an array $a$ of odd length $n$ and at most $k$ operations. One operation adds 1 to any single element. The median is the middle element after sorting. Find the largest median you can reach.\n\nLimits: $n \\le 2\\cdot10^{5}$, $k \\le 10^{9}$, $1 \\le a_i \\le 10^{9}$.\n\nSamples (format: $n$, $k$, then the array): `3 2 / 1 3 5` gives 5. `5 5 / 1 2 1 1 1` gives 3. `7 7 / 4 1 2 4 3 4 4` gives 5.",
+    "solution": "Sort $a$ and let mid $=\\tfrac{n-1}{2}$ (0-based). For a candidate $m$, compute $\\mathrm{cost}(m)=\\sum_{i\\ge\\text{mid}}\\max(0,m-a_i)$. Binary search the largest $m$ in $[a_{\\text{mid}},\\,a_{\\text{mid}}+k]$ with $\\mathrm{cost}(m)\\le k$.\n\nTo make the median at least $m$ you must lift the median and everything above it to $m$, and nothing else matters. The cost never decreases with $m$, so the feasible values are a prefix and binary search finds the last one.\n\nTime $O(n\\log n + n\\log k)$. Use 64-bit integers for the cost.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Maximum Median",
+      "url": "https://codeforces.com/problemset/problem/1201/C",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 1201C"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.threshold-search",
+        "type": "choose",
+        "ask": "Sort the array. Purpose: find which elements are worth spending operations on. Which elements can ever change the median?",
+        "options": [
+          {
+            "text": "Only the elements at the median position and above, the top $(n+1)/2$.",
+            "ok": true,
+            "feedback": "Yes. The median is the $\\tfrac{n+1}{2}$-th smallest, so raising it means lifting that element and every element above it."
+          },
+          {
+            "text": "Every element equal to the current median value, wherever it sits in the sorted order.",
+            "ok": false,
+            "feedback": "Equal values below the median position do nothing. In `2 6 6 6 8` the lowest 6 sits below the median position, so raising it never helps."
+          },
+          {
+            "text": "Every element, since the median is computed from the whole array.",
+            "ok": false,
+            "feedback": "Raising small elements may leave the median untouched. In `1 3 5`, lifting the 1 to 3 leaves the median at 3."
+          }
+        ],
+        "reveal": "Only positions $\\tfrac{n+1}{2}$ to $n$ in sorted order matter. The other elements stay as they are."
+      },
+      {
+        "id": "s2",
+        "move": "mv.threshold-search",
+        "type": "counterexample",
+        "ask": "Purpose: test the natural 'raise the median group' plan. Find input where it falls short.",
+        "claim": "Repeat: find the current median value, then raise every element equal to it by 1, as long as the budget pays for the whole group. This reaches the best median.",
+        "input_hint": "$k$ first, then the array: space-separated whole numbers, odd array length at most 7, $k \\le 8$, values between 1 and 100",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        t = [int(x) for x in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers separated by spaces\")\n    if len(t) < 2:\n        raise ValueError(\"enter k, then the array\")\n    k, a = t[0], t[1:]\n    if len(a) % 2 == 0 or len(a) > 7:\n        raise ValueError(\"the array needs an odd length, at most 7\")\n    if not 0 <= k <= 8:\n        raise ValueError(\"k must be between 0 and 8\")\n    if any(x < 1 or x > 100 for x in a):\n        raise ValueError(\"array values must be between 1 and 100\")\n    n = len(a)\n\n    def best(i, left, cur):\n        if i == n:\n            return sorted(cur)[n // 2]\n        return max(best(i + 1, left - x, cur + [a[i] + x]) for x in range(left + 1))\n\n    truth = best(0, k, [])\n    b = sorted(a)\n    left = k\n    while True:\n        mid = b[n // 2]\n        group = [i for i in range(n) if b[i] == mid]\n        if len(group) > left:\n            break\n        for i in group:\n            b[i] += 1\n        left -= len(group)\n        b.sort()\n    return b[n // 2] != truth\n",
+        "examples": [
+          {
+            "inp": "2 1 4 4 4 9",
+            "breaks": true
+          },
+          {
+            "inp": "2 1 3 5",
+            "breaks": false
+          },
+          {
+            "inp": "0 1 2 3",
+            "breaks": false
+          }
+        ],
+        "reveal": "With `k = 2` and `1 4 4 4 9`, raising all three 4s costs 3, so the plan stops at median 4. Raising only the two 4s at the median position and above gives `1 4 5 5 9` and median 5. Elements below the median position must not be raised."
+      },
+      {
+        "id": "s3",
+        "move": "mv.threshold-search",
+        "type": "typed",
+        "ask": "Sorted array `2 3 6 7 7`, target median at least $m=8$. Purpose: get the cost of reaching a target. How many operations does it take?",
+        "hint": "Lift only the top $(n+1)/2$ elements, each to at least $m$.",
+        "answer": {
+          "kind": "numeric",
+          "value": 4
+        },
+        "reveal": "The three elements 6, 7, 7 must reach at least 8, costing $2+1+1=4$. The elements 2 and 3 are untouched."
+      },
+      {
+        "id": "s4",
+        "move": "mv.threshold-search",
+        "type": "choose",
+        "ask": "Let $\\mathrm{cost}(m)=\\sum_{i\\ge\\text{mid}}\\max(0,m-a_i)$ be the operations needed for median at least $m$. Purpose: decide how to find the best $m$ without constructing it. What property of $\\mathrm{cost}$ matters?",
+        "options": [
+          {
+            "text": "It never decreases as $m$ grows, so the affordable values form a prefix.",
+            "ok": true,
+            "feedback": "Yes. A larger target never costs less, so if $m$ is affordable every smaller value is too, and we can search the boundary."
+          },
+          {
+            "text": "It is not monotone, because elements already above $m$ cost nothing to keep.",
+            "ok": false,
+            "feedback": "Elements above $m$ contribute 0, never a negative amount, so raising $m$ only adds cost. The function never decreases."
+          },
+          {
+            "text": "It depends on the budget $k$, so the unknown to search is $k$.",
+            "ok": false,
+            "feedback": "The budget $k$ is given. The unknown is the target median $m$, and that is what we search."
+          }
+        ],
+        "reveal": "Because $\\mathrm{cost}$ is non-decreasing in $m$, feasibility is monotone. Binary search the largest $m$ with $\\mathrm{cost}(m)\\le k$."
+      },
+      {
+        "id": "s5",
+        "move": "mv.threshold-search",
+        "type": "choose",
+        "ask": "Purpose: fix the complexity for $n=2\\cdot10^{5}$, $k=10^{9}$. Which method fits?",
+        "options": [
+          {
+            "text": "Sort once, then search $m$ over about $k$ values with an $O(n)$ check: $O(n\\log n+n\\log k)$.",
+            "ok": true,
+            "feedback": "Yes. About 30 checks, each linear."
+          },
+          {
+            "text": "Raise the median by 1 repeatedly and recompute, re-sorting each time: $O(k\\,n\\log n)$, with $k$ steps.",
+            "ok": false,
+            "feedback": "With $k$ up to $10^{9}$ that is far too many steps. The check lets us jump straight to a candidate."
+          },
+          {
+            "text": "Re-sort after every raise and recount the group, which costs $O(n^2\\log n)$.",
+            "ok": false,
+            "feedback": "Re-sorting is unnecessary: cost needs only the top half of the original sorted array."
+          }
+        ],
+        "reveal": "An alternative that also works is walking the sorted top half and levelling groups up to the next distinct value. The threshold search is simpler to get right."
+      }
+    ],
+    "lesson": "When the goal is 'maximize X' and the check 'can I reach at least $m$?' is cheap and monotone in $m$, do not build the optimum. Write the cost of reaching $m$ as a sum, then binary search the largest affordable $m$.\n\nHere only the top half of the sorted array matters, so $\\mathrm{cost}(m)=\\sum_{i\\ge\\text{mid}}\\max(0,m-a_i)$ and one pass evaluates it.\n\n*Trap:* Raising everything that equals the median. Elements below the median position are dead weight."
+  },
+  {
+    "id": "ld.1610c",
+    "tier": "b",
+    "type": "micro",
+    "level": "1500",
+    "tags": [
+      "mv.fix-the-unknown"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 4,
+    "prompt": "**Keshi is throwing a party.** Source: Codeforces 1610C, paraphrased.\n\nThere are $n$ friends, numbered $1..n$ in strictly increasing order of wealth, so friend $n$ is the richest. Friend $i$ has two numbers $a_i$ and $b_i$. Friend $i$ enjoys the party if, among the invited friends, at most $a_i$ are richer than friend $i$ and at most $b_i$ are poorer. Invite as many friends as possible so that every invited friend enjoys the party.\n\nLimits: $n \\le 2\\cdot10^{5}$ in total, $0 \\le a_i, b_i \\le n$.\n\nSample: $n=3$ with $(a_i,b_i)$ = $(1,2)$, $(2,1)$, $(1,1)$. Answer: 2.",
+    "solution": "Binary search the largest $k$ for which feasible($k$) holds. To test $k$, scan friends from poorest to richest with a counter $c$ of invited friends so far (the next slot). Invite friend $i$ when $c \\le b_i$ and $k-1-c \\le a_i$, then increment $c$. The test passes when $c$ reaches $k$.\n\nCorrectness: in a set of size $k$, slot $j$ has exactly $j$ poorer and $k-1-j$ richer invited friends, so each friend's condition depends only on the slot. The earliest eligible friend for each slot never costs a later slot an option, by an exchange argument. Dropping the richest friend of a valid set keeps it valid, so feasibility is monotone in $k$.\n\nTime $O(n\\log n)$.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Keshi Is Throwing a Party",
+      "url": "https://codeforces.com/problemset/problem/1610/C",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 1610C"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.fix-the-unknown",
+        "type": "choose",
+        "ask": "Purpose: find what blocks a left-to-right scan. You process friends from poorest to richest and try a DP over friends. Why does it stall?",
+        "options": [
+          {
+            "text": "A friend's limits count all invited friends, and the total is unknown mid-scan.",
+            "ok": true,
+            "feedback": "Yes. 'At most $a_i$ richer' counts everyone invited, including friends not yet decided."
+          },
+          {
+            "text": "The DP needs a third dimension tracking $b_i$ of every friend chosen so far.",
+            "ok": false,
+            "feedback": "No extra dimension helps. Whatever the state records about earlier picks, it cannot say whether friend $i$ is happy: with $(1,1)$ that depends on picks still to come."
+          },
+          {
+            "text": "The scan has to run from richest to poorest instead, to count the poorer friends.",
+            "ok": false,
+            "feedback": "Direction changes nothing: running from the richest, the count of richer friends is known but the total is still not. The unknown total is the blocker."
+          }
+        ],
+        "reveal": "The stall comes from a global unknown: the final size. Each friend's condition mentions it."
+      },
+      {
+        "id": "s2",
+        "move": "mv.fix-the-unknown",
+        "type": "choose",
+        "ask": "Purpose: remove the global unknown. Which plan fixes it?",
+        "options": [
+          {
+            "text": "Fix the number invited as $k$, test whether $k$ friends can be invited, then search over $k$.",
+            "ok": true,
+            "feedback": "Yes. With $k$ fixed, every friend's condition depends only on how many invited friends are poorer."
+          },
+          {
+            "text": "Sort friends by $a_i + b_i$ descending and invite greedily while every invited friend stays happy.",
+            "ok": false,
+            "feedback": "The sum ignores which slot a friend can take. Friends $(0,5)$ and $(5,0)$ have the same sum, yet the first must be the richest invited and the second the poorest."
+          },
+          {
+            "text": "Invite every friend with $a_i + b_i \\ge n-1$, where $n$ counts all friends.",
+            "ok": false,
+            "feedback": "The necessary test uses the number invited, not the number of friends. In the sample all three have $a_i+b_i \\ge 2$, but inviting all three fails: friend 1 would have two richer invited friends against $a_1=1$."
+          }
+        ],
+        "reveal": "Fix $k$. Then test feasibility of exactly $k$ invited friends with one pass."
+      },
+      {
+        "id": "s3",
+        "move": "mv.fix-the-unknown",
+        "type": "typed",
+        "ask": "With $k$ friends invited, the friend in slot $j$ (0-based, the poorest invited is slot 0) has exactly $j$ poorer and $k-1-j$ richer invited friends. Purpose: turn each friend's limits into allowed slots. For $k=4$ and a friend with $(a,b)=(1,2)$, which slot $j$ can they take?",
+        "hint": "Write both inequalities, one from $b$ and one from $a$, and intersect them.",
+        "answer": {
+          "kind": "numeric",
+          "value": 2
+        },
+        "reveal": "They need $j \\le b=2$ and $k-1-j \\le a=1$, which gives $j \\ge 2$. Only $j=2$ works. In general slot $j$ is allowed when $j \\le b_i$ and $k-1-j \\le a_i$."
+      },
+      {
+        "id": "s4",
+        "move": "mv.fix-the-unknown",
+        "type": "choose",
+        "ask": "Scan friends in wealth order and put each into the next free slot whenever slot $j$ is allowed. Take friends $(a,b)$: 1:(2,0) 2:(0,0) 3:(2,0) 4:(1,2) 5:(0,5) with $k=3$. The greedy picks friends 1, 4, 5. Purpose: justify scanning once with no backtracking. Could an early pick ever force you to undo it?",
+        "options": [
+          {
+            "text": "No: slot $j$ always has exactly $j$ poorer invited friends, so an early pick cannot hurt a later slot.",
+            "ok": true,
+            "feedback": "Yes. If any valid set has its $t$-th friend later than our $t$-th pick, swapping in our pick keeps it valid, so the greedy never falls behind."
+          },
+          {
+            "text": "Yes: an early pick raises the poorer count of everyone after it, so later friends with small $b_i$ may force us to undo it.",
+            "ok": false,
+            "feedback": "That count is fixed by the slot, not by who fills earlier slots. A friend with small $b_i$ is simply restricted to early slots, which the scan reaches first."
+          },
+          {
+            "text": "No, but only after reordering friends by $b_i$ so the most restricted ones are placed first.",
+            "ok": false,
+            "feedback": "Reordering breaks the meaning of slots. Poorer and richer are defined by the fixed wealth order, so the scan must follow it."
+          }
+        ],
+        "reveal": "One scan per $k$ suffices. For $k=3$ the greedy picks friends 1, 4, 5. For $k=4$ no set exists, since slot 0 needs $a_i\\ge3$ and no friend has it."
+      },
+      {
+        "id": "s5",
+        "move": "mv.fix-the-unknown",
+        "type": "choose",
+        "ask": "Purpose: search over $k$ with minimum work. What is the relation between feasibility and $k$, and what is the total cost?",
+        "options": [
+          {
+            "text": "It is monotone in $k$, so binary search $k$ with an $O(n)$ check each: $O(n\\log n)$.",
+            "ok": true,
+            "feedback": "Yes. Dropping the richest invited friend lowers everyone else's richer count and leaves poorer counts alone, so size $k-1$ stays feasible."
+          },
+          {
+            "text": "Try every $k$ from $n$ down and stop at the first feasible one: $O(n^2)$.",
+            "ok": false,
+            "feedback": "Correct but about $4\\cdot10^{10}$ steps at $n=2\\cdot10^{5}$. Monotonicity lets us halve the range each time."
+          },
+          {
+            "text": "It is not monotone, since a larger $k$ can need richer friends, so test every $k$: $O(n^2)$.",
+            "ok": false,
+            "feedback": "Dropping the richest invited friend from a valid set keeps everyone else happy, so feasibility cannot break as $k$ shrinks."
+          }
+        ],
+        "reveal": "Feasibility is monotone in $k$, so binary search the largest feasible $k$."
+      }
+    ],
+    "lesson": "When every condition mentions a global unknown, a scan cannot decide anything on the way. Fix the unknown as $k$. Each condition becomes local to a slot, one pass tests $k$, and you search over $k$.\n\nThe pass works because the slot, not the previous picks, determines who stands behind and in front.\n\n*Trap:* Worrying that an early pick hurts a later friend. In a set of size $k$ the slot already fixes how many are poorer."
+  },
+  {
+    "id": "ld.977e",
+    "tier": "b",
+    "type": "micro",
+    "level": "1500",
+    "tags": [
+      "mv.local-condition"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 3,
+    "prompt": "**Cyclic components.** Source: Codeforces 977E, paraphrased.\n\nAn undirected graph has $n$ vertices and $m$ edges, with no self-loops and no repeated edges. A connected component is a *cycle* if it has $k \\ge 3$ vertices and its edges are exactly the $k$ links of one ring $v_1 - v_2 - \\dots - v_k - v_1$, with nothing else. Count the components that are cycles.\n\nLimits: $n, m \\le 2\\cdot10^{5}$.\n\nSample 1 (format: $n\\ m$, then $m$ edges): `5 4 / 1 2 / 3 4 / 5 4 / 3 5` gives 1. Vertices 3, 4, 5 form a triangle and vertices 1, 2 form a lone edge.\n\nSample 2: `6 6 / 1 2 / 2 3 / 3 1 / 4 5 / 5 6 / 6 4` gives 2.",
+    "solution": "Compute degrees. For each unvisited vertex, run DFS or BFS to collect its component. Count the component if every vertex in it has degree 2.\n\nIf every degree is 2 and the component is connected, a walk that never turns back around can neither branch nor stop, so it traces one ring through every vertex. No loops or repeated edges means that ring has at least 3 vertices. Any vertex of another degree means the edges are not exactly one ring.\n\nTime and memory $O(n+m)$.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Cyclic Components",
+      "url": "https://codeforces.com/problemset/problem/977/E",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 977E"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.local-condition",
+        "type": "counterexample",
+        "ask": "Purpose: test the obvious global description. Find a graph with a component that has a ring but is not a cycle component.",
+        "claim": "A component is a cycle component exactly when it contains a ring: a closed loop through at least 3 distinct vertices that uses no edge twice and returns to its start.",
+        "input_hint": "$n$ and $m$, then $m$ vertex pairs; whole numbers, $n \\le 8$, no loops, no repeated edges",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        t = [int(x) for x in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers only\")\n    if len(t) < 2:\n        raise ValueError(\"start with n and m\")\n    n, m = t[0], t[1]\n    if not 1 <= n <= 8:\n        raise ValueError(\"n must be between 1 and 8\")\n    if m < 0 or len(t) != 2 + 2 * m:\n        raise ValueError(\"after n and m give exactly m pairs of vertices\")\n    adj = [set() for _ in range(n)]\n    for i in range(m):\n        u, v = t[2 + 2 * i] - 1, t[3 + 2 * i] - 1\n        if not (0 <= u < n and 0 <= v < n):\n            raise ValueError(\"vertices are numbered 1..n\")\n        if u == v:\n            raise ValueError(\"no self-loops\")\n        if v in adj[u]:\n            raise ValueError(\"no repeated edges\")\n        adj[u].add(v)\n        adj[v].add(u)\n    seen = set()\n    comps = []\n    for s in range(n):\n        if s in seen:\n            continue\n        stack, comp = [s], []\n        seen.add(s)\n        while stack:\n            x = stack.pop()\n            comp.append(x)\n            for y in adj[x]:\n                if y not in seen:\n                    seen.add(y)\n                    stack.append(y)\n        comps.append(sorted(comp))\n\n    def has_cycle(comp):\n        # a simple cycle of length >= 3 using vertices of comp\n        for s in comp:\n            def walk(x, visited):\n                for y in adj[x]:\n                    if y == s and len(visited) >= 3:\n                        return True\n                    if y not in visited and y > s and walk(y, visited | {y}):\n                        return True\n                return False\n            if walk(s, {s}):\n                return True\n        return False\n\n    def is_ring(comp):\n        k = len(comp)\n        if k < 3:\n            return False\n        edges = sum(len(adj[x]) for x in comp) // 2\n        if edges != k:\n            return False\n\n        def walk(x, visited, start):\n            if len(visited) == k:\n                return start in adj[x]\n            return any(y not in visited and walk(y, visited | {y}, start) for y in adj[x])\n\n        return walk(comp[0], {comp[0]}, comp[0])\n\n    return any(has_cycle(c) != is_ring(c) for c in comps)\n",
+        "examples": [
+          {
+            "inp": "4 5  1 2 2 3 3 4 4 1 1 3",
+            "breaks": true
+          },
+          {
+            "inp": "3 3  1 2 2 3 3 1",
+            "breaks": false
+          },
+          {
+            "inp": "4 3  1 2 2 3 3 4",
+            "breaks": false
+          }
+        ],
+        "reveal": "Four vertices in a ring plus the chord 1-3 pass the walk test, because the ring 1-2-3-4 exists. But the component has five edges, not four, so it is not a cycle component. A walk that returns checks that a ring exists, not that nothing else is attached."
+      },
+      {
+        "id": "s2",
+        "move": "mv.local-condition",
+        "type": "choose",
+        "ask": "Purpose: find a check that rejects the chorded square and similar near-misses. What condition on a component's vertices describes a cycle component exactly?",
+        "options": [
+          {
+            "text": "Every vertex has exactly 2 neighbours.",
+            "ok": true,
+            "feedback": "Yes. Exactly two neighbours everywhere rejects the chord (degree 3) and any pendant vertex (degree 1)."
+          },
+          {
+            "text": "Every vertex has at least 2 neighbours.",
+            "ok": false,
+            "feedback": "The square with a chord has degrees 3, 2, 3, 2, all at least 2, but it is not a cycle component."
+          },
+          {
+            "text": "The component has at least as many edges as vertices.",
+            "ok": false,
+            "feedback": "The same chorded square has 5 edges and 4 vertices. This only says the component contains a ring."
+          }
+        ],
+        "reveal": "Count a component only if every vertex has degree exactly 2."
+      },
+      {
+        "id": "s3",
+        "move": "mv.local-condition",
+        "type": "choose",
+        "ask": "A triangle with one extra vertex attached to it by one edge forms a component. Purpose: see how the rule treats a near-miss. Does it count?",
+        "options": [
+          {
+            "text": "No: the attachment point has degree 3 and the extra vertex degree 1, so the check fails.",
+            "ok": true,
+            "feedback": "Yes. The component's edges are not exactly one ring, and the degrees show it."
+          },
+          {
+            "text": "Yes: the triangle inside is still a ring, and the extra vertex is only decoration.",
+            "ok": false,
+            "feedback": "The definition says the edges are exactly the ring, with nothing else. The pendant edge is something else."
+          },
+          {
+            "text": "Count only the triangle part and ignore the pendant vertex, since components can be trimmed.",
+            "ok": false,
+            "feedback": "Components are whole. The pendant vertex is connected to the triangle and belongs to the same component."
+          }
+        ],
+        "reveal": "The whole component is rejected. A near-miss is caught by one bad degree."
+      },
+      {
+        "id": "s4",
+        "move": "mv.local-condition",
+        "type": "choose",
+        "ask": "Purpose: be sure the rule is enough. Why does 'connected and every vertex has degree 2' give exactly one ring?",
+        "options": [
+          {
+            "text": "The walk is forced: it can neither branch nor dead-end, so it ends only back at its start, covering the component.",
+            "ok": true,
+            "feedback": "Yes. With no loops or repeated edges the ring it traces has at least 3 vertices."
+          },
+          {
+            "text": "Two rings can share a vertex, so degree 2 everywhere still allows a figure-eight and the walk could pick either ring.",
+            "ok": false,
+            "feedback": "A vertex shared by two rings has four neighbours, so its degree is 4, not 2."
+          },
+          {
+            "text": "The walk can branch at some vertex, so edges must also be compared with vertices to confirm a single ring.",
+            "ok": false,
+            "feedback": "Degree 2 at every vertex already gives $\\sum \\deg = 2k$, hence $k$ edges. The extra comparison adds nothing."
+          }
+        ],
+        "reveal": "Connected plus degree 2 everywhere forces one ring, with $k \\ge 3$ because loops and repeated edges are excluded."
+      },
+      {
+        "id": "s5",
+        "move": "mv.local-condition",
+        "type": "choose",
+        "ask": "Purpose: choose how to find the components and apply the rule in $O(n+m)$. Which approach works?",
+        "options": [
+          {
+            "text": "DFS or BFS from each unvisited vertex, checking every degree on the way: $O(n+m)$.",
+            "ok": true,
+            "feedback": "Yes. Each vertex and edge is visited once."
+          },
+          {
+            "text": "Label each vertex with the smallest index reachable, updating only the endpoints of each edge as it is read: $O(m)$.",
+            "ok": false,
+            "feedback": "The labels do not cascade. For edges 2-3 then 1-3, vertex 3 gets label 1, but vertex 2 keeps label 2 although it is in the same component."
+          },
+          {
+            "text": "From every vertex walk around until you return, counting the vertices: $O(n+m)$ in total.",
+            "ok": false,
+            "feedback": "Every vertex of a component repeats the whole walk, so a component of size $k$ costs $k^2$, not $k$."
+          }
+        ],
+        "reveal": "Per component: DFS or BFS, check all degrees are 2. Count the components that pass."
+      }
+    ],
+    "lesson": "When a question is about a whole component being one ring, first check whether the global description (a walk returns) separates the ring from near-misses. If not, find the per-vertex quantity that does.\n\nHere exactly two neighbours everywhere, plus connectedness, forces a single ring. A one-line comparison per vertex replaces any walk.\n\n*Trap:* A rule that lets in extra structure. 'Has a ring' accepts a ring with a chord."
+  },
+  {
+    "id": "ld.1519d",
+    "tier": "b",
+    "type": "micro",
+    "level": "1600",
+    "tags": [
+      "mv.incremental-eval"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 4,
+    "prompt": "**Maximum sum of products.** Source: Codeforces 1519D, paraphrased.\n\nYou have two arrays $a$ and $b$ of length $n$. You may reverse at most one contiguous subarray of $a$. Maximize $\\sum_i a_i b_i$ after the reversal.\n\nLimits: $n \\le 5000$, $1 \\le a_i, b_i \\le 10^{7}$.\n\nSamples (format: $n$, then $a$, then $b$): `5 / 2 3 2 1 3 / 1 2 3 4 5` gives 37 (reverse positions 1 to 4 of $a$, which gives `1 2 3 2 3`). `2 / 13 37 / 2 4` gives 174. `6 / 1 8 7 6 3 6 / 5 9 6 8 8 6` gives 235 (reverse positions 3 to 5).",
+    "solution": "Take the base sum of the original arrangement. For each centre (a position, or the gap between two positions), start with the empty reversal and the base sum, then extend outward one step at a time. When the reversal grows from $[l+1,r-1]$ to $[l,r]$, add $a_l b_r + a_r b_l - a_l b_l - a_r b_r$. Track the best value seen over all centres and steps, including 0 change.\n\nExpanding outward from every centre visits every interval, each exactly once. Each step touches two terms, because the inner block is reversed in both candidates.\n\nTime $O(n^2)$, memory $O(1)$. Use 64-bit integers.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Maximum Sum of Products",
+      "url": "https://codeforces.com/problemset/problem/1519/D",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 1519D"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.incremental-eval",
+        "type": "counterexample",
+        "ask": "Purpose: test the 'pair the biggest numbers' idea. Find input where the largest $a$ already faces the largest $b$ and a reversal still helps.",
+        "claim": "Pairing the largest $a$ with the largest $b$ is best. When they already face each other, no reversal can beat the original arrangement.",
+        "input_hint": "$n$, then $a$, then $b$: whole numbers, $n \\le 8$, values between 1 and 100",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        t = [int(x) for x in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers only\")\n    if not t or not 1 <= t[0] <= 8 or len(t) != 1 + 2 * t[0]:\n        raise ValueError(\"give n (1 to 8), then n numbers for a, then n numbers for b\")\n    n = t[0]\n    a, b = t[1:1 + n], t[1 + n:]\n    if any(x < 1 or x > 100 for x in a + b):\n        raise ValueError(\"values must be between 1 and 100\")\n    orig = sum(x * y for x, y in zip(a, b))\n    best = orig\n    for l in range(n):\n        for r in range(l, n):\n            c = a[:l] + a[l:r + 1][::-1] + a[r + 1:]\n            best = max(best, sum(x * y for x, y in zip(c, b)))\n    ma, mb = max(a), max(b)\n    aligned = any(a[i] == ma and b[i] == mb for i in range(n))\n    return aligned and best > orig\n",
+        "examples": [
+          {
+            "inp": "6  1 8 7 6 3 6  5 9 6 8 8 6",
+            "breaks": true
+          },
+          {
+            "inp": "2  13 37  2 4",
+            "breaks": false
+          },
+          {
+            "inp": "5  2 3 2 1 3  1 2 3 4 5",
+            "breaks": true
+          }
+        ],
+        "reveal": "In the third sample the largest $a$ (8) and the largest $b$ (9) already share position 2, and the original sum is 227. Reversing positions 3 to 5 gives 235. The reversal never moves the 8, so the greedy idea is wrong."
+      },
+      {
+        "id": "s2",
+        "move": "mv.incremental-eval",
+        "type": "choose",
+        "ask": "Purpose: see what makes brute force slow. Try every reversal and evaluate each from scratch. What is the cost for $n=5000$?",
+        "options": [
+          {
+            "text": "$O(n^3)$: about $n^2/2$ reversals, each evaluated with an $O(n)$ pass, tens of billions of steps.",
+            "ok": true,
+            "feedback": "Yes. The evaluation is repeated work, which is what we will remove."
+          },
+          {
+            "text": "$O(n^2)$: there are about $n^2/2$ reversals and each evaluation is a single multiplication of two sums.",
+            "ok": false,
+            "feedback": "Each reversal needs its own pass over the array to get the sum, so the total is $n^2 \\cdot n$."
+          },
+          {
+            "text": "$O(n\\log n)$: sort $a$ and $b$ and pair them, since large values should meet large values.",
+            "ok": false,
+            "feedback": "Positions matter: the sum pairs $a_i$ with $b_i$ at the same index. Sorting would destroy the pairing."
+          }
+        ],
+        "reveal": "There are about $n^2/2$ reversals and each evaluation is linear. The repeated evaluation is the target."
+      },
+      {
+        "id": "s3",
+        "move": "mv.incremental-eval",
+        "type": "choose",
+        "ask": "Compare reversing positions $l..r$ with reversing $l-1..r+1$. Purpose: find what changes between neighbouring candidates. Which terms of $\\sum a_i b_i$ differ?",
+        "options": [
+          {
+            "text": "Only positions $l-1$ and $r+1$, since the inner block is reversed identically.",
+            "ok": true,
+            "feedback": "Yes. Reversing $l-1..r+1$ reverses the same inner block and swaps the two outer elements."
+          },
+          {
+            "text": "Every position from $l-1$ to $r+1$, because the whole block shifts one step outward.",
+            "ok": false,
+            "feedback": "The inner block is reversed in both candidates, so each inner position holds the same value in both. Positions $2..3$ versus $1..4$ differ only at positions 1 and 4."
+          },
+          {
+            "text": "Only position $l-1$, because the right end stays where it is.",
+            "ok": false,
+            "feedback": "The swap moves $a_{l-1}$ to position $r+1$ as well, and $a_{r+1}$ to position $l-1$. Two positions change."
+          }
+        ],
+        "reveal": "Two terms change: $a_{l-1}b_{l-1} + a_{r+1}b_{r+1}$ becomes $a_{r+1}b_{l-1} + a_{l-1}b_{r+1}$."
+      },
+      {
+        "id": "s4",
+        "move": "mv.incremental-eval",
+        "type": "typed",
+        "ask": "For `a = 2 3 2 1 3` and `b = 1 2 3 4 5` (positions from 1), extend the reversal of positions 2 to 3 to positions 1 to 4. Purpose: price one step. By how much does $\\sum a_i b_i$ change?",
+        "hint": "Write the two products at the outer positions before the extension and after it.",
+        "answer": {
+          "kind": "numeric",
+          "value": 3
+        },
+        "reveal": "Positions 1 and 4 change: before, $2\\cdot1+1\\cdot4=6$. After, $1\\cdot1+2\\cdot4=9$. The change is $+3$, which is $(a_{l-1}-a_{r+1})(b_{r+1}-b_{l-1}) = (2-1)(4-1)$."
+      },
+      {
+        "id": "s5",
+        "move": "mv.incremental-eval",
+        "type": "counterexample",
+        "ask": "Purpose: check that chains cover every candidate. Chains start from a reversal $[0, r]$ and shrink inward by one on each side. Give $n$ and an interval $l<r$ (0-based) that no chain reaches.",
+        "claim": "Starting a chain at every $[0, r]$ and shrinking inward ($[l,r] \\to [l+1,r-1]$) visits every reversal $[l,r]$ with $0 \\le l < r < n$.",
+        "input_hint": "three whole numbers: $n$ (1 to 8), then $l$ and $r$ with $0 \\le l < r < n$",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        n, l, r = [int(x) for x in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter three whole numbers: n, then l and r\")\n    if not 1 <= n <= 8:\n        raise ValueError(\"n must be between 1 and 8\")\n    if not (0 <= l < n and 0 <= r < n):\n        raise ValueError(\"l and r must be between 0 and n-1\")\n    if l >= r:\n        raise ValueError(\"need l < r\")\n    reached = set()\n    for r0 in range(n):\n        a, b = 0, r0\n        while a < b:\n            reached.add((a, b))\n            a += 1\n            b -= 1\n    return (l, r) not in reached\n",
+        "examples": [
+          {
+            "inp": "3 1 2",
+            "breaks": true
+          },
+          {
+            "inp": "5 2 3",
+            "breaks": true
+          },
+          {
+            "inp": "5 1 3",
+            "breaks": false
+          },
+          {
+            "inp": "4 0 3",
+            "breaks": false
+          }
+        ],
+        "reveal": "A chain from $[0,r']$ keeps $l+r$ fixed at $r' \\le n-1$, so any interval with $l+r \\ge n$ is missed. For $n=3$ the interval $[1,2]$ has $l+r=3$. Fix it by also starting chains from $[l, n-1]$, or by expanding outward from every centre."
+      },
+      {
+        "id": "s6",
+        "move": "mv.incremental-eval",
+        "type": "choose",
+        "ask": "Purpose: fix the memory of the final method. How much do you need to store while expanding from a centre?",
+        "options": [
+          {
+            "text": "$O(1)$ extra: a running sum and the best value seen so far, nothing per reversal.",
+            "ok": true,
+            "feedback": "Yes. Expanding from a centre needs only the previous value."
+          },
+          {
+            "text": "An $n\\times n$ table holding the sum of every reversal, filled diagonal by diagonal.",
+            "ok": false,
+            "feedback": "It works, but the table has $2.5\\cdot10^{7}$ cells, about 200 MB of 64-bit integers, and every cell is read once."
+          },
+          {
+            "text": "A list of all reversal values, sorted, so the maximum can be read off the end.",
+            "ok": false,
+            "feedback": "That is $n^2$ values again plus a sort. A running maximum is enough."
+          }
+        ],
+        "reveal": "Expand from each of the $2n-1$ centres, adding the two outer terms, keeping the running maximum. Time $O(n^2)$, memory $O(1)$."
+      }
+    ],
+    "lesson": "When many candidates overlap, ask how neighbouring ones differ and order them in chains where each comes from the last by a small change. Update the value with only the changed terms.\n\nHere a reversal grows to the next one outward by swapping two end elements, so only two products change. Check that the chains cover every candidate, for example by expanding from every centre.\n\n*Trap:* Chains that start from one end only. They miss reversals whose endpoints sum past the end of the array."
+  },
+  {
+    "id": "ld.1213g",
+    "tier": "b",
+    "type": "micro",
+    "level": "1700",
+    "tags": [
+      "mv.offline-merge"
+    ],
+    "critical": [],
+    "probe": false,
+    "difficulty": 5,
+    "prompt": "**Path queries.** Source: Codeforces 1213G, paraphrased.\n\nA weighted tree has $n$ vertices and $n-1$ edges. You get $m$ queries, each a number $q$. For each query, count the pairs of vertices $u<v$ such that the largest edge weight on the path from $u$ to $v$ is at most $q$.\n\nLimits: $n, m \\le 2\\cdot10^{5}$, edge weights and $q$ at most $2\\cdot10^{5}$.\n\nSample (format: $n\\ m$, then $n-1$ edges as `u v w`, then the $m$ queries):\n```\n7 5\n1 2 1\n3 2 3\n2 4 1\n4 5 2\n5 7 4\n3 6 2\n5 2 3 4 1\n```\nAnswers: `21 7 15 21 3`.",
+    "solution": "Sort edges by weight and queries by $q$, remembering original positions. Keep a parent array, a size array, and a running answer $\\mathrm{ans}=0$. For each query in increasing $q$, while the next edge has weight at most $q$, find the roots $A$ and $B$ of its endpoints. They differ, because the input is a tree, so add $s_A s_B$ to $\\mathrm{ans}$ and attach the smaller root under the larger, adding sizes. Record $\\mathrm{ans}$ for the query.\n\nA pair counts for $q$ exactly when its tree path uses only edges of weight at most $q$, which means the two vertices share a component of the threshold graph. Each merge adds exactly the newly connected pairs, $s_A s_B$.\n\nTime $O((n+m)\\log(n+m))$: sorting, plus union by size without path compression, which keeps each find at $O(\\log n)$. Use 64-bit integers, since the answer reaches about $2\\cdot10^{10}$.",
+    "hints": [],
+    "answer": {
+      "kind": "ladder"
+    },
+    "source": {
+      "type": "adapted",
+      "title": "Path Queries",
+      "url": "https://codeforces.com/problemset/problem/1213/G",
+      "note": "paraphrased statement; stages, counterexamples and verified samples are original",
+      "from": "Codeforces 1213G"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "mv.offline-merge",
+        "type": "choose",
+        "ask": "Purpose: see why from-scratch answers are too slow. For one query, a direct solution checks every pair $(u,v)$ for its path maximum. What does that cost at the limits?",
+        "options": [
+          {
+            "text": "About $n^2/2\\approx2\\cdot10^{10}$ pairs per query, times up to $2\\cdot10^{5}$ queries.",
+            "ok": true,
+            "feedback": "Yes. Even enumerating the pairs once is too slow, let alone per query."
+          },
+          {
+            "text": "About $n\\log n$ per query, by sorting the edges and counting along them.",
+            "ok": false,
+            "feedback": "The pairs themselves number $n^2/2$. Sorting edges does not by itself count them; the answer needs structure over pairs."
+          },
+          {
+            "text": "About $n$ per query, since the answer is one number built from a single pass over the tree.",
+            "ok": false,
+            "feedback": "A linear pass per query costs $n\\cdot m = 4\\cdot10^{10}$ in total, and one pass does not obviously give the count at all."
+          }
+        ],
+        "reveal": "Enumerating pairs, or even rebuilding per query, is out. We need to share work between queries."
+      },
+      {
+        "id": "s2",
+        "move": "mv.offline-merge",
+        "type": "choose",
+        "ask": "Purpose: find the structure behind 'path maximum at most $q$'. Which edges can lie on a counted pair's path?",
+        "options": [
+          {
+            "text": "Only edges of weight at most $q$; a pair counts if its endpoints stay connected.",
+            "ok": true,
+            "feedback": "Yes. The tree path is unique, so a pair counts exactly when its path avoids every edge heavier than $q$."
+          },
+          {
+            "text": "Only edges of weight exactly $q$, because the path maximum has to reach $q$ to count.",
+            "ok": false,
+            "feedback": "The bound is 'at most $q$', not 'equal to $q$'. In the sample the heaviest edge has weight 4 and the answer for $q=5$ is all 21 pairs."
+          },
+          {
+            "text": "Edges whose weights add up to at most $q$ along the whole path from $u$ to $v$.",
+            "ok": false,
+            "feedback": "The condition is on the largest weight, not the sum. The path 1-2-3 has weights 1 and 3: maximum 3, sum 4. It counts for $q=3$ but a sum rule would reject it."
+          }
+        ],
+        "reveal": "Remove every edge heavier than $q$. The remaining graph is a forest, and the answer counts pairs inside the same tree of that forest."
+      },
+      {
+        "id": "s3",
+        "move": "mv.offline-merge",
+        "type": "counterexample",
+        "ask": "Purpose: avoid guessing the count. Find a tree and a $q$ where the claim below is wrong.",
+        "claim": "The answer for $q$ equals the number of edges of weight at most $q$, because each such edge joins one pair.",
+        "input_hint": "$n$ and $q$, then $n-1$ edges as `u v w`: whole numbers, $2 \\le n \\le 8$, weights and $q$ between 1 and 100",
+        "code": "def breaks(inp: str) -> bool:\n    try:\n        t = [int(x) for x in inp.split()]\n    except ValueError:\n        raise ValueError(\"enter whole numbers only\")\n    if len(t) < 2:\n        raise ValueError(\"start with n and q\")\n    n, q = t[0], t[1]\n    if not 2 <= n <= 8:\n        raise ValueError(\"n must be between 2 and 8\")\n    if not 1 <= q <= 100:\n        raise ValueError(\"q must be between 1 and 100\")\n    if len(t) != 2 + 3 * (n - 1):\n        raise ValueError(\"give exactly n-1 edges as u v w\")\n    adj = [[] for _ in range(n)]\n    edges = []\n    for i in range(n - 1):\n        u, v, w = t[2 + 3 * i] - 1, t[3 + 3 * i] - 1, t[4 + 3 * i]\n        if not (0 <= u < n and 0 <= v < n) or u == v:\n            raise ValueError(\"vertices are numbered 1..n and an edge joins two different ones\")\n        if not 1 <= w <= 100:\n            raise ValueError(\"weights must be between 1 and 100\")\n        adj[u].append((v, w))\n        adj[v].append((u, w))\n        edges.append(w)\n\n    def path_max(s, e):\n        stack = [(s, -1, 0)]\n        while stack:\n            x, par, mx = stack.pop()\n            if x == e:\n                return mx\n            for y, w in adj[x]:\n                if y != par:\n                    stack.append((y, x, max(mx, w)))\n        raise ValueError(\"the edges must form one tree\")\n\n    pairs = sum(1 for u in range(n) for v in range(u + 1, n) if path_max(u, v) <= q)\n    return pairs != sum(1 for w in edges if w <= q)\n",
+        "examples": [
+          {
+            "inp": "3 1  1 2 1  2 3 1",
+            "breaks": true
+          },
+          {
+            "inp": "3 1  1 2 1  2 3 5",
+            "breaks": false
+          },
+          {
+            "inp": "7 5  1 2 1 3 2 3 2 4 1 4 5 2 5 7 4 3 6 2",
+            "breaks": true
+          }
+        ],
+        "reveal": "A path 1-2-3 with both weights 1 and $q=1$ has 2 edges but 3 counted pairs: (1,2), (2,3) and (1,3). Pairs joined through several small edges count too. In general the answer is the number of pairs inside the components of the threshold graph, $\\sum \\binom{s}{2}$ over component sizes $s$. At $q=1$ in the sample the components have sizes 3, 1, 1, 1, 1, giving 3."
+      },
+      {
+        "id": "s4",
+        "move": "mv.offline-merge",
+        "type": "choose",
+        "ask": "Purpose: find what carries over between queries. As $q$ increases, how does the set of edges with weight at most $q$ change?",
+        "options": [
+          {
+            "text": "It only grows, and each edge enters exactly once, at its own weight.",
+            "ok": true,
+            "feedback": "Yes. A larger $q$ keeps every old edge and may add heavier ones, so the sets are nested."
+          },
+          {
+            "text": "It grows by whole weight classes, so every $q$ in one class shares an answer and only $m$ distinct sets exist.",
+            "ok": false,
+            "feedback": "Half right: queries between two consecutive weights do share an answer. But that still says nothing about how to get from one set to the next; what matters is that nothing is ever removed, so each set extends the previous one."
+          },
+          {
+            "text": "It shrinks, because a larger $q$ asks for a stricter path condition.",
+            "ok": false,
+            "feedback": "A larger $q$ is more permissive: a path maximum at most 3 is also at most 4. Sample answers grow with $q$: 3, 7, 15, 21."
+          }
+        ],
+        "reveal": "The kept edges only grow as $q$ rises, and each edge enters once. So answers can be produced in order of $q$ from one growing structure."
+      },
+      {
+        "id": "s5",
+        "move": "mv.offline-merge",
+        "type": "choose",
+        "ask": "Purpose: use the nesting to share work. Which order of processing answers all queries?",
+        "options": [
+          {
+            "text": "Sort queries and edges by weight; sweep once, adding edges up to the current $q$.",
+            "ok": true,
+            "feedback": "Yes. Each edge is added once for all queries."
+          },
+          {
+            "text": "Take queries in input order and rebuild the kept edges each time: $O(nm)$ in total.",
+            "ok": false,
+            "feedback": "Each rebuild costs $O(n)$ and there are $m$ of them. The nesting makes the rebuild unnecessary."
+          },
+          {
+            "text": "Cache answers by the value of $q$ and reuse them whenever a query repeats.",
+            "ok": false,
+            "feedback": "Caching only helps repeated values. The sample queries `5 2 3 4 1` are all different, and many real inputs are too."
+          }
+        ],
+        "reveal": "Offline order: sort queries by $q$, sort edges by weight, add edges while their weight is at most the current query, answer, repeat."
+      },
+      {
+        "id": "s6",
+        "move": "mv.offline-merge",
+        "type": "choose",
+        "ask": "Adding an edge merges two components. Purpose: decide what the merge step must maintain and how to make it fast. Which description fits?",
+        "hint": "Ask what must be fast: finding a vertex's component, and merging two components without touching every member.",
+        "options": [
+          {
+            "text": "Keep sizes and a running answer; give each vertex a parent pointer, smaller component under larger.",
+            "ok": true,
+            "feedback": "Yes. Find follows parents to a root, union links two roots, and sizes live at roots. Each merge adds $s_A s_B$ pairs, for instance 3 and 4 add 12."
+          },
+          {
+            "text": "Keep a member list per component and relabel the component holding the new edge's first endpoint.",
+            "ok": false,
+            "feedback": "If edges arrive as 1-2, 2-3, 3-4, and so on, the first endpoint's component is the long chain each time, so relabelling costs $1+2+\\dots+(n-1)\\approx n^2/2$ in total."
+          },
+          {
+            "text": "Keep one label per vertex and update only the labels at the two endpoints of the new edge.",
+            "ok": false,
+            "feedback": "The labels do not cascade. For edges 6-7 then 5-7, vertices 5 and 7 get label 5 but vertex 6 keeps label 6, although all three are now connected."
+          }
+        ],
+        "reveal": "Maintain a parent forest with component sizes at roots. Merging components of sizes $s_A$ and $s_B$ adds $s_A s_B$ pairs to the running answer. Joining sizes 3 and 4 adds 12."
+      },
+      {
+        "id": "s7",
+        "move": "mv.offline-merge",
+        "type": "typed",
+        "ask": "Purpose: run the sweep by hand. Using the sample's edges in weight order and the merge step, what is the answer for $q=3$?",
+        "hint": "Process edges of weight 1, then 2, then 3. For each, multiply the sizes of the two components it joins and add.",
+        "answer": {
+          "kind": "numeric",
+          "value": 15
+        },
+        "reveal": "In weight order the merges are 1-2 (sizes 1, 1: +1), 2-4 (2, 1: +2), 4-5 (3, 1: +3), 3-6 (1, 1: +1), 3-2 (2, 4: +8). The total is $1+2+3+1+8=15$."
+      }
+    ],
+    "lesson": "When many queries ask about a structure under a threshold, do not answer them one by one. The kept part only grows as the threshold rises, so sort queries and changes by the threshold and answer each query when the sweep reaches it.\n\nEach change here merges two groups and adds $s_A s_B$ pairs. Finding and joining groups cheaply pushes you to a parent-pointer forest, where union attaches the smaller group under the larger. Relabelling the larger side each time costs $O(n^2)$.\n\n*Trap:* Rebuilding per query, or relabelling members on each merge."
+  }
+]

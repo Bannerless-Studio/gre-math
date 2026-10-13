@@ -1,0 +1,35 @@
+{
+ "key": "algo-discovery",
+ "name": "Algorithmic Discovery",
+ "lang": "en",
+ "levels": [
+  {
+   "id": "1400",
+   "label": "Codeforces rating band 1400: sorted scans, end-state analysis, threshold search",
+   "short": "1400"
+  },
+  {
+   "id": "1500",
+   "label": "Codeforces rating band 1500: fixing unknowns, local conditions",
+   "short": "1500"
+  },
+  {
+   "id": "1600",
+   "label": "Codeforces rating band 1600: incremental evaluation",
+   "short": "1600"
+  },
+  {
+   "id": "1700",
+   "label": "Codeforces rating band 1700: offline reordering and merging",
+   "short": "1700"
+  }
+ ],
+ "gate": 0.7,
+ "mastered": 3,
+ "session": {
+  "review": 12,
+  "learn": 2,
+  "micro": 8,
+  "full": 1
+ }
+}
