@@ -1,4 +1,4 @@
-# ds-core content report
+# data-science content report
 
 ## Skeleton (2026-10-13)
 - `CURRICULUM.md`, `pack.json`, `techniques.json` (138 techniques, T1-T10), `attribution.json` written. `items.json` is `[]`; no batches yet.
@@ -149,8 +149,8 @@ Agreement with key: T4.ab 135/135 (100%), T4.c 30/30 (100%). No key was wrong. F
 
 ### Checker
 ```
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T4.ab.json   -> OK 135 items
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T4.c.json    -> OK 30 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T4.ab.json   -> OK 135 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T4.c.json    -> OK 30 items
 engine/answer.js check(): value + all `also` forms ok:true for 18/18 expression items
 ```
 
@@ -179,8 +179,8 @@ Agreement: T5.ab 126/126 (100%), T5.c 28/28 (100%). No wrong key, no ill-posed i
 
 ### Checker
 ```
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T5.ab.json -> OK 126 items
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T5.c.json  -> OK 28 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T5.ab.json -> OK 126 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T5.c.json  -> OK 28 items
 tools/render.js renderItem on all 154 items, renderText + glyphIssues on 14 cards: 0 errors
 ```
 
@@ -279,8 +279,8 @@ Agreement: T6.ab 144/144 (100%), T6.c 32/32 (100%). No wrong key, no ill-posed i
 
 ### Checker
 ```
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T6.ab.json -> OK 144 items
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T6.c.json  -> OK 32 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T6.ab.json -> OK 144 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T6.c.json  -> OK 32 items
 engine/answer.js check(): value + all `also` forms ok:true for 53/53 forms (26 expression items)
 tools/render.js renderItem on 176 items, renderText + glyphIssues on 16 cards: 0 errors
 ```
@@ -349,8 +349,8 @@ Teach cards edited (shape and rules, 14 cards): named every unnamed symbol (kmea
 
 ### Checker
 ```
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T7.ab.json -> OK 126 items
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T7.c.json  -> OK 28 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T7.ab.json -> OK 126 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T7.c.json  -> OK 28 items
 engine/answer.js check(): value + all `also` forms ok:true for 66/66 forms (expression items); t7-0061 rejects exp(-d^2/s^2) and exp(-d^2/(2*s)); t7-0125 rejects (x-m)*1.4826/s
 tools/render.js renderItem on 154 items and renderTechnique on 14 cards: 0 errors
 ```
@@ -390,8 +390,8 @@ Agreement (blind solve, key hidden): T8.ab 126/126 (100%), T8.c 28/28 (100%). No
 
 ### Checker
 ```
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T8.ab.json -> OK 126 items
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T8.c.json  -> OK 28 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T8.ab.json -> OK 126 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T8.c.json  -> OK 28 items
 engine/answer.js check(): value + all `also` forms ok:true for 45/45 forms (15 expression items)
 tools/render.js renderItem on 154 items, renderText on 14 cards: 0 errors
 ```
@@ -415,12 +415,12 @@ Agreement: T9.ab 144/144 (100%), T9.c 32/32 (100%). Blind solve of every item be
 - Cards still do not cover every drill: mean-centred CF (0078), naive Bayes (0107), A/B lift (0121), seasonal indices (f008) are in the drills only; each is a one-line plug-in from the solution text.
 - t9-0120, 0121, 0125, 0126 (A/B lift, traffic share) are light arithmetic under t9.drift; kept as tier a/b practice.
 - Probes: exactly one per CURRICULUM section 4 technique, all tier b numeric: causal-dag 0015, ts-arima 0042, bayes-conj 0058, ranking-metrics 0094, fairness 0130.
-- Every T9 technique has a tier b numeric or expression item in T9.ab.json. validate_pack.js on packs/ds-core still fails only because T9 batches are not merged into items.json yet.
+- Every T9 technique has a tier b numeric or expression item in T9.ab.json. validate_pack.js on packs/data-science still fails only because T9 batches are not merged into items.json yet.
 
 ### Checker
 ```
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T9.ab.json -> OK 144 items
-python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T9.c.json  -> OK 32 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T9.ab.json -> OK 144 items
+python3 -I tools/check_items.py packs/data-science --batch=packs/data-science/batches/T9.c.json  -> OK 32 items
 engine/answer.js check(): value + all `also` forms ok:true for 22/22 forms (8 expression items)
 tools/render.js renderItem on 176 items, renderTechnique on 16 cards: 0 errors
 ```
@@ -496,7 +496,7 @@ Left as is:
 
 Least sure ids: t8-k025 (index/pair notation), t8-k015 (stop/patience counting, stated but easy to off-by-one), t8-k016 (warmup `(step+1)/warmup` vs cosine start at p=0 is a given convention).
 
-Gates after edits: `check_items.py packs/ds-core --batch=packs/ds-core/batches/T8.code.json` -> `OK 28 items`; `run_code_items.py` on temp pack with the batch as items.json -> `RESULT run_code_items code_items=28 proven=28 skipped=0 failed=0` (starters all fail, enforced by the tool).
+Gates after edits: `check_items.py packs/data-science --batch=packs/data-science/batches/T8.code.json` -> `OK 28 items`; `run_code_items.py` on temp pack with the batch as items.json -> `RESULT run_code_items code_items=28 proven=28 skipped=0 failed=0` (starters all fail, enforced by the tool).
 
 ## T9 code review (sonnet-5.5)
 
@@ -513,7 +513,7 @@ Left as is: k001, k002, k005, k013, k017, k021, k025, k031 reuse the data of a n
 
 Least sure: t9-k018 (neighbour selection, now pinned), t9-k024 (perplexity with unseen test bigrams relies on the stated V and alpha > 0), t9-k022 (ideal DCG over the sorted list truncated to k, matches the prompt but readers may use the full ideal list; equal for these tests).
 
-Gates: `check_items.py packs/ds-core --batch=packs/ds-core/batches/T9.code.json` -> `OK 32 items`; `run_code_items.py` on temp pack (batch as items.json) -> `RESULT run_code_items code_items=32 proven=32 skipped=0 failed=0` (starters all fail, enforced by the tool).
+Gates: `check_items.py packs/data-science --batch=packs/data-science/batches/T9.code.json` -> `OK 32 items`; `run_code_items.py` on temp pack (batch as items.json) -> `RESULT run_code_items code_items=32 proven=32 skipped=0 failed=0` (starters all fail, enforced by the tool).
 
 ## Teach cards v3 review (sonnet-5.5)
 

@@ -1,6 +1,6 @@
-# Data Science core (O-level maths to MS level): curriculum for the `ds-core` pack
+# Data Science core (O-level maths to MS level): curriculum for the `data-science` pack
 
-Status: draft v1, 2026-10-13. Owner: problem-engine. Pack path: `packs/ds-core/`. Mirrors `packs/gre-physics/CURRICULUM.md` in structure and schema.
+Status: draft v1, 2026-10-13. Owner: problem-engine. Pack path: `packs/data-science/`. Mirrors `packs/gre-physics/CURRICULUM.md` in structure and schema.
 
 ## 1. Target analysis
 

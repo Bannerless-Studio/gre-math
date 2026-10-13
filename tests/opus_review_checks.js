@@ -61,11 +61,11 @@ const gm = packIx('gre-math');
   const els = {};
   const el = (id) => els[id] || (els[id] = { id, hidden: false, innerHTML: '', textContent: '', className: '', value: '',
     setAttribute() {}, getAttribute() { return null; }, addEventListener(t, f) { (this.h = this.h || {})[t] = f; }, focus() {},
-    querySelector() { return null; } });
+    querySelector() { return null; }, querySelectorAll() { return []; }, classList: { toggle() {}, add() {}, remove() {} }, style: {} });
   const document = { getElementById: el, addEventListener() {}, querySelectorAll() { return []; }, readyState: 'loading',
-    hidden: false, title: '', body: { appendChild() {} }, createElement() { return el('x'); } };
+    hidden: false, title: '', body: { appendChild() {}, classList: { toggle() {} } }, createElement() { return el('x'); }, fonts: null };
   const win = { document, localStorage: ls, addEventListener() {}, scrollTo() {}, navigator: {}, location: { protocol: 'file:' },
-    console: { log() {}, warn() {}, error() {} }, setTimeout, clearTimeout, setInterval, clearInterval, Date, JSON, Math };
+    console: { log() {}, warn() {}, error() {} }, requestAnimationFrame(f) { f(); }, getComputedStyle() { return { fontSize: '16px' }; }, setTimeout, clearTimeout, setInterval, clearInterval, Date, JSON, Math };
   win.window = win;
   const ctx = vm.createContext(win);
   scripts.forEach((s) => vm.runInContext(s, ctx));
@@ -308,11 +308,11 @@ S.check('A3 domain [1,1] is bad-spec', A.check({ kind: 'expression', value: 'x^2
   const ls = mem(); const els = {}; let exported = null;
   const el = (id) => els[id] || (els[id] = { id, hidden: false, innerHTML: '', textContent: '', className: '', value: '',
     setAttribute() {}, getAttribute() { return null; }, addEventListener(t, f) { (this.h = this.h || {})[t] = f; }, focus() {},
-    querySelector() { return null; }, click() {}, remove() {} });
+    querySelector() { return null; }, querySelectorAll() { return []; }, classList: { toggle() {}, add() {}, remove() {} }, style: {}, click() {}, remove() {} });
   const document = { getElementById: el, addEventListener() {}, querySelectorAll() { return []; }, readyState: 'loading',
-    hidden: false, title: '', body: { appendChild() {} }, createElement() { return el('x'); } };
+    hidden: false, title: '', body: { appendChild() {}, classList: { toggle() {} } }, createElement() { return el('x'); }, fonts: null };
   const win = { document, localStorage: ls, addEventListener() {}, scrollTo() {}, navigator: {}, location: { protocol: 'file:' },
-    console: { log() {}, warn() {}, error() {} }, setTimeout, clearTimeout, setInterval, clearInterval, Date, JSON, Math,
+    console: { log() {}, warn() {}, error() {} }, requestAnimationFrame(f) { f(); }, getComputedStyle() { return { fontSize: '16px' }; }, setTimeout, clearTimeout, setInterval, clearInterval, Date, JSON, Math,
     Blob: function (parts) { exported = parts.join(''); }, URL: { createObjectURL() { return 'blob:x'; }, revokeObjectURL() {} } };
   win.window = win;
   const ctx = vm.createContext(win);
