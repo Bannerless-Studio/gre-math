@@ -122,6 +122,14 @@ function renderItem(item, where) {
   if (Array.isArray(a.options)) a.options.forEach((o, i) => check(o, true, 'options[' + i + ']'));
   if (a.display !== undefined) check(a.display, true, 'display');
   if (Array.isArray(item.rubric)) item.rubric.forEach((r, i) => check(r && r.text != null ? r.text : '', true, 'rubric[' + i + ']'));
+  check(item.lesson, false, 'lesson');
+  if (Array.isArray(item.stages)) item.stages.forEach((s, i) => {
+    if (!s || typeof s !== 'object') return;
+    const sw = 'stages[' + i + ']';
+    check(s.ask, false, sw + '.ask'); check(s.hint, false, sw + '.hint'); check(s.reveal, false, sw + '.reveal'); check(s.claim, false, sw + '.claim');
+    if (s.answer && s.answer.display !== undefined) check(s.answer.display, true, sw + '.answer.display');
+    if (Array.isArray(s.options)) s.options.forEach((o, j) => { if (o) { check(o.text, true, sw + '.options[' + j + '].text'); check(o.feedback, false, sw + '.options[' + j + '].feedback'); } });
+  });
   if (item.figure !== undefined) errors.push(...checkFigure(item.figure, where + ' figure'));
   return { errors: errors };
 }

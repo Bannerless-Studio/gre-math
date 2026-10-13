@@ -661,6 +661,32 @@
     return call + ' -> expected ' + showVal(row.expect) + ', got ' + showVal(row.got);
   }
 
+  // Ladder stage (docs/PACK_SCHEMA.md "ladder"). response: authored option index (choose), typed string (typed), or the
+  // pyharness result of running the stage's `breaks` on the learner's input (counterexample). Same result shape as check.
+  // A counterexample whose runner raised, timed out or is unavailable is no attempt (the message is shown).
+  function checkLadderStage(stage, response) {
+    if (!stage || typeof stage !== 'object') return bad('bad-spec');
+    if (stage.type === 'choose') {
+      var i = toIndex(response), opts = stage.options || [];
+      if (i === null || i >= opts.length) return bad('unparsable', 'option');
+      return { ok: opts[i].ok === true, parsed: i, attempt: true };
+    }
+    if (stage.type === 'typed') return check(stage.answer, response == null ? '' : String(response));
+    if (stage.type === 'counterexample') {
+      var r = response;
+      if (!r || typeof r !== 'object') return bad('no-runtime', 'no runner result');
+      if (r.status === 'timeout') return bad('timeout');
+      if (r.status === 'unavailable') return bad('no-runtime', r.error || 'unavailable');
+      if (r.status === 'error') return bad('runtime-error', r.error || 'error');
+      if (r.status !== 'ok' || !Array.isArray(r.results) || r.results.length !== 1) return bad('no-runtime', 'malformed runner result');
+      var row = r.results[0] || {};
+      if (typeof row.error === 'string') return bad('runtime-error', row.error);
+      if (row.got !== true && row.got !== false) return bad('runtime-error', 'breaks must return True or False');
+      return { ok: row.got === true, parsed: row.got, attempt: true };
+    }
+    return bad('bad-spec', 'stage type');
+  }
+
   // check(spec, typed) -> {ok, parsed, attempt, error?, detail?}
   function check(spec, typed) {
     if (!spec || typeof spec !== 'object') return bad('bad-spec');
@@ -670,6 +696,7 @@
       case 'mcq': return checkMcq(spec, typed);
       case 'multi': return checkMulti(spec, typed);
       case 'code': return checkCode(spec, typed);
+      case 'ladder': return checkLadderStage(spec.stage, typed);   // spec = {kind:'ladder', stage}
       default: return bad('unsupported-kind', String(spec.kind));
     }
   }
@@ -679,6 +706,7 @@
     evalExpr: evalExpr,
     check: check,
     checkCode: checkCode,
+    checkLadderStage: checkLadderStage,
     codeEq: codeEq,
     codeFailLine: codeFailLine,
     codeShow: showVal,

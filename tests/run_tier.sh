@@ -42,6 +42,7 @@ run export_checks "$NODE" tests/export_checks.js
 run m6_checks "$NODE" tests/m6_checks.js
 run pacing_checks "$NODE" tests/pacing_checks.js
 run session_resume_checks "$NODE" tests/session_resume_checks.js
+run ladder_checks env NODE="$NODE" "$NODE" tests/ladder_checks.js
 validate_ok packs/_fixture
 [ -f packs/gre-math/items.json ] && validate_ok packs/gre-math
 

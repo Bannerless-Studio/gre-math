@@ -9,7 +9,7 @@
 # carries the marker <!--pe-build:<id>--> that sw.js checks before caching it. Publish sw.js together with the page;
 # the page registers it for offline use (README "Offline use"). One page per output directory: sw.js is per directory.
 #
-# Packs with a code answer item also get engine/pyworker.js and engine/pyharness.py inlined as inert text blocks
+# Packs with a code answer item or a ladder counterexample stage also get engine/pyworker.js and engine/pyharness.py inlined as inert text blocks
 # (docs/SPEC.md 3.4); the page loads Pyodide from jsdelivr at run time, cached by sw.js.
 #
 # Usage: ./build.sh <packdir> <out.html>
@@ -44,7 +44,7 @@ fi
 # Code answers (Python in the browser): the worker and harness sources go into the page as inert text blocks, only for
 # packs that have a code item. Same two guards as above for the text blocks.
 PE_CODE=0
-if grep -Eq '"kind"[[:space:]]*:[[:space:]]*"code"' "$PACKDIR/items.json"; then
+if grep -Eq '"kind"[[:space:]]*:[[:space:]]*"code"|"type"[[:space:]]*:[[:space:]]*"counterexample"' "$PACKDIR/items.json"; then
   PE_CODE=1
   if grep -il '</script' "$ROOT/engine/pyworker.js" "$ROOT/engine/pyharness.py" >/dev/null 2>&1 || grep -l '<!--' "$ROOT/engine/pyworker.js" "$ROOT/engine/pyharness.py" >/dev/null 2>&1; then
     echo "build.sh: pyworker.js or pyharness.py contains a closing script tag or an HTML comment opener; refusing to build" >&2; exit 1

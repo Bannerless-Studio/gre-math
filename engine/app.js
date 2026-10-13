@@ -208,7 +208,7 @@
     }).catch(function (err) { return { status: 'unavailable', error: String(err && err.message || err) }; });
   }
   function codeKey() { var c = S.sess && PE.currentCard(S.sess); return c && c.type === 'code' ? S.sess.pos + '|' + c.id : ''; }
-  function setCodeMsg(msg) { C.msg = msg; paintCode(); }
+  function setCodeMsg(msg) { C.msg = msg; paintCode(); if (L.busy || L.warm) { L.msg = msg; paintLad(); } }
   function resultLine(rep, spec) {
     if (rep.error === 'timeout') return 'Timed out after ' + (PY_WALL_MS / 1000) + ' s. Look for a loop that never ends.';
     if (rep.error === 'runtime-error') return 'Error: ' + rep.detail;
@@ -291,6 +291,138 @@
       S.codeReport = rep;
       answer(res);
     });
+  }
+
+
+  // ---- ladder cards (DECISIONS 17). Stage state is on the card (PE.ladderOf); L holds only transient UI: the last
+  // message, whether a counterexample is running, and whether Python is down. Counterexample stages run the stage's
+  // `breaks(inp)` on the learner's string through the same Pyodide worker (pyharness entry run, one test).
+  var L = { key: '', busy: false, msg: '', fb: '', down: false, warm: false };
+  function ladKey() {
+    var c = S.sess && PE.currentCard(S.sess);
+    return c && c.type === 'ladder' ? S.sess.pos + '|' + c.id + '|' + PE.ladderOf(c).i : '';
+  }
+  function ladSync() {
+    var k = ladKey();
+    if (L.key !== k) { L.key = k; L.busy = false; L.msg = ''; L.fb = ''; L.down = false; L.warm = false; }
+  }
+  function ladOutHtml() {
+    var h = '';
+    if (L.fb) h += '<p class="bad-line">' + esc(L.fb) + '</p>';
+    if (L.msg) h += '<p class="note">' + esc(L.msg) + '</p>';
+    return h;
+  }
+  function paintLad() {
+    var el = document.getElementById('lad-out');
+    if (!el) return;
+    ladSync();
+    el.innerHTML = ladOutHtml();
+    Array.prototype.forEach.call(document.querySelectorAll('#lad-actions button'), function (b) { b.disabled = L.busy; });
+  }
+  // Starts loading Python when a counterexample stage first shows. Silent once ready.
+  function warmLadder() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'ladder' || PE.ladderOf(card).fin) return;
+    var st = PE.ladderStage(card);
+    if (!st || st.type !== 'counterexample') return;
+    ladSync();
+    if (py.ready || py.loadedOnce) return;
+    var key = L.key;
+    L.warm = true; L.msg = PY_LOADING; paintLad();
+    pyStart().then(function () { if (L.key === key) { L.warm = false; L.msg = ''; L.down = false; paintLad(); } },
+      function (err) { if (L.key === key) { L.warm = false; L.down = true; L.msg = 'Python did not load (' + String(err && err.message || 'offline').replace(/[.\s]+$/, '') + '). Check your connection; it retries when you press Check.'; paintLad(); } });
+  }
+  function ladderBody(card, l, st) {
+    var h = '<p class="anchor">Stage ' + (l.i + 1) + ' of ' + card.item.stages.length + '</p><div class="prose">' + md(st.ask) + '</div>';
+    if (st.type === 'choose') {
+      h += '<div class="opts">' + card.orders[l.i].map(function (orig, i) {
+        var bad = l.wrong.indexOf(orig) >= 0;
+        return '<button type="button" class="opt' + (bad ? ' bad' : '') + '" data-act="opt" data-i="' + i + '"' + (bad ? ' disabled' : '') + '>' + md(st.options[orig].text, true) + '</button>';
+      }).join('') + '</div>';
+      l.wrong.forEach(function (o) { h += '<div class="prose lad-fb">' + md(st.options[o].feedback) + '</div>'; });
+    } else {
+      if (st.type === 'counterexample') h += '<div class="prose lad-claim">' + md(st.claim) + '</div>';
+      var ph = st.type === 'counterexample' ? (st.input_hint || 'your input') : (st.answer.kind === 'expression' ? 'e.g. x^2/2' : 'e.g. 7, 0.5 or 9/2');
+      h += '<form class="typed" id="typed" autocomplete="off"><input id="ans" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + esc(ph) + '" aria-label="' + (st.type === 'counterexample' ? 'Your input' : 'Your answer') + '">' +
+        '<button type="submit" class="primary">Check</button></form>';
+      if (st.type === 'counterexample' && st.input_hint) h += '<p class="note">Input: ' + esc(st.input_hint) + '</p>';
+    }
+    if (l.hint && st.hint) h += '<div class="prose lad-hint">' + md(st.hint) + '</div>';
+    var acts = '';
+    if (st.hint && !l.hint) acts += '<button type="button" class="ghost" data-act="lad-hint">Hint</button>';
+    if (st.type !== 'choose') acts += '<button type="button" class="ghost" data-act="lad-show"' + (l.att < 1 ? ' disabled' : '') + '>Show me</button>';
+    return h + '<div id="lad-out" class="code-out" aria-live="polite">' + ladOutHtml() + '</div>' +
+      (acts ? '<div class="code-actions" id="lad-actions">' + acts + '</div>' : '');
+  }
+  function viewLadder(card) {
+    ladSync();
+    var l = PE.ladderOf(card), item = card.item, st = l.fin ? null : item.stages[l.i];
+    var h = '<div class="card"><div class="drill-body lad">' + T.figure(item.figure) + '<div class="prose">' + field(item, 'prompt') + '</div>';
+    for (var i = 0; i < l.i; i++) {
+      h += '<div class="lad-done"><p class="anchor">Stage ' + (i + 1) + ' of ' + item.stages.length + '</p><div class="prose">' + md(item.stages[i].reveal) + '</div></div>';
+    }
+    if (st) h += ladderBody(card, l, st) + '<p class="hint">' + esc(S.hint) + '</p></div></div>';
+    else {
+      var f = l.fin;
+      h += '</div><div class="reveal ' + (f.grade > 0 ? 'ok' : 'bad') + '"><p class="verdict">' + (f.grade === 2 ? 'Clean.' : f.grade === 1 ? 'Got there with help.' : f.shown ? 'Needed the answer shown.' : 'Took several tries.') + '</p>' +
+        '<div class="prose">' + field(item, 'lesson') + '</div><div class="prose">' + field(item, 'solution') + '</div>' +
+        (f.mastered ? '<p class="note">Mastered: ' + esc(techName(card.tech)) + '.</p>' : '') +
+        '<button type="button" class="primary" data-act="continue">Next</button></div></div>';
+    }
+    return h;
+  }
+  // Applies a ladderAttempt / ladderShow result to the page.
+  function ladAfter(card, st, r) {
+    if (r.unparsable) {
+      if (r.error === 'repeat') { render(); return; }
+      if (st.type === 'counterexample') {
+        L.fb = '';
+        L.down = r.error === 'no-runtime';
+        L.msg = r.error === 'timeout' ? 'Timed out after ' + (PY_WALL_MS / 1000) + ' s. Try a smaller input.'
+          : r.error === 'runtime-error' ? 'Error: ' + r.detail
+          : 'Python is not available: ' + String(r.detail || r.error).replace(/[.\s]+$/, '') + '. Check your connection and try again.';
+        paintLad(); return;
+      }
+      S.hint = st.type === 'typed' ? unparsableHint({ detail: r.detail, kind: st.answer.kind }) : 'Pick an option.';
+      render(); return;
+    }
+    S.hint = ''; L.msg = '';
+    if (r.ok) S.draft = '';
+    if (!r.ok) {
+      L.fb = st.type === 'counterexample' ? 'The claim survives this input.' : st.type === 'typed' ? 'Not it.' : '';
+      render(); return;
+    }
+    L.fb = '';
+    if (r.fin && !S.readonly) PE.noteMiss(S.prog, card, { ok: r.fin.grade > 0, answer: r.fin.answer });
+    save(); render();
+  }
+  function ladAnswer(response) {
+    var card = PE.currentCard(S.sess), l = PE.ladderOf(card), st = PE.ladderStage(card);
+    if (l.fin || !st || L.busy) return;
+    if (st.type !== 'counterexample') return ladAfter(card, st, PE.ladderAttempt(S.prog, IX, S.sess, card, response, secondsSince()));
+    var inp = String(response == null ? '' : response);
+    if (!inp.trim()) { S.hint = 'Type an input first.'; render(); return; }
+    S.draft = inp; S.hint = '';
+    var key = ladKey();
+    L.busy = true; L.fb = ''; L.msg = py.ready || py.loadedOnce ? 'Running...' : PY_LOADING;
+    paintLad();
+    pyRun({ entry: 'breaks', tests: [{ args: [inp] }], setup: '', packages: [] }, st.code).then(function (res) {
+      if (ladKey() !== key) return;   // the stage moved on while Python ran
+      L.busy = false; L.msg = '';
+      ladAfter(card, st, PE.ladderAttempt(S.prog, IX, S.sess, card, res, secondsSince()));
+    });
+  }
+  function ladHint() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'ladder' || L.busy) return;
+    if (PE.ladderHint(card)) { save(); render(); }
+  }
+  function ladShow() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'ladder' || L.busy) return;
+    var st = PE.ladderStage(card), l = PE.ladderOf(card);
+    if (!st || l.fin || st.type === 'choose' || l.att < 1) return;
+    ladAfter(card, st, PE.ladderShow(S.prog, IX, S.sess, card, secondsSince()));
   }
 
   // Reveal: a rule under the answer, growing down. Verdict, the answer when wrong, the solution, the facts that are
@@ -385,7 +517,7 @@
     for (i = sess.pos; i < sess.queue.length; i++) {
       c = sess.queue[i];
       if (c.requeued || c.type === 'teach') continue;
-      if (c === cur && (c.type === 'full' ? c.graded : (S.reveal && sess.kind !== 'place'))) continue;
+      if (c === cur && (c.type === 'full' ? c.graded : c.type === 'ladder' ? PE.ladderOf(c).fin : (S.reveal && sess.kind !== 'place'))) continue;
       n++;
     }
     return n;
@@ -411,6 +543,7 @@
         '<button type="button" class="primary" data-act="continue">Start problems</button></article>';
     }
     if (card.type === 'full') return head + viewFull(card);
+    if (card.type === 'ladder') return head + viewLadder(card);
     var body = '<div class="card"><div class="drill-body">' + T.figure(card.item && card.item.figure) + '<div class="prose">' + field(card.item, 'prompt') + '</div>';
     if (sess.kind === 'place') {
       // Placement gives no feedback: the probe is answered and the next one opens.
@@ -555,7 +688,10 @@
   }
   function viewTest() {
     var p = S.prog, ro = S.readonly ? ' disabled' : '', html = '<section class="pv card">';
-    if (p.placedOnce) {
+    var canPlace = PE.placementPlan(IX, p.sessions + 1).some(function (b) { return b.cards.length; });
+    if (!p.placedOnce && !canPlace) {
+      html += '';   // no probes in this pack (ladder-only tiers): no placement offer
+    } else if (p.placedOnce) {
       html += '<div><p class="med">Next: ' + esc(p.pl || 'none') + '</p>' + (S.placeResult ? placeResultHtml(S.placeResult) : '') + '</div>';
     } else {
       html += '<div><p class="med">Not placed yet.</p>' +
@@ -563,13 +699,14 @@
         '<button type="button" class="primary" data-act="place"' + ro + '>Place me</button></div>';
     }
     var lx = PE.examLevel(p, IX);
-    if (lx) {
+    if (lx && PE.examPlayable(p, IX, today())) {
       html += '<div><h3>Level exam</h3><p class="note">' + esc(lx.id + ' · ' + lx.label) + '. 8 micro and 2 full problems. ' +
         'Pass at 70% marks the techniques you got right as known.</p>' +
         '<button type="button" class="primary" data-act="exam"' + ro + '>Start exam</button></div>';
     }
     if (S.placeResult && !p.placedOnce) html += '<div>' + placeResultHtml(S.placeResult) + '</div>';
     if (S.examResult) html += examResultHtml(S.examResult);
+    if (html === '<section class="pv card">') html += '<p class="note">No placement test or level exam for this pack.</p>';
     if (S.readonly) html += '<p class="note">Read-only: nothing is saved.</p>';
     html += '<p class="data-msg">' + esc(S.msg) + '</p></section>';
     return html;
@@ -745,6 +882,7 @@
     }
     updateEcho();
     warmCode();
+    warmLadder();
     markOverflow();
     requestAnimationFrame(markOverflow);
   }
@@ -813,6 +951,7 @@
     if (!S.sess) return;
     if (S.sess.kind === 'place') return answerPlace(response, false);
     if (PE.currentCard(S.sess).type === 'full') return commitFull(response);
+    if (PE.currentCard(S.sess).type === 'ladder') return ladAnswer(response);
     if (S.reveal) return;
     var card = PE.currentCard(S.sess);
     var r = PE.answerCard(S.prog, IX, S.sess, response, secondsSince());
@@ -836,7 +975,7 @@
     var cur = PE.currentCard(S.sess);
     if (!cur) return;
     // double tap on Continue must not skip a card
-    if (cur.type === 'full' ? !cur.graded : (cur.type !== 'teach' && !S.reveal)) return;
+    if (cur.type === 'full' ? !cur.graded : cur.type === 'ladder' ? !PE.ladderOf(cur).fin : (cur.type !== 'teach' && !S.reveal)) return;
     step();
   }
   // Moves to the next card, or ends the session or exam at the last one.
@@ -897,6 +1036,8 @@
     else if (act === 'pause-new') { if (!S.readonly) { PE.setPauseNew(S.prog, !S.prog.pauseNew); save(); } render(); }
     else if (act === 'opt') answer(Number(el.getAttribute('data-i')));
     else if (act === 'run') runCode('run');
+    else if (act === 'lad-hint') ladHint();
+    else if (act === 'lad-show') ladShow();
     else if (act === 'code-skip') skipCode();
     else if (act === 'continue') next();
     else if (act === 'to-progress') { visitProgress(); S.tab = 'progress'; S.msg = ''; S.ask = null; render(); }

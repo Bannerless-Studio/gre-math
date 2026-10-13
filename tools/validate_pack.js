@@ -27,6 +27,74 @@ const CODE_PACKAGES = ['numpy', 'pandas'];
 const PY_KEYWORDS = new Set(['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del',
   'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass',
   'raise', 'return', 'try', 'while', 'with', 'yield']);
+// Numeric and expression answer objects (items and typed ladder stages): field ranges, no options, and the key must
+// pass its own check (DECISIONS 15).
+function checkTypedAnswer(a, w, err) {
+  if (a.kind === 'numeric') {
+    const v = typeof a.value === 'number' ? answer.parseNumber(a.value) : typeof a.value === 'string' ? answer.parseNumber(a.value) : null;
+    if (!v || (typeof a.value === 'string' && !/^\s*[+-]?\d+\s*\/\s*\d+\s*$|^\s*[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?\s*$/.test(a.value))) err(w, 'answer.value must be a number, "p/q", a decimal or a scientific string (1.6e-19)');
+    if (a.tol !== undefined && !(typeof a.tol === 'number' && a.tol >= 0)) err(w, 'answer.tol must be a number >= 0');
+    if (a.rel !== undefined && !(typeof a.rel === 'number' && a.rel >= 0 && a.rel <= 0.1)) err(w, 'answer.rel must be a number from 0 to 0.1 (relative tolerance)');
+    if (a.form !== undefined && !answer.FORMS.includes(a.form)) err(w, 'answer.form must be exact, decimal or fraction');
+  }
+  if (a.kind === 'numeric' && a.options !== undefined) err(w, 'numeric answers take no options');
+  // The key must pass its own check: catches bad expression specs (parse error, undeclared var, zero-width or thin
+  // domain) and numeric keys no typed answer can match (form fraction with a decimal value).
+  if (a.kind === 'numeric' || a.kind === 'expression') {
+    [a.value].concat(a.kind === 'expression' && Array.isArray(a.also) ? a.also : []).forEach((f) => {
+      const r = answer.check(a, typeof f === 'number' ? String(f) : f);
+      if (!r.ok) err(w, `answer ${JSON.stringify(f)} fails its own check (${r.error}${r.detail ? ': ' + r.detail : ''})`);
+    });
+    const pv = a.kind === 'numeric' && typeof a.value === 'string' ? answer.parseNumber(a.value) : null;
+    if (pv && pv.p !== null && (a.form || 'exact') === 'exact' && (a.rel || a.tol)) err(w, 'rel and tol have no effect on an exact rational value; write value as a JSON number or set form decimal');
+  }
+}
+
+// Ladder items (docs/PACK_SCHEMA.md "ladder"). Structural checks; tools/run_ladder_examples.py proves each counterexample's examples.
+const LADDER_STAGE_TYPES = ['choose', 'counterexample', 'typed'];
+function nonEmpty(x) { return typeof x === 'string' && x.trim().length > 0; }
+function checkLadder(it, techById, w, err) {
+  if (it.tier !== 'b') err(w, 'ladder items are tier b');
+  if (!nonEmpty(it.lesson)) err(w, 'ladder lesson is required (Markdown, shown after the last stage)');
+  const st = it.stages;
+  if (!Array.isArray(st) || st.length < 3 || st.length > 7) { err(w, 'ladder stages must be an array of 3 to 7 stages'); return; }
+  const seen = {};
+  st.forEach((s, k) => {
+    const sw = `${w} stages[${k}]`;
+    if (!isObj(s)) { err(sw, 'must be an object'); return; }
+    if (typeof s.id !== 'string' || !ID_RE.test(s.id)) err(sw, 'id must match [a-z0-9][a-z0-9._-]*');
+    else if (seen[s.id]) err(sw, `duplicate stage id ${s.id}`);
+    else seen[s.id] = true;
+    if (s.move !== undefined && !techById[s.move]) err(sw, `move ${s.move} is not a technique`);
+    if (!nonEmpty(s.ask)) err(sw, 'ask is required');
+    if (!nonEmpty(s.reveal)) err(sw, 'reveal is required');
+    if (s.hint !== undefined && !nonEmpty(s.hint)) err(sw, 'hint must be a non-empty string when present');
+    if (!LADDER_STAGE_TYPES.includes(s.type)) { err(sw, `type must be one of ${LADDER_STAGE_TYPES.join(', ')}`); return; }
+    if (s.type === 'choose') {
+      if (!Array.isArray(s.options) || s.options.length < 3 || s.options.length > 4) { err(sw, 'choose stage needs 3 or 4 options'); return; }
+      s.options.forEach((o, j) => {
+        if (!isObj(o) || !nonEmpty(o.text) || typeof o.ok !== 'boolean' || !nonEmpty(o.feedback)) err(sw, `options[${j}] must be {text, ok: true|false, feedback}`);
+      });
+      const nOk = s.options.filter((o) => isObj(o) && o.ok === true).length;
+      if (nOk !== 1) err(sw, `choose stage needs exactly one ok option (has ${nOk})`);
+    } else if (s.type === 'counterexample') {
+      if (!nonEmpty(s.claim)) err(sw, 'counterexample stage needs claim');
+      if (!nonEmpty(s.input_hint)) err(sw, 'counterexample stage needs input_hint (input format and size cap)');
+      if (!nonEmpty(s.code) || !/^def breaks\s*\(\s*inp\b/m.test(s.code)) err(sw, 'counterexample code must define def breaks(inp)');
+      if (!Array.isArray(s.examples) || s.examples.length < 2) err(sw, 'counterexample examples needs at least 2 entries');
+      else {
+        s.examples.forEach((e, j) => { if (!isObj(e) || typeof e.inp !== 'string' || typeof e.breaks !== 'boolean') err(sw, `examples[${j}] must be {inp: string, breaks: true|false}`); });
+        const t = s.examples.filter((e) => isObj(e) && e.breaks === true).length, f = s.examples.filter((e) => isObj(e) && e.breaks === false).length;
+        if (!t || !f) err(sw, 'counterexample examples needs at least one breaks true and one breaks false');
+      }
+    } else {
+      const a = s.answer;
+      if (!isObj(a) || (a.kind !== 'numeric' && a.kind !== 'expression')) { err(sw, 'typed stage answer must be a numeric or expression answer'); return; }
+      checkTypedAnswer(a, sw, err);
+    }
+  });
+}
+
 function checkCodeAnswer(a, it, w, err) {
   if (a.lang !== 'python') err(w, 'code answer.lang must be "python"');
   const entryOk = typeof a.entry === 'string' && /^[A-Za-z_][A-Za-z0-9_]*$/.test(a.entry) && !PY_KEYWORDS.has(a.entry);
@@ -197,13 +265,7 @@ function check(data) {
     const a = it.answer;
     if (!isObj(a)) { err(w, 'answer is required'); return; }
     if (!core.ANSWER_KINDS.includes(a.kind)) { err(w, `answer.kind must be one of ${core.ANSWER_KINDS.join(', ')}`); return; }
-    if (a.kind === 'numeric') {
-      const v = typeof a.value === 'number' ? answer.parseNumber(a.value) : typeof a.value === 'string' ? answer.parseNumber(a.value) : null;
-      if (!v || (typeof a.value === 'string' && !/^\s*[+-]?\d+\s*\/\s*\d+\s*$|^\s*[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?\s*$/.test(a.value))) err(w, 'answer.value must be a number, "p/q", a decimal or a scientific string (1.6e-19)');
-      if (a.tol !== undefined && !(typeof a.tol === 'number' && a.tol >= 0)) err(w, 'answer.tol must be a number >= 0');
-      if (a.rel !== undefined && !(typeof a.rel === 'number' && a.rel >= 0 && a.rel <= 0.1)) err(w, 'answer.rel must be a number from 0 to 0.1 (relative tolerance)');
-      if (a.form !== undefined && !answer.FORMS.includes(a.form)) err(w, 'answer.form must be exact, decimal or fraction');
-    }
+    if (a.kind === 'numeric' || a.kind === 'expression') checkTypedAnswer(a, w, err);
     if (Array.isArray(a.options) || a.kind === 'mcq' || a.kind === 'multi') {
       if (!Array.isArray(a.options) || a.options.length < 2) err(w, 'answer.options needs at least 2 entries');
       else if (a.kind === 'multi') {
@@ -212,18 +274,9 @@ function check(data) {
       }
       else if (!isInt(a.correct) || a.correct < 0 || a.correct >= a.options.length) err(w, 'answer.correct must index answer.options');
     }
-    if (a.kind === 'numeric' && a.options !== undefined) err(w, 'numeric answers take no options');
-    // The key must pass its own check: catches bad expression specs (parse error, undeclared var, zero-width or thin
-    // domain) and numeric keys no typed answer can match (form fraction with a decimal value).
-    if (a.kind === 'numeric' || a.kind === 'expression') {
-      [a.value].concat(a.kind === 'expression' && Array.isArray(a.also) ? a.also : []).forEach((f) => {
-        const r = answer.check(a, typeof f === 'number' ? String(f) : f);
-        if (!r.ok) err(w, `answer ${JSON.stringify(f)} fails its own check (${r.error}${r.detail ? ': ' + r.detail : ''})`);
-      });
-      const pv = a.kind === 'numeric' && typeof a.value === 'string' ? answer.parseNumber(a.value) : null;
-      if (pv && pv.p !== null && (a.form || 'exact') === 'exact' && (a.rel || a.tol)) err(w, 'rel and tol have no effect on an exact rational value; write value as a JSON number or set form decimal');
-    }
     if (a.kind === 'code') checkCodeAnswer(a, it, w, err);
+    if (a.kind === 'ladder') checkLadder(it, techById, w, err);
+    else if (it.stages !== undefined) err(w, 'stages are only for ladder items (answer.kind ladder)');
   });
 
   // M5: tier c (full) items. Commit kind mcq (5 options) or numeric; rubric and pass live at the top level.
@@ -254,8 +307,8 @@ function check(data) {
   techs.forEach((t) => {
     if (!isObj(t) || !techById[t.id]) return;
     const own = items.filter((it) => isObj(it) && Array.isArray(it.tags) && it.tags[0] === t.id);
-    if (own.length && !own.some((it) => it.tier === 'b' && isObj(it.answer) && (it.answer.kind === 'numeric' || it.answer.kind === 'expression' || it.answer.kind === 'code'))) {
-      err(`techniques ${t.id}`, 'has items but no tier b numeric, expression or code item (production gate needs one)');
+    if (own.length && !own.some((it) => it.tier === 'b' && isObj(it.answer) && (it.answer.kind === 'numeric' || it.answer.kind === 'expression' || it.answer.kind === 'code' || (it.answer.kind === 'ladder' && core.ladderProd(it))))) {
+      err(`techniques ${t.id}`, 'has items but no tier b numeric, expression or code item (production gate needs one; a ladder counts when it has a counterexample or typed stage)');
     }
   });
 

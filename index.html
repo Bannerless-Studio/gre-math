@@ -270,6 +270,13 @@ img, table, pre { max-width: 100%; }
 .pvtech .pvt > span:first-child { font-weight: 400; white-space: normal; }
 .mine-h { margin: 8px 0 0; }
 .reveal pre.mine { margin: 4px 0 12px; padding: 10px 12px; overflow-x: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font: .88rem/1.45 ui-monospace, Menlo, Consolas, monospace; white-space: pre; max-height: 40vh; }
+
+/* ladder cards */
+.lad-done { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); }
+.lad-done .anchor { margin-bottom: 4px; }
+.lad-claim { margin-top: 12px; padding: 10px 14px; border-left: 3px solid var(--line); }
+.lad-fb, .lad-hint { margin-top: 12px; font-size: 15px; color: var(--muted); }
+.drill-body.lad { padding-top: 0; }
 </style>
 </head>
 <body>
@@ -285,7 +292,7 @@ img, table, pre { max-width: 100%; }
   <button type="button" role="tab" id="tab-test" data-tab="test" aria-selected="false">Test</button>
   <button type="button" role="tab" id="tab-progress" data-tab="progress" aria-selected="false">Progress</button>
 </nav>
-<script>window.PE_BUILD = '992860057-2102665';</script>
+<script>window.PE_BUILD = '1949887327-2119107';</script>
 <script>window.PE_DATA={"pack":{
   "key": "gre-math",
   "name": "GRE Mathematics Subject Test",
@@ -57070,6 +57077,32 @@ img, table, pre { max-width: 100%; }
     return call + ' -> expected ' + showVal(row.expect) + ', got ' + showVal(row.got);
   }
 
+  // Ladder stage (docs/PACK_SCHEMA.md "ladder"). response: authored option index (choose), typed string (typed), or the
+  // pyharness result of running the stage's `breaks` on the learner's input (counterexample). Same result shape as check.
+  // A counterexample whose runner raised, timed out or is unavailable is no attempt (the message is shown).
+  function checkLadderStage(stage, response) {
+    if (!stage || typeof stage !== 'object') return bad('bad-spec');
+    if (stage.type === 'choose') {
+      var i = toIndex(response), opts = stage.options || [];
+      if (i === null || i >= opts.length) return bad('unparsable', 'option');
+      return { ok: opts[i].ok === true, parsed: i, attempt: true };
+    }
+    if (stage.type === 'typed') return check(stage.answer, response == null ? '' : String(response));
+    if (stage.type === 'counterexample') {
+      var r = response;
+      if (!r || typeof r !== 'object') return bad('no-runtime', 'no runner result');
+      if (r.status === 'timeout') return bad('timeout');
+      if (r.status === 'unavailable') return bad('no-runtime', r.error || 'unavailable');
+      if (r.status === 'error') return bad('runtime-error', r.error || 'error');
+      if (r.status !== 'ok' || !Array.isArray(r.results) || r.results.length !== 1) return bad('no-runtime', 'malformed runner result');
+      var row = r.results[0] || {};
+      if (typeof row.error === 'string') return bad('runtime-error', row.error);
+      if (row.got !== true && row.got !== false) return bad('runtime-error', 'breaks must return True or False');
+      return { ok: row.got === true, parsed: row.got, attempt: true };
+    }
+    return bad('bad-spec', 'stage type');
+  }
+
   // check(spec, typed) -> {ok, parsed, attempt, error?, detail?}
   function check(spec, typed) {
     if (!spec || typeof spec !== 'object') return bad('bad-spec');
@@ -57079,6 +57112,7 @@ img, table, pre { max-width: 100%; }
       case 'mcq': return checkMcq(spec, typed);
       case 'multi': return checkMulti(spec, typed);
       case 'code': return checkCode(spec, typed);
+      case 'ladder': return checkLadderStage(spec.stage, typed);   // spec = {kind:'ladder', stage}
       default: return bad('unsupported-kind', String(spec.kind));
     }
   }
@@ -57088,6 +57122,7 @@ img, table, pre { max-width: 100%; }
     evalExpr: evalExpr,
     check: check,
     checkCode: checkCode,
+    checkLadderStage: checkLadderStage,
     codeEq: codeEq,
     codeFailLine: codeFailLine,
     codeShow: showVal,
@@ -57301,8 +57336,9 @@ img, table, pre { max-width: 100%; }
   var EXAM_FULL = 2;
   var EXAM_PASS = 0.7;
   var EXAM_NEAR_PCT = 5;        // exam offered when the gate is within this many points of opening
-  var ANSWER_KINDS = ['numeric', 'mcq', 'expression', 'multi', 'self', 'code'];
-  var PLAYABLE = ['numeric', 'expression', 'mcq', 'multi', 'code'];   // self is never played (refused for tier c, no tier a/b use)
+  var ANSWER_KINDS = ['numeric', 'mcq', 'expression', 'multi', 'self', 'code', 'ladder'];
+  var PLAYABLE = ['numeric', 'expression', 'mcq', 'multi', 'code', 'ladder'];   // self is never played (refused for tier c, no tier a/b use)
+  var LADDER_MIN = 3;   // stages per ladder item: 3 to 7 (tools/validate_pack.js)
   var PRODUCTION = ['numeric', 'expression', 'code'];         // typed answers: the only kinds that earn the s>=2 credit
   var FULL_MIN_TECHS = 4;       // Full waits until this many techniques have a streak (SPEC 5 stage 4)
   var FULL_NEAR = 0.5;          // rubric below this share of pass is "far below": a right commit then grades 0
@@ -57346,10 +57382,16 @@ img, table, pre { max-width: 100%; }
     var a = item && item.answer;
     if (!a || PLAYABLE.indexOf(a.kind) < 0) return null;
     if (a.kind === 'mcq' || a.kind === 'multi') return Array.isArray(a.options) && a.options.length >= 2 ? a.kind : null;
+    if (a.kind === 'ladder') return item.tier === 'b' && Array.isArray(item.stages) && item.stages.length >= LADDER_MIN ? 'ladder' : null;
     return a.kind;
   }
   // Typed kinds earn the production streak credit (SPEC 2.4); choice kinds do not.
-  function isProduction(type) { return PRODUCTION.indexOf(type) >= 0; }
+  // A ladder is production iff it has a counterexample or typed stage (docs/PACK_SCHEMA.md "ladder").
+  function ladderProd(item) {
+    return !!item && Array.isArray(item.stages) && item.stages.some(function (s) { return s.type === 'counterexample' || s.type === 'typed'; });
+  }
+  function isProduction(type, item) { return type === 'ladder' ? ladderProd(item) : PRODUCTION.indexOf(type) >= 0; }
+  function isProdItem(item) { return isProduction(itemKind(item), item); }
 
   // Full cards keep the answer kind in `kind` (their `type` is 'full'); other cards use `type`.
   function answerText(card) {
@@ -57358,6 +57400,7 @@ img, table, pre { max-width: 100%; }
     if (kind === 'mcq') return String(a.options[a.correct]);
     if (kind === 'multi') return a.correct.map(function (i) { return String(a.options[i]); }).join('; ');
     if (kind === 'code') return 'Reference solution below.';
+    if (kind === 'ladder') return 'See the solution below.';
     return String(a.value);
   }
 
@@ -57372,6 +57415,11 @@ img, table, pre { max-width: 100%; }
     var card = { type: stage === 'full' ? 'full' : kind, stage: stage, id: item.id, tech: item.tags[0], item: item,
       order: order, requeued: false };
     if (stage === 'full') { card.kind = kind; card.budgetSec = budgetFor(ix.cfg, item.difficulty); }
+    if (kind === 'ladder') {   // per-stage option order, seeded like mcq; null for stages without options
+      card.orders = item.stages.map(function (st) {
+        return st.type === 'choose' && Array.isArray(st.options) ? permutation(st.options.length, n + '|' + stage + '|' + item.id + '|' + st.id) : null;
+      });
+    }
     return card;
   }
 
@@ -57539,11 +57587,11 @@ img, table, pre { max-width: 100%; }
   function pickItem(ctx, t, tier, wantProd) {
     var rec0 = ctx.prog.tech[t.id] || { s: 0 };
     var cands = (ctx.ix.itemsByTech[t.id] || []).filter(function (it) {
-      return it.tier === tier && itemKind(it) && !ctx.st.used[it.id];
+      return it.tier === tier && itemKind(it) && !(ctx.noLadder && itemKind(it) === 'ladder') && !ctx.st.used[it.id];
     });
     if (!cands.length) return null;
     function pref(it) {
-      var prod = isProduction(itemKind(it));
+      var prod = isProdItem(it);
       if (wantProd === undefined) return rec0.s >= PRODUCTION_STREAK && prod ? 0 : 1;
       return prod === wantProd ? 0 : 1;
     }
@@ -57566,12 +57614,12 @@ img, table, pre { max-width: 100%; }
     // A typed card is the only kind that earns credit from streak 2 (SPEC 2.4). When the recall pool has no typed
     // item for this technique, the typed card comes from tier b, so Review cannot fill the per-technique cap with
     // cards that never credit.
-    if (counted && wantProd && (!it || !isProduction(itemKind(it)))) {
+    if (counted && wantProd && (!it || !isProdItem(it))) {
       var typed = pickItem(ctx, t, 'b', true);
-      if (typed && isProduction(itemKind(typed))) it = typed;
+      if (typed && isProdItem(typed)) it = typed;
     }
     if (!it) return false;
-    if (counted) { ctx.st.elig += 1; if (isProduction(itemKind(it))) ctx.st.prod += 1; }
+    if (counted) { ctx.st.elig += 1; if (isProdItem(it)) ctx.st.prod += 1; }
     ctx.st.used[it.id] = true;
     ctx.st.perTech[t.id] = (ctx.st.perTech[t.id] || 0) + 1;
     out.push(makeCard(ctx.ix, it, stage, ctx.n));
@@ -57735,8 +57783,8 @@ img, table, pre { max-width: 100%; }
       r.r += 1;
       if (item.tier === 'b') r.wk = 0;   // a right micro clears the weak flag from a failed full problem (SPEC 2.4)
       // a right typed tier b answer at streak >= PRODUCTION_STREAK also sets fp (changed 2026-10-12 after pacing study)
-      if (item.tier === 'b' && isProduction(card.type) && r.s >= PRODUCTION_STREAK) r.fp = 1;
-      var held = r.s >= PRODUCTION_STREAK && !isProduction(card.type);
+      if (item.tier === 'b' && isProduction(card.type, item) && r.s >= PRODUCTION_STREAK) r.fp = 1;
+      var held = r.s >= PRODUCTION_STREAK && !isProduction(card.type, item);
       if (!(card.requeued || sess.credited[primary] || held || r.l >= sess.n || sess.kind === 'exam')) {
         bump(r, ix.cfg.mastered);
         r.l = sess.n;
@@ -57759,6 +57807,7 @@ img, table, pre { max-width: 100%; }
     var card = currentCard(sess);
     if (!card || card.type === 'teach') throw new Error('no answerable card at this position');
     if (card.type === 'full') throw new Error('full problems take fullCommit and fullGrade');
+    if (card.type === 'ladder') throw new Error('ladders take ladderAttempt, ladderHint and ladderShow');
     var g = gradeCard(card, response);
     if (g.unparsable) return { unparsable: true, error: g.error, detail: g.detail, kind: card.type };
     var out = applyAnswer(prog, ix, sess, card, g.ok, seconds);
@@ -57773,6 +57822,76 @@ img, table, pre { max-width: 100%; }
     touchDay(prog, sess.today, card.id);
     return { unparsable: false, ok: g.ok, credited: out.credited, mastered: out.mastered, requeue: out.requeue,
       answer: answerText(card), solution: card.item.solution, chosen: g.chosen, typed: g.typed, error: g.error };
+  }
+
+  // ---- ladder items (docs/PACK_SCHEMA.md "ladder", DECISIONS 17). Stage state lives on the card (card.lad, plain data, so a
+  // resumed session keeps it). Stage grade: 2 clean, 1 one hint or one wrong attempt, 0 two wrong attempts / hint + wrong
+  // attempt / Show me. Item grade = min over stages: 2 credits like a right micro, 1 holds, 0 resets like a miss.
+  function ladderOf(card) {
+    if (!card.lad) card.lad = { i: 0, att: 0, hint: 0, wrong: [], grades: [], shows: 0, fin: null };
+    return card.lad;
+  }
+  function ladderStageGrade(l, shown) { return shown || l.att >= 2 ? 0 : (l.hint || l.att ? 1 : 2); }
+  function ladderStage(card) { return card.item.stages[ladderOf(card).i] || null; }
+  function ladderHint(card) {
+    var l = ladderOf(card), st = ladderStage(card);
+    if (l.fin || !st || !st.hint || l.hint) return null;
+    l.hint = 1;
+    return st.hint;
+  }
+  function ladderStageDone(prog, ix, sess, card, shown, seconds) {
+    var l = ladderOf(card), st = card.item.stages[l.i], g = ladderStageGrade(l, shown);
+    l.grades.push(g);
+    l.i += 1; l.att = 0; l.hint = 0; l.wrong = [];
+    var out = { stage: st.id, grade: g, reveal: st.reveal, done: l.i >= card.item.stages.length };
+    if (out.done) out.fin = ladderFinish(prog, ix, sess, card, seconds);
+    return out;
+  }
+  // response: display index (choose), string (typed), pyharness result (counterexample).
+  // -> {unparsable, error, detail} (nothing counted) | {ok:false, feedback?, att} | {ok:true, ...ladderStageDone}
+  function ladderAttempt(prog, ix, sess, card, response, seconds) {
+    var l = ladderOf(card), st = ladderStage(card);
+    if (l.fin || !st) throw new Error('ladder already finished');
+    var resp = response, orig = null;
+    if (st.type === 'choose') {
+      var di = ANS.toIndex(response), ord = card.orders[l.i];
+      if (di === null || !ord || di >= ord.length) return { unparsable: true, error: 'unparsable' };
+      orig = ord[di];
+      if (l.wrong.indexOf(orig) >= 0) return { unparsable: true, error: 'repeat' };
+      resp = orig;
+    }
+    var c = ANS.checkLadderStage(st, resp);
+    if (!c.attempt) return { unparsable: true, error: c.error, detail: c.detail };
+    if (!c.ok) {
+      l.att += 1;
+      if (orig !== null) l.wrong.push(orig);
+      return { ok: false, att: l.att, chosen: orig, feedback: orig !== null ? st.options[orig].feedback : null, typed: c.parsed };
+    }
+    return Object.assign({ ok: true, att: l.att, chosen: orig, typed: c.parsed }, ladderStageDone(prog, ix, sess, card, false, seconds));
+  }
+  // Show me: counterexample and typed stages, after at least one failed attempt. Stage grade 0.
+  function ladderShow(prog, ix, sess, card, seconds) {
+    var l = ladderOf(card), st = ladderStage(card);
+    if (l.fin || !st || st.type === 'choose' || l.att < 1) throw new Error('show me needs a failed attempt on a counterexample or typed stage');
+    l.shows = (l.shows || 0) + 1;
+    return Object.assign({ ok: true, shown: true }, ladderStageDone(prog, ix, sess, card, true, seconds));
+  }
+  function ladderFinish(prog, ix, sess, card, seconds) {
+    var l = ladderOf(card), item = card.item, g = Math.min.apply(null, l.grades);
+    var out = { credited: false, mastered: false };
+    if (g === 2) out = applyAnswer(prog, ix, sess, card, true, seconds);
+    else if (g === 0) out = applyAnswer(prog, ix, sess, card, false, seconds);   // reset; the retry is not queued, a ladder is long
+    var it = prog.items[item.id] = prog.items[item.id] || defItem({});
+    it.st = l.grades.slice(); it.l = sess.n;
+    if (g !== 1) {   // a hold is not a scored answer: no seconds, no score, no day-log entry
+      if (seconds) it.t = nonneg(seconds);
+      sess.scored += 1;
+      if (g === 2) sess.right += 1; else sess.missed.push(card);
+      touchDay(prog, sess.today, item.id);
+    }
+    l.fin = { ok: g === 2, grade: g, shown: (l.shows || 0) > 0, stages: l.grades.slice(), credited: !!out.credited, mastered: !!out.mastered,
+      lesson: item.lesson, solution: item.solution, answer: answerText(card) };
+    return l.fin;
   }
 
   // ---- full problems (SPEC 2.4, 3.4, 5 stage 4). Commit (timed, correctness record), reveal, rubric self-grade.
@@ -57930,7 +58049,7 @@ img, table, pre { max-width: 100%; }
     var flagged = [], plain = [];
     (ix.techsByLevel[tier] || []).forEach(function (t) {
       var its = (ix.itemsByTech[t.id] || []).filter(function (it) {
-        return it.tier === 'b' && itemKind(it);
+        return it.tier === 'b' && itemKind(it) && itemKind(it) !== 'ladder';   // a probe is one answer
       }).sort(function (a, b) { return (a.difficulty - b.difficulty) || cmp(a.id, b.id); });
       var f = its.filter(function (it) { return it.probe === true; });
       if (f.length) flagged.push(f[0]);
@@ -58062,11 +58181,11 @@ img, table, pre { max-width: 100%; }
   }
   // Mixed set at the level below the gate: EXAM_MICRO micro problems (one per technique first), then EXAM_FULL full
   // problems whose secondary tag is mastered. The session does not consume a session number.
-  function startExam(prog, ix, today) {
+  function startExam(prog, ix, today, dry) {   // dry: build only, to ask whether an exam can be played
     var lv = examLevel(prog, ix);
     if (!lv) return null;
     var n = prog.sessions + 1;
-    var ctx = { prog: prog, ix: ix, today: today, n: n, st: { used: {}, perTech: {}, elig: 0, prod: 0 } };
+    var ctx = { prog: prog, ix: ix, today: today, n: n, noLadder: true, st: { used: {}, perTech: {}, elig: 0, prod: 0 } };
     var techs = (ix.techsByLevel[lv.id] || []).slice().sort(byDue(prog, ix));
     var micro = planStage(ctx, 'exam', 'b', EXAM_MICRO, techs, [], 0);
     var fullCands = [];
@@ -58083,7 +58202,7 @@ img, table, pre { max-width: 100%; }
     var full = fullCands.slice(0, EXAM_FULL).map(function (it) { return makeCard(ix, it, 'full', n); });
     var queue = micro.concat(full);
     if (!queue.length) return null;
-    if (!prog.day || prog.day.d !== today) prog.day = { d: today, n: 0, log: [] };
+    if (!dry && (!prog.day || prog.day.d !== today)) prog.day = { d: today, n: 0, log: [] };
     return { kind: 'exam', level: lv.id, label: lv.label, n: n, today: today, queue: queue, pos: 0,
       credited: {}, lost: {}, requeued: {}, scored: 0, right: 0, missed: [], mastered: [], introduced: [], result: null };
   }
@@ -58198,6 +58317,9 @@ img, table, pre { max-width: 100%; }
     finishSession: finishSession,
     placementPlan: placementPlan, placeProbes: placeProbes, startPlacement: startPlacement,
     placementAnswer: placementAnswer, placementResult: placementResult, applyPlacement: applyPlacement,
+    ladderOf: ladderOf, ladderStage: ladderStage, ladderHint: ladderHint, ladderAttempt: ladderAttempt, ladderShow: ladderShow, ladderStageGrade: ladderStageGrade,
+    isProdItem: isProdItem, ladderProd: ladderProd,
+    examPlayable: function (prog, ix, today) { return !!startExam(prog, ix, today, true); },
     noteMiss: noteMiss, examLevel: examLevel, examOffered: examOffered, startExam: startExam, finishExam: finishExam, setPauseNew: setPauseNew,
     FULL_MIN_TECHS: FULL_MIN_TECHS, FULL_NEAR: FULL_NEAR, FULL_BUDGET: FULL_BUDGET,
     budgetFor: budgetFor, clockFor: clockFor, gradeFullRule: gradeFullRule, planFull: planFull,
@@ -58416,7 +58538,7 @@ img, table, pre { max-width: 100%; }
     }).catch(function (err) { return { status: 'unavailable', error: String(err && err.message || err) }; });
   }
   function codeKey() { var c = S.sess && PE.currentCard(S.sess); return c && c.type === 'code' ? S.sess.pos + '|' + c.id : ''; }
-  function setCodeMsg(msg) { C.msg = msg; paintCode(); }
+  function setCodeMsg(msg) { C.msg = msg; paintCode(); if (L.busy || L.warm) { L.msg = msg; paintLad(); } }
   function resultLine(rep, spec) {
     if (rep.error === 'timeout') return 'Timed out after ' + (PY_WALL_MS / 1000) + ' s. Look for a loop that never ends.';
     if (rep.error === 'runtime-error') return 'Error: ' + rep.detail;
@@ -58499,6 +58621,138 @@ img, table, pre { max-width: 100%; }
       S.codeReport = rep;
       answer(res);
     });
+  }
+
+
+  // ---- ladder cards (DECISIONS 17). Stage state is on the card (PE.ladderOf); L holds only transient UI: the last
+  // message, whether a counterexample is running, and whether Python is down. Counterexample stages run the stage's
+  // `breaks(inp)` on the learner's string through the same Pyodide worker (pyharness entry run, one test).
+  var L = { key: '', busy: false, msg: '', fb: '', down: false, warm: false };
+  function ladKey() {
+    var c = S.sess && PE.currentCard(S.sess);
+    return c && c.type === 'ladder' ? S.sess.pos + '|' + c.id + '|' + PE.ladderOf(c).i : '';
+  }
+  function ladSync() {
+    var k = ladKey();
+    if (L.key !== k) { L.key = k; L.busy = false; L.msg = ''; L.fb = ''; L.down = false; L.warm = false; }
+  }
+  function ladOutHtml() {
+    var h = '';
+    if (L.fb) h += '<p class="bad-line">' + esc(L.fb) + '</p>';
+    if (L.msg) h += '<p class="note">' + esc(L.msg) + '</p>';
+    return h;
+  }
+  function paintLad() {
+    var el = document.getElementById('lad-out');
+    if (!el) return;
+    ladSync();
+    el.innerHTML = ladOutHtml();
+    Array.prototype.forEach.call(document.querySelectorAll('#lad-actions button'), function (b) { b.disabled = L.busy; });
+  }
+  // Starts loading Python when a counterexample stage first shows. Silent once ready.
+  function warmLadder() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'ladder' || PE.ladderOf(card).fin) return;
+    var st = PE.ladderStage(card);
+    if (!st || st.type !== 'counterexample') return;
+    ladSync();
+    if (py.ready || py.loadedOnce) return;
+    var key = L.key;
+    L.warm = true; L.msg = PY_LOADING; paintLad();
+    pyStart().then(function () { if (L.key === key) { L.warm = false; L.msg = ''; L.down = false; paintLad(); } },
+      function (err) { if (L.key === key) { L.warm = false; L.down = true; L.msg = 'Python did not load (' + String(err && err.message || 'offline').replace(/[.\s]+$/, '') + '). Check your connection; it retries when you press Check.'; paintLad(); } });
+  }
+  function ladderBody(card, l, st) {
+    var h = '<p class="anchor">Stage ' + (l.i + 1) + ' of ' + card.item.stages.length + '</p><div class="prose">' + md(st.ask) + '</div>';
+    if (st.type === 'choose') {
+      h += '<div class="opts">' + card.orders[l.i].map(function (orig, i) {
+        var bad = l.wrong.indexOf(orig) >= 0;
+        return '<button type="button" class="opt' + (bad ? ' bad' : '') + '" data-act="opt" data-i="' + i + '"' + (bad ? ' disabled' : '') + '>' + md(st.options[orig].text, true) + '</button>';
+      }).join('') + '</div>';
+      l.wrong.forEach(function (o) { h += '<div class="prose lad-fb">' + md(st.options[o].feedback) + '</div>'; });
+    } else {
+      if (st.type === 'counterexample') h += '<div class="prose lad-claim">' + md(st.claim) + '</div>';
+      var ph = st.type === 'counterexample' ? (st.input_hint || 'your input') : (st.answer.kind === 'expression' ? 'e.g. x^2/2' : 'e.g. 7, 0.5 or 9/2');
+      h += '<form class="typed" id="typed" autocomplete="off"><input id="ans" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="' + esc(ph) + '" aria-label="' + (st.type === 'counterexample' ? 'Your input' : 'Your answer') + '">' +
+        '<button type="submit" class="primary">Check</button></form>';
+      if (st.type === 'counterexample' && st.input_hint) h += '<p class="note">Input: ' + esc(st.input_hint) + '</p>';
+    }
+    if (l.hint && st.hint) h += '<div class="prose lad-hint">' + md(st.hint) + '</div>';
+    var acts = '';
+    if (st.hint && !l.hint) acts += '<button type="button" class="ghost" data-act="lad-hint">Hint</button>';
+    if (st.type !== 'choose') acts += '<button type="button" class="ghost" data-act="lad-show"' + (l.att < 1 ? ' disabled' : '') + '>Show me</button>';
+    return h + '<div id="lad-out" class="code-out" aria-live="polite">' + ladOutHtml() + '</div>' +
+      (acts ? '<div class="code-actions" id="lad-actions">' + acts + '</div>' : '');
+  }
+  function viewLadder(card) {
+    ladSync();
+    var l = PE.ladderOf(card), item = card.item, st = l.fin ? null : item.stages[l.i];
+    var h = '<div class="card"><div class="drill-body lad">' + T.figure(item.figure) + '<div class="prose">' + field(item, 'prompt') + '</div>';
+    for (var i = 0; i < l.i; i++) {
+      h += '<div class="lad-done"><p class="anchor">Stage ' + (i + 1) + ' of ' + item.stages.length + '</p><div class="prose">' + md(item.stages[i].reveal) + '</div></div>';
+    }
+    if (st) h += ladderBody(card, l, st) + '<p class="hint">' + esc(S.hint) + '</p></div></div>';
+    else {
+      var f = l.fin;
+      h += '</div><div class="reveal ' + (f.grade > 0 ? 'ok' : 'bad') + '"><p class="verdict">' + (f.grade === 2 ? 'Clean.' : f.grade === 1 ? 'Got there with help.' : f.shown ? 'Needed the answer shown.' : 'Took several tries.') + '</p>' +
+        '<div class="prose">' + field(item, 'lesson') + '</div><div class="prose">' + field(item, 'solution') + '</div>' +
+        (f.mastered ? '<p class="note">Mastered: ' + esc(techName(card.tech)) + '.</p>' : '') +
+        '<button type="button" class="primary" data-act="continue">Next</button></div></div>';
+    }
+    return h;
+  }
+  // Applies a ladderAttempt / ladderShow result to the page.
+  function ladAfter(card, st, r) {
+    if (r.unparsable) {
+      if (r.error === 'repeat') { render(); return; }
+      if (st.type === 'counterexample') {
+        L.fb = '';
+        L.down = r.error === 'no-runtime';
+        L.msg = r.error === 'timeout' ? 'Timed out after ' + (PY_WALL_MS / 1000) + ' s. Try a smaller input.'
+          : r.error === 'runtime-error' ? 'Error: ' + r.detail
+          : 'Python is not available: ' + String(r.detail || r.error).replace(/[.\s]+$/, '') + '. Check your connection and try again.';
+        paintLad(); return;
+      }
+      S.hint = st.type === 'typed' ? unparsableHint({ detail: r.detail, kind: st.answer.kind }) : 'Pick an option.';
+      render(); return;
+    }
+    S.hint = ''; L.msg = '';
+    if (r.ok) S.draft = '';
+    if (!r.ok) {
+      L.fb = st.type === 'counterexample' ? 'The claim survives this input.' : st.type === 'typed' ? 'Not it.' : '';
+      render(); return;
+    }
+    L.fb = '';
+    if (r.fin && !S.readonly) PE.noteMiss(S.prog, card, { ok: r.fin.grade > 0, answer: r.fin.answer });
+    save(); render();
+  }
+  function ladAnswer(response) {
+    var card = PE.currentCard(S.sess), l = PE.ladderOf(card), st = PE.ladderStage(card);
+    if (l.fin || !st || L.busy) return;
+    if (st.type !== 'counterexample') return ladAfter(card, st, PE.ladderAttempt(S.prog, IX, S.sess, card, response, secondsSince()));
+    var inp = String(response == null ? '' : response);
+    if (!inp.trim()) { S.hint = 'Type an input first.'; render(); return; }
+    S.draft = inp; S.hint = '';
+    var key = ladKey();
+    L.busy = true; L.fb = ''; L.msg = py.ready || py.loadedOnce ? 'Running...' : PY_LOADING;
+    paintLad();
+    pyRun({ entry: 'breaks', tests: [{ args: [inp] }], setup: '', packages: [] }, st.code).then(function (res) {
+      if (ladKey() !== key) return;   // the stage moved on while Python ran
+      L.busy = false; L.msg = '';
+      ladAfter(card, st, PE.ladderAttempt(S.prog, IX, S.sess, card, res, secondsSince()));
+    });
+  }
+  function ladHint() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'ladder' || L.busy) return;
+    if (PE.ladderHint(card)) { save(); render(); }
+  }
+  function ladShow() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'ladder' || L.busy) return;
+    var st = PE.ladderStage(card), l = PE.ladderOf(card);
+    if (!st || l.fin || st.type === 'choose' || l.att < 1) return;
+    ladAfter(card, st, PE.ladderShow(S.prog, IX, S.sess, card, secondsSince()));
   }
 
   // Reveal: a rule under the answer, growing down. Verdict, the answer when wrong, the solution, the facts that are
@@ -58593,7 +58847,7 @@ img, table, pre { max-width: 100%; }
     for (i = sess.pos; i < sess.queue.length; i++) {
       c = sess.queue[i];
       if (c.requeued || c.type === 'teach') continue;
-      if (c === cur && (c.type === 'full' ? c.graded : (S.reveal && sess.kind !== 'place'))) continue;
+      if (c === cur && (c.type === 'full' ? c.graded : c.type === 'ladder' ? PE.ladderOf(c).fin : (S.reveal && sess.kind !== 'place'))) continue;
       n++;
     }
     return n;
@@ -58619,6 +58873,7 @@ img, table, pre { max-width: 100%; }
         '<button type="button" class="primary" data-act="continue">Start problems</button></article>';
     }
     if (card.type === 'full') return head + viewFull(card);
+    if (card.type === 'ladder') return head + viewLadder(card);
     var body = '<div class="card"><div class="drill-body">' + T.figure(card.item && card.item.figure) + '<div class="prose">' + field(card.item, 'prompt') + '</div>';
     if (sess.kind === 'place') {
       // Placement gives no feedback: the probe is answered and the next one opens.
@@ -58763,7 +59018,10 @@ img, table, pre { max-width: 100%; }
   }
   function viewTest() {
     var p = S.prog, ro = S.readonly ? ' disabled' : '', html = '<section class="pv card">';
-    if (p.placedOnce) {
+    var canPlace = PE.placementPlan(IX, p.sessions + 1).some(function (b) { return b.cards.length; });
+    if (!p.placedOnce && !canPlace) {
+      html += '';   // no probes in this pack (ladder-only tiers): no placement offer
+    } else if (p.placedOnce) {
       html += '<div><p class="med">Next: ' + esc(p.pl || 'none') + '</p>' + (S.placeResult ? placeResultHtml(S.placeResult) : '') + '</div>';
     } else {
       html += '<div><p class="med">Not placed yet.</p>' +
@@ -58771,13 +59029,14 @@ img, table, pre { max-width: 100%; }
         '<button type="button" class="primary" data-act="place"' + ro + '>Place me</button></div>';
     }
     var lx = PE.examLevel(p, IX);
-    if (lx) {
+    if (lx && PE.examPlayable(p, IX, today())) {
       html += '<div><h3>Level exam</h3><p class="note">' + esc(lx.id + ' · ' + lx.label) + '. 8 micro and 2 full problems. ' +
         'Pass at 70% marks the techniques you got right as known.</p>' +
         '<button type="button" class="primary" data-act="exam"' + ro + '>Start exam</button></div>';
     }
     if (S.placeResult && !p.placedOnce) html += '<div>' + placeResultHtml(S.placeResult) + '</div>';
     if (S.examResult) html += examResultHtml(S.examResult);
+    if (html === '<section class="pv card">') html += '<p class="note">No placement test or level exam for this pack.</p>';
     if (S.readonly) html += '<p class="note">Read-only: nothing is saved.</p>';
     html += '<p class="data-msg">' + esc(S.msg) + '</p></section>';
     return html;
@@ -58953,6 +59212,7 @@ img, table, pre { max-width: 100%; }
     }
     updateEcho();
     warmCode();
+    warmLadder();
     markOverflow();
     requestAnimationFrame(markOverflow);
   }
@@ -59021,6 +59281,7 @@ img, table, pre { max-width: 100%; }
     if (!S.sess) return;
     if (S.sess.kind === 'place') return answerPlace(response, false);
     if (PE.currentCard(S.sess).type === 'full') return commitFull(response);
+    if (PE.currentCard(S.sess).type === 'ladder') return ladAnswer(response);
     if (S.reveal) return;
     var card = PE.currentCard(S.sess);
     var r = PE.answerCard(S.prog, IX, S.sess, response, secondsSince());
@@ -59044,7 +59305,7 @@ img, table, pre { max-width: 100%; }
     var cur = PE.currentCard(S.sess);
     if (!cur) return;
     // double tap on Continue must not skip a card
-    if (cur.type === 'full' ? !cur.graded : (cur.type !== 'teach' && !S.reveal)) return;
+    if (cur.type === 'full' ? !cur.graded : cur.type === 'ladder' ? !PE.ladderOf(cur).fin : (cur.type !== 'teach' && !S.reveal)) return;
     step();
   }
   // Moves to the next card, or ends the session or exam at the last one.
@@ -59105,6 +59366,8 @@ img, table, pre { max-width: 100%; }
     else if (act === 'pause-new') { if (!S.readonly) { PE.setPauseNew(S.prog, !S.prog.pauseNew); save(); } render(); }
     else if (act === 'opt') answer(Number(el.getAttribute('data-i')));
     else if (act === 'run') runCode('run');
+    else if (act === 'lad-hint') ladHint();
+    else if (act === 'lad-show') ladShow();
     else if (act === 'code-skip') skipCode();
     else if (act === 'continue') next();
     else if (act === 'to-progress') { visitProgress(); S.tab = 'progress'; S.msg = ''; S.ask = null; render(); }
@@ -59210,6 +59473,6 @@ img, table, pre { max-width: 100%; }
 })();
 </script>
 <!--pe-pack:gre-math-->
-<!--pe-build:992860057-2102665-->
+<!--pe-build:1949887327-2119107-->
 </body>
 </html>

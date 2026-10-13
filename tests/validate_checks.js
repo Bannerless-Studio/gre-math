@@ -103,7 +103,7 @@ S.eq('fixture is clean', validate(clone(base)), []);
 }
 {
   const d = clone(base);
-  d.items.filter((i) => i.tags[0] === 't1.lin-eq' && i.tier === 'b').forEach((i) => { i.answer = { kind: 'mcq', options: ['a', 'b'], correct: 0 }; });
+  d.items.filter((i) => i.tags[0] === 't1.lin-eq' && i.tier === 'b').forEach((i) => { i.answer = { kind: 'mcq', options: ['a', 'b'], correct: 0 }; delete i.stages; delete i.lesson; });
   S.check('technique with tier b mcq only (no numeric, expression or code) is an error', hasErr(d, 'no tier b numeric, expression or code'), validate(d));
 }
 {

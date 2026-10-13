@@ -1165,5 +1165,87 @@
       "gen": "hand-authored",
       "ver": "fixture"
     }
+  },
+  {
+    "id": "f038",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 5,
+    "prompt": "Find the least integer $x$ with $2x+3 \\ge 11$. Example: for $2x+3 \\ge 5$ the answer is $1$.",
+    "answer": {
+      "kind": "ladder"
+    },
+    "stages": [
+      {
+        "id": "s1",
+        "move": "t1.lin-eq",
+        "type": "choose",
+        "ask": "Which first move turns the inequality into a plain bound on $x$?",
+        "options": [
+          {
+            "text": "Subtract $3$ from both sides",
+            "ok": true,
+            "feedback": "Right: the constant is the thing in the way."
+          },
+          {
+            "text": "Square both sides",
+            "ok": false,
+            "feedback": "Squaring is not reversible here: $x=-5$ gives $9 \\ge 11$ false, yet $x^2$ is large."
+          },
+          {
+            "text": "Try every integer from $0$ upward",
+            "ok": false,
+            "feedback": "It finds the answer but gives no reason it is least; isolate $x$ first."
+          }
+        ],
+        "hint": "Undo the addition before the multiplication.",
+        "reveal": "Subtract $3$: $2x \\ge 8$."
+      },
+      {
+        "id": "s2",
+        "move": "t1.lin-eq",
+        "type": "counterexample",
+        "ask": "Purpose: see why a tempting rule fails. Break the claim.",
+        "claim": "For every positive integer $n$, $n^2 > n$.",
+        "input_hint": "one positive integer, n up to 1000",
+        "code": "def breaks(inp):\n    s = inp.strip()\n    if not s.isdigit():\n        raise ValueError('type one positive integer')\n    n = int(s)\n    if n < 1 or n > 1000:\n        raise ValueError('n must be from 1 to 1000')\n    return not (n * n > n)\n",
+        "examples": [
+          {
+            "inp": "1",
+            "breaks": true
+          },
+          {
+            "inp": "5",
+            "breaks": false
+          }
+        ],
+        "hint": "Try the smallest value.",
+        "reveal": "At $n=1$, $n^2 = n$: the claim fails on the boundary."
+      },
+      {
+        "id": "s3",
+        "move": "t1.lin-eq",
+        "type": "typed",
+        "ask": "Divide by $2$ and give the least integer $x$.",
+        "answer": {
+          "kind": "numeric",
+          "value": 4
+        },
+        "reveal": "$x \\ge 4$, so the least integer is $4$."
+      }
+    ],
+    "lesson": "Isolate the unknown first; test a rule on its boundary before trusting it.",
+    "solution": "Subtract $3$ and divide by $2$: $x \\ge 4$. The least integer is $4$. Constant time.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
   }
 ]

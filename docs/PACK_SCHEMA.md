@@ -71,7 +71,31 @@ Numeric tolerance is `max(tol, rel * |value|)`, relative to the target and never
 | `expression` | `value` (ASCII, see Answer checker), `vars` (names, required for variables), `domain`, `also`, `points` | Typed input with a live "Read as" line (the parsed form, fully parenthesised) and an inline message on a parse error. A parse error counts no attempt and keeps the input. Playable since M4. |
 | `multi` | `options` (>= 2 Markdown strings), `correct` (non-empty list of distinct indexes into `options`), `shuffle` (default `true`) | Checkboxes and a Check button. Set equality, no partial credit. Playable since M4. |
 | `code` | `lang` (`"python"`), `entry` (identifier), `setup` (optional string), `tests` (>= 3 of `{args: [...], expect: <json>}`), `tol` (0 to 1, optional), `packages` (subset of `numpy`, `pandas`), `starter` (must define `entry`) | Editor with Run tests and Check. Python runs in the page (Pyodide, see SPEC 3.4). `solution` must contain the reference code in a fenced block; `python3 -I tools/run_code_items.py <pack>` proves it against the tests. Typed (production) kind. Not allowed on tier c. Use spaces, not tabs, in `setup` and `starter`. `setup` may import only numpy, pandas and pure stdlib modules (math, statistics, random, collections, itertools, functools, fractions, decimal, re, string, heapq, bisect, operator, dataclasses, typing). Integers in `args`/`expect` stay within 2^53 - 1; a bigger expected int is written `{"__i": "<digits>"}`. With no `tol`, an integer `expect` needs an exact integer result. |
+| `ladder` | none (`{ "kind": "ladder" }`); the content is in the item's `stages`, see Ladder items | Staged discovery walk, tier b only. See Ladder items. |
 | `self` | none | Not used for tier c (see Full items). A `self` item is skipped in planning and warned by the validator. |
+
+## Ladder items (tier b)
+
+A ladder walks a learner from a statement to the technique through 3 to 7 staged interventions and grades the process (how much help was needed), not one final answer. It is a deterministic stand-in for a coaching conversation. `answer` is `{ "kind": "ladder" }`; the item must be tier `b`, `type` `micro`. It is playable and appears wherever a tier b micro item does (Learn, Review), except as a placement probe (`probe` is refused) and in the level exam's micro set. It is a production item (can credit from streak 2) iff at least one stage is `counterexample` or `typed`. The technique rule above ("at least one typed tier b item") is satisfied by such a ladder.
+
+| Item field | Required | Meaning |
+|---|---|---|
+| `prompt` | yes | Markdown: the problem statement with constraints and at least one example (answers verified by brute force by the author). |
+| `stages` | yes | Array of 3 to 7 stages, played in order. |
+| `lesson` | yes | Markdown, teach-card voice (`docs/TEACH_CARDS.md`): the reusable mental move. Shown after the last stage. |
+| `solution` | yes | Markdown: full algorithm, correctness in 2 to 3 sentences, complexity. Shown with the lesson. |
+
+Common stage fields: `id` (unique within the item, `[a-z0-9][a-z0-9._-]*`), `move` (optional technique id, default `tags[0]`; must exist), `type` (`choose`, `counterexample`, `typed`), `ask` (Markdown), `hint` (optional Markdown, once, costs one grade level), `reveal` (Markdown, shown once the stage resolves).
+
+| `type` | Fields | Play |
+|---|---|---|
+| `choose` | `options`: 3 or 4 of `{text, ok, feedback}`, exactly one `ok: true` | Option order is a seeded shuffle per card and stage. A wrong pick shows its `feedback` (Markdown, ideally a concrete counterexample) and is disabled; the learner picks again. |
+| `counterexample` | `claim` (Markdown conjecture), `input_hint` (input format and size cap), `code` (Python defining `def breaks(inp)`: True iff the string `inp` is a valid input violating the claim; invalid or oversized input raises `ValueError` with a short message), `examples`: >= 2 of `{inp, breaks}` with at least one `true` and one `false` | The learner types an input; the page runs `breaks(inp)` in the Pyodide worker (10 s wall). True resolves the stage. False shows "The claim survives this input." and counts one attempt. An exception, timeout or missing runtime shows its message and counts no attempt. `examples` are for author tooling only (`python3 -I tools/run_ladder_examples.py <pack>` runs them against `code` in CPython through `pyharness.py`); they are not shown. |
+| `typed` | `answer`: a `numeric` or `expression` answer object | Checked by the answer checker; an unparsable entry counts no attempt. |
+
+Grading. Stage grade: 2 on the first attempt without a hint; 1 with a hint or exactly one wrong attempt (both together is still 1); 0 after two or more wrong attempts or Show me. Show me exists on `counterexample` and `typed` stages and is enabled after one failed attempt. Item grade is the minimum over stages. Grade 2 credits the primary technique exactly like a right micro (once per session, streak cap, production gate: a ladder without a production stage cannot credit from streak 2). Grade 1 holds: only `items[id].l` and `st` change; it is not scored, not listed as missed. Grade 0 resets like a miss (`resetTech`, secondary `critical` tags, Recent misses, Missed list) without a requeue. Stage grades are stored as `items[id].st` (array, one per stage, additive; unknown fields survive import). A pack whose tier b items are all ladders has no placement test and no level exam.
+
+Build: a pack whose `items.json` contains `"type": "counterexample"` or a `code` answer gets the Python worker and harness inlined.
 
 ## Full items (tier c, M5)
 
@@ -102,7 +126,7 @@ Only tier c items may carry `rubric` or `pass`. The validator enforces each row 
 
 - Credit: a right answer adds one streak to the primary technique, at most once per session per technique. Three credited sessions master it (`mastered`).
 - Miss: streak drops by one (not below 0). Mastery is cleared only when the streak falls below `mastered` (changed 2026-10-12 after pacing study; was streak 0 and mastery cleared at once). The item is requeued once in the same session with no credit. The technique gets no further credit that session.
-- Production gate: from streak 2 a right MCQ or multi holds the streak. Only a typed answer (`numeric`, `expression` or `code`) credits. Planning prefers typed items once a technique reaches streak 2.
+- Production gate: from streak 2 a right MCQ or multi holds the streak. Only a typed answer (`numeric`, `expression`, `code`, or a ladder with a `counterexample` or `typed` stage) credits. Planning prefers typed items once a technique reaches streak 2.
 - Secondary tags: a right answer adds a practice count only. A miss costs one streak step only for tags listed in `critical`.
 - Spacing is by session ordinal. Items seen today are deprioritised but never excluded.
 - Learn picks the first untaught technique whose prerequisites each have a streak of at least 1 or are placed (changed 2026-10-12 after pacing study; was mastered). It is held when the first level with untaught techniques has a previous level below `gate`.
@@ -132,7 +156,7 @@ Stored under `pe_<pack.key>` in localStorage. Backup keys: `pe_<key>_invalid_bac
 |---|---|
 | top level | `v` (1), `sessions`, `theme`, `placedOnce`, `pl` (landing level id, null when the prefix reaches the top), `pauseNew` (M6), `tech`, `items`, `full`, `day`, `pv` |
 | `tech[id]` | `s` streak, `l` last credited session, `r`/`w` counts, `m` mastered flag, `wk` weak flag, `prov`, `fp`, and `in` (session that introduced it; `in > 0` means started) |
-| `items[id]` | `r`/`w` counts, `l` last session seen, `t` last answer seconds |
+| `items[id]` | `r`/`w` counts, `l` last session seen, `t` last answer seconds, `st` stage grades of the last ladder play (ladder items only) |
 | `day` | `d` date, `n` sessions that day, `log` item ids seen that day |
 | `pv` | Progress visit totals (M6): `sn` sessions, `k` known, `m` mastered, `full` full problems. Entering Progress shows the change since these and saves the new totals. |
 

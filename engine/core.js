@@ -30,8 +30,9 @@
   var EXAM_FULL = 2;
   var EXAM_PASS = 0.7;
   var EXAM_NEAR_PCT = 5;        // exam offered when the gate is within this many points of opening
-  var ANSWER_KINDS = ['numeric', 'mcq', 'expression', 'multi', 'self', 'code'];
-  var PLAYABLE = ['numeric', 'expression', 'mcq', 'multi', 'code'];   // self is never played (refused for tier c, no tier a/b use)
+  var ANSWER_KINDS = ['numeric', 'mcq', 'expression', 'multi', 'self', 'code', 'ladder'];
+  var PLAYABLE = ['numeric', 'expression', 'mcq', 'multi', 'code', 'ladder'];   // self is never played (refused for tier c, no tier a/b use)
+  var LADDER_MIN = 3;   // stages per ladder item: 3 to 7 (tools/validate_pack.js)
   var PRODUCTION = ['numeric', 'expression', 'code'];         // typed answers: the only kinds that earn the s>=2 credit
   var FULL_MIN_TECHS = 4;       // Full waits until this many techniques have a streak (SPEC 5 stage 4)
   var FULL_NEAR = 0.5;          // rubric below this share of pass is "far below": a right commit then grades 0
@@ -75,10 +76,16 @@
     var a = item && item.answer;
     if (!a || PLAYABLE.indexOf(a.kind) < 0) return null;
     if (a.kind === 'mcq' || a.kind === 'multi') return Array.isArray(a.options) && a.options.length >= 2 ? a.kind : null;
+    if (a.kind === 'ladder') return item.tier === 'b' && Array.isArray(item.stages) && item.stages.length >= LADDER_MIN ? 'ladder' : null;
     return a.kind;
   }
   // Typed kinds earn the production streak credit (SPEC 2.4); choice kinds do not.
-  function isProduction(type) { return PRODUCTION.indexOf(type) >= 0; }
+  // A ladder is production iff it has a counterexample or typed stage (docs/PACK_SCHEMA.md "ladder").
+  function ladderProd(item) {
+    return !!item && Array.isArray(item.stages) && item.stages.some(function (s) { return s.type === 'counterexample' || s.type === 'typed'; });
+  }
+  function isProduction(type, item) { return type === 'ladder' ? ladderProd(item) : PRODUCTION.indexOf(type) >= 0; }
+  function isProdItem(item) { return isProduction(itemKind(item), item); }
 
   // Full cards keep the answer kind in `kind` (their `type` is 'full'); other cards use `type`.
   function answerText(card) {
@@ -87,6 +94,7 @@
     if (kind === 'mcq') return String(a.options[a.correct]);
     if (kind === 'multi') return a.correct.map(function (i) { return String(a.options[i]); }).join('; ');
     if (kind === 'code') return 'Reference solution below.';
+    if (kind === 'ladder') return 'See the solution below.';
     return String(a.value);
   }
 
@@ -101,6 +109,11 @@
     var card = { type: stage === 'full' ? 'full' : kind, stage: stage, id: item.id, tech: item.tags[0], item: item,
       order: order, requeued: false };
     if (stage === 'full') { card.kind = kind; card.budgetSec = budgetFor(ix.cfg, item.difficulty); }
+    if (kind === 'ladder') {   // per-stage option order, seeded like mcq; null for stages without options
+      card.orders = item.stages.map(function (st) {
+        return st.type === 'choose' && Array.isArray(st.options) ? permutation(st.options.length, n + '|' + stage + '|' + item.id + '|' + st.id) : null;
+      });
+    }
     return card;
   }
 
@@ -268,11 +281,11 @@
   function pickItem(ctx, t, tier, wantProd) {
     var rec0 = ctx.prog.tech[t.id] || { s: 0 };
     var cands = (ctx.ix.itemsByTech[t.id] || []).filter(function (it) {
-      return it.tier === tier && itemKind(it) && !ctx.st.used[it.id];
+      return it.tier === tier && itemKind(it) && !(ctx.noLadder && itemKind(it) === 'ladder') && !ctx.st.used[it.id];
     });
     if (!cands.length) return null;
     function pref(it) {
-      var prod = isProduction(itemKind(it));
+      var prod = isProdItem(it);
       if (wantProd === undefined) return rec0.s >= PRODUCTION_STREAK && prod ? 0 : 1;
       return prod === wantProd ? 0 : 1;
     }
@@ -295,12 +308,12 @@
     // A typed card is the only kind that earns credit from streak 2 (SPEC 2.4). When the recall pool has no typed
     // item for this technique, the typed card comes from tier b, so Review cannot fill the per-technique cap with
     // cards that never credit.
-    if (counted && wantProd && (!it || !isProduction(itemKind(it)))) {
+    if (counted && wantProd && (!it || !isProdItem(it))) {
       var typed = pickItem(ctx, t, 'b', true);
-      if (typed && isProduction(itemKind(typed))) it = typed;
+      if (typed && isProdItem(typed)) it = typed;
     }
     if (!it) return false;
-    if (counted) { ctx.st.elig += 1; if (isProduction(itemKind(it))) ctx.st.prod += 1; }
+    if (counted) { ctx.st.elig += 1; if (isProdItem(it)) ctx.st.prod += 1; }
     ctx.st.used[it.id] = true;
     ctx.st.perTech[t.id] = (ctx.st.perTech[t.id] || 0) + 1;
     out.push(makeCard(ctx.ix, it, stage, ctx.n));
@@ -464,8 +477,8 @@
       r.r += 1;
       if (item.tier === 'b') r.wk = 0;   // a right micro clears the weak flag from a failed full problem (SPEC 2.4)
       // a right typed tier b answer at streak >= PRODUCTION_STREAK also sets fp (changed 2026-10-12 after pacing study)
-      if (item.tier === 'b' && isProduction(card.type) && r.s >= PRODUCTION_STREAK) r.fp = 1;
-      var held = r.s >= PRODUCTION_STREAK && !isProduction(card.type);
+      if (item.tier === 'b' && isProduction(card.type, item) && r.s >= PRODUCTION_STREAK) r.fp = 1;
+      var held = r.s >= PRODUCTION_STREAK && !isProduction(card.type, item);
       if (!(card.requeued || sess.credited[primary] || held || r.l >= sess.n || sess.kind === 'exam')) {
         bump(r, ix.cfg.mastered);
         r.l = sess.n;
@@ -488,6 +501,7 @@
     var card = currentCard(sess);
     if (!card || card.type === 'teach') throw new Error('no answerable card at this position');
     if (card.type === 'full') throw new Error('full problems take fullCommit and fullGrade');
+    if (card.type === 'ladder') throw new Error('ladders take ladderAttempt, ladderHint and ladderShow');
     var g = gradeCard(card, response);
     if (g.unparsable) return { unparsable: true, error: g.error, detail: g.detail, kind: card.type };
     var out = applyAnswer(prog, ix, sess, card, g.ok, seconds);
@@ -502,6 +516,76 @@
     touchDay(prog, sess.today, card.id);
     return { unparsable: false, ok: g.ok, credited: out.credited, mastered: out.mastered, requeue: out.requeue,
       answer: answerText(card), solution: card.item.solution, chosen: g.chosen, typed: g.typed, error: g.error };
+  }
+
+  // ---- ladder items (docs/PACK_SCHEMA.md "ladder", DECISIONS 17). Stage state lives on the card (card.lad, plain data, so a
+  // resumed session keeps it). Stage grade: 2 clean, 1 one hint or one wrong attempt, 0 two wrong attempts / hint + wrong
+  // attempt / Show me. Item grade = min over stages: 2 credits like a right micro, 1 holds, 0 resets like a miss.
+  function ladderOf(card) {
+    if (!card.lad) card.lad = { i: 0, att: 0, hint: 0, wrong: [], grades: [], shows: 0, fin: null };
+    return card.lad;
+  }
+  function ladderStageGrade(l, shown) { return shown || l.att >= 2 ? 0 : (l.hint || l.att ? 1 : 2); }
+  function ladderStage(card) { return card.item.stages[ladderOf(card).i] || null; }
+  function ladderHint(card) {
+    var l = ladderOf(card), st = ladderStage(card);
+    if (l.fin || !st || !st.hint || l.hint) return null;
+    l.hint = 1;
+    return st.hint;
+  }
+  function ladderStageDone(prog, ix, sess, card, shown, seconds) {
+    var l = ladderOf(card), st = card.item.stages[l.i], g = ladderStageGrade(l, shown);
+    l.grades.push(g);
+    l.i += 1; l.att = 0; l.hint = 0; l.wrong = [];
+    var out = { stage: st.id, grade: g, reveal: st.reveal, done: l.i >= card.item.stages.length };
+    if (out.done) out.fin = ladderFinish(prog, ix, sess, card, seconds);
+    return out;
+  }
+  // response: display index (choose), string (typed), pyharness result (counterexample).
+  // -> {unparsable, error, detail} (nothing counted) | {ok:false, feedback?, att} | {ok:true, ...ladderStageDone}
+  function ladderAttempt(prog, ix, sess, card, response, seconds) {
+    var l = ladderOf(card), st = ladderStage(card);
+    if (l.fin || !st) throw new Error('ladder already finished');
+    var resp = response, orig = null;
+    if (st.type === 'choose') {
+      var di = ANS.toIndex(response), ord = card.orders[l.i];
+      if (di === null || !ord || di >= ord.length) return { unparsable: true, error: 'unparsable' };
+      orig = ord[di];
+      if (l.wrong.indexOf(orig) >= 0) return { unparsable: true, error: 'repeat' };
+      resp = orig;
+    }
+    var c = ANS.checkLadderStage(st, resp);
+    if (!c.attempt) return { unparsable: true, error: c.error, detail: c.detail };
+    if (!c.ok) {
+      l.att += 1;
+      if (orig !== null) l.wrong.push(orig);
+      return { ok: false, att: l.att, chosen: orig, feedback: orig !== null ? st.options[orig].feedback : null, typed: c.parsed };
+    }
+    return Object.assign({ ok: true, att: l.att, chosen: orig, typed: c.parsed }, ladderStageDone(prog, ix, sess, card, false, seconds));
+  }
+  // Show me: counterexample and typed stages, after at least one failed attempt. Stage grade 0.
+  function ladderShow(prog, ix, sess, card, seconds) {
+    var l = ladderOf(card), st = ladderStage(card);
+    if (l.fin || !st || st.type === 'choose' || l.att < 1) throw new Error('show me needs a failed attempt on a counterexample or typed stage');
+    l.shows = (l.shows || 0) + 1;
+    return Object.assign({ ok: true, shown: true }, ladderStageDone(prog, ix, sess, card, true, seconds));
+  }
+  function ladderFinish(prog, ix, sess, card, seconds) {
+    var l = ladderOf(card), item = card.item, g = Math.min.apply(null, l.grades);
+    var out = { credited: false, mastered: false };
+    if (g === 2) out = applyAnswer(prog, ix, sess, card, true, seconds);
+    else if (g === 0) out = applyAnswer(prog, ix, sess, card, false, seconds);   // reset; the retry is not queued, a ladder is long
+    var it = prog.items[item.id] = prog.items[item.id] || defItem({});
+    it.st = l.grades.slice(); it.l = sess.n;
+    if (g !== 1) {   // a hold is not a scored answer: no seconds, no score, no day-log entry
+      if (seconds) it.t = nonneg(seconds);
+      sess.scored += 1;
+      if (g === 2) sess.right += 1; else sess.missed.push(card);
+      touchDay(prog, sess.today, item.id);
+    }
+    l.fin = { ok: g === 2, grade: g, shown: (l.shows || 0) > 0, stages: l.grades.slice(), credited: !!out.credited, mastered: !!out.mastered,
+      lesson: item.lesson, solution: item.solution, answer: answerText(card) };
+    return l.fin;
   }
 
   // ---- full problems (SPEC 2.4, 3.4, 5 stage 4). Commit (timed, correctness record), reveal, rubric self-grade.
@@ -659,7 +743,7 @@
     var flagged = [], plain = [];
     (ix.techsByLevel[tier] || []).forEach(function (t) {
       var its = (ix.itemsByTech[t.id] || []).filter(function (it) {
-        return it.tier === 'b' && itemKind(it);
+        return it.tier === 'b' && itemKind(it) && itemKind(it) !== 'ladder';   // a probe is one answer
       }).sort(function (a, b) { return (a.difficulty - b.difficulty) || cmp(a.id, b.id); });
       var f = its.filter(function (it) { return it.probe === true; });
       if (f.length) flagged.push(f[0]);
@@ -791,11 +875,11 @@
   }
   // Mixed set at the level below the gate: EXAM_MICRO micro problems (one per technique first), then EXAM_FULL full
   // problems whose secondary tag is mastered. The session does not consume a session number.
-  function startExam(prog, ix, today) {
+  function startExam(prog, ix, today, dry) {   // dry: build only, to ask whether an exam can be played
     var lv = examLevel(prog, ix);
     if (!lv) return null;
     var n = prog.sessions + 1;
-    var ctx = { prog: prog, ix: ix, today: today, n: n, st: { used: {}, perTech: {}, elig: 0, prod: 0 } };
+    var ctx = { prog: prog, ix: ix, today: today, n: n, noLadder: true, st: { used: {}, perTech: {}, elig: 0, prod: 0 } };
     var techs = (ix.techsByLevel[lv.id] || []).slice().sort(byDue(prog, ix));
     var micro = planStage(ctx, 'exam', 'b', EXAM_MICRO, techs, [], 0);
     var fullCands = [];
@@ -812,7 +896,7 @@
     var full = fullCands.slice(0, EXAM_FULL).map(function (it) { return makeCard(ix, it, 'full', n); });
     var queue = micro.concat(full);
     if (!queue.length) return null;
-    if (!prog.day || prog.day.d !== today) prog.day = { d: today, n: 0, log: [] };
+    if (!dry && (!prog.day || prog.day.d !== today)) prog.day = { d: today, n: 0, log: [] };
     return { kind: 'exam', level: lv.id, label: lv.label, n: n, today: today, queue: queue, pos: 0,
       credited: {}, lost: {}, requeued: {}, scored: 0, right: 0, missed: [], mastered: [], introduced: [], result: null };
   }
@@ -927,6 +1011,9 @@
     finishSession: finishSession,
     placementPlan: placementPlan, placeProbes: placeProbes, startPlacement: startPlacement,
     placementAnswer: placementAnswer, placementResult: placementResult, applyPlacement: applyPlacement,
+    ladderOf: ladderOf, ladderStage: ladderStage, ladderHint: ladderHint, ladderAttempt: ladderAttempt, ladderShow: ladderShow, ladderStageGrade: ladderStageGrade,
+    isProdItem: isProdItem, ladderProd: ladderProd,
+    examPlayable: function (prog, ix, today) { return !!startExam(prog, ix, today, true); },
     noteMiss: noteMiss, examLevel: examLevel, examOffered: examOffered, startExam: startExam, finishExam: finishExam, setPauseNew: setPauseNew,
     FULL_MIN_TECHS: FULL_MIN_TECHS, FULL_NEAR: FULL_NEAR, FULL_BUDGET: FULL_BUDGET,
     budgetFor: budgetFor, clockFor: clockFor, gradeFullRule: gradeFullRule, planFull: planFull,

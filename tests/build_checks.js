@@ -74,7 +74,7 @@ S.check('page inlines the Python worker and harness as text blocks', /<script ty
 {
   const nc = fs.mkdtempSync(path.join(OUT_DIR, 'nocode-'));
   ['pack.json', 'techniques.json'].forEach((f) => fs.copyFileSync(path.join(ROOT, 'packs', '_fixture', f), path.join(nc, f)));
-  const its = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', '_fixture', 'items.json'), 'utf8')).filter((i) => i.answer.kind !== 'code');
+  const its = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', '_fixture', 'items.json'), 'utf8')).filter((i) => i.answer.kind !== 'code' && i.answer.kind !== 'ladder');
   fs.writeFileSync(path.join(nc, 'items.json'), JSON.stringify(its));
   const ncOut = path.join(nc, 'out', 'nocode.html');   // own directory: sw.js is per output directory
   S.check('pack without code items builds', build(nc, ncOut).code === 0);

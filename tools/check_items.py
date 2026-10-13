@@ -208,6 +208,28 @@ def check_multi(item, errors):
         errors.append("multi correct selects every option")
 
 
+def check_ladder(item, errors):
+    """Structure only (tools/validate_pack.js is the full gate; tools/run_ladder_examples.py proves counterexample stages)."""
+    st = item.get("stages")
+    if not isinstance(st, list) or not 3 <= len(st) <= 7:
+        errors.append("ladder needs 3-7 stages")
+        return
+    if not item.get("lesson"):
+        errors.append("ladder lesson missing")
+    pos = re.compile(r"\b(option|choice)\s*[1-5A-E]\b|\b(first|second|third|fourth|last) (option|choice)\b", re.I)
+    for k, s in enumerate(st):
+        t = s.get("type")
+        if t not in ("choose", "counterexample", "typed"):
+            errors.append(f"stage {k}: bad type {t!r}")
+        if t == "choose":
+            opts = s.get("options", [])
+            if sum(1 for o in opts if o.get("ok") is True) != 1:
+                errors.append(f"stage {k}: needs exactly one ok option")
+            for o in opts:
+                if pos.search(str(o.get("text", "")) + str(o.get("feedback", ""))):
+                    errors.append(f"stage {k}: cites an option by position (options are shuffled)")
+
+
 def check_code(item, errors):
     """Structure only. The key itself is proven by tools/run_code_items.py (runs the reference code against the tests)."""
     ans = item["answer"]
@@ -277,6 +299,8 @@ def main():
             check_multi(item, errors)
         elif kind == "code":
             check_code(item, errors)
+        elif kind == "ladder":
+            check_ladder(item, errors)
         else:
             errors.append(f"unsupported answer kind {kind!r} in this batch")
         # Category guards found in T4 review: options are shuffled at play time, so text must never cite a position;
@@ -288,7 +312,7 @@ def main():
         if kind == "expression" and re.search(r"\ban antiderivative\b|\bindefinite integral\b", item.get("prompt", ""), re.I) \
                 and not re.search(r"C\s*=\s*0|constant|tends to|\bF\(|such that", item.get("prompt", ""), re.I):
             errors.append("expression antiderivative prompt must pin the constant of integration")
-        if not item.get("hints") or not isinstance(item.get("hints"), list):
+        if kind != "ladder" and (not item.get("hints") or not isinstance(item.get("hints"), list)):
             errors.append("hints must be a non-empty list")
         if errors:
             failures.append((iid, errors))
