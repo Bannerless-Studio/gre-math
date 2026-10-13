@@ -17,7 +17,7 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 - [x] Opus engine review 2026-10-13: 21 findings (D1–D6 data safety, L1–L6 learning model, A1–A7 checker, S1, V1–V3, T1–T2, Q1) fixed + 8 more from the re-review; tests/opus_review_checks.js (36) wired into the fast tier. Decisions: streak capped at mastered+1 (L4), one step lost per technique per session (L6), exam miss drops the placement flag (J2), 2-slot backup rings (J1). Pacing sim after L4/L6: 95%/90% gates within 10%, 80% gates 22–30% faster.
 - [x] ds-core code pass done 2026-10-13 (see ds-core entry). Follow-up: code items for T1–T4 are not planned (code share 0–10%).
 - [x] Placement result after an early stop listed unreached levels as "0 of 0": hidden in the UI v2 table (2026-10-13).
-- [x] UI v2 port from vocab-engine 2026-10-13 (DECISIONS 16); two Opus browser rounds passed (overflow at 390px fixed, 11 look deviations from vocab zh closed in a second pass). `etaLine(level)` in engine/app.js is the empty hook for M9.
+- [x] UI v2 port from vocab-engine 2026-10-13 (DECISIONS 16), live on all three sites 2026-10-13; three Opus browser rounds passed (overflow at 390px fixed, 11 look deviations from vocab zh closed in a second pass). `etaLine(level)` in engine/app.js is the empty hook for M9.
 - [ ] M9 ETA calibration (needs ~14 real owner sessions); deploy done (Pages)
 - [ ] T10 test mode: timed mixed sets drawn across tiers, 66-question full-length practice, T10 teach cards
 - [ ] Owner spot-check 10% of items (DECISIONS 2): REPORT.md lists each tier's least-sure ids
