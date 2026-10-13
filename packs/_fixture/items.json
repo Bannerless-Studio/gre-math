@@ -971,5 +971,199 @@
       "gen": "hand-authored",
       "ver": "fixture"
     }
+  },
+  {
+    "id": "f035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.lin-eq"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `solve_linear(a, b, c)` that returns the $x$ with $ax+b=c$ (with $a\\ne 0$).",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "solve_linear",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            2,
+            3,
+            11
+          ],
+          "expect": 4
+        },
+        {
+          "args": [
+            4,
+            0,
+            10
+          ],
+          "expect": 2.5
+        },
+        {
+          "args": [
+            -1,
+            5,
+            2
+          ],
+          "expect": 3
+        },
+        {
+          "args": [
+            0.5,
+            1,
+            3
+          ],
+          "expect": 4
+        }
+      ],
+      "starter": "def solve_linear(a, b, c):\n    # return x with a*x + b = c\n    ..."
+    },
+    "solution": "Subtract $b$, then divide by $a$.\n\n```python\ndef solve_linear(a, b, c):\n    return (c - b) / a\n```\n\nThe cost `$` in a code block stays literal: `cost = \"$5\"`.",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T1",
+    "tags": [
+      "t1.quad"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `quad_roots(a, b, c)` that returns the real roots of $ax^2+bx+c=0$ as a list, smallest first. Use numpy.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "quad_roots",
+      "tol": 1e-06,
+      "packages": [
+        "numpy"
+      ],
+      "tests": [
+        {
+          "args": [
+            1,
+            -3,
+            2
+          ],
+          "expect": [
+            1,
+            2
+          ]
+        },
+        {
+          "args": [
+            1,
+            0,
+            -4
+          ],
+          "expect": [
+            -2,
+            2
+          ]
+        },
+        {
+          "args": [
+            2,
+            -4,
+            -6
+          ],
+          "expect": [
+            -1,
+            3
+          ]
+        },
+        {
+          "args": [
+            1,
+            -2,
+            1
+          ],
+          "expect": [
+            1,
+            1
+          ]
+        }
+      ],
+      "starter": "import numpy as np\n\ndef quad_roots(a, b, c):\n    ..."
+    },
+    "solution": "`numpy.roots` takes the coefficients, highest power first. Sort the result.\n\n```python\nimport numpy as np\n\ndef quad_roots(a, b, c):\n    return np.sort(np.roots([a, b, c]).real)\n```",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
+  },
+  {
+    "id": "f037",
+    "tier": "b",
+    "type": "micro",
+    "level": "T2",
+    "tags": [
+      "t2.exp-log"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "The table `DATA` (columns `x`, `y`, `z`, `g`) is already loaded. Write `group_means(col)` that returns a dict of the mean of column `col` for each group in `g`.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "group_means",
+      "tol": 1e-09,
+      "packages": [
+        "pandas"
+      ],
+      "setup": "import pandas as pd\n\nDATA = pd.DataFrame({\n    \"x\": [1, 2, 3, 4, 5, 6],\n    \"y\": [10.0, 20.0, 30.0, 40.0, 50.0, 60.5],\n    \"z\": [1, 1, 1, 2, 2, 2],\n    \"g\": [\"a\", \"b\", \"a\", \"b\", \"a\", \"b\"],\n})",
+      "tests": [
+        {
+          "args": [
+            "x"
+          ],
+          "expect": {
+            "b": 4,
+            "a": 3
+          }
+        },
+        {
+          "args": [
+            "y"
+          ],
+          "expect": {
+            "a": 30,
+            "b": 40.166666666666664
+          }
+        },
+        {
+          "args": [
+            "z"
+          ],
+          "expect": {
+            "a": 1.3333333333333333,
+            "b": 1.6666666666666667
+          }
+        }
+      ],
+      "starter": "def group_means(col):\n    ..."
+    },
+    "solution": "Group by `g`, take the mean of the column, convert to a dict.\n\n```python\ndef group_means(col):\n    return DATA.groupby(\"g\")[col].mean().to_dict()\n```",
+    "hints": [],
+    "source": {
+      "type": "original",
+      "gen": "hand-authored",
+      "ver": "fixture"
+    }
   }
 ]

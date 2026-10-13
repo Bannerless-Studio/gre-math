@@ -359,4 +359,13 @@ okCase('numeric zero target accepts cos(pi/2)', { kind: 'numeric', value: 0, for
 okCase('numeric zero target accepts 0.1+0.2-0.3', { kind: 'numeric', value: 0, form: 'decimal', tol: 0 }, '0.1+0.2-0.3');
 noCase('numeric zero target rejects 0.001', { kind: 'numeric', value: 0, form: 'decimal', tol: 0 }, '0.001');
 
+// Variable spelling aliases: X_1 and X1 are the same declared variable (content audit).
+okCase('alias: declared X1 accepts X_1', ex('X1^2+1', ['X1']), 'X_1^2+1');
+okCase('alias: declared X_1 accepts X1', ex('X_1^2+1', ['X_1']), 'X1^2+1');
+okCase('alias: declared X1 still accepts X1', ex('2*X1', ['X1']), '2X1');
+okCase('alias: case preserved, two vars', ex('x_1+x_2', ['x1', 'x2']), 'x1+x_2');
+check('alias: wrong case is not an alias', isErr('x_1', ['X1']));
+check('alias: different index is not an alias', isErr('X_2', ['X1']));
+check('alias: canon uses the declared spelling', A.canon(A.parseExpr('X_1+1', ['X1']).ast).indexOf('X1') >= 0);
+
 S.done();

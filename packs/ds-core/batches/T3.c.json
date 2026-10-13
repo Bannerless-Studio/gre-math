@@ -1,0 +1,1543 @@
+[
+ {
+  "id": "t3-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Page-load times (ms) for 6 requests: $4,\\,6,\\,6,\\,8,\\,10,\\,26$. Quartiles are medians of the lower and upper halves (3 values each). A point is an outlier if above $Q_3+1.5\\,\\mathrm{IQR}$. Remove outliers, then report the mean of the remaining times in ms.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.8,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Quartiles $Q_1=6$, $Q_3=10$ from the halves",
+    "weight": 2
+   },
+   {
+    "text": "Upper fence $Q_3+1.5\\,\\mathrm{IQR}=16$, so only 26 is flagged",
+    "weight": 1
+   },
+   {
+    "text": "Mean of the five kept values",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Halves are $\\{4,6,6\\}$ and $\\{8,10,26\\}$, so $Q_1=6$, $Q_3=10$ (descriptive).\n$\\mathrm{IQR}=4$; fence $=10+6=16$.\nOnly 26 exceeds 16.\nMean of $4,6,6,8,10$ is $34/5=6.8$ (expectation).",
+  "hints": [
+   "Compute the fence from the quartiles before averaging."
+  ],
+  "check": "sum([4,6,6,8,10])/5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two segments of 50 users each have daily session counts. Segment A: mean 10, sample sd 2. Segment B: mean 20, sample sd 2. Pool all 100 users. Find the sample sd (divisor $n-1$) of the pooled data.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.404823883543405,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Pooled mean 15",
+    "weight": 2
+   },
+   {
+    "text": "Total sum of squares = within (49·4+49·4) + between (50·25+50·25)",
+    "weight": 1
+   },
+   {
+    "text": "Divide by 99 and take the root",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Pooled mean $=15$ (descriptive).\nWithin SS $=49\\cdot4+49\\cdot4=392$.\nBetween SS $=50\\cdot25+50\\cdot25=2500$ (variance decomposition).\nTotal $2892$; $s^2=2892/99=29.21$; $s\\approx5.41$.\nTrap: averaging the two sds gives 2.",
+  "hints": [
+   "Group means differ, so the spread between them counts too."
+  ],
+  "check": "math.sqrt((49*4+49*4+50*(10-15)**2+50*(20-15)**2)/99)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.sampling",
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A survey samples $n=100$ of $N=400$ stores without replacement. Store revenue has population sd $\\sigma=20$. Use $\\mathrm{SE}=\\frac{\\sigma}{\\sqrt n}\\sqrt{\\frac{N-n}{N-1}}$ and a normal approximation for the sample mean. Find the probability (decimal, 0 to 1) that the sample mean exceeds the population mean by more than 3. Use $\\Phi(1.73)=0.9582$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0418254664624691,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "SE with finite population correction ($\\approx1.734$)",
+    "weight": 2
+   },
+   {
+    "text": "$z=3/\\mathrm{SE}\\approx1.73$",
+    "weight": 1
+   },
+   {
+    "text": "Upper tail $1-\\Phi(1.73)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Correction $\\sqrt{300/399}=0.867$ (sampling).\n$\\mathrm{SE}=2\\times0.867=1.734$.\n$z=3/1.734=1.73$ (CLT).\n$P=1-0.9582=0.0418$.\nTrap: without the correction $z=1.5$, $P=0.0668$.",
+  "hints": [
+   "Sampling without replacement shrinks the SE."
+  ],
+  "check": "0.5*math.erfc((3/(20/math.sqrt(100)*math.sqrt(300/399)))/math.sqrt(2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.sampling",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A survey picks 20 clusters (shops) and 11 users per cluster, so 220 users. Within-cluster correlation is $\\rho=0.1$. The design effect is $1+(m-1)\\rho$ with $m$ users per cluster. What is the effective sample size, as if users were independent?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$110$",
+    "$220$",
+    "$104.8$",
+    "$20$",
+    "$440$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored clustering, treated all 220 as independent",
+    "used $1+m\\rho=2.1$ instead of $1+(m-1)\\rho$",
+    "counted clusters only, ignored users within them",
+    "multiplied by the design effect instead of dividing"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Design effect $1+(11-1)(0.1)=2$",
+    "weight": 2
+   },
+   {
+    "text": "Effective $n=n/\\mathrm{deff}$",
+    "weight": 1
+   },
+   {
+    "text": "Reject 220 (independence) and 20 (clusters only)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$m=11$, so $\\mathrm{deff}=1+10(0.1)=2$ (sampling).\nCorrelated users carry less information: $n_{\\mathrm{eff}}=220/2=110$.\nVar of the mean is twice the iid value (variance).",
+  "hints": [
+   "Divide the nominal size by the design effect."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.estimators",
+   "t2.expectation",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Daily revenue has mean $\\mu=10$ and variance $\\sigma^2=25$. From $n=25$ iid days, an analyst uses the shrunk estimator $\\hat\\mu=0.9\\bar X$. Find its mean squared error, $E[(\\hat\\mu-\\mu)^2]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.81,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Bias $=0.9\\mu-\\mu=-1$",
+    "weight": 2
+   },
+   {
+    "text": "Variance $=0.81\\,\\sigma^2/n=0.81$",
+    "weight": 1
+   },
+   {
+    "text": "MSE = bias² + variance",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$E[\\hat\\mu]=9$, bias $=-1$ (estimators).\n$\\mathrm{Var}(\\bar X)=25/25=1$; $\\mathrm{Var}(0.9\\bar X)=0.81$ (variance).\n$\\mathrm{MSE}=1+0.81=1.81$.\nPlain $\\bar X$ has MSE 1, so the shrinkage hurts here.",
+  "hints": [
+   "MSE = bias squared plus variance."
+  ],
+  "check": "(0.9*10-10)**2+0.81*25/25",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.estimators",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "For normal data with $n=5$, the sample variance $S^2$ (divisor $n-1$) is unbiased with $\\mathrm{Var}(S^2)=2\\sigma^4/(n-1)$. Among $cS^2$ with divisor $n-1$, $n$, or $n+1$ (that is $c=1,\\,4/5,\\,4/6$), which has the smallest MSE, and what is it?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "divisor $n+1$, MSE $=\\sigma^4/3$",
+    "divisor $n-1$, MSE $=0.5\\,\\sigma^4$",
+    "divisor $n$, MSE $=0.36\\,\\sigma^4$",
+    "divisor $n+1$, MSE $=\\sigma^4/9$",
+    "divisor $n$, MSE $=0.04\\,\\sigma^4$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "picked unbiased as best; ignored variance reduction",
+    "correct arithmetic for divisor $n$, but it is not the minimum",
+    "bias² only, dropped the variance term",
+    "bias² only for divisor $n$, dropped the variance"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\mathrm{MSE}(cS^2)=(c-1)^2\\sigma^4+c^2\\cdot0.5\\sigma^4$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $c=1,\\,0.8,\\,2/3$: $0.5,\\,0.36,\\,0.333$",
+    "weight": 1
+   },
+   {
+    "text": "Pick the smallest",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Bias is $(c-1)\\sigma^2$, variance $c^2\\cdot2\\sigma^4/4$ (estimators).\n$c=1$: $0.5$. $c=4/5$: $0.04+0.32=0.36$.\n$c=4/6$: $1/9+(4/9)(0.5)=1/3$ (variance).\nBiased divisor $n+1$ wins.",
+  "hints": [
+   "Write MSE as bias squared plus variance for each $c$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.mle",
+   "t1.exp-log",
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Four waiting times (minutes) between support tickets, modelled as exponential with rate $\\lambda$: $1.5,\\ 2.5,\\ 3,\\ 5$. Find the maximum likelihood estimate of $P(T>4)$ (decimal, 0 to 1).",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.26359713811572677,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Log-likelihood $n\\ln\\lambda-\\lambda\\sum t$, so $\\hat\\lambda=n/\\sum t=1/3$",
+    "weight": 2
+   },
+   {
+    "text": "Invariance: plug $\\hat\\lambda$ into $P(T>4)=e^{-4\\lambda}$",
+    "weight": 1
+   },
+   {
+    "text": "Numerical value",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\ell=4\\ln\\lambda-12\\lambda$ (mle, exp-log).\n$\\ell'=4/\\lambda-12=0$, so $\\hat\\lambda=1/3$.\nMLE is invariant: $\\widehat{P}=e^{-4/3}=0.2636$ (cont-dists).",
+  "hints": [
+   "Find the MLE of the rate first, then transform it."
+  ],
+  "check": "math.exp(-4*4/12)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.mle",
+   "t1.exp-log",
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Time to churn is exponential with rate $\\lambda$. Five users are tracked for 10 days. Three churned, at days 2, 4 and 6. Two had not churned by day 10 (censored). Which is the maximum likelihood estimate of $\\lambda$ per day?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3/32\\approx0.094$",
+    "$3/12=0.25$",
+    "$5/32\\approx0.156$",
+    "$3/20=0.15$",
+    "$15/32\\approx0.469$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used only the churners' exposure and dropped the censored time",
+    "counted censored users as events",
+    "used censored exposure only in the denominator",
+    "multiplied instead of dividing"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Likelihood: events contribute $\\lambda e^{-\\lambda t}$, censored $e^{-\\lambda c}$",
+    "weight": 2
+   },
+   {
+    "text": "$\\hat\\lambda=\\text{events}/\\text{total exposure}$",
+    "weight": 1
+   },
+   {
+    "text": "Total exposure $=12+20=32$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$L=\\lambda^3 e^{-\\lambda(2+4+6)}\\,e^{-\\lambda(10+10)}$ (mle).\n$\\ell=3\\ln\\lambda-32\\lambda$ (exp-log).\n$\\ell'=3/\\lambda-32=0$, so $\\hat\\lambda=3/32$.\nCensored users add exposure but no event.",
+  "hints": [
+   "Censored users contribute survival, not density."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ci",
+   "t1.exp-log",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Log revenue per order for $n=36$ orders has sample mean 3.0 and sample sd 0.9. Treat log revenue as normal. Using $t_{35,\\,0.975}=2.030$, find the upper limit of a 95% confidence interval for the median revenue ($e^{\\mu}$), in the original revenue units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 27.234920723506786,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\mathrm{SE}=0.9/6=0.15$",
+    "weight": 2
+   },
+   {
+    "text": "Interval on log scale: $3.0\\pm2.030(0.15)$",
+    "weight": 1
+   },
+   {
+    "text": "Exponentiate the upper end",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\mathrm{SE}=0.15$ (ci).\nUpper log limit $=3+0.3045=3.3045$.\nBack-transform: $e^{3.3045}=27.2$ (exp-log).\nThe median of a lognormal is $e^\\mu$, so the interval maps directly (normal).\nTrap: exponentiating the sd first.",
+  "hints": [
+   "Build the interval on the log scale, then exponentiate."
+  ],
+  "check": "math.exp(3+2.030*0.9/math.sqrt(36))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ci",
+   "t2.normal",
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A 95% interval for mean time-on-page from $n=49$ users is $[4.1,\\,6.3]$ s. A new study keeps the same $\\bar x$ and $s$ but uses $n=196$ and 99% confidence. Use $z_{0.975}=1.96$, $z_{0.995}=2.576$ and ignore the $t$ correction. Which interval results?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$[4.48,\\ 5.92]$",
+    "$[4.65,\\ 5.75]$",
+    "$[4.84,\\ 5.56]$",
+    "$[3.75,\\ 6.65]$",
+    "$[4.78,\\ 5.62]$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "halved for 4× n but forgot the 99% level",
+    "applied the 99% factor correctly but divided by 4 instead of 2 for 4× n",
+    "widened for 99% but ignored the larger n",
+    "inverted the z ratio (1.96/2.576)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Centre 5.2, half-width 1.1",
+    "weight": 2
+   },
+   {
+    "text": "Larger $n$ scales half-width by $\\sqrt{49/196}=1/2$",
+    "weight": 1
+   },
+   {
+    "text": "Higher level multiplies by $2.576/1.96$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Centre $5.2$, half-width $1.1$ (ci).\n$n\\times4$ halves it: $0.55$ (sampling).\n99% level: $\\times2.576/1.96=1.314$ (normal).\n$0.55\\times1.314=0.723$; interval $[4.48,5.92]$.",
+  "hints": [
+   "Half-width scales as $z/\\sqrt n$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis",
+   "t2.bayes",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A team tests many variants. 10% of variants have a real effect. Tests use $\\alpha=0.05$ and have power 0.80 for real effects. Find the probability (decimal, 0 to 1) that a variant is truly null given that its test was significant.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.36,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$P(\\text{sig}\\mid H_0)=0.05$, $P(\\text{sig}\\mid\\text{real})=0.8$",
+    "weight": 2
+   },
+   {
+    "text": "Total $P(\\text{sig})=0.045+0.08$",
+    "weight": 1
+   },
+   {
+    "text": "Bayes: $0.045/0.125$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Null and significant: $0.9\\times0.05=0.045$ (hypothesis).\nReal and significant: $0.1\\times0.8=0.08$.\n$P(H_0\\mid\\text{sig})=0.045/0.125=0.36$ (bayes).\nTrap: reading $\\alpha=0.05$ as the false-discovery rate.",
+  "hints": [
+   "Condition on the test being significant, not on the null."
+  ],
+  "check": "0.9*0.05/(0.9*0.05+0.1*0.8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis",
+   "t2.independence",
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dashboard checks an A/A experiment at 3 pre-planned looks, each at $\\alpha=0.05$ and each stopping on a significant result. Treat the three looks as independent. What is the probability of at least one false positive?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.143$",
+    "$0.05$",
+    "$0.15$",
+    "$0.857$",
+    "$0.0001$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "single-look rate; ignored repeated looks",
+    "sum $3\\times0.05$, ignoring the overlap",
+    "probability of no false positive; forgot the complement",
+    "product $0.05^3$, the chance all three fire"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Complement: $P(\\text{none})=0.95^3$",
+    "weight": 2
+   },
+   {
+    "text": "Independence lets the looks multiply",
+    "weight": 1
+   },
+   {
+    "text": "Subtract from 1",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$P(\\text{no false positive in a look})=0.95$ (hypothesis).\nIndependent: $0.95^3=0.857$ (independence).\nAt least one: $1-0.857=0.143$ (axioms: complement).\nPeeking inflates the Type I error.",
+  "hints": [
+   "Use the complement of no false positive."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests",
+   "t2.variance",
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Checkout time (s): variant A has $n_1=25$, mean 12.4, sample sd 3.0. Variant B has $n_2=36$, mean 11.0, sample sd 4.0. Compute the Welch (unpooled) $t$ statistic for $\\bar x_A-\\bar x_B$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5609177071190492,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Mean difference $1.4$",
+    "weight": 2
+   },
+   {
+    "text": "$\\mathrm{SE}^2=s_1^2/n_1+s_2^2/n_2=0.36+0.444$",
+    "weight": 1
+   },
+   {
+    "text": "$t=1.4/\\mathrm{SE}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Difference $12.4-11.0=1.4$ (t-tests).\n$\\mathrm{Var}$ of each mean: $9/25=0.36$, $16/36=0.444$ (variance).\nIndependent groups add: $\\mathrm{SE}=\\sqrt{0.804}=0.897$ (sampling).\n$t=1.4/0.897=1.56$.",
+  "hints": [
+   "Add the variances of the two means, then take the root."
+  ],
+  "check": "1.4/math.sqrt(3.0**2/25+4.0**2/36)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests",
+   "t2.joint-cov",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Eight users are measured before and after a redesign (same users). Before: sd 5.0. After: sd 5.5. Correlation between the two measurements is $0.8$. Mean change (after minus before) is $2.0$. Which is the paired $t$ statistic?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.69$",
+    "$0.76$",
+    "$0.57$",
+    "$0.60$",
+    "$4.77$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "Welch independent-samples $t$; ignored the pairing",
+    "used $+2\\rho s_1s_2$ in the variance of the difference",
+    "forgot the $\\sqrt n$ in the standard error",
+    "divided by $s_d/n$ instead of $s_d/\\sqrt n$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\mathrm{Var}(d)=s_1^2+s_2^2-2\\rho s_1s_2=11.25$",
+    "weight": 2
+   },
+   {
+    "text": "$s_d=3.354$, $\\mathrm{SE}=s_d/\\sqrt8=1.186$",
+    "weight": 1
+   },
+   {
+    "text": "$t=2/1.186$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\mathrm{Var}(d)=25+30.25-2(0.8)(5)(5.5)=11.25$ (joint-cov).\n$s_d=3.354$; $\\mathrm{SE}=3.354/2.828=1.186$ (variance).\n$t=2/1.186=1.69$ with 7 df (t-tests).\nPositive correlation shrinks the difference's variance.",
+  "hints": [
+   "Work with the sd of the differences."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.proportions",
+   "t3.hypothesis",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A/B test: A converts 200 of 2000 visitors, B converts 240 of 2000. Compute the two-sided pooled two-proportion $z$ statistic for $\\hat p_B-\\hat p_A$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.021336646531404,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Pooled proportion $440/4000=0.11$",
+    "weight": 2
+   },
+   {
+    "text": "$\\mathrm{SE}=\\sqrt{\\hat p(1-\\hat p)(1/n_1+1/n_2)}$",
+    "weight": 1
+   },
+   {
+    "text": "$z=0.02/\\mathrm{SE}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Under $H_0$ both share $\\hat p=0.11$ (hypothesis).\n$\\mathrm{SE}^2=0.11(0.89)(2/2000)=9.79\\times10^{-5}$ (variance).\n$\\mathrm{SE}=0.00989$.\n$z=0.02/0.00989=2.02$ (proportions).",
+  "hints": [
+   "The null variance uses the pooled proportion."
+  ],
+  "check": "(240/2000-200/2000)/math.sqrt((440/4000)*(1-440/4000)*(1/2000+1/2000))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.proportions",
+   "t2.discrete-dists",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "In 50 sessions, 15 had a payment error. Test $H_0:p=0.2$ against $H_1:p>0.2$ using the normal approximation to the binomial with continuity correction. Which $z$ is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.59$",
+    "$1.77$",
+    "$1.39$",
+    "$1.95$",
+    "$0.56$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "no continuity correction",
+    "SE built from $\\hat p=0.3$ instead of $p_0$",
+    "applied the correction in the wrong direction ($15.5$)",
+    "used variance $np(1-p)=8$ as the sd"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Null mean $np_0=10$, sd $\\sqrt{50(0.2)(0.8)}=2.83$",
+    "weight": 2
+   },
+   {
+    "text": "Continuity correction for an upper tail: use $14.5$",
+    "weight": 1
+   },
+   {
+    "text": "$z=4.5/2.83$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Under $H_0$: mean $10$, var $8$ (discrete-dists).\n$P(X\\ge15)\\approx P(Y>14.5)$ (normal).\n$z=(14.5-10)/\\sqrt8=1.59$ (proportions).\nTrap: sd is $\\sqrt8$, not $8$.",
+  "hints": [
+   "Build the null distribution with $p_0$, not $\\hat p$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.chisq",
+   "t2.independence",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Users by platform and purchase. Platform A: 30 bought, 70 did not. Platform B: 50 bought, 50 did not. Compute the chi-square statistic for independence (no continuity correction).",
+  "answer": {
+   "kind": "numeric",
+   "value": 8.333333333333334,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Expected counts under independence: $40$ and $60$ per row",
+    "weight": 2
+   },
+   {
+    "text": "Cell contributions $(O-E)^2/E$",
+    "weight": 1
+   },
+   {
+    "text": "Sum over the four cells",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Totals: 80 bought, 120 not; rows of 100 (independence).\nExpected $E=100\\cdot80/200=40$ bought, $60$ not (conditional).\nEvery cell is off by 10.\n$\\chi^2=2(100/40+100/60)=8.33$ (chisq), df $=1$.",
+  "hints": [
+   "Expected = row total × column total / grand total."
+  ],
+  "check": "2*((30-40)**2/40+(70-60)**2/60)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.chisq",
+   "t2.discrete-dists",
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Daily outage counts over 100 days are grouped into 4 categories (0, 1, 2, 3 or more). A Poisson model is fitted with $\\lambda$ estimated from the same data. The goodness-of-fit statistic is $6.2$. Chi-square 95% critical values: df 1: 3.841, df 2: 5.991, df 3: 7.815, df 4: 9.488. What is the correct decision?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "df $=2$: reject",
+    "df $=3$: do not reject",
+    "df $=4$: do not reject",
+    "df $=1$: reject",
+    "df $=2$: do not reject"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot to subtract the estimated parameter",
+    "used the number of categories as df",
+    "subtracted two parameters",
+    "right df, wrong comparison"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "df $=k-1-p=4-1-1=2$",
+    "weight": 2
+   },
+   {
+    "text": "Critical value $5.991$",
+    "weight": 1
+   },
+   {
+    "text": "Compare $6.2>5.991$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Four cells, one total constraint, one fitted parameter (chisq).\ndf $=4-1-1=2$.\nCritical value $5.991$ (hypothesis).\n$6.2>5.991$: reject the Poisson fit (discrete-dists).",
+  "hints": [
+   "Each estimated parameter costs one df."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.multiple",
+   "t1.inequalities",
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Five feature tests give p-values $0.049,\\ 0.001,\\ 0.041,\\ 0.030,\\ 0.035$. Apply Benjamini-Hochberg at $q=0.05$ (step-up: find the largest rank $i$ with $p_{(i)}\\le iq/m$, reject all up to it). How many tests are rejected?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Sort: $0.001,0.030,0.035,0.041,0.049$",
+    "weight": 2
+   },
+   {
+    "text": "Thresholds $iq/m=0.01,\\dots,0.05$",
+    "weight": 1
+   },
+   {
+    "text": "Largest passing rank is 5, so reject all",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Sorted p-values and thresholds $0.01,0.02,0.03,0.04,0.05$ (multiple).\nRank 5: $0.049\\le0.05$ passes (inequalities).\nStep-up rejects every rank up to 5, including rank 3 and 4 that fail their own threshold (sets).\nResult: 5 rejections.\nTrap: checking each rank alone gives 1 rejection.",
+  "hints": [
+   "Find the largest rank that passes, not the first that fails."
+  ],
+  "check": "5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.multiple",
+   "t2.independence",
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A team runs 40 independent A/B tests, each on a variant with no true effect, each at $\\alpha=0.05$. What is the probability of at least one false positive?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.87$",
+    "$2.0$",
+    "$0.05$",
+    "$0.13$",
+    "$0.95$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "expected number of false positives, not a probability",
+    "single-test rate",
+    "probability of none, not at least one",
+    "unadjusted 0.95 reading of 'confidence'"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$P(\\text{none})=0.95^{40}$",
+    "weight": 2
+   },
+   {
+    "text": "Independence: tests multiply",
+    "weight": 1
+   },
+   {
+    "text": "Complement $1-0.95^{40}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Each null test stays quiet with prob $0.95$ (multiple).\nAll 40 quiet: $0.95^{40}=0.1285$ (independence).\nAt least one: $1-0.1285=0.87$ (discrete-dists: binomial).\nExpected count is 2, which is not a probability.",
+  "hints": [
+   "Use the complement of all 40 tests being quiet."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.power",
+   "t3.hypothesis",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Plan a two-group test of mean session time. Outcome sd $\\sigma=5$ in both groups; the smallest difference worth detecting is $\\delta=2$. Two-sided $\\alpha=0.05$ ($z_{0.975}=1.960$) and power 0.80 ($z_{0.80}=0.842$). Use $n=2\\sigma^2(z_{1-\\alpha/2}+z_{1-\\beta})^2/\\delta^2$ per group. Round up to the next integer. Give the per-group sample size.",
+  "answer": {
+   "kind": "numeric",
+   "value": 99,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Plug $\\sigma,\\delta$ into the formula",
+    "weight": 2
+   },
+   {
+    "text": "$(1.960+0.842)^2=7.851$",
+    "weight": 1
+   },
+   {
+    "text": "Round up, not to nearest",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$n=2(25)(2.802)^2/4$ (power).\n$=50\\times7.851/4=98.1$ (normal).\nSample sizes round up: $99$ per group.\nTrap: rounding to 98 leaves power just below 0.80.",
+  "hints": [
+   "Round sample sizes up."
+  ],
+  "check": "math.ceil(2*5**2*(1.960+0.842)**2/2**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.power",
+   "t3.hypothesis",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "One-sided z-test of $H_0:\\mu=0$ vs $H_1:\\mu>0$, $\\sigma=10$, $n=25$, $\\alpha=0.05$ ($z_{0.95}=1.645$). True mean is 4. Interpolate with $\\Phi(0.35)=0.6368$, $\\Phi(0.36)=0.6406$. What is the power?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.639$",
+    "$0.361$",
+    "$0.107$",
+    "$0.516$",
+    "$0.977$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "Type II error rate, not power",
+    "used $\\sigma=10$ instead of $\\mathrm{SE}=2$ for the cutoff",
+    "used the two-sided cutoff 1.96",
+    "dropped the cutoff; probability that $z<2$ under the alternative"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\mathrm{SE}=10/5=2$; reject if $\\bar x>3.29$",
+    "weight": 2
+   },
+   {
+    "text": "Under $\\mu=4$: $z=(3.29-4)/2=-0.355$",
+    "weight": 1
+   },
+   {
+    "text": "Power $=\\Phi(0.355)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\mathrm{SE}=2$; cutoff $=1.645\\times2=3.29$ (hypothesis).\nUnder the alternative $\\bar X\\sim N(4,2^2)$ (normal).\n$P(\\bar X>3.29)=P(Z>-0.355)=\\Phi(0.355)\\approx0.639$ (power).",
+  "hints": [
+   "Find the rejection cutoff on the $\\bar x$ scale first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design",
+   "t3.chisq",
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An A/B test was planned as a 50/50 split of 10,000 users. It logged 5,300 in A and 4,700 in B. Compute the chi-square statistic for a sample-ratio-mismatch check against the planned split.",
+  "answer": {
+   "kind": "numeric",
+   "value": 36.0,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Expected 5,000 per arm",
+    "weight": 2
+   },
+   {
+    "text": "Each cell: $300^2/5000=18$",
+    "weight": 1
+   },
+   {
+    "text": "Sum: 36 (1 df), a severe mismatch",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Planned split gives 5,000 per arm (ab-design).\nEach deviation is 300: $90000/5000=18$ (chisq).\n$\\chi^2=18+18=36$, 1 df.\nCritical 3.84 at 5%; $p\\ll0.001$, so the assignment is broken (hypothesis). Do not read the metric.",
+  "hints": [
+   "Compare observed with planned counts."
+  ],
+  "check": "(5300-5000)**2/5000+(4700-5000)**2/5000",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design",
+   "t3.power",
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "An experiment needs 10,000 users per arm to detect a lift. A pre-experiment covariate has correlation $\\rho=0.6$ with the metric. Adjusting for it (CUPED) multiplies the metric variance by $1-\\rho^2$. About how many users per arm are needed now, for the same power?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6{,}400$",
+    "$3{,}600$",
+    "$4{,}000$",
+    "$8{,}000$",
+    "$10{,}000$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $\\rho^2$ instead of $1-\\rho^2$",
+    "used $1-\\rho$",
+    "used the sd factor $\\sqrt{1-\\rho^2}$ on $n$",
+    "assumed adjustment cannot change the required $n$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Variance factor $1-\\rho^2=0.64$",
+    "weight": 2
+   },
+   {
+    "text": "Required $n$ is proportional to variance",
+    "weight": 1
+   },
+   {
+    "text": "$10{,}000\\times0.64$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Residual variance factor $1-0.36=0.64$ (joint-cov).\n$n\\propto\\sigma^2$ at fixed effect and power (power).\n$n=6{,}400$ (ab-design).\nA randomised covariate adds precision without bias.",
+  "hints": [
+   "Sample size scales with variance."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap",
+   "t2.variance",
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A tiny sample has 3 values: $2,\\ 4,\\ 9$. A nonparametric bootstrap resamples 3 values with replacement from them. Find the exact standard deviation of the bootstrap mean, taking the empirical distribution (each value prob $1/3$) as the population.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.699673171197595,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Sample mean 5; empirical variance with divisor $n$: $26/3$",
+    "weight": 2
+   },
+   {
+    "text": "Variance of a mean of 3 draws: $(26/3)/3$",
+    "weight": 1
+   },
+   {
+    "text": "Take the root",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Mean $=5$; deviations $-3,-1,4$; SS $=26$ (bootstrap).\nEmpirical variance (divisor $n$) $=26/3=8.67$ (variance).\nMean of 3 iid draws: $8.67/3=2.89$ (sampling).\nSD $=1.70$.\nTrap: divisor $n-1$ gives 2.08.",
+  "hints": [
+   "The resampling population is the three values themselves."
+  ],
+  "check": "math.sqrt((((2-5)**2+(4-5)**2+(9-5)**2)/3)/3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap",
+   "t2.discrete-dists",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A bootstrap resample draws $n=10$ observations with replacement from a sample of 10. Which is the expected fraction of the original observations that appear at least once?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.651$",
+    "$0.349$",
+    "$0.632$",
+    "$0.9$",
+    "$0.5$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "probability a given observation is missed",
+    "large-$n$ limit $1-1/e$ applied to $n=10$",
+    "probability a single draw is not that observation",
+    "guess of half"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$P(\\text{missed})=0.9^{10}$",
+    "weight": 2
+   },
+   {
+    "text": "$0.9^{10}=0.349$",
+    "weight": 1
+   },
+   {
+    "text": "Appearing: $1-0.349$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Each draw misses a given point w.p. $0.9$ (discrete-dists).\nMissed in all 10: $0.9^{10}=0.3487$ (bootstrap).\nAppears: $1-0.3487=0.651$.\nAs $n\\to\\infty$, $(1-1/n)^n\\to e^{-1}$ gives $0.632$ (exp-log), not exact at $n=10$.",
+  "hints": [
+   "Find the chance a given point is never drawn."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple",
+   "t2.variance",
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Five weeks of ad spend $x$ (k$) and signups $y$:\n\n| x | 1 | 2 | 3 | 4 | 5 |\n|---|---|---|---|---|---|\n| y | 3 | 5 | 4 | 8 | 10 |\n\nFit $y=a+bx$ by least squares. Find the residual standard error $\\sqrt{\\mathrm{SSE}/(n-2)}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.3038404810405295,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$b=S_{xy}/S_{xx}=17/10$, $a=6-1.7(3)=0.9$",
+    "weight": 2
+   },
+   {
+    "text": "Residuals $0.4,0.7,-2,0.3,0.6$",
+    "weight": 1
+   },
+   {
+    "text": "$\\mathrm{SSE}=5.1$; divide by $n-2=3$, root",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\bar x=3$, $\\bar y=6$; $S_{xy}=17$, $S_{xx}=10$ (ols-simple).\n$b=1.7$, $a=0.9$.\nResiduals $0.4,\\ 0.7,\\ -2,\\ 0.3,\\ 0.6$ sum to 0.\n$\\mathrm{SSE}=0.16+0.49+4+0.09+0.36=5.1$ (sigma).\n$s=\\sqrt{5.1/3}=1.30$ (variance).",
+  "hints": [
+   "Fit the line, list residuals, then divide SSE by $n-2$."
+  ],
+  "check": "math.sqrt(sum([([3,5,4,8,10][i]-(6-1.7*3+1.7*[1,2,3,4,5][i]))**2 for i in range(5)])/3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple",
+   "t2.joint-cov",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Over many weeks, ad spend $x$ has sd 2 and signups $y$ has sd 5, with correlation $r=0.6$. By how much does the least-squares prediction of $y$ exceed $\\bar y$ when $x$ is 4 units above $\\bar x$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$10$",
+    "$0.96$",
+    "$3$",
+    "$2.4$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored $r$: treated 2 sd of $x$ as 2 sd of $y$",
+    "used the reversed slope $r\\,s_x/s_y=0.24$",
+    "moved one sd instead of two",
+    "used $r\\times4$, forgot the sd ratio"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Slope $b=r\\,s_y/s_x=1.5$",
+    "weight": 2
+   },
+   {
+    "text": "Change in $x$ is 4",
+    "weight": 1
+   },
+   {
+    "text": "Prediction shift $=1.5\\times4=6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$b=r\\,s_y/s_x=0.6\\times5/2=1.5$ (ols-simple, joint-cov).\n$\\Delta\\hat y=b\\,\\Delta x=1.5\\times4=6$.\nCheck: 2 sd of $x$ moves $\\hat y$ by $r\\cdot2=1.2$ sd of $y$, $=6$ (variance).",
+  "hints": [
+   "Slope is $r\\,s_y/s_x$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi",
+   "t3.hypothesis",
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A regression of weekly revenue on $k=3$ predictors uses $n=30$ weeks and has $R^2=0.60$. Compute the overall $F$ statistic for $H_0$: all slopes are zero, using $F=\\dfrac{R^2/k}{(1-R^2)/(n-k-1)}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 13.0,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Numerator $R^2/k=0.2$",
+    "weight": 2
+   },
+   {
+    "text": "Denominator df $=n-k-1=26$",
+    "weight": 1
+   },
+   {
+    "text": "Denominator $0.4/26$, ratio",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Explained share per predictor: $0.6/3=0.2$ (ols-multi).\nResidual per df: $0.4/26=0.01538$.\n$F=0.2/0.01538=13.0$ (hypothesis), with 3 and 26 df.\nTrap: using $n-k$ gives 14.5.",
+  "hints": [
+   "Residual df is $n-k-1$ with an intercept."
+  ],
+  "check": "(0.60/3)/((1-0.60)/(30-3-1))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t3-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi",
+   "t3.ols-simple",
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "True model: $y=2x_1+3x_2+\\varepsilon$ ($x_1$ ad spend, $x_2$ email volume). Emails grow with ads: the regression of $x_2$ on $x_1$ has slope $0.5$. An analyst omits $x_2$ and regresses $y$ on $x_1$ alone, with a large sample. What slope does the analyst expect to find?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$3.5$",
+    "$2.0$",
+    "$3.0$",
+    "$0.5$",
+    "$5.0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed omission causes no bias",
+    "used the omitted variable's coefficient",
+    "used the auxiliary slope only",
+    "added the coefficients, ignoring the 0.5"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Omitted-variable bias = $\\beta_2\\times\\delta$",
+    "weight": 2
+   },
+   {
+    "text": "$\\delta=0.5$ (slope of $x_2$ on $x_1$)",
+    "weight": 1
+   },
+   {
+    "text": "$2+3(0.5)=3.5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$y=2x_1+3x_2+\\varepsilon$ and $x_2\\approx0.5x_1$ (ols-multi).\nSubstitute: $y\\approx(2+3\\cdot0.5)x_1=3.5x_1$ (joint-cov).\nSimple slope $=\\beta_1+\\beta_2\\delta=3.5$ (ols-simple).\nThe slope absorbs the omitted variable's effect.",
+  "hints": [
+   "Substitute the dependence of $x_2$ on $x_1$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

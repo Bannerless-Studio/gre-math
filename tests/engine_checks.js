@@ -122,7 +122,7 @@ const plan0 = core.buildPlan(prog, ix, '2026-10-12');
 eq('fresh learn is first untaught tech', plan0.learn.tech.id, 't1.lin-eq');
 eq('fresh review empty', plan0.review.count, 0);
 eq('fresh micro empty', plan0.micro.count, 0);
-eq('learn block is teach then the tier b micro items by difficulty', plan0.cards.map((c) => c.type), ['teach', 'numeric', 'numeric', 'mcq']);
+eq('learn block is teach then the tier b micro items by difficulty', plan0.cards.map((c) => c.type), ['teach', 'numeric', 'code', 'numeric', 'mcq']);   // f035 is a tier b code item on t1.lin-eq
 check('plan does not consume an ordinal', prog.sessions === 0);
 const sess0 = core.startSession(prog, ix, '2026-10-12');
 eq('start consumes ordinal', prog.sessions, 1);

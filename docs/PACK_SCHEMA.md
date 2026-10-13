@@ -49,7 +49,7 @@ Array of item objects.
 | `level` | yes | none | Must equal the level of `tags[0]`. |
 | `tags` | yes | none | Non-empty. Each must be a technique id. `tags[0]` is the primary technique and the only one that gets streak credit. |
 | `critical` | no | `[]` | Secondary tags that also reset on a miss. Each must be in `tags[1:]`. |
-| `probe` | no | `false` | M6 placement probe. `true` only on a tier b item with a playable answer kind (numeric, mcq, expression, multi). Placement uses one flagged item per technique, up to five per tier. A tier with no flagged item falls back to each technique's first tier b item.
+| `probe` | no | `false` | M6 placement probe. `true` only on a tier b item with a playable answer kind (numeric, mcq, expression, multi, code). Placement uses one flagged item per technique, up to five per tier. A tier with no flagged item falls back to each technique's first tier b item.
 | `difficulty` | yes | none | Integer 1 to 5. Orders Learn micro problems (easiest first). |
 | `prompt` | yes | none | Markdown, non-empty. |
 | `solution` | yes | none | Markdown, non-empty. Shown after every answer. Mandatory for tier c. |
@@ -70,6 +70,7 @@ Numeric tolerance is `max(tol, rel * |value|)`, relative to the target and never
 | `mcq` | `options` (>= 2 Markdown strings), `correct` (index into `options`), `shuffle` (default `true`) | Shown as buttons. Display order is a seeded shuffle, fixed per card. |
 | `expression` | `value` (ASCII, see Answer checker), `vars` (names, required for variables), `domain`, `also`, `points` | Typed input with a live "Read as" line (the parsed form, fully parenthesised) and an inline message on a parse error. A parse error counts no attempt and keeps the input. Playable since M4. |
 | `multi` | `options` (>= 2 Markdown strings), `correct` (non-empty list of distinct indexes into `options`), `shuffle` (default `true`) | Checkboxes and a Check button. Set equality, no partial credit. Playable since M4. |
+| `code` | `lang` (`"python"`), `entry` (identifier), `setup` (optional string), `tests` (>= 3 of `{args: [...], expect: <json>}`), `tol` (0 to 1, optional), `packages` (subset of `numpy`, `pandas`), `starter` (must define `entry`) | Editor with Run tests and Check. Python runs in the page (Pyodide, see SPEC 3.4). `solution` must contain the reference code in a fenced block; `python3 -I tools/run_code_items.py <pack>` proves it against the tests. Typed (production) kind. Not allowed on tier c. Use spaces, not tabs, in `setup` and `starter`. `setup` may import only numpy, pandas and pure stdlib modules (math, statistics, random, collections, itertools, functools, fractions, decimal, re, string, heapq, bisect, operator, dataclasses, typing). Integers in `args`/`expect` stay within 2^53 - 1; a bigger expected int is written `{"__i": "<digits>"}`. With no `tol`, an integer `expect` needs an exact integer result. |
 | `self` | none | Not used for tier c (see Full items). A `self` item is skipped in planning and warned by the validator. |
 
 ## Full items (tier c, M5)
@@ -101,7 +102,7 @@ Only tier c items may carry `rubric` or `pass`. The validator enforces each row 
 
 - Credit: a right answer adds one streak to the primary technique, at most once per session per technique. Three credited sessions master it (`mastered`).
 - Miss: streak drops by one (not below 0). Mastery is cleared only when the streak falls below `mastered` (changed 2026-10-12 after pacing study; was streak 0 and mastery cleared at once). The item is requeued once in the same session with no credit. The technique gets no further credit that session.
-- Production gate: from streak 2 a right MCQ or multi holds the streak. Only a typed answer (`numeric` or `expression`) credits. Planning prefers typed items once a technique reaches streak 2.
+- Production gate: from streak 2 a right MCQ or multi holds the streak. Only a typed answer (`numeric`, `expression` or `code`) credits. Planning prefers typed items once a technique reaches streak 2.
 - Secondary tags: a right answer adds a practice count only. A miss costs one streak step only for tags listed in `critical`.
 - Spacing is by session ordinal. Items seen today are deprioritised but never excluded.
 - Learn picks the first untaught technique whose prerequisites each have a streak of at least 1 or are placed (changed 2026-10-12 after pacing study; was mastered). It is held when the first level with untaught techniques has a previous level below `gate`.
@@ -111,7 +112,7 @@ Only tier c items may carry `rubric` or `pass`. The validator enforces each row 
 - Learn cap (M6): see `session.learn`. `pauseNew` (top-level, set on Today) stops Learn only.
 - Work in progress: placement-provisional techniques are not counted toward the work-in-progress cap.
 - Placement (M6, SPEC 6): one bucket per tier, five probes each. Stop after three buckets in a row with no right answer, or two in a row under 0.7. The placed prefix is the largest run of buckets that reaches 0.7 in total and has a right answer in each, except an isolated empty bucket. Placed techniques get `s` 1 and `prov` 1 when they have no streak and no answers. `prov` drops at the first miss on the technique and at mastery. A retake only applies when it lands higher.
-- Level exam (M6): offered when the gate is held and the level below is within 5 points of it. Eight micro and two full problems at that level. Seven right or more sets `fp` on each technique answered right. Exam answers do not requeue and do not take a session number.
+- Level exam (M6): offered when the gate is held and the level below is within 5 points of it or one technique short of it. Eight micro and two full problems at that level. Seven right or more sets `fp` on each technique answered right. Exam answers do not requeue and do not take a session number.
 
 Full stage (M5, SPEC 5 stage 4):
 
@@ -125,7 +126,7 @@ Full stage (M5, SPEC 5 stage 4):
 
 ## Progress record (format version 1)
 
-Stored under `pe_<pack.key>` in localStorage. Backup keys: `pe_<key>_invalid_backup`, `pe_<key>_pre_import_backup`, `pe_<key>_reset_backup`.
+Stored under `pe_<pack.key>` in localStorage. Backup keys: `pe_<key>_invalid_backup`, `pe_<key>_pre_import_backup`, `pe_<key>_reset_backup`. The last two are 2-slot rings: the key above is the newest slot, `<key>_1` the one before it.
 
 | Path | Fields |
 |---|---|
@@ -145,7 +146,7 @@ Module `engine/answer.js` (browser global `PEAnswer`). Pure logic. Suite: `tests
 
 API: `check(spec, typed)`, `parseExpr(src, vars)`, `evalExpr(ast, env)`, `toLatex(ast)`, `canon(ast)`, `parseNumber(input)`.
 
-`check` returns `{ok, parsed, attempt, error?, detail?}`. `attempt: false` on every parse, spec, or domain failure, so no attempt is counted. `error` codes: `unparsable`, `bad-spec`, `unsupported-kind`, `too-few-points`, `out-of-range`, `lowest-terms`, `fraction-form`, `literal-required`.
+`check` returns `{ok, parsed, attempt, error?, detail?}`. `attempt: false` on every parse, spec, or domain failure, so no attempt is counted. `error` codes: `unparsable`, `bad-spec`, `unsupported-kind`, `too-few-points`, `out-of-range`, `lowest-terms`, `fraction-form`, `literal-required`; for `code` also `no-runtime` (no attempt), `runtime-error` and `timeout` (wrong, an attempt).
 
 - `numeric`: `value` (number, `"p/q"`, decimal or scientific string), `form` (default `exact`), `tol`, `rel` (tolerance rule in "Answers" above). Literals (`3`, `-6/2`, `0.5`, `2/4`) go through the core rules. `form: fraction` needs lowest terms and a `p/q` or integer literal, so `0.5` is rejected. Other typed input goes to the expression parser with no variables (`sqrt(2)`, `pi/4`) and is compared at 1e-9. Under `form: exact` with a rational target, or under `form: fraction`, expression input is rejected (`literal-required`): a float cannot prove exactness.
 - `expression`: `value` (ASCII), `vars`, `domain` (map `var: [lo, hi]`, or one `[lo, hi]` for all vars; default `[0.3, 2.7]`), `points` (default 12, minimum 8), `also` (extra accepted forms). Points come from a seeded RNG keyed on `value` and `vars`, so results are deterministic. Points where either side is non-finite are skipped. At least 8 valid points are required. Tolerance `1e-9 * max(1, |a|, |b|)` at every valid point.
@@ -167,7 +168,7 @@ Markup rules (shared module `engine/text.js`):
 
 - `$...$` is inline math, `$$...$$` is display math.
 - `\$` is a literal dollar sign outside math.
-- Other text is escaped (`&`, `<`, `>`, `"`), then `` `code` `` and `**bold**` apply, and blank lines split paragraphs.
+- Other text is escaped (`&`, `<`, `>`, `"`), then `` `code` `` and `**bold**` apply, and blank lines split paragraphs. A fenced block (three backticks, optional language, each fence on its own line) renders as `<pre><code>`: literal text, blank lines kept, no math, no bold.
 - A JSON escape misread (a single backslash before a letter, such as `\frac` written as `\f` followed by `rac`) lands as a control character. The validator rejects any control character in a string.
 
 The build validates the same fields with `throwOnError` and strict warnings on. It fails a pack on:

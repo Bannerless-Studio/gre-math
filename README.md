@@ -82,7 +82,7 @@ Browser checks (Playwright, not in the tier) cover the page at 360x780 and the o
 ## Test tab and progress (M6)
 
 - Place me: one attempt per probe, no feedback until the end. Probes are T1 items at first, so the walk stops at the first tier with no probe items and says why.
-- Level exam: offered when the gate is held and within 5 points of opening. Pass at 7 of 10 marks the techniques answered right as known.
+- Level exam: offered when the gate is held and within 5 points of opening or one technique short. Pass at 7 of 10 marks the techniques answered right as known.
 - Progress: one block per level with a 10-cell bar. Levels under 90 percent known stay open; the levels below the first such level fold into one line. The hero line shows the change since the last visit.
 - Today: Pause new techniques stops Learn. Review and Full keep running.
 

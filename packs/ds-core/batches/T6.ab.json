@@ -1,0 +1,4649 @@
+[
+ {
+  "id": "t6-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which quantity is the empirical risk of a model on a training set?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The average loss over the training rows",
+    "The sum of losses over the whole population",
+    "The loss on a single held-out row",
+    "The variance of the predictions"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a population sum is the true risk, not the empirical one",
+    "a held-out loss is a test estimate, not a training risk",
+    "variance measures spread, not loss"
+   ]
+  },
+  "solution": "Empirical risk averages the loss over the $n$ training rows.",
+  "hints": [
+   "Look for the word that makes it a sample estimate."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which set is used to choose the model and its hyperparameters?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The validation set",
+    "The test set",
+    "The training set",
+    "All rows together"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the test set is kept for one final estimate, not for choices",
+    "the training set fits parameters, not hyperparameters",
+    "using all rows leaves no honest check"
+   ]
+  },
+  "solution": "Choices go on validation. Test stays untouched until one final report.",
+  "hints": [
+   "Which set must stay unseen until the end?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a random split of 1000 rows into 70% train, 15% validation and 15% test, what fraction of rows is in the test set? Give a decimal between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.15,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$15\\%$ of rows is $0.15$.",
+  "hints": [
+   "Percent to decimal."
+  ],
+  "check": "Fraction(15,100)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dataset of 480 rows is split 60/20/20 into train, validation and test. How many rows are in the validation set?",
+  "answer": {
+   "kind": "numeric",
+   "value": 96,
+   "form": "exact"
+  },
+  "solution": "$20\\%$ of $480$ is $96$.",
+  "hints": [
+   "Take 20 percent of the total row count."
+  ],
+  "check": "480*20//100",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Four training examples have squared losses 1, 4, 0 and 3, in squared units. Find the empirical risk, the mean loss, in squared units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "solution": "The sum is $8$ and the mean over $4$ rows is $2$.",
+  "hints": [
+   "Average, not sum."
+  ],
+  "check": "Fraction(1+4+0+3,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A model predicts $\\hat y = w x$ for a row with feature $x$. Write the residual, target $y$ minus prediction, as an expression in $y$, $w$ and $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "y-w*x",
+   "vars": [
+    "y",
+    "w",
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "y-x*w",
+    "-(w*x-y)"
+   ]
+  },
+  "solution": "Residual is target minus prediction: $y-wx$.",
+  "hints": [
+   "Subtract the prediction from the target."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about the train, validation and test sets are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The test set chooses the model's hyperparameters",
+    "The validation set guides model selection",
+    "Test error estimates generalisation of the final model",
+    "Training error is an unbiased estimate of generalisation error"
+   ],
+   "correct": [
+    1,
+    2
+   ]
+  },
+  "solution": "Validation guides choices. Test gives the final estimate. Training error is optimistic.",
+  "hints": [
+   "Which set must stay unseen until the end?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Model A has validation MSE 0.64 and training MSE 0.36, in squared units. Find the gap, validation minus training, as a decimal in squared units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.28,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$0.64-0.36=0.28$.",
+  "hints": [
+   "Subtract training from validation."
+  ],
+  "check": "Fraction(64,100)-Fraction(36,100)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dataset has 1000 rows, split 80/10/10 into train, validation and test. How many rows are in the training set?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "800 rows",
+    "100 rows",
+    "900 rows",
+    "80 rows"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is one 10 percent set, not the 80 percent set",
+    "that is train plus validation, not train alone",
+    "80 percent was used as a count, not as a share"
+   ]
+  },
+  "solution": "$80\\%$ of $1000$ is $800$.",
+  "hints": [
+   "Take 80 percent of the total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which pattern signals overfitting?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Low training error with much higher validation error",
+    "High training error and high validation error",
+    "Low training error and low validation error",
+    "Validation error below training error"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that pattern signals underfitting, with high bias",
+    "that pattern is a good fit",
+    "a reversed gap points to a split or leak problem"
+   ]
+  },
+  "solution": "Overfitting fits the training rows well and generalises poorly, so the gap is large.",
+  "hints": [
+   "Overfitting means a large gap between training and validation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "As model complexity grows, what usually happens to training error?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It falls",
+    "It rises",
+    "It stays fixed at the noise variance",
+    "It equals the test error"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "rising training error at high complexity points to an optimiser fault, not overfitting",
+    "noise variance is a floor on test error, not on training error",
+    "training and test error match only by chance"
+   ]
+  },
+  "solution": "More flexible models fit the training rows more closely.",
+  "hints": [
+   "Think about what a more flexible model can do with the rows it sees."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let bias be the squared gap between the average prediction and the truth at a point, var the variance of predictions across training sets, and noise the irreducible variance. Write the expected squared test error at that point in bias, var and noise.",
+  "answer": {
+   "kind": "expression",
+   "value": "bias+var+noise",
+   "vars": [
+    "bias",
+    "var",
+    "noise"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "noise+var+bias"
+   ]
+  },
+  "solution": "Expected test error is bias plus variance plus noise.",
+  "hints": [
+   "Three terms, each nonnegative."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Averaged over many training sets, a model predicts $3.2$ at a point $x_0$, where the true value is $2.0$. Find the squared bias at $x_0$, in squared units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.44,
+   "form": "exact"
+  },
+  "solution": "$(3.2-2.0)^2=1.44$.",
+  "hints": [
+   "Bias is the gap between the average prediction and the truth, then square it."
+  ],
+  "check": "(Fraction(32,10)-2)**2",
+  "probe": true,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which change most directly reduces variance for a fixed model class?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Collect more training rows",
+    "Add higher-degree polynomial terms",
+    "Cut the training set to speed up fitting",
+    "Grow each tree deeper"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "more terms raise variance and lower bias",
+    "fewer rows raise variance",
+    "deeper trees add complexity and raise variance"
+   ]
+  },
+  "solution": "More rows average out noise in each fit.",
+  "hints": [
+   "Which change gives each fit less noise to chase?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Model A has training MSE 2.0 and test MSE 2.4, and model B has training MSE 1.0 and test MSE 4.0, all in squared units. Find model B's gap, test minus training.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "solution": "$4.0-1.0=3.0$. Model B overfits more than A.",
+  "hints": [
+   "Subtract the training error from the test error for model B only."
+  ],
+  "check": "Fraction(4)-Fraction(1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about under- and overfitting are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "High bias gives underfitting with high training error",
+    "High variance gives overfitting with a large train-validation gap",
+    "Overfitting shows high training error",
+    "More data always reduces bias"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "High bias misses the pattern even on training rows. High variance fits noise, leaving a gap.",
+  "hints": [
+   "Bias concerns the model class. Variance concerns sensitivity to the sample."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Predictions at a point are $\\hat f = c + Z$, where $c$ is a fixed constant and $Z$ has standard deviation $s$. Write $\\mathrm{Var}(\\hat f)$ as an expression in $s$.",
+  "answer": {
+   "kind": "expression",
+   "value": "s^2",
+   "vars": [
+    "s"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "s*s"
+   ]
+  },
+  "solution": "A constant shift does not change variance, so $\\mathrm{Var}(\\hat f)=s^2$.",
+  "hints": [
+   "Adding a constant leaves the spread unchanged."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Learning curves plateau with training and validation error both high and close together. What does this indicate?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "High bias, so underfitting",
+    "High variance, so overfitting",
+    "Enough complexity, and more data would fix it",
+    "A data leak in the validation set"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a large gap is the overfitting sign, and this gap is small",
+    "more data does not lower a plateau caused by bias",
+    "a leak makes validation error look too good, not equal to training"
+   ]
+  },
+  "solution": "Both errors are high and close, so the model is too simple.",
+  "hints": [
+   "Compare the size of the gap with the height of the errors."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which penalty can set coefficients exactly to zero?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "L1 penalty, as in the lasso",
+    "L2 penalty, as in ridge",
+    "A penalty on the intercept",
+    "A larger training set"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "L2 shrinks coefficients but rarely makes them exactly zero",
+    "the intercept is not the source of sparsity",
+    "more rows do not create exact zeros"
+   ]
+  },
+  "solution": "The absolute penalty has a corner at zero, which lets solutions land exactly there.",
+  "hints": [
+   "Think about the shape of the penalty at zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "As the penalty strength grows, what do ridge coefficients do?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Shrink toward zero",
+    "Grow in magnitude",
+    "Stay unchanged",
+    "Flip sign at random"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a larger penalty pushes against large coefficients, so growth is the wrong direction",
+    "any positive penalty changes the fit",
+    "the penalty is smooth, so signs do not jump at random"
+   ]
+  },
+  "solution": "The squared penalty pulls every coefficient towards zero as its weight rises.",
+  "hints": [
+   "What does the penalty reward?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a single coefficient $\\beta$, with fit error $\\mathrm{RSS}$ and penalty strength $\\lambda$, write the ridge objective in RSS, lam and beta.",
+  "answer": {
+   "kind": "expression",
+   "value": "RSS+lam*beta^2",
+   "vars": [
+    "RSS",
+    "lam",
+    "beta"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "RSS+lam*beta*beta"
+   ]
+  },
+  "solution": "Ridge adds $\\lambda\\beta^2$ to the fit error.",
+  "hints": [
+   "The squared penalty is lam times beta squared."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimise $(b-3)^2+\\lambda b^2$ over $b$, with $\\lambda=1$. Find the minimiser $b$.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact"
+  },
+  "solution": "$2(b-3)+2b=0$ gives $b=\\tfrac32$.",
+  "hints": [
+   "Differentiate and set to zero."
+  ],
+  "check": "Fraction(3,1+1)",
+  "probe": true,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimise $\\tfrac12(b-5)^2+2|b|$ over $b$. Find the minimiser.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "solution": "Soft threshold: $5-2=3$ on the positive side.",
+  "hints": [
+   "The lasso shrinks by the threshold and stops at zero."
+  ],
+  "check": "5-2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "With orthonormal features and the ridge objective $\\mathrm{RSS}+\\lambda\\beta^2$ at $\\lambda=3$, what fraction of the unpenalised OLS coefficient does ridge keep, as an exact fraction?",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "form": "exact"
+  },
+  "solution": "Ridge keeps $1/(1+\\lambda)=1/4$.",
+  "hints": [
+   "Shrinkage factor is one over one plus lambda."
+  ],
+  "check": "1/(1+Fraction(3))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A lasso fit uses 12 features, and 3 of its coefficients are exactly zero. What fraction of the features is kept, as a decimal between 0 and 1?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$9/12=0.75$.",
+  "hints": [
+   "Kept means nonzero."
+  ],
+  "check": "Fraction(12-3,12)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A standardised coefficient has unpenalised estimate $b_0$ and the features are orthonormal. Write the ridge estimate for the objective $\\mathrm{RSS}+\\lambda b^2$ as an expression in $b_0$ and $\\lambda$.",
+  "answer": {
+   "kind": "expression",
+   "value": "b0/(1+lam)",
+   "vars": [
+    "b0",
+    "lam"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "b0*(1+lam)^(-1)"
+   ]
+  },
+  "solution": "Ridge divides $b_0$ by $1+\\lambda$.",
+  "hints": [
+   "Shrinkage factor."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statement about ridge and lasso is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Lasso can set coefficients exactly to zero, ridge cannot",
+    "Ridge sets coefficients exactly to zero, lasso only shrinks",
+    "Both set coefficients exactly to zero for any positive penalty",
+    "Neither changes the coefficients for a positive penalty"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reversed: exact zeros are the lasso property",
+    "ridge only shrinks toward zero, it does not zero them",
+    "any positive penalty changes the fit"
+   ]
+  },
+  "solution": "Only the absolute penalty produces exact zeros.",
+  "hints": [
+   "Which penalty has the corner at zero?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A logistic model gives log-odds 0 for a case. What is the predicted probability of the positive class? Give a decimal between 0 and 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Zero log-odds means odds 1, so $p=1/2$.",
+  "hints": [
+   "Odds equal one means even chance."
+  ],
+  "check": "Fraction(1,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which function maps a linear score to a probability?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Sigmoid, the logistic function",
+    "Exponential of the score",
+    "Natural log of the score",
+    "Square root of the score"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "exp is unbounded, so it can exceed 1",
+    "log of the score is unbounded and sits on the log-odds scale",
+    "square root does not bound the output to (0,1)"
+   ]
+  },
+  "solution": "The sigmoid maps any real score into (0,1).",
+  "hints": [
+   "Which function squeezes the whole real line into (0,1)?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Give the probability $p$ as a function of the log-odds $z$, that is, invert the logit.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/(1+exp(-z))",
+   "vars": [
+    "z"
+   ],
+   "domain": [
+    -2.5,
+    2.5
+   ],
+   "also": [
+    "exp(z)/(1+exp(z))"
+   ]
+  },
+  "solution": "Sigmoid inverts the logit.",
+  "hints": [
+   "Odds are $e^z$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A coefficient is $\\beta_1=0.8$ in a logistic model. Raising $x_1$ by one unit multiplies the odds by what factor, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.225540928492468,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Odds ratio is $e^{0.8}\\approx 2.226$.",
+  "hints": [
+   "Exponentiate the coefficient."
+  ],
+  "check": "math.exp(0.8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A logistic model has score $z=-1.2+0.5x$. Find the predicted probability at $x=2$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.45016600268752216,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$z=-0.2$, so $p=1/(1+e^{0.2})\\approx 0.450$.",
+  "hints": [
+   "Compute the score first, then the sigmoid."
+  ],
+  "check": "1/(1+math.exp(0.2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A binary logistic model gives log-odds $\\ln 3$ for a case. What is the probability of the positive class, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Odds $=e^{\\ln 3}=3$, so $p=3/4$.",
+  "hints": [
+   "The odds are three to one."
+  ],
+  "check": "Fraction(3,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For a case with label 1 and predicted probability $p$, the log loss uses the natural log. Write the loss as an expression in $p$.",
+  "answer": {
+   "kind": "expression",
+   "value": "-ln(p)",
+   "vars": [
+    "p"
+   ],
+   "domain": [
+    0.05,
+    0.95
+   ],
+   "also": [
+    "ln(1/p)"
+   ]
+  },
+  "solution": "With $y=1$ the loss is $-\\ln p$.",
+  "hints": [
+   "Only one term of the cross-entropy survives when y is 1."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A coefficient for a binary feature is $\\beta=-0.7$. How do the odds of the positive class change when the feature goes from 0 to 1?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Odds multiply by about 0.50",
+    "Odds multiply by -0.7",
+    "Odds multiply by about 2.01",
+    "Odds add 0.7"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "coefficients act on log-odds, so exponentiate before using a factor",
+    "the sign was dropped, giving exp(0.7)",
+    "log-odds add a coefficient, but odds multiply by its exponential"
+   ]
+  },
+  "solution": "$e^{-0.7}\\approx 0.50$.",
+  "hints": [
+   "Exponentiate the coefficient and keep its sign."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.logistic"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about logistic regression coefficients are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "A coefficient is the change in log-odds per unit of its feature",
+    "A coefficient is the change in probability per unit of its feature",
+    "Exponentiating a coefficient gives an odds ratio",
+    "Coefficients are unaffected by feature scale"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Coefficients act on log-odds. Their size depends on the feature scale.",
+  "hints": [
+   "Log-odds is the scale of the linear score."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Among squared, absolute and exponential loss on residuals, which grows slowest for large residuals?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Absolute loss",
+    "Squared loss",
+    "Exponential loss",
+    "All three grow at the same rate"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "squared loss grows faster than absolute loss",
+    "exponential loss grows fastest of the three",
+    "the growth rates differ, so this claim fails"
+   ]
+  },
+  "solution": "$|r|$ grows linearly, while $r^2$ and $e^{r}$ grow faster.",
+  "hints": [
+   "Compare the shape of each curve at large residuals."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Hinge loss is $\\max(0,1-m)$ with margin $m=yf$. What is the smallest margin at which the loss is zero?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "solution": "The loss is zero once $m\\ge 1$.",
+  "hints": [
+   "Find where $1-m$ reaches zero."
+  ],
+  "check": "1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Squared loss for residual $r=y-\\hat y$, written in $y$ and $\\hat y$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(y-yhat)^2",
+   "vars": [
+    "y",
+    "yhat"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(yhat-y)^2"
+   ]
+  },
+  "solution": "Square the difference between target and prediction.",
+  "hints": [
+   "Squared loss is the square of the residual."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Residuals are 1, -2 and 4, in target units. Find the mean squared loss, in squared units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact"
+  },
+  "solution": "$(1+4+16)/3=7$.",
+  "hints": [
+   "Square each residual before averaging."
+  ],
+  "check": "Fraction(1+4+16,3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Huber loss with $\\delta=1$ is $\\tfrac12 r^2$ when $|r|\\le\\delta$, and $\\delta(|r|-\\tfrac12\\delta)$ otherwise. Find the loss at $r=3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.5,
+   "form": "exact"
+  },
+  "solution": "$|r|=3>1$, so the loss is $1\\cdot(3-\\tfrac12)=\\tfrac52$.",
+  "hints": [
+   "Check which branch applies first."
+  ],
+  "check": "Fraction(5,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Target values are 1, 2 and 9. Find the smallest possible sum of absolute deviations $|v-c|$ over all constants $c$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact"
+  },
+  "solution": "The median 2 minimises the absolute sum: $1+0+7=8$.",
+  "hints": [
+   "The minimiser of absolute deviations is the middle value."
+  ],
+  "check": "abs(1-2)+abs(2-2)+abs(9-2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For label $y=-1$ and score $f$, the hinge loss is $\\max(0,\\,1-yf)$. For $f\\ge -1$, write the loss as an expression in $f$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1+f",
+   "vars": [
+    "f"
+   ],
+   "domain": [
+    -0.9,
+    2.7
+   ],
+   "also": [
+    "f+1"
+   ]
+  },
+  "solution": "$1-(-1)f=1+f$, which is nonnegative for $f\\ge -1$.",
+  "hints": [
+   "Substitute $y=-1$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which loss suits a margin classifier with labels $\\pm 1$ and score $f$, and gives zero penalty for points beyond the margin?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Hinge loss",
+    "Squared loss on the labels",
+    "Absolute loss on the labels",
+    "Poisson loss"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "squared loss penalises confident correct points too",
+    "absolute loss penalises every deviation, even beyond the margin",
+    "Poisson loss is for count targets"
+   ]
+  },
+  "solution": "Hinge is zero once $yf\\ge 1$.",
+  "hints": [
+   "Which loss is zero for a margin beyond one?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which losses are convex in the prediction for their usual setting? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Squared loss",
+    "Hinge loss",
+    "Zero-one loss",
+    "Log loss for a binary label"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "The zero-one loss is a step function and is not convex.",
+  "hints": [
+   "A step function is not convex."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What training error does a 1-nearest-neighbour classifier get on its own training rows, when all feature vectors are distinct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0",
+    "0.5",
+    "1",
+    "Equal to the validation error"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "0.5 is a chance level, not what 1-NN does on its own rows",
+    "1 would mean every training row is misclassified",
+    "training and validation errors differ in general"
+   ]
+  },
+  "solution": "Each training row is its own nearest neighbour.",
+  "hints": [
+   "Which row is closest to a training point?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the Euclidean distance between points $(x_1,x_2)$ and $(z_1,z_2)$ as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt((x1-z1)^2+(x2-z2)^2)",
+   "vars": [
+    "x1",
+    "x2",
+    "z1",
+    "z2"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "((x1-z1)^2+(x2-z2)^2)^(1/2)"
+   ]
+  },
+  "solution": "Sum the squared coordinate differences, then take the square root.",
+  "hints": [
+   "Pythagoras in two dimensions."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does k-nearest neighbour degrade in high dimensions?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Distances concentrate, so neighbours are not much closer than other points",
+    "It has too few parameters to fit",
+    "It needs gradient steps that do not converge",
+    "It requires binary features"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "few parameters is a linear-model property, not the k-NN failure",
+    "k-NN has no gradient steps, so this is not the cause",
+    "k-NN takes any numeric features"
+   ]
+  },
+  "solution": "In high dimension, all points end up roughly equally far apart.",
+  "hints": [
+   "Think about the ratio of near and far distances."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Points $(1,2)$ and $(4,6)$ lie in the plane, in metres. Find the Euclidean distance in metres.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact"
+  },
+  "solution": "$\\sqrt{3^2+4^2}=5$.",
+  "hints": [
+   "Take the difference in each coordinate first."
+  ],
+  "check": "math.sqrt((4-1)**2+(6-2)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Feature 1 is a length in metres (range 0 to 1) and feature 2 is a mass in grams (range 0 to 1000), with points $a=(0.2,\\,100)$ and $b=(0.5,\\,300)$. Find the unscaled Euclidean distance between them in the given units, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 200.00022499987344,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "The gram difference dominates: $\\sqrt{0.09+40000}\\approx 200.0002$.",
+  "hints": [
+   "Compare the squared differences in each feature."
+  ],
+  "check": "math.sqrt(0.3**2+200**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Five neighbours have labels 1, 1, 0, 1, 0. What fraction of them vote class 1, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Three of five vote 1.",
+  "hints": [
+   "Count the 1 labels."
+  ],
+  "check": "Fraction(3,5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A cubic neighbourhood of side length $s$ must hold a fraction $f$ of uniform points in the unit cube in $d$ dimensions. Write $s$ as an expression in $f$ and $d$.",
+  "answer": {
+   "kind": "expression",
+   "value": "f^(1/d)",
+   "vars": [
+    "f",
+    "d"
+   ],
+   "domain": [
+    0.1,
+    0.9
+   ],
+   "also": [
+    "exp(ln(f)/d)"
+   ]
+  },
+  "solution": "The volume is $s^d=f$, so $s=f^{1/d}$.",
+  "hints": [
+   "Solve $s^d=f$ for $s$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A training set has 120 rows and $k=6$. What fraction of the training rows does each prediction average over, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.05,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$6/120=0.05$.",
+  "hints": [
+   "Divide k by n."
+  ],
+  "check": "Fraction(6,120)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.knn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which change makes a k-NN model smoother, with lower variance?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Increase k",
+    "Decrease k to 1",
+    "Add more noisy features",
+    "Cut the training set to 10 rows"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "k=1 follows every training point, which raises variance",
+    "noise features dilute distances and raise variance in high dimensions",
+    "fewer rows mean fewer neighbours to average, which raises variance"
+   ]
+  },
+  "solution": "More neighbours average more labels.",
+  "hints": [
+   "What does averaging over more neighbours do?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does the naive independence assumption state?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Features are mutually independent given the class",
+    "Features are independent of each other overall",
+    "Features are identically distributed",
+    "Class priors are equal"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "marginal independence is not assumed, only conditional on the class",
+    "identical distributions are not part of the assumption",
+    "priors are estimated and need not be equal"
+   ]
+  },
+  "solution": "Given the class label, each feature is treated as independent of the others.",
+  "hints": [
+   "Does the independence hold overall, or conditional on the class?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A binary word feature in a class of $N=4$ rows never has the word. With Laplace smoothing $\\alpha=1$ and $P(\\text{word}\\mid c)=\\frac{\\text{count}+\\alpha}{N+2\\alpha}$, find the smoothed probability that the word is present. Give an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "form": "exact"
+  },
+  "solution": "$(0+1)/(4+2)=1/6$.",
+  "hints": [
+   "Plug count 0 into the formula."
+  ],
+  "check": "Fraction(0+1,4+2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the unnormalised posterior of class $c$ with prior $\\mathrm{prior}$ and conditional probabilities $q_1$ and $q_2$ for two features, as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "prior*q1*q2",
+   "vars": [
+    "prior",
+    "q1",
+    "q2"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "q1*q2*prior"
+   ]
+  },
+  "solution": "Naive Bayes multiplies the prior by each likelihood.",
+  "hints": [
+   "Prior times each feature likelihood."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Priors are spam 0.4 and ham 0.6, and words are independent given the class, with $P(w_1\\mid\\text{spam})=0.5$, $P(w_2\\mid\\text{spam})=0.2$, $P(w_1\\mid\\text{ham})=0.1$ and $P(w_2\\mid\\text{ham})=0.6$. Find $P(\\text{spam}\\mid w_1,w_2)$ as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "10/19",
+   "form": "exact"
+  },
+  "solution": "Spam score $0.04$, ham score $0.036$, so the posterior is $0.04/0.076=10/19$.",
+  "hints": [
+   "Compute the unnormalised score for each class, then divide."
+  ],
+  "check": "Fraction(4,10)*Fraction(5,10)*Fraction(2,10)/(Fraction(4,10)*Fraction(5,10)*Fraction(2,10)+Fraction(6,10)*Fraction(1,10)*Fraction(6,10))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Class spam has 30 words in total, the word free appears 2 times, and the vocabulary has 10 distinct words. With Laplace smoothing $\\alpha=1$, use $(\\text{count}+\\alpha)/(N+V\\alpha)$ to find $P(\\text{free}\\mid\\text{spam})$ as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/40",
+   "form": "exact"
+  },
+  "solution": "$(2+1)/(30+10)=3/40$.",
+  "hints": [
+   "Add alpha to the count and V alpha to the total."
+  ],
+  "check": "Fraction(2+1,30+10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A class never saw a word in training, and smoothing is off. What does that class's naive Bayes product become?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0, which removes that class",
+    "1, so the word is ignored",
+    "0.5, a neutral factor",
+    "The prior alone, since the word is skipped"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a zero count gives a zero factor, not one",
+    "no default value is assigned to an unseen word",
+    "unsmoothed products do not skip words"
+   ]
+  },
+  "solution": "One zero factor makes the whole product zero.",
+  "hints": [
+   "What is a product with one zero factor?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Spam prior is 0.3 and ham prior is 0.7, and a word has $P(w\\mid\\text{spam})=0.6$ and $P(w\\mid\\text{ham})=0.2$. Find $P(\\text{spam}\\mid w)$ as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/16",
+   "form": "exact"
+  },
+  "solution": "$0.18/(0.18+0.14)=9/16$.",
+  "hints": [
+   "Multiply each prior by its likelihood."
+  ],
+  "check": "Fraction(3,10)*Fraction(6,10)/(Fraction(3,10)*Fraction(6,10)+Fraction(7,10)*Fraction(2,10))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Under independence given class $c$, write $P(x_1,x_2\\mid c)$ as a product. Let $a=P(x_1\\mid c)$ and $b=P(x_2\\mid c)$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a*b",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "b*a"
+   ]
+  },
+  "solution": "Conditional independence turns the joint into a product.",
+  "hints": [
+   "Multiply the two conditionals."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about naive Bayes are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "It estimates a likelihood for each feature within each class",
+    "Laplace smoothing adds a constant to each count",
+    "Its probabilities are always well calibrated",
+    "It needs features to be independent overall, not given the class"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Naive Bayes models each feature per class. Its raw probabilities are often overconfident.",
+  "hints": [
+   "Which claims describe the method itself?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What do Gini impurity and entropy measure at a node?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Class mixing at the node",
+    "The number of features used",
+    "Distance to the nearest split",
+    "Depth of the tree"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "features used is a count, not an impurity",
+    "distance to a split is not a node impurity",
+    "depth belongs to the whole tree, not one node"
+   ]
+  },
+  "solution": "Both are zero for a pure node and largest for an even mix.",
+  "hints": [
+   "A pure node scores zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A node has two classes in equal proportions. Find its Gini impurity. Give an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact"
+  },
+  "solution": "$1-(1/4+1/4)=1/2$.",
+  "hints": [
+   "Gini is one minus the sum of squared proportions."
+  ],
+  "check": "1-(Fraction(1,2)**2+Fraction(1,2)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which tree control most directly limits overfitting?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Maximum depth or minimum leaf size",
+    "Feature scaling",
+    "Column names",
+    "Alphabetical order of class labels"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "splits of a tree do not depend on feature scaling",
+    "names carry no information for the fit",
+    "class label order does not change the fit"
+   ]
+  },
+  "solution": "These limits stop splits that only chase noise.",
+  "hints": [
+   "Which setting caps how fine the partition gets?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A node has 6 rows of class A and 2 rows of class B. Find its Gini impurity as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/8",
+   "form": "exact"
+  },
+  "solution": "$1-(9/16+1/16)=3/8$.",
+  "hints": [
+   "The class proportions are 6/8 and 2/8."
+  ],
+  "check": "1-(Fraction(6,8)**2+Fraction(2,8)**2)",
+  "probe": true,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A node has 6 rows of class A and 2 rows of class B. Find its entropy in bits, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8112781244591328,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$-(0.75\\log_2 0.75+0.25\\log_2 0.25)\\approx 0.811$.",
+  "hints": [
+   "Use log base 2."
+  ],
+  "check": "-(0.75*math.log2(0.75)+0.25*math.log2(0.25))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A node has 4 rows of class A and 4 of class B, and a split sends 6 rows left (4 of class A, 2 of class B) and 2 rows right (all class B). Find the Gini decrease, parent minus size-weighted children, as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "form": "exact"
+  },
+  "solution": "Parent $0.5$. Children give $\\tfrac34\\cdot\\tfrac49+\\tfrac14\\cdot 0=\\tfrac13$. Decrease $\\tfrac16$.",
+  "hints": [
+   "Weight each child by its share of the rows."
+  ],
+  "check": "Fraction(1,2)-(Fraction(6,8)*(1-(Fraction(4,6)**2+Fraction(2,6)**2))+Fraction(2,8)*(1-(Fraction(0,2)**2+Fraction(2,2)**2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A binary tree of depth 3 has at most how many leaves?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "8",
+    "6",
+    "4",
+    "9"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "doubling per level gives 2 times 3 rather than 2 to the 3",
+    "four is the leaf count at depth 2",
+    "nine is the square of the depth, not a doubling"
+   ]
+  },
+  "solution": "Each level doubles the leaves: $2^3=8$.",
+  "hints": [
+   "Each split doubles the number of leaves."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the entropy in bits of a node whose class-1 fraction is $p$, as an expression in $p$. Use ln for the natural log.",
+  "answer": {
+   "kind": "expression",
+   "value": "-(p*ln(p)+(1-p)*ln(1-p))/ln(2)",
+   "vars": [
+    "p"
+   ],
+   "domain": [
+    0.05,
+    0.95
+   ],
+   "also": [
+    "-(p*ln(p)+(1-p)*ln(1-p))*ln(2)^(-1)"
+   ]
+  },
+  "solution": "Convert the natural log to base 2 by dividing by $\\ln 2$.",
+  "hints": [
+   "Change of base."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.trees"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fully grown depth-2 binary tree is fit to 8 training rows, with the same number of rows in each leaf. How many rows are in each leaf?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "solution": "Depth 2 gives 4 leaves, so $8/4=2$.",
+  "hints": [
+   "Count the leaves first."
+  ],
+  "check": "8//4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does an out-of-bag estimate use?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Rows left out of each bootstrap sample",
+    "The held-out test set",
+    "Duplicated rows in the sample",
+    "Only the first tree in the forest"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the test set is kept apart and not used by the forest",
+    "duplicates are in the sample, not the rows left out",
+    "out-of-bag uses every tree that did not see a row"
+   ]
+  },
+  "solution": "Each row is scored only by trees whose sample excluded it.",
+  "hints": [
+   "Out of the bag means left out of the sample."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "As $n\\to\\infty$, the expected fraction of distinct original rows in a bootstrap sample of size $n$ tends to what limit? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6321205588285577,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Each row is missed with probability $(1-1/n)^n\\to e^{-1}$.",
+  "hints": [
+   "Find the probability that a given row is never drawn."
+  ],
+  "check": "1-math.exp(-1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$B$ trees each have prediction variance $\\sigma^2$, and their errors are uncorrelated. Write the variance of their average in $B$ and s2, where s2 stands for $\\sigma^2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "s2/B",
+   "vars": [
+    "B",
+    "s2"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "s2*B^(-1)"
+   ]
+  },
+  "solution": "Averaging independent terms divides the variance by B.",
+  "hints": [
+   "Variance of a sum of independent terms."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A forest of 4 trees has zero pairwise correlation, and each tree has prediction variance 0.8 at a point. Find the variance of the average as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/5",
+   "form": "exact"
+  },
+  "solution": "$0.8/4=0.2=1/5$.",
+  "hints": [
+   "Uncorrelated averages divide the variance by B."
+  ],
+  "check": "Fraction(8,10)/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Four trees, each with variance 0.8, have pairwise correlation $\\rho=0.5$, so the variance of the average is $\\rho\\sigma^2+(1-\\rho)\\sigma^2/B$. Find it as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact"
+  },
+  "solution": "$0.4+0.5\\cdot 0.2=0.5$.",
+  "hints": [
+   "Substitute rho, sigma squared and B."
+  ],
+  "check": "Fraction(1,2)*Fraction(8,10)+(1-Fraction(1,2))*Fraction(8,10)/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A bootstrap sample draws 10 rows with replacement from 10 original rows. What is the expected number of original rows never drawn, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.486784401,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$10(1-1/10)^{10}=10\\cdot 0.9^{10}\\approx 3.487$.",
+  "hints": [
+   "Each row is missed with probability 0.9 to the power 10, per row."
+  ],
+  "check": "10*(Fraction(9,10))**10",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What does feature subsampling in a random forest mainly reduce?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Correlation between the trees' predictions",
+    "Bias of a single tree",
+    "Size of each bootstrap sample",
+    "Number of trees needed"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "subsampling features does not lower the bias of one tree",
+    "the row sample size is set separately from feature subsampling",
+    "feature subsampling is about decorrelation, not about needing fewer trees"
+   ]
+  },
+  "solution": "Random feature subsets make trees differ, which lowers their correlation.",
+  "hints": [
+   "Trees that all see the same strong feature look alike."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about bagging and random forests are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Bagging averages models fit on bootstrap samples",
+    "Bagging mainly reduces variance rather than bias",
+    "A random forest always beats a single deep tree on bias",
+    "Out-of-bag error needs a separate validation set"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Averaging targets variance. Bias stays near that of each tree.",
+  "hints": [
+   "Averaging smooths noise, not systematic error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A forest has 100 trees, each with variance 1.0 at a point and pairwise correlation 0.2. Find the variance of the average as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.208,
+   "form": "exact"
+  },
+  "solution": "$0.2+0.8/100=0.208$.",
+  "hints": [
+   "The correlated part does not shrink with the number of trees."
+  ],
+  "check": "Fraction(2,10)+Fraction(8,10)/100",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In gradient boosting with squared loss, what does each new tree fit?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The residuals of the current model",
+    "The original labels",
+    "A fresh bootstrap sample",
+    "The class priors"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "fitting raw labels ignores what the model already explains",
+    "bootstrap sampling is bagging, not boosting",
+    "priors are the starting value, not each tree's target"
+   ]
+  },
+  "solution": "Residuals are the negative gradient under squared loss.",
+  "hints": [
+   "What is left to explain after the current fit?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "With learning rate $\\eta=0.1$, a tree predicts $+5$ at a point. How much does it add to the model output there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "form": "exact"
+  },
+  "solution": "$0.1\\cdot 5=0.5$.",
+  "hints": [
+   "Multiply the tree output by the learning rate."
+  ],
+  "check": "Fraction(1,10)*5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "AdaBoost multiplies a misclassified point's weight by $e^{\\alpha}$, with $\\alpha>0$. Write the new weight in $w$ and alpha, where $w$ is the old weight.",
+  "answer": {
+   "kind": "expression",
+   "value": "w*exp(alpha)",
+   "vars": [
+    "w",
+    "alpha"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "exp(alpha)*w"
+   ]
+  },
+  "solution": "Misclassified rows gain weight by the factor $e^{\\alpha}$.",
+  "hints": [
+   "Multiply the old weight by the factor."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Squared loss is $\\tfrac12(y-F)^2$, with current prediction $F=2$ and label $y=5$. Find the negative gradient with respect to $F$, which is the next tree's target.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "solution": "$\\partial L/\\partial F=F-y=-3$, so the negative gradient is $3$.",
+  "hints": [
+   "Differentiate in F, then flip the sign."
+  ],
+  "check": "5-2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Start at $F_0=0$ for a label of $10$, and at each step add $\\eta=0.5$ times a tree that exactly fits the current residual. Find $F_2$ after two steps as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "15/2",
+   "form": "exact"
+  },
+  "solution": "$F_1=5$, then $F_2=5+0.5\\cdot 5=7.5$.",
+  "hints": [
+   "The residual shrinks by half each step."
+  ],
+  "check": "10*(1-Fraction(1,2)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In an AdaBoost round the weighted error is $\\varepsilon=0.2$ and the learner weight is $\\alpha=\\tfrac12\\ln\\frac{1-\\varepsilon}{\\varepsilon}$. Find $\\alpha$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6931471805599453,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$\\tfrac12\\ln 4=\\ln 2\\approx 0.693$.",
+  "hints": [
+   "Compute the ratio inside the log first."
+  ],
+  "check": "0.5*math.log((1-0.2)/0.2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which change makes boosting overfit less, all else equal?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Lower the learning rate and add more trees",
+    "Raise the learning rate to 1.0",
+    "Make each tree deeper",
+    "Drop the gradient and fit once"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "bigger steps fit noise faster",
+    "deeper trees add variance at each step",
+    "without gradients there is no residual to fit"
+   ]
+  },
+  "solution": "Small steps with more rounds usually generalise better.",
+  "hints": [
+   "Shrinkage slows the fit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Boosting with shrinkage $\\eta$ adds $\\eta h$ for each round. Over $t$ rounds that each output the same $h$, write the total added output as an expression in eta, t and h.",
+  "answer": {
+   "kind": "expression",
+   "value": "eta*t*h",
+   "vars": [
+    "eta",
+    "t",
+    "h"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "t*eta*h"
+   ]
+  },
+  "solution": "Sum $t$ equal terms $\\eta h$.",
+  "hints": [
+   "Repeated addition is multiplication."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.boosting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about boosting are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Trees are fit one after another, each to the current errors",
+    "Trees are fit independently on bootstrap samples",
+    "Shrinkage trades off against the number of trees",
+    "Boosting is mainly a variance-reduction method like bagging"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Boosting is sequential and mainly reduces bias.",
+  "hints": [
+   "Sequential fitting is the defining feature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which training points determine the maximum-margin hyperplane?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The support vectors",
+    "The points farthest from the origin",
+    "The class centroids",
+    "All training points equally"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "distance from the origin does not set the margin",
+    "centroids are not used by the hard-margin rule",
+    "only points on the margin matter, not all equally"
+   ]
+  },
+  "solution": "Points on the margin carry the constraint.",
+  "hints": [
+   "Which points touch the margin?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A hard-margin linear SVM has $w\\cdot x+b$, with support vectors on $\\pm1$ and $\\|w\\|=2$. Find the margin width $2/\\|w\\|$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "solution": "$2/2=1$.",
+  "hints": [
+   "Plug the norm in."
+  ],
+  "check": "2/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For margin $m\\ge 1$ the hinge loss is zero. For $m<1$, write the hinge loss as an expression in $m$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1-m",
+   "vars": [
+    "m"
+   ],
+   "domain": [
+    -1.5,
+    0.9
+   ],
+   "also": [
+    "-m+1"
+   ]
+  },
+  "solution": "The hinge loss is $\\max(0,1-m)$.",
+  "hints": [
+   "Use the branch where the max is positive."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A hard-margin SVM has $w=(3,4)$. Find the geometric margin width $2/\\|w\\|$ as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/5",
+   "form": "exact"
+  },
+  "solution": "$\\|w\\|=5$, so the width is $2/5$.",
+  "hints": [
+   "Compute the Euclidean norm first."
+  ],
+  "check": "2/math.sqrt(3**2+4**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A point with label $y=+1$ has score $f=0.4$. Find the hinge loss $\\max(0,1-yf)$ as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/5",
+   "form": "exact"
+  },
+  "solution": "$1-0.4=0.6=3/5$.",
+  "hints": [
+   "The margin is $yf$."
+  ],
+  "check": "max(0,1-Fraction(4,10))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What happens to a soft-margin SVM when C grows?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Margin violations cost more, so the margin narrows",
+    "The margin always widens",
+    "Slack variables are removed",
+    "The kernel is forced to linear"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a wider margin is the effect of a smaller C",
+    "slack stays in the soft margin, and C only scales its cost",
+    "C is independent of the kernel choice"
+   ]
+  },
+  "solution": "A larger C tolerates fewer violations.",
+  "hints": [
+   "What does a big penalty on violations do?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two points on a line, $x=0$ with label $-1$ and $x=2$ with label $+1$, are the support vectors of the max-margin $wx+b=0$, so $w=(f_2-f_1)/(x_2-x_1)$ with $f_1=-1$ and $f_2=+1$. Find the width $2/|w|$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "solution": "$w=2/2=1$, so the width is $2$.",
+  "hints": [
+   "Find w from the two support values."
+  ],
+  "check": "2/abs(Fraction(1+1,2-0))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Expand the polynomial kernel $K(x,z)=(xz+1)^2$ for scalar $x$ and $z$. Write $K$ as a polynomial in $x$ and $z$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x^2*z^2+2*x*z+1",
+   "vars": [
+    "x",
+    "z"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(x*z+1)^2"
+   ]
+  },
+  "solution": "$(xz+1)^2=x^2z^2+2xz+1$.",
+  "hints": [
+   "Expand the square."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.svm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about support vector machines are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The decision depends only on the support vectors",
+    "Hinge loss is zero for points beyond the margin",
+    "SVM outputs calibrated probabilities by default",
+    "The kernel trick requires computing explicit feature maps"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "SVM outputs scores, not calibrated probabilities. The kernel trick avoids explicit feature maps.",
+  "hints": [
+   "Which statements describe the model's own structure?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many models does 5-fold cross-validation fit for one setting, one per fold? Give a count.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact"
+  },
+  "solution": "One fit per fold.",
+  "hints": [
+   "One model per fold."
+  ],
+  "check": "5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What must stratified splitting preserve?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Class proportions in each fold",
+    "Row order",
+    "Exact feature means",
+    "Test set size only"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "row order is irrelevant to stratification",
+    "stratification does not fix feature means",
+    "a size rule does not keep class balance"
+   ]
+  },
+  "solution": "Each fold mirrors the overall class mix.",
+  "hints": [
+   "Stratify means balance the labels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For time-ordered data, which validation split is valid?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Train on earlier rows and validate on later rows",
+    "Random shuffled folds",
+    "Random leave-one-out",
+    "Train and validate on all rows"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "shuffling lets future rows into training",
+    "random leave-one-out also mixes the time order",
+    "using all rows leaves no hold-out to test on"
+   ]
+  },
+  "solution": "Validation must lie in the future of training.",
+  "hints": [
+   "Training must not see the future."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "100 rows are split into 5 equal folds for cross-validation. How many rows are in each validation fold?",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "form": "exact"
+  },
+  "solution": "$100/5=20$.",
+  "hints": [
+   "Equal folds divide the total evenly."
+  ],
+  "check": "100//5",
+  "probe": true,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Five fold accuracies are 0.80, 0.84, 0.76, 0.82 and 0.78. Find the mean accuracy as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8,
+   "form": "exact"
+  },
+  "solution": "The sum is $4.00$, so the mean is $0.80$.",
+  "hints": [
+   "Average the five numbers."
+  ],
+  "check": "Fraction(80+84+76+82+78,500)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which step is data leakage in cross-validation?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Fitting a scaler on all rows before splitting",
+    "Fitting a scaler inside each training fold",
+    "Reporting the spread of fold scores",
+    "Shuffling rows before a random split"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "fitting inside each training fold is the valid pattern",
+    "reporting spread is good practice and not leakage",
+    "shuffling is fine for independent rows, so this is not leakage"
+   ]
+  },
+  "solution": "Statistics from held-out rows leak into training.",
+  "hints": [
+   "Which step lets validation rows shape the training transform?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Nested CV: 5 outer folds, each running 4-fold inner CV for one setting. How many inner-CV model fits run in total, not counting refits?",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "form": "exact"
+  },
+  "solution": "$5\\cdot 4=20$.",
+  "hints": [
+   "Multiply outer folds by inner folds."
+  ],
+  "check": "5*4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A grouped CV holds out $m$ of $N$ patients in each fold, and every patient has the same number of rows. Write the fraction of rows held out as an expression in $m$ and $N$.",
+  "answer": {
+   "kind": "expression",
+   "value": "m/N",
+   "vars": [
+    "m",
+    "N"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "m*N^(-1)"
+   ]
+  },
+  "solution": "Rows scale with patients, so the fraction is $m/N$.",
+  "hints": [
+   "Patients and rows scale together."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A setting scores 0.90 in CV, then 0.85 on a separate test set. Find the optimism, validation minus test, as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/20",
+   "form": "exact"
+  },
+  "solution": "$0.90-0.85=0.05=1/20$.",
+  "hints": [
+   "Subtract the test score from the CV score."
+  ],
+  "check": "Fraction(90,100)-Fraction(85,100)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Recall is which ratio?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "TP / (TP + FN)",
+    "TP / (TP + FP)",
+    "TN / (TN + FP)",
+    "TP / all rows"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that ratio is precision",
+    "that ratio is specificity",
+    "that divides by all rows, not by the actual positives"
+   ]
+  },
+  "solution": "Recall is the share of actual positives found.",
+  "hints": [
+   "The denominator is the actual positives."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Precision is 0.6 and recall is 0.3. Find F1, the harmonic mean of precision and recall, as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/5",
+   "form": "exact"
+  },
+  "solution": "$2\\cdot 0.18/0.9=0.4=2/5$.",
+  "hints": [
+   "F1 is twice the product over the sum."
+  ],
+  "check": "2*Fraction(6,10)*Fraction(3,10)/(Fraction(6,10)+Fraction(3,10))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write precision in terms of TP and FP.",
+  "answer": {
+   "kind": "expression",
+   "value": "TP/(TP+FP)",
+   "vars": [
+    "TP",
+    "FP"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "TP/(FP+TP)"
+   ]
+  },
+  "solution": "Precision divides true positives by all predicted positives.",
+  "hints": [
+   "Predicted positives are TP plus FP."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A test set has TP=40, FP=20, FN=10 and TN=30. Find accuracy as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "7/10",
+   "form": "exact"
+  },
+  "solution": "$(40+30)/100=7/10$.",
+  "hints": [
+   "Correct rows over all rows."
+  ],
+  "check": "Fraction(40+30,100)",
+  "probe": true,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A test set of 100 rows has TP=18, FP=6, FN=12 and TN=64. Find precision as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/4",
+   "form": "exact"
+  },
+  "solution": "$18/24=3/4$.",
+  "hints": [
+   "Predicted positives are TP plus FP."
+  ],
+  "check": "Fraction(18,18+6)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Same test set (TP=18, FP=6, FN=12, TN=64). Find recall as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/5",
+   "form": "exact"
+  },
+  "solution": "$18/30=3/5$.",
+  "hints": [
+   "Actual positives are TP plus FN."
+  ],
+  "check": "Fraction(18,18+12)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Same test set (TP=18, FP=6, FN=12, TN=64). Find F1 as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/3",
+   "form": "exact"
+  },
+  "solution": "$P=3/4$, $R=3/5$, so $F_1=2PR/(P+R)=2/3$.",
+  "hints": [
+   "Compute precision and recall first."
+  ],
+  "check": "2*Fraction(3,4)*Fraction(3,5)/(Fraction(3,4)+Fraction(3,5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dataset has 1% positives and a model predicts negative for every row. Which metric looks strong while the model finds no positives?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Accuracy, about 0.99",
+    "Recall, which is 0",
+    "Specificity, which is 0",
+    "Precision, which is 0.5"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "recall is 0 here, so it exposes the failure rather than looking strong",
+    "specificity is 1 here, since no negatives are flagged",
+    "precision is undefined here, with no predicted positives"
+   ]
+  },
+  "solution": "Accuracy is high because almost every row is negative.",
+  "hints": [
+   "Which metric is high because the negatives dominate?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write specificity in terms of TN and FP.",
+  "answer": {
+   "kind": "expression",
+   "value": "TN/(TN+FP)",
+   "vars": [
+    "TN",
+    "FP"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "TN/(FP+TN)"
+   ]
+  },
+  "solution": "Specificity divides true negatives by actual negatives.",
+  "hints": [
+   "Actual negatives are TN plus FP."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does ROC AUC equal?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Probability a random positive scores above a random negative",
+    "Accuracy at the default threshold",
+    "Precision in the top decile",
+    "Fraction of rows that are positive"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "accuracy depends on one threshold, while AUC uses all of them",
+    "top-decile precision is a single operating point",
+    "that is the prevalence, which AUC does not measure"
+   ]
+  },
+  "solution": "AUC is a rank statistic over all thresholds.",
+  "hints": [
+   "Think about pairs of rows from each class."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A random classifier has what ROC AUC? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "A random ranking wins half the pairs.",
+  "hints": [
+   "Pairs are won by chance."
+  ],
+  "check": "Fraction(1,2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Under heavy class imbalance, which curve shows changes in false positives more clearly?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Precision-recall curve",
+    "ROC curve",
+    "Both are identical",
+    "Neither uses thresholds"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the false positive rate divides by a large negative count, so the ROC curve looks flat",
+    "under imbalance they differ, so they are not identical",
+    "both curves are built from thresholds on the score"
+   ]
+  },
+  "solution": "The PR curve tracks precision, which the negatives dilute.",
+  "hints": [
+   "Which metric divides by predicted positives?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Positive scores are 0.9 and 0.4, and negative scores are 0.6 and 0.2. Find the ROC AUC as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/4",
+   "form": "exact"
+  },
+  "solution": "Pairs won: 3 of 4.",
+  "hints": [
+   "Compare every positive with every negative."
+  ],
+  "check": "Fraction(sum(1 if p>n else 0 for p in [Fraction(9,10),Fraction(4,10)] for n in [Fraction(6,10),Fraction(2,10)]),4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Positive scores are 0.9 and 0.4, and negative scores are 0.6 and 0.2. Predicting positive when the score is at least 0.5, find the false positive rate as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact"
+  },
+  "solution": "The negative 0.6 is flagged and 0.2 is not, so the rate is $1/2$.",
+  "hints": [
+   "Count negatives above the threshold, over all negatives."
+  ],
+  "check": "Fraction(sum(1 for n in [Fraction(6,10),Fraction(2,10)] if n>=Fraction(1,2)),2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dataset has 50 positives, and at a threshold 40 rows are predicted positive, 30 of them true positives. Find recall as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/5",
+   "form": "exact"
+  },
+  "solution": "$30/50=3/5$.",
+  "hints": [
+   "Recall divides by all actual positives."
+  ],
+  "check": "Fraction(30,50)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "False negatives cost 5 units each and false positives cost 1 unit. Which threshold move fits?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Lower the threshold to catch more positives",
+    "Raise the threshold to cut false positives",
+    "Keep 0.5 always",
+    "Pick the threshold that maximises accuracy"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a false negative costs more, so raising the threshold is the wrong direction",
+    "0.5 ignores the cost ratio",
+    "accuracy treats both errors alike and ignores the 5-to-1 cost"
+   ]
+  },
+  "solution": "Missing a positive costs five times a false alarm.",
+  "hints": [
+   "Which error is more expensive?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In a dataset with 20% positives, a random classifier has precision equal to the share of positives. What is that precision, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Precision equals prevalence, $0.2$.",
+  "hints": [
+   "Random predictions hit positives at the base rate."
+  ],
+  "check": "Fraction(1,5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Youden's index is TPR minus FPR. Write it for a classifier with TPR $t$ and FPR $f$ as an expression in t and f.",
+  "answer": {
+   "kind": "expression",
+   "value": "t-f",
+   "vars": [
+    "t",
+    "f"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "-f+t"
+   ]
+  },
+  "solution": "The index is $t-f$.",
+  "hints": [
+   "Subtract the false positive rate from the true positive rate."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0127",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which regression metric is in the target's units and not squared?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "MAE",
+    "MSE",
+    "R-squared",
+    "Log loss"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "MSE is in squared units",
+    "R-squared is unitless",
+    "log loss is a classification loss"
+   ]
+  },
+  "solution": "MAE averages absolute residuals.",
+  "hints": [
+   "Look at the units of the target."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0128",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A model predicts the mean of $y$ for every row. Find its R-squared.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "form": "exact"
+  },
+  "solution": "Predicting the mean gives SSE equal to SST, so $R^2=0$.",
+  "hints": [
+   "Compare the model's error to the error of predicting the mean."
+  ],
+  "check": "0",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0129",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write RMSE as an expression in mse, where mse is the mean squared error.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(mse)",
+   "vars": [
+    "mse"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "mse^(1/2)"
+   ]
+  },
+  "solution": "Take the square root of MSE.",
+  "hints": [
+   "Undo the square."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0130",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Residuals are 2, -1, 3 and -4 in target units. Find the MSE, in squared units, as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "15/2",
+   "form": "exact"
+  },
+  "solution": "$30/4=15/2$.",
+  "hints": [
+   "Square, sum, then average."
+  ],
+  "check": "Fraction(4+1+9+16,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The same residuals are 2, -1, 3 and -4 in target units. Find the RMSE in target units, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.7386127875258306,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "$\\sqrt{7.5}\\approx 2.739$.",
+  "hints": [
+   "Take the root of the MSE."
+  ],
+  "check": "math.sqrt(Fraction(15,2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The same residuals are 2, -1, 3 and -4 in target units. Find the MAE in target units, as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "form": "exact"
+  },
+  "solution": "$10/4=5/2$.",
+  "hints": [
+   "Take absolute values first."
+  ],
+  "check": "Fraction(2+1+3+4,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Targets are 1, 2 and 3, and predictions are 1.5, 2 and 2.5. Find R-squared as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/4",
+   "form": "exact"
+  },
+  "solution": "The mean target is 2, so SST $=2$. SSE $=0.5$, and $R^2=1-0.5/2=3/4$.",
+  "hints": [
+   "Use the mean of the targets as the baseline."
+  ],
+  "check": "1-Fraction(1,2)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What is the main pitfall of MAPE?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Huge or undefined percentage errors when targets are near zero",
+    "Errors always smaller than MAE",
+    "Errors reported in squared units",
+    "No pitfalls, since it is safe near zero"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "MAPE and MAE are not ordered in general",
+    "MAPE is a percentage, not squared units",
+    "division by a target near zero makes it unsafe"
+   ]
+  },
+  "solution": "MAPE divides each error by the target.",
+  "hints": [
+   "What does MAPE divide by?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the sum of squared residuals over $n$ rows, SSE, as an expression in n and mse.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*mse",
+   "vars": [
+    "n",
+    "mse"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "mse*n"
+   ]
+  },
+  "solution": "SSE $=n\\cdot$ MSE.",
+  "hints": [
+   "MSE divides SSE by n."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0136",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which search usually finds good settings faster when only a few hyperparameters matter?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Random search",
+    "Grid search always",
+    "Neither, defaults always suffice",
+    "Grid search, only if features are scaled"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a grid tests only its own points, so the best value can lie between them",
+    "defaults do not always suffice, so search is needed",
+    "scaling does not change which search wins"
+   ]
+  },
+  "solution": "Random draws try more distinct values for each important setting.",
+  "hints": [
+   "A grid spends trials on every combination."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0137",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is validation leakage in tuning?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Choosing hyperparameters using the test set",
+    "Fitting the final model on the training rows",
+    "Reporting the validation score",
+    "Setting a random seed"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "fitting the final model on training rows is the normal pipeline",
+    "reporting a validation score is normal practice",
+    "a fixed seed makes runs repeatable, not leaky"
+   ]
+  },
+  "solution": "Test information influences the chosen settings.",
+  "hints": [
+   "Which set must stay untouched until the final report?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0138",
+  "tier": "a",
+  "type": "recall",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Among rows where a model says 0.8, 60% are actually positive. What is the calibrated probability for those rows? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Calibration matches stated probability to observed frequency.",
+  "hints": [
+   "Use the observed frequency among those rows."
+  ],
+  "check": "Fraction(6,10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0139",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A grid has 3 values of learning rate and 4 values of depth, with 5-fold CV (one fit per fold) for each setting. How many model fits in total?",
+  "answer": {
+   "kind": "numeric",
+   "value": 60,
+   "form": "exact"
+  },
+  "solution": "$3\\cdot 4\\cdot 5=60$.",
+  "hints": [
+   "Settings times folds."
+  ],
+  "check": "3*4*5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0140",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two rows have predicted probabilities 0.8 and 0.3, with outcomes 1 and 0. Find the mean squared gap, the Brier score, as an exact fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "13/200",
+   "form": "exact"
+  },
+  "solution": "$((0.8-1)^2+0.3^2)/2=0.065=13/200$.",
+  "hints": [
+   "Square each probability gap, then average."
+  ],
+  "check": "((Fraction(8,10)-1)**2+Fraction(3,10)**2)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0141",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which practice keeps the reported score honest after tuning?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Choose settings on validation folds, then report on an untouched test set",
+    "Report the best validation score as the final estimate",
+    "Tune on the test set, then retrain",
+    "Average the test scores of all trials"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the best of many noisy trials is optimistic",
+    "tuning on test makes the test set part of the training signal",
+    "trials that look at the test set still leak it into the report"
+   ]
+  },
+  "solution": "The final number comes from data that never guided a choice.",
+  "hints": [
+   "Which data must be unseen by every choice?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0142",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A grid has 3 hyperparameters with 4 values each. How many configurations does the full grid contain?",
+  "answer": {
+   "kind": "numeric",
+   "value": 64,
+   "form": "exact"
+  },
+  "solution": "$4^3=64$.",
+  "hints": [
+   "Each hyperparameter multiplies the count."
+  ],
+  "check": "4**3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0143",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Platt scaling maps a score $s$ to a probability as $\\sigma(as+b)$, where $\\sigma$ is the logistic function and $a$, $b$ are fitted. Write the probability in a, b and s.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/(1+exp(-(a*s+b)))",
+   "vars": [
+    "a",
+    "b",
+    "s"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "1/(1+exp(-a*s-b))"
+   ]
+  },
+  "solution": "It is the logistic of the linear score $as+b$.",
+  "hints": [
+   "Use $\\sigma(z)=1/(1+e^{-z})$ with $z=as+b$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t6-0144",
+  "tier": "b",
+  "type": "micro",
+  "level": "T6",
+  "tags": [
+   "t6.tuning"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements explain why a validation score is optimistic after tuning? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Many trials pick the best of noisy scores, which biases the score upward",
+    "Validation rows reused for early stopping make the score optimistic",
+    "A score on a new holdout is optimistic",
+    "Nested CV removes all optimism"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Selection on noise inflates the best score. Nested CV reduces this bias but does not erase it.",
+  "hints": [
+   "Which claims describe selection bias?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

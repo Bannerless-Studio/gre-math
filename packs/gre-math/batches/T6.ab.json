@@ -1198,10 +1198,10 @@
       ],
       "correct": 3,
       "why": [
-        "",
-        "",
-        "",
-        "assumed a subspace must contain unit vectors"
+        "required: a subspace must contain $\\mathbf 0$",
+        "required: closure under addition",
+        "required: closure under scalar multiplication",
+        "correct: unit vectors are not required"
       ]
     },
     "check": null,

@@ -12,6 +12,7 @@ items = json.load(open(ip)); techs = json.load(open(tp))
 by_id = {it["id"]: i for i, it in enumerate(items)}
 tech_by = {t["id"]: t for t in techs}
 added = replaced = teach = 0
+seen_run = {}
 for f in sorted(glob.glob(os.path.join(pack, "batches", "*.json"))):
     if only is not None and os.path.basename(f).split(".")[0] not in only: continue
     data = json.load(open(f))
@@ -21,6 +22,8 @@ for f in sorted(glob.glob(os.path.join(pack, "batches", "*.json"))):
             tech_by[tid]["teach"] = md; teach += 1
         continue
     for it in data:
+        if it["id"] in seen_run: sys.exit(f"{f}: item id {it['id']} already appears in {seen_run[it['id']]} in this run")
+        seen_run[it["id"]] = os.path.basename(f)
         if it["id"] in by_id: items[by_id[it["id"]]] = it; replaced += 1
         else: by_id[it["id"]] = len(items); items.append(it); added += 1
 json.dump(items, open(ip, "w"), indent=1, ensure_ascii=False)

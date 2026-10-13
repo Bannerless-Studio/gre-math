@@ -1,0 +1,3999 @@
+[
+ {
+  "id": "t1-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement is equivalent to $A \\subseteq B$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Every element of $A$ is an element of $B$",
+    "Some element of $A$ is an element of $B$",
+    "Every element of $B$ is an element of $A$",
+    "$A$ and $B$ share at least one element"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "'some' allows elements of A outside B",
+    "reverses the containment",
+    "shared elements describe intersection, not containment"
+   ]
+  },
+  "solution": "A subset means every element of $A$ lies in $B$.",
+  "hints": [
+   "Subset is a for-all statement about elements of $A$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write $\\overline{A\\cap B}$ using complements and unions.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\overline{A}\\cup\\overline{B}$",
+    "$\\overline{A}\\cap\\overline{B}$",
+    "$A\\cup B$",
+    "$\\overline{A}\\cap B$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "flips the complements but keeps intersection",
+    "drops both complements",
+    "complements only one set"
+   ]
+  },
+  "solution": "De Morgan: the complement of an intersection is the union of the complements.",
+  "hints": [
+   "Complement swaps union and intersection."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $|A|=a$, $|B|=b$ and $|A\\cap B|=c$. Write $|A\\cup B|$ in terms of $a$, $b$, $c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a+b-c",
+   "vars": [
+    "a",
+    "b",
+    "c"
+   ],
+   "also": [
+    "b+a-c",
+    "a-c+b"
+   ]
+  },
+  "check": null,
+  "solution": "Inclusion-exclusion counts the overlap once, so subtract it once.",
+  "hints": [
+   "Add the two sizes, then remove the overlap once."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "In a group of 60 people, 34 like tea, 27 like coffee and 12 like both. How many like neither? Answer in people.",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "60-(34+27-12)",
+  "solution": "At least one: $34+27-12=49$. Neither: $60-49=11$.",
+  "hints": [
+   "Count the union first, then take the rest of the 60."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A class has 100 students. 45 take maths, 30 take physics and 10 take both. Pick one student at random. Give the probability that they take maths or physics, as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.65,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(45+30-10)/100",
+  "solution": "The union has $45+30-10=65$ students, so $65/100=0.65$.",
+  "hints": [
+   "Use inclusion-exclusion before dividing by 100."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $A=\\{1,2,3,4\\}$, $B=\\{3,4,5\\}$ and $C=\\{4,6\\}$. Select all true statements.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$A\\cap B=\\{3,4\\}$",
+    "$A\\cup C=\\{1,2,3,4,6\\}$",
+    "$B\\setminus A=\\{5\\}$",
+    "$C\\subseteq B$",
+    "$A\\cap B\\cap C=\\{4\\}$"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    4
+   ]
+  },
+  "solution": "$6\\in C$ but $6\\notin B$, so $C\\not\\subseteq B$. The other four check directly.",
+  "hints": [
+   "Test each set equality element by element."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A set has $n$ elements. How many of its subsets contain one fixed element $x$? Answer in terms of $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2^(n-1)",
+   "vars": [
+    "n"
+   ],
+   "also": [
+    "2^n/2",
+    "2^n*2^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Fix $x$ in. The other $n-1$ elements are free, giving $2^{n-1}$.",
+  "hints": [
+   "The other elements are each free to be in or out."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Of 50 students, 30 study French, 25 German and 20 Spanish. 15 study both French and German, 10 both French and Spanish, 8 both German and Spanish (each count includes those who study all three), and 5 study all three. How many study none of the three? Answer in students.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "50-(30+25+20-15-10-8+5)",
+  "solution": "The union is $75-33+5=47$, so $50-47=3$.",
+  "hints": [
+   "Use the three-set inclusion-exclusion formula."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all statements equivalent to $A\\subseteq B$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$A\\cap B=A$",
+    "$A\\cup B=B$",
+    "$A\\cup B=A$",
+    "$A\\setminus B=\\varnothing$",
+    "$B\\subseteq A$"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Each correct option says every element of $A$ lies in $B$. $A\\cup B=A$ and $B\\subseteq A$ state the reverse containment.",
+  "hints": [
+   "Translate each equality into a statement about elements."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A rational function $f(x)=p(x)/q(x)$ is undefined at which $x$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Where $q(x)=0$",
+    "Where $p(x)=0$",
+    "Where $x=0$, always",
+    "Where $p(x)=q(x)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a zero of the numerator gives value 0, not an undefined value",
+    "x=0 matters only if the denominator vanishes there",
+    "equal numerator and denominator gives 1"
+   ]
+  },
+  "solution": "Division by zero is the only failure, so the denominator's zeros are excluded.",
+  "hints": [
+   "Division by zero is the only problem here."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement about an inverse $f^{-1}$ is always true where it is defined?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f^{-1}(f(x))=x$ for every $x$ in the domain of $f$",
+    "$f^{-1}(x)=1/f(x)$",
+    "$f^{-1}$ exists for every function $f$",
+    "$f^{-1}$ has the same graph as $f$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "confuses the inverse with the reciprocal",
+    "only one-to-one functions have inverses",
+    "the graph is reflected in y=x, so it differs"
+   ]
+  },
+  "solution": "The inverse undoes $f$, so applying $f$ then $f^{-1}$ returns $x$.",
+  "hints": [
+   "Think of the inverse as undoing the function."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f(x)=2x+3$ and $g(x)=x^2$. Write $f(g(x))$ in terms of $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*x^2+3",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "2x^2+3",
+    "3+2*x^2"
+   ]
+  },
+  "check": null,
+  "solution": "Substitute $g(x)$ into $f$: $2(x^2)+3$.",
+  "hints": [
+   "Replace the input of f by the whole of g(x)."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f(x)=3x-1$ and $g(x)=x^2+2$. Find $f(g(2))$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 17,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3*(2*2+2)-1",
+  "solution": "$g(2)=6$ and $f(6)=17$.",
+  "hints": [
+   "Evaluate the inner function first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the inverse of $f(x)=3x-5$. Write $f^{-1}(y)$ in terms of $y$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(y+5)/3",
+   "vars": [
+    "y"
+   ],
+   "also": [
+    "(y+5)*3^(-1)",
+    "y/3+5/3"
+   ]
+  },
+  "check": null,
+  "solution": "Solve $y=3x-5$ for $x$: $x=(y+5)/3$.",
+  "hints": [
+   "Undo the subtraction, then the multiplication."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=x+1$ for $x<0$ and $f(x)=x^2$ for $x\\ge 0$. Find $f(-2)+f(3)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(-2+1)+3*3",
+  "solution": "$f(-2)=-1$ and $f(3)=9$, so the sum is 8.",
+  "hints": [
+   "Choose the branch from the sign of the input."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all functions that are one-to-one on all of $\\mathbb{R}$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$2x+1$",
+    "$x^2$",
+    "$x^3$",
+    "$|x|$",
+    "$e^{x}$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "solution": "Nonzero-slope lines, cubics and exponentials never repeat a value. $x^2$ and $|x|$ take each positive value twice.",
+  "hints": [
+   "Ask whether two different inputs can share an output."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $h(x)=-(x-1)^2+5$. Find the maximum value of $h$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "5-(1-1)*(1-1)",
+  "solution": "The squared term is zero at $x=1$, so the peak is 5.",
+  "hints": [
+   "The squared term is never negative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $f(x)=x^2$ and $g(x)=f(x-3)$. Find $g(5)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(5-3)**2",
+  "solution": "$g(5)=f(2)=4$.",
+  "hints": [
+   "Substitute x-3 wherever x appears in f."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Multiplying both sides of an inequality by a negative number does what?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Reverses the inequality sign",
+    "Keeps the sign",
+    "Requires squaring both sides",
+    "Is never allowed"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets the sign flip",
+    "squaring is a different move, not needed",
+    "multiplying by negatives is allowed"
+   ]
+  },
+  "solution": "Multiplying by a negative flips the direction of the inequality.",
+  "hints": [
+   "Test with -1 on the inequality 1 < 2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which set equals the solutions of $|x-a|<b$ when $b>0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a-b<x<a+b$",
+    "$x<a-b$ or $x>a+b$",
+    "$a<x<b$",
+    "$x<a$ or $x>b$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the solution of the opposite inequality $|x-a|>b$",
+    "swaps the centre and the radius",
+    "compares x with the parameters, not their distance"
+   ]
+  },
+  "solution": "Distance from $a$ less than $b$ means $x$ lies within $b$ of $a$.",
+  "hints": [
+   "Think of absolute value as distance on the number line."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the length of the solution interval of $-2 < x \\le 5$? Answer as a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "5-(-2)",
+  "solution": "The length is $5-(-2)=7$.",
+  "hints": [
+   "Subtract the lower endpoint from the upper."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Solve $3x-7 > 2x+4$. Give the smallest integer $x$ that satisfies it.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "int(11)+1",
+  "solution": "Subtract $2x$ and add 7 to get $x>11$, so the smallest integer is 12.",
+  "hints": [
+   "Collect the x terms on one side first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Solve $-2x+5 \\ge 11$. Give the largest integer $x$ that satisfies it.",
+  "answer": {
+   "kind": "numeric",
+   "value": -3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(11-5,-2)",
+  "solution": "$-2x\\ge 6$, so $x\\le -3$. Dividing by $-2$ flips the sign.",
+  "hints": [
+   "Divide by a negative number and flip the sign."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which values of $x$ satisfy $|2x-1|\\le 3$? Select all.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$x=-1$",
+    "$x=2$",
+    "$x=0$",
+    "$x=2.5$",
+    "$x=-1.5$"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "The condition is $-1\\le x\\le 2$.",
+  "hints": [
+   "Write the condition as a double inequality first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $x<1$, write $|x-3|$ without absolute value bars, in terms of $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "3-x",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "-x+3",
+    "-(x-3)"
+   ]
+  },
+  "check": null,
+  "solution": "Since $x-3<0$, $|x-3|=-(x-3)=3-x$.",
+  "hints": [
+   "Check the sign of x-3 first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Solve $x^2-5x+6<0$. The solution set is $(a,b)$ with $a<b$. Find $b-a$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3-2",
+  "solution": "The roots are 2 and 3, and the parabola is negative between them, so $b-a=1$.",
+  "hints": [
+   "Factor, then test a point between the roots."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many integers $x$ satisfy $1\\le x<4$? Answer as a count.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "len(range(1,4))",
+  "solution": "The integers are 1, 2 and 3.",
+  "hints": [
+   "Include the left endpoint and exclude 4."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write $\\sum_{k=1}^{n} k$ in closed form in $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*(n+1)/2",
+   "vars": [
+    "n"
+   ],
+   "also": [
+    "n(n+1)/2",
+    "(n^2+n)/2"
+   ]
+  },
+  "check": null,
+  "solution": "Pair the terms $k$ and $n+1-k$. There are $n$ pairs, each summing to $n+1$.",
+  "hints": [
+   "Pair terms from the two ends."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $x\\ne 1$, which expression equals $\\sum_{k=0}^{n} x^k$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{x^{n+1}-1}{x-1}$",
+    "$\\dfrac{x^{n}-1}{x-1}$",
+    "$\\dfrac{1-x^{n}}{1+x}$",
+    "$(n+1)x$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets that k starts at 0, so there are n+1 terms",
+    "wrong denominator, which should be x-1",
+    "treats every power of x as x"
+   ]
+  },
+  "solution": "Multiply by $x-1$ and the sum telescopes to $x^{n+1}-1$.",
+  "hints": [
+   "Count the terms: k runs from 0 to n."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Rewrite $\\sum_{k=2}^{5} a_k$ with $j=k-1$. Which form is correct?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sum_{j=1}^{4} a_{j+1}$",
+    "$\\sum_{j=1}^{4} a_{j}$",
+    "$\\sum_{j=2}^{5} a_{j-1}$",
+    "$\\sum_{j=1}^{5} a_{j+1}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets to replace k with j+1 in the term",
+    "shift taken the wrong way, bounds left alone",
+    "bounds not shifted, so five terms, not four"
+   ]
+  },
+  "solution": "$k=2$ gives $j=1$ and $k=5$ gives $j=4$, with $a_k=a_{j+1}$.",
+  "hints": [
+   "Work out the new lower and upper limits first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Compute $\\sum_{k=1}^{10} k^2$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 385,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(k*k for k in range(1,11))",
+  "solution": "The sum of the first ten squares is 385.",
+  "hints": [
+   "Add the squares directly or use the formula."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Compute $\\sum_{k=3}^{7}(2k-1)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(2*k-1 for k in range(3,8))",
+  "solution": "The terms are 5, 7, 9, 11 and 13.",
+  "hints": [
+   "List the five terms first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write $\\sum_{k=1}^{n}(2k-1)$ in closed form in $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n^2",
+   "vars": [
+    "n"
+   ],
+   "also": [
+    "n*n",
+    "n(n)"
+   ]
+  },
+  "check": null,
+  "solution": "The first $n$ odd numbers sum to $n^2$. Check $n=2$: $1+3=4$.",
+  "hints": [
+   "Try n = 1, 2, 3 and spot the pattern."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Compute the telescoping product $\\prod_{k=2}^{5}\\dfrac{k}{k-1}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(2,1)*Fraction(3,2)*Fraction(4,3)*Fraction(5,4)",
+  "solution": "Numerators and denominators cancel, leaving $5/1$.",
+  "hints": [
+   "Write out the four factors and cancel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Compute $\\sum_{k=1}^{20}(k+3)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 270,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(k+3 for k in range(1,21))",
+  "solution": "$\\sum k=210$ and $20\\cdot 3=60$, so the total is 270.",
+  "hints": [
+   "Split the sum into two parts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which expressions equal $\\sum_{k=1}^{4} k^3$? Select all.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$100$",
+    "$\\left(\\frac{4\\cdot 5}{2}\\right)^2$",
+    "$\\sum_{k=0}^{4} k^3$",
+    "$\\sum_{k=1}^{3} k^3+4$",
+    "$\\sum_{k=1}^{4} k^2$"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "$1+8+27+64=100$, which is also $(1+2+3+4)^2$. The $k=0$ term adds nothing.",
+  "hints": [
+   "Add the four cubes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write $1+r+r^2+\\cdots+r^{n-1}$ in closed form, for $r\\ne 1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(1-r^n)/(1-r)",
+   "vars": [
+    "r",
+    "n"
+   ],
+   "also": [
+    "(r^n-1)/(r-1)",
+    "(1-r^n)*(1-r)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Multiply the sum by $1-r$. Everything telescopes to $1-r^n$.",
+  "hints": [
+   "Multiply the sum by 1-r."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The infinite series $\\sum_{k\\ge 0} a r^k$ converges if and only if:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$|r|<1$",
+    "$r<1$",
+    "$|r|\\le 1$",
+    "$r>0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "allows r below -1, where terms grow",
+    "includes r=1 and r=-1, where terms do not shrink",
+    "a negative r with |r|<1 still converges"
+   ]
+  },
+  "solution": "The terms must shrink in size, so $|r|<1$.",
+  "hints": [
+   "Think about the size of the terms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $\\sum_{k\\ge 0}(1/2)^k$. Answer as a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "1/(1-Fraction(1,2))",
+  "solution": "With first term 1 and ratio $1/2$, the sum is $1/(1-1/2)=2$.",
+  "hints": [
+   "Use the infinite formula with first term 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Compute $\\sum_{k=0}^{5} 2^k$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 63,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(2**k for k in range(6))",
+  "solution": "The terms are 1, 2, 4, 8, 16 and 32, summing to 63.",
+  "hints": [
+   "Use the finite formula or add directly."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sum_{k=1}^{\\infty} 5\\,(0.6)^k$. Give the answer as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "15/2",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "5*Fraction(3,5)/(1-Fraction(3,5))",
+  "solution": "The first term is $5(0.6)=3$ and the ratio is $0.6$, so the sum is $3/0.4=7.5$.",
+  "hints": [
+   "Start the formula at k=1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A payment of 100 dollars arrives at the end of each year, forever, starting one year from now. At a discount factor of $1/1.05$ per year, what is the present value in dollars?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2000,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "100/(Fraction(105,100)-1)",
+  "solution": "The sum is $100/(1.05-1)=2000$ dollars.",
+  "hints": [
+   "Sum the discounted payments as a geometric series."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Compute $\\sum_{k=0}^{4} 3(-2)^k$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 33,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(3*(-2)**k for k in range(5))",
+  "solution": "The terms are 3, -6, 12, -24 and 48, summing to 33.",
+  "hints": [
+   "Track the alternating signs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Given $0<r<1$ and $\\sum_{k\\ge 0} r^k = 4$, find $r$. Give it as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/4",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "1-Fraction(1,4)",
+  "solution": "$1/(1-r)=4$ gives $r=3/4$.",
+  "hints": [
+   "Solve $1/(1-r)=4$ for r."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write $\\sum_{k=2}^{n} r^k$ in closed form for $r\\ne 1$, in terms of $r$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(r^(n+1)-r^2)/(r-1)",
+   "vars": [
+    "r",
+    "n"
+   ],
+   "also": [
+    "(r^(n+1)-r^2)*(r-1)^(-1)",
+    "r^2*(r^(n-1)-1)/(r-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Take the full sum from $k=0$ and remove the $k=0$ and $k=1$ terms, or factor out $r^2$.",
+  "hints": [
+   "Start from the sum from k=0 and remove the first two terms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which is the correct law for the log of a product, $a,b>0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\log(ab)=\\log a+\\log b$",
+    "$\\log(ab)=\\log a\\cdot\\log b$",
+    "$\\log(a+b)=\\log a+\\log b$",
+    "$\\log(a-b)=\\log a-\\log b$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "multiplies the logs instead of adding them",
+    "distributes the log over a sum",
+    "splits a difference, which the law does not allow"
+   ]
+  },
+  "solution": "Logs turn products into sums: $\\log(ab)=\\log a+\\log b$.",
+  "hints": [
+   "Test with a=b=10 in base 10."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write $\\log_b x$ in terms of base-10 logs, for $x>0$, $b>0$, $b\\ne 1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "log(x)/log(b)",
+   "vars": [
+    "x",
+    "b"
+   ],
+   "also": [
+    "log(x)*log(b)^(-1)",
+    "1/(log(b)/log(x))"
+   ]
+  },
+  "check": null,
+  "solution": "Change of base: divide the base-10 log of $x$ by the base-10 log of $b$.",
+  "hints": [
+   "Divide by log b."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The equation $2^{x}=8$ has solution:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$x=3$",
+    "$x=4$",
+    "$x=2$",
+    "$x=8$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reads 2^4 as 8; in fact 2^4 is 16",
+    "reads 2^2 as 8; in fact 2^2 is 4",
+    "confuses the exponent with the value"
+   ]
+  },
+  "solution": "$8=2^3$, so $x=3$.",
+  "hints": [
+   "Write 8 as a power of 2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "Solve $3^{x}=81$ for $x$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "round(math.log(81,3))",
+  "solution": "$81=3^4$, so $x=4$.",
+  "hints": [
+   "Write 81 as a power of 3."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Solve $\\log_{10} x = 3.5$ for $x$. Give $x$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3162.2776601683795,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "10**3.5",
+  "solution": "$x=10^{3.5}\\approx 3162$.",
+  "hints": [
+   "Undo the log by raising 10 to the answer."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Compute $\\log_2 8+\\log_2 16$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3+4",
+  "solution": "The exponents add: $3+4=7$.",
+  "hints": [
+   "Write 8 and 16 as powers of 2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Simplify $e^{3x}/e^{x}$ to a single exponential in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "exp(2*x)",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "e^(2*x)",
+    "exp(2x)"
+   ]
+  },
+  "check": null,
+  "solution": "Subtract exponents: $e^{3x-x}=e^{2x}$.",
+  "hints": [
+   "Dividing powers with the same base subtracts exponents."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Solve $2^{x}=5$ for $x$, using logs. Give $x$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.321928094887362,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.log(5)/math.log(2)",
+  "solution": "$x=\\ln 5/\\ln 2\\approx 2.32$.",
+  "hints": [
+   "Take the natural log of both sides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $x>0$, select all expressions equal to $\\ln(x^3)$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$3\\ln x$",
+    "$\\ln x+\\ln x+\\ln x$",
+    "$(\\ln x)^3$",
+    "$\\ln(3x)$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "The power law brings the exponent out front, giving $3\\ln x$.",
+  "hints": [
+   "Power law: the exponent comes out front."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The sigmoid $\\sigma(z)=\\dfrac{1}{1+e^{-z}}$ satisfies which identity?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1-\\sigma(z)=\\sigma(-z)$",
+    "$\\sigma(-z)=\\sigma(z)$",
+    "$\\sigma(0)=0$",
+    "$1-\\sigma(z)=\\sigma(z)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treats the sigmoid as an even function",
+    "wrong value: sigma(0) is 1/2",
+    "would need sigma(z)=1/2 for every z"
+   ]
+  },
+  "solution": "$1-\\sigma(z)=\\dfrac{e^{-z}}{1+e^{-z}}=\\dfrac{1}{1+e^{z}}=\\sigma(-z)$.",
+  "hints": [
+   "Write 1 as $(1+e^{-z})/(1+e^{-z})$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write $\\log_{10}(a/b)$ as a difference of two logs, for $a,b>0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "log(a)-log(b)",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "also": [
+    "log(a)+(-1)*log(b)",
+    "log(a)-1*log(b)"
+   ]
+  },
+  "check": null,
+  "solution": "The quotient law: the log of a ratio is the difference of the logs.",
+  "hints": [
+   "Split the quotient into two logs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is $\\log_{10}$ of the ratio $10^{7}/10^{2}$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "7-2",
+  "solution": "The ratio is $10^5$, so the log is 5.",
+  "hints": [
+   "Divide the powers first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Compute $\\log_{10} 2000$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.3010299956639813,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "3+math.log10(2)",
+  "solution": "$2000=2\\times 10^{3}$, so $\\log_{10}2000=3+\\log_{10}2\\approx 3.30$.",
+  "hints": [
+   "Split 2000 into 2 times a power of 10."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A quantity falls from $5\\times10^{4}$ to $5\\times10^{-2}$. What is $\\log_{10}$ of the ratio of the first value to the second?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "round(math.log10(5e4/5e-2))",
+  "solution": "The ratio is $10^{6}$, so the answer is 6.",
+  "hints": [
+   "The 5s cancel, leaving a power of 10."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Compute $\\log_2\\!\\left(\\dfrac{64}{4}\\right)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "round(math.log2(64/4))",
+  "solution": "$64/4=16=2^4$, so the answer is 4.",
+  "hints": [
+   "Simplify the ratio first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $\\log$ mean base-10 log. Write $\\log\\!\\left(\\dfrac{x^{2}y}{z}\\right)$ in terms of $\\log x$, $\\log y$ and $\\log z$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*log(x)+log(y)-log(z)",
+   "vars": [
+    "x",
+    "y",
+    "z"
+   ],
+   "also": [
+    "2log(x)+log(y)-log(z)",
+    "log(x^2)+log(y)-log(z)"
+   ]
+  },
+  "check": null,
+  "solution": "Product law adds, quotient law subtracts, and the power law brings the exponent 2 out front.",
+  "hints": [
+   "Use the product, quotient and power laws in turn."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $p=0.25$. Compute the log-odds $\\ln\\!\\left(\\dfrac{p}{1-p}\\right)$ with the natural log. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": -1.0986122886681098,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.log(1/3)",
+  "solution": "The odds are $0.25/0.75=1/3$, and $\\ln(1/3)\\approx -1.10$.",
+  "hints": [
+   "Simplify the odds to a fraction first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $a,b>0$ and any fixed log base, select all expressions equal to $\\log a+\\log b$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\log(ab)$",
+    "$\\log(a+b)$",
+    "$\\log a-\\log(1/b)$",
+    "$\\log a\\cdot\\log b$",
+    "$\\log(a^{2}b)-\\log a$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "solution": "Products add under log, and $-\\log(1/b)=\\log b$.",
+  "hints": [
+   "Apply the power and quotient laws to each option."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which expression gives the derivative $f'(a)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\lim_{h\\to 0}\\dfrac{f(a+h)-f(a)}{h}$",
+    "$f(a+1)-f(a)$",
+    "$\\dfrac{f(a)}{a}$",
+    "$\\lim_{h\\to 0} f(a+h)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "fixes the step at 1, giving an average rate over one unit",
+    "a ratio of values, not a rate of change",
+    "a limit of f itself, not of its change"
+   ]
+  },
+  "solution": "The derivative is the limit of the difference quotient as the step $h$ shrinks to zero.",
+  "hints": [
+   "Shrink the step h."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $P$ is measured in kilograms and $t$ in hours, what are the units of $\\dfrac{dP}{dt}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Kilograms per hour",
+    "Hours per kilogram",
+    "Kilogram-hours",
+    "Kilograms"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "inverts the ratio",
+    "multiplies units instead of dividing",
+    "drops the time unit"
+   ]
+  },
+  "solution": "A derivative divides the change in $P$ by the change in $t$: kg per hour.",
+  "hints": [
+   "Divide the output unit by the input unit."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(x)=x^2$. Write the average rate of change from $x=1$ to $x=1+h$, simplified, in terms of $h$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2+h",
+   "vars": [
+    "h"
+   ],
+   "also": [
+    "h+2",
+    "(2h+h^2)/h"
+   ]
+  },
+  "check": null,
+  "solution": "$\\dfrac{(1+h)^2-1}{h}=\\dfrac{2h+h^2}{h}=2+h$.",
+  "hints": [
+   "Expand $(1+h)^2$ and cancel h."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "A position is $s(t)=t^3$ metres, with $t$ in seconds. Find $s'(2)$ in metres per second.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3*2*2",
+  "solution": "$s'(t)=3t^2$, so $s'(2)=12$.",
+  "hints": [
+   "Differentiate, then substitute t=2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x)=x^3$, find the average slope between $x=1$ and $x=3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 13,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(3**3-1,2)",
+  "solution": "$(27-1)/(3-1)=13$.",
+  "hints": [
+   "The average rate uses only the endpoints."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A tank holds $V(t)=t^2+4t$ litres at time $t$ hours. Write $V'(t)$ in terms of $t$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*t+4",
+   "vars": [
+    "t"
+   ],
+   "also": [
+    "2t+4",
+    "4+2*t"
+   ]
+  },
+  "check": null,
+  "solution": "Differentiate term by term: $2t+4$ litres per hour.",
+  "hints": [
+   "Use the power rule on each term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the slope of the tangent to $y=1/x$ at $x=2$. Give it as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-1/4",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "-Fraction(1,4)",
+  "solution": "$y'=-1/x^2$, which is $-1/4$ at $x=2$.",
+  "hints": [
+   "Write $1/x$ as $x^{-1}$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A car's position is $x(t)$ metres. Select all statements that describe $x'(t)$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Instantaneous velocity at time $t$",
+    "Slope of the position-time graph at time $t$",
+    "Average velocity over the next second",
+    "Position divided by time"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "The derivative is the instantaneous rate. A one-second average is a different quantity.",
+  "hints": [
+   "Instantaneous means the limit as the interval shrinks."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A population is $P(t)=500\\cdot 1.1^{t}$ people, with $t$ in years. Find $P'(0)$ in people per year. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 47.655089902162466,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "500*math.log(1.1)",
+  "solution": "$P'(t)=500(\\ln 1.1)\\,1.1^{t}$, so $P'(0)=500\\ln 1.1\\approx 47.66$.",
+  "hints": [
+   "The derivative of $a^{t}$ is $a^{t}\\ln a$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the derivative of $x^{n}$ with respect to $x$, for a constant $n\\ne 0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*x^(n-1)",
+   "vars": [
+    "x",
+    "n"
+   ],
+   "also": [
+    "x^(n-1)*n",
+    "n x^(n-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Power rule: bring the exponent down and lower it by one.",
+  "hints": [
+   "Bring the exponent down, then subtract one from it."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Chain rule: which expression is $\\dfrac{d}{dx}f(g(x))$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$f'(g(x))\\,g'(x)$",
+    "$f'(x)\\,g'(x)$",
+    "$f(g(x))\\,g'(x)$",
+    "$f'(g(x))+g'(x)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "evaluates the outer derivative at x, not at g(x)",
+    "forgets to differentiate the outer function",
+    "adds the derivatives instead of multiplying"
+   ]
+  },
+  "solution": "Differentiate the outer function at the inner point, then multiply by the inner derivative.",
+  "hints": [
+   "Outer derivative first, then times the inner derivative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State $\\dfrac{d}{dx}\\ln x$ for $x>0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/x",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "x^(-1)",
+    "1*x^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "The log's derivative is $1/x$.",
+  "hints": [
+   "Recall the derivative of the natural log."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find $f'(2)$ for $f(x)=x^{4}$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 32,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4*2*2*2",
+  "solution": "$f'(x)=4x^3$, so $f'(2)=32$.",
+  "hints": [
+   "Use the power rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Differentiate $f(x)=x\\,e^{x}$.",
+  "answer": {
+   "kind": "expression",
+   "value": "exp(x)+x*exp(x)",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "exp(x)*(1+x)",
+    "e^x+x*e^x"
+   ]
+  },
+  "check": null,
+  "solution": "Product rule: $e^{x}\\cdot 1+x\\cdot e^{x}=e^{x}(1+x)$.",
+  "hints": [
+   "Use the product rule first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Differentiate $f(x)=\\dfrac{x}{x+1}$ for $x\\ne -1$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/(x+1)^2",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "(x+1)^(-2)",
+    "1/((x+1)*(x+1))"
+   ]
+  },
+  "check": null,
+  "solution": "Quotient rule: $\\dfrac{(x+1)-x}{(x+1)^2}=\\dfrac{1}{(x+1)^2}$.",
+  "hints": [
+   "Quotient rule with numerator x and denominator x+1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $h(x)=(3x+1)^{5}$. Find $h'(0)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "5*3*(3*0+1)**4",
+  "solution": "Chain rule: $h'(x)=15(3x+1)^4$, so $h'(0)=15$.",
+  "hints": [
+   "Outer power first, then times the inner derivative 3."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $g(x)=\\ln(x^{2}+1)$. Find $g'(1)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(2*1,1+1)",
+  "solution": "$g'(x)=2x/(x^2+1)$, so $g'(1)=2/2=1$.",
+  "hints": [
+   "Use the chain rule with inner function $x^2+1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all correct derivatives.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\dfrac{d}{dx}x^{3}=3x^{2}$",
+    "$\\dfrac{d}{dx}e^{2x}=e^{2x}$",
+    "$\\dfrac{d}{dx}e^{2x}=2e^{2x}$",
+    "$\\dfrac{d}{dx}\\ln(2x)=\\dfrac{1}{x}$",
+    "$\\dfrac{d}{dx}\\left(x^{2}\\cdot x\\right)=2x$"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "solution": "The chain rule gives $2e^{2x}$ and $2/(2x)=1/x$. $x^2\\cdot x=x^3$ has derivative $3x^2$.",
+  "hints": [
+   "Apply the chain rule to each exponent or log argument."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "At a local maximum of a differentiable $f$, how does the sign of $f'$ change through the point?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "From positive to negative",
+    "From negative to positive",
+    "It stays zero on both sides",
+    "It stays positive on both sides"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that pattern marks a local minimum",
+    "no sign change, so the test gives nothing",
+    "a function rising on both sides does not reach a peak"
+   ]
+  },
+  "solution": "Before the peak $f$ increases ($f'>0$), after it $f$ decreases ($f'<0$).",
+  "hints": [
+   "Picture the graph climbing, then falling."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "If $f'(c)=0$ and $f''(c)<0$, what does $c$ give?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A local maximum",
+    "A local minimum",
+    "An inflection point",
+    "No conclusion"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a negative second derivative means concave down, so a peak",
+    "an inflection point needs f'' to change sign",
+    "the test is conclusive when f''(c) is nonzero"
+   ]
+  },
+  "solution": "Negative $f''$ means concave down at a critical point, so it is a peak.",
+  "hints": [
+   "Read the sign of the second derivative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "How many critical points does $f(x)=x^{4}-2x^{2}$ have on the real line? Count them.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "len({x for x in range(-3,4) if 4*x**3-4*x==0})",
+  "solution": "$f'(x)=4x^3-4x=4x(x-1)(x+1)$ vanishes at $x=-1,0,1$.",
+  "hints": [
+   "Solve $f'(x)=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "Find the $x$ at which $f(x)=x^{2}-6x+10$ has its minimum.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "6//2",
+  "solution": "$f'(x)=2x-6=0$ gives $x=3$.",
+  "hints": [
+   "Set the derivative to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the minimum value of $f(x)=x^{2}-6x+10$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3*3-6*3+10",
+  "solution": "$f(3)=9-18+10=1$.",
+  "hints": [
+   "Substitute the minimiser found by setting f' to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the maximum value of $g(x)=-2x^{2}+8x-3$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "-2*2*2+8*2-3",
+  "solution": "The vertex is at $x=2$: $g(2)=-8+16-3=5$.",
+  "hints": [
+   "Set g' to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all critical points of $f(x)=x^{3}-3x$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$x=-1$",
+    "$x=0$",
+    "$x=1$",
+    "$x=3$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "$f'(x)=3x^2-3=0$ gives $x=\\pm 1$.",
+  "hints": [
+   "Solve $3x^2-3=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What is the maximum of $x(20-x)$ over all real $x$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 100,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "10*(20-10)",
+  "solution": "The vertex is at $x=10$, giving $10\\cdot 10=100$.",
+  "hints": [
+   "This quadratic has a negative leading coefficient."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find the $x>0$ that minimises $f(x)=x^{2}+\\dfrac{4}{x}$. Give $x$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.2599210498948732,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "2**(1/3)",
+  "solution": "$f'(x)=2x-4/x^2=0$ gives $x^3=2$, so $x=2^{1/3}\\approx 1.26$.",
+  "hints": [
+   "Multiply f' by $x^2$ and solve for x."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the antiderivative $F(x)$ of $x^{n}$ for $n\\ne -1$, taking $C=0$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x^(n+1)/(n+1)",
+   "vars": [
+    "x",
+    "n"
+   ],
+   "also": [
+    "x^(n+1)*(n+1)^(-1)",
+    "x^(n+1)/(1+n)"
+   ]
+  },
+  "check": null,
+  "solution": "Raise the exponent by one and divide by the new exponent.",
+  "hints": [
+   "Raise the power by one, then divide by it."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The definite integral $\\int_a^b f(x)\\,dx$ represents:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The signed area between the graph of $f$ and the $x$-axis from $a$ to $b$",
+    "$f(b)-f(a)$ in all cases",
+    "The slope of $f$ at $b$",
+    "The value of $f$ at the midpoint of $[a,b]$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the integral of $f'$, not of $f$",
+    "that is a derivative at b, not an accumulation",
+    "a midpoint value is not an accumulation"
+   ]
+  },
+  "solution": "The definite integral accumulates signed area between $a$ and $b$.",
+  "hints": [
+   "Think of accumulation along the x-axis."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the average value of $f(x)=x$ on $[0,4]$. Answer as a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(4**2,2)/4",
+  "solution": "$\\int_0^4 x\\,dx=8$, so the average is $8/4=2$.",
+  "hints": [
+   "Average value is the integral divided by the length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Compute $\\int_0^2 3x^{2}\\,dx$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2**3",
+  "solution": "The antiderivative is $x^3$, so $2^3-0=8$.",
+  "hints": [
+   "Find the antiderivative, then subtract."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Compute $\\int_0^3 (2x+1)\\,dx$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3**2+3",
+  "solution": "The antiderivative is $x^2+x$, and $9+3=12$.",
+  "hints": [
+   "Integrate term by term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the average value of $f(x)=x^{2}$ on $[0,3]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(3**3,3*3)",
+  "solution": "$\\frac{1}{3}\\int_0^3 x^2\\,dx=\\frac{1}{3}\\cdot 9=3$.",
+  "hints": [
+   "The average is the integral over the length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $F(x)$ with $F'(x)=4x^{3}-2x$ and $F(0)=5$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x^4-x^2+5",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "-x^2+x^4+5",
+    "5-x^2+x^4"
+   ]
+  },
+  "check": null,
+  "solution": "Integrate: $x^4-x^2+C$. Then $F(0)=5$ gives $C=5$.",
+  "hints": [
+   "Integrate each term, then fix C from F(0)."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the area between $y=x$ and $y=x^{2}$ over $0\\le x\\le 1$. Give it as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "Fraction(1,2)-Fraction(1,3)",
+  "solution": "Area $=\\int_0^1 (x-x^2)\\,dx=\\tfrac12-\\tfrac13=\\tfrac16$.",
+  "hints": [
+   "Subtract the bottom curve from the top curve."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all definite integrals with a positive value.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\int_0^1 x\\,dx$",
+    "$\\int_{-1}^{0} x\\,dx$",
+    "$\\int_{-1}^{1} x\\,dx$",
+    "$\\int_1^2 1\\,dx$"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "solution": "$\\int_0^1 x\\,dx=\\tfrac12$ and $\\int_1^2 1\\,dx=1$. The other two are $-\\tfrac12$ and $0$.",
+  "hints": [
+   "Compute each value, or check where the integrand is negative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For vectors $u,v$ in $\\mathbb{R}^n$, how is $u+v$ computed?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Componentwise, adding matching entries",
+    "Componentwise, multiplying matching entries",
+    "By adding the lengths of $u$ and $v$",
+    "By concatenating the two lists"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the entrywise product, not addition",
+    "a sum of lengths is a number, not a vector",
+    "concatenation gives a longer list, not a vector in R^n"
+   ]
+  },
+  "solution": "Vector addition adds matching components.",
+  "hints": [
+   "Match entries by position."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dataset has $n$ rows and $p$ features. Each row is a vector in:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mathbb{R}^{p}$",
+    "$\\mathbb{R}^{n}$",
+    "$\\mathbb{R}^{np}$",
+    "$\\mathbb{R}^{n\\times p}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uses the row count instead of the feature count",
+    "the flattened size of the whole table, not one row",
+    "that is the space of whole matrices"
+   ]
+  },
+  "solution": "Each row has one entry per feature, so it lives in $\\mathbb{R}^p$.",
+  "hints": [
+   "Count the entries in one row."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $u=(p,q)$ and $v=(s,t)$ in $\\mathbb{R}^2$. Write the first component of $2u-3v$ in terms of $p$ and $s$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*p-3*s",
+   "vars": [
+    "p",
+    "s"
+   ],
+   "also": [
+    "2p-3s",
+    "-3*s+2*p"
+   ]
+  },
+  "check": null,
+  "solution": "$2u-3v=(2p-3s,\\ 2q-3t)$.",
+  "hints": [
+   "Combine matching components."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $u=(1,-2,3)$ and $v=(4,0,-1)$. Compute $2u+v$, then add up its three components.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(2*1+4)+(2*(-2)+0)+(2*3-1)",
+  "solution": "$2u+v=(6,-4,5)$, and $6-4+5=7$.",
+  "hints": [
+   "Scale first, then add componentwise."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $u=(a,b)$ and $v=(c,d)$. Write the second component of $3u-v$ in terms of $b$ and $d$.",
+  "answer": {
+   "kind": "expression",
+   "value": "3*b-d",
+   "vars": [
+    "b",
+    "d"
+   ],
+   "also": [
+    "3b-d",
+    "-d+3*b"
+   ]
+  },
+  "check": null,
+  "solution": "The second component is $3b-d$.",
+  "hints": [
+   "Scale u's second entry by 3, then subtract v's."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two data rows are $x=(2,4)$ and $y=(6,0)$. Their componentwise mean is $\\frac{x+y}{2}$. What is its second component?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(4+0,2)",
+  "solution": "$(4+0)/2=2$.",
+  "hints": [
+   "Add the second entries, then halve."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Scale $v=(1,2,3)$ by 4, then add up the components of the result.",
+  "answer": {
+   "kind": "numeric",
+   "value": 24,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4*(1+2+3)",
+  "solution": "$4v=(4,8,12)$, with sum 24.",
+  "hints": [
+   "Scaling multiplies every component."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $u=(1,2)$ and $v=(3,-1)$. Select all vectors equal to $u+v$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(4,1)$",
+    "$2u+v-u$",
+    "$(4,-1)$",
+    "$(-2,3)$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "$u+v=(1+3,\\ 2-1)=(4,1)$. $2u+v-u$ simplifies to $u+v$. $(4,-1)$ is a sign slip and $(-2,3)$ is $u-v$.",
+  "hints": [
+   "Add the first entries and the second entries separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $u=(z,w)$. Write the second component of $-2u+(1,1)$ in terms of $w$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1-2*w",
+   "vars": [
+    "w"
+   ],
+   "also": [
+    "1-2w",
+    "-2*w+1"
+   ]
+  },
+  "check": null,
+  "solution": "The second component is $-2w+1$.",
+  "hints": [
+   "Scale u first, then add the vector (1,1)."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write $u\\cdot v$ in components for $u=(u_1,u_2)$ and $v=(v_1,v_2)$.",
+  "answer": {
+   "kind": "expression",
+   "value": "u1*v1+u2*v2",
+   "vars": [
+    "u1",
+    "u2",
+    "v1",
+    "v2"
+   ],
+   "also": [
+    "v1*u1+v2*u2",
+    "u2*v2+u1*v1"
+   ]
+  },
+  "check": null,
+  "solution": "Multiply matching components and add.",
+  "hints": [
+   "Pair entries by position."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The L1 norm of a vector $x$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sum_i |x_i|$",
+    "$\\sqrt{\\sum_i x_i^{2}}$",
+    "$\\max_i |x_i|$",
+    "$\\sum_i x_i$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the L2 norm",
+    "that is the max norm",
+    "signs can cancel, so this is not a norm"
+   ]
+  },
+  "solution": "L1 adds the absolute values of the entries.",
+  "hints": [
+   "L1 is the taxicab distance from zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Cosine similarity of nonzero vectors $u$ and $v$ equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{u\\cdot v}{\\lVert u\\rVert_2\\,\\lVert v\\rVert_2}$",
+    "$\\dfrac{u\\cdot v}{\\lVert u\\rVert_1\\,\\lVert v\\rVert_1}$",
+    "$u\\cdot v$",
+    "$\\lVert u-v\\rVert_2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uses L1 norms, which do not give the angle",
+    "the raw dot product depends on length, so it is not a cosine",
+    "a distance between the vectors, not a cosine"
+   ]
+  },
+  "solution": "Dividing the dot product by both L2 lengths gives the cosine of the angle.",
+  "hints": [
+   "Remove the lengths from the dot product."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "Let $u=(1,2,3)$ and $v=(4,-5,6)$. Find $u\\cdot v$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "1*4+2*(-5)+3*6",
+  "solution": "$4-10+18=12$.",
+  "hints": [
+   "Multiply entries pairwise, then add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the L2 norm of $(3,4,12)$. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 13,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(9+16+144)",
+  "solution": "$\\sqrt{9+16+144}=\\sqrt{169}=13$.",
+  "hints": [
+   "Sum the squares first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the L1 norm of $(3,-4,0,2)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "abs(3)+abs(-4)+abs(0)+abs(2)",
+  "solution": "The absolute values 3, 4, 0 and 2 sum to 9.",
+  "hints": [
+   "Drop the signs, then add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Find the max norm of $(-7,2,5)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(abs(-7),abs(2),abs(5))",
+  "solution": "The largest absolute entry is 7.",
+  "hints": [
+   "Take the largest size, ignoring sign."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the cosine similarity of $u=(1,0)$ and $v=(1,1)$. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7071067811865476,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(1*1+0*1)/(math.sqrt(1)*math.sqrt(2))",
+  "solution": "$u\\cdot v=1$, $\\lVert u\\rVert=1$ and $\\lVert v\\rVert=\\sqrt2$, so the answer is $1/\\sqrt2\\approx 0.71$.",
+  "hints": [
+   "Divide the dot product by both lengths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all pairs of vectors that are orthogonal.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(1,2)$ and $(2,-1)$",
+    "$(1,1)$ and $(1,-1)$",
+    "$(3,0)$ and $(1,1)$",
+    "$(1,2,0)$ and $(0,0,5)$"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "The dot products are 0, 0, 3 and 0.",
+  "hints": [
+   "A dot product of zero means orthogonal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Tangent-line approximation to $f$ at $a$. Write $f(x)\\approx$ in terms of $y_0=f(a)$, $m=f'(a)$, $x$ and $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "y0+m*(x-a)",
+   "vars": [
+    "y0",
+    "m",
+    "x",
+    "a"
+   ],
+   "also": [
+    "m*(x-a)+y0",
+    "y0+m(x-a)"
+   ]
+  },
+  "check": null,
+  "solution": "A line through $(a,f(a))$ with slope $f'(a)$.",
+  "hints": [
+   "Use point-slope form."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The tangent-line approximation is accurate when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$x$ is close to $a$ and $f$ is smooth near $a$",
+    "$x$ is far from $a$",
+    "$f$ is any function at all",
+    "The approximation is exact at every point"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "error grows as x moves away from a",
+    "a sharp bend or kink makes the tangent a poor guide",
+    "only exact for linear f"
+   ]
+  },
+  "solution": "The error is small near $a$ when the curve is smooth there.",
+  "hints": [
+   "Think about how far x is from the point of tangency."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $f(x)=x^{2}$, the coefficient of $(x-1)^{2}$ in the Taylor expansion about $a=1$ is $f''(1)/2!$. Find that coefficient.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(2,2)",
+  "solution": "$f''(x)=2$, so the coefficient is $2/2=1$.",
+  "hints": [
+   "Differentiate twice, then divide by 2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Use the tangent line of $(1+x)^{3}$ at $x=0$ to approximate its value at $x=0.02$. Give the approximation as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "53/50",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "1+3*Fraction(2,100)",
+  "solution": "$f(0)=1$ and $f'(0)=3$, so $1+3(0.02)=1.06=53/50$.",
+  "hints": [
+   "Add the slope times the step to f(0)."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Use the tangent line of $\\sqrt{x}$ at $x=4$ to approximate $\\sqrt{4.02}$. Give the answer as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "401/200",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "2+Fraction(2,100)/4",
+  "solution": "$f(4)=2$ and $f'(4)=1/4$, so $2+0.02/4=2.005=401/200$.",
+  "hints": [
+   "The slope of sqrt x is $1/(2\\sqrt{x})$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The tangent line of $\\ln x$ at $x=1$ predicts $\\ln(1.1)$. Give the predicted value as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/10",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "Fraction(11,10)-1",
+  "solution": "The tangent line is $y=x-1$, which gives $0.1$ at $x=1.1$.",
+  "hints": [
+   "The slope of ln x at 1 is 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The tangent line of $\\ln x$ at $x=1$ predicts $\\ln(1.1)$ as $0.1$. Find prediction minus true value, $0.1-\\ln(1.1)$, with $\\ln$ the natural log. Give it to 4 decimal places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0047,
+   "form": "decimal",
+   "tol": 5e-05,
+   "rel": 0
+  },
+  "check": "round(0.1-math.log(1.1),4)",
+  "solution": "$0.1-0.09531=0.00469$, so $0.0047$ to 4 places.",
+  "hints": [
+   "Compute the true value of ln(1.1) and subtract."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the second-order Taylor polynomial of $e^{x}$ at $a=0$, in $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1+x+x^2/2",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "1+x+x*x/2",
+    "x^2/2+x+1"
+   ]
+  },
+  "check": null,
+  "solution": "Coefficients: $f(0)=1$, $f'(0)=1$, and $f''(0)/2=1/2$.",
+  "hints": [
+   "Terms are $f(0)$, then $f'(0)x$, then $f''(0)x^2/2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t1-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Use the second-order Taylor polynomial of $e^{x}$ at $0$ to approximate $e^{0.1}$. Give the value as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "221/200",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "1+Fraction(1,10)+Fraction(1,100)/2",
+  "solution": "$1+0.1+0.005=1.105=221/200$.",
+  "hints": [
+   "Substitute $x=1/10$ into $1+x+x^2/2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

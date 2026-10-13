@@ -1,0 +1,4126 @@
+[
+ {
+  "id": "t7-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does one Lloyd iteration do?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Assign each row to its nearest centre, then move each centre to the mean of its rows",
+    "Move each centre to the median of all rows, then assign rows",
+    "Assign each row to its farthest centre, then move centres to the mean",
+    "Fit a Gaussian to each cluster, then assign rows by likelihood"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "median and no assignment step: wrong update",
+    "farthest centre reverses the assignment rule",
+    "that is a mixture model, not Lloyd's update"
+   ]
+  },
+  "solution": "Lloyd's step alternates nearest-centre assignment and mean update.",
+  "hints": [
+   "Two steps, assign then average."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For one row $x$ in a cluster with centre $m$ in one dimension, write its squared-distance term in inertia.",
+  "answer": {
+   "kind": "expression",
+   "value": "(x-m)^2",
+   "vars": [
+    "x",
+    "m"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(m-x)^2",
+    "x^2-2*x*m+m^2"
+   ]
+  },
+  "check": null,
+  "solution": "Inertia sums squared distances from each row to its own centre: $(x-m)^2$.",
+  "hints": [
+   "Square the gap to the centre."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why run k-means from several random starts?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Several starts are needed to choose k",
+    "One run always finds the global minimum",
+    "Each run can stop at a different local minimum of inertia",
+    "Averaging the runs gives the true clusters"
+   ],
+   "correct": 2,
+   "why": [
+    "k is chosen separately, for example by an elbow plot",
+    "k-means has no guarantee of a global minimum",
+    "",
+    "averaging centres does not give true clusters"
+   ]
+  },
+  "solution": "Starts matter because the result depends on where the centres begin.",
+  "hints": [
+   "Starting centres decide where it stops."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t7-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Rows $1,2,4,9$ on a line form clusters $\\{1,2\\}$ and $\\{4,9\\}$ under $k$-means with $k=2$. Find the inertia: the sum of squared distances from each row to its cluster mean.",
+  "answer": {
+   "kind": "numeric",
+   "value": 13,
+   "form": "exact"
+  },
+  "check": "sum((Fraction(x)-Fraction(sum(c),len(c)))**2 for c in [[1,2],[4,9]] for x in c)",
+  "solution": "Means are $1.5$ and $6.5$. Squared gaps: $0.25+0.25+6.25+6.25=13$.",
+  "hints": [
+   "Use each cluster's mean, not the overall mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Points $(0,0)$, $(4,0)$ and $(2,6)$ form one cluster. Give the $y$-coordinate of its centre.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "Fraction(0+0+6,3)",
+  "solution": "The mean of $0,0,6$ is $6/3=2$.",
+  "hints": [
+   "Average the $y$ values only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Centres sit at $3$ and $10$ on a line. Give the distance from the row at $5$ to its nearest centre.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "min(abs(5-3),abs(5-10))",
+  "solution": "Distances are $2$ and $5$. The nearest is $2$.",
+  "hints": [
+   "Compare the row to each centre."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which dataset shape is a classic failure for k-means?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Two blobs far apart in a line",
+    "One compact Gaussian blob",
+    "Two concentric rings",
+    "Three round blobs of equal size"
+   ],
+   "correct": 2,
+   "why": [
+    "well-separated blobs suit k-means",
+    "a single blob has no split to fail on",
+    "",
+    "round equal blobs suit k-means"
+   ]
+  },
+  "solution": "Centres split rings by distance, so the ring boundary is wrong.",
+  "hints": [
+   "Think about non-convex shapes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two rows $a$ and $b$ form a cluster in one dimension. Write the centre (mean) of the cluster.",
+  "answer": {
+   "kind": "expression",
+   "value": "(a+b)/2",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(a+b)*2^(-1)",
+    "a/2+b/2"
+   ]
+  },
+  "check": null,
+  "solution": "The mean of two values is $(a+b)/2$.",
+  "hints": [
+   "Average the two values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about k-means are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Each Lloyd step never increases inertia",
+    "The final clusters are the same for every random start",
+    "k-means needs the number of clusters $k$ as input",
+    "k-means can find non-convex clusters"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Steps lower inertia and k must be given. Results vary by start, and shapes must be convex-ish.",
+  "hints": [
+   "Check each claim against the two steps."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What distance does single linkage use between two clusters?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The average over all pairs of rows",
+    "The smallest distance between any row in one and any row in the other",
+    "The largest distance between any pair of rows",
+    "The distance between the two cluster means"
+   ],
+   "correct": 1,
+   "why": [
+    "that is average linkage",
+    "",
+    "that is complete linkage",
+    "that is centroid linkage"
+   ]
+  },
+  "solution": "Single linkage takes the closest pair across the two clusters.",
+  "hints": [
+   "Closest pair wins."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does the height of a merge in a dendrogram measure?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The within-cluster variance of the final clustering",
+    "The number of clusters left after that merge",
+    "The distance at which two clusters were joined",
+    "The number of rows in the merged cluster"
+   ],
+   "correct": 2,
+   "why": [
+    "variance is not a merge rule",
+    "that is a count, not a distance",
+    "",
+    "that is the leaf count, not the height"
+   ]
+  },
+  "solution": "The height is the linkage distance at the merge.",
+  "hints": [
+   "Height is a distance, not a size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A full dendrogram for $n$ rows has how many merge steps? Write it in $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n-1",
+   "vars": [
+    "n"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "-1+n",
+    "n+(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Each merge reduces the cluster count by one, from $n$ down to $1$.",
+  "hints": [
+   "Start at $n$ clusters, end at one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Points $0,1$ form cluster $A$ and point $5$ is cluster $B$, on a line. Give the single-linkage distance between $A$ and $B$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "min(abs(a-5) for a in [0,1])",
+  "solution": "The closest pair is $1$ and $5$, distance $4$.",
+  "hints": [
+   "Find the closest cross pair."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Points $0,1$ form cluster $A$ and point $5$ is cluster $B$, on a line. Give the average-linkage distance: the mean of all cross-pair distances.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.5,
+   "form": "exact"
+  },
+  "check": "Fraction(abs(0-5)+abs(1-5),2)",
+  "solution": "Cross distances are $5$ and $4$. Their mean is $4.5$.",
+  "hints": [
+   "Average over all cross pairs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Cutting a dendrogram at height $2.5$, the merges are $\\{1,2\\}$ at $1.0$, $\\{3,4\\}$ at $1.8$ and $\\{1,2,3,4\\}$ at $3.1$. How many clusters remain after the cut?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "solution": "Two merges lie below the cut, so $4-2=2$ clusters remain.",
+  "hints": [
+   "Count only merges below the cut."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "4-sum(1 for h in (1.0,1.8,3.1) if h<=2.5)"
+ },
+ {
+  "id": "t7-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Clusters $A$ ($2$ rows) and $B$ ($3$ rows) have cross-pair distances summing to $S$ over all $6$ pairs. Write the average-linkage distance in $S$.",
+  "answer": {
+   "kind": "expression",
+   "value": "S/6",
+   "vars": [
+    "S"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "S/(2*3)",
+    "(1/6)*S"
+   ]
+  },
+  "check": null,
+  "solution": "Average linkage divides the cross sum by $|A|\\cdot|B|=6$.",
+  "hints": [
+   "Divide by the number of cross pairs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about single linkage are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "It can produce long chains of rows",
+    "It merges clusters by their closest pair of rows",
+    "It always gives the same clusters as complete linkage",
+    "It uses the farthest pair between clusters"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Single linkage follows closest pairs, so chaining is common.",
+  "hints": [
+   "Think closest pair."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Rows $1,2,4,8$ on a line, single linkage. Give the height of the final merge.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact"
+  },
+  "check": "max(2-1,4-2,8-4)",
+  "solution": "Sorted gaps are $1,2,4$; the last merge is the largest gap, $8-4=4$.",
+  "hints": [
+   "The top merge is the largest single-linkage gap."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In DBSCAN, what makes a row a core point?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It is the centre of its cluster",
+    "It has more than $k$ neighbours, with $k$ the number of clusters",
+    "At least $m$ rows, itself included, lie within radius $\\varepsilon$",
+    "It lies within $\\varepsilon$ of a core point"
+   ],
+   "correct": 2,
+   "why": [
+    "DBSCAN has no centroids",
+    "DBSCAN takes no $k$",
+    "",
+    "that is the definition of a border point"
+   ]
+  },
+  "solution": "A core point has at least $m$ rows in its $\\varepsilon$-ball, itself included.",
+  "hints": [
+   "Count the ball, including the point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In DBSCAN, what is a noise row?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A row far from every centroid",
+    "A row that belongs to the smallest cluster",
+    "A row with fewer than $\\varepsilon$ neighbours",
+    "A row that is not core and lies within $\\varepsilon$ of no core row"
+   ],
+   "correct": 3,
+   "why": [
+    "DBSCAN has no centroids",
+    "noise belongs to no cluster",
+    "$\\varepsilon$ is a radius, not a count",
+    ""
+   ]
+  },
+  "solution": "Noise is neither core nor reachable from a core point.",
+  "hints": [
+   "Noise is unreachable from every core."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A DBSCAN core row counts itself. With $m=4$, how many other rows must lie within $\\varepsilon$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "4-1",
+  "solution": "Core needs $4$ rows in total, one of which is the row itself, so $4-1=3$ others.",
+  "hints": [
+   "Subtract the row itself."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "1D rows $0,1,2,3,10$ with radius $\\varepsilon=1.5$ (neighbours at distance $\\le\\varepsilon$) and $m=3$ counting the row itself. How many core rows are there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "sum(1 for x in [0,1,2,3,10] if sum(1 for y in [0,1,2,3,10] if abs(x-y)<=Fraction(3,2))>=3)",
+  "solution": "Rows $1$ and $2$ each have three rows within $1.5$. Others do not.",
+  "hints": [
+   "Count within 1.5 for each row, itself included."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "1D rows $0,1,2,3,10$ with $\\varepsilon=1.5$ (distance $\\le\\varepsilon$) and $m=3$ counting the row itself. How many rows are noise: neither core nor within $\\varepsilon$ of a core row?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "check": "len([x for x in [0,1,2,3,10] if sum(1 for y in [0,1,2,3,10] if abs(x-y)<=Fraction(3,2))<3 and min(abs(x-c) for c in [1,2])>Fraction(3,2)])",
+  "solution": "Row $0$ and row $3$ are border rows near core rows. Row $10$ is noise.",
+  "hints": [
+   "A non-core row near a core row is border, not noise."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Raising $\\varepsilon$ while $m$ stays fixed will most likely do what?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Split clusters and turn more rows into noise",
+    "Leave the noise unchanged",
+    "Change the number of clusters to $k$",
+    "Merge clusters and turn fewer rows into noise"
+   ],
+   "correct": 3,
+   "why": [
+    "that is what shrinking $\\varepsilon$ does",
+    "a larger radius reaches more neighbours",
+    "DBSCAN takes no $k$",
+    ""
+   ]
+  },
+  "solution": "A larger radius makes more rows core and joins clusters.",
+  "hints": [
+   "Bigger radius means more neighbours."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Points have uniform density $r$ per unit area. Write the expected number of other rows inside a disk of radius $s$ around a point.",
+  "answer": {
+   "kind": "expression",
+   "value": "r*pi*s^2",
+   "vars": [
+    "r",
+    "s"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "pi*r*s^2",
+    "r*s^2*pi"
+   ]
+  },
+  "check": null,
+  "solution": "Expected count is density times disk area, $r\\pi s^2$.",
+  "hints": [
+   "Density times area."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about DBSCAN are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Border rows belong to a cluster but are not core rows",
+    "Noise rows are later assigned to the nearest cluster",
+    "It can find clusters of arbitrary shape",
+    "It needs the number of clusters as input"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Border rows join through a core row. Noise stays unassigned. Shapes are free. No $k$ is needed.",
+  "hints": [
+   "Noise has no cluster by definition."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "1D rows $0,1,2.5,6$. A row's neighbourhood is every row at distance $\\le1.5$, itself included, and a core row needs at least $2$. How many core rows are there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "sum(1 for x in [0,1,Fraction(5,2),6] if sum(1 for y in [0,1,Fraction(5,2),6] if abs(x-y)<=Fraction(3,2))>=2)",
+  "solution": "Rows $0$, $1$ and $2.5$ each have at least two rows within $1.5$. Row $6$ has one.",
+  "hints": [
+   "Count within 1.5 for each row."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In the E step for a Gaussian mixture, what is computed?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The new means and variances",
+    "A hard label per row, with nothing else",
+    "The total likelihood of the data under the old parameters",
+    "The responsibility of each component for each row"
+   ],
+   "correct": 3,
+   "why": [
+    "that is the M step",
+    "that is the k-means assignment, not EM",
+    "a single number, not per-row weights",
+    ""
+   ]
+  },
+  "solution": "The E step gives soft weights, one per component per row.",
+  "hints": [
+   "E step: weights. M step: parameters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In the M step, how are weights, means and variances updated?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Each is re-estimated using the responsibilities as weights",
+    "Each is set to the unweighted mean of its hard cluster",
+    "The number of components is chosen",
+    "Each row is moved to its nearest mean"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is k-means, not EM",
+    "a separate model choice",
+    "that is the k-means assignment"
+   ]
+  },
+  "solution": "M step uses responsibility-weighted sums.",
+  "hints": [
+   "Weighted averages with responsibilities."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two equal-weight components have densities $a$ and $b$ at a row. Write the responsibility of component 1 for that row.",
+  "answer": {
+   "kind": "expression",
+   "value": "a/(a+b)",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*(a+b)^(-1)",
+    "1/(1+b/a)"
+   ]
+  },
+  "check": null,
+  "solution": "With equal weights the prior cancels, leaving $a/(a+b)$.",
+  "hints": [
+   "Equal weights cancel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two equal-weight components have densities $0.2$ and $0.6$ at one row. Give the responsibility of component 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.25,
+   "form": "exact"
+  },
+  "check": "Fraction(2,10)/(Fraction(2,10)+Fraction(6,10))",
+  "solution": "Responsibility is $0.2/(0.2+0.6)=0.25$.",
+  "hints": [
+   "Weights cancel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Components with weights $0.3$ and $0.7$ have densities $0.5$ and $0.2$ at one row. Give the responsibility of component 1, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5172413793103448,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,10)*Fraction(5,10)/(Fraction(3,10)*Fraction(5,10)+Fraction(7,10)*Fraction(2,10))",
+  "solution": "$0.15/(0.15+0.14)=15/29\\approx 0.517$.",
+  "hints": [
+   "Multiply each density by its weight first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Rows at $0,1,4,5$ have responsibilities $0.9,0.8,0.1,0.2$ for component 1. Give the M-step mean of component 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.1,
+   "form": "exact"
+  },
+  "check": "(0*Fraction(9,10)+1*Fraction(8,10)+4*Fraction(1,10)+5*Fraction(2,10))/(Fraction(9,10)+Fraction(8,10)+Fraction(1,10)+Fraction(2,10))",
+  "solution": "Weighted sum $2.2$ over total weight $2.0$ gives $1.1$.",
+  "hints": [
+   "Divide the weighted sum by the total weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Why does the EM likelihood never decrease from one iteration to the next?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The likelihood is convex in the means",
+    "The M step maximises a lower bound that equals the log-likelihood at the current parameters",
+    "Responsibilities are hard labels, so each step is a k-means step",
+    "The E step adds noise that raises the likelihood"
+   ],
+   "correct": 1,
+   "why": [
+    "it is not convex, so EM can stall",
+    "",
+    "k-means minimises inertia, not likelihood",
+    "the E step only sets weights; it adds no noise"
+   ]
+  },
+  "solution": "Each M step maximises a bound that touches the likelihood, so the likelihood rises.",
+  "hints": [
+   "Bound argument, not noise."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Mixture weight $w$ on component density $a$ and $1-w$ on component density $b$. Write the mixture density.",
+  "answer": {
+   "kind": "expression",
+   "value": "w*a+(1-w)*b",
+   "vars": [
+    "w",
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*w+b*(1-w)",
+    "(1-w)*b+w*a"
+   ]
+  },
+  "check": null,
+  "solution": "Mixture density is the weighted sum of component densities.",
+  "hints": [
+   "Weights times densities, summed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about EM for a Gaussian mixture are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Soft assignments are probabilities that sum to one for each row",
+    "Covariances must be diagonal",
+    "EM can converge to a local maximum",
+    "EM chooses the number of components by itself"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Responsibilities sum to one per row. Full covariances are allowed. EM stalls at local maxima. The number of components is not learned.",
+  "hints": [
+   "Check each claim against the E step."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The silhouette of one row compares which two distances?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Mean distance to its own cluster versus mean distance to the nearest other cluster",
+    "Distance to its centroid versus the global mean",
+    "Inertia versus the between-cluster sum",
+    "Number of rows versus number of clusters"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is a centroid check, not silhouette",
+    "those are sums, not a per-row comparison",
+    "a count ratio is not silhouette"
+   ]
+  },
+  "solution": "Silhouette compares own-cluster cohesion with nearest-other-cluster separation.",
+  "hints": [
+   "Own cluster against the nearest other."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does the elbow method plot against $k$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The average silhouette",
+    "Inertia (within-cluster sum of squares)",
+    "The number of rows in the largest cluster",
+    "The Rand index against true labels"
+   ],
+   "correct": 1,
+   "why": [
+    "a separate criterion, not the elbow curve",
+    "",
+    "a size count, not a fit measure",
+    "elbow needs no labels; the Rand index does"
+   ]
+  },
+  "solution": "Elbow uses inertia, which falls as $k$ grows.",
+  "hints": [
+   "Inertia, not labels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the silhouette $s$ in terms of $a$ (own-cluster mean distance) and $b$ (nearest-other mean distance), with $b$ larger than $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(b-a)/b",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "1-a/b",
+    "(b-a)*b^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "With $b>a$, the maximum is $b$, so $s=(b-a)/b$.",
+  "hints": [
+   "Divide by the larger of the two."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A row has own-cluster mean distance $a=2$ and nearest-other mean distance $b=6$. Give its silhouette as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6666666666666666,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(6-2,6)",
+  "solution": "$s=(6-2)/6=2/3$.",
+  "hints": [
+   "Divide by the larger distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Four rows have silhouette values $0.6$, $0.2$, $0.4$ and $0.8$. Give the mean silhouette.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "form": "exact"
+  },
+  "check": "(Fraction(6,10)+Fraction(2,10)+Fraction(4,10)+Fraction(8,10))/4",
+  "solution": "Sum is $2.0$, and dividing by four gives $0.5$.",
+  "hints": [
+   "Average the four values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Inertia for $k=1,2,3,4$ is $100, 40, 30, 28$. Give the elbow: the smallest $k$ whose next added cluster lowers inertia by less than $15$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "solution": "Going from $k=1$ to $2$ drops inertia by $60$, too much. Going from $k=2$ to $3$ drops it by $10<15$, so the elbow is $k=2$.",
+  "hints": [
+   "Check each next drop against 15."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "min(k for k,drop in ((1,100-40),(2,40-30),(3,30-28)) if drop<15)"
+ },
+ {
+  "id": "t7-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Ten labelled rows form three clusters whose most common true labels appear $4$, $3$ and $2$ times. Give purity as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.9,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(4+3+2,10)",
+  "solution": "Purity is $(4+3+2)/10=0.9$.",
+  "hints": [
+   "Sum the majority counts, divide by the rows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about evaluating clusters without ground truth are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Silhouette needs true labels to compute",
+    "The elbow method plots inertia against $k$",
+    "Stability checks whether clusters repeat across resamples",
+    "The Rand index needs true labels"
+   ],
+   "correct": [
+    1,
+    2,
+    3
+   ]
+  },
+  "solution": "Silhouette uses distances only. Elbow uses inertia. Stability uses resamples. Rand compares to labels.",
+  "hints": [
+   "Silhouette needs no labels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A row has mean distance $3$ to its own cluster and $1$ to the nearest other cluster. Give its silhouette as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": -0.6666666666666666,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(1-3,3)",
+  "solution": "$s=(1-3)/3=-2/3$. Negative means it sits closer to another cluster.",
+  "hints": [
+   "Use the larger distance in the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why centre the data before PCA?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Because PCA needs a zero intercept in regression",
+    "So the first component passes through the mean and captures variance around it",
+    "To make every variable unit length",
+    "So the eigenvalues sum to one"
+   ],
+   "correct": 1,
+   "why": [
+    "PCA is not a regression",
+    "",
+    "that is scaling, not centring",
+    "eigenvalue sums are a consequence, not the reason"
+   ]
+  },
+  "solution": "Centring puts the mean at the origin, so the variance axes are measured from it.",
+  "hints": [
+   "Centre means mean at zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does a scree plot show?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A scatter of the first two scores",
+    "The residual of each row",
+    "Eigenvalues (or variance shares) of the components, in order",
+    "The loadings of one component"
+   ],
+   "correct": 2,
+   "why": [
+    "that is a score plot",
+    "that is a reconstruction check",
+    "",
+    "that is a loading plot"
+   ]
+  },
+  "solution": "A scree plot shows how fast the variance share falls by component.",
+  "hints": [
+   "Eigenvalues in order."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A PCA has total variance $t$ and component $j$ has eigenvalue $a$. Write the share of variance that component $j$ explains.",
+  "answer": {
+   "kind": "expression",
+   "value": "a/t",
+   "vars": [
+    "a",
+    "t"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*t^(-1)",
+    "(1/t)*a"
+   ]
+  },
+  "check": null,
+  "solution": "Share is the eigenvalue over the total variance.",
+  "hints": [
+   "Eigenvalue over total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t7-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two standardised features have eigenvalues $3$ and $1$. Give the share of variance explained by the first component.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "form": "exact"
+  },
+  "check": "Fraction(3,3+1)",
+  "solution": "Share is $3/(3+1)=0.75$.",
+  "hints": [
+   "Eigenvalue over the sum of eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two variables have variances $4$ and $16$ and covariance $3$. Give their correlation as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.375,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,2*4)",
+  "solution": "Correlation is $3/(2\\cdot 4)=0.375$.",
+  "hints": [
+   "Divide by the product of standard deviations."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "PCA is run on raw columns: one variable is in grams with variance $1000000$, another in kilograms with variance $0.01$. What does the first component look like?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It is almost entirely the kilograms variable",
+    "It is the simple average of the two columns",
+    "It is almost entirely the grams variable",
+    "It is an equal mix of both variables"
+   ],
+   "correct": 2,
+   "why": [
+    "the larger variance wins, which is grams here",
+    "PCA maximises variance, not an average",
+    "",
+    "raw PCA does not standardise, so units decide the mix"
+   ]
+  },
+  "solution": "Raw variance is unit-driven, so the large-unit column dominates PC1.",
+  "hints": [
+   "Scale first, or expect unit dominance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A loading vector $(a,b)$ gives the row $(p,q)$ the score $s=ap+bq$. Write the first coordinate of the reconstruction $s\\,(a,b)$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a*(a*p+b*q)",
+   "vars": [
+    "a",
+    "b",
+    "p",
+    "q"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*(p*a+q*b)",
+    "a^2*p+a*b*q"
+   ]
+  },
+  "check": null,
+  "solution": "Reconstruction is score times loading, so the first coordinate is $s\\,a$.",
+  "hints": [
+   "Score times the first loading entry."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about PCA loadings and scores are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Loadings are eigenvectors of the covariance matrix",
+    "Scores are centred rows projected onto the loadings",
+    "The overall sign of a loading is arbitrary",
+    "Loadings are chosen to be correlated with each other"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "Loadings are eigenvectors. Scores project. Signs can flip. Loadings are orthogonal, not correlated.",
+  "hints": [
+   "Eigenvectors are orthogonal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Keep one component with loading $(1,0)$ for the centred row $(3,4)$. Give the squared reconstruction error.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "form": "exact"
+  },
+  "check": "4**2",
+  "solution": "Reconstruction is $(3,0)$, so the residual is $(0,4)$ and the squared error is $16$.",
+  "hints": [
+   "Residual is the part the component drops."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does the perplexity setting control in t-SNE?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The learning rate",
+    "The number of iterations",
+    "The effective number of neighbours each row's probabilities spread over",
+    "The output dimension"
+   ],
+   "correct": 2,
+   "why": [
+    "learning rate is a separate optimiser setting",
+    "iterations are a separate budget",
+    "",
+    "output dimension is set separately, usually 2"
+   ]
+  },
+  "solution": "Perplexity sets how many neighbours each row's affinity spreads over.",
+  "hints": [
+   "Neighbour count, not dimension."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does t-SNE try to match between the high-dimensional and low-dimensional spaces?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Exact pairwise distances",
+    "Eigenvalues of the covariance matrix",
+    "Class labels",
+    "Neighbour probabilities"
+   ],
+   "correct": 3,
+   "why": [
+    "t-SNE keeps neighbour probabilities, not distances",
+    "eigenvalues belong to PCA",
+    "t-SNE uses no labels",
+    ""
+   ]
+  },
+  "solution": "t-SNE matches probability distributions over neighbours.",
+  "hints": [
+   "Probabilities over neighbours."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What output dimension is a typical t-SNE map?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "2",
+  "solution": "Maps are usually two-dimensional for viewing.",
+  "hints": [
+   "Two axes for a picture."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A t-SNE map is built on $200$ rows. How many unordered pairs of rows are there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 19900,
+   "form": "exact"
+  },
+  "check": "200*199//2",
+  "solution": "Pairs are $\\binom{200}{2}=200\\cdot 199/2=19900$.",
+  "hints": [
+   "Choose two rows, order does not matter."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A t-SNE affinity matrix is built on $400$ rows. How many off-diagonal entries does the full $400\\times400$ matrix have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 159600,
+   "form": "exact"
+  },
+  "check": "400*399",
+  "solution": "$400\\cdot 399=159600$.",
+  "hints": [
+   "Each row pairs with every other row, and order matters."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A UMAP map shows groups $A$ and $B$ far apart, and point $C$ near $A$. Which conclusion is safe?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$B$ is exactly three times as far from $A$ as $C$ is",
+    "$A$ and $B$ have different class labels",
+    "The horizontal axis measures feature one",
+    "$C$ and $A$ were likely neighbours in the data"
+   ],
+   "correct": 3,
+   "why": [
+    "map distances between far groups are not reliable",
+    "maps carry no labels",
+    "embedding axes have no fixed meaning",
+    ""
+   ]
+  },
+  "solution": "Local nearness is what the map keeps. Far distances are not measurements.",
+  "hints": [
+   "Trust local neighbours, not far gaps."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A Gaussian affinity is the normal density in the distance $d$ with standard deviation $s$, without its normalising constant. Write it as an expression in $d$ and $s$.",
+  "answer": {
+   "kind": "expression",
+   "value": "exp(-d^2/(2*s^2))",
+   "vars": [
+    "d",
+    "s"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "exp(-(d^2)/(2*s^2))",
+    "exp(-d^2*(2*s^2)^(-1))"
+   ]
+  },
+  "check": null,
+  "solution": "Dropping the constant from the normal density gives $\\exp(-d^2/(2s^2))$.",
+  "hints": [
+   "Exponent is minus distance squared over twice the variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about t-SNE and UMAP are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Both are nonlinear embedding methods",
+    "Both keep local neighbourhoods",
+    "Both preserve exact global distances",
+    "Both need labelled training data"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Both are nonlinear and local. Neither keeps global distances, and neither needs labels.",
+  "hints": [
+   "Check global distances and labels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A UMAP graph on $1000$ rows keeps $15$ nearest neighbours per row, before any symmetrising. How many directed neighbour edges are there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 15000,
+   "form": "exact"
+  },
+  "check": "1000*15",
+  "solution": "$1000\\cdot 15=15000$ directed edges.",
+  "hints": [
+   "Each row keeps $15$ outgoing edges."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does cosine similarity measure between two vectors?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The Euclidean distance between them",
+    "The sum of their coordinates",
+    "Their dot product regardless of length",
+    "The angle between them, ignoring length"
+   ],
+   "correct": 3,
+   "why": [
+    "that is a distance, not a direction measure",
+    "a sum has no angle meaning",
+    "dot product keeps length; cosine removes it",
+    ""
+   ]
+  },
+  "solution": "Cosine is the dot product divided by both lengths, so it depends only on direction.",
+  "hints": [
+   "Direction only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two vectors $u$ and $v$ have dot product $d$ and lengths $p$ and $q$. Write the cosine similarity.",
+  "answer": {
+   "kind": "expression",
+   "value": "d/(p*q)",
+   "vars": [
+    "d",
+    "p",
+    "q"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "d/p/q",
+    "d*(p*q)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Cosine is dot over the product of lengths.",
+  "hints": [
+   "Divide dot by both lengths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why do nearest-neighbour searches on embeddings often use cosine or a normalised dot product?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It always gives the exact Euclidean neighbours",
+    "Scores then depend on direction, not on vector length",
+    "It makes the vectors sum to one",
+    "It removes the need for an index"
+   ],
+   "correct": 1,
+   "why": [
+    "cosine ranking is not Euclidean ranking in general",
+    "",
+    "sums are not the point",
+    "an index is still needed at scale"
+   ]
+  },
+  "solution": "Direction carries meaning, so length should not change the ranking.",
+  "hints": [
+   "Length should not decide."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Vectors $u=(3,4)$ and $v=(4,3)$. Give their cosine similarity as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.96,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(24,25)",
+  "solution": "Dot is $24$, each length is $5$, so $24/25=0.96$.",
+  "hints": [
+   "Dot over the product of lengths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Vectors $(1,0)$ and $(1,1)$. Give their cosine similarity as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7071067811865476,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1/math.sqrt(2)",
+  "solution": "Dot is $1$, lengths $1$ and $\\sqrt2$, so $1/\\sqrt2$.",
+  "hints": [
+   "Lengths are $1$ and $\\sqrt2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two vectors point the same way, and one is $10$ times longer. Give their cosine similarity.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "solution": "Parallel vectors have cosine one, whatever their lengths.",
+  "hints": [
+   "Cosine ignores length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "(1*10+2*20)/(math.hypot(1,2)*math.hypot(10,20))"
+ },
+ {
+  "id": "t7-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For query $q=(1,0)$ and candidates $(2,0)$, $(0.6,0.8)$ and $(0,1)$, give the squared Euclidean distance from $q$ to the nearest candidate.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8,
+   "form": "exact"
+  },
+  "check": "(Fraction(3,5)-1)**2+Fraction(4,5)**2",
+  "solution": "Squared distances are $1$, $0.8$ and $2$. The nearest is $0.8$.",
+  "hints": [
+   "Compare Euclidean distances, not cosines."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about nearest-neighbour search in embeddings are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Exact search cost grows with the number of stored vectors",
+    "Approximate indexes trade some recall for speed",
+    "For unit vectors, cosine and Euclidean rankings agree",
+    "Hand-built features always beat learned embeddings"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "Exact search scales with the store. Approximate search trades recall. For unit vectors the two rankings match. Learned features can win.",
+  "hints": [
+   "Check the unit-vector identity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Unit vectors $u$ and $v$ have cosine $c$. Write their squared Euclidean distance in $c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2-2*c",
+   "vars": [
+    "c"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "2*(1-c)",
+    "-2*c+2"
+   ]
+  },
+  "check": null,
+  "solution": "For unit vectors, $\\lVert u-v\\rVert^2=2-2\\,u\\cdot v$.",
+  "hints": [
+   "Expand the squared norm."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does one-hot encoding of a category with four levels produce?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Four binary columns, exactly one of which is 1 in each row",
+    "One column with values 1 to 4",
+    "Two columns, one for each bit of a code",
+    "Four columns, each equal to the row mean"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is ordinal encoding, which adds order",
+    "that is binary encoding",
+    "that is a target-style column, not one-hot"
+   ]
+  },
+  "solution": "One-hot makes one indicator per level.",
+  "hints": [
+   "One column per level."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Target encoding replaces a category with what?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A random number per category",
+    "The mean target value of the training rows in that category",
+    "The count of rows in that category",
+    "The rank of the category by frequency"
+   ],
+   "correct": 1,
+   "why": [
+    "random values carry no label information",
+    "",
+    "that is frequency encoding",
+    "that is ordinal encoding"
+   ]
+  },
+  "solution": "Target encoding uses the mean label per level, fitted on training rows.",
+  "hints": [
+   "Mean label per level."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A category has $a$ rows out of $b$ rows in total. Write its frequency encoding.",
+  "answer": {
+   "kind": "expression",
+   "value": "a/b",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*b^(-1)",
+    "(1/b)*a"
+   ]
+  },
+  "check": null,
+  "solution": "Frequency is the share of rows in the level.",
+  "hints": [
+   "Share of rows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Ten rows, four with colour red. Give the frequency encoding of red as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4,
+   "form": "exact"
+  },
+  "check": "Fraction(4,10)",
+  "solution": "$4/10=0.4$.",
+  "hints": [
+   "Count over total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Training rows in a category have targets $1,0,1,1$. Give the target encoding for that category.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "form": "exact"
+  },
+  "check": "Fraction(1+0+1+1,4)",
+  "solution": "Mean is $3/4=0.75$.",
+  "hints": [
+   "Average training targets only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A categorical feature has $5000$ levels over $20000$ rows. What fraction of the entries in its one-hot matrix are nonzero, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0002,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "Each row has one $1$ among $5000$ columns, so the fraction is $1/5000=0.0002$. The matrix is wide and sparse.",
+  "hints": [
+   "One nonzero per row."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "20000/(20000*5000)"
+ },
+ {
+  "id": "t7-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A level has $n$ training rows with mean $a$, and smoothing adds $k$ pseudo-rows valued at the global mean $g$. Write the smoothed target encoding in $n,a,k,g$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(n*a+k*g)/(n+k)",
+   "vars": [
+    "n",
+    "a",
+    "k",
+    "g"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(a*n+g*k)/(k+n)",
+    "(n*a+k*g)*(n+k)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Smoothing pulls a small level toward the global mean.",
+  "hints": [
+   "Weighted average of level mean and global mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about encoding categorical features are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Target encoding must be fitted on training folds only",
+    "One-hot encoding of an ordinal feature discards its order",
+    "Frequency encoding uses the target labels",
+    "Binary encoding needs ceil of log2 of $L$ columns for $L$ levels"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Target encoding is fitted on training folds. One-hot drops order. Frequency uses counts only. Binary uses log2 columns.",
+  "hints": [
+   "Frequency needs no labels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t7-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A categorical with $6$ levels is one-hot encoded with one level dropped as the reference. How many columns remain?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact"
+  },
+  "check": "6-1",
+  "solution": "Six levels minus the reference level leaves $5$ columns.",
+  "hints": [
+   "Drop one reference level."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Standardisation with training mean and standard deviation gives which value?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\log x$",
+    "$(x-\\text{mean})/\\text{sd}$",
+    "$(x-\\min)/(\\max-\\min)$",
+    "$x/\\max$"
+   ],
+   "correct": 1,
+   "why": [
+    "that is a log transform",
+    "",
+    "that is min-max scaling",
+    "that divides by the maximum, not the sd"
+   ]
+  },
+  "solution": "Standardising centres at the training mean and divides by the training sd.",
+  "hints": [
+   "Mean and sd of training rows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Min-max scaling uses training minimum $a$ and maximum $b$. Write the scaled value of $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(x-a)/(b-a)",
+   "vars": [
+    "x",
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(x-a)*(b-a)^(-1)",
+    "x/(b-a)-a/(b-a)"
+   ]
+  },
+  "check": null,
+  "solution": "Min-max maps the training range onto $[0,1]$.",
+  "hints": [
+   "Shift by the minimum, divide by the range."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which model is most sensitive to feature scale?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A decision tree",
+    "A model that uses only the sign of each feature",
+    "A logistic regression with an intercept only",
+    "$k$-nearest neighbours"
+   ],
+   "correct": 3,
+   "why": [
+    "splits use thresholds, so monotone scaling leaves them unchanged",
+    "signs survive positive scaling",
+    "an intercept-only model has no features to rescale",
+    ""
+   ]
+  },
+  "solution": "Distances change with units, so distance models need scaling.",
+  "hints": [
+   "Distance models need scaling."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t7-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Training mean is $10$ and training sd is $2$. Give the standardised value of $x=14$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact"
+  },
+  "check": "Fraction(14-10,2)",
+  "solution": "$z=(14-10)/2=2$.",
+  "hints": [
+   "Subtract the mean, divide by sd."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Training minimum is $20$ and maximum is $60$. Give the min-max scaled value of $x=35$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.375,
+   "form": "exact"
+  },
+  "check": "Fraction(35-20,60-20)",
+  "solution": "$(35-20)/(60-20)=15/40=0.375$.",
+  "hints": [
+   "Subtract the minimum, divide by the range."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A feature has values $1,10,100,1000$. After a base-10 log transform, what is the spread, maximum minus minimum?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "round(math.log10(1000)-math.log10(1))",
+  "solution": "Logs are $0,1,2,3$, so the spread is $3$.",
+  "hints": [
+   "Take logs first, then the range."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which scaling is most robust to a single extreme outlier?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Min-max scaling, since it keeps the order",
+    "Standardisation with the mean, since the mean ignores outliers",
+    "Dividing by the maximum",
+    "Robust scaling with median and interquartile range"
+   ],
+   "correct": 3,
+   "why": [
+    "order survives, but the outlier squashes everything else",
+    "the mean is pulled by outliers",
+    "the maximum is the outlier itself",
+    ""
+   ]
+  },
+  "solution": "Median and IQR ignore the outlier's pull.",
+  "hints": [
+   "Use median and IQR."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the Box-Cox transform of $x>0$ with parameter $l\\neq 0$ as an expression in $x$ and $l$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(x^l-1)/l",
+   "vars": [
+    "x",
+    "l"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(x^l-1)*l^(-1)",
+    "x^l/l-1/l"
+   ]
+  },
+  "check": null,
+  "solution": "Box-Cox is $(x^l-1)/l$ for $l\\neq 0$.",
+  "hints": [
+   "Power minus one, over the power."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about scaling are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Standardising sets the mean of a feature to zero",
+    "Tree splits change after any monotone scaling of a feature",
+    "Min-max fitted on all rows can leak test range into training",
+    "A log transform reduces right skew"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "solution": "Standardising centres. Trees ignore monotone scaling. Fitting on all rows leaks. Logs reduce right skew.",
+  "hints": [
+   "Trees split on order, not size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A filter method selects features by what?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The final model's own coefficients",
+    "A search over every possible subset",
+    "A score computed without fitting the final model",
+    "Retraining the model for each candidate subset"
+   ],
+   "correct": 2,
+   "why": [
+    "that is an embedded method",
+    "exhaustive search is a wrapper, not a filter",
+    "",
+    "that is a wrapper method"
+   ]
+  },
+  "solution": "Filters score each feature on its own, before modelling.",
+  "hints": [
+   "Score first, model later."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "With $3$ features and degree at most $2$, how many polynomial terms (powers and products) are there, excluding the constant?",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "form": "exact"
+  },
+  "check": "sum(1 for i in range(3) for j in range(i,3))+3",
+  "solution": "Three linear terms, three squares and three products give $9$.",
+  "hints": [
+   "Count linear, then pairs with repeats."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does an interaction term $x_1x_2$ matter?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The effect of $x_1$ depends on the level of $x_2$",
+    "$x_1$ and $x_2$ are correlated",
+    "It doubles the variance of each feature",
+    "It removes the need for main effects"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is collinearity, a different issue",
+    "products do not double variance",
+    "interactions are added to main effects, not in place of them"
+   ]
+  },
+  "solution": "An interaction lets one feature's slope change with another.",
+  "hints": [
+   "Slope depends on the other feature."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "With $2$ features, count the monomials (powers and products) of degree $1$ to $3$, excluding the constant.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "form": "exact"
+  },
+  "check": "math.comb(5,3)-1",
+  "solution": "Monomials of degree $1,2,3$ in two variables are $2,3,4$, total $9$.",
+  "hints": [
+   "Count monomials per degree."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Four features have filter scores $0.2,-0.7,0.5,0.1$. Ranking by absolute value, which score is the second-highest?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "form": "exact"
+  },
+  "check": "max(abs(v) for v in [Fraction(1,5),Fraction(-7,10),Fraction(1,2),Fraction(1,10)] if abs(v)<Fraction(7,10))",
+  "solution": "By absolute value, $0.7$ is first and $0.5$ second.",
+  "hints": [
+   "Rank by absolute value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Forward selection on $20$ features adds one feature per step and fits one model per candidate. How many fits happen in the first three steps in total?",
+  "answer": {
+   "kind": "numeric",
+   "value": 57,
+   "form": "exact"
+  },
+  "solution": "Step 1 tries $20$ candidates, step 2 tries $19$, step 3 tries $18$: $20+19+18=57$.",
+  "hints": [
+   "Candidates shrink by one each step."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "sum(range(20,17,-1))"
+ },
+ {
+  "id": "t7-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Model $y=a+b\\,x_1+c\\,x_2+d\\,x_1x_2$. Write the slope of $y$ in $x_1$ at a fixed $x_2=x$, in terms of $b,d,x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "b+d*x",
+   "vars": [
+    "b",
+    "d",
+    "x"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "d*x+b",
+    "x*d+b"
+   ]
+  },
+  "check": null,
+  "solution": "Differentiate with respect to $x_1$: $b+d\\,x_2$.",
+  "hints": [
+   "Differentiate in $x_1$, hold $x_2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about feature selection are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Filter methods are cheaper than wrapper methods",
+    "Wrapper methods refit the model for each candidate subset",
+    "Embedded methods need no model at all",
+    "The test set may be used to choose features"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Filters are cheap. Wrappers refit. Embedded methods use a model. Test rows must not guide selection.",
+  "hints": [
+   "Embedded uses a model."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two features $x,y$. Count the monomials of degree at most $2$, including the constant term.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact"
+  },
+  "check": "math.comb(4,2)",
+  "solution": "Terms are $1,x,y,x^2,xy,y^2$, which is six.",
+  "hints": [
+   "List the terms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does a bag-of-words vector record for a document?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The position of each word",
+    "The learned embedding of each word",
+    "The sentiment of the sentence",
+    "Counts of each vocabulary term, ignoring word order"
+   ],
+   "correct": 3,
+   "why": [
+    "bag of words discards position",
+    "embeddings are a different representation",
+    "bag of words holds counts, not sentiment",
+    ""
+   ]
+  },
+  "solution": "A bag of words is a count vector over the vocabulary.",
+  "hints": [
+   "Counts, no order."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A term appears $a$ times in a document and in $c$ of $b$ documents. Write its tf-idf, with tf the raw count and idf the natural log of documents over document frequency.",
+  "answer": {
+   "kind": "expression",
+   "value": "a*ln(b/c)",
+   "vars": [
+    "a",
+    "b",
+    "c"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*ln(b)-a*ln(c)",
+    "a*(ln(b)-ln(c))"
+   ]
+  },
+  "check": null,
+  "solution": "tf-idf is term frequency times $\\ln(N/\\text{df})$.",
+  "hints": [
+   "Count times log of documents over document frequency."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why are text feature matrices usually sparse?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Counts are normalised to sum to one",
+    "Most vocabulary terms appear in only a few documents",
+    "Every document uses every word",
+    "The vocabulary is smaller than the document count"
+   ],
+   "correct": 1,
+   "why": [
+    "normalising does not create zeros",
+    "",
+    "most rows are zero, which is the opposite of dense",
+    "vocabulary size is not the cause"
+   ]
+  },
+  "solution": "Each document uses few of many possible terms.",
+  "hints": [
+   "Few terms per document."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A term appears $4$ times in a document and in $8$ of $64$ documents. With tf the raw count and the natural log, give tf-idf as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8.317766166719343,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "4*math.log(8)",
+  "solution": "$4\\ln(64/8)=4\\ln 8\\approx 8.32$.",
+  "hints": [
+   "Compute idf first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Five documents over a vocabulary of $10$ terms each contain two distinct terms. What fraction of the document-term matrix is zero?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8,
+   "form": "exact"
+  },
+  "check": "1-Fraction(10,50)",
+  "solution": "Nonzero entries are $5\\cdot 2=10$ of $50$, so zeros are $0.8$.",
+  "hints": [
+   "Count nonzero entries first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The sentence is 'the cat sat on the mat'. How many bigram tokens does it have, counting repeats?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact"
+  },
+  "check": "6-1",
+  "solution": "Six tokens give five adjacent pairs.",
+  "hints": [
+   "Bigrams are adjacent pairs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A term appears in all $50$ documents of a corpus. Under $\\ln(N/\\text{df})$, give its idf.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0,
+   "form": "exact"
+  },
+  "solution": "When df equals $N$, the ratio is one and its log is zero.",
+  "hints": [
+   "Ratio of N to df is 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "math.log(50/50)"
+ },
+ {
+  "id": "t7-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A term appears $a$ times in a document with $b$ tokens in total. Write its term frequency as a ratio.",
+  "answer": {
+   "kind": "expression",
+   "value": "a/b",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "a*b^(-1)",
+    "(1/b)*a"
+   ]
+  },
+  "check": null,
+  "solution": "Normalised term frequency is count over document length.",
+  "hints": [
+   "Count over length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about text features are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Bag of words discards word order",
+    "Unigram features cannot represent 'not good' as one feature",
+    "TF-IDF gives the most common words the highest weight",
+    "Bigram vocabularies are smaller than unigram ones"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Bags drop order. Unigrams miss phrases. Common words get low idf. Bigram vocabularies are usually larger.",
+  "hints": [
+   "Rarity raises idf."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is target leakage?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A feature carries information about the label that will not exist at prediction time",
+    "Two features are highly correlated",
+    "A model trained on too few rows",
+    "The label itself is noisy"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is collinearity",
+    "that is a data-size problem",
+    "label noise is a different issue"
+   ]
+  },
+  "solution": "Leakage is information that is not available when predicting.",
+  "hints": [
+   "Available at prediction time?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Where should a scaler be fitted?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Separately for each row",
+    "On the training fold only, then applied to the test fold",
+    "On all rows before splitting",
+    "On the test set, to match its distribution"
+   ],
+   "correct": 1,
+   "why": [
+    "a row has no distribution to fit",
+    "",
+    "leaks test statistics into training",
+    "test rows must not shape the fit"
+   ]
+  },
+  "solution": "Fit learned steps on training rows, then apply them.",
+  "hints": [
+   "Fit on train, apply to test."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "With $100$ rows and $5$-fold cross-validation, how many rows does each training fit see?",
+  "answer": {
+   "kind": "numeric",
+   "value": 80,
+   "form": "exact"
+  },
+  "check": "100*4//5",
+  "solution": "Each fit uses four folds, so $4/5$ of $100$ rows.",
+  "hints": [
+   "Four of five folds."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "probe": true,
+  "id": "t7-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A train set of $80$ rows has mean $5.0$ and a test set of $20$ rows has mean $9.0$. A scaler is fitted on all $100$ rows: what centre does it use?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.8,
+   "form": "exact"
+  },
+  "check": "Fraction(80*5+20*9,100)",
+  "solution": "$(80\\cdot 5+20\\cdot 9)/100=5.8$. The correct centre is $5.0$.",
+  "hints": [
+   "Pool all rows for the leaked mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A feature at day $t$ is the average of days $t-2$ through $t+1$. How many future days does it use?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact"
+  },
+  "check": "len([d for d in range(-2,2) if d>0])",
+  "solution": "Only day $t+1$ lies in the future.",
+  "hints": [
+   "Count days after $t$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Imputing missing values with the mean of the full dataset, before the train-test split. Is this leaky?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Only if the test set is larger than the training set",
+    "Yes, the test rows shape the imputed values",
+    "No, the mean is always safe",
+    "No, imputation never uses data"
+   ],
+   "correct": 1,
+   "why": [
+    "size does not decide leakage",
+    "",
+    "the mean ignores test rows, which is a common mistake",
+    "imputation uses data by definition"
+   ]
+  },
+  "solution": "The mean uses test rows before the split, which leaks.",
+  "hints": [
+   "Fit inside the training fold."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Training has $a$ rows with mean $b$ and test has $c$ rows with mean $d$. Write the pooled mean of all rows.",
+  "answer": {
+   "kind": "expression",
+   "value": "(a*b+c*d)/(a+c)",
+   "vars": [
+    "a",
+    "b",
+    "c",
+    "d"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(b*a+d*c)/(c+a)",
+    "(a*b+c*d)*(a+c)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Pooled mean is the weighted average over all rows.",
+  "hints": [
+   "Weight each mean by its row count."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which steps cause leakage when done before the train-test split? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Fitting a scaler on all rows",
+    "Selecting features by correlation with the target on all rows",
+    "Writing the test rows to a separate file",
+    "Target encoding on all rows"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Scalers, feature selection, and target encoding learn from rows. Writing a file learns nothing.",
+  "hints": [
+   "Ask whether the step learns from labels or rows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A test set of $200$ rows follows an $800$-row train set, and $40$ test rows share an ID with training rows. What fraction of test rows is leaked, as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(40,200)",
+  "solution": "$40/200=0.2$.",
+  "hints": [
+   "Count leaked test rows over test size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A z-score flags a row when what holds?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It has more than $k$ neighbours",
+    "It lies more than a chosen number of standard deviations from the mean",
+    "It is the largest value in the data",
+    "It differs from the median by more than the mean"
+   ],
+   "correct": 1,
+   "why": [
+    "that is density counting, not z",
+    "",
+    "the maximum is not a z threshold",
+    "mixes median and mean"
+   ]
+  },
+  "solution": "A z-score is distance from the mean in standard deviations.",
+  "hints": [
+   "Standard deviations from the mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the core idea of an isolation forest?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Anomalies are far from the centroid of all rows",
+    "Anomalies have the largest variance",
+    "Anomalies are isolated by random splits in few steps",
+    "Anomalies sit close to many other rows"
+   ],
+   "correct": 2,
+   "why": [
+    "distance to centroid is a k-means idea",
+    "variance is not isolation",
+    "",
+    "that is a density idea, not isolation"
+   ]
+  },
+  "solution": "Rare points are separated quickly by random cuts.",
+  "hints": [
+   "Short paths mean anomalous."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A dataset has $2000$ rows with a $0.5\\%$ positive rate. How many positive rows are there?",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "form": "exact"
+  },
+  "check": "Fraction(5,1000)*2000",
+  "solution": "$0.005\\cdot 2000=10$.",
+  "hints": [
+   "Rate times rows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Mean is $40$, sd is $5$. Give the z-score of $x=55$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact"
+  },
+  "check": "Fraction(55-40,5)",
+  "solution": "$(55-40)/5=3$.",
+  "hints": [
+   "Subtract the mean, divide by sd."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Mean is $20$, sd is $4$. Give the signed z-score of $x=12$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -2,
+   "form": "exact"
+  },
+  "check": "Fraction(12-20,4)",
+  "solution": "$(12-20)/4=-2$.",
+  "hints": [
+   "Keep the sign."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A detector flags $20$ rows, $8$ of them true anomalies, out of $10$ true anomalies in total. Give precision as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(8,20)",
+  "solution": "Precision is $8/20=0.4$.",
+  "hints": [
+   "Precision uses flagged rows only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Anomalies are $1\\%$ of rows. A detector never flags anything. Give its accuracy as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.99,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "solution": "It is right on every normal row, which is $99\\%$ of rows, so accuracy is $0.99$ while recall is zero.",
+  "hints": [
+   "Count the rows it gets right."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  },
+  "check": "1-0.01"
+ },
+ {
+  "id": "t7-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write the robust z-score of $x$: its difference from the median $m$, divided by $1.4826$ times the median absolute deviation $s$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(x-m)/(1.4826*s)",
+   "vars": [
+    "x",
+    "m",
+    "s"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ],
+   "also": [
+    "(x-m)/s/1.4826",
+    "(x-m)*(1.4826*s)^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Robust z uses median and MAD, scaled by $1.4826$ to match a normal sd.",
+  "hints": [
+   "Median in, scaled MAD out."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t7-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about anomaly detection are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Z-scores assume roughly symmetric, unimodal data",
+    "Isolation forest needs labelled anomalies",
+    "Density methods flag points in sparse regions",
+    "Anomaly scores need no threshold to use"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Z-scores assume shape. Isolation forest is unsupervised. Density flags sparse regions. A threshold is still needed.",
+  "hints": [
+   "Scores need a cut-off."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

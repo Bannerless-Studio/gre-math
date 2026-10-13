@@ -30,9 +30,9 @@
   var EXAM_FULL = 2;
   var EXAM_PASS = 0.7;
   var EXAM_NEAR_PCT = 5;        // exam offered when the gate is within this many points of opening
-  var ANSWER_KINDS = ['numeric', 'mcq', 'expression', 'multi', 'self'];
-  var PLAYABLE = ['numeric', 'expression', 'mcq', 'multi'];   // self waits for M5
-  var PRODUCTION = ['numeric', 'expression'];                 // typed answers: the only kinds that earn the s>=2 credit
+  var ANSWER_KINDS = ['numeric', 'mcq', 'expression', 'multi', 'self', 'code'];
+  var PLAYABLE = ['numeric', 'expression', 'mcq', 'multi', 'code'];   // self is never played (refused for tier c, no tier a/b use)
+  var PRODUCTION = ['numeric', 'expression', 'code'];         // typed answers: the only kinds that earn the s>=2 credit
   var FULL_MIN_TECHS = 4;       // Full waits until this many techniques have a streak (SPEC 5 stage 4)
   var FULL_NEAR = 0.5;          // rubric below this share of pass is "far below": a right commit then grades 0
   var FULL_BUDGET = { easy: 300, mid: 600, hard: 1080 };   // fallback when pack.full.budgetSec is absent
@@ -70,7 +70,7 @@
   }
 
   // ---- items
-  // Kind the engine plays: numeric, expression, mcq, multi, or null (skipped in planning; self waits for M5).
+  // Kind the engine plays: numeric, expression, mcq, multi, or null (skipped in planning; self is never played).
   function itemKind(item) {
     var a = item && item.answer;
     if (!a || PLAYABLE.indexOf(a.kind) < 0) return null;
@@ -86,6 +86,7 @@
     if (a.display) return a.display;
     if (kind === 'mcq') return String(a.options[a.correct]);
     if (kind === 'multi') return a.correct.map(function (i) { return String(a.options[i]); }).join('; ');
+    if (kind === 'code') return 'Reference solution below.';
     return String(a.value);
   }
 
@@ -103,14 +104,14 @@
     return card;
   }
 
-  // response: display index for mcq, array of display indexes for multi, string for typed kinds.
+  // response: display index for mcq, array of display indexes for multi, string for typed kinds, runner result for code.
   // Choice responses are mapped back to the authored option order before answer.check runs.
   // Returns {ok, chosen|typed, error?} or {unparsable: true, error?, detail?} (no attempt counted).
   function gradeCard(card, response) {
     var a = card.item.answer, kind = card.kind || card.type;
     if (kind === 'mcq') {
-      var idx = Number(response);
-      if (!Number.isInteger(idx) || idx < 0 || idx >= card.order.length) return { ok: null, unparsable: true };
+      var idx = ANS.toIndex(response);
+      if (idx === null || idx >= card.order.length) return { ok: null, unparsable: true };
       var orig = card.order[idx];
       var m = ANS.check({ kind: 'mcq', correct: a.correct, options: a.options }, orig);
       return { ok: m.ok, chosen: orig };
@@ -119,14 +120,15 @@
       var list = Array.isArray(response) ? response : [];
       var origs = [];
       for (var i = 0; i < list.length; i++) {
-        var di = Number(list[i]);
-        if (!Number.isInteger(di) || di < 0 || di >= card.order.length) return { ok: null, unparsable: true };
+        var di = ANS.toIndex(list[i]);
+        if (di === null || di >= card.order.length) return { ok: null, unparsable: true };
         origs.push(card.order[di]);
       }
       var mm = ANS.check({ kind: 'multi', correct: a.correct, options: a.options }, origs);
       return { ok: mm.ok, chosen: origs };
     }
-    var c = ANS.check(a, response == null ? '' : String(response));
+    // code: the response is the runner's raw result object (the page runs Python, then grades here); no string form.
+    var c = ANS.check(a, kind === 'code' ? response : (response == null ? '' : String(response)));
     if (!c.attempt) return { ok: null, unparsable: true, error: c.error, detail: c.detail };
     return { ok: c.ok, typed: c.parsed, error: c.error };
   }
@@ -136,7 +138,7 @@
     var s = (pack && pack.session) || {};
     var fb = (pack && pack.full && pack.full.budgetSec) || FULL_BUDGET;
     return {
-      review: nonneg(s.review), learn: nonneg(s.learn), micro: nonneg(s.micro),
+      review: s.review === undefined ? 12 : nonneg(s.review), learn: s.learn === undefined ? 2 : nonneg(s.learn), micro: s.micro === undefined ? 8 : nonneg(s.micro),
       full: s.full === undefined ? 1 : nonneg(s.full),
       fullBudget: { easy: num(fb.easy, FULL_BUDGET.easy), mid: num(fb.mid, FULL_BUDGET.mid), hard: num(fb.hard, FULL_BUDGET.hard) },
       gate: num(pack && pack.gate, 0.7), mastered: Math.max(1, nonneg(pack && pack.mastered) || 3)
@@ -178,7 +180,7 @@
   }
   function defFull(r) {
     var g = Array.isArray(r.g) ? r.g.filter(function (x) { return x === 0 || x === 1 || x === 2; }).slice(-2) : [];
-    return { g: g, l: nonneg(r.l), best: nonneg(r.best) };
+    return Object.assign({}, r, { g: g, l: nonneg(r.l), best: nonneg(r.best) });
   }
   function defItem(r) {
     return Object.assign({}, r, { r: nonneg(r.r), w: nonneg(r.w), l: nonneg(r.l), t: nonneg(r.t) });
@@ -198,7 +200,7 @@
     Object.keys(raw.tech || {}).forEach(function (id) { p.tech[id] = defTech(raw.tech[id] || {}); });
     Object.keys(raw.items || {}).forEach(function (id) { p.items[id] = defItem(raw.items[id] || {}); });
     var d = raw.day && typeof raw.day === 'object' ? raw.day : {};
-    p.day = { d: typeof d.d === 'string' ? d.d : null, n: nonneg(d.n), log: Array.isArray(d.log) ? d.log.slice() : [] };
+    p.day = Object.assign({}, d, { d: typeof d.d === 'string' ? d.d : null, n: nonneg(d.n), log: Array.isArray(d.log) ? d.log.slice() : [] });
     return p;
   }
 
@@ -254,7 +256,7 @@
       sentence: st[F].id + ' waits: ' + prev.id + ' at ' + pct + '% known.', short: 'gate: ' + prev.id + ' at ' + pct + '%' };
   }
 
-  // ---- planning (SPEC 5: Learn, Review, Micro; Full is M3+)
+  // ---- planning (SPEC 5: Learn, Review, Micro; Full is stage 4)
   function byDue(prog, ix) {
     return function (a, b) {
       var ra = prog.tech[a.id] || { s: 0, l: 0 }, rb = prog.tech[b.id] || { s: 0, l: 0 };
@@ -323,7 +325,7 @@
     return out;
   }
 
-  // New techniques per session (SPEC 5): 2 while fewer than 20 are started, then 1; pack.session.learn is the ceiling.
+  // New techniques per session (SPEC 5): NEW_EARLY while fewer than NEW_EARLY_BELOW are started, then NEW_LATER; pack.session.learn is the ceiling.
   function newCap(prog, ix) {
     var started = ix.techs.filter(function (t) { return isIntro(prog, t.id); }).length;
     return Math.min(ix.cfg.learn, started < NEW_EARLY_BELOW ? NEW_EARLY : NEW_LATER);
@@ -412,7 +414,7 @@
     prog.day.n += 1;
     return {
       n: n, today: today, plan: plan, queue: plan.cards, pos: 0,
-      credited: {}, requeued: {}, scored: 0, right: 0, missed: [], mastered: [], introduced: []
+      credited: {}, lost: {}, requeued: {}, scored: 0, right: 0, missed: [], mastered: [], introduced: []
     };
   }
 
@@ -433,7 +435,15 @@
   // ---- credit rules (SPEC 2.4)
   // A miss resets the streak and drops the placement flag (SPEC 6: prov drops at first miss or at mastered).
   // changed 2026-10-12 after pacing study: a miss costs one streak step, not the whole streak; m = s >= mastered.
-  function resetTech(r, mastered) { r.s = Math.max(0, r.s - 1); r.m = r.s >= mastered ? 1 : 0; r.prov = 0; }
+  // A miss costs one streak step, at most once per technique per session (L6, mirrors credit-once-per-session):
+  // the requeued retry of a missed card cannot take a second step.
+  function resetTech(r, mastered, sess, id) {
+    if (sess) { sess.lost = sess.lost || {}; if (sess.lost[id]) return; sess.lost[id] = true; }
+    // min(): a record from before the L4 cap (streak above mastered + 1) is brought under it by its first miss.
+    r.s = Math.max(0, Math.min(r.s, mastered + 1) - 1); r.m = r.s >= mastered ? 1 : 0; r.prov = 0;
+  }
+  // A credit raises the streak to at most mastered + 1: one slip is tolerated, mastery is never permanent (L4).
+  function bump(r, mastered) { r.s = Math.min(r.s + 1, mastered + 1); }
 
   function applyAnswer(prog, ix, sess, card, ok, seconds) {
     var item = card.item, primary = item.tags[0], critical = item.critical || [];
@@ -446,7 +456,7 @@
     item.tags.slice(1).forEach(function (tag) {
       var r = rec(prog, tag);
       if (ok) r.r += 1;
-      else { r.w += 1; if (critical.indexOf(tag) >= 0) resetTech(r, ix.cfg.mastered); }
+      else { r.w += 1; if (critical.indexOf(tag) >= 0) { if (sess.kind !== 'exam') resetTech(r, ix.cfg.mastered, sess, tag); else r.prov = 0; } }
     });
 
     var r = rec(prog, primary);
@@ -456,16 +466,17 @@
       // a right typed tier b answer at streak >= PRODUCTION_STREAK also sets fp (changed 2026-10-12 after pacing study)
       if (item.tier === 'b' && isProduction(card.type) && r.s >= PRODUCTION_STREAK) r.fp = 1;
       var held = r.s >= PRODUCTION_STREAK && !isProduction(card.type);
-      if (!(card.requeued || sess.credited[primary] || held)) {
-        r.s += 1;
+      if (!(card.requeued || sess.credited[primary] || held || r.l >= sess.n || sess.kind === 'exam')) {
+        bump(r, ix.cfg.mastered);
         r.l = sess.n;
         sess.credited[primary] = true;
         out.credited = true;
-        if (r.m !== 1 && r.s >= ix.cfg.mastered) { r.m = 1; r.prov = 0; out.mastered = true; sess.mastered.push(primary); }
+        if (r.m !== 1 && r.s >= ix.cfg.mastered) { if (r.prov === 1) r.fp = 1; r.m = 1; r.prov = 0; out.mastered = true; sess.mastered.push(primary); }
       }
     } else {
       r.w += 1;
-      resetTech(r, ix.cfg.mastered);
+      if (sess.kind !== 'exam') resetTech(r, ix.cfg.mastered, sess, primary);
+      else r.prov = 0;   // J2: an exam miss ends placement-known status but moves no streak
       sess.credited[primary] = true;
       if (!card.requeued && !sess.requeued[item.id]) { sess.requeued[item.id] = true; out.requeue = true; }
     }
@@ -605,13 +616,15 @@
     var r = rec(prog, primary);
     if (grade === 2) {
       item.tags.forEach(function (tag) { rec(prog, tag).fp = 1; fx.fp.push(tag); });
-      if (!sess.credited[primary]) {
-        r.s += 1; r.l = sess.n; sess.credited[primary] = true; fx.credited = true;
-        if (r.m !== 1 && r.s >= ix.cfg.mastered) { r.m = 1; r.prov = 0; fx.mastered = true; sess.mastered.push(primary); }
+      r.wk = 0;
+      if (!sess.credited[primary] && r.l < sess.n && sess.kind !== 'exam') {
+        bump(r, ix.cfg.mastered); r.l = sess.n; sess.credited[primary] = true; fx.credited = true;
+        if (r.m !== 1 && r.s >= ix.cfg.mastered) { if (r.prov === 1) r.fp = 1; r.m = 1; r.prov = 0; fx.mastered = true; sess.mastered.push(primary); }
       }
-    } else if (grade === 0) {
-      resetTech(r, ix.cfg.mastered); r.wk = 1; sess.credited[primary] = true; fx.reset = true; fx.weak.push(primary);
-      item.tags.slice(1).forEach(function (tag) { rec(prog, tag).wk = 1; fx.weak.push(tag); });
+    } else if (grade === 0 && sess.kind !== 'exam') {
+      resetTech(r, ix.cfg.mastered, sess, primary); r.wk = 1; sess.credited[primary] = true; fx.reset = true; fx.weak.push(primary);
+      var crit = item.critical || [];
+      item.tags.slice(1).forEach(function (tag) { var rt = rec(prog, tag); rt.wk = 1; if (crit.indexOf(tag) >= 0) resetTech(rt, ix.cfg.mastered, sess, tag); fx.weak.push(tag); });
     }
     return fx;
   }
@@ -760,13 +773,20 @@
     return { applied: true, placed: seeded, pl: res.pl };
   }
 
-  // ---- level exam (SPEC 2.6). Offered when the gate is held and the level below it is within EXAM_NEAR_PCT points.
+  // ---- level exam (SPEC 2.6). Offered when the gate is held and the level below it is within EXAM_NEAR_PCT points, or one technique short of the gate.
   // Integer arithmetic on known/total so the boundary is exact.
+  // Window [gate-5, gate) points, or the last count below the gate (known + 1 reaches it): levels of 5, 14, 17 techniques
+  // have no count inside the window. Known at or above the gate is never offered (the gate is open then).
+  function examOffered(known, total, gatePct) {
+    if (total <= 0 || known * 100 >= gatePct * total) return false;
+    return known * 100 >= (gatePct - EXAM_NEAR_PCT) * total || (known + 1) * 100 >= gatePct * total;
+  }
   function examLevel(prog, ix) {
     var g = gateState(prog, ix);
     if (!g.held || g.F < 1) return null;
     var prev = g.levels[g.F - 1], gatePct = Math.round(ix.cfg.gate * 100);
-    if (prev.total === 0 || prev.known * 100 < (gatePct - EXAM_NEAR_PCT) * prev.total) return null;
+    if (prev.total === 0) return null;
+    if (!examOffered(prev.known, prev.total, gatePct)) return null;
     return { id: prev.id, label: prev.label, known: prev.known, total: prev.total, pct: prev.pct };
   }
   // Mixed set at the level below the gate: EXAM_MICRO micro problems (one per technique first), then EXAM_FULL full
@@ -794,7 +814,7 @@
     if (!queue.length) return null;
     if (!prog.day || prog.day.d !== today) prog.day = { d: today, n: 0, log: [] };
     return { kind: 'exam', level: lv.id, label: lv.label, n: n, today: today, queue: queue, pos: 0,
-      credited: {}, requeued: {}, scored: 0, right: 0, missed: [], mastered: [], introduced: [], result: null };
+      credited: {}, lost: {}, requeued: {}, scored: 0, right: 0, missed: [], mastered: [], introduced: [], result: null };
   }
   // Scores the exam: right micro answers and grade-2 full problems over the whole set. Pass at EXAM_PASS sets fp on
   // every technique answered right. Returns {right, total, pass, fp}.
@@ -894,7 +914,7 @@
     finishSession: finishSession,
     placementPlan: placementPlan, placeProbes: placeProbes, startPlacement: startPlacement,
     placementAnswer: placementAnswer, placementResult: placementResult, applyPlacement: applyPlacement,
-    examLevel: examLevel, startExam: startExam, finishExam: finishExam, setPauseNew: setPauseNew,
+    examLevel: examLevel, examOffered: examOffered, startExam: startExam, finishExam: finishExam, setPauseNew: setPauseNew,
     FULL_MIN_TECHS: FULL_MIN_TECHS, FULL_NEAR: FULL_NEAR, FULL_BUDGET: FULL_BUDGET,
     budgetFor: budgetFor, clockFor: clockFor, gradeFullRule: gradeFullRule, planFull: planFull,
     fullCommit: fullCommit, fullGrade: fullGrade, rubricPicks: rubricPicks

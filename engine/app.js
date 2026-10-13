@@ -8,7 +8,7 @@
   var IX = PE.index(DATA);
   var root = document.getElementById('root');
   var S = { tab: 'today', prog: null, readonly: false, notice: '', sess: null, reveal: null, summary: null,
-    hint: '', msg: '', cardStart: 0, draft: '', ask: null, placeResult: null, examResult: null, delta: null };
+    hint: '', msg: '', cardStart: 0, draft: '', ask: null, codeReport: null, placeResult: null, examResult: null, delta: null };
 
   function p2(n) { return (n < 10 ? '0' : '') + n; }
   function today() { var d = new Date(); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
@@ -48,6 +48,12 @@
   function storageOrNull() { try { return window.localStorage || null; } catch (e) { return null; } }
   var store = ST.make(storageOrNull(), KEY, window.PE_BUILD);
   function save() { return store.save(S); }
+  // D1: another tab wrote the progress key; this tab stops writing so it cannot overwrite that work.
+  if (typeof window.addEventListener === 'function') window.addEventListener('storage', function (e) {
+    if (e.key !== KEY && e.key !== null) return;
+    S.readonly = true; S.notice = ST.MSG.otherTab;
+    var b = document.getElementById('banner'); if (b) { b.hidden = false; b.textContent = S.notice; }
+  });
 
   // M7 session resume: a Today session in progress is parked after every change (render, and each draft edit).
   // Any other state (finished, quit, placement or exam, no session) drops the parked record.
@@ -119,6 +125,148 @@
     return card.stage === 'review' ? 'Review' : card.stage === 'learn' ? 'Learn' : card.stage === 'full' ? 'Full' : 'Micro';
   }
 
+  // ---- code cards: Python in a Web Worker (Pyodide from the CDN, cached by sw.js after the first load)
+  // The worker source and the harness arrive as inert text blocks inlined by build.sh. A run has a hard wall-clock
+  // limit; past it the worker is terminated and the next run starts a fresh one (Pyodide files come from the cache).
+  var PY_BASE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+  var PY_WALL_MS = 10000;
+  var PY_LOAD_MS = 120000;   // Pyodide or a package still not loaded after this: the runtime counts as unavailable
+  var PY_PACKAGES = ['numpy', 'pandas'];   // same allowlist as engine/pyworker.js and tools/validate_pack.js
+  var PY_LOADING = 'Loading Python (one-time, ~10 MB)';
+  var py = { worker: null, ready: null, run: null, seq: 0, loadedOnce: false };
+  var C = { key: '', busy: false, msg: '', report: null, spec: null, down: false };
+  function blockText(id) { var el = document.getElementById(id); return el ? el.textContent : ''; }
+  function pyKill() { if (py.worker) py.worker.terminate(); py.worker = null; py.ready = null; }
+  function pyFinish(res) {
+    var r = py.run; if (!r) return;
+    py.run = null; clearTimeout(r.timer); clearTimeout(r.loadTimer); r.resolve(res);
+  }
+  function pyStart() {
+    if (py.ready) return py.ready;
+    py.ready = new Promise(function (resolve, reject) {
+      var w;
+      try { w = new Worker(URL.createObjectURL(new Blob([blockText('pe-pyworker')], { type: 'text/javascript' }))); }
+      catch (e) { reject(e); return; }
+      py.worker = w;
+      // A first visit offline, or a CDN that never answers: give up after PY_LOAD_MS instead of spinning forever.
+      var loadTimer = setTimeout(function () { if (py.worker === w) pyKill(); reject(new Error('Python took too long to load')); }, PY_LOAD_MS);
+      w.onmessage = function (e) {
+        var m = e.data;
+        if (m.type === 'status') { if (!py.loadedOnce || /^Loading /.test(m.msg)) setCodeMsg(m.msg === 'Loading Python' ? PY_LOADING : m.msg + '...'); }
+        else if (m.type === 'ready') { clearTimeout(loadTimer); py.loadedOnce = true; resolve(w); }
+        else if (m.type === 'fatal') { clearTimeout(loadTimer); reject(new Error(m.error)); }
+        else if (m.type === 'started') {
+          if (py.run && py.run.id === m.id) { clearTimeout(py.run.loadTimer); py.run.timer = setTimeout(function () { pyKill(); pyFinish({ status: 'timeout' }); }, PY_WALL_MS); }
+        }
+        else if (m.type === 'done') { if (py.run && py.run.id === m.id) { var res; try { res = JSON.parse(m.json); } catch (er) { res = { status: 'unavailable', error: 'bad runner output' }; } pyFinish(res); } }
+        // fail = packages did not load or Pyodide itself broke: start a fresh worker next time.
+        else if (m.type === 'fail') { if (py.run && py.run.id === m.id) { pyKill(); pyFinish({ status: 'unavailable', error: m.error }); } }
+      };
+      w.onerror = function (e) { var msg = e && e.message ? e.message : 'worker error'; clearTimeout(loadTimer); pyKill(); reject(new Error(msg)); pyFinish({ status: 'unavailable', error: msg }); };
+      w.postMessage({ type: 'init', base: PY_BASE, harness: blockText('pe-pyharness') });
+    });
+    py.ready.catch(function () { pyKill(); });
+    return py.ready;
+  }
+  // Resolves to the harness result object ({status:'ok'|'error'|'timeout'|'unavailable', ...}); never rejects.
+  function pyRun(spec, src) {
+    return pyStart().then(function (w) {
+      return new Promise(function (resolve) {
+        var id = ++py.seq;
+        var pk = (spec.packages || []).filter(function (p) { return PY_PACKAGES.indexOf(p) >= 0; });
+        py.run = { id: id, resolve: resolve, timer: null,
+          loadTimer: setTimeout(function () { pyKill(); pyFinish({ status: 'unavailable', error: 'packages took too long to load' }); }, PY_LOAD_MS) };
+        w.postMessage({ type: 'run', id: id, user: src, setup: spec.setup || '', entry: spec.entry,
+          tests: JSON.stringify(spec.tests.map(function (t) { return { args: t.args }; })), packages: pk });
+      });
+    }).catch(function (err) { return { status: 'unavailable', error: String(err && err.message || err) }; });
+  }
+  function codeKey() { var c = S.sess && PE.currentCard(S.sess); return c && c.type === 'code' ? S.sess.pos + '|' + c.id : ''; }
+  function setCodeMsg(msg) { C.msg = msg; paintCode(); }
+  function resultLine(rep, spec) {
+    if (rep.error === 'timeout') return 'Timed out after ' + (PY_WALL_MS / 1000) + ' s. Look for a loop that never ends.';
+    if (rep.error === 'runtime-error') return 'Error: ' + rep.detail;
+    if (rep.error) return 'Python is not available: ' + String(rep.detail || rep.error).replace(/[.\s]+$/, '') + '. Check your connection and try again.';
+    return '';
+  }
+  // One row per test: pass/fail, the call, and for a fail what was expected and what came back.
+  function testsHtml(entry, tests) {
+    if (!tests || !tests.length) return '';
+    return '<ul class="tests">' + tests.map(function (t) {
+      var detail = t.pass ? '' : t.error ? ' raised ' + t.error
+        : ' expected ' + A.codeShow(t.expect) + ', got ' + A.codeShow(t.got);
+      return '<li class="' + (t.pass ? 'pass' : 'fail') + '"><b>' + (t.pass ? 'pass' : 'fail') + '</b> ' +
+        esc(entry + '(' + A.codeArgs(t.args) + ')' + detail) + '</li>';
+    }).join('') + '</ul>';
+  }
+  // The area under the editor: loading line, per-test results after Run, program output. When Python cannot load,
+  // a Skip button moves on without counting an attempt (no credit either). Placement has its own I don't know.
+  function codeOutHtml() {
+    var spec = C.spec, rep = C.report, h = '';
+    if (C.msg) h += '<p class="note">' + esc(C.msg) + '</p>';
+    if (rep) {
+      var line = resultLine(rep, spec);
+      if (line) h += '<p class="bad-line">' + esc(line) + '</p>';
+      h += testsHtml(spec.entry, rep.tests);
+      if (rep.stdout) h += '<pre class="stdout">' + esc(rep.stdout) + '</pre>';
+    }
+    if (C.down && !C.busy && S.sess && S.sess.kind !== 'place') {
+      h += '<button type="button" class="ghost" data-act="code-skip">Skip this card (no credit, not counted)</button>';
+    }
+    return h;
+  }
+  // Python is unavailable: leave the card unanswered and move on (nothing recorded for the item).
+  function skipCode() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'code' || S.reveal || C.busy || !C.down || S.sess.kind === 'place') return;
+    S.codeReport = null;
+    step();
+  }
+  // A new card clears the previous card's report and message. Call before setting C.msg for the card.
+  function syncCodeKey() {
+    var key = codeKey();
+    if (C.key !== key) { C.key = key; C.report = null; C.busy = false; C.msg = ''; C.down = false; }
+  }
+  function paintCode() {
+    var el = document.getElementById('code-out');
+    if (!el) return;
+    syncCodeKey();
+    el.innerHTML = codeOutHtml();
+    var btns = document.querySelectorAll('#codeform button');
+    Array.prototype.forEach.call(btns, function (b) { b.disabled = C.busy; });
+  }
+  // Starts loading Python when a code card first shows. Silent once ready.
+  function warmCode() {
+    var card = S.sess && PE.currentCard(S.sess);
+    if (!card || card.type !== 'code' || S.reveal) return;
+    syncCodeKey(); C.spec = card.item.answer;
+    if (py.ready || py.loadedOnce) { paintCode(); return; }
+    C.msg = PY_LOADING; paintCode();
+    pyStart().then(function () { if (C.msg === PY_LOADING) { C.msg = ''; C.down = false; paintCode(); } },
+      function (err) { C.down = true; C.msg = 'Python did not load (' + String(err && err.message || 'offline').replace(/[.\s]+$/, '') + '). Check your connection; it retries when you press Run.'; paintCode(); });
+  }
+  // mode 'run': show the per-test results and nothing else. mode 'check': grade, count the attempt, reveal.
+  function runCode(mode) {
+    var card = S.sess && PE.currentCard(S.sess), ta = document.getElementById('ans');
+    if (!card || card.type !== 'code' || !ta || C.busy) return;
+    var src = ta.value;
+    if (!src.trim()) { S.hint = 'Write some code first.'; var h0 = root.querySelector('.hint'); if (h0) h0.textContent = S.hint; return; }
+    S.draft = src; S.hint = ''; var h1 = root.querySelector('.hint'); if (h1) h1.textContent = '';
+    syncCodeKey(); C.spec = card.item.answer; C.busy = true; C.report = null;
+    C.msg = py.ready || py.loadedOnce ? 'Running...' : PY_LOADING;
+    paintCode();
+    pyRun(C.spec, src).then(function (res) {
+      var cur = S.sess && PE.currentCard(S.sess);
+      if (cur !== card || S.reveal) return;   // the card moved on while Python ran
+      C.busy = false; C.msg = '';
+      var rep = A.checkCode(C.spec, res);
+      C.report = rep; C.down = rep.attempt === false && rep.error === 'no-runtime';
+      if (mode === 'run' || rep.attempt === false) { paintCode(); return; }
+      S.codeReport = rep;
+      answer(res);
+    });
+  }
+
   // Reveal: the verdict, the answer when wrong, the solution, and only the facts that are not routine.
   function revealHtml(card, r) {
     var notes = [], name = techName(card.tech);
@@ -127,7 +275,14 @@
     if (r.requeue) notes.push('Back later in this session. No credit.');
     else if (card.requeued) notes.push('Practice only. No credit.');
     else if (r.choiceNote) notes.push('Choice cards hold the streak here. Type an answer to earn credit.');
-    var ans = r.ok ? '' : '<p class="answer">Answer: ' + ansHtml(card.item, r.answer) + '</p>';
+    var ans = r.ok || card.type === 'code' ? '' : '<p class="answer">Answer: ' + ansHtml(card.item, r.answer) + '</p>';
+    if (card.type === 'code' && r.code) {
+      var cl = r.code.err || '';
+      if (!r.ok && cl) ans = '<p class="answer">' + esc(cl) + '</p>';
+      if (!r.ok && r.code.tests) ans += testsHtml(card.item.answer.entry, r.code.tests);
+      if (r.code.stdout) ans += '<pre class="stdout">' + esc(r.code.stdout) + '</pre>';
+      if (!r.ok && r.code.parsed && /^\d+\/\d+$/.test(r.code.parsed)) notes.unshift(r.code.parsed.split('/')[0] + ' of ' + r.code.parsed.split('/')[1] + ' tests pass.');
+    }
     return '<div class="reveal ' + (r.ok ? 'ok' : 'bad') + '">' +
       '<p class="verdict">' + (r.ok ? 'Right' : 'Not quite') + '</p>' + ans +
       '<div class="prose">' + field(card.item, 'solution') + '</div>' +
@@ -148,12 +303,23 @@
           return '<label class="check"><input type="checkbox" name="pick" value="' + i + '"><span>' + optHtml(card.item, orig) + '</span></label>';
         }).join('') + '</fieldset>' +
         '<button type="submit" class="primary">Check</button></form>';
+    } else if (card.type === 'code') {
+      var a0 = card.item.answer, pk = (a0.packages || []).length ? ' Uses ' + a0.packages.join(' and ') + '.' : '';
+      body = '<form class="code" id="codeform" autocomplete="off">' +
+        '<textarea id="ans" class="editor" rows="10" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off" aria-label="Your Python code"></textarea>' +
+        '<p class="note">Define <code>' + esc(a0.entry) + '</code>.' + esc(pk) + ' Run tests shows each test; Check counts.</p>' +
+        '<div class="code-actions"><button type="button" class="ghost" data-act="run">Run tests</button>' +
+        '<button type="submit" class="primary">Check</button></div></form><div id="code-out" class="code-out" aria-live="polite"></div>';
     } else {
       var ph = card.type === 'expression' ? 'e.g. x^2/2 or sqrt(1-x^2)' : 'e.g. 7, 0.5 or 9/2';
       body = '<form class="typed" id="typed" autocomplete="off"><input id="ans" inputmode="text" autocapitalize="off" ' +
         'autocorrect="off" spellcheck="false" placeholder="' + ph + '" aria-label="Your answer">' +
         '<button type="submit" class="primary">Check</button></form>';
-      if (card.type === 'expression') body += '<p class="echo" id="echo" aria-live="polite"></p>';
+      if (card.type === 'expression') {
+        body += '<p class="echo" id="echo" aria-live="polite"></p>';
+        var dv = card.item.answer.vars || [];
+        if (dv.length) body += '<p class="note vars">Variables: ' + dv.map(esc).join(', ') + '</p>';
+      }
     }
     return body;
   }
@@ -172,7 +338,7 @@
     }
     if (card.type === 'teach') {
       return head + '<article class="card"><p class="kicker">New technique</p><h2>' + esc(card.name) + '</h2>' +
-        T.figure(card.figure) + '<div class="prose">' + techHtml(card) + '</div>' +
+        T.figure(card.figure) + '<div class="prose teach">' + techHtml(card) + '</div>' +
         '<button type="button" class="primary" data-act="continue">Start problems</button></article>';
     }
     if (card.type === 'full') return head + viewFull(card);
@@ -314,7 +480,7 @@
     var lx = PE.examLevel(p, IX);
     if (lx) {
       html += '<h3>Level exam</h3><p class="note">' + esc(lx.id + ' · ' + lx.label) + '. 8 micro and 2 full problems. ' +
-        'Pass at 7 of 10 marks the techniques you got right as known.</p>' +
+        'Pass at 70% marks the techniques you got right as known.</p>' +
         '<button type="button" class="primary" data-act="exam"' + ro + '>Start exam</button>';
     }
     if (S.examResult) html += examResultHtml(S.examResult);
@@ -420,8 +586,10 @@
     if (!txt) { el.className = 'echo'; el.textContent = 'Type the expression, for example x^2/2.'; return; }
     var pr = A.parseExpr(txt, card.item.answer.vars || []);
     if (pr.error) { el.className = 'echo bad'; el.textContent = 'Not read: ' + pr.error; return; }
+    var shown;
+    try { shown = A.canon(pr.ast); } catch (e) { el.className = 'echo bad'; el.textContent = 'Not read: expression too deep'; return; }   // A6
     el.className = 'echo';
-    el.textContent = 'Read as ' + A.canon(pr.ast);
+    el.textContent = 'Read as ' + shown;
   }
 
   function render() {
@@ -442,8 +610,13 @@
     if (clockRead()) startClock(); else stopClock();
     window.scrollTo(0, 0);
     var inp = document.getElementById('ans');
+    if (inp && S.sess && !S.reveal) {
+      var cc = PE.currentCard(S.sess);
+      if (cc && cc.type === 'code' && !S.draft) S.draft = cc.item.answer.starter || '';
+    }
     if (inp) { inp.value = S.draft; inp.focus(); }
     updateEcho();
+    warmCode();
   }
 
   function secondsSince() { return Math.max(0, Math.floor((Date.now() - S.cardStart) / 1000)); }
@@ -491,6 +664,12 @@
     // The choice-card note shows once per session: the first reveal where it applies sets the flag.
     var tc = S.prog.tech[card.tech], choiceHold = r.ok && !r.requeue && !card.requeued && tc && tc.s >= PE.PRODUCTION_STREAK && !PE.isProduction(card.type);
     if (choiceHold && !S.sess.choiceNoted) { r.choiceNote = true; S.sess.choiceNoted = true; }
+    if (card.type === 'code' && S.codeReport) {
+      var cr = S.codeReport;
+      r.code = { line: A.codeFailLine(card.item.answer, cr), err: cr.error === 'runtime-error' ? 'Error: ' + cr.detail : cr.error === 'timeout' ? 'Timed out after ' + (PY_WALL_MS / 1000) + ' s.' : '',
+        stdout: cr.stdout || '', parsed: cr.parsed, tests: cr.tests || [] };
+    }
+    S.codeReport = null;
     S.reveal = r; S.hint = ''; S.draft = '';
     save(); render();
   }
@@ -501,6 +680,10 @@
     if (!cur) return;
     // double tap on Continue must not skip a card
     if (cur.type === 'full' ? !cur.graded : (cur.type !== 'teach' && !S.reveal)) return;
+    step();
+  }
+  // Moves to the next card, or ends the session or exam at the last one.
+  function step() {
     S.reveal = null; S.hint = ''; S.draft = '';
     if (!PE.advance(S.sess, S.prog)) {
       if (S.sess.kind === 'exam') return finishExam();
@@ -536,6 +719,16 @@
     return Array.prototype.map.call(boxes, function (b) { return Number(b.value); });
   }
 
+  // J5: read-only Export writes the stored record as it is now (another tab may have saved since this tab read);
+  // falls back to the text read at open (newer-build record, D4), then to this tab's progress.
+  function exportText() {
+    if (S.readonly) {
+      try { var cur = store.raw(); if (cur !== null && cur !== undefined) return cur; } catch (e) { /* unreadable: fall back */ }
+      if (S.raw) return S.raw;
+    }
+    return JSON.stringify(S.prog, null, 2);
+  }
+
   root.addEventListener('click', function (e) {
     var el = e.target.closest('[data-act]');
     if (!el) return;
@@ -546,13 +739,15 @@
     else if (act === 'dk') { if (S.sess && S.sess.kind === 'place') answerPlace(null, true); }
     else if (act === 'pause-new') { if (!S.readonly) { PE.setPauseNew(S.prog, !S.prog.pauseNew); save(); } render(); }
     else if (act === 'opt') answer(Number(el.getAttribute('data-i')));
+    else if (act === 'run') runCode('run');
+    else if (act === 'code-skip') skipCode();
     else if (act === 'continue') next();
     else if (act === 'quit') { S.ask = 'quit'; render(); }
     else if (act === 'quit-yes') { S.sess = null; S.ask = null; S.tab = 'today'; render(); }
     else if (act === 'home') { S.summary = null; S.tab = 'today'; render(); }
     else if (act === 'cancel') { S.ask = null; render(); }
     else if (act === 'export') {
-      try { download('pe_' + DATA.pack.key + '_' + today() + '.json', JSON.stringify(S.prog, null, 2)); S.msg = 'Exported.'; }
+      try { download('pe_' + DATA.pack.key + '_' + today() + '.json', exportText()); S.msg = 'Exported.'; }
       catch (err) { S.msg = 'Export failed: ' + err.message; }
       render();
     }
@@ -574,6 +769,9 @@
       var ticks = Array.prototype.map.call(document.querySelectorAll('#rubric input[name=tick]:checked'), function (b) { return Number(b.value); });
       PE.fullGrade(S.prog, IX, S.sess, ticks);
       save(); render();
+    } else if (e.target.id === 'codeform') {
+      e.preventDefault();
+      runCode('check');
     } else if (e.target.id === 'multi') {
       e.preventDefault();
       var picks = multiPicks();
@@ -589,6 +787,20 @@
     draftTimer = setTimeout(syncSession, 400);
     if (S.hint) { S.hint = ''; var h = root.querySelector('.hint'); if (h) h.textContent = ''; }
     updateEcho();
+  });
+  // Editor: Tab inserts four spaces. Escape hands Tab back to the browser for the next press (keyboard users can leave).
+  var tabFree = false;
+  root.addEventListener('keydown', function (e) {
+    if (e.target.id !== 'ans' || e.target.tagName !== 'TEXTAREA') return;
+    if (e.key === 'Escape') { tabFree = true; return; }
+    if (e.key !== 'Tab' || e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (tabFree) { tabFree = false; return; }
+    e.preventDefault();
+    var ta = e.target;
+    if (!document.execCommand || !document.execCommand('insertText', false, '    ')) {
+      ta.setRangeText('    ', ta.selectionStart, ta.selectionEnd, 'end');
+      ta.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   });
   root.addEventListener('change', function (e) {
     if (e.target.id === 'import') importFile(e.target.files[0]);

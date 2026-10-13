@@ -355,7 +355,7 @@
       ],
       "correct": 0,
       "why": [
-        "the isothermal relation, which needs $T$ constant",
+        "correct: with $Q=0$, $PV^\\gamma$ is constant",
         "the isothermal relation, which needs $T$ constant",
         "the isochoric relation, which needs $V$ constant",
         "the isobaric relation, which needs $P$ constant"
@@ -962,8 +962,8 @@
       ],
       "correct": 0,
       "why": [
+        "correct: entropy never decreases in an isolated system",
         "confuses the second law with energy conservation",
-        "",
         "reverses the inequality",
         "reverses the sign for the surroundings"
       ]
@@ -1231,8 +1231,8 @@
       ],
       "correct": 0,
       "why": [
+        "correct: spontaneous at constant $T$ and $P$ means $\\Delta G<0$",
         "reverses the inequality",
-        "",
         "ignores the surroundings",
         "ignores the entropy term"
       ]
@@ -1268,9 +1268,9 @@
       ],
       "correct": 0,
       "why": [
-        "that is the enthalpy $H$",
-        "drops the pressure term, which gives the Helmholtz function",
-        "the Helmholtz function is $F=U-TS$",
+        "correct: $G=H-TS$, with $H=U+PV$",
+        "that is the enthalpy $H$, not $G$",
+        "that is the Helmholtz function $F=U-TS$, not $G$",
         "sign error on the entropy term"
       ]
     },

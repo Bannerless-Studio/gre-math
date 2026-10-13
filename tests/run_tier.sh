@@ -31,6 +31,8 @@ validate_ok() {
 
 run engine_checks "$NODE" tests/engine_checks.js
 run answer_checks "$NODE" tests/answer_checks.js
+run opus_review_checks "$NODE" tests/opus_review_checks.js
+run code_checks env NODE="$NODE" "$NODE" tests/code_checks.js
 run sim_checks "$NODE" tests/sim_checks.js
 run full_checks "$NODE" tests/full_checks.js
 run validate_checks "$NODE" tests/validate_checks.js

@@ -246,6 +246,11 @@ const ixP = core.index({ pack: synthP.pack, techniques: synthP.techniques, items
   const pFar = prog0();
   pFar.tech['t1.lin-eq'] = { s: 3, l: 1, r: 3, w: 0, m: 1, wk: 0, prov: 0, fp: 1, in: 1 };
   check('level exam not offered at 33 percent', core.examLevel(pFar, ix) === null);
+  for (let n = 5; n <= 20; n++) {
+    const offers = []; for (let kn = 0; kn <= n; kn++) if (core.examOffered(kn, n, 70)) offers.push(kn);
+    check('level exam has an offering count for n=' + n, offers.length >= 1 && offers.every((kn) => kn * 10 < n * 7), offers);
+  }
+  check('exam n=14: 9 known offered, 10 not (gate open)', core.examOffered(9, 14, 70) && !core.examOffered(10, 14, 70) && !core.examOffered(8, 14, 70));
 }
 {
   // Pass: every answer right. Fail: every answer wrong. Both with the same starting progress.

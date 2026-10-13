@@ -356,3 +356,150 @@ Blind solve: 153 ab items, 34 full, 17 teach cards. Keys agreed on 153/153 (ab) 
 - Thin second technique: t9-f027 (ln(N_D/n_i) only), t9-f034 (Johnson noise formula), t9-f003. Tags not changed.
 - Rubric pass is 67%-80% of weight (integer weights); no change.
 - Checker: check_items.py OK 153 items and OK 34 items; 91 expression forms (value plus every also) all ok:true; wrong forms for 0053 and 0098 rejected.
+
+## Audit fixes (2026-10-13)
+
+Source: `packs/gre-physics/AUDIT-2026-10-13.md`. Edits made in batches, then `tools/merge_batches.py`.
+
+| Id | Class | Change |
+|---|---|---|
+| t2-0014, t2-0015, t2-0023, t2-0025, t2-0032, t2-0033, t2-0040, t2-0052, t2-0096, t2-0107 | `form: exact` on data-computed value | `form: decimal`, `rel: 0.02`, `tol` = 0.02 × value, value at full precision; `check` unchanged |
+| t1.graphs | Teach card 80+ words | Trimmed to 63 words (whitespace count); move and trap kept |
+| t6-0021, t7-0011, t7-0029, t7-0037, t7-0038 | `why` blank or shifted | Realigned, one reason per option; correct option says "correct" |
+
+Scan results: no other exact numeric item with a non-integer decimal value of 4+ significant digits; no other teach cards over 80 words by whitespace count; no other mcq `why` blank or misaligned.
+
+Open: with `rel: 0.02`, typed two-significant-figure roundings of t2-0015 (15), t2-0025 and t2-0032 (2.5), and t2-0096 (2.2 or 2.3) fall outside tolerance.
+
+## Teach cards v2 review (T1–T10, sonnet-5.5)
+
+Checked all 137 cards in `batches/T1..T10.teach.json`: recomputed every Example, compared each card with the technique's drill prompts, and ran the shape script. Edits are in place, ids and six-paragraph shape kept. No commit, no merge.
+
+Cards changed: 106 of 137. Per class (a card can carry two classes): teaching 71, overlap 62, shape 11, factual 6.
+
+Verification: JSON loads under `python3 -I` for all ten files. `renderText` succeeds and `glyphIssues` is empty for all 137. Word count 90–160 (excluding math and code), six labels in order, display math in Move and Example, no headings, no "note that", no banned font commands. Overlap script flags only `t1.graphs` against t1-f024, which shares three small numbers in an unrelated setting (log-log moon periods); left as is.
+
+Overlap rule used: Example numbers that are not in the rest of the card must not match one drill item on 3 or more values, or on 2 values making up most of the Example. Several cards were exact copies of a drill (t5.maxwell, t6.dilation-contraction, t7.blackbody, t7.gas-processes, t9.xray-spectra, t9.nuclear-structure, t4.gauss, t8.born, t8.operators).
+
+Real factual errors found: `t2.damped-driven` gave Q = ω0τ, which is twice the correct Q = ω0 m/b (drill uses ω0/(b/m)); `t7.canonical` Example rounded p_up to 0.020 where 3.86 gives 0.021. Author-flagged cards: t8.variational verified numerically (⟨H⟩ = 0.70711 ħω at b² = 1/√2, Riemann sum agrees); t7.phase Clapeyron sign correct (ΔV = V_final − V_initial, ice ΔV<0); t9.solid-thermal constants correct (12π⁴/5, 1.76 k_BT_c, M^-1/2); t5.mag-materials correct; t3.thin-film correct but lacked dark conditions and transmission = reflection-dark, added; t4.images force correct but energy, field at the plane and induced charge density were missing, and the work to remove the charge is kq²/4d, now stated; t5.maxwell correct but Example duplicated drill t5-0087, replaced; t10.pacing: about 70 questions in 2 h confirmed from the ETS practice book; ETS reports percent correct for tests since September 2023, so no wrong-answer penalty (only a test-prep site states this outright, card says to confirm in the bulletin).
+
+### Changed cards
+
+| id | class | change |
+|---|---|---|
+| t1.sigfig | teaching | added power rule for delta z/z = n delta x/x (drill: % uncertainty in t^2) |
+| t1.kin-2d | shape | range formula moved to display math |
+| t1.small-angle | teaching | added angular size theta = d/D (drills use it) |
+| t1.vec-comp | overlap | Example numbers changed (shared 4.0,5.0,1.0 with t1-0033); Example B changed to 3.5 (3.0/4.0 matched t1-0033) |
+| t1.graphs | overlap | Example numbers changed (answer 21 and 3.0 matched t1-f016); Example changed again to avoid t1-f012 numbers; Example set to 0->8.0 m/s in 2.0 s, hold 5.0 s (answer 48 m; earlier 36 matched t1-0067) |
+| t2.newton | overlap, teaching | Example 5.0 kg, 3.0 N and 4.0 N (matched t2-0004); added system-then-isolate step for contact forces |
+| t2.fbd | overlap | Example 6.0 kg, 25 N at 37 deg (matched t2-f007 numbers) |
+| t2.friction-drag | overlap | Example mu_s 0.45, mu_k 0.35, 100 N (matched t2-0022); N=mg shown |
+| t2.incline-pulley | overlap | Example 37 deg, mu 0.25 (30 deg and g matched frictionless-incline drill) |
+| t2.circular | factual, shape | period renamed P (T clashed with tension in drills); omega=2pi/P added |
+| t2.work-energy | overlap | Example 5.0 kg, 40 N at 37 deg over 5.0 m (matched t2-f013 numbers) |
+| t2.momentum | overlap | Example 0.25 kg, 14 -> 6.0 m/s, 0.020 s (matched t2-f015) |
+| t2.collisions | overlap, teaching | Example 1.5 kg at 8.0 m/s into 2.5 kg (matched t2-f025); added elastic result and ballistic pendulum step |
+| t2.com | overlap | Example 6.0 kg at 0, 3.0 kg at 9.0 m; Example changed again to 5.0 kg at 0, 15 kg at 8.0 m |
+| t2.rot-dynamics | overlap, teaching | Example hoop 3.0 kg, 0.20 m, 0.60 N m (matched t2-0103); added rolling rotational-energy fraction |
+| t2.ang-mom | overlap, teaching | Example I 6.0->2.0 kg m^2 at 1.5 rad/s (matched t2-f025); added L=mvr |
+| t2.gravitation | teaching | added GM = gR^2 for drills giving g and R |
+| t2.shm | teaching | added a_max = A omega^2 |
+| t2.damped-driven | factual, teaching | Q = omega0 tau was off by 2 (Q = omega0 m/b = omega0 tau/2); added steady-state driven amplitude and energy decay used by drills; Example gains Q and resonance amplitude |
+| t3.wave-basics | teaching | added phase difference over distance (drill t3-0006) |
+| t3.sound | overlap, teaching | added beats and closed-pipe index; Example 600 Hz at 25 m/s (800 Hz/20 matched t3-0023) |
+| t3.refraction | teaching | added apparent depth (drill t3-0042) |
+| t3.geom-optics | teaching | state d_o>0 real object, diverging f<0 |
+| t3.interference | teaching | added phase difference from path difference (drill t3-0060) |
+| t3.thin-film | factual, overlap, teaching | added dark conditions for both flip cases and reflection-dark = transmission-bright (drills 0068, 0069); Example 560 nm |
+| t3.polarization | overlap | Example axes 20 deg (60 matched t3-0085) |
+| t3.optical-instruments | overlap, teaching | added microscope total magnification; Example telescope 90/3.0 cm, 0.12 m, 500 nm |
+| t3.fluid-static | overlap, shape | Example made coherent (floating block 750 kg/m^3, gauge pressure at 6.0 m) |
+| t3.ideal-gas | teaching | added v_rms and named n (drill t3-0123) |
+| t4.coulomb | overlap | Example 8.0 nC at 0.20 m, 3.0 uC test charge (matched t4-0005) |
+| t4.gauss | overlap, teaching | Example lambda 3.5 uC/m at 0.80 m (was identical to t4-0013); added standard results and enclosed charge for uniform volume |
+| t4.potential | teaching | added energy gain K = q dV (drill proton through 500 V) |
+| t4.multipole | overlap, teaching | added far-field dipole potential and field (drills 0031, 0033); Example +-3.0 nC, 2.0 mm, 5.0e3 N/C |
+| t4.conductors | overlap, teaching | added cavity-charge bookkeeping and joined-spheres rule (drills 0041, 0042); Example R=0.15 m, 6.0 nC |
+| t4.images | factual, shape, teaching | card lacked energy, field at foot and induced charge density that drills 0050, 0051, 0053, f011, f012 ask; clarified work-to-remove is kq^2/4d; dropped unused sphere; new Example; trimmed to 160 words |
+| t4.laplace | overlap, teaching | generalised to E = -grad V and test of Laplace; Example 200 V across 0.050 m (120, 30 matched t4-f014) |
+| t4.capacitors | overlap, teaching | added charge sharing between connected capacitors (drill 0069); Example 3.0 and 12 uF series across 15 V |
+| t4.dielectrics | overlap | Example C0 2.0 uF at 12 V, kappa 5.0 (kappa 4.0, 2.5 matched drills) |
+| t4.dc-circuits | overlap, shape, teaching | words 88 -> in range; power formulas added (drill 0086); Example 18 V, r=0.50 ohm (was near-copy of t4-0087); Example changed again: 30 V, r=0.50, 8.0 in series with 20 // 5.0 (avoid t4-f019 numbers) |
+| t4.kirchhoff | overlap | Example 9.0 V/1.0 ohm, 4.0 V/2.0 ohm, shared 3.0 ohm; now shows a negative current (structure matched t4-0095 and numbers t5-f016); Example 7.0 V/2.0 ohm, 1.0 V/2.0 ohm, shared 3.0 ohm (avoid t4-f022 numbers) |
+| t4.rc-transient | shape, teaching | words 89 -> in range; added solving for time (drills 0103, 0105); words 89 -> in range |
+| t4.drude | teaching | added v_d = (q tau/m) E (drill t4-0114) |
+| t5.lorentz | overlap, teaching | added F = qvB sin(theta) for angled motion (drill 0006); Example 3.0e6 m/s in 2.0 mT (electron 2.0e6 matched t5-0004) |
+| t5.biot-savart | overlap, teaching | coil of N turns (drill 0015); Example 20 turns, R=0.25 m, 2.0 A (0.10 m matched t5-0014) |
+| t5.ampere | overlap, teaching | Example radius 5.0 mm, 20 A, r=3.0 mm (matched t5-0022 numbers); named n; Example radius 6.0 mm, 18 A, r=3.0 mm (avoid t5-f021 numbers) |
+| t5.mag-materials | overlap | Example n=400/m, 0.60 A, mu_r=500 (mu_r=200 and 0.5 A drills); factual re-check ok |
+| t5.faraday | overlap | Example 80 turns, 0.015 m^2, 0 to 0.30 T in 0.060 s (0.40 T matched t5-0040) |
+| t5.inductance | overlap, teaching | added series coupling and mutual inductance (drill 0051); Example N=300, A=5.0e-4, 0.15 m, 2.0 A (A=2.0e-4 matched t5-0050) |
+| t5.rl-lc | teaching | added solving for time (drill 0059) |
+| t5.ac-circuits | overlap | Example R=60, L=80 mH, C=6.25 uF at 1000 rad/s, 200 V (R=40, L=0.20 matched t5-0067) |
+| t5.resonance | teaching | added f0 = w0/2pi and low-pass gain (drills 0076, 0078) |
+| t5.maxwell | overlap, teaching | Example duplicated drill 0087 (c from eps0, mu0); integral forms (drills 0085/0086) added; new Example: induced E in a rising B |
+| t5.em-waves | teaching | added travelling-wave form and intensity (drills 0104, 0105) |
+| t5.poynting | shape, teaching | average energy density and point-source intensity (drills 0113, 0114) |
+| t5.em-boundary | overlap, teaching | Example n=1.40 (n=1.50 matched Brewster drill); added v = 1/sqrt(eps mu) (drill 0123); Check not tied to glass |
+| t6.gen-coords | shape, teaching | 163 words -> in range; added how to write T from chosen coordinates (drills 0004-0006 ask for T) |
+| t6.cyclic | teaching | added p_phi = m r^2 phidot for polar L (drills 0022-0024) |
+| t6.central-force | teaching | added circular-orbit speed for gravity (drill 0040) |
+| t6.eff-potential | overlap, teaching | Example m=1.0, k=9.0, l=3.0 (answer 2.25 m matched t6-0049); added circular speed and energy formulas (drills 0050, 0051) |
+| t6.small-osc | teaching | effective mass and normal-mode determinant (drills 0059, 0060) |
+| t6.rotating | overlap | Example omega 0.30, v 4.0, r 2.0 (omega 3.0 matched drill) |
+| t6.lorentz-tr | overlap | Example event x=6.0e8 m, t=5.0 s at 0.60c (matched t6-0077 values); Example event x=9.0e8 m, t=6.0 s (avoid t6-f026) |
+| t6.dilation-contraction | overlap | Example duplicated drill 0086 (100 m at 0.80c); now 75 m at 0.60c |
+| t6.vel-addition | overlap | Example 0.70c + 0.40c (0.90c and 0.50c matched drill 0096) |
+| t6.rel-energy | teaching | added gamma definition (drills 0103, 0104) |
+| t6.rel-collisions | teaching | added two-body decay at rest energy (drill 0121) |
+| t7.first-law | overlap, teaching | Example 300 J on gas, 120 J lost (200/50/150 matched t7-0004); added C_V for monatomic and constant-volume Q = Delta U (drill 0005) |
+| t7.gas-processes | overlap, teaching | Example duplicated drill 0015 (monatomic 300 K, volume halved); now 400 K, volume x8; added PV^gamma and isobaric Q (drill 0014); Example now compression from 250 K to 1/8 volume (expansion 400->300 K matched t7-0017) |
+| t7.engines | overlap | Example 800 K / 400 K, 1500 J; refrigerator 250/300 K (500/300/2000 and 270/300 matched drills 0022, 0024) |
+| t7.entropy | teaching | added two-reservoir irreversible heat flow formula (drill 0032) |
+| t7.potentials | teaching | defined H, F, G (drill 0049 needs G = H - TS) |
+| t7.phase | overlap, teaching | added Delta S = nL/T and dP/dT = PL/(RT^2) (drills 0061, 0063); Example changed to boiling ethanol (273 K, 6.0 kJ matched t7-0061) |
+| t7.kinetic | teaching | added N_A, molar form of v_rms, total translational energy (drills 0067, 0068) |
+| t7.equipartition | overlap, teaching | added solid f=6 so C=3R (drill 0078); Example 3.0 mol, 15 K (2.0 mol diatomic matched t7-0077) |
+| t7.canonical | factual | Example rounding: eps/kT = 3.86 gives p_up = 0.021, not 0.020; Check extended with hot and cold limits (drill 0096) |
+| t7.blackbody | overlap | Example duplicated drills 0113/0115 (7.0e8 m, 5800 K); now R=2.0e8 m, T=3500 K |
+| t7.heat-transfer | overlap | Example concrete 0.15 m k=1.0 + wood 0.030 m k=0.15, A=5.0, 30 K |
+| t7.second-law | overlap | Example dH=+42 kJ, dS=+0.12 kJ/K (was same numbers as t7-0044); shows the high-T case |
+| t8.born | overlap | Example duplicated drill 0006 (psi = A exp(-x/a)); now psi = A x^2 on 0..2.0 nm |
+| t8.step-tunnel | overlap, teaching | added step reflection formula (drill 0032); Example E=0.50 eV, V0=2.0 eV, a=0.40 nm |
+| t8.qho | teaching | added ground-state <x^2> and omega = sqrt(k/m) (drills 0041, 0042) |
+| t8.operators | overlap, teaching | Example [x,p^2] (was the same commutator as drill 0049); added Ehrenfest rule (drill 0050) |
+| t8.uncertainty | teaching | added energy-time bound named in When |
+| t8.ang-mom-qm | teaching | added L_x^2+L_y^2 and angle to z (drills 0086, 0087); trimmed |
+| t8.two-level | overlap | Example Omega=3.0e6 s^-1 for 0.40 us (Omega=2.0e12 matched drill 0104) |
+| t8.perturbation | teaching | stated how to evaluate the diagonal element with the well wavefunction (drills 0112-0114) |
+| t8.variational | shape, teaching | added <T> from /psi'/^2 (no second derivative at a cusp); numerics confirmed 0.7071 hbar omega; kinetic-energy formula moved to display math |
+| t8.identical | teaching | added spinless fermions and symmetric/antisymmetric two-orbital states (drills 0130, 0132) |
+| t9.hydrogen | teaching | added photon wavelength lambda = 1240 eV nm / dE (drill 0005) |
+| t9.fine-hyperfine | teaching | added hc and interval rule (drills 0014, 0015) |
+| t9.zeeman-stark | overlap, teaching | added Lande g_J formula (drill 0023); Example B=0.80 T (0.50 T matched 0022) |
+| t9.selection | shape | grammar: An allowed line |
+| t9.multi-electron | teaching | added Slater screening constants (drill 0041) |
+| t9.xray-spectra | overlap | Example Mo (Z=42); copper Z=29 duplicated drill 0050 |
+| t9.early-quantum | overlap, teaching | added threshold wavelength; Example Compton at 60 deg (90 deg matched drill 0062) |
+| t9.nuclear-structure | overlap, shape | Example 12C (He-4 mass defect duplicated drill 0068); removed stray A=27 sentence |
+| t9.decay | overlap, teaching | Example T=20 min, 960 Bq, 2.0 h; added solving for time (drill 0078) |
+| t9.nuclear-reactions | overlap | second reaction Delta m = 0.0050 u (0.0189 u gave 17.6 MeV, near drill 0085 answer) |
+| t9.particle-kinematics | teaching | added fixed-target threshold energy (drill 0096) |
+| t9.standard-model | teaching | named quark charges and strangeness (drills 0103, 0105) |
+| t9.crystal-bands | overlap, teaching | Example lambda 0.071 nm, d 0.25 nm (0.154/0.200 matched drill 0113); added atoms per cell, number density and nearest-neighbour distance (drills 0112, 0114) |
+| t9.semiconductors | overlap | Example N_D = 5.0e16, mu_n = 1400 (1350 matched drill 0122) |
+| t9.solid-thermal | teaching | gave the Debye T^3 prefactor (flagged card; checked: 12 pi^4/5 R, BCS 1.76 kB Tc, isotope M^-1/2 all correct) |
+| t9.lab-stats | overlap, teaching | Example 3600/1600 counts in 200 s; added weighted mean (drill 0140) |
+| t9.lab-electronics | overlap, teaching | Example C=33 nF, Rf 100k/Ri 5.0k (47k/4.7k matched drill 0149); added non-inverting gain (drill 0149) |
+| t10.pacing | factual | scoring line now states what ETS reports (about 70 questions / 2 h confirmed via ETS practice book; percent-correct reporting since Sept 2023, so no wrong-answer penalty; confirm in current bulletin) |
+
+### Left as is
+
+Cards with no edit are those whose Example, formulas and drill coverage all passed. Notes: `t3.diffraction` and `t5.em-waves` share a constant (550 nm, c) with items, not treated as overlap. `t6.*` cards keep the older spacing style in math; renders fine. `t2.sound` uses v = 343 m/s while drills give 340; the card says "unless told otherwise".
+
+### Still doubtful
+
+- `t10.pacing` scoring sentence depends on ETS policy; reconfirm against the current Information Bulletin.
+- `t9.zeeman-stark` Stark paragraph is qualitative; drills do not test it numerically.
+- Longest cards after edits are under 140 words; the densest for a cold reader are `t4.images`, `t6.gen-coords` and `t8.identical`.

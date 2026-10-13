@@ -1,0 +1,1539 @@
+[
+ {
+  "id": "t2-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.counting",
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A rack holds $10$ sensors, of which $3$ are faulty. An engineer tests $4$ sensors chosen uniformly at random without replacement. Find the probability, as a fraction, that at least one tested sensor is faulty.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/6",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Complement event: no faulty sensor tested",
+    "weight": 2
+   },
+   {
+    "text": "Count both selections with combinations",
+    "weight": 1
+   },
+   {
+    "text": "Final fraction in lowest terms",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "At least one faulty is the complement of none faulty (axioms).\nAll samples: $\\binom{10}{4}=210$.\nNone faulty: all $4$ from the $7$ good ones, $\\binom74=35$ (counting).\n$P=1-35/210=1-1/6=5/6$.",
+  "hints": [
+   "Count the complement instead of three separate cases."
+  ],
+  "check": "1-Fraction(math.comb(7,4),math.comb(10,4))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.counting",
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A model uses a subset of $8$ candidate features. Feature $A$ must be included, and the subset must have exactly $3$ or exactly $4$ features. How many subsets are allowed?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$56$",
+    "$126$",
+    "$70$",
+    "$49$",
+    "$112$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ignored the requirement that $A$ is included: $\\binom83+\\binom84$",
+    "fixed $A$ but chose the other features from the wrong sizes: $\\binom73+\\binom74$",
+    "multiplied the two cases ($7\\cdot7$) instead of adding them",
+    "counted each valid subset twice"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Fix $A$ and choose the remaining features from $7$",
+    "weight": 2
+   },
+   {
+    "text": "Split into the two size cases with the right sizes ($2$ and $3$ more)",
+    "weight": 1
+   },
+   {
+    "text": "Add the disjoint cases",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Fix $A$ in the subset (counting).\nSize $3$: choose $2$ more from $7$: $\\binom72=21$.\nSize $4$: choose $3$ more from $7$: $\\binom73=35$.\nThe cases are disjoint, so add (sets): $21+35=56$.",
+  "hints": [
+   "Put $A$ in first, then count what is left to choose."
+  ],
+  "check": "math.comb(7,2)+math.comb(7,3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.axioms",
+   "t1.sets"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In a spam-filter log, $30\\%$ of emails contain the word *free*, $20\\%$ contain *winner*, and $8\\%$ contain both. Find the probability, as a decimal in $0$ to $1$, that a random email contains neither word.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5800000000000001,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Inclusion-exclusion for the union",
+    "weight": 2
+   },
+   {
+    "text": "Subtract the overlap once",
+    "weight": 1
+   },
+   {
+    "text": "Complement of the union",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Union by inclusion-exclusion (axioms): $0.30+0.20-0.08=0.42$ (sets).\nNeither word is the complement: $1-0.42=0.58$.\nTrap: adding without subtracting the overlap gives $0.50$.",
+  "hints": [
+   "Neither = complement of at least one."
+  ],
+  "check": "1-(0.3+0.2-0.08)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.axioms",
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Server $A$ is up with probability $0.6$ and server $B$ with probability $0.7$. Nothing is assumed about how they depend on each other. What is the smallest possible value of $P(\\text{both up})$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.3$",
+    "$0.42$",
+    "$0.6$",
+    "$0.1$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed independence and multiplied",
+    "took the larger-probability bound $\\min(0.6,0.7)$, which is the largest possible value, not the smallest",
+    "subtracted in the wrong order: $0.7-0.6$",
+    "assumed the events could be disjoint, but $0.6+0.7>1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Use $P(A\\cap B)=P(A)+P(B)-P(A\\cup B)$",
+    "weight": 2
+   },
+   {
+    "text": "Bound $P(A\\cup B)\\le 1$",
+    "weight": 2
+   },
+   {
+    "text": "Conclude the minimum is $0.3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$P(A\\cap B)=P(A)+P(B)-P(A\\cup B)$ (axioms).\nThe union is at most $1$ (inequalities), so $P(A\\cap B)\\ge 1.3-1=0.3$.\nEquality holds when the union is everything, which is feasible.",
+  "hints": [
+   "The union cannot exceed $1$."
+  ],
+  "check": "Fraction(6,10)+Fraction(7,10)-1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.conditional",
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A log has $20$ lines, of which $5$ are errors. Two lines are drawn uniformly at random without replacement. Given that at least one drawn line is an error, find the probability, as a fraction, that the second line drawn is an error.",
+  "answer": {
+   "kind": "numeric",
+   "value": "19/34",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Condition on the event $\\ge1$ error, not just on a first draw",
+    "weight": 2
+   },
+   {
+    "text": "Compute $P(\\ge1\\text{ error})$ by counting",
+    "weight": 1
+   },
+   {
+    "text": "Compute the ratio",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Let $S$ = second is error, $E$ = at least one error. $S\\subset E$, so $P(S\\mid E)=P(S)/P(E)$ (conditional).\n$P(S)=5/20=1/4$ by symmetry.\n$P(E)=1-\\binom{15}2/\\binom{20}2=1-105/190=17/38$ (counting).\n$P(S\\mid E)=\\frac{1/4}{17/38}=\\frac{19}{34}$.",
+  "hints": [
+   "Every outcome with the second line an error already has at least one error."
+  ],
+  "check": "Fraction(1,4)/(1-Fraction(math.comb(15,2),math.comb(20,2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.conditional",
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Three sensors fail independently, each with probability $0.2$. Given that at least one sensor failed, what is the probability that exactly one failed? Give to $3$ decimals.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.787$",
+    "$0.384$",
+    "$0.488$",
+    "$0.750$",
+    "$0.200$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "no conditioning: $P(\\text{exactly one})$ alone",
+    "$P(\\text{at least one})$ reported instead of the conditional",
+    "divided by $P(\\text{none})=0.512$ instead of $P(\\ge1)$",
+    "reused the single-sensor failure rate"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Write $P(A\\mid B)=P(A\\cap B)/P(B)$ with $A\\subset B$",
+    "weight": 2
+   },
+   {
+    "text": "Compute $P(\\text{exactly one})=3(0.2)(0.8)^2$",
+    "weight": 1
+   },
+   {
+    "text": "Compute $P(\\ge1)=1-0.8^3$ and divide",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Exactly one failed implies at least one failed, so numerator is $P(\\text{exactly one})=3(0.2)(0.64)=0.384$ (conditional).\n$P(\\ge1)=1-0.8^3=0.488$ (axioms).\nRatio $0.384/0.488\\approx0.787$.",
+  "hints": [
+   "Exactly one failure is a sub-event of at least one."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.bayes",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "$20\\%$ of emails are spam. Two filters flag emails independently given the true class. Each flags $90\\%$ of spam and $5\\%$ of legitimate email. An email is flagged by both filters. Find the probability, as a fraction, that it is spam.",
+  "answer": {
+   "kind": "numeric",
+   "value": "81/82",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Treat the two flags as conditionally independent: multiply likelihoods per class",
+    "weight": 2
+   },
+   {
+    "text": "Apply Bayes with the $20\\%$ prior",
+    "weight": 2
+   },
+   {
+    "text": "Simplify to a fraction",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Both flags given spam: $0.9^2=0.81$ (independence given class).\nBoth flags given legit: $0.05^2=0.0025$.\nBayes: $\\frac{0.2\\cdot0.81}{0.2\\cdot0.81+0.8\\cdot0.0025}=\\frac{0.162}{0.164}=\\frac{81}{82}$ (bayes).\nTrap: using one flag gives only $9/11$.",
+  "hints": [
+   "Multiply the likelihoods within each class before using Bayes."
+  ],
+  "check": "Fraction(2,10)*Fraction(9,10)**2/(Fraction(2,10)*Fraction(9,10)**2+Fraction(8,10)*Fraction(5,100)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.bayes",
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A factory has three lines producing $50\\%$, $30\\%$, $20\\%$ of output, with defect rates $2\\%$, $3\\%$, $5\\%$ respectively. A unit is found defective. What is the probability it came from line $3$? Give to $2$ decimals.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.34$",
+    "$0.20$",
+    "$0.05$",
+    "$0.10$",
+    "$0.66$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "prior only, ignores the defect evidence",
+    "likelihood only, not weighted by the prior",
+    "divided the line-3 term by the sum of the three defect rates instead of the weighted total",
+    "complement: probability it is not from line 3"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Weights = prior times defect rate for each line",
+    "weight": 2
+   },
+   {
+    "text": "Total defect probability by total probability",
+    "weight": 1
+   },
+   {
+    "text": "Divide line 3 weight by the total",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Joint weights (axioms): line 1 $0.5\\cdot0.02=0.010$; line 2 $0.3\\cdot0.03=0.009$; line 3 $0.2\\cdot0.05=0.010$.\nTotal defective $=0.029$.\nBayes: $0.010/0.029=10/29\\approx0.34$ (bayes).",
+  "hints": [
+   "Weight every line by its share of output times its defect rate."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.independence",
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Three servers are up independently with probabilities $0.9$, $0.8$, $0.7$. The service works when at least two servers are up. Find the probability, as a fraction, that the service works.",
+  "answer": {
+   "kind": "numeric",
+   "value": "451/500",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "List the disjoint up-patterns with at least two up",
+    "weight": 2
+   },
+   {
+    "text": "Multiply probabilities across independent servers",
+    "weight": 1
+   },
+   {
+    "text": "Add the disjoint patterns",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "At least two up means all three, or exactly two (axioms, four disjoint patterns).\nAll up: $0.9\\cdot0.8\\cdot0.7=0.504$ (independence).\nOnly 3 down: $0.9\\cdot0.8\\cdot0.3=0.216$; only 2 down: $0.9\\cdot0.2\\cdot0.7=0.126$; only 1 down: $0.1\\cdot0.8\\cdot0.7=0.056$.\nSum $=0.902=451/500$.",
+  "hints": [
+   "Enumerate which servers are down in each allowed pattern."
+  ],
+  "check": "Fraction(9,10)*Fraction(8,10)*Fraction(7,10)+Fraction(9,10)*Fraction(8,10)*Fraction(3,10)+Fraction(9,10)*Fraction(2,10)*Fraction(7,10)+Fraction(1,10)*Fraction(8,10)*Fraction(7,10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.independence",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "$X$ and $Y$ are independent fair $0/1$ bits. Let $Z=1$ exactly when $X\\neq Y$, else $Z=0$. What is $P(X=1,\\,Y=1,\\,Z=1)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$1/8$",
+    "$1/4$",
+    "$1/2$",
+    "$1/16$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "multiplied the three marginals, assuming mutual independence",
+    "used $P(X=1,Y=1)$ and ignored $Z$",
+    "used $P(Z=1)$ alone",
+    "squared the pair probability"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Notice $Z$ is determined by $(X,Y)$",
+    "weight": 2
+   },
+   {
+    "text": "$X=Y=1$ forces $Z=0$",
+    "weight": 2
+   },
+   {
+    "text": "Reject the product of marginals despite pairwise independence",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$Z=1$ iff $X\\neq Y$ (conditional).\n$X=1,Y=1$ gives $Z=0$, so the triple event is impossible: probability $0$.\nThe three variables are pairwise independent but not mutually independent (independence), so $1/8$ is wrong.",
+  "hints": [
+   "Check what $Z$ equals when both bits are $1$."
+  ],
+  "check": "Fraction(0)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A job retries $X\\in\\{0,1,2,3\\}$ times with $P(X=k)=c\\,(k+1)$. Find $P(X\\ge2\\mid X\\ge1)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "7/9",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Normalise the pmf to find $c$ (or work with weights)",
+    "weight": 1
+   },
+   {
+    "text": "Sum the right pmf tails",
+    "weight": 1
+   },
+   {
+    "text": "Form the conditional ratio",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Weights are $1,2,3,4$ for $k=0..3$, total $10$, so $c=0.1$ (discrete-rv).\n$P(X\\ge1)=0.9$ and $P(X\\ge2)=0.7$.\n$P(X\\ge2\\mid X\\ge1)=0.7/0.9=7/9$ (conditional).",
+  "hints": [
+   "The constant $c$ cancels in the ratio."
+  ],
+  "check": "Fraction(3+4,2+3+4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv",
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two fair six-sided dice are rolled and $Y=|d_1-d_2|$. What is $P(Y\\ge2)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5/9$",
+    "$5/6$",
+    "$10/21$",
+    "$1/3$",
+    "$4/9$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "this is $P(Y\\ge1)$",
+    "treated the $21$ unordered pairs as equally likely",
+    "this is $P(Y\\ge3)$ (strict inequality slip)",
+    "this is $P(Y\\le1)$, forgot the complement"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Use $36$ ordered equally likely outcomes",
+    "weight": 1
+   },
+   {
+    "text": "Count $Y=0$ and $Y=1$ outcomes",
+    "weight": 2
+   },
+   {
+    "text": "Complement to get $Y\\ge2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Use ordered pairs, $36$ equally likely (counting).\n$Y=0$: $6$ outcomes. $Y=1$: $2\\cdot5=10$ outcomes.\n$P(Y\\ge2)=1-16/36=20/36=5/9$ (discrete-rv).",
+  "hints": [
+   "Count the small gaps, then take the complement."
+  ],
+  "check": "Fraction(sum(1 for a in range(1,7) for b in range(1,7) if abs(a-b)>=2),36)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.expectation",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A system logs $8$ independent failures. Each failure is one of $5$ equally likely types. Find the expected number of distinct types that appear, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.1611392,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Indicator variable for each type appearing",
+    "weight": 2
+   },
+   {
+    "text": "Probability a given type is missed: $(4/5)^8$",
+    "weight": 1
+   },
+   {
+    "text": "Linearity of expectation",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Let $I_t=1$ if type $t$ appears (expectation).\n$P(I_t=0)=(4/5)^8$ because the failures are independent (independence), so $P(I_t=1)=1-(4/5)^8\\approx0.832$.\nBy linearity: $5\\cdot0.832\\approx4.16$.\nNo joint distribution of the indicators is needed.",
+  "hints": [
+   "Sum indicators, one per type."
+  ],
+  "check": "5*(1-(4/5)**8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.expectation",
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A request is retried until it succeeds; each attempt succeeds independently with probability $1/4$. The system gives up after $3$ attempts. Let $N$ = number of attempts made (at most $3$). What is $E[N]$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$37/16$",
+    "$4$",
+    "$3$",
+    "$7/4$",
+    "$175/64$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "uncapped geometric mean $1/p$",
+    "the cap itself, assuming all attempts are always used",
+    "dropped the $P(G\\ge3)$ term in the tail sum",
+    "summed the tail one term too far (cap of $4$)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Model attempts as geometric with $p=1/4$ and cap at $3$",
+    "weight": 1
+   },
+   {
+    "text": "Use $E[N]=\\sum_{k=1}^{3}P(G\\ge k)$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate with $P(G\\ge k)=(3/4)^{k-1}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$N=\\min(G,3)$ with $G$ geometric on $1,2,\\dots$ (discrete-dists).\n$E[N]=\\sum_{k=1}^{3}P(G\\ge k)$ (expectation).\n$P(G\\ge k)=(3/4)^{k-1}$: $1+3/4+9/16=37/16$.",
+  "hints": [
+   "For a nonnegative integer variable, add the tail probabilities."
+  ],
+  "check": "Fraction(1)+Fraction(3,4)+Fraction(3,4)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.variance",
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $A\\sim\\text{Poisson}(4)$ and $B\\sim\\text{Binomial}(12,\\,0.25)$ be independent. Find $\\text{Var}(3A-2B+5)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Variances of the two distributions",
+    "weight": 2
+   },
+   {
+    "text": "Scale by squared coefficients; the constant adds nothing",
+    "weight": 1
+   },
+   {
+    "text": "Independence: add variances",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\text{Var}(A)=4$ (Poisson); $\\text{Var}(B)=12(0.25)(0.75)=2.25$ (discrete-dists).\n$\\text{Var}(aX+c)=a^2\\text{Var}(X)$, and the $-2$ is squared (variance).\nIndependent, so $9\\cdot4+4\\cdot2.25=36+9=45$.",
+  "hints": [
+   "Coefficients enter squared; the shift drops out."
+  ],
+  "check": "9*4+4*12*Fraction(1,4)*Fraction(3,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.variance",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A count $X$ takes values $0,1,2,4$ with probabilities $0.4,0.3,0.2,0.1$. What is $\\text{Var}(X)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.49$",
+    "$2.70$",
+    "$1.21$",
+    "$1.10$",
+    "$3.91$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "this is $E[X^2]$, forgot to subtract the squared mean",
+    "this is $E[X]^2$ only",
+    "this is $E[X]$",
+    "added $E[X^2]$ and $E[X]^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Compute $E[X]$",
+    "weight": 1
+   },
+   {
+    "text": "Compute $E[X^2]$",
+    "weight": 1
+   },
+   {
+    "text": "Use $\\text{Var}=E[X^2]-E[X]^2$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$E[X]=0.3+0.4+0.4=1.1$ (expectation).\n$E[X^2]=0.3+0.8+1.6=2.7$.\n$\\text{Var}(X)=2.7-1.1^2=2.7-1.21=1.49$ (variance).",
+  "hints": [
+   "Use the shortcut formula with second moment."
+  ],
+  "check": "Fraction(27,10)-Fraction(11,10)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists",
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A team runs $20$ independent hypothesis tests where every null hypothesis is true. Each test has a $0.05$ chance of a false positive. Find the probability, as a decimal in $0$ to $1$, of at least $2$ false positives.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2641604750561508,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Recognise Binomial$(20,0.05)$",
+    "weight": 1
+   },
+   {
+    "text": "Complement of $0$ or $1$ false positives",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate both terms",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "The count is Binomial$(20,0.05)$ (discrete-dists).\nComplement of $\\{0,1\\}$ (axioms): $1-0.95^{20}-20(0.05)(0.95)^{19}$.\n$=1-0.3585-0.3774\\approx0.264$.",
+  "hints": [
+   "Subtract the two smallest outcomes from $1$."
+  ],
+  "check": "1-0.95**20-20*0.05*0.95**19",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists",
+   "t2.independence",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Server errors arrive as a Poisson process with rate $3$ per hour. What is the probability of no errors in a given 20-minute window and at least one error in the 40 minutes right after it?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$e^{-1}(1-e^{-2})$",
+    "$e^{-3}(1-e^{-6})$",
+    "$e^{-1}(1-e^{-1})$",
+    "$1-e^{-3}$",
+    "$e^{-3}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the hourly rate in both windows without rescaling",
+    "used the wrong length for the second window (20 minutes again)",
+    "only asked for at least one error in the full hour",
+    "only asked for no errors in the full hour"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rescale the rate: mean $1$ for 20 min, $2$ for 40 min",
+    "weight": 2
+   },
+   {
+    "text": "Disjoint windows are independent",
+    "weight": 1
+   },
+   {
+    "text": "Multiply $P(0)$ and $P(\\ge1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Counts in disjoint windows are independent (independence).\n20 min: mean $3\\cdot\\frac13=1$, so $P(0)=e^{-1}$ (discrete-dists).\n40 min: mean $2$, so $P(\\ge1)=1-e^{-2}$.\nProduct: $e^{-1}(1-e^{-2})\\approx0.318$ (exp-log).",
+  "hints": [
+   "Scale the rate to each window length first."
+  ],
+  "check": "math.exp(-1)*(1-math.exp(-2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf",
+   "t1.integral"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A response time $X$ (seconds) has density $f(x)=c(1+x)$ on $[0,2]$ and $0$ elsewhere. Find $P(X>1)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/8",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Fix $c$ from $\\int f=1$",
+    "weight": 2
+   },
+   {
+    "text": "Integrate the density over $[1,2]$",
+    "weight": 1
+   },
+   {
+    "text": "Multiply and simplify",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\int_0^2(1+x)\\,dx=2+2=4$, so $c=1/4$ (pdf-cdf).\n$P(X>1)=\\frac14\\int_1^2(1+x)\\,dx=\\frac14\\left(1+\\frac32\\right)$ (integral).\n$=\\frac{5}{8}$.",
+  "hints": [
+   "Normalise first, then integrate the tail."
+  ],
+  "check": "Fraction(5,2)/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf",
+   "t1.integral",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A service time $X$ has CDF $F(x)=x^2/4$ on $[0,2]$. What is $E[X]$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4/3$",
+    "$1$",
+    "$2$",
+    "$8/3$",
+    "$\\sqrt2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $F$ as if it were the density",
+    "the upper end of the support",
+    "used $f(x)=x$ (dropped the $1/2$), unnormalised",
+    "the median, not the mean"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Differentiate the CDF to get $f(x)=x/2$",
+    "weight": 2
+   },
+   {
+    "text": "Set up $\\int_0^2 x f(x)\\,dx$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$f(x)=F'(x)=x/2$ on $[0,2]$ (pdf-cdf).\n$E[X]=\\int_0^2 x\\cdot\\frac x2\\,dx$ (expectation).\n$=\\frac{1}{2}\\cdot\\frac{8}{3}=\\frac43$ (integral).",
+  "hints": [
+   "The CDF is not the density."
+  ],
+  "check": "Fraction(8,3)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.normal",
+   "t2.variance",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two independent latencies are $X_1\\sim N(200,\\,40^2)$ and $X_2\\sim N(100,\\,30^2)$ in ms. Find $P(X_1+X_2>350)$, as a decimal in $0$ to $1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.15865525393145705,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Mean of the sum is $300$",
+    "weight": 1
+   },
+   {
+    "text": "Variance (not sd) adds: $1600+900=2500$, sd $50$",
+    "weight": 2
+   },
+   {
+    "text": "Standardise: $z=1$ and take the upper tail",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Sum of independent normals is normal (normal, independence).\nMean $300$; variance $40^2+30^2=2500$, so sd $50$ (variance).\n$z=(350-300)/50=1$.\n$P(Z>1)=0.1587$.\nTrap: adding sds gives $70$.",
+  "hints": [
+   "Variances add for independent variables, sds do not."
+  ],
+  "check": "0.5*math.erfc(1/math.sqrt(2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.normal",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Scores are normal. $10\\%$ of scores fall below $40$ and $20\\%$ fall above $70$. Use $z_{0.90}=1.2816$ and $z_{0.80}=0.8416$. What is the standard deviation, to $1$ decimal?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$14.1$",
+    "$15.0$",
+    "$23.4$",
+    "$35.6$",
+    "$68.2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "rounded both $z$ values to $1$ and added them",
+    "divided the $30$ gap by the lower-cutoff $z$ only",
+    "divided the $30$ gap by the upper-cutoff $z$ only",
+    "subtracted the $z$ values instead of adding"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Convert each tail to a $z$ value, with the lower one negative",
+    "weight": 2
+   },
+   {
+    "text": "Subtract: $70-40=(z_2-z_1)\\sigma$",
+    "weight": 2
+   },
+   {
+    "text": "Solve for $\\sigma$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Lower: $(40-\\mu)/\\sigma=-1.2816$. Upper: $(70-\\mu)/\\sigma=+0.8416$ (normal).\nSubtract to remove $\\mu$: $30=(0.8416+1.2816)\\sigma$.\n$\\sigma=30/2.1232\\approx14.1$ (variance).",
+  "hints": [
+   "Two equations, two unknowns; subtract to cancel the mean."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists",
+   "t2.conditional",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two machines fail independently. Each has an exponential lifetime with mean $50$ hours. Both have already run $30$ hours without failing. Find the probability, as a decimal in $0$ to $1$, that both survive at least $20$ more hours.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.44932896411722156,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Memoryless property removes the $30$ hours already run",
+    "weight": 2
+   },
+   {
+    "text": "One machine: $e^{-20/50}$",
+    "weight": 1
+   },
+   {
+    "text": "Independence: multiply for both",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Exponential is memoryless, so the past $30$ hours do not matter (conditional, cont-dists).\nOne machine: $P(T>20)=e^{-20/50}=e^{-0.4}$.\nIndependent machines (independence): $e^{-0.4}\\cdot e^{-0.4}=e^{-0.8}\\approx0.449$.",
+  "hints": [
+   "The past survival does not change the remaining-life distribution."
+  ],
+  "check": "math.exp(-2*20/50)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists",
+   "t2.axioms",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two jobs arrive at independent uniform times $X,Y$ on $[0,10]$ minutes. What is the probability that they arrive less than $2$ minutes apart?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.36$",
+    "$0.20$",
+    "$0.40$",
+    "$0.64$",
+    "$0.16$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "compared one job to a fixed time, ignoring the second dimension",
+    "doubled $2/10$ without removing edge effects",
+    "complement: probability they arrive at least $2$ apart",
+    "squared the two-sided fraction $(4/10)^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Model $(X,Y)$ as uniform on a $10\\times10$ square",
+    "weight": 1
+   },
+   {
+    "text": "Region $|X-Y|\\ge2$ is two right triangles with legs $8$",
+    "weight": 2
+   },
+   {
+    "text": "Complement to get $|X-Y|<2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$(X,Y)$ is uniform on the square (cont-dists, independence).\n$|X-Y|\\ge2$ is two triangles with legs $8$: area $64$ out of $100$.\nComplement (axioms): $1-0.64=0.36$.",
+  "hints": [
+   "Draw the square and the band around the diagonal."
+  ],
+  "check": "1-Fraction(8,10)**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Binary features $X,Y$ have joint pmf: $P(0,0)=0.4$, $P(0,1)=0.1$, $P(1,0)=0.2$, $P(1,1)=0.3$. Find $\\text{Var}(X+Y)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "69/100",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Marginals: $P(X=1)=0.5$, $P(Y=1)=0.4$",
+    "weight": 1
+   },
+   {
+    "text": "$\\text{Cov}=E[XY]-E[X]E[Y]=0.1$",
+    "weight": 2
+   },
+   {
+    "text": "$\\text{Var}(X+Y)=\\text{Var}X+\\text{Var}Y+2\\text{Cov}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Marginals (joint-cov): $P(X=1)=0.5$, $P(Y=1)=0.4$. Bernoulli variances: $0.25$ and $0.24$.\n$E[XY]=P(1,1)=0.3$; $\\text{Cov}=0.3-0.5\\cdot0.4=0.1$.\n$\\text{Var}(X+Y)=0.25+0.24+2(0.1)=0.69=69/100$ (variance).",
+  "hints": [
+   "Variances alone are not enough; add twice the covariance."
+  ],
+  "check": "Fraction(1,4)+Fraction(6,25)+2*(Fraction(3,10)-Fraction(1,2)*Fraction(2,5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$\\text{Var}(X)=4$, $\\text{Var}(Y)=9$ and the correlation of $X$ and $Y$ is $-0.5$. What is $\\text{Var}(2X-Y)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$37$",
+    "$13$",
+    "$25$",
+    "$7$",
+    "$31$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "flipped the sign of the cross term",
+    "ignored the covariance entirely",
+    "subtracted $\\text{Var}(Y)$ for the $-Y$ term: $16-9$",
+    "used cross term $ab\\,\\text{Cov}$ without the factor $2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Convert correlation to covariance: $-0.5\\cdot2\\cdot3=-3$",
+    "weight": 2
+   },
+   {
+    "text": "Expand $\\text{Var}(aX+bY)$ with $a=2$, $b=-1$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "$\\text{Cov}=\\rho\\sigma_X\\sigma_Y=-0.5\\cdot2\\cdot3=-3$ (joint-cov).\n$\\text{Var}(2X-Y)=4\\cdot4+1\\cdot9+2(2)(-1)(-3)$ (variance).\n$=16+9+12=37$.",
+  "hints": [
+   "The cross term is $2ab\\,\\text{Cov}$ with $b=-1$."
+  ],
+  "check": "4*4+9-2*2*1*Fraction(-3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Daily error counts have mean $20$ and standard deviation $4$ (distribution unknown). Use Chebyshev's inequality to bound $P(X\\ge30\\ \\text{or}\\ X\\le10)$. Give the bound as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "4/25",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Recognise the event as $|X-20|\\ge10$",
+    "weight": 2
+   },
+   {
+    "text": "Apply $P(|X-\\mu|\\ge t)\\le\\sigma^2/t^2$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "The two tails together are $|X-20|\\ge10$ (tail-bounds).\nChebyshev: $\\sigma^2/t^2=16/100$ (variance).\n$=4/25$.\nTrap: Markov on $X\\ge30$ gives $2/3$ and ignores the variance.",
+  "hints": [
+   "Two-sided deviation of $10$ from the mean."
+  ],
+  "check": "Fraction(4**2,10**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds",
+   "t2.variance",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A conversion rate $p$ is unknown. The sample proportion $\\hat p$ comes from $n$ independent users. Using Chebyshev with the worst-case variance of a Bernoulli, what is the smallest $n$ that guarantees $P(|\\hat p-p|\\ge0.05)\\le0.05$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2000$",
+    "$8000$",
+    "$100$",
+    "$400$",
+    "$4000$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used variance $1$ instead of the worst case $1/4$",
+    "dropped the $0.05$ failure probability",
+    "did not square the tolerance $0.05$",
+    "doubled for a two-sided event that Chebyshev already covers"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$E[\\hat p]=p$ and $\\text{Var}(\\hat p)\\le\\frac1{4n}$",
+    "weight": 2
+   },
+   {
+    "text": "Chebyshev: bound $=\\text{Var}/\\varepsilon^2$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $\\frac{1}{4n(0.05)^2}\\le0.05$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$E[\\hat p]=p$ and $\\text{Var}(\\hat p)=p(1-p)/n\\le1/(4n)$ (expectation, variance).\nChebyshev (tail-bounds): $P\\le\\frac{1}{4n\\varepsilon^2}$ with $\\varepsilon=0.05$.\nThe bound is $100/n$, so $100/n\\le0.05$ gives $n\\ge2000$.",
+  "hints": [
+   "Worst-case Bernoulli variance is $1/4$."
+  ],
+  "check": "Fraction(1,4)/(Fraction(5,100)**2*Fraction(5,100))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Session lengths are independent with mean $8$ min and sd $6$ min. For $100$ sessions, use the CLT to estimate the probability, as a decimal in $0$ to $1$, that the total exceeds $900$ min.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0477903522728147,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Total has mean $800$ and sd $6\\sqrt{100}=60$",
+    "weight": 2
+   },
+   {
+    "text": "Standardise: $z=100/60\\approx1.67$",
+    "weight": 1
+   },
+   {
+    "text": "Upper-tail probability",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Sum of $100$ iid terms is approximately normal (lln-clt).\nMean $=800$; sd $=6\\sqrt{100}=60$ (normal).\n$z=(900-800)/60\\approx1.667$.\n$P(Z>1.667)\\approx0.048$.",
+  "hints": [
+   "Sum of $n$ terms has sd $\\sigma\\sqrt n$."
+  ],
+  "check": "0.5*math.erfc((900-800)/(60*math.sqrt(2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t2-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt",
+   "t2.discrete-dists",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A true conversion rate is $p=0.2$. With $n=400$ independent users, use the CLT (no continuity correction) to estimate $P(|\\hat p-0.2|<0.02)$. Give to $3$ decimals.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.683$",
+    "$0.954$",
+    "$0.841$",
+    "$0.317$",
+    "$0.341$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "took the standard error as $0.2/\\sqrt{400}=0.01$, using $p$ not $\\sqrt{p(1-p)}$",
+    "used one-sided $\\Phi(1)$",
+    "tail probability outside the band",
+    "used $\\Phi(1)-\\Phi(0)$, one side of the band"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Standard error $=\\sqrt{p(1-p)/n}=0.02$",
+    "weight": 2
+   },
+   {
+    "text": "Band half-width $=1$ standard error",
+    "weight": 1
+   },
+   {
+    "text": "$P(|Z|<1)$ from the normal",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Bernoulli sd is $\\sqrt{0.2\\cdot0.8}=0.4$, so $SE=0.4/\\sqrt{400}=0.02$ (lln-clt).\nThe band is $\\pm1$ SE, so $z=1$ (normal).\n$P(|Z|<1)\\approx0.683$ (discrete-dists for the Bernoulli sd).",
+  "hints": [
+   "Compute the Bernoulli sd before dividing by $\\sqrt n$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

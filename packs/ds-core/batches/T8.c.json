@@ -1,0 +1,1369 @@
+[
+ {
+  "id": "t8-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.mlp",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fully connected network maps $784$ inputs through hidden layers of $128$ and $64$ units to $10$ outputs. Every layer has a weight matrix and a bias vector. How many trainable parameters does it have in total? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 109386,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Weight matrix sizes $784\\times128$, $128\\times64$, $64\\times10$",
+    "weight": 2
+   },
+   {
+    "text": "One bias per output unit of each layer",
+    "weight": 1
+   },
+   {
+    "text": "Sum all six arrays",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "mlp: layer 1 has $784\\cdot128+128=100480$.\nLayer 2 has $128\\cdot64+64=8256$.\nLayer 3 has $64\\cdot10+10=650$ (matrix-ops: weight shapes are in $\\times$ out).\nTotal $=109386$.\nTrap: skipping biases gives $109184$; counting units gives $986$.",
+  "hints": [
+   "Per layer: in $\\times$ out weights plus out biases."
+  ],
+  "check": "784*128+128+128*64+64+64*10+10",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.mlp",
+   "t8.activations",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Network: input $x=(1,-2)^T$, hidden layer $h=\\mathrm{ReLU}(W_1x+b_1)$ with $W_1=\\begin{pmatrix}2&1\\\\-1&3\\end{pmatrix}$, $b_1=(1,-1)^T$, then a linear output $\\hat y=w_2^Th+b_2$ with $w_2=(3,2)^T$, $b_2=-1$. What is $\\hat y$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "-14",
+    "14",
+    "3",
+    "2",
+    "-1"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "skipped the ReLU, so the negative unit $-8$ leaks through",
+    "used $W_1^T$ instead of $W_1$",
+    "dropped the output bias $b_2$",
+    "",
+    "dropped the hidden bias $b_1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Pre-activations $W_1x+b_1=(1,-8)$",
+    "weight": 2
+   },
+   {
+    "text": "ReLU zeroes the second unit",
+    "weight": 2
+   },
+   {
+    "text": "Output $3\\cdot1+2\\cdot0-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "mlp: $W_1x=(2-2,\\,-1-6)=(0,-7)$ (matrix-ops, row times vector).\nAdd $b_1$: $z=(1,-8)$.\nactivations: ReLU gives $h=(1,0)$.\n$\\hat y=3\\cdot1+2\\cdot0-1=2$.\nTrap: no ReLU gives $-14$.",
+  "hints": [
+   "Apply ReLU before the output layer."
+  ],
+  "check": "3*max(0,2*1+1*(-2)+1)+2*max(0,-1*1+3*(-2)-1)-1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.activations",
+   "t8.backprop",
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A chain of $6$ single-unit layers, $a_k=\\sigma(w\\,a_{k-1}+b_k)$ with $\\sigma$ the logistic sigmoid and $w=2$ in every layer. The biases are set so every pre-activation equals $0$. What is $\\partial a_6/\\partial a_0$? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.015625,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\sigma'(0)=1/4$",
+    "weight": 1
+   },
+   {
+    "text": "Per-layer factor $w\\,\\sigma'(0)=1/2$",
+    "weight": 2
+   },
+   {
+    "text": "Six factors multiply: $2^{-6}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "activations: $\\sigma'(z)=\\sigma(1-\\sigma)$, which is $1/4$ at $z=0$.\nbackprop: each layer contributes $w\\,\\sigma'(z)=2\\cdot\\tfrac14=\\tfrac12$ (deriv-rules, chain rule).\nSix layers multiply: $(1/2)^6=1/64=0.015625$.\nTrap: ignoring $w$ gives $4^{-6}\\approx0.00024$.",
+  "hints": [
+   "Chain rule: multiply six identical local derivatives."
+  ],
+  "check": "(2*0.25)**6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.activations",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A ReLU unit has pre-activation $z\\sim N(\\mu,\\sigma^2)$ with $\\mu=-1$, $\\sigma=2$. Compute $E[\\mathrm{ReLU}(z)]$ (the mean output of the unit). Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.3955931148026121,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Write $E[\\max(z,0)]=\\int_0^\\infty z f(z)\\,dz$",
+    "weight": 1
+   },
+   {
+    "text": "Standardise: $\\mu/\\sigma=-0.5$",
+    "weight": 1
+   },
+   {
+    "text": "Apply $\\sigma\\varphi(\\mu/\\sigma)+\\mu\\Phi(\\mu/\\sigma)$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate with normal table values",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "activations: ReLU outputs $z$ only when $z>0$.\nnormal: with $a=\\mu/\\sigma=-0.5$, $E[\\max(z,0)]=\\sigma\\varphi(a)+\\mu\\Phi(a)$.\n$\\varphi(0.5)=0.3521$, $\\Phi(-0.5)=0.3085$.\n$2(0.3521)-1(0.3085)=0.3956$.\nTrap: $\\max(\\mu,0)=0$ ignores the positive tail.",
+  "hints": [
+   "Truncated-normal mean: split at $z=0$."
+  ],
+  "check": "2*math.exp(-0.5**2/2)/math.sqrt(2*math.pi)+(-1)*0.5*(1+math.erf(-0.5/math.sqrt(2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce",
+   "t8.backprop",
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Logits $z=(2,1,0)$, true class is the second ($y=(0,1,0)$), loss $L=-\\ln\\mathrm{softmax}(z)_2$ (natural log). What is the Euclidean norm $\\lVert\\nabla_zL\\rVert_2$? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.0104880582079183,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Softmax $p=(0.665,0.245,0.090)$",
+    "weight": 1
+   },
+   {
+    "text": "Gradient is $p-y$",
+    "weight": 2
+   },
+   {
+    "text": "Norm of $(0.665,-0.755,0.090)$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "softmax-ce: $e^2,e^1,e^0=7.389,2.718,1$; sum $11.107$; $p=(0.6652,0.2447,0.0900)$.\nbackprop (gradient): $\\nabla_zL=p-y=(0.6652,-0.7553,0.0900)$.\nNorm $=\\sqrt{0.4425+0.5705+0.0081}=1.0105$.\nTrap: using $y-p$ flips signs only; using $\\ln p$ gives the loss $1.408$, not the gradient.",
+  "hints": [
+   "For softmax with cross-entropy, $\\partial L/\\partial z=p-y$."
+  ],
+  "check": "math.sqrt(((math.exp(2)/(math.exp(2)+math.e+1))-0)**2+((math.e/(math.exp(2)+math.e+1))-1)**2+((1/(math.exp(2)+math.e+1))-0)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce",
+   "t6.loss"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Logits $z=(4,2,-2)$ are divided by temperature $T=2$ before the softmax. The true class is the second. What is the cross-entropy loss (natural log) of the tempered distribution?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "2.129",
+    "1.349",
+    "4.018",
+    "0.5859",
+    "0.349"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "ignored the temperature ($T=1$)",
+    "",
+    "multiplied the logits by $T$ instead of dividing",
+    "used $\\log_{10}$ instead of the natural log",
+    "took the loss of the first class, not the second"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Tempered logits $(2,1,-1)$",
+    "weight": 1
+   },
+   {
+    "text": "Softmax denominator $e^2+e+e^{-1}=10.475$",
+    "weight": 2
+   },
+   {
+    "text": "Loss $=-\\ln(e/10.475)$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "softmax-ce: divide by $T$: $(2,1,-1)$.\n$e^2+e^1+e^{-1}=7.389+2.718+0.368=10.475$.\n$p_2=2.718/10.475=0.2595$.\nloss (cross-entropy): $-\\ln0.2595=1.349$ (equivalently $\\ln10.475-1$).\nTrap: $T$ in the wrong direction gives $4.02$.",
+  "hints": [
+   "Loss for the true class is $\\ln\\sum e^{z_j/T}-z_{true}/T$."
+  ],
+  "check": "round(math.log(math.exp(2)+math.exp(1)+math.exp(-1))-1,4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.backprop",
+   "t8.activations",
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Scalar network: $h=\\tanh(w_1x)$, $\\hat y=w_2h$, loss $L=\\tfrac12(\\hat y-t)^2$. With $x=2$, $w_1=0.5$, $w_2=-1.5$, $t=1$, compute $\\partial L/\\partial w_1$. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.699248043852834,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Forward: $h=\\tanh(1)=0.7616$, $\\hat y=-1.1424$",
+    "weight": 1
+   },
+   {
+    "text": "$\\partial L/\\partial\\hat y=\\hat y-t=-2.1424$",
+    "weight": 1
+   },
+   {
+    "text": "$\\tanh'=1-h^2=0.42$ and $\\partial z/\\partial w_1=x$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply the chain",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "backprop forward: $z=1$, $h=0.76159$, $\\hat y=-1.14239$.\nBackward: $\\delta_{\\hat y}=\\hat y-t=-2.14239$.\n$\\delta_h=\\delta_{\\hat y}w_2=3.21359$; $\\delta_z=\\delta_h(1-h^2)=3.21359(0.41998)=1.34964$ (activations: $\\tanh'=1-\\tanh^2$).\n$\\partial L/\\partial w_1=\\delta_zx=2.6993$.\nTrap: omitting the factor $x$ gives $1.350$.",
+  "hints": [
+   "Chain: $L\\to\\hat y\\to h\\to z\\to w_1$."
+  ],
+  "check": "(-1.5*math.tanh(0.5*2)-1)*(-1.5)*(1-math.tanh(0.5*2)**2)*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.backprop",
+   "t4.matrix-calc",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A linear layer computes $Z=XW$ for a batch, with $X=\\begin{pmatrix}1&0&2\\\\0&1&1\\\\1&1&0\\\\2&1&1\\end{pmatrix}$ ($4\\times3$) and $W$ of shape $3\\times2$. The upstream gradient is $G=\\partial L/\\partial Z=\\begin{pmatrix}1&-1\\\\0&2\\\\1&0\\\\-1&1\\end{pmatrix}$. What is the entry in row $3$, column $2$ (1-indexed) of $\\partial L/\\partial W$? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "$\\partial L/\\partial W=X^TG$ (shape $3\\times2$)",
+    "weight": 2
+   },
+   {
+    "text": "Row 3 of $X^T$ is column 3 of $X$: $(2,1,0,1)$",
+    "weight": 1
+   },
+   {
+    "text": "Dot with column 2 of $G$: $(-1,2,0,1)$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "backprop: for $Z=XW$, $\\partial L/\\partial W=X^TG$ (matrix-calc), shape $3\\times2$.\nEntry $(3,2)$ is column 3 of $X$ dotted with column 2 of $G$ (matrix-ops).\n$(2,1,0,1)\\cdot(-1,2,0,1)=-2+2+0+1=1$.\nTrap: $GX^T$ has the wrong shape; $XG$ is undefined.",
+  "hints": [
+   "Check shapes: $X^T$ is $3\\times4$, $G$ is $4\\times2$."
+  ],
+  "check": "2*(-1)+1*2+0*0+1*1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers",
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A scalar parameter starts at $\\theta_0=0$. Adam with $\\eta=0.1$, $\\beta_1=0.9$, $\\beta_2=0.999$, $\\epsilon=0$ (and bias correction) sees gradients $g_1=2$, $g_2=-1$. What is $\\theta_2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "-0.4294",
+    "-0.1",
+    "-0.1266",
+    "-0.28",
+    "-0.2"
+   ],
+   "correct": 2,
+   "shuffle": true,
+   "why": [
+    "skipped bias correction on $m$ and $v$",
+    "plain SGD: $-0.1g_1-0.1g_2$",
+    "",
+    "heavy-ball momentum with $\\beta=0.9$ and no second-moment scaling",
+    "took two full steps of size $\\eta$ in the same direction"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Step 1: $\\hat m=2$, $\\hat v=4$, so $\\theta_1=-0.1$",
+    "weight": 1
+   },
+   {
+    "text": "$m_2=0.08$, $v_2=0.004996$",
+    "weight": 1
+   },
+   {
+    "text": "Corrections $1-0.9^2=0.19$, $1-0.999^2=0.001999$",
+    "weight": 2
+   },
+   {
+    "text": "$\\theta_2=-0.1-0.1\\hat m_2/\\sqrt{\\hat v_2}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "optimizers: step 1 has $m_1=0.2$, $v_1=0.004$; corrected $2$ and $4$; $\\theta_1=-0.1\\cdot2/2=-0.1$.\nStep 2: $m_2=0.9(0.2)+0.1(-1)=0.08$; $v_2=0.999(0.004)+0.001=0.004996$.\nCorrect: $\\hat m_2=0.08/0.19=0.42105$; $\\hat v_2=0.004996/0.001999=2.4993$.\nStep $=0.1(0.42105)/1.5809=0.02663$; $\\theta_2=-0.1266$ (grad-descent update $\\theta\\leftarrow\\theta-\\eta\\hat m/\\sqrt{\\hat v}$).\nTrap: skipping bias correction gives $-0.429$.",
+  "hints": [
+   "Divide $m$ by $1-\\beta_1^t$ and $v$ by $1-\\beta_2^t$."
+  ],
+  "check": "round(-0.1-0.1*((0.9*0.2+0.1*(-1))/(1-0.9**2))/math.sqrt((0.999*0.004+0.001*1)/(1-0.999**2)),4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers",
+   "t4.eigen",
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Gradient descent with fixed step $\\eta=0.03$ on $f(\\theta)=\\tfrac12(\\theta_1^2+50\\theta_2^2)$, starting at $\\theta=(1,1)$. What is $f$ after $3$ steps? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8071110024645,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Hessian eigenvalues $1$ and $50$ (diagonal)",
+    "weight": 1
+   },
+   {
+    "text": "Per-step factors $1-\\eta\\lambda$: $0.97$ and $-0.5$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $\\theta_3=(0.9127,-0.125)$ and $f$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "optimizers: $\\nabla f=(\\theta_1,50\\theta_2)$; the Hessian is diagonal with eigenvalues $1,50$ (eigen).\ngrad-descent: $\\theta_i\\leftarrow(1-\\eta\\lambda_i)\\theta_i$, factors $0.97$ and $1-1.5=-0.5$.\nAfter 3 steps: $\\theta_1=0.97^3=0.91267$, $\\theta_2=(-0.5)^3=-0.125$.\n$f=\\tfrac12(0.8330+50\\cdot0.015625)=0.8071$.\nTrap: the stiff direction oscillates (factor magnitude below 1 only because $\\eta<2/50$).",
+  "hints": [
+   "The two coordinates decouple: iterate each separately."
+  ],
+  "check": "0.5*((0.97**3)**2+50*((1-0.03*50)**3)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm",
+   "t2.variance",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A layer with $300$ inputs and $100$ outputs has weights drawn i.i.d. from Xavier uniform $U(-a,a)$ with $a=\\sqrt{6/(n_{in}+n_{out})}$, independent of the inputs. The inputs are independent with mean $0$ and $E[x_j^2]=1$. What is the variance of one pre-activation $z=\\sum_jw_jx_j$ (no bias)? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$a^2=6/400=0.015$",
+    "weight": 1
+   },
+   {
+    "text": "$\\mathrm{Var}(w)=a^2/3=0.005$",
+    "weight": 2
+   },
+   {
+    "text": "$\\mathrm{Var}(z)=n_{in}\\mathrm{Var}(w)E[x^2]=1.5$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "init-norm: Xavier uniform has $a^2=6/(300+100)=0.015$.\nA uniform on $(-a,a)$ has variance $a^2/3=0.005$ (variance).\nIndependent zero-mean terms: $\\mathrm{Var}(z)=\\sum_jE[w_j^2]E[x_j^2]=300(0.005)(1)=1.5$ (expectation of products).\nTrap: $E[w]=0$ so $\\mathrm{Var}(w)=E[w^2]$; using $a^2$ instead of $a^2/3$ gives $4.5$.",
+  "hints": [
+   "Uniform$(-a,a)$ has variance $a^2/3$."
+  ],
+  "check": "300*(6/(300+100))/3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Batch normalisation on one feature over a batch of four values $1,3,5,7$ in training mode. Use the biased batch variance (divide by $N=4$), $\\epsilon=0$, scale $\\gamma=2$, shift $\\beta=1$. What is the output for the value $7$? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.6832815729997477,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Batch mean $4$",
+    "weight": 1
+   },
+   {
+    "text": "Biased variance $5$",
+    "weight": 2
+   },
+   {
+    "text": "$\\gamma(7-4)/\\sqrt5+\\beta$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "init-norm: batch statistics are the mean and variance of the four values.\ndescriptive: mean $=4$; variance $=(9+1+1+9)/4=5$.\nNormalised: $(7-4)/\\sqrt5=1.3416$.\nOutput $=2(1.3416)+1=3.683$.\nTrap: unbiased variance $6.67$ gives $3.324$.",
+  "hints": [
+   "Normalise, then scale by $\\gamma$ and shift by $\\beta$."
+  ],
+  "check": "2*(7-4)/math.sqrt(((1-4)**2+(3-4)**2+(5-4)**2+(7-4)**2)/4)+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.regularization",
+   "t6.ridge-lasso",
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimise $L(w)+\\tfrac{\\lambda}{2}w^2$ with $\\lambda=0.5$ by gradient descent, step $\\eta=0.1$, starting at $w=4$. The data loss has constant gradient $\\partial L/\\partial w=1$ at every step. What is $w$ after $2$ steps? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.415,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Penalty gradient is $\\lambda w$",
+    "weight": 1
+   },
+   {
+    "text": "Step 1: $4-0.1(1+2)=3.7$",
+    "weight": 2
+   },
+   {
+    "text": "Step 2: $3.7-0.1(1+1.85)$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "regularization: the L2 term adds $\\lambda w$ to the gradient (weight decay).\nridge-lasso: the total gradient is $1+0.5w$.\ngrad-descent step 1: $w=4-0.1(1+2)=3.7$.\nStep 2: $w=3.7-0.1(1+1.85)=3.415$.\nTrap: forgetting that the penalty gradient uses the current $w$ gives $3.4$.",
+  "hints": [
+   "Total gradient is $L'(w)+\\lambda w$."
+  ],
+  "check": "(4-0.1*(1+0.5*4))-0.1*(1+0.5*(4-0.1*(1+0.5*4)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.regularization",
+   "t2.variance",
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Inverted dropout with keep probability $q=0.8$: each input activation is kept independently with probability $q$ and a kept value is scaled by $1/q$; dropped values are $0$. A unit computes $y=w_1\\tilde a_1+w_2\\tilde a_2$ with $w=(1,-2)$ and activations $a=(3,1)$ before dropout. What is $\\mathrm{Var}(y)$ over the dropout masks? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.2499999999999996,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$\\tilde a_i=a_im_i/q$ with $m_i\\sim\\mathrm{Bernoulli}(q)$",
+    "weight": 1
+   },
+   {
+    "text": "$\\mathrm{Var}(m_i/q)=(1-q)/q=0.25$",
+    "weight": 2
+   },
+   {
+    "text": "Independent terms: $0.25(9+4)$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "regularization: $E[\\tilde a_i]=a_i$ (the $1/q$ keeps the mean).\ndiscrete-dists: $\\mathrm{Var}(m)=q(1-q)$, so $\\mathrm{Var}(m/q)=(1-q)/q=0.25$.\nvariance: independent masks add, $\\mathrm{Var}(y)=0.25\\,[(1\\cdot3)^2+(-2\\cdot1)^2]=0.25(13)$.\n$=3.25$.\nTrap: dropping the $1/q$ scaling from the variance gives $0.16\\cdot13=2.08$.",
+  "hints": [
+   "Variance of a scaled Bernoulli: $c^2q(1-q)$ with $c=1/q$."
+  ],
+  "check": "(1*3)**2*0.8*0.2/0.8**2+(-2*1)**2*0.8*0.2/0.8**2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag",
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Validation loss per epoch (epochs 1 to 8):\n\n| epoch | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |\n|---|---|---|---|---|---|---|---|---|\n| val loss | 0.90 | 0.71 | 0.64 | 0.66 | 0.63 | 0.65 | 0.68 | 0.60 |\n\nEarly stopping with patience $2$: training halts once validation loss has failed to beat the best value so far for $2$ consecutive epochs, then the weights from the best epoch are restored. Which epoch's weights are restored?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "5",
+    "3",
+    "4",
+    "7",
+    "8"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "stopped at the first local minimum, ignoring the new best at epoch 5",
+    "picked the epoch before the second rise",
+    "restored the weights at the stopping epoch, not the best epoch",
+    "picked the global minimum, which training never reaches"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Epoch 3 is a best value; epoch 4 starts the wait",
+    "weight": 1
+   },
+   {
+    "text": "Epoch 5 beats $0.64$, resetting the counter",
+    "weight": 2
+   },
+   {
+    "text": "Epochs 6 and 7 fail, so training halts at 7",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "training-diag: track best-so-far and a miss counter.\nEpochs 1 to 3 improve (best $0.64$); epoch 4 is miss 1; epoch 5 ($0.63$) is a new best, counter resets.\nEpoch 6 is miss 1; epoch 7 is miss 2: stop.\ncv: restore the best-validation epoch, 5.\nTrap: epoch 8 ($0.60$) is never trained.",
+  "hints": [
+   "Reset the miss counter whenever validation loss hits a new best."
+  ],
+  "check": "5",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag",
+   "t8.backprop",
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A deep chain of single-unit sigmoid layers has weight $w=0.4$ in every layer and every pre-activation equal to $0$. The output layer's gradient norm is $1$, and each layer further back multiplies it by $w\\,\\sigma'(0)$ with $\\sigma$ the logistic sigmoid. For how many layers $L$ (counting the output layer) is the first layer's gradient norm still at least $5\\times10^{-7}$? Give the largest such $L$ as an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Per-layer factor $w\\,\\sigma'(0)=0.4\\cdot\\tfrac14=0.1$",
+    "weight": 2
+   },
+   {
+    "text": "First layer norm is $0.1^{L-1}$",
+    "weight": 1
+   },
+   {
+    "text": "Solve $0.1^{L-1}\\ge5\\times10^{-7}$, so $L-1\\le6$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "activations: $\\sigma'(z)=\\sigma(1-\\sigma)$, which is $1/4$ at $z=0$.\nbackprop: each layer back multiplies the norm by $w\\,\\sigma'(0)=0.4\\cdot\\tfrac14=0.1$, so layer $L$ has norm $0.1^{L-1}$.\ntraining-diag: $0.1^{L-1}\\ge5\\times10^{-7}$ means $L-1\\le\\log_{10}(2\\times10^{6})=6.30$.\nSo $L\\le7$ (norm $10^{-6}$ at $L=7$).\nTrap: $L=8$ gives $10^{-7}$, below the bar; ignoring $w$ uses factor $0.25$ and gives $L=11$ ($0.25^{10}\\approx9.5\\times10^{-7}$).",
+  "hints": [
+   "The first layer is $L-1$ steps from the output.",
+   "Each backward step multiplies by $w\\,\\sigma'(0)$."
+  ],
+  "check": "max(L for L in range(1,40) if (0.4*0.25)**(L-1)>=5e-7)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.conv",
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A convolution layer takes a $32\\times32\\times3$ input and applies $16$ filters of size $5\\times5$ (over all $3$ channels) with stride $2$ and zero padding $2$ on each side. Count multiply-accumulate operations for one image, ignoring biases. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 307200,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Output size $\\lfloor(32+4-5)/2\\rfloor+1=16$",
+    "weight": 2
+   },
+   {
+    "text": "Per output value: $5\\cdot5\\cdot3=75$ MACs",
+    "weight": 1
+   },
+   {
+    "text": "Total $16\\cdot16\\cdot16\\cdot75$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "conv: output side $=\\lfloor(32+2\\cdot2-5)/2\\rfloor+1=\\lfloor15.5\\rfloor+1=16$.\nOutput volume $16\\times16\\times16=4096$ values.\nmlp view: each value is a dot product of length $5\\cdot5\\cdot3=75$.\nMACs $=4096\\cdot75=307200$.\nTrap: forgetting the floor gives side $16.5$; forgetting channels gives $102400$.",
+  "hints": [
+   "Output side $=\\lfloor(n+2p-k)/s\\rfloor+1$."
+  ],
+  "check": "((32+2*2-5)//2+1)**2*16*5*5*3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.conv",
+   "t8.activations",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $4\\times4$ input $I=\\begin{pmatrix}2&2&0&3\\\\1&0&1&0\\\\2&3&1&3\\\\0&1&0&1\\end{pmatrix}$ is passed through one convolution layer with kernel $K=\\begin{pmatrix}1&0&-1\\\\2&0&-2\\\\1&0&-1\\end{pmatrix}$, stride $1$, no padding, no bias, using the deep-learning convention (the kernel slides without being flipped). A ReLU follows. What is the sum of the resulting $2\\times2$ output?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1",
+    "4",
+    "6",
+    "3",
+    "5"
+   ],
+   "correct": 4,
+   "shuffle": true,
+   "why": [
+    "flipped the kernel (true convolution), which negates this edge filter",
+    "omitted the ReLU, letting negative outputs cancel positive ones",
+    "took absolute values instead of ReLU",
+    "took the maximum output instead of the sum",
+    ""
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Four $3\\times3$ window dot products",
+    "weight": 2
+   },
+   {
+    "text": "Outputs [[3, -1], [2, 0]]",
+    "weight": 1
+   },
+   {
+    "text": "ReLU keeps positives; sum them",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "conv: slide $K$ over the four $3\\times3$ windows without flipping.\nmatrix-ops: each output is an elementwise product summed.\nOutputs: [[3, -1], [2, 0]].\nactivations: ReLU zeroes negatives, sum $=5$.\nTrap: flipping $K$ negates all outputs, giving 1.",
+  "hints": [
+   "No kernel flip; ReLU before summing."
+  ],
+  "check": "sum(max(0,t) for t in [2*1+2*0+0*-1+1*2+0*0+1*-2+2*1+3*0+1*-1,2*1+0*0+3*-1+0*2+1*0+0*-2+3*1+1*0+3*-1,1*1+0*0+1*-1+2*2+3*0+1*-2+0*1+1*0+0*-1,0*1+1*0+0*-1+3*2+1*0+3*-2+1*1+0*0+1*-1])",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch",
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Layers applied in order: conv $3\\times3$ stride $1$, conv $3\\times3$ stride $1$, max-pool $2\\times2$ stride $2$, conv $3\\times3$ stride $1$, conv $3\\times3$ stride $1$ (all with padding that preserves alignment). Along one axis, how many input pixels does a unit in the final feature map see (its receptive field)? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Two $3\\times3$ convs: $1\\to3\\to5$",
+    "weight": 1
+   },
+   {
+    "text": "Pool: $5\\to6$, jump becomes $2$",
+    "weight": 2
+   },
+   {
+    "text": "Next convs add $(k-1)\\cdot2=4$ each: $6\\to10\\to14$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "cnn-arch: track receptive field $r$ and jump $j$ (input pixels between adjacent units).\nStart $r=1,j=1$. Conv: $r\\mathrel{+}=(k-1)j$. After two convs $r=5$.\nPool ($k=2,s=2$): $r=6$, $j=2$.\nconv arithmetic: each later conv adds $2\\cdot2=4$: $r=10$, then $14$.\nTrap: ignoring the jump after pooling gives $10$.",
+  "hints": [
+   "After a stride-2 layer each new $3\\times3$ conv widens $r$ by $4$, not $2$."
+  ],
+  "check": "1+2*1+2*1+(2-1)*1+2*2+2*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch",
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two designs for a residual branch on $256$ channels, no biases or normalisation. Design A: two $3\\times3$ convs, $256\\to256$ each. Design B (bottleneck): $1\\times1$ conv $256\\to64$, $3\\times3$ conv $64\\to64$, $1\\times1$ conv $64\\to256$. What is the parameter count of A divided by that of B? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16.941176470588236,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "A: $2\\cdot9\\cdot256^2=1179648$",
+    "weight": 1
+   },
+   {
+    "text": "B: $16384+36864+16384=69632$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio $\\approx16.94$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "cnn-arch: a $k\\times k$ conv from $C_{in}$ to $C_{out}$ has $k^2C_{in}C_{out}$ weights (conv).\nA: $2\\cdot9\\cdot65536=1179648$.\nB: $256\\cdot64+9\\cdot64\\cdot64+64\\cdot256=69632$.\nRatio $=1179648/69632=16.94$.\nTrap: giving the $3\\times3$ in B the full $256$ channels erases the saving.",
+  "hints": [
+   "The $1\\times1$ convs cost only $C_{in}C_{out}$."
+  ],
+  "check": "(2*9*256*256)/(256*64+9*64*64+64*256)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.rnn",
+   "t8.backprop",
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Scalar RNN: $h_t=\\tanh(0.5\\,h_{t-1}+x_t)$, $h_0=0$, inputs $x_1=1$, $x_2=-1$, $x_3=2$. Compute the Jacobian $\\partial h_3/\\partial h_1$. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.02079331428916789,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Forward: $h_1=0.7616$, $h_2=-0.5506$, $h_3=0.9384$",
+    "weight": 2
+   },
+   {
+    "text": "Local factors $0.5(1-h_t^2)$ for $t=3,2$",
+    "weight": 2
+   },
+   {
+    "text": "Product $\\approx0.0208$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "rnn: forward $h_1=\\tanh(1)=0.7616$; $h_2=\\tanh(0.3808-1)=-0.5506$; $h_3=\\tanh(-0.2753+2)=0.9384$.\nbackprop through time: $\\partial h_t/\\partial h_{t-1}=0.5(1-h_t^2)$ (activations: $\\tanh'$).\n$t=3$: $0.5(1-0.8806)=0.0597$; $t=2$: $0.5(1-0.3031)=0.3484$.\nProduct $=0.0208$.\nTrap: using $h_1$ in place of $h_2,h_3$ in the factors gives the wrong product.",
+  "hints": [
+   "Chain two one-step Jacobians: $t=3$ and $t=2$."
+  ],
+  "check": "0.5*(1-math.tanh(0.5*math.tanh(0.5*math.tanh(1)-1)+2)**2)*0.5*(1-math.tanh(0.5*math.tanh(1)-1)**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.rnn",
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "One LSTM step with scalar state. Pre-activations: input gate $0$, forget gate $\\ln3$, output gate $\\ln3$, candidate cell $1$. Gates use the logistic sigmoid, the candidate and the output nonlinearity use $\\tanh$. Previous cell state $c_{t-1}=2$. Cell update $c_t=f\\,c_{t-1}+i\\,\\tilde c$, output $h_t=o\\tanh(c_t)$. What is $h_t$? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7159222163314598,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Gates $i=0.5$, $f=o=0.75$ (since $\\sigma(\\ln3)=3/4$)",
+    "weight": 2
+   },
+   {
+    "text": "$c_t=0.75\\cdot2+0.5\\tanh(1)=1.8808$",
+    "weight": 2
+   },
+   {
+    "text": "$h_t=0.75\\tanh(1.8808)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "activations: $\\sigma(0)=0.5$; $\\sigma(\\ln3)=3/(1+3)=0.75$; $\\tilde c=\\tanh1=0.7616$.\nrnn: $c_t=0.75(2)+0.5(0.7616)=1.8808$.\n$\\tanh(1.8808)=0.9546$.\n$h_t=0.75(0.9546)=0.7160$.\nTrap: applying $\\tanh$ to $c_{t-1}$ instead of $c_t$ gives $0.723$.",
+  "hints": [
+   "Gates first, then $c_t$, then $h_t$."
+  ],
+  "check": "0.75*math.tanh(0.75*2+0.5*math.tanh(1))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.attention",
+   "t8.softmax-ce",
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Single-query scaled dot-product attention with $d_k=4$. Query $q=(1,0,1,0)$, keys $k_1=(2,0,2,0)$, $k_2=(0,2,0,2)$, $k_3=(1,1,1,1)$, scalar values $v=(10,20,30)$. Weights are $\\mathrm{softmax}(qk_j^T/\\sqrt{d_k})$. What is the attention output?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "12.50",
+    "18.01",
+    "20",
+    "15.79",
+    "10"
+   ],
+   "correct": 3,
+   "shuffle": true,
+   "why": [
+    "omitted the $1/\\sqrt{d_k}$ scaling",
+    "divided by $d_k$ instead of $\\sqrt{d_k}$",
+    "used uniform weights (a plain average of the values)",
+    "",
+    "took the hard argmax key instead of the softmax mixture"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Scores $q\\cdot k_j=(4,0,2)$",
+    "weight": 1
+   },
+   {
+    "text": "Scaled by $1/2$: $(2,0,1)$",
+    "weight": 1
+   },
+   {
+    "text": "Softmax $(0.665,0.090,0.245)$",
+    "weight": 2
+   },
+   {
+    "text": "Weighted values $\\approx15.79$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "attention: scores are dot products (dot-norm): $(4,0,2)$.\nScale by $\\sqrt{4}=2$: $(2,0,1)$.\nsoftmax-ce: $e^2,1,e=7.389,1,2.718$, sum $11.107$; weights $(0.6652,0.0900,0.2447)$.\nOutput $=6.652+1.800+7.341=15.79$.\nTrap: no scaling gives $12.50$.",
+  "hints": [
+   "Scale before the softmax, then mix the values."
+  ],
+  "check": "round((10*math.exp(2)+20*1+30*math.exp(1))/(math.exp(2)+1+math.exp(1)),2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.attention",
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Self-attention over $3$ tokens with a causal mask (token $i$ attends only to tokens $j\\le i$). The scaled score matrix $S_{ij}$ before masking is $\\begin{pmatrix}1&2&3\\\\0&1&2\\\\2&0&1\\end{pmatrix}$, and the scalar values are $v=(1,5,9)$. What is the output for token $2$ (row $2$)? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.9242343145200196,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Mask removes column 3 for row 2",
+    "weight": 2
+   },
+   {
+    "text": "Softmax over scores $(0,1)$: $(0.269,0.731)$",
+    "weight": 2
+   },
+   {
+    "text": "Output $0.269\\cdot1+0.731\\cdot5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "attention: masked entries get $-\\infty$ before the softmax, so only $j\\in\\{1,2\\}$ remain.\nsoftmax-ce: $\\mathrm{softmax}(0,1)=(1/(1+e),\\,e/(1+e))=(0.2689,0.7311)$.\nOutput $=0.2689(1)+0.7311(5)=3.924$.\nTrap: softmax over all three scores $(0,1,2)$ gives $7.30$.",
+  "hints": [
+   "Row 2 of the mask allows columns 1 and 2 only."
+  ],
+  "check": "(1+5*math.e)/(1+math.e)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.transformer",
+   "t8.attention",
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "One Transformer encoder block with model width $d=512$, a single multi-head self-attention module (query, key, value and output projections, each $512\\times512$ with bias; heads just split the width), a feed-forward network $512\\to2048\\to512$ with biases, and two layer norms each with scale and shift vectors of length $512$. How many parameters does the block have? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3152384,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Attention: $4(512^2+512)=1050624$",
+    "weight": 2
+   },
+   {
+    "text": "FFN: $2099712$",
+    "weight": 2
+   },
+   {
+    "text": "Two layer norms: $2048$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "attention: four projections, each $512\\cdot512+512=262656$; total $1050624$ (heads split width, adding no parameters).\nmlp: $512\\cdot2048+2048=1050624$ and $2048\\cdot512+512=1049088$; FFN total $2099712$.\ntransformer: two layer norms, $2\\cdot2\\cdot512=2048$.\nTotal $=1050624+2099712+2048=3152384$.\nTrap: giving each head its own $512\\times512$ matrices multiplies the attention count by the number of heads.",
+  "hints": [
+   "Count each weight matrix and each bias or layer-norm vector."
+  ],
+  "check": "4*(512*512+512)+(512*2048+2048)+(2048*512+512)+2*2*512",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.transformer",
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Self-attention stores the score matrix $QK^T/\\sqrt{d_k}$ for every head. A layer has batch $4$, $16$ heads, sequence length $4096$, and keeps scores in fp16 (2 bytes each). How many MiB ($1\\text{ MiB}=2^{20}$ bytes) does one layer's score tensor take?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1024",
+    "2048",
+    "128",
+    "4096",
+    "512"
+   ],
+   "correct": 1,
+   "shuffle": true,
+   "why": [
+    "scaled linearly in sequence length from the $n=2048$ case ($512$ MiB, doubled to $1024$)",
+    "",
+    "forgot the $16$ heads",
+    "assumed fp32 (4 bytes)",
+    "used $n=2048$ instead of $4096$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Tensor shape $4\\times16\\times4096\\times4096$",
+    "weight": 2
+   },
+   {
+    "text": "Entries $=1.07\\times10^9$",
+    "weight": 1
+   },
+   {
+    "text": "Times 2 bytes, divide by $2^{20}$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "attention: scores are $n\\times n$ per head, so memory grows with $n^2$ (transformer: this is the long-context bottleneck).\nEntries $=4\\cdot16\\cdot4096^2=1073741824$.\nBytes $=2\\times$ that $=2147483648$.\nMiB $=2147483648/1048576=2048$.\nTrap: doubling $n$ quadruples memory, not doubles it.",
+  "hints": [
+   "Count entries as batch $\\times$ heads $\\times n\\times n$."
+  ],
+  "check": "4*16*4096*4096*2//2**20",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.transfer",
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A pretrained network has $11{,}689{,}512$ parameters in total. This includes an old classifier head $512\\to1000$ with bias, and a last convolutional block of $2{,}360{,}000$ parameters. For a $20$-class task you delete the old head, add a new head $512\\to20$ with bias, freeze everything except the last convolutional block and the new head. How many parameters are trainable? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2370260,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "New head $512\\cdot20+20=10260$",
+    "weight": 2
+   },
+   {
+    "text": "Old head removed, not counted",
+    "weight": 1
+   },
+   {
+    "text": "Add the unfrozen block: $2370260$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "transfer: trainable = unfrozen block + new head.\nmlp: new head weights $512\\cdot20=10240$ plus $20$ biases $=10260$.\nThe old head ($513000$) is deleted and the rest is frozen.\nTrainable $=2360000+10260=2370260$.\nTrap: the total $11689512$ is not needed.",
+  "hints": [
+   "Frozen weights are not trainable; the old head is gone."
+  ],
+  "check": "2360000+512*20+20",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t8-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T8",
+  "tags": [
+   "t8.transfer",
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Adapting a frozen-or-tunable backbone to $5000$ images. Forward pass costs $4$ GFLOPs per image; backward costs twice the forward. Plan A: fine-tune the whole backbone for $10$ epochs. Plan B: a linear probe, running the frozen backbone forward once per image to cache features, then training a head whose cost you ignore. What is (cost of A) / (cost of B)? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 30,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "A per epoch per image: forward + backward $=3\\times4$ GFLOPs",
+    "weight": 2
+   },
+   {
+    "text": "B: one forward per image",
+    "weight": 1
+   },
+   {
+    "text": "Ratio $=10\\cdot3=30$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "transfer: fine-tuning pays forward and backward every epoch; a linear probe caches features after one forward pass.\nbackprop: backward $=2\\times$ forward, so a training step costs $3\\times$ forward $=12$ GFLOPs.\nA $=5000\\cdot10\\cdot12=600000$ GFLOPs; B $=5000\\cdot4=20000$.\nRatio $=30$.\nTrap: omitting the backward pass gives $10$.",
+  "hints": [
+   "A training step is forward plus backward, $3\\times$ forward."
+  ],
+  "check": "(5000*10*(4+2*4))/(5000*4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

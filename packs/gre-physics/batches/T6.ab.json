@@ -684,10 +684,10 @@
       ],
       "correct": 1,
       "why": [
-        "",
-        "",
+        "$r$ appears undifferentiated in $V(r)$, so it is not cyclic",
+        "correct: $\\varphi$ never appears without its derivative",
         "a velocity is not a coordinate",
-        "the potential depends on $r$, not $\\varphi$, so $\\varphi$ is cyclic"
+        "$\\varphi$ is cyclic, so neither is wrong"
       ]
     },
     "solution": "$\\varphi$ never appears undifferentiated, so $p_\\varphi=mr^2\\dot\\varphi$ is conserved.",

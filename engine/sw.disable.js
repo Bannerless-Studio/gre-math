@@ -2,7 +2,8 @@
 // over sw.js (after build.sh, which rewrites sw.js) and publish. Never just delete sw.js:
 // a 404 on the update check leaves the installed worker serving its cached page forever.
 // Browsers that load the page next fetch this worker; it installs at once, deletes this
-// site's pe:<scope path>: caches (never another site's) and unregisters itself.
+// site's pe:<scope path>: caches (the page cache and the Pyodide cache of code answers; never another
+// site's) and unregisters itself.
 // It has no fetch handler, so from then on every request goes to the network. The page
 // still calls register("sw.js") on each load; this worker just unregisters again.
 // To re-enable, rebuild (build.sh writes the real sw.js again) and publish.

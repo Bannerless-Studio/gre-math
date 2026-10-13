@@ -1,0 +1,4392 @@
+[
+ {
+  "id": "t4-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $A$ of size $2\\times3$ and $B$ of size $3\\times4$, what is the size of $AB$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\times4$",
+    "$4\\times2$",
+    "$3\\times4$",
+    "$2\\times3$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "rows and columns swapped",
+    "returns the shape of $B$",
+    "keeps the shape of $A$ and ignores $B$"
+   ]
+  },
+  "check": null,
+  "solution": "Rows come from $A$ (2), columns from $B$ (4). The inner sizes (3, 3) must match.",
+  "hints": [
+   "Keep the outer sizes: rows of the first, columns of the second."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For conformable $A$ (size $m\\times n$) and $B$ (size $n\\times p$), which identity holds?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(AB)^\\top=B^\\top A^\\top$",
+    "$(AB)^\\top=A^\\top B^\\top$",
+    "$(AB)^\\top=AB^\\top$",
+    "$(AB)^\\top=A^\\top B$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "keeps the order, which is wrong for a product",
+    "transposes only $B$",
+    "transposes only $A$"
+   ]
+  },
+  "check": null,
+  "solution": "Transposing a product reverses the order: $(AB)^\\top=B^\\top A^\\top$, of size $p\\times m$.",
+  "hints": [
+   "Reverse the order when you transpose a product."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $A$ be $n\\times p$ and $B$ be $p\\times m$. Write the number of scalar multiplications to compute $AB$ with the textbook formula, as an expression in $n$, $m$, $p$. Use `n`, `m`, `p`.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*m*p",
+   "vars": [
+    "n",
+    "m",
+    "p"
+   ],
+   "also": [
+    "m*n*p",
+    "p*n*m"
+   ]
+  },
+  "check": null,
+  "solution": "There are $nm$ entries, and each needs $p$ products: $nmp$.",
+  "hints": [
+   "Count the entries of $AB$, then the products per entry."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$ and $B=\\begin{pmatrix}2&0\\\\1&1\\end{pmatrix}$. Find the entry in row 2, column 1 of $AB$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "0*2+3*1",
+  "solution": "Row 2 of $A$ is $(0,3)$ and column 1 of $B$ is $(2,1)^\\top$. So $0\\cdot2+3\\cdot1=3$.",
+  "hints": [
+   "Entry $(i,j)$ is row $i$ of the left matrix dotted with column $j$ of the right."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X=\\begin{pmatrix}1&2\\\\3&4\\\\5&6\\end{pmatrix}$ is a data matrix (rows are samples, columns are features). Find the entry in row 1, column 2 of $X^\\top X$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 44,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "1*2+3*4+5*6",
+  "solution": "Entry $(1,2)$ is column 1 of $X$ dotted with column 2: $2+12+30=44$.",
+  "hints": [
+   "Entry $(i,j)$ of $X^\\top X$ is column $i$ of $X$ dotted with column $j$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2\\\\0&3\\\\-1&1\\end{pmatrix}$. Find the trace of $A^\\top A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(v*v for v in [1,2,0,3,-1,1])",
+  "solution": "The trace of $A^\\top A$ is the sum of squared entries of $A$: $1+4+0+9+1+1=16$.",
+  "hints": [
+   "Diagonal entries of $A^\\top A$ are squared column norms."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A$ is $3\\times2$ and $B$ is $2\\times5$. Select every product that is defined.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$AB$",
+    "$BA$",
+    "$A^\\top A$",
+    "$AB^\\top$",
+    "$BB^\\top$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "Defined when inner sizes match: $AB$ ($2=2$), $A^\\top A$ ($3=3$), $BB^\\top$ ($5=5$).",
+  "hints": [
+   "Check the touching inner sizes first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$R=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$. Find the entry in row 1, column 1 of $R^2$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": -1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "0*0+(-1)*1",
+  "solution": "$(R^2)_{11}=0\\cdot0+(-1)\\cdot1=-1$.",
+  "hints": [
+   "Square means multiply the matrix by itself."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A data matrix $X$ has $n$ rows and $p$ columns. Write the number of scalar multiplications to compute $X^\\top X$ with the textbook formula, as an expression in `n` and `p`.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*p^2",
+   "vars": [
+    "n",
+    "p"
+   ],
+   "also": [
+    "p^2*n",
+    "n*p*p"
+   ]
+  },
+  "check": null,
+  "solution": "$X^\\top X$ has $p^2$ entries, each a sum of $n$ products: $np^2$.",
+  "hints": [
+   "Count the entries first, then the products per entry."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "After row reduction, a 3-equation system has the row $(0\\ \\ 0\\ \\ |\\ \\ 5)$ in its augmented matrix. The system has:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "No solution",
+    "Exactly one solution",
+    "Infinitely many solutions",
+    "Exactly two solutions"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a unique solution needs a pivot in every variable column, and this row has none",
+    "the row says $0=5$, a contradiction, not a free variable",
+    "linear systems have 0, 1 or infinitely many solutions"
+   ]
+  },
+  "check": null,
+  "solution": "The row says $0=5$, which is impossible. So there is no solution.",
+  "hints": [
+   "Read the row as an equation: what does it say?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A$ is a $2\\times2$ matrix of rank 1, and $Ax=b$ has at least one solution. The solution set is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A single point",
+    "A line (infinitely many solutions)",
+    "Empty",
+    "The whole plane"
+   ],
+   "correct": 1,
+   "why": [
+    "a single point needs rank 2",
+    "",
+    "contradicts the assumption that a solution exists",
+    "needs rank 0, which holds only for the zero matrix"
+   ]
+  },
+  "check": null,
+  "solution": "Rank 1 leaves one free direction. A consistent system then has a whole line of solutions.",
+  "hints": [
+   "Rank counts independent directions. Two rows of rank 1 are parallel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $3\\times5$ matrix $A$ has rank 2. When $Ax=b$ is consistent, how many free variables does it have? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "5-2",
+  "solution": "Free variables $=$ columns $-$ pivots $=5-2=3$.",
+  "hints": [
+   "Pivots count the rank."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Solve $\\begin{pmatrix}2&1\\\\1&3\\end{pmatrix}x=\\begin{pmatrix}5\\\\10\\end{pmatrix}$. Give $x_1$ as an integer or fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(5*3-1*10,2*3-1*1)",
+  "solution": "Cramer's rule: $x_1=\\dfrac{5\\cdot3-1\\cdot10}{2\\cdot3-1\\cdot1}=\\dfrac{5}{5}=1$.",
+  "hints": [
+   "Replace column 1 by the right side and take the ratio of determinants."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Rows of an augmented matrix are $\\begin{pmatrix}1&2&3\\end{pmatrix}$ and $\\begin{pmatrix}2&k&7\\end{pmatrix}$, coefficients then right side. Find $k$ so that the system has no solution. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2*2",
+  "solution": "No solution needs the coefficients proportional ($k=2\\cdot2=4$) with a right side that does not match ($7\\neq2\\cdot3$).",
+  "hints": [
+   "Proportional coefficients with unmatched right sides means no solution."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which coefficient matrices give a system $Ax=b$ with a unique solution for every $b$? Select all.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$",
+    "$\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$",
+    "$\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$",
+    "$\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$"
+   ],
+   "correct": [
+    1,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "Unique for every $b$ means $\\det A\\neq0$. Here $1\\cdot4-2\\cdot3=-2$ and $2\\cdot1-1\\cdot1=1$. The other two have determinant $0$.",
+  "hints": [
+   "Unique for every right side means the determinant is nonzero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2&-1\\\\2&5&1\\\\1&0&3\\end{pmatrix}$ and $b=(4,13,4)^\\top$. Solve $Ax=b$ and give $x_2$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction((lambda a,b,c,d,e,f,g,h,i: a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g))(1,4,-1,2,13,1,1,4,3),(lambda a,b,c,d,e,f,g,h,i: a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g))(1,2,-1,2,5,1,1,0,3))",
+  "solution": "Replace column 2 with $b$. The determinants are $20$ and $10$, so $x_2=20/10=2$.",
+  "hints": [
+   "Cramer: replace one column with $b$ and divide determinants."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A consistent system $Ax=b$ has a $4\\times6$ coefficient matrix of rank 4. How many free parameters does its solution set have? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "6-4",
+  "solution": "Free parameters $=6-4=2$.",
+  "hints": [
+   "Free parameters equal columns minus rank."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Solve $2x+3y=k$ and $x-y=1$ for $x$ in terms of $k$. Use `k` for $k$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(k+3)/5",
+   "vars": [
+    "k"
+   ],
+   "also": [
+    "(3+k)/5",
+    "k/5+3/5"
+   ]
+  },
+  "check": null,
+  "solution": "From $x=1+y$: $2(1+y)+3y=k$, so $y=(k-2)/5$ and $x=(k+3)/5$.",
+  "hints": [
+   "Eliminate $x$ first using the second equation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ with $ad-bc\\neq0$, which is $A^{-1}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{1}{ad-bc}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$",
+    "$\\dfrac{1}{ad-bc}\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$",
+    "$\\dfrac{1}{ad+bc}\\begin{pmatrix}d&-b\\\\-c&a\\end{pmatrix}$",
+    "$\\begin{pmatrix}1/a&1/b\\\\1/c&1/d\\end{pmatrix}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets to swap $a$ and $d$ and negate $b$ and $c$",
+    "sign error in the determinant",
+    "takes reciprocals of entries, which is not the inverse"
+   ]
+  },
+  "check": null,
+  "solution": "Swap the diagonal, negate the off-diagonal, and divide by the determinant $ad-bc$.",
+  "hints": [
+   "Swap the diagonal entries and negate the other two."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement about a square matrix $A$ with $\\det A=0$ is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$A$ has an inverse",
+    "$A$ is singular: it has no inverse and its columns are dependent",
+    "$A^{-1}$ exists and has determinant $0$",
+    "$\\det(A^{-1})=-\\det A$"
+   ],
+   "correct": 1,
+   "why": [
+    "confuses $\\det A=0$ with $\\det A\\neq0$",
+    "",
+    "$A^{-1}A=I$ forces $\\det A\\cdot\\det A^{-1}=1$, so $\\det A^{-1}\\neq0$",
+    "the inverse's determinant is $1/\\det A$, not a negative"
+   ]
+  },
+  "check": null,
+  "solution": "A zero determinant means no inverse, and the columns are linearly dependent.",
+  "hints": [
+   "Zero determinant means singular."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $D=\\det A$ for an invertible $2\\times2$ matrix $A$. Write $\\det(A^{-1})$ in terms of $D$. Use `D` for $D$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/D",
+   "vars": [
+    "D"
+   ],
+   "also": [
+    "D^(-1)",
+    "D^-1"
+   ]
+  },
+  "check": null,
+  "solution": "$\\det(A^{-1})=1/\\det A$, since $\\det A\\cdot\\det A^{-1}=\\det I=1$.",
+  "hints": [
+   "Use the product of determinants for $AA^{-1}=I$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "$A=\\begin{pmatrix}2&-1\\\\3&4\\end{pmatrix}$. Find $\\det A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2*4-(-1)*3",
+  "solution": "$\\det A=2\\cdot4-(-1)\\cdot3=8+3=11$.",
+  "hints": [
+   "$\\det\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}=ad-bc$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}3&1\\\\1&1\\end{pmatrix}$. Find the $(2,2)$ entry of $A^{-1}$. Give a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(3,3*1-1*1)",
+  "solution": "The $(2,2)$ entry of $A^{-1}$ is $a/\\det A=3/2$, since $\\det A=3-1=2$.",
+  "hints": [
+   "For a $2\\times2$ inverse, the $(2,2)$ entry is $a/\\det A$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2&0\\\\0&1&3\\\\1&0&1\\end{pmatrix}$. Find $\\det A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(lambda a,b,c,d,e,f,g,h,i: a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g))(1,2,0,0,1,3,1,0,1)",
+  "solution": "Expand along row 1: $1(1\\cdot1-3\\cdot0)-2(0\\cdot1-3\\cdot1)+0=1+6=7$.",
+  "hints": [
+   "Expand along the first row using $2\\times2$ minors."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which matrix is not invertible?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$",
+    "$\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$",
+    "$\\begin{pmatrix}1&3\\\\2&5\\end{pmatrix}$",
+    "$\\begin{pmatrix}2&1\\\\1&3\\end{pmatrix}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a zero entry does not make a matrix singular: $\\det=-1$",
+    "$\\det=5-6=-1\\neq0$, so invertible",
+    "$\\det=6-1=5\\neq0$, so invertible"
+   ]
+  },
+  "check": null,
+  "solution": "Row 2 is twice row 1, so $\\det=4-4=0$. The other three have nonzero determinants.",
+  "hints": [
+   "Look for a row that is a multiple of another."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ with $ad-bc\\neq0$. Write the $(1,1)$ entry of $A^{-1}$ in terms of $a$, $b$, $c$, $d$.",
+  "answer": {
+   "kind": "expression",
+   "value": "d/(a*d-b*c)",
+   "vars": [
+    "a",
+    "b",
+    "c",
+    "d"
+   ],
+   "also": [
+    "d/(d*a-c*b)",
+    "d/(-b*c+a*d)"
+   ]
+  },
+  "check": null,
+  "solution": "The $(1,1)$ entry of $A^{-1}$ is $d/(ad-bc)$.",
+  "hints": [
+   "Swap the diagonal and divide by the determinant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ and $b=(4,5)^\\top$. Solve $Ax=b$ and give $x_2$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(2*5-4*1,2*2-1*1)",
+  "solution": "Replace column 2 with $b$: $\\det\\begin{pmatrix}2&4\\\\1&5\\end{pmatrix}=6$. Divide by $\\det A=3$ to get $2$.",
+  "hints": [
+   "Cramer: replace one column with $b$ and divide determinants."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Any three vectors in $\\mathbb{R}^2$ are:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "linearly dependent",
+    "linearly independent",
+    "a basis of $\\mathbb{R}^2$",
+    "mutually orthogonal"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "three vectors in a 2-dimensional space cannot be independent",
+    "a basis needs exactly 2 independent vectors",
+    "orthogonality is not implied by counting"
+   ]
+  },
+  "check": null,
+  "solution": "Two vectors can be independent in $\\mathbb{R}^2$, but a third must depend on them.",
+  "hints": [
+   "Dimension caps the number of independent vectors."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A matrix has 5 columns and rank 3. Its null space has dimension:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "2",
+    "3",
+    "5",
+    "8"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "confuses nullity with rank",
+    "ignores the rank",
+    "adds rank and column count"
+   ]
+  },
+  "check": "5-3",
+  "solution": "Rank-nullity: nullity $=5-3=2$.",
+  "hints": [
+   "Rank plus nullity equals the number of columns."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $5\\times3$ matrix $A$ has rank 2. What is the dimension of its null space? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3-2",
+  "solution": "Nullity $=$ columns $-$ rank $=3-2=1$.",
+  "hints": [
+   "Rank-nullity uses the number of columns."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2&3\\\\0&1&4\\\\1&3&7\\end{pmatrix}$. Find the rank of $A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2 if (lambda a,b,c,d,e,f,g,h,i: a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g))(1,2,3,0,1,4,1,3,7)==0 else 3",
+  "solution": "Row 3 equals row 1 plus row 2, so $\\det A=0$. Rows 1 and 2 are independent, so the rank is 2.",
+  "hints": [
+   "Look for a row that is a combination of the others."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2&3&4\\\\2&4&6&8\\end{pmatrix}$. Find the dimension of the null space of $A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4-(1 if [2,4,6,8]==[2*v for v in [1,2,3,4]] else 2)",
+  "solution": "Row 2 is twice row 1, so the rank is 1. Nullity $=4-1=3$.",
+  "hints": [
+   "Count columns, then subtract the rank."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select every set of vectors that is linearly independent.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\{(1,0,0),(0,1,0)\\}$",
+    "$\\{(1,2),(2,4)\\}$",
+    "$\\{(1,1,0),(0,1,1),(1,0,-1)\\}$",
+    "$\\{(1,0,1),(0,1,1),(1,1,0)\\}$"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "The third set is dependent: $(1,1,0)-(0,1,1)-(1,0,-1)=\\mathbf 0$. The fourth has $\\det=-2\\neq0$.",
+  "hints": [
+   "Check for a nontrivial combination that gives zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The vectors $(1,2,0)$, $(2,4,0)$, $(0,0,1)$ and $(1,0,1)$ are given. Find the dimension of their span. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4-(1 if (2,4,0)==(2*1,2*2,2*0) else 0)",
+  "solution": "$(2,4,0)=2(1,2,0)$ is redundant. The other three are independent, so the span has dimension 3.",
+  "hints": [
+   "Find the one dependent vector first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $6\\times4$ matrix $A$ has rank 4. Which is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Its columns are linearly independent",
+    "Its columns span $\\mathbb{R}^6$",
+    "Its columns form a basis of $\\mathbb{R}^6$",
+    "Its columns are mutually orthogonal"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "4 columns span only a 4-dimensional subspace of $\\mathbb{R}^6$",
+    "4 vectors cannot be a basis of $\\mathbb{R}^6$",
+    "rank does not imply orthogonality"
+   ]
+  },
+  "check": null,
+  "solution": "Four columns with rank 4 are independent, but they span only a 4-dimensional part of $\\mathbb{R}^6$.",
+  "hints": [
+   "Rank 4 with 4 columns means no column depends on the others."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2&0\\\\0&0&1\\\\1&2&1\\end{pmatrix}$. Find the nullity of $A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3-(2 if (lambda a,b,c,d,e,f,g,h,i: a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g))(1,2,0,0,0,1,1,2,1)==0 else 3)",
+  "solution": "$\\det A=0$, and rows 1 and 2 are independent, so the rank is 2. Nullity $=3-2=1$.",
+  "hints": [
+   "Nullity is columns minus rank."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The projection of $\\mathbf y$ onto the line through $\\mathbf u\\neq\\mathbf 0$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\dfrac{\\mathbf y\\cdot\\mathbf u}{\\mathbf u\\cdot\\mathbf u}\\,\\mathbf u$",
+    "$\\dfrac{\\mathbf y\\cdot\\mathbf u}{\\lVert\\mathbf y\\rVert}\\,\\mathbf u$",
+    "$\\dfrac{\\mathbf u\\cdot\\mathbf u}{\\mathbf y\\cdot\\mathbf u}\\,\\mathbf u$",
+    "$(\\mathbf y\\cdot\\mathbf u)\\,\\mathbf u$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "divides by $\\lVert\\mathbf y\\rVert$ instead of $\\mathbf u\\cdot\\mathbf u$",
+    "inverts the ratio",
+    "forgets to divide by $\\mathbf u\\cdot\\mathbf u$"
+   ]
+  },
+  "check": null,
+  "solution": "The coefficient is $(\\mathbf y\\cdot\\mathbf u)/(\\mathbf u\\cdot\\mathbf u)$ times the direction $\\mathbf u$.",
+  "hints": [
+   "Scale the direction by the dot-product ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If the columns of $Q$ are orthonormal, $Q^\\top Q$ equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$I$",
+    "$QQ^\\top$",
+    "$0$",
+    "$2I$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$QQ^\\top$ is a projector, and equals $I$ only when $Q$ is square",
+    "zero would mean zero columns",
+    "unit norms give 1, not 2"
+   ]
+  },
+  "check": null,
+  "solution": "Orthonormal columns give $q_i\\cdot q_j=\\delta_{ij}$, so $Q^\\top Q=I$.",
+  "hints": [
+   "Orthonormal means dot products are 0 or 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $P$ be an orthogonal projection matrix. Write $P^2$ in terms of $P$. Use `P` for $P$.",
+  "answer": {
+   "kind": "expression",
+   "value": "P",
+   "vars": [
+    "P"
+   ],
+   "also": [
+    "P^1",
+    "1*P"
+   ]
+  },
+  "check": null,
+  "solution": "Projecting twice changes nothing, so $P^2=P$.",
+  "hints": [
+   "A projection leaves its range fixed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Project $\\mathbf y=(2,3)$ onto the line through $\\mathbf u=(1,1)$. Give the first component of the projection as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(2*1+3*1,1*1+1*1)*1",
+  "solution": "Coefficient $=(\\mathbf y\\cdot\\mathbf u)/(\\mathbf u\\cdot\\mathbf u)=5/2$. So the projection is $(5/2,5/2)$.",
+  "hints": [
+   "Coefficient first, then multiply by $\\mathbf u$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using $\\mathbf y=(2,3)$ and $\\mathbf u=(1,1)$, find the length of the residual $\\mathbf y-\\operatorname{proj}_{\\mathbf u}\\mathbf y$. Give a decimal to 4 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7071067811865476,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(sum((yv-Fraction(2*1+3*1,1*1+1*1)*uv)**2 for yv,uv in [(2,1),(3,1)]))",
+  "solution": "The residual is $(2,3)-(5/2,5/2)=(-1/2,1/2)$, with length $\\sqrt{1/2}\\approx0.7071$.",
+  "hints": [
+   "Subtract the projection, then take the Euclidean length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Select every set of vectors that is orthonormal.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\{(1,0),(0,1)\\}$",
+    "$\\{(1,1),(1,-1)\\}$",
+    "$\\left\\{\\tfrac{1}{\\sqrt2}(1,1),\\ \\tfrac{1}{\\sqrt2}(1,-1)\\right\\}$",
+    "$\\{(1,0),(1,1)\\}$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "check": null,
+  "solution": "Orthonormal means unit length and pairwise orthogonal. $\\{(1,1),(1,-1)\\}$ is orthogonal but has length $\\sqrt2$. $\\{(1,0),(1,1)\\}$ is neither.",
+  "hints": [
+   "Check both length and orthogonality."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Apply Gram–Schmidt to $\\mathbf a_1=(1,1,0)$ and $\\mathbf a_2=(1,0,1)$. Let $\\mathbf v_2=\\mathbf a_2-\\operatorname{proj}_{\\mathbf a_1}\\mathbf a_2$. Find $\\lVert\\mathbf v_2\\rVert^2$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum((c-Fraction(sum(p*q for p,q in [(1,1),(1,0),(0,1)]),sum(p*p for p,q in [(1,1),(1,0),(0,1)]))*p)**2 for p,c in [(1,1),(1,0),(0,1)])",
+  "solution": "The coefficient is $(\\mathbf a_1\\cdot\\mathbf a_2)/(\\mathbf a_1\\cdot\\mathbf a_1)=1/2$. Then $\\mathbf v_2=(1/2,-1/2,1)$ and $\\lVert\\mathbf v_2\\rVert^2=3/2$.",
+  "hints": [
+   "Subtract the projection before taking the length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $\\hat{\\mathbf y}=X(X^\\top X)^{-1}X^\\top\\mathbf y$, the residual $\\mathbf e=\\mathbf y-\\hat{\\mathbf y}$ satisfies:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$X^\\top\\mathbf e=\\mathbf 0$",
+    "$\\mathbf e$ is parallel to the columns of $X$",
+    "$\\mathbf e=\\mathbf 0$ whenever $\\mathbf y\\notin\\operatorname{col}(X)$",
+    "$\\mathbf e=\\mathbf y$ always"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "parallel to the column space is the opposite of orthogonal",
+    "$\\mathbf e=\\mathbf 0$ means $\\mathbf y$ already lies in the column space",
+    "the projection removes the column-space part, so $\\mathbf e\\neq\\mathbf y$"
+   ]
+  },
+  "check": null,
+  "solution": "The residual is orthogonal to every column of $X$.",
+  "hints": [
+   "The residual is what the projection cannot reach."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $\\mathbf u$ be a unit vector and $\\mathbf y$ a vector with $\\lVert\\mathbf y\\rVert=Y$ at angle $\\theta$ to $\\mathbf u$. Write the squared length of the projection of $\\mathbf y$ onto $\\mathrm{span}(\\mathbf u)$ in terms of `Y` and `t`, where `t` stands for $\\theta$.",
+  "answer": {
+   "kind": "expression",
+   "value": "Y^2*cos(t)^2",
+   "vars": [
+    "Y",
+    "t"
+   ],
+   "also": [
+    "Y^2*cos(t)*cos(t)",
+    "(Y*cos(t))^2"
+   ]
+  },
+  "check": null,
+  "solution": "The projection length is $\\mathbf y\\cdot\\mathbf u=Y\\cos\\theta$, so its squared length is $Y^2\\cos^2\\theta$.",
+  "hints": [
+   "The projection length is the dot product with the unit vector."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The normal equations for least squares $\\min_{\\mathbf w}\\lVert\\mathbf y-X\\mathbf w\\rVert^2$ are:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$X^\\top X\\mathbf w=X^\\top\\mathbf y$",
+    "$XX^\\top\\mathbf w=\\mathbf y$",
+    "$X^\\top X\\mathbf w=\\mathbf y$",
+    "$X\\mathbf w=X^\\top\\mathbf y$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$XX^\\top$ is $n\\times n$, the wrong size for $\\mathbf w$",
+    "drops the $X^\\top$ on $\\mathbf y$",
+    "mixes up which side carries the transpose"
+   ]
+  },
+  "check": null,
+  "solution": "Setting the gradient $-2X^\\top(\\mathbf y-X\\mathbf w)$ to zero gives $X^\\top X\\mathbf w=X^\\top\\mathbf y$.",
+  "hints": [
+   "The residual must be orthogonal to the columns of $X$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "When do the normal equations have a unique solution?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$X$ has full column rank, so $X^\\top X$ is invertible",
+    "$X$ is square",
+    "$\\mathbf y$ is orthogonal to every column of $X$",
+    "$X$ has full row rank"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a square matrix can be singular",
+    "that makes the fit zero, not the solution unique",
+    "full row rank does not make $X^\\top X$ invertible"
+   ]
+  },
+  "check": null,
+  "solution": "Full column rank means $X^\\top X$ is invertible, so the solution is unique.",
+  "hints": [
+   "Uniqueness needs independent columns."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A design matrix $X$ has 10 rows and 4 columns. How many entries does $X^\\top X$ have? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4*4",
+  "solution": "$X^\\top X$ is $4\\times4$, so it has $16$ entries.",
+  "hints": [
+   "Its size depends only on the number of columns."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Fit $y\\approx a+bx$ by least squares to the points $(0,1)$, $(1,2)$, $(2,2)$. Find the slope $b$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(3*6-3*5,3*5-3*3)",
+  "solution": "$X^\\top X=\\begin{pmatrix}3&3\\\\3&5\\end{pmatrix}$ and $X^\\top\\mathbf y=(5,6)^\\top$. Cramer gives $b=(18-15)/(15-9)=1/2$.",
+  "hints": [
+   "Form $X^\\top X$ and $X^\\top\\mathbf y$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Fit $y\\approx a+bx$ by least squares to the points $(0,1)$, $(1,2)$, $(2,2)$. Find the residual sum of squares of the best line as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum((yv-(Fraction(5*5-3*6,3*5-3*3)+Fraction(3*6-3*5,3*5-3*3)*xv))**2 for xv,yv in [(0,1),(1,2),(2,2)])",
+  "solution": "The best line is $y=7/6+x/2$. Residuals are $-1/6$, $1/3$, $-1/6$, with squares summing to $1/6$.",
+  "hints": [
+   "Fit first, then add the squared residuals."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does the least squares solution fail when two columns of $X$ are identical?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$X^\\top X$ is singular, so $(X^\\top X)^{-1}$ does not exist",
+    "$X^\\top\\mathbf y$ becomes the zero vector",
+    "$X^\\top X$ becomes the identity matrix",
+    "the residual vector is always zero"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$X^\\top\\mathbf y$ depends on $\\mathbf y$, not on the column structure",
+    "two equal columns give two equal rows in $X^\\top X$, not the identity",
+    "residuals depend on $\\mathbf y$, and duplicate columns do not force a fit"
+   ]
+  },
+  "check": null,
+  "solution": "Identical columns are dependent, so $X^\\top X$ has no inverse.",
+  "hints": [
+   "Dependent columns make the normal matrix singular."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X=\\begin{pmatrix}1\\\\2\\\\2\\end{pmatrix}$ (one column, no intercept) and $\\mathbf y=(1,3,2)^\\top$. Find the least squares coefficient $w$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "11/9",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(1*1+2*3+2*2,1*1+2*2+2*2)",
+  "solution": "$w=(X^\\top\\mathbf y)/(X^\\top X)=(1+6+4)/(1+4+4)=11/9$.",
+  "hints": [
+   "For one column, the coefficient is a ratio of two dot products."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X=\\begin{pmatrix}1\\\\2\\\\2\\end{pmatrix}$ (one column, no intercept) and $\\mathbf y=(1,3,2)^\\top$. Find the residual sum of squares of the least squares fit, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/9",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(Fraction(v)**2 for v in [1,3,2])-Fraction(1*1+2*3+2*2)**2/(1*1+2*2+2*2)",
+  "solution": "Residuals are $(-2/9,5/9,-4/9)$, with squares summing to $45/81=5/9$.",
+  "hints": [
+   "The residual sum of squares is $\\lVert\\mathbf y\\rVert^2-(X^\\top\\mathbf y)^2/(X^\\top X)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a single-column design $\\mathbf x$ with no intercept, write the least squares slope $w$ in terms of `p` for $\\mathbf x^\\top\\mathbf y$ and `q` for $\\mathbf x^\\top\\mathbf x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "p/q",
+   "vars": [
+    "p",
+    "q"
+   ],
+   "also": [
+    "p*(1/q)",
+    "p*q^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "Normal equation: $(\\mathbf x^\\top\\mathbf x)w=\\mathbf x^\\top\\mathbf y$, so $w=p/q$.",
+  "hints": [
+   "Solve the one-by-one normal equation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $A\\mathbf v=\\lambda\\mathbf v$ with $\\mathbf v\\neq\\mathbf 0$, which equation holds?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(A-\\lambda I)\\mathbf v=\\mathbf 0$",
+    "$(A+\\lambda I)\\mathbf v=\\mathbf 0$",
+    "$A\\mathbf v=\\lambda$",
+    "$A^{-1}\\mathbf v=\\lambda\\mathbf v$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign error: subtracting $\\lambda\\mathbf v$ gives $A-\\lambda I$",
+    "$\\lambda$ is a scalar, not a vector",
+    "the eigenvalue of $A^{-1}$ is $1/\\lambda$, not $\\lambda$"
+   ]
+  },
+  "check": null,
+  "solution": "Move $\\lambda\\mathbf v$ to the left: $(A-\\lambda I)\\mathbf v=\\mathbf 0$.",
+  "hints": [
+   "Move everything to one side."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a $2\\times2$ matrix $A$, the characteristic polynomial is $\\lambda^2-T\\lambda+D$. What are $T$ and $D$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "trace and determinant",
+    "the two diagonal entries",
+    "trace and rank",
+    "determinant and the sum of all entries"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the diagonal entries alone miss the off-diagonal entries",
+    "rank is not a coefficient of the polynomial",
+    "the sum of all entries is not a coefficient"
+   ]
+  },
+  "check": null,
+  "solution": "For $\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$, $T=4$ and $D=3$.",
+  "hints": [
+   "The two coefficients are the trace and the determinant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A $3\\times3$ matrix has eigenvalues $1$, $2$ and $4$. What is its determinant? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "1*2*4",
+  "solution": "The determinant is the product of eigenvalues: $1\\cdot2\\cdot4=8$.",
+  "hints": [
+   "Determinant equals the product of eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "$A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$. Find the largest eigenvalue. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(l for l in range(-10,11) if l*l-4*l+3==0)",
+  "solution": "$\\det(A-\\lambda I)=(2-\\lambda)^2-1=\\lambda^2-4\\lambda+3=(\\lambda-1)(\\lambda-3)$. The largest root is $3$.",
+  "hints": [
+   "Solve $\\det(A-\\lambda I)=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$. Find the smallest eigenvalue. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "min(l for l in range(-10,11) if l*l-7*l+10==0)",
+  "solution": "Trace $7$, determinant $10$. $\\lambda^2-7\\lambda+10=(\\lambda-2)(\\lambda-5)$, so the smallest eigenvalue is $2$.",
+  "hints": [
+   "Use the trace and determinant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$A=\\begin{pmatrix}2&1\\\\0&3\\end{pmatrix}$. Select every vector that is an eigenvector of $A$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(1,0)^\\top$",
+    "$(1,1)^\\top$",
+    "$(1,2)^\\top$",
+    "$(0,1)^\\top$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "check": null,
+  "solution": "$(1,0)\\mapsto(2,0)$ and $(1,1)\\mapsto(3,3)$ are scalar multiples. $(1,2)\\mapsto(4,6)$ and $(0,1)\\mapsto(1,3)$ are not.",
+  "hints": [
+   "Check whether $A\\mathbf v$ is a scalar multiple of $\\mathbf v$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$A=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$. Find the sum of the squares of the eigenvalues of $A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 29,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(1+4)**2-2*(1*4-2*3)",
+  "solution": "Trace $5$, determinant $-2$. $\\lambda_1^2+\\lambda_2^2=T^2-2D=25+4=29$.",
+  "hints": [
+   "Use $\\lambda_1^2+\\lambda_2^2=(\\lambda_1+\\lambda_2)^2-2\\lambda_1\\lambda_2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$ and $\\mathbf v=(1,2)^\\top$ satisfy $A\\mathbf v=\\lambda\\mathbf v$. Find $\\lambda$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(1*1+2*2)/1",
+  "solution": "$A\\mathbf v=(5,10)^\\top=5\\mathbf v$, so $\\lambda=5$.",
+  "hints": [
+   "Multiply, then compare with $\\mathbf v$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2\\times2$ matrix has eigenvalues `lam` and `mu`. Write the trace of $A^2$ in terms of `lam` and `mu`.",
+  "answer": {
+   "kind": "expression",
+   "value": "lam^2+mu^2",
+   "vars": [
+    "lam",
+    "mu"
+   ],
+   "also": [
+    "mu^2+lam^2",
+    "lam*lam+mu*mu"
+   ]
+  },
+  "check": null,
+  "solution": "The eigenvalues of $A^2$ are $\\lambda^2$ and $\\mu^2$, and the trace is their sum.",
+  "hints": [
+   "Squaring a matrix squares its eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The eigenvalues of a real symmetric matrix are always:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "real",
+    "positive",
+    "integers",
+    "distinct"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a symmetric matrix can have zero or negative eigenvalues",
+    "eigenvalues need not be integers",
+    "repeated eigenvalues are allowed, e.g. the identity"
+   ]
+  },
+  "check": null,
+  "solution": "The spectral theorem gives real eigenvalues and orthogonal eigenvectors.",
+  "hints": [
+   "Symmetric means real spectrum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A symmetric matrix $A$ is positive definite if and only if:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "all eigenvalues are greater than $0$",
+    "all entries are greater than $0$",
+    "its trace is greater than $0$",
+    "its determinant is greater than $0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "entries do not decide it: $\\begin{pmatrix}1&5\\\\5&1\\end{pmatrix}$ has eigenvalues $6$ and $-4$",
+    "one positive eigenvalue is not enough",
+    "both eigenvalues could be negative, with positive determinant"
+   ]
+  },
+  "check": null,
+  "solution": "Positive definite means every eigenvalue is positive.",
+  "hints": [
+   "Eigenvalues decide definiteness."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $\\Sigma=s^2I_n$ with `s` a positive number, and let $\\mathbf v$ be a unit vector. Write $\\mathbf v^\\top\\Sigma\\mathbf v$ in terms of `s`.",
+  "answer": {
+   "kind": "expression",
+   "value": "s^2",
+   "vars": [
+    "s"
+   ],
+   "also": [
+    "s^2*1",
+    "1*s^2"
+   ]
+  },
+  "check": null,
+  "solution": "$\\mathbf v^\\top(s^2I)\\mathbf v=s^2\\lVert\\mathbf v\\rVert^2=s^2$.",
+  "hints": [
+   "Factor the scalar out of the quadratic form."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$ and $\\mathbf x=(1,-1)^\\top$. Find $\\mathbf x^\\top A\\mathbf x$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2*1**2+2*1*1*(-1)+2*(-1)**2",
+  "solution": "$\\mathbf x^\\top A\\mathbf x=2(1)+2(1)(-1)(1)+2(1)=2-2+2=2$.",
+  "hints": [
+   "Expand $\\mathbf x^\\top A\\mathbf x=\\sum_{ij}A_{ij}x_ix_j$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}5&2\\\\2&2\\end{pmatrix}$. Find the smallest eigenvalue. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "min(l for l in range(-10,11) if l*l-7*l+6==0)",
+  "solution": "Trace $7$, determinant $6$. $\\lambda^2-7\\lambda+6=(\\lambda-1)(\\lambda-6)$, so the smallest is $1$.",
+  "hints": [
+   "Use the trace and determinant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Select every positive definite matrix.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$",
+    "$\\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}$",
+    "$\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$",
+    "$\\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "Eigenvalues: $\\{1,3\\}$ and $\\{2,4\\}$ are positive. $\\{3,-1\\}$ has a negative eigenvalue. $\\{1,0\\}$ has a zero eigenvalue.",
+  "hints": [
+   "Positive definite means all eigenvalues are strictly positive."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$\\Sigma=\\begin{pmatrix}4&2\\\\2&3\\end{pmatrix}$ is a covariance matrix. Find $\\mathbf v^\\top\\Sigma\\mathbf v$ for $\\mathbf v=(1,-1)^\\top$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4*1**2+2*2*1*(-1)+3*(-1)**2",
+  "solution": "$4(1)+2\\cdot2(1)(-1)+3(1)=4-4+3=3$.",
+  "hints": [
+   "This equals the variance of $\\mathbf v^\\top\\mathbf X$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$A=\\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$. Over all unit vectors $\\mathbf x$, find the largest value of $\\mathbf x^\\top A\\mathbf x$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(l for l in range(-10,11) if l*l-6*l+8==0)",
+  "solution": "The maximum of a quadratic form on unit vectors is the largest eigenvalue. Here $\\lambda^2-6\\lambda+8=(\\lambda-2)(\\lambda-4)$, so the answer is $4$.",
+  "hints": [
+   "The maximum is the largest eigenvalue."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For symmetric positive definite $A=Q\\Lambda Q^\\top$ with $Q$ orthogonal, which is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$Q^\\top Q=I$, and the diagonal of $\\Lambda$ holds the positive eigenvalues",
+    "$Q$ holds the eigenvalues and $\\Lambda$ holds the eigenvectors",
+    "$\\Lambda$ may have complex diagonal entries",
+    "$A^{-1}=Q\\Lambda Q^\\top$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the roles of $Q$ and $\\Lambda$ are swapped",
+    "symmetric matrices have real eigenvalues",
+    "the inverse is $Q\\Lambda^{-1}Q^\\top$, with reciprocal eigenvalues"
+   ]
+  },
+  "check": null,
+  "solution": "$Q$ holds orthonormal eigenvectors and $\\Lambda$ holds the eigenvalues.",
+  "hints": [
+   "Q holds eigenvectors, Lambda holds eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In $A=U\\Sigma V^\\top$, the diagonal of $\\Sigma$ holds:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "non-negative singular values",
+    "the eigenvalues of $A$",
+    "the entries of $A$ in order",
+    "the eigenvectors of $A^\\top A$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "eigenvalues of a non-symmetric $A$ need not be its singular values",
+    "the entries of $A$ are not placed on $\\Sigma$",
+    "eigenvectors form $U$ and $V$, not $\\Sigma$"
+   ]
+  },
+  "check": null,
+  "solution": "$\\Sigma$ holds the singular values, which are non-negative and in decreasing order.",
+  "hints": [
+   "Sigma holds singular values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The singular values of $A$ are the square roots of the eigenvalues of:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$A^\\top A$",
+    "$A+A^\\top$",
+    "$A^2$",
+    "$\\det A$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the symmetric part gives the eigenvalues of $A+A^\\top$, not the singular values of $A$",
+    "$A^2$ has eigenvalues $\\lambda^2$, not singular values in general",
+    "$\\det A$ is a number, not a matrix with eigenvalues"
+   ]
+  },
+  "check": null,
+  "solution": "Singular values are $\\sqrt{\\lambda(A^\\top A)}$.",
+  "hints": [
+   "Singular values come from the Gram matrix A transpose A."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A matrix in $\\mathbb R^{5\\times4}$ has rank 2. How many of its singular values are nonzero? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2",
+  "solution": "The number of nonzero singular values equals the rank, $2$.",
+  "hints": [
+   "Nonzero singular values count the rank."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "$A=\\begin{pmatrix}0&3\\\\4&0\\end{pmatrix}$. Find the largest singular value of $A$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(s for s in range(0,21) if s*s==max(0**2+4**2,3**2+0**2))",
+  "solution": "$A^\\top A=\\operatorname{diag}(16,9)$, so the singular values are $\\sqrt{16}=4$ and $\\sqrt9=3$. The largest is $4$.",
+  "hints": [
+   "Form $A^\\top A$ and take square roots of its eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$A=\\begin{pmatrix}1&2\\\\3&4\\end{pmatrix}$. Find the sum of the squares of all its singular values. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 30,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(v*v for v in [1,2,3,4])",
+  "solution": "The sum of squared singular values equals the sum of squared entries: $1+4+9+16=30$.",
+  "hints": [
+   "The Frobenius norm squared is the sum of squared singular values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A matrix has singular values $5$, $2$ and $0.5$. Which term gives the best rank-1 approximation in the Frobenius norm?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "the term with $\\sigma=5$",
+    "the term with $\\sigma=0.5$",
+    "the sum of the first two terms",
+    "the term built from the largest entry of $A$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "keeps the smallest singular value, the worst choice",
+    "that is rank 2, not rank 1",
+    "the largest entry is not what Eckart–Young selects"
+   ]
+  },
+  "check": null,
+  "solution": "Eckart–Young: keep the largest singular value's term.",
+  "hints": [
+   "Keep the largest singular value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The singular values of $A$ are $5$, $2$ and $0.5$. Find the spectral-norm error of its best rank-1 approximation. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "5+2+0.5-max(5,2,0.5)-min(5,2,0.5)",
+  "solution": "The spectral-norm error of the best rank-1 approximation is the second singular value, $2$.",
+  "hints": [
+   "The error is the first dropped singular value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A matrix $A$ has singular values $3$ and $4$ and no others. Find $\\lVert A\\rVert_F$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "math.sqrt(3**2+4**2)",
+  "solution": "$\\lVert A\\rVert_F=\\sqrt{3^2+4^2}=5$.",
+  "hints": [
+   "Frobenius norm is the square root of the sum of squared singular values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.svd"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A matrix has singular values $a\\ge b\\ge c\\ge0$. Write the squared Frobenius error of its best rank-1 approximation in terms of `a`, `b`, `c`.",
+  "answer": {
+   "kind": "expression",
+   "value": "b^2+c^2",
+   "vars": [
+    "a",
+    "b",
+    "c"
+   ],
+   "also": [
+    "c^2+b^2"
+   ]
+  },
+  "check": null,
+  "solution": "The error drops $a$ and keeps the rest, so its squared Frobenius size is $b^2+c^2$.",
+  "hints": [
+   "Drop the largest singular value and sum what remains."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The first principal component of centred data is the eigenvector of the covariance matrix with:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "the largest eigenvalue",
+    "the smallest eigenvalue",
+    "the largest diagonal entry",
+    "the largest entry of the data matrix"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the smallest eigenvalue gives the direction of least variance",
+    "diagonal entries are per-feature variances, not directions",
+    "data entries are not covariance eigen-data"
+   ]
+  },
+  "check": null,
+  "solution": "The largest eigenvalue gives the most variance, along its eigenvector.",
+  "hints": [
+   "Largest eigenvalue means most variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The share of variance explained by the first $k$ components is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "sum of the top $k$ eigenvalues divided by the sum of all eigenvalues",
+    "top $k$ eigenvalues divided by the largest eigenvalue",
+    "$k$ divided by the number of features $p$",
+    "top $k$ eigenvalues divided by the sample size $n$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "divides by one eigenvalue, so the share can exceed 1",
+    "counts components and ignores the variances",
+    "dividing by sample size gives no variance share"
+   ]
+  },
+  "check": null,
+  "solution": "Explained share is $\\sum_{i\\le k}\\lambda_i/\\sum_i\\lambda_i$.",
+  "hints": [
+   "Share is top eigenvalues over all eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Centred data has covariance eigenvalues $4$, $1$ and $0$. How many components explain all the variance? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum(1 for e in [4,1,0] if e>0)",
+  "solution": "Only the nonzero eigenvalues carry variance, so two components suffice.",
+  "hints": [
+   "Count the eigenvalues that carry variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Covariance matrix $\\Sigma=\\begin{pmatrix}4&2\\\\2&1\\end{pmatrix}$ of centred data. Find the variance along the first principal component. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(l for l in range(-10,11) if l*l-5*l==0)",
+  "solution": "Trace $5$, determinant $0$. The eigenvalues are $0$ and $5$. The largest is $5$.",
+  "hints": [
+   "Solve for the eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Covariance matrix $\\Sigma=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$. What fraction of total variance does the first principal component explain? Give a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "max(l for l in range(-10,11) if l*l-4*l+3==0)/(2+2)",
+  "solution": "Eigenvalues $3$ and $1$, total $4$. The first component explains $3/4=0.75$.",
+  "hints": [
+   "Share is largest eigenvalue over the sum of eigenvalues."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Centred data matrix $X$ is $n\\times p$. Select every true statement about PCA.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$X^\\top X$ is proportional to the sample covariance",
+    "The principal components are mutually orthogonal",
+    "Each principal component has unit variance",
+    "The principal components are eigenvectors of $XX^\\top$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "check": null,
+  "solution": "Components have variance equal to their eigenvalue, not 1. The $n\\times n$ matrix $XX^\\top$ has different eigenvectors.",
+  "hints": [
+   "Check each claim against the covariance definition."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using the unit first component $\\mathbf u=(1,1)/\\sqrt2$, find the score of the point $\\mathbf x=(3,1)$. Give a decimal to 4 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.82842712474619,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(3+1)/math.sqrt(2)",
+  "solution": "The score is $\\mathbf x\\cdot\\mathbf u=(3+1)/\\sqrt2=2\\sqrt2\\approx2.8284$.",
+  "hints": [
+   "The score is the dot product with the unit component."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Reconstruct $\\mathbf x=(3,1)$ from the first component only, using $\\mathbf u=(1,1)/\\sqrt2$. Find the squared reconstruction error $\\lVert\\mathbf x-\\hat{\\mathbf x}\\rVert^2$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(3-(3+1)/2)**2+(1-(3+1)/2)**2",
+  "solution": "$\\hat{\\mathbf x}=\\text{score}\\cdot\\mathbf u=(2,2)$. The error is $(1,-1)$, with squared length $2$.",
+  "hints": [
+   "Rebuild the point from the score, then measure the gap."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.pca"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why standardise features before PCA?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Without it, a feature measured in large units can dominate the variance and the components",
+    "PCA needs unit variance to compute eigenvalues",
+    "Centring alone changes the number of components",
+    "Scaling never changes the eigenvectors"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "eigen-decomposition works for any covariance matrix",
+    "it does not change the number of features $p$",
+    "scaling a feature changes the covariance off-diagonals, so directions move"
+   ]
+  },
+  "check": null,
+  "solution": "PCA follows variance, so feature units change the answer.",
+  "hints": [
+   "Variance depends on units."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "At a point, the gradient of $f(x,y)$ points in the direction of:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "steepest increase of $f$",
+    "steepest decrease of $f$",
+    "the tangent to the level curve",
+    "the positive $x$-axis"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the negative gradient points to steepest decrease",
+    "the gradient is perpendicular to the level curve",
+    "the gradient depends on the point, not on a fixed axis"
+   ]
+  },
+  "check": null,
+  "solution": "The gradient points to steepest increase, and is perpendicular to level curves.",
+  "hints": [
+   "Steepest ascent, not descent."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(\\mathbf w)=\\mathbf w^\\top\\mathbf w$, the gradient $\\nabla f(\\mathbf w)$ equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\mathbf w$",
+    "$\\mathbf w$",
+    "$2\\,\\mathbf w^\\top\\mathbf w$",
+    "$2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets the factor 2 from the power rule",
+    "multiplies by $f$, which is not a gradient",
+    "a scalar, not a vector of partials"
+   ]
+  },
+  "check": null,
+  "solution": "Each partial of $\\sum w_i^2$ is $2w_i$, so the gradient is $2\\mathbf w$.",
+  "hints": [
+   "Each partial of a square gives a factor 2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(x,y)=x^2y$, write $\\partial f/\\partial x$ in terms of `x` and `y`.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*x*y",
+   "vars": [
+    "x",
+    "y"
+   ],
+   "also": [
+    "2*y*x",
+    "x*2*y"
+   ]
+  },
+  "check": null,
+  "solution": "Treat $y$ as constant: $\\partial f/\\partial x=2xy$.",
+  "hints": [
+   "Hold the other variable fixed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "$f(x,y)=x^2+3xy$. Find $\\partial f/\\partial y$ at $(x,y)=(2,-1)$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3*2",
+  "solution": "Treat $x$ as constant: $\\partial f/\\partial y=3x$. At $x=2$ this is $6$.",
+  "hints": [
+   "Hold x fixed when differentiating in y."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$L(w,b)=(w-1)^2+(b-2)^2+wb$. Find $\\partial L/\\partial w$ at $(w,b)=(2,3)$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2*(2-1)+3",
+  "solution": "$\\partial L/\\partial w=2(w-1)+b=2+3=5$.",
+  "hints": [
+   "The cross term $wb$ contributes $b$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$f(x,y)=x^2+y^2$. At $(1,2)$, select every vector that gives the direction of steepest increase.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$(1,2)$",
+    "$(2,4)$",
+    "$(-1,-2)$",
+    "$(2,-4)$",
+    "$(1,0)$"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "check": null,
+  "solution": "The gradient is $(2,4)$, parallel to $(1,2)$. The vector $(-1,-2)$ is the descent direction.",
+  "hints": [
+   "Compare each vector with the gradient's direction."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$L(w,b)=(wx+b-y)^2$ for one data point. Write $\\partial L/\\partial w$. Use `w`, `b`, `x`, `y`.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*(w*x+b-y)*x",
+   "vars": [
+    "w",
+    "b",
+    "x",
+    "y"
+   ],
+   "also": [
+    "2*x*(w*x+b-y)",
+    "2*(x*w+b-y)*x"
+   ]
+  },
+  "check": null,
+  "solution": "Chain rule: $\\partial L/\\partial w=2(wx+b-y)\\cdot x$.",
+  "hints": [
+   "Apply the chain rule, with the inner term's derivative $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$f(x,y)=3x^2+4y^2$. Find the Euclidean length of $\\nabla f$ at $(1,1)$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "math.sqrt((3*2*1)**2+(4*2*1)**2)",
+  "solution": "$\\nabla f=(6x,8y)=(6,8)$ at $(1,1)$, with length $\\sqrt{36+64}=10$.",
+  "hints": [
+   "Compute the gradient first, then its length."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$f(x,y)=x^2+2xy$. Find the rate of change of $f$ at $(1,1)$ in the direction $\\mathbf u=(3/5,\\,4/5)$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction((2*1+2*1)*3+(2*1)*4,5)",
+  "solution": "$\\nabla f=(2x+2y,\\,2x)=(4,2)$ at $(1,1)$. Then $\\nabla f\\cdot\\mathbf u=12/5+8/5=4$.",
+  "hints": [
+   "The rate in a direction is the gradient dotted with the unit vector."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $f(\\mathbf w)=\\mathbf a^\\top\\mathbf w$ with constant $\\mathbf a$, $\\nabla_{\\mathbf w}f$ (a column vector, like $\\mathbf w$) equals:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mathbf a$",
+    "$\\mathbf a^\\top$",
+    "$\\mathbf a^\\top\\mathbf a$",
+    "$\\mathbf 0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a row vector: the gradient has the shape of $\\mathbf w$, a column",
+    "a scalar, not a gradient",
+    "$\\mathbf a$ multiplies $\\mathbf w$, so the gradient is not zero"
+   ]
+  },
+  "check": null,
+  "solution": "Each component of $\\mathbf w$ has coefficient $a_i$, so the gradient is $\\mathbf a$.",
+  "hints": [
+   "Components of the gradient are the coefficients."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A map $\\mathbf f:\\mathbb R^3\\to\\mathbb R^2$ has Jacobian with shape:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$2\\times3$",
+    "$3\\times2$",
+    "$3\\times3$",
+    "$2\\times2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "transposed: rows index outputs, so there are 2 rows",
+    "square in the input dimension is not the rule",
+    "square in the output dimension is not the rule"
+   ]
+  },
+  "check": null,
+  "solution": "Rows index outputs (2) and columns index inputs (3).",
+  "hints": [
+   "Rows are outputs, columns are inputs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $\\mathbf w\\in\\mathbb R^4$, the gradient of $\\lVert\\mathbf w\\rVert^2$ has how many entries? Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4",
+  "solution": "The gradient is a vector in $\\mathbb R^4$, so it has $4$ entries.",
+  "hints": [
+   "The gradient has the shape of the input."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$f(\\mathbf w)=\\lVert\\mathbf w\\rVert^2$. Find the second component of $\\nabla f$ at $\\mathbf w=(1,-2)^\\top$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": -4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2*(-2)",
+  "solution": "$\\nabla f=2\\mathbf w$, so the second component is $2(-2)=-4$.",
+  "hints": [
+   "The gradient of a squared norm is twice the vector."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$f(\\mathbf w)=\\mathbf w^\\top A\\mathbf w$ with $A=\\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$. Find the second component of $\\nabla f$ at $\\mathbf w=(1,1)^\\top$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(0+2)*1+(3+3)*1",
+  "solution": "$\\nabla f=(A+A^\\top)\\mathbf w$, and $A+A^\\top=\\begin{pmatrix}2&2\\\\2&6\\end{pmatrix}$. The second row gives $2+6=8$.",
+  "hints": [
+   "For a non-symmetric $A$, the gradient is $(A+A^\\top)\\mathbf w$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$L(\\mathbf w)=\\lVert\\mathbf y-X\\mathbf w\\rVert^2$ with $X\\in\\mathbb R^{n\\times p}$. Select every true statement.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\nabla L=-2X^\\top(\\mathbf y-X\\mathbf w)$",
+    "$\\nabla L=-2X(\\mathbf y-X\\mathbf w)$",
+    "$\\nabla L$ has $p$ entries",
+    "$\\nabla L=2X^\\top X\\mathbf w$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "check": null,
+  "solution": "The gradient is $-2X^\\top(\\mathbf y-X\\mathbf w)$, which has $p$ entries. $-2X(\\cdot)$ has the wrong shape, and $2X^\\top X\\mathbf w$ drops $\\mathbf y$.",
+  "hints": [
+   "Check shapes: the gradient has p entries."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $\\mathbf w=(p,q)^\\top$ and $L=(p+2q-t)^2$. Find $\\partial L/\\partial p$. Use `p`, `q`, `t`.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*(p+2*q-t)",
+   "vars": [
+    "p",
+    "q",
+    "t"
+   ],
+   "also": [
+    "2*(2*q+p-t)",
+    "2*p+4*q-2*t"
+   ]
+  },
+  "check": null,
+  "solution": "Chain rule: $\\partial L/\\partial p=2(p+2q-t)\\cdot1$.",
+  "hints": [
+   "The inner derivative with respect to p is 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$, $\\mathbf y=(1,3)^\\top$, $L(\\mathbf w)=\\lVert\\mathbf y-X\\mathbf w\\rVert^2$. Find the second component of $\\nabla L$ at $\\mathbf w=\\mathbf 0$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": -10,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "-2*(2*1+1*3)",
+  "solution": "$\\nabla L=-2X^\\top(\\mathbf y-X\\mathbf w)$. At $\\mathbf w=\\mathbf 0$ this is $-2X^\\top\\mathbf y=-2(1,5)^\\top$. The second component is $-10$.",
+  "hints": [
+   "Evaluate at w = 0 first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$\\mathbf f(\\mathbf w)=A\\mathbf w$ with $A\\in\\mathbb R^{3\\times4}$. Its Jacobian is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$A$, a $3\\times4$ matrix",
+    "$A^\\top$, a $4\\times3$ matrix",
+    "$\\mathbf w$ itself",
+    "the scalar $\\operatorname{tr}A$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "rows index outputs, so the Jacobian is $3\\times4$, not transposed",
+    "the Jacobian is a matrix of partials, not the input",
+    "the trace is a scalar, not a Jacobian"
+   ]
+  },
+  "check": null,
+  "solution": "A linear map has constant Jacobian equal to its matrix.",
+  "hints": [
+   "A linear map's Jacobian is its matrix."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A twice-differentiable $f$ is convex on $\\mathbb R^n$ if its Hessian is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "positive semidefinite everywhere",
+    "positive definite at one point",
+    "entrywise positive everywhere",
+    "negative semidefinite everywhere"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "one point says nothing about convexity everywhere",
+    "entries positive do not determine semidefiniteness",
+    "that describes concave functions"
+   ]
+  },
+  "check": null,
+  "solution": "Convex means the Hessian is positive semidefinite at every point.",
+  "hints": [
+   "Convexity is a condition everywhere."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why must a local minimum of a convex function be a global minimum?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The graph lies below every chord, so a lower point elsewhere would contradict the local minimum",
+    "Convex functions have a unique maximum",
+    "Convex functions have zero gradient everywhere",
+    "Convex functions never have a minimum"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "maxima are not the reason",
+    "only minimisers have zero gradient, not every point",
+    "$x^2$ is convex and has a minimum"
+   ]
+  },
+  "check": null,
+  "solution": "A lower point would give a chord below the local minimum, which is impossible.",
+  "hints": [
+   "Chords lie above the graph."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$f(x)=x^3-3x$. Write $f''(x)$ in terms of `x`. Use `x` for $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "6*x",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "x*6",
+    "x*3*2"
+   ]
+  },
+  "check": null,
+  "solution": "$f'(x)=3x^2-3$, so $f''(x)=6x$.",
+  "hints": [
+   "Differentiate twice."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$f(x,y)=x^2+xy+2y^2$. The Hessian is constant. Find its smallest eigenvalue as a decimal to 4 places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5857864376269049,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "3-math.sqrt(2)",
+  "solution": "$H=\\begin{pmatrix}2&1\\\\1&4\\end{pmatrix}$, with trace $6$ and determinant $7$. Eigenvalues are $3\\pm\\sqrt2$, so the smallest is $3-\\sqrt2\\approx1.5858$.",
+  "hints": [
+   "Use the trace and determinant of the Hessian."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$f(x,y)=x^2+2xy+3y^2$. Find the determinant of its Hessian. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 8,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2*6-2*2",
+  "solution": "$H=\\begin{pmatrix}2&2\\\\2&6\\end{pmatrix}$, so $\\det H=12-4=8$.",
+  "hints": [
+   "Second derivatives form the Hessian."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select every function that is convex on all of $\\mathbb R$.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$x^2$",
+    "$-x^2$",
+    "$|x|$",
+    "$x^3$",
+    "$e^{x}$"
+   ],
+   "correct": [
+    0,
+    2,
+    4
+   ]
+  },
+  "check": null,
+  "solution": "$x^2$, $|x|$ and $e^x$ have nonnegative second derivative (or a convex kink). $-x^2$ is concave. $x^3$ has second derivative $6x$, negative for $x<0$.",
+  "hints": [
+   "Check the second derivative on all of R."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which set is convex?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A solid disc",
+    "The union of two disjoint discs",
+    "$\\{x\\in\\mathbb R:x^2\\ge1\\}$",
+    "The unit circle"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the segment between the two centres leaves the set",
+    "$-2$ and $2$ are in the set, but $0$ between them is not",
+    "a circle is only its boundary, and chords leave it"
+   ]
+  },
+  "check": null,
+  "solution": "A solid disc contains the segment between any two of its points.",
+  "hints": [
+   "A convex set contains every segment between its points."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$f(x,y)=x^2-xy+y^2$. Find the largest eigenvalue of its Hessian. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(l for l in range(-10,11) if l*l-4*l+3==0)",
+  "solution": "$H=\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}$, with trace $4$ and determinant $3$. $\\lambda^2-4\\lambda+3=(\\lambda-1)(\\lambda-3)$, so the largest is $3$.",
+  "hints": [
+   "Use the trace and determinant of the Hessian."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$f(x)=x^4-2x^2$. Write $f''(x)$ in terms of `x`. Use `x` for $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "12*x^2-4",
+   "vars": [
+    "x"
+   ],
+   "also": [
+    "-4+12*x^2",
+    "12*x*x-4"
+   ]
+  },
+  "check": null,
+  "solution": "$f'(x)=4x^3-4x$, so $f''(x)=12x^2-4$.",
+  "hints": [
+   "Differentiate twice."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "The gradient descent update with step size $\\eta>0$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\mathbf w\\leftarrow\\mathbf w-\\eta\\nabla L(\\mathbf w)$",
+    "$\\mathbf w\\leftarrow\\mathbf w+\\eta\\nabla L(\\mathbf w)$",
+    "$\\mathbf w\\leftarrow\\mathbf w-\\nabla L(\\mathbf w)/\\eta$",
+    "$\\mathbf w\\leftarrow\\eta\\mathbf w-\\nabla L(\\mathbf w)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "adds the gradient, which climbs the loss",
+    "divides by $\\eta$ instead of scaling by $\\eta$",
+    "scales the old point instead of the step"
+   ]
+  },
+  "check": null,
+  "solution": "Step against the gradient, scaled by $\\eta$.",
+  "hints": [
+   "Descent subtracts the scaled gradient."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $L(w)=\\tfrac{\\lambda}{2}w^2$ with $\\lambda>0$, gradient descent with step $\\eta>0$ diverges when:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$|1-\\eta\\lambda|>1$",
+    "$\\eta\\lambda<0$",
+    "$\\eta>0$",
+    "$\\lambda>1$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "$\\eta\\lambda$ is positive here, so this never happens",
+    "every step size works on this loss",
+    "the threshold depends on $\\eta$ as well as $\\lambda$"
+   ]
+  },
+  "check": null,
+  "solution": "Each step multiplies $w$ by $1-\\eta\\lambda$, so the size grows when $|1-\\eta\\lambda|>1$.",
+  "hints": [
+   "The per-step factor decides growth."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Gradient descent with $\\eta=0.1$ on $L(w)=\\tfrac12w^2$ starts at $w_0=2$. Find $w_1$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/5",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(2)-Fraction(1,10)*2",
+  "solution": "$\\nabla L=w$, so $w_1=2-0.1\\cdot2=1.8=9/5$.",
+  "hints": [
+   "Gradient of w squared over 2 is w."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "$L(w)=(w-3)^2$, step size $\\eta=0.25$, $w_0=0$. Find $w_1$ after one gradient step. Give a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(0)-Fraction(1,4)*2*(0-3)",
+  "solution": "$\\nabla L=2(w-3)=-6$ at $w_0=0$. Then $w_1=0-0.25(-6)=3/2$.",
+  "hints": [
+   "Step against the gradient, scaled by the step size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$L(w)=(w-3)^2$, step size $\\eta=0.25$, $w_0=0$. Find $w_2$ after two gradient steps, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/4",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(lambda w: w-Fraction(1,4)*2*(w-3))(Fraction(0)-Fraction(1,4)*2*(0-3))",
+  "solution": "After $w_1=3/2$, the gradient is $2(3/2-3)=-3$. Then $w_2=3/2+3/4=9/4$.",
+  "hints": [
+   "Repeat the step from the new point."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$L(w)=\\tfrac12\\cdot10\\,w^2$ and $\\eta=0.2$. Each step multiplies $w$ by $1-\\eta\\lambda$. What happens to $w_k$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It alternates sign with the same size, so it neither converges nor diverges",
+    "It reaches $0$ in one step",
+    "It diverges, growing in size each step",
+    "It shrinks by a factor of $0.8$ each step"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a factor of $0$ would do that, but here the factor is $-1$",
+    "the factor $-1$ has size 1, so the size does not grow",
+    "forgets $\\lambda$: $1-\\eta=0.8$ is the wrong factor"
+   ]
+  },
+  "check": null,
+  "solution": "Here $\\lambda=10$, so $1-\\eta\\lambda=1-2=-1$. The iterates flip sign forever.",
+  "hints": [
+   "Compute the factor 1 minus eta times lambda."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$L(w)=w^2$, so $\\nabla L=2w$. Step size $\\eta=0.25$, start $w_0=8$. Find $w_3$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "8*(1-Fraction(1,4)*2)**3",
+  "solution": "The factor is $1-0.25\\cdot2=0.5$. So $w_3=8(0.5)^3=1$.",
+  "hints": [
+   "Each step multiplies w by the same factor."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$L(w)=2w^2$, so $\\nabla L=4w$. Find the step size $\\eta$ that reaches the minimum in one step from any start. Give a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(1,2*2)",
+  "solution": "One step is exact when $1-4\\eta=0$, so $\\eta=1/4$.",
+  "hints": [
+   "The factor must be zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For $L(w)=\\tfrac12\\lambda w^2$ with $\\lambda>0$, $\\eta>0$ and $w_0\\neq0$, select every true statement.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The iterates shrink toward $0$ when $|1-\\eta\\lambda|<1$",
+    "A larger $\\eta$ always converges faster",
+    "If $\\eta\\lambda=1$, one step reaches the minimiser",
+    "If $1-\\eta\\lambda<0$, the iterates alternate in sign"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "The factor is $1-\\eta\\lambda$. Shrinking needs size below 1, one step is exact when the factor is 0, and a negative factor flips sign. A larger step can overshoot.",
+  "hints": [
+   "Track the factor 1 minus eta times lambda."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0127",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "With Lagrangian $L=f+\\lambda g$ for $\\min f$ subject to $g=0$, a constrained optimum satisfies:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\nabla f+\\lambda\\nabla g=\\mathbf 0$",
+    "$\\nabla f=\\nabla g$",
+    "$\\nabla f\\cdot\\nabla g=0$",
+    "$\\nabla f=\\mathbf 0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "drops the multiplier $\\lambda$ on $\\nabla g$",
+    "orthogonal gradients is the wrong condition, they must be parallel",
+    "ignores the constraint, which is the unconstrained condition"
+   ]
+  },
+  "check": null,
+  "solution": "Stationarity of $L$ in $\\mathbf x$ gives $\\nabla f+\\lambda\\nabla g=\\mathbf 0$.",
+  "hints": [
+   "Stationarity of the Lagrangian."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0128",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Ridge regression can be written as minimising the loss subject to:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\lVert\\mathbf w\\rVert_2^2\\le c$",
+    "$\\lVert\\mathbf w\\rVert_1\\le c$",
+    "$\\mathbf w\\ge\\mathbf 0$",
+    "$\\sum_j w_j=0$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the lasso (L1) constraint, which gives sparsity",
+    "a sign constraint, not a size constraint",
+    "a sum constraint, not a norm bound"
+   ]
+  },
+  "check": null,
+  "solution": "Ridge bounds the squared L2 norm of the weights.",
+  "hints": [
+   "Ridge is the L2 norm."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0129",
+  "tier": "a",
+  "type": "recall",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the Lagrangian $L=f+\\lambda g$ for $\\min x^2+y^2$ subject to $g=x+y-1=0$. Use `x`, `y` and `lam` for $\\lambda$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x^2+y^2+lam*(x+y-1)",
+   "vars": [
+    "x",
+    "y",
+    "lam"
+   ],
+   "also": [
+    "x^2+y^2+lam*(y+x-1)",
+    "x^2+y^2+lam*(x+y)-lam"
+   ]
+  },
+  "check": null,
+  "solution": "$L=x^2+y^2+\\lambda(x+y-1)$.",
+  "hints": [
+   "Add the multiplier times the constraint expression."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0130",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimise $x^2+y^2$ subject to $x+y=1$. Find the minimum value as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(1**2,1**2+1**2)",
+  "solution": "By symmetry $x=y=1/2$, so the minimum is $1/4+1/4=1/2$.",
+  "hints": [
+   "Use the symmetric point on the constraint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimise $x^2+2y^2$ subject to $x+y=3$. Find the minimum value. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(3**2)/(1+Fraction(1,2))",
+  "solution": "Stationarity: $2x=\\lambda$ and $4y=\\lambda$, so $x=2y$. With $x+y=3$: $y=1$, $x=2$, value $4+2=6$.",
+  "hints": [
+   "Solve the stationarity equations with the constraint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "At a constrained minimum of $f$ subject to $g=0$ (with $\\nabla g\\neq\\mathbf 0$), $\\nabla f$ is:",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "parallel to $\\nabla g$",
+    "perpendicular to $\\nabla g$",
+    "zero",
+    "equal to $g$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "perpendicular gradients mean $f$ can still change along the constraint",
+    "zero gradient is the unconstrained condition",
+    "$\\nabla f$ is a vector and $g$ is a scalar, so they cannot be equal"
+   ]
+  },
+  "check": null,
+  "solution": "At the optimum, $\\nabla f$ and $\\nabla g$ are parallel.",
+  "hints": [
+   "Gradients line up at the optimum."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Minimise $(w-4)^2+3w^2$ over real $w$. Find the minimiser $w$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(4,1+3)",
+  "solution": "Derivative: $2(w-4)+6w=8w-8=0$, so $w=1$.",
+  "hints": [
+   "Set the derivative to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Minimise $x^2+y^2$ subject to $x+y=s$. Write the optimal $x$ in terms of `s`. Use `s` for $s$.",
+  "answer": {
+   "kind": "expression",
+   "value": "s/2",
+   "vars": [
+    "s"
+   ],
+   "also": [
+    "s*(1/2)",
+    "0.5*s"
+   ]
+  },
+  "check": null,
+  "solution": "By symmetry, $x=y=s/2$.",
+  "hints": [
+   "The symmetric point satisfies the constraint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t4-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Minimise $x^2+y^2$ subject to $2x+y=5$. Find the minimum value. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "Fraction(5**2,2**2+1**2)",
+  "solution": "Stationarity: $2x=2\\lambda$ and $2y=\\lambda$, so $x=\\lambda$ and $y=\\lambda/2$. The constraint gives $\\lambda=2$, so $x=2$, $y=1$, value $5$.",
+  "hints": [
+   "Solve the stationarity equations with the constraint."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

@@ -1,0 +1,1533 @@
+[
+ {
+  "id": "t4-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops",
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A design matrix (rows are samples, columns are features) is $X=\\begin{pmatrix}1&2\\\\0&1\\\\3&0\\end{pmatrix}$, the targets are $y=(1,3,4)^\\top$ and the weights are $w=(2,-1)^\\top$. Find the squared residual norm $\\lVert y-Xw\\rVert^2$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 21,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Compute $Xw$ row by row",
+    "weight": 1
+   },
+   {
+    "text": "Subtract from $y$ to get the residual vector",
+    "weight": 1
+   },
+   {
+    "text": "Sum the squared entries (squared norm, no root)",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Matrix-vector product (matrix-ops): $Xw=(2-2,\\,0-1,\\,6-0)=(0,-1,6)$.\nResidual $r=y-Xw=(1,4,-2)$.\nSquared norm (dot-norm): $r\\cdot r=1+16+4=21$.\nTrap: the norm is $\\sqrt{21}$, the squared norm is $21$.",
+  "hints": [
+   "Form $Xw$ first, one row at a time."
+  ],
+  "check": "sum(([1,3,4][i]-([[1,2],[0,1],[3,0]][i][0]*2-[[1,2],[0,1],[3,0]][i][1]))**2 for i in range(3))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-ops",
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "With $X=\\begin{pmatrix}1&2\\\\0&1\\\\3&0\\end{pmatrix}$ (rows are samples), ridge regression with penalty $\\lambda=3$ uses the matrix $X^\\top X+\\lambda I$. Which is it?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\begin{pmatrix}13&2\\\\2&8\\end{pmatrix}$",
+    "$\\begin{pmatrix}13&5\\\\5&8\\end{pmatrix}$",
+    "$\\begin{pmatrix}13&2\\\\2&5\\end{pmatrix}$",
+    "$\\begin{pmatrix}30&6\\\\6&15\\end{pmatrix}$",
+    "$\\begin{pmatrix}8&2\\\\2&4\\end{pmatrix}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "added $\\lambda$ to every entry instead of only the diagonal",
+    "added $\\lambda$ to the first diagonal entry only",
+    "multiplied by $\\lambda$ instead of adding $\\lambda I$",
+    "used the top-left block of $XX^\\top$ (samples side) instead of $X^\\top X$, plus $\\lambda I$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Form $X^\\top X$ as column dot products",
+    "weight": 2
+   },
+   {
+    "text": "Add $\\lambda I$ to the diagonal only",
+    "weight": 1
+   },
+   {
+    "text": "Check the size is features by features",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$X^\\top X$ entries are dot products of columns (matrix-ops): columns $(1,0,3)$ and $(2,1,0)$.\n$X^\\top X=\\begin{pmatrix}10&2\\\\2&5\\end{pmatrix}$.\nAdd $3I$ (diagonal only): $\\begin{pmatrix}13&2\\\\2&8\\end{pmatrix}$.\nTrap: $XX^\\top$ is $3\\times3$, the wrong side.",
+  "hints": [
+   "Entry $(i,j)$ of $X^\\top X$ is column $i$ dot column $j$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A quadratic $y=c_0+c_1x+c_2x^2$ passes through the points $(0,1)$, $(1,2)$ and $(2,7)$. Solve the linear system for $c_0,c_1,c_2$, then give the predicted $y$ at $x=3$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Write the three equations in $c_0,c_1,c_2$",
+    "weight": 1
+   },
+   {
+    "text": "Eliminate to get $c_0,c_1,c_2$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate at $x=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Equations (linear-systems): $c_0=1$\\; $c_0+c_1+c_2=2$\\; $c_0+2c_1+4c_2=7$.\nSubstitute $c_0=1$: $c_1+c_2=1$, $2c_1+4c_2=6$.\nEliminate: $2c_2=4$, so $c_2=2$, $c_1=-1$.\nFunction value (functions): $1-3+18=16$.",
+  "hints": [
+   "The first point gives $c_0$ directly."
+  ],
+  "check": "1*(2*1)/2+2*(3*1)/(-1)+7*(3*2)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.linear-systems",
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Consider the system $x+2y+z=3$ and $2x+4y+3z=8$ in the unknowns $x,y,z$. Which describes the solution set?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "a line: $(1-2t,\\;t,\\;2)$ for any real $t$",
+    "the single point $(1,0,2)$",
+    "no solution",
+    "a plane in $\\mathbb R^3$",
+    "a line: $(1-2t,\\;t,\\;2t)$ for any real $t$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "picked the single member with $t=0$ and called it the solution\\; the system is underdetermined",
+    "read the row of zeros after elimination wrongly as a contradiction",
+    "counted two equations in three unknowns as leaving two free variables\\; here the equations are independent, so only one is free",
+    "substituted $z=2t$ instead of the fixed $z=2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Eliminate: subtract twice row 1 from row 2",
+    "weight": 1
+   },
+   {
+    "text": "Read off $z=2$ and $x+2y=1$",
+    "weight": 2
+   },
+   {
+    "text": "Recognise one free variable, a line",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Row2 $-2\\cdot$Row1 (linear-systems): $z=2$.\nBack-substitute: $x+2y=1$, one equation in two unknowns.\nSo $y=t$ free, $x=1-2t$, $z=2$.\nTwo independent equations, three unknowns: one-dimensional family (span-rank: nullity $3-2=1$).",
+  "hints": [
+   "Eliminate $x$ from the second equation first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $3\\times3$ covariance matrix is $\\Sigma=\\begin{pmatrix}2&1&0\\\\1&3&1\\\\0&1&2\\end{pmatrix}$. Every feature is then rescaled by a factor of $2$, giving covariance $\\Sigma'$. Find the generalised variance $\\det\\Sigma'$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 512,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Rescaling each feature by 2 multiplies covariance entries by 4: $\\Sigma'=4\\Sigma$",
+    "weight": 1
+   },
+   {
+    "text": "Compute $\\det\\Sigma=8$ by cofactors",
+    "weight": 2
+   },
+   {
+    "text": "Apply $\\det(c A)=c^3\\det A$ for $c=4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Scaling a feature by $2$ scales variances and covariances by $4$ (matrix-ops): $\\Sigma'=4\\Sigma$.\n$\\det\\Sigma=2(6-1)-1(2-0)+0=8$.\nFor $3\\times3$, $\\det(4\\Sigma)=4^3\\cdot8=512$ (inverse-det).\nTrap: $\\det(4\\Sigma)\\ne4\\det\\Sigma$.",
+  "hints": [
+   "How many rows does the factor $4$ multiply in the determinant?"
+  ],
+  "check": "4**3*(2*(3*2-1*1)-1*(1*2-1*0)+0*(1*1-3*0))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.inverse-det",
+   "t4.linear-systems"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For $A=\\begin{pmatrix}4&2\\\\2&2\\end{pmatrix}$ and $b=(6,2)^\\top$, solve $Aw=b$ using the inverse $A^{-1}$. Which is $w$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(2,-1)$",
+    "$(8,-4)$",
+    "$(5,-2)$",
+    "$(2.5,\\,4)$",
+    "$(4,\\,5)$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the adjugate without dividing by $\\det A=4$",
+    "built the adjugate without swapping the diagonal entries",
+    "took the entrywise reciprocal of $A$ as the inverse",
+    "kept the off-diagonal signs in the adjugate (forgot to negate them)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\det A=4\\cdot2-2\\cdot2=4$",
+    "weight": 1
+   },
+   {
+    "text": "Adjugate: swap diagonal, negate off-diagonal, divide by $\\det$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply $A^{-1}b$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\det A=8-4=4$ (inverse-det).\n$A^{-1}=\\frac14\\begin{pmatrix}2&-2\\\\-2&4\\end{pmatrix}=\\begin{pmatrix}1/2&-1/2\\\\-1/2&1\\end{pmatrix}$.\n$w=A^{-1}b=(3-1,\\,-3+2)=(2,-1)$ (linear-systems).\nCheck: $4\\cdot2+2\\cdot(-1)=6$, $2\\cdot2-2=2$.",
+  "hints": [
+   "Swap the diagonal of $A$, negate the off-diagonal, divide by the determinant."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A design matrix with $4$ samples has columns $c_1=(1,1,1,1)$, $c_2=(1,2,3,4)$, $c_3=(3,5,7,9)$, $c_4=(1,0,1,0)$. Find the rank of the $4\\times4$ matrix $X^\\top X$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Spot the dependency $c_3=c_1+2c_2$",
+    "weight": 2
+   },
+   {
+    "text": "Confirm the other three columns are independent",
+    "weight": 1
+   },
+   {
+    "text": "Use $\\operatorname{rank}(X^\\top X)=\\operatorname{rank}X$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$c_1+2c_2=(3,5,7,9)=c_3$ (span-rank): one dependency.\n$c_1,c_2,c_4$ are independent: $c_4$ is not of the form $a+bx$ on $x=1,2,3,4$.\nSo $\\operatorname{rank}X=3$.\n$\\operatorname{rank}(X^\\top X)=\\operatorname{rank}X=3$ (matrix-ops), so $X^\\top X$ is singular.",
+  "hints": [
+   "Test whether one column is a combination of two others."
+  ],
+  "check": "4-(sum(1 for i in range(4) if [3,5,7,9][i]==1+2*[1,2,3,4][i])==4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.span-rank",
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ is a $5\\times3$ design matrix of rank $2$. Which statement about the normal equations $X^\\top Xw=X^\\top y$ is true for every $y\\in\\mathbb R^5$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "They have infinitely many solutions",
+    "They have exactly one solution",
+    "They have no solution unless $y$ lies in the column space of $X$",
+    "They have no solution",
+    "They have exactly one solution because $X^\\top X$ is $3\\times3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed full column rank\\; rank $2<3$ so $X^\\top X$ is singular",
+    "confused with $Xw=y$, which needs $y$ in the column space\\; the normal equations are always consistent",
+    "claimed singular implies inconsistent",
+    "used the matrix size instead of its rank"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rank 2 with 3 columns: $X^\\top X$ is singular",
+    "weight": 1
+   },
+   {
+    "text": "$X^\\top y$ lies in the row space of $X$, so the system is consistent",
+    "weight": 2
+   },
+   {
+    "text": "Nullity $3-2=1$ gives a line of solutions",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Rank $2<3$: $\\operatorname{rank}(X^\\top X)=2$, singular (span-rank).\n$X^\\top y$ always lies in the column space of $X^\\top X$ (the projection of $y$ exists), so a solution exists (normal-eq).\nSolutions form $w_0+\\ker X$, a line (nullity 1): infinitely many.",
+  "hints": [
+   "Does the projection of $y$ onto the column space always exist?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.projection",
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Project $y=(3,0,6)$ onto the direction $u=(1,2,2)$. Find the squared length of the part of $y$ left over (the component orthogonal to $u$). Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Coefficient or squared projection length $(y\\cdot u)^2/\\lVert u\\rVert^2$",
+    "weight": 2
+   },
+   {
+    "text": "Subtract from $\\lVert y\\rVert^2$ (Pythagoras)",
+    "weight": 1
+   },
+   {
+    "text": "Compute the dot products accurately",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$y\\cdot u=3+0+12=15$, $\\lVert u\\rVert^2=9$ (dot-norm).\nProjection $=\\frac{15}{9}u$, squared length $\\frac{15^2}{9}=25$ (projection).\n$\\lVert y\\rVert^2=9+0+36=45$.\nOrthogonal leftover: $45-25=20$ (Pythagoras).",
+  "hints": [
+   "Pythagoras: total squared length minus the squared length of the projection."
+  ],
+  "check": "45-Fraction(15**2,9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.projection",
+   "t4.span-rank"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "In linear regression with an intercept and $3$ predictors, the design matrix $X$ is $n\\times4$ ($n=10$) with full column rank. The hat matrix $H=X(X^\\top X)^{-1}X^\\top$ has diagonal entries (leverages) $h_{ii}$. What is $\\sum_i h_{ii}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$4$",
+    "$3$",
+    "$10$",
+    "$1$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgot the intercept column",
+    "used $n$, the size of $H$",
+    "treated $H$ as a single projection direction (trace $1$)",
+    "used $n-p=6$, the residual-maker trace $\\operatorname{tr}(I-H)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$H$ is the projection onto the column space",
+    "weight": 1
+   },
+   {
+    "text": "Trace of a projection equals its rank",
+    "weight": 2
+   },
+   {
+    "text": "Rank of $X$ is $4$ (intercept counted)",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$H$ projects onto the column space of $X$ (projection), $H^2=H$.\nEigenvalues of a projection are $0$ or $1$, so $\\operatorname{tr}H=\\operatorname{rank}H$.\nFull column rank: $\\operatorname{rank}X=4$ (span-rank). So $\\sum h_{ii}=4$.\nTrap: $\\operatorname{tr}(I-H)=n-4=6$.",
+  "hints": [
+   "Eigenvalues of a projection are only $0$ and $1$."
+  ],
+  "check": "4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq",
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Fit $y=w_0+w_1x$ by least squares to the points $(0,1)$, $(1,2)$, $(2,2)$ using the normal equations. Give the minimum sum of squared residuals as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/6",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Build $X^\\top X=\\begin{pmatrix}3&3\\\\3&5\\end{pmatrix}$ and $X^\\top y=(5,6)^\\top$",
+    "weight": 1
+   },
+   {
+    "text": "Invert the $2\\times2$ and solve for $w$",
+    "weight": 2
+   },
+   {
+    "text": "Sum the three squared residuals",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$X^\\top X=\\begin{pmatrix}3&3\\\\3&5\\end{pmatrix}$, $X^\\top y=(5,6)$ (normal-eq).\n$\\det=6$, so $w=\\frac16\\begin{pmatrix}5&-3\\\\-3&3\\end{pmatrix}(5,6)^\\top=(7/6,\\,1/2)$ (inverse-det).\nFitted: $7/6,\\,5/3,\\,13/6$\\; residuals $-1/6,\\,1/3,\\,-1/6$.\nSSE $=\\frac1{36}+\\frac4{36}+\\frac1{36}=\\frac16$.",
+  "hints": [
+   "Start from $X^\\top X$ and $X^\\top y$."
+  ],
+  "check": "sum((y-Fraction(5*5-3*6,6)-Fraction(-3*5+3*6,6)*x)**2 for x,y in [(0,1),(1,2),(2,2)])",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.normal-eq",
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "One feature $x=(1,2,3)$ and targets $y=(2,3,7)$. Ridge loss: $L(w)=\\sum_i(y_i-wx_i)^2+\\lambda w^2$ with $\\lambda=2$. Which $w$ minimises $L$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$29/16$",
+    "$29/14$",
+    "$29/28$",
+    "$29/12$",
+    "$29/18$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "ordinary least squares: ignored the penalty",
+    "multiplied the denominator by $\\lambda$ instead of adding",
+    "subtracted $\\lambda$ instead of adding",
+    "added $\\lambda^2$ instead of $\\lambda$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Differentiate $L$ and set to zero",
+    "weight": 1
+   },
+   {
+    "text": "Get $w=\\dfrac{x\\cdot y}{x\\cdot x+\\lambda}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $x\\cdot y=29$, $x\\cdot x=14$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$L'(w)=-2x\\cdot(y-wx)+2\\lambda w=0$ (deriv-rules).\n$w(x\\cdot x+\\lambda)=x\\cdot y$ (normal-eq, ridge).\n$x\\cdot y=2+6+21=29$, $x\\cdot x=14$.\n$w=29/(14+2)=29/16$.",
+  "hints": [
+   "Set the derivative of the penalised loss to zero."
+  ],
+  "check": "Fraction(2+6+21,14+2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.eigen",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A linear system evolves as $v_{t+1}=Av_t$ with $A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$ and $v_0=(2,1)^\\top$. Find the first coordinate of $v_5$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5219,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Find eigenvalues $5$ and $2$ with eigenvectors $(1,1)$ and $(1,-2)$",
+    "weight": 1
+   },
+   {
+    "text": "Decompose $v_0=\\tfrac53(1,1)+\\tfrac13(1,-2)$",
+    "weight": 1
+   },
+   {
+    "text": "Scale each part by $\\lambda^5$ and recombine",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\operatorname{tr}A=7$, $\\det A=10$: $\\lambda=5,2$ (eigen). Eigenvectors $(1,1)$ and $(1,-2)$.\n$v_0=\\frac53(1,1)+\\frac13(1,-2)$.\n$v_5=\\frac53 5^5(1,1)+\\frac13 2^5(1,-2)$.\nFirst coordinate $=\\frac{5\\cdot3125+32}{3}=\\frac{15657}{3}=5219$.\nMatches direct iteration: $(9,7),(43,39),(211,203),(1047,1031),(5219,5187)$.",
+  "hints": [
+   "Write $v_0$ in the eigenvector basis, then apply $A^5$ by scaling."
+  ],
+  "check": "(lambda f: f(f(f(f(f((2,1)))))))(lambda v:(4*v[0]+v[1],2*v[0]+3*v[1]))[0]",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.eigen",
+   "t4.inverse-det"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $3\\times3$ matrix $A$ has trace $10$ and two known eigenvalues $2$ and $3$. Find $\\det(A-I)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$30$",
+    "$29$",
+    "$7$",
+    "$6$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "computed $\\det A=2\\cdot3\\cdot5$, forgetting the shift",
+    "subtracted $1$ from $\\det A$",
+    "summed the shifted eigenvalues instead of multiplying",
+    "found the third eigenvalue as $10-2\\cdot3=4$ instead of $10-2-3=5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Third eigenvalue from trace: $10-2-3=5$",
+    "weight": 1
+   },
+   {
+    "text": "Shift: eigenvalues of $A-I$ are $1,2,4$",
+    "weight": 2
+   },
+   {
+    "text": "Determinant is the product of eigenvalues: $8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Trace is the sum of eigenvalues (eigen): $\\lambda_3=10-2-3=5$.\n$A-I$ has eigenvalues $\\lambda-1=1,2,4$.\n$\\det$ is their product (inverse-det): $1\\cdot2\\cdot4=8$.\nTrap: $\\det(A-I)\\ne\\det A-1$.",
+  "hints": [
+   "How do the eigenvalues change when you subtract $I$?"
+  ],
+  "check": "1*2*4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.spectral",
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $A=\\begin{pmatrix}2&1&0\\\\1&2&0\\\\0&0&1\\end{pmatrix}$. Maximise $x^\\top Ax$ over unit vectors $x$ that are orthogonal to $(1,1,0)$. Give the maximum.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Eigenvalues $3,1,1$\\; $(1,1,0)$ is the eigenvector for $3$",
+    "weight": 2
+   },
+   {
+    "text": "Orthogonal complement is spanned by eigenvectors for the remaining eigenvalues",
+    "weight": 1
+   },
+   {
+    "text": "Maximum over the complement is the largest remaining eigenvalue, $1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "The upper block has eigenvalues $3$ (vector $(1,1)$) and $1$ (vector $(1,-1)$)\\; $e_3$ has eigenvalue $1$ (spectral).\nThe constraint removes the eigenvector for $3$ (projection onto the complement).\nOn the complement, $A$ acts with eigenvalues $1,1$, so $x^\\top Ax=1$ for every unit $x$ there.\nMaximum $=1$, not the unconstrained $3$.",
+  "hints": [
+   "Which eigenvector does the constraint remove?"
+  ],
+  "check": "max(2-1,1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.spectral",
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For which values of $a$ is the symmetric matrix $\\begin{pmatrix}2&a\\\\a&8\\end{pmatrix}$ positive definite?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-4<a<4$",
+    "$-4\\le a\\le4$",
+    "$0\\le a<4$",
+    "$a<4$",
+    "$-16<a<16$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used non-strict inequalities, which give positive semidefinite",
+    "kept only $a\\ge0$\\; $a$ appears squared in the determinant so the sign does not matter",
+    "applied the determinant condition one-sidedly, ignoring $a<-4$",
+    "took the bound as $a^2<16$ but dropped the square, getting $|a|<16$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Leading minors: $2>0$",
+    "weight": 1
+   },
+   {
+    "text": "Determinant $16-a^2>0$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $|a|<4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Positive definite iff all leading principal minors are positive (spectral).\n$2>0$ always.\n$\\det=16-a^2>0$ (inequalities) $\\Rightarrow|a|<4$.\nStrict: at $|a|=4$ the matrix is only semidefinite.",
+  "hints": [
+   "Check the leading principal minors."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.svd",
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "For $A=\\begin{pmatrix}3&0\\\\4&5\\end{pmatrix}$, find the condition number $\\sigma_1/\\sigma_2$ (ratio of the largest to the smallest singular value). Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Form $A^\\top A=\\begin{pmatrix}25&20\\\\20&25\\end{pmatrix}$",
+    "weight": 1
+   },
+   {
+    "text": "Eigenvalues $45$ and $5$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio of square roots $\\sqrt{45/5}=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$A^\\top A=\\begin{pmatrix}25&20\\\\20&25\\end{pmatrix}$ (matrix-ops).\nEigenvalues: $25\\pm20=45,\\,5$ (eigen).\nSingular values $\\sqrt{45},\\sqrt5$ (svd).\nRatio $=\\sqrt{45/5}=3$. Check: $\\sigma_1\\sigma_2=15=|\\det A|$.",
+  "hints": [
+   "Singular values are square roots of eigenvalues of $A^\\top A$."
+  ],
+  "check": "math.sqrt((25+20)/(25-20))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.svd",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A matrix $A$ has $A^\\top A$ with eigenvalues $49$, $16$, $9$. What is the Frobenius-norm error $\\lVert A-A_1\\rVert_F$ of its best rank-1 approximation $A_1$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5$",
+    "$7$",
+    "$4$",
+    "$25$",
+    "$\\sqrt{74}$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "added $\\sigma_2+\\sigma_3=4+3$ instead of taking the root of the sum of squares",
+    "gave the spectral-norm error $\\sigma_2$ instead of the Frobenius error",
+    "skipped the square root: $\\sigma_2^2+\\sigma_3^2$",
+    "gave $\\lVert A\\rVert_F=\\sqrt{49+16+9}$, the norm of $A$ itself"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Singular values $7,4,3$ from the square roots",
+    "weight": 1
+   },
+   {
+    "text": "Best rank-1 error keeps the discarded singular values",
+    "weight": 2
+   },
+   {
+    "text": "Frobenius error $\\sqrt{4^2+3^2}=5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Singular values are square roots of eigenvalues of $A^\\top A$ (svd): $7,4,3$.\nBest rank-$1$ approximation drops $\\sigma_2,\\sigma_3$ (Eckart-Young).\nFrobenius error $=\\sqrt{\\sigma_2^2+\\sigma_3^2}=\\sqrt{16+9}=5$.\nSpectral-norm error would be $\\sigma_2=4$.",
+  "hints": [
+   "The error is built from the singular values that are dropped."
+  ],
+  "check": "math.sqrt(4**2+3**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.pca",
+   "t4.eigen"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A $3$-feature dataset has covariance matrix $\\Sigma=\\begin{pmatrix}5&0&0\\\\0&3&1\\\\0&1&3\\end{pmatrix}$. What percentage of the total variance is explained by the first two principal components together? Give a number in percent.",
+  "answer": {
+   "kind": "numeric",
+   "value": 81.81818181818181,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Block structure: eigenvalue $5$ and the block eigenvalues $4,2$",
+    "weight": 2
+   },
+   {
+    "text": "Total variance is the trace $11$",
+    "weight": 1
+   },
+   {
+    "text": "$(5+4)/11\\times100\\approx81.8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\Sigma$ is block diagonal (eigen): eigenvalue $5$ from the first coordinate.\nBlock $\\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$ has eigenvalues $3\\pm1=4,2$.\nOrdered: $5,4,2$\\; total $=\\operatorname{tr}\\Sigma=11$ (pca).\nTop two: $9/11\\approx81.8\\%$.",
+  "hints": [
+   "Block-diagonal matrices split into separate eigenproblems."
+  ],
+  "check": "(5+4)/(5+4+2)*100",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.pca",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Three points $(2,1)$, $(4,3)$, $(6,5)$ are analysed by PCA with the sample covariance (divisor $n-1=2$) of the **mean-centred** data. What is the variance along the first principal component?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$16$",
+    "$4$",
+    "$45.4$",
+    "$16/3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the centred scatter matrix without dividing by $n-1$",
+    "reported the variance of a single coordinate, not the variance along the principal direction",
+    "skipped centering: top eigenvalue of $X^\\top X/(n-1)$ on raw data",
+    "divided by $n=3$ instead of $n-1=2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Centre the data: $(\\!-2,-2),(0,0),(2,2)$",
+    "weight": 1
+   },
+   {
+    "text": "Build the sample covariance $\\begin{pmatrix}4&4\\\\4&4\\end{pmatrix}$",
+    "weight": 1
+   },
+   {
+    "text": "Top eigenvalue is $8$ (trace, rank 1)",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Mean $(4,3)$\\; centred points $(-2,-2),(0,0),(2,2)$ (descriptive).\nCovariance $=\\frac12\\sum vv^\\top=\\begin{pmatrix}4&4\\\\4&4\\end{pmatrix}$.\nRank 1, trace $8$, so eigenvalues $8,0$ (pca).\nAll variance lies along $(1,1)$: $8$.",
+  "hints": [
+   "Centre first, then divide the scatter by $n-1$."
+  ],
+  "check": "8",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.gradient",
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(w_1,w_2)=w_1^2w_2+3w_2^2-2w_1$. Find the directional derivative of $f$ at $(2,1)$ in the direction of the unit vector $u=(3,4)/5$, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "46/5",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Partials $2w_1w_2-2$ and $w_1^2+6w_2$",
+    "weight": 1
+   },
+   {
+    "text": "Gradient at $(2,1)$ is $(2,10)$",
+    "weight": 1
+   },
+   {
+    "text": "Dot with the unit vector: $46/5$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\partial_1f=2w_1w_2-2=2$, $\\partial_2f=w_1^2+6w_2=10$ (gradient).\n$\\nabla f=(2,10)$.\nDirectional derivative $=\\nabla f\\cdot u=(6+40)/5=46/5$ (dot-norm).\nTrap: $u$ is already unit, do not renormalise.",
+  "hints": [
+   "Directional derivative is gradient dot unit direction."
+  ],
+  "check": "Fraction((2*2*1-2)*3+(2**2+6*1)*4,5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.gradient",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Logistic loss for one sample: $L(w)=-\\bigl[y\\ln\\sigma(wx)+(1-y)\\ln(1-\\sigma(wx))\\bigr]$ with $\\sigma(z)=1/(1+e^{-z})$, $x=2$, $y=1$. What is $dL/dw$ at $w=0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$-1$",
+    "$1$",
+    "$-1/2$",
+    "$-1/4$",
+    "$-2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "sign error: used $(y-\\sigma)x$ instead of $(\\sigma-y)x$",
+    "dropped the factor $x$",
+    "used the squared-error gradient, which carries the extra factor $\\sigma'=1/4$",
+    "took $\\sigma(0)=0$ instead of $1/2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gradient $dL/dw=(\\sigma(wx)-y)x$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $\\sigma(0)=1/2$",
+    "weight": 1
+   },
+   {
+    "text": "$(\\tfrac12-1)\\cdot2=-1$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Chain rule with $\\sigma'=\\sigma(1-\\sigma)$ (gradient): the $\\sigma'$ cancels against $1/\\sigma$ and $1/(1-\\sigma)$.\n$dL/dw=(\\sigma(wx)-y)\\,x$.\nAt $w=0$: $\\sigma=1/2$, so $(1/2-1)\\cdot2=-1$.\nNegative: increasing $w$ lowers the loss.",
+  "hints": [
+   "Cross-entropy and the sigmoid combine into $(\\sigma-y)x$."
+  ],
+  "check": "Fraction(1,2)*2-2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Let $f(w)=\\lVert Xw-y\\rVert^2$ with $X=\\begin{pmatrix}1&2\\\\0&1\\\\1&0\\end{pmatrix}$ (rows are samples), $y=(3,0,2)^\\top$. Find the Euclidean norm $\\lVert\\nabla f(w)\\rVert$ at $w=(1,0)^\\top$. Give an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Use $\\nabla f=2X^\\top(Xw-y)$",
+    "weight": 2
+   },
+   {
+    "text": "Residual $Xw-y=(-2,0,-1)$",
+    "weight": 1
+   },
+   {
+    "text": "$\\nabla f=(-6,-8)$, norm $10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\nabla f=2X^\\top(Xw-y)$ (matrix-calc).\n$Xw=(1,0,1)$, so $r=Xw-y=(-2,0,-1)$.\n$X^\\top r=(1\\cdot(-2)+1\\cdot(-1),\\;2\\cdot(-2)+0)=(-3,-4)$ (matrix-ops).\n$\\nabla f=(-6,-8)$, norm $\\sqrt{36+64}=10$.\nTrap: forgetting the $2$ gives $5$.",
+  "hints": [
+   "The factor $2$ comes from differentiating the square."
+  ],
+  "check": "math.sqrt(sum((2*sum([[1,2],[0,1],[1,0]][i][j]*(sum([[1,2],[0,1],[1,0]][i][k]*[1,0][k] for k in range(2))-[3,0,2][i]) for i in range(3)))**2 for j in range(2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.matrix-calc",
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $f(w)=w^\\top Aw$ with the non-symmetric matrix $A=\\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}$. What is $\\nabla f$ at $w=(1,1)^\\top$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(4,8)$",
+    "$(6,6)$",
+    "$(3,3)$",
+    "$(1,5)$",
+    "$(2,6)$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used $2Aw$, valid only for symmetric $A$",
+    "used $Aw$ and dropped the factor $2$",
+    "used $A^\\top w$ alone",
+    "differentiated only the diagonal terms $w_1^2+3w_2^2$ and missed the cross term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gradient of a quadratic form is $(A+A^\\top)w$",
+    "weight": 2
+   },
+   {
+    "text": "Form $A+A^\\top=\\begin{pmatrix}2&2\\\\2&6\\end{pmatrix}$",
+    "weight": 1
+   },
+   {
+    "text": "Multiply by $w=(1,1)$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "For a quadratic form $\\nabla(w^\\top Aw)=(A+A^\\top)w$ (matrix-calc)\\; it equals $2Aw$ only if $A$ is symmetric.\n$A+A^\\top=\\begin{pmatrix}2&2\\\\2&6\\end{pmatrix}$.\nTimes $(1,1)$: $(4,8)$.\nDirect check: $f=w_1^2+2w_1w_2+3w_2^2$, $\\nabla f=(2w_1+2w_2,\\,2w_1+6w_2)=(4,8)$.",
+  "hints": [
+   "Expand $f$ in $w_1,w_2$ to see the cross term."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.convexity",
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$f(x,y)=x^2+4xy+ay^2$. Find the smallest value of $a$ for which $f$ is convex on all of $\\mathbb R^2$. Give a number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Hessian $\\begin{pmatrix}2&4\\\\4&2a\\end{pmatrix}$",
+    "weight": 1
+   },
+   {
+    "text": "Convex iff Hessian is positive semidefinite",
+    "weight": 1
+   },
+   {
+    "text": "Determinant $4a-16\\ge0$ gives $a\\ge4$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Hessian is constant: $H=\\begin{pmatrix}2&4\\\\4&2a\\end{pmatrix}$ (convexity).\nConvex on $\\mathbb R^2$ iff $H\\succeq0$ (spectral): $2\\ge0$ and $\\det H\\ge0$.\n$\\det H=4a-16\\ge0\\Rightarrow a\\ge4$.\nAt $a=4$, $f=(x+2y)^2$, convex but not strictly.",
+  "hints": [
+   "Positive semidefinite Hessian: check the determinant."
+  ],
+  "check": "Fraction(4*4,2*2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.convexity",
+   "t4.spectral"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Exactly one of these functions is convex on all of $\\mathbb R^2$. Which?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$x^2+xy+y^2$",
+    "$x^2+3xy+y^2$",
+    "$x^2y^2$",
+    "$e^{x}-y^2$",
+    "$x^2-y^2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "Hessian $\\begin{pmatrix}2&3\\\\3&2\\end{pmatrix}$ has determinant $4-9<0$: indefinite",
+    "Hessian determinant is $4x^2y^2-16x^2y^2\\le0$: not convex",
+    "the $-y^2$ term makes the $y$-direction concave",
+    "indefinite Hessian $\\operatorname{diag}(2,-2)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Compute the Hessian of each candidate",
+    "weight": 1
+   },
+   {
+    "text": "Test positive semidefiniteness of each",
+    "weight": 2
+   },
+   {
+    "text": "Identify the one PSD everywhere",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Convex iff Hessian PSD everywhere (convexity).\n$x^2+xy+y^2$: $H=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$, eigenvalues $3,1>0$ (spectral).\nOthers: $\\det H<0$, or a negative diagonal entry in $H$.\nOnly the first is convex.",
+  "hints": [
+   "Compute each Hessian and test its determinant and diagonal."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent",
+   "t4.gradient",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Minimise $f(w)=\\tfrac12w^\\top Aw-b^\\top w$ with $A=\\begin{pmatrix}2&0\\\\0&6\\end{pmatrix}$, $b=(2,6)^\\top$. Start at $w^{(0)}=(0,0)$ and run $2$ steps of gradient descent with learning rate $\\eta=1/4$. Give $f(w^{(2)})$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-15/4",
+   "tol": 0,
+   "rel": 0,
+   "form": "fraction"
+  },
+  "rubric": [
+   {
+    "text": "Gradient is $Aw-b$",
+    "weight": 1
+   },
+   {
+    "text": "Step 1: $w^{(1)}=(1/2,3/2)$\\; step 2: $w^{(2)}=(3/4,3/4)$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate $f(w^{(2)})=-15/4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\nabla f=Aw-b$ (gradient).\nStep 1: $\\nabla f(0)=(-2,-6)$, $w^{(1)}=(1/2,3/2)$ (grad-descent).\nStep 2: $\\nabla f=(1-2,9-6)=(-1,3)$, $w^{(2)}=(1/2+1/4,\\,3/2-3/4)=(3/4,3/4)$.\n$f=\\tfrac12(2\\cdot\\tfrac9{16}+6\\cdot\\tfrac9{16})-(\\tfrac32+\\tfrac92)=\\tfrac94-6=-\\tfrac{15}4$.",
+  "hints": [
+   "Update each coordinate: $w\\leftarrow w-\\eta(Aw-b)$."
+  ],
+  "check": "(lambda s:(lambda w:Fraction(1,2)*(2*w[0]**2+6*w[1]**2)-(2*w[0]+6*w[1]))(s(s((Fraction(0),Fraction(0))))))(lambda w:(w[0]-Fraction(1,4)*(2*w[0]-2),w[1]-Fraction(1,4)*(6*w[1]-6)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.grad-descent",
+   "t4.convexity"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Gradient descent runs on $f(w)=w_1^2+5w_2^2$ (Hessian eigenvalues $2$ and $10$) with a fixed learning rate $\\eta$. For which $\\eta>0$ does it converge from every start?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\eta<0.2$",
+    "$\\eta<1$",
+    "$\\eta<0.1$",
+    "$\\eta<1/6$",
+    "$\\eta<1/3$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used the smallest eigenvalue: $2/\\lambda_{\\min}=1$\\; the steep direction diverges",
+    "used $1/\\lambda_{\\max}$, the optimal-step condition for one direction, not the stability bound $2/\\lambda_{\\max}$",
+    "used $2/(\\lambda_1+\\lambda_2)=2/12$",
+    "used $2/\\bar\\lambda$ with the average eigenvalue $6$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Each coordinate contracts by $|1-\\eta\\lambda_i|$",
+    "weight": 1
+   },
+   {
+    "text": "Need $|1-\\eta\\lambda_i|<1$ for every $i$",
+    "weight": 1
+   },
+   {
+    "text": "Binding constraint is $\\lambda_{\\max}=10$: $\\eta<2/10$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Update $w_i\\leftarrow(1-\\eta\\lambda_i)w_i$ (grad-descent), $\\lambda=2,10$.\nConverges iff $|1-\\eta\\lambda_i|<1$ for all $i$, i.e. $\\eta<2/\\lambda_i$.\nThe tightest is the largest curvature (convexity): $\\eta<2/10=0.2$.",
+  "hints": [
+   "Look at one coordinate: it multiplies by $1-\\eta\\lambda$ each step."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange",
+   "t4.projection"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Find the weights $(x,y,z)$ of smallest squared norm $x^2+y^2+z^2$ that satisfy the score constraint $x+2y+2z=6$. Give the minimum value as an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Set up $\\mathcal L=x^2+y^2+z^2-\\lambda(x+2y+2z-6)$",
+    "weight": 1
+   },
+   {
+    "text": "Stationarity: $(x,y,z)\\propto(1,2,2)$",
+    "weight": 1
+   },
+   {
+    "text": "Solve: $(2/3,4/3,4/3)$, value $4$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Stationarity (lagrange): $2x=\\lambda$, $2y=2\\lambda$, $2z=2\\lambda$, so $(x,y,z)\\propto(1,2,2)$.\nConstraint: $\\lambda/2+2\\lambda+2\\lambda=6\\Rightarrow\\lambda=4/3$.\n$(x,y,z)=(2/3,4/3,4/3)$.\nValue $4/9+16/9+16/9=4$. Check (projection): $c^2/\\lVert a\\rVert^2=36/9=4$.",
+  "hints": [
+   "The optimum is parallel to the constraint normal $(1,2,2)$."
+  ],
+  "check": "Fraction(6**2,1+4+4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t4-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T4",
+  "tags": [
+   "t4.lagrange",
+   "t1.critical-points"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Maximise $xy$ subject to $2x+y=8$. What is the maximum value?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$8$",
+    "$16$",
+    "$64/9$",
+    "$2$",
+    "$32$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "solved the wrong constraint $x+y=8$ (equal coordinates $4,4$)",
+    "dropped the coefficient $2$ in the constraint gradient, giving $x=y=8/3$",
+    "reported the multiplier $\\lambda=2$ instead of the objective value",
+    "used the intercept point $(4,8)$, which violates the constraint"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Set $\\nabla(xy)=\\lambda\\nabla(2x+y)$: $y=2\\lambda$, $x=\\lambda$",
+    "weight": 2
+   },
+   {
+    "text": "Constraint gives $\\lambda=2$, so $(x,y)=(2,4)$",
+    "weight": 1
+   },
+   {
+    "text": "Report the objective $xy=8$, not $\\lambda$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "$\\mathcal L=xy-\\lambda(2x+y-8)$ (lagrange): $y=2\\lambda$, $x=\\lambda$.\nConstraint: $2\\lambda+2\\lambda=8$, $\\lambda=2$, so $(x,y)=(2,4)$.\nObjective $xy=8$.\nCheck (critical-points): $x(8-2x)$ peaks at $x=2$.",
+  "hints": [
+   "Substitute $y=8-2x$ and maximise one variable, or use a multiplier."
+  ],
+  "check": "2*(8-2*2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

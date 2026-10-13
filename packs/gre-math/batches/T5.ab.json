@@ -2453,8 +2453,9 @@
     "answer": {
       "kind": "numeric",
       "value": "1.570796327",
-      "form": "decimal",
-      "tol": 1e-06
+      "tol": 0.031416,
+      "rel": 0.02,
+      "form": "decimal"
     },
     "check": "math.pi/2",
     "solution": "The integral separates into $\\frac{\\pi}{2}\\cdot\\frac12\\cdot2=\\frac{\\pi}{2}$.",
@@ -2519,8 +2520,9 @@
     "answer": {
       "kind": "numeric",
       "value": "4.188790205",
-      "form": "decimal",
-      "tol": 1e-06
+      "tol": 0.083776,
+      "rel": 0.02,
+      "form": "decimal"
     },
     "check": "4*math.pi/3",
     "solution": "$\\int_0^{2\\pi}\\int_0^{\\pi}\\int_0^1\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta=\\frac{4\\pi}{3}$.",
@@ -3299,8 +3301,9 @@
     "answer": {
       "kind": "numeric",
       "value": "3.141592654",
-      "form": "decimal",
-      "tol": 1e-06
+      "tol": 0.062832,
+      "rel": 0.02,
+      "form": "decimal"
     },
     "check": "math.pi",
     "solution": "$Q_x-P_y=1$, so the integral equals the area $\\pi$.",

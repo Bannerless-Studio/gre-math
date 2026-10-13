@@ -141,7 +141,7 @@
   ],
   "critical": [],
   "difficulty": 2,
-  "prompt": "Let $A=\\left\\{\\frac{m}{n}: m,n\\in\\mathbb{N},\\ m+n\\le 4\\right\\}$. Find $\\sup A+\\inf A$.",
+  "prompt": "Let $\\mathbb N=\\{1,2,3,\\dots\\}$ and $A=\\left\\{\\frac{m}{n}: m,n\\in\\mathbb{N},\\ m+n\\le 4\\right\\}$. Find $\\sup A+\\inf A$.",
   "answer": {
    "kind": "numeric",
    "value": "10/3",

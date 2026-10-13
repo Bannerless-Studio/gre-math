@@ -21,6 +21,7 @@
     invalid: 'Saved progress was unreadable. A copy is kept in this browser.',
     invalidNoBackup: 'Saved progress is unreadable and could not be backed up. Opened read-only.',
     unsaved: 'Progress could not be saved. Export it now.',
+    otherTab: 'Progress changed in another tab. Reload this page.',
     readonlyImport: 'Read-only mode: import is disabled.',
     readonlyReset: 'Read-only mode: reset is disabled.',
     importBackupFailed: 'Not imported: the current progress could not be backed up.',
@@ -47,7 +48,21 @@
       if (!storage) throw new Error('no storage');
       storage.setItem(k, v);
     }
-    function backup(suffix, text) { set(key + suffix, text); }
+    // J1: each backup is a 2-slot ring, newest first: slot 0 is `key + suffix` (the pre-ring single record becomes
+    // slot 0 as is), slot 1 is `key + suffix + '_1'`. A slot holding progress (sessions > 0) is never replaced by an
+    // empty record (D5). Restore/Export read slot 0 first. A failed write throws so the caller aborts.
+    function sessionsOf(text) { try { var n = JSON.parse(text).sessions; return typeof n === 'number' ? n : 0; } catch (e) { return 0; } }
+    function backup(suffix, text) {
+      var k0 = key + suffix, k1 = k0 + '_1';
+      var cur = storage.getItem(k0);
+      if (cur !== null) {
+        if (sessionsOf(text) === 0 && sessionsOf(cur) > 0) return;   // empty record never displaces progress
+        var old = storage.getItem(k1);
+        // shift slot 0 to slot 1, unless that would push progress out of slot 1 in favour of an empty record
+        if (!(sessionsOf(cur) === 0 && old !== null && sessionsOf(old) > 0)) set(k1, cur);
+      }
+      set(k0, text);
+    }
 
     // ---- session resume (M7, SPEC M7). Best effort: a failed write or read never changes progress or read-only mode.
     // Record: {v, build, t (last write, ms), s (the page's session data)}. Only progress lives in the progress key.
@@ -58,7 +73,7 @@
       try {
         set(sessionKey, JSON.stringify({ v: 1, build: build, t: now, s: data }));
         return true;
-      } catch (e) { return false; }
+      } catch (e) { dropSession(); return false; }
     }
     // Returns the saved session data, or null. Drops the record when it is unreadable, from another build,
     // older than SESSION_MAX_MS, or dated in the future.
@@ -75,12 +90,15 @@
     }
 
     // Reads the saved record. st is the page state: {prog, readonly, notice}. Returns st.
+    var lastRaw = null;
     function open(st) {
       var raw;
       st.prog = PE.newProg(); st.readonly = false; st.notice = '';
       try { raw = get(); } catch (e) { st.readonly = true; st.notice = MSG.unreadable; return st; }
+      lastRaw = raw;
       if (raw === null) return st;
       try { st.prog = PE.normalizeProg(JSON.parse(raw)); return st; } catch (e) {
+        st.raw = raw;   // D4: Export offers the stored text in read-only mode
         if (e.code === 'newer') { st.readonly = true; st.notice = MSG.newer; return st; }
         try { backup('_invalid_backup', raw); st.notice = MSG.invalid; }
         catch (e2) { st.readonly = true; st.notice = MSG.invalidNoBackup; }
@@ -89,9 +107,17 @@
     }
 
     // Writes st.prog. A failed write turns the page read-only. Returns true when saved.
+    // D1: the stored record changed since this page read or wrote it (another tab). Turns the page read-only.
+    function stale(st) {
+      if (get() === lastRaw) return false;
+      st.readonly = true; st.notice = MSG.otherTab; return true;
+    }
     function save(st) {
       if (st.readonly) return false;
-      try { set(key, JSON.stringify(st.prog)); return true; } catch (e) {
+      try {
+        if (stale(st)) return false;
+        var out = JSON.stringify(st.prog); set(key, out); lastRaw = out; return true;
+      } catch (e) {
         st.readonly = true; st.notice = MSG.unsaved; return false;
       }
     }
@@ -105,6 +131,7 @@
         if (e.code === 'newer') return { ok: false, msg: newerWording(e.version) };
         return { ok: false, msg: 'Not imported: ' + e.message };
       }
+      try { if (stale(st)) return { ok: false, msg: MSG.otherTab }; } catch (e) { /* unreadable: the save below refuses */ }
       try { backup('_pre_import_backup', JSON.stringify(st.prog)); } catch (e) {
         return { ok: false, msg: MSG.importBackupFailed };
       }
@@ -117,6 +144,7 @@
     // Reset to a new record. The current progress is backed up first; a failed backup aborts the reset.
     function reset(st) {
       if (st.readonly) return { ok: false, msg: MSG.readonlyReset };
+      try { if (stale(st)) return { ok: false, msg: MSG.otherTab }; } catch (e) { /* unreadable: the save below refuses */ }
       try { backup('_reset_backup', JSON.stringify(st.prog)); } catch (e) {
         return { ok: false, msg: MSG.resetBackupFailed };
       }
@@ -126,7 +154,10 @@
       return { ok: true, msg: MSG.reset };
     }
 
-    return { open: open, save: save, importText: importText, reset: reset, key: key,
+    // J5: the stored text as it is now (null when none). Throws when storage is unreadable.
+    function raw() { return get(); }
+
+    return { open: open, save: save, raw: raw, importText: importText, reset: reset, key: key,
       saveSession: saveSession, readSession: readSession, dropSession: dropSession };
   }
 

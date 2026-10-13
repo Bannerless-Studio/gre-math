@@ -1,0 +1,84 @@
+{
+  "key": "ds-core",
+  "name": "Data Science core (to MS level)",
+  "lang": "en",
+  "levels": [
+    {
+      "id": "T1",
+      "label": "Maths for data science I: sets, functions, logs, calculus as rates, vectors",
+      "short": "Maths I"
+    },
+    {
+      "id": "T2",
+      "label": "Probability: events, random variables, distributions, limit theorems",
+      "short": "Probability"
+    },
+    {
+      "id": "T3",
+      "label": "Statistics and inference: estimation, tests, bootstrap, regression, experiments",
+      "short": "Statistics"
+    },
+    {
+      "id": "T4",
+      "label": "Linear algebra and optimisation for ML: matrices, decompositions, gradients, descent",
+      "short": "Linear algebra"
+    },
+    {
+      "id": "T5",
+      "label": "Data wrangling and SQL: relational model, joins, windows, pandas semantics, cleaning",
+      "short": "Wrangling and SQL"
+    },
+    {
+      "id": "T6",
+      "label": "Supervised machine learning: models, bias-variance, evaluation",
+      "short": "Supervised ML"
+    },
+    {
+      "id": "T7",
+      "label": "Unsupervised learning and feature engineering: clustering, embeddings, encoding, leakage",
+      "short": "Unsupervised and features"
+    },
+    {
+      "id": "T8",
+      "label": "Deep learning: backprop, CNNs, sequence models, attention, training dynamics",
+      "short": "Deep learning"
+    },
+    {
+      "id": "T9",
+      "label": "Advanced topics: causal inference, time series, Bayesian methods, recommenders, NLP, MLOps, fairness",
+      "short": "Advanced topics"
+    },
+    {
+      "id": "T10",
+      "label": "Test mode: case studies, metric choice, pipelines, model selection, communication",
+      "short": "Test mode"
+    }
+  ],
+  "weights": {
+    "math": 0.06,
+    "prob": 0.13,
+    "stats": 0.13,
+    "linalg": 0.13,
+    "data": 0.09,
+    "ml": 0.15,
+    "unsup": 0.09,
+    "dl": 0.1,
+    "adv": 0.12
+  },
+  "gate": 0.7,
+  "mastered": 3,
+  "settled": 0.9,
+  "full": {
+    "budgetSec": {
+      "easy": 300,
+      "mid": 600,
+      "hard": 1080
+    }
+  },
+  "session": {
+    "review": 12,
+    "learn": 2,
+    "micro": 8,
+    "full": 1
+  }
+}

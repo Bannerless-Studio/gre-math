@@ -1,0 +1,4337 @@
+[
+ {
+  "id": "t2-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the number of orderings of $n$ distinct objects in a row.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n$",
+    "$n!$",
+    "$n^2$",
+    "$\\binom{n}{2}$"
+   ],
+   "correct": 1,
+   "why": [
+    "counts one position only, not all orderings",
+    "",
+    "allows $n$ choices in two positions only",
+    "counts pairs, not full orderings"
+   ]
+  },
+  "solution": "Fill the $n$ slots one at a time: $n\\cdot(n-1)\\cdots 1=n!$ orders.",
+  "hints": [
+   "Fill the slots one at a time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the number of $k$-element subsets of an $n$-element set, where order does not matter and nothing repeats.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{n!}{(n-k)!}$",
+    "$\\binom{n}{k}=\\frac{n!}{k!\\,(n-k)!}$",
+    "$n^k$",
+    "$\\frac{n!}{k!}$"
+   ],
+   "correct": 1,
+   "why": [
+    "counts ordered selections, so order matters",
+    "",
+    "allows repeats and keeps order",
+    "divides out $k!$ but not $(n-k)!$, so it is not a subset count"
+   ]
+  },
+  "solution": "Ordered selections number $n!/(n-k)!$. Each subset appears $k!$ times among them, so divide by $k!$.",
+  "hints": [
+   "Divide the ordered count by the orders inside each subset."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the number of ordered length-$k$ strings over an alphabet of $n$ letters, where letters may repeat, in terms of $n$ and $k$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n^k",
+   "vars": [
+    "n",
+    "k"
+   ],
+   "also": [
+    "n*n^(k-1)",
+    "n^(k-1)*n"
+   ]
+  },
+  "check": null,
+  "solution": "Each of the $k$ positions has $n$ independent choices, so the count is $n^k$.",
+  "hints": [
+   "Each position is an independent choice."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0004",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the complement rule for an event $A$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(A^c)=P(A)$",
+    "$P(A^c)=1-P(A)$",
+    "$P(A^c)=1+P(A)$",
+    "$P(A^c)=P(A)^2$"
+   ],
+   "correct": 1,
+   "why": [
+    "treats the complement as equal to the event",
+    "",
+    "sign slip: gives a value above 1",
+    "multiplies instead of complementing"
+   ]
+  },
+  "solution": "$A$ and $A^c$ partition the sample space, so $P(A)+P(A^c)=1$.",
+  "hints": [
+   "The event and its complement together cover everything."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0005",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the addition rule for two events $A$ and $B$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(A\\cup B)=P(A)+P(B)$",
+    "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$",
+    "$P(A\\cup B)=P(A)P(B)$",
+    "$P(A\\cup B)=P(A\\cap B)-P(A)-P(B)$"
+   ],
+   "correct": 1,
+   "why": [
+    "forgets the overlap, so counts it twice",
+    "",
+    "the product rule is for intersections of independent events",
+    "signs reversed, which can give a negative value"
+   ]
+  },
+  "solution": "Outcomes in $A\\cap B$ are counted in both $P(A)$ and $P(B)$, so subtract them once.",
+  "hints": [
+   "Count the shared outcomes only once."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0006",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $a=P(A)$ and $b=P(B)$, with $A$ and $B$ mutually exclusive. Write $P(A\\cup B)$ in terms of $a$ and $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a+b",
+   "vars": [
+    "a",
+    "b"
+   ],
+   "also": [
+    "b+a"
+   ]
+  },
+  "check": null,
+  "solution": "Exclusive events share no outcomes, so the overlap term is 0 and $P(A\\cup B)=a+b$.",
+  "hints": [
+   "No overlap means nothing to subtract."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0007",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the definition of $P(A\\mid B)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{P(A\\cap B)}{P(A)}$",
+    "$\\frac{P(A\\cap B)}{P(B)}$",
+    "$P(A)P(B)$",
+    "$\\frac{P(A\\cup B)}{P(B)}$"
+   ],
+   "correct": 1,
+   "why": [
+    "divides by $P(A)$: that is $P(B\\mid A)$",
+    "",
+    "the product holds only under independence",
+    "uses the union, not the intersection"
+   ]
+  },
+  "solution": "Restrict to $B$: the chance that $A$ also happens, among the outcomes where $B$ happened, is $P(A\\cap B)/P(B)$.",
+  "hints": [
+   "The condition is the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0008",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the law of total probability for a partition $B_1,\\dots,B_n$ of the sample space.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(A)=\\sum_i P(A\\mid B_i)$",
+    "$P(A)=\\sum_i P(A\\mid B_i)\\,P(B_i)$",
+    "$P(A)=\\prod_i P(A\\mid B_i)$",
+    "$P(A)=\\sum_i P(B_i\\mid A)$"
+   ],
+   "correct": 1,
+   "why": [
+    "drops the weights $P(B_i)$",
+    "",
+    "multiplies instead of summing",
+    "reverses the conditioning"
+   ]
+  },
+  "solution": "Split $A$ by the pieces $B_i$: $P(A)=\\sum_i P(A\\cap B_i)=\\sum_i P(A\\mid B_i)P(B_i)$.",
+  "hints": [
+   "Each piece contributes its conditional chance times its own weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0009",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $b=P(B)$ and $x=P(A\\mid B)$. Write $P(A\\cap B)$ in terms of $b$ and $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "b*x",
+   "vars": [
+    "b",
+    "x"
+   ],
+   "also": [
+    "x*b"
+   ]
+  },
+  "check": null,
+  "solution": "The multiplication rule gives $P(A\\cap B)=P(B)P(A\\mid B)$.",
+  "hints": [
+   "Multiply the probability of the condition by the conditional."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State Bayes' rule for $P(A\\mid B)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(B\\mid A)P(A)$",
+    "$\\frac{P(B\\mid A)P(A)}{P(B)}$",
+    "$\\frac{P(A\\mid B)P(B)}{P(A)}$",
+    "$\\frac{P(B\\mid A)}{P(B)}$"
+   ],
+   "correct": 1,
+   "why": [
+    "missing the denominator $P(B)$",
+    "",
+    "gives $P(B\\mid A)$, since the conditioning is reversed",
+    "drops the prior $P(A)$"
+   ]
+  },
+  "solution": "Since $P(A\\cap B)=P(B\\mid A)P(A)=P(A\\mid B)P(B)$, divide by $P(B)$.",
+  "hints": [
+   "Two expressions for the same joint probability."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "When $A$ and $A^c$ partition the sample space, which expression gives $P(B)$ used in Bayes' denominator?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(B\\mid A)+P(B\\mid A^c)$",
+    "$P(B\\mid A)P(A)+P(B\\mid A^c)P(A^c)$",
+    "$P(B\\mid A)P(A)$",
+    "$P(B\\mid A)P(A^c)+P(B\\mid A^c)P(A)$"
+   ],
+   "correct": 1,
+   "why": [
+    "sums the likelihoods without their weights",
+    "",
+    "drops the second branch",
+    "swaps the weights between the branches"
+   ]
+  },
+  "solution": "Total probability over $A$ and $A^c$ gives $P(B)=P(B\\mid A)P(A)+P(B\\mid A^c)P(A^c)$.",
+  "hints": [
+   "Each branch needs its own weight."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $x=P(B\\mid A)$, $a=P(A)$ and $b=P(B)$. Write $P(A\\mid B)$ in terms of $x$, $a$ and $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x*a/b",
+   "vars": [
+    "x",
+    "a",
+    "b"
+   ],
+   "also": [
+    "a*x/b",
+    "(x*a)/b"
+   ]
+  },
+  "check": null,
+  "solution": "Bayes' rule gives $P(A\\mid B)=P(B\\mid A)P(A)/P(B)=xa/b$.",
+  "hints": [
+   "Start from the joint probability and divide by $P(B)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0013",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which condition defines independence of events $A$ and $B$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(A\\cap B)=0$",
+    "$P(A\\cap B)=P(A)P(B)$",
+    "$P(A\\cup B)=P(A)+P(B)$",
+    "$P(A\\mid B)=P(B\\mid A)$"
+   ],
+   "correct": 1,
+   "why": [
+    "that is mutual exclusion, a different condition",
+    "",
+    "the addition rule for disjoint events",
+    "symmetry of two conditionals does not define independence"
+   ]
+  },
+  "solution": "Independence means $P(A\\cap B)=P(A)P(B)$, equivalently $P(A\\mid B)=P(A)$.",
+  "hints": [
+   "Compare the joint probability with the product of marginals."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0014",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two events have positive probability and are mutually exclusive. Are they independent?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Yes, always",
+    "No, since $P(A\\cap B)=0\\neq P(A)P(B)$",
+    "Yes, since $P(A\\cup B)=P(A)+P(B)$",
+    "Only if $P(A)=P(B)$"
+   ],
+   "correct": 1,
+   "why": [
+    "confuses exclusive with independent",
+    "",
+    "the addition rule holds for exclusive events but does not imply independence",
+    "equal probabilities are not the condition"
+   ]
+  },
+  "solution": "Exclusive events have $P(A\\cap B)=0$, but $P(A)P(B)>0$. So they are dependent.",
+  "hints": [
+   "If one happens, the other cannot."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0015",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Events $A$ and $B$ are independent. Let $x=P(A)$ and $y=P(B)$. Write $P(A\\cap B)$ in terms of $x$ and $y$.",
+  "answer": {
+   "kind": "expression",
+   "value": "x*y",
+   "vars": [
+    "x",
+    "y"
+   ],
+   "also": [
+    "y*x"
+   ]
+  },
+  "check": null,
+  "solution": "Independence gives $P(A\\cap B)=P(A)P(B)=xy$.",
+  "hints": [
+   "Independence turns the intersection into a product."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0016",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the defining properties of a PMF $p(x)$ of a discrete random variable.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$p(x)\\ge 0$ and $\\sum_x p(x)=1$",
+    "$p(x)\\le 1$ and $\\int p(x)\\,dx=1$",
+    "$\\sum_x p(x)=0$ and $p(x)\\ge 0$",
+    "$p(x)$ is increasing in $x$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uses the integral rule of continuous densities",
+    "the total must be 1, not 0",
+    "a PMF need not be monotone"
+   ]
+  },
+  "solution": "A PMF is nonnegative and its values over all $x$ sum to 1.",
+  "hints": [
+   "Discrete means sum, not integrate."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0017",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the CDF $F(x)$ of a discrete random variable $X$ in terms of its PMF.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$F(x)=P(X\\le x)=\\sum_{t\\le x}p(t)$",
+    "$F(x)=P(X=x)$",
+    "$F(x)=P(X<x)$",
+    "$F(x)=\\sum_{t\\ge x}p(t)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the PMF, not the cumulative value",
+    "strict inequality; the CDF includes the point $x$",
+    "upper tail sum, not the cumulative sum"
+   ]
+  },
+  "solution": "The CDF accumulates the PMF from the left up to and including $x$.",
+  "hints": [
+   "Accumulate from the left, including $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0018",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $u=F(a)$ and $v=F(b)$ for a CDF $F$ with $a<b$. Write $P(a<X\\le b)$ in terms of $u$ and $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "v-u",
+   "vars": [
+    "u",
+    "v"
+   ],
+   "also": [
+    "-u+v"
+   ]
+  },
+  "check": null,
+  "solution": "$P(a<X\\le b)=F(b)-F(a)=v-u$.",
+  "hints": [
+   "Subtract the value at the lower end."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the definition of $E[X]$ for a discrete random variable $X$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sum_x x\\,p(x)$",
+    "$\\sum_x p(x)$",
+    "$\\sum_x x$",
+    "$\\max_x\\, x\\,p(x)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "always 1, so no values are weighted",
+    "an unweighted sum of values",
+    "a maximum, not an average"
+   ]
+  },
+  "solution": "Weight each value by its probability and add.",
+  "hints": [
+   "Weight each value by its probability."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State linearity of expectation.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$E[aX+bY]=aE[X]+bE[Y]$ for any $X$ and $Y$",
+    "$E[XY]=E[X]E[Y]$ for any $X$ and $Y$",
+    "$E[X^2]=E[X]^2$",
+    "$E[aX]=a^2E[X]$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the product rule needs independence, or at least zero covariance",
+    "squares the mean, but the mean of a square is larger",
+    "scaling is linear, not quadratic"
+   ]
+  },
+  "solution": "Expectation is a weighted sum, so it passes through sums and constant factors.",
+  "hints": [
+   "Expectation is linear, but products need extra conditions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $X=I_1+\\dots+I_n$, where each indicator $I_i$ has $P(I_i=1)=p$. Write $E[X]$ in terms of $n$ and $p$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*p",
+   "vars": [
+    "n",
+    "p"
+   ],
+   "also": [
+    "p*n"
+   ]
+  },
+  "check": null,
+  "solution": "Linearity gives $E[X]=\\sum_i E[I_i]=np$, with no independence needed.",
+  "hints": [
+   "Use linearity over the indicators."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0022",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the shortcut formula for $\\operatorname{Var}(X)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$E[X^2]-E[X]^2$",
+    "$E[X^2]+E[X]^2$",
+    "$E[X^2]-E[X]$",
+    "$E[X-E[X]]$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign error",
+    "subtracts the mean, not its square",
+    "the mean of deviations is 0, not the variance"
+   ]
+  },
+  "solution": "Expanding $E[(X-\\mu)^2]$ gives $E[X^2]-2\\mu E[X]+\\mu^2=E[X^2]-\\mu^2$.",
+  "hints": [
+   "Expand the square and use linearity."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0023",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For constants $a$ and $b$, what is $\\operatorname{Var}(aX+b)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$a^2\\operatorname{Var}(X)$",
+    "$a\\operatorname{Var}(X)$",
+    "$a^2\\operatorname{Var}(X)+b$",
+    "$\\operatorname{Var}(X)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "scales linearly; variance scales with the square of $a$",
+    "adds the shift $b$ to the variance",
+    "ignores the scale factor $a$ and the shift"
+   ]
+  },
+  "solution": "A shift does not change spread. A scale $a$ multiplies the variance by $a^2$.",
+  "hints": [
+   "Only the scale affects spread, and it enters squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0024",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "If $\\operatorname{Var}(X)=v$, write $\\operatorname{SD}(X)$ in terms of $v$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sqrt(v)",
+   "vars": [
+    "v"
+   ],
+   "also": [
+    "v^(1/2)"
+   ]
+  },
+  "check": null,
+  "solution": "The standard deviation is the square root of the variance.",
+  "hints": [
+   "SD is the square root of variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0025",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the PMF of $\\mathrm{Bin}(n,p)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\binom{n}{k}p^k(1-p)^{n-k}$",
+    "$\\binom{n}{k}p^{n-k}(1-p)^k$",
+    "$p^k(1-p)^{n-k}$",
+    "$\\binom{n}{k}p^k$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "swaps the success and failure counts",
+    "forgets the count of arrangements",
+    "forgets the failure probability"
+   ]
+  },
+  "solution": "Choose which $k$ of the $n$ trials succeed, then multiply by $p^k(1-p)^{n-k}$.",
+  "hints": [
+   "Count the arrangements, then the probability of each one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0026",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Geometric distribution on $\\{1,2,\\dots\\}$ with success probability $p$. Write its mean in terms of $p$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/p",
+   "vars": [
+    "p"
+   ],
+   "also": [
+    "p^(-1)"
+   ],
+   "domain": [
+    0.2,
+    0.9
+   ]
+  },
+  "check": null,
+  "solution": "The mean number of trials to the first success is $1/p$.",
+  "hints": [
+   "Count trials up to and including the first success."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0027",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which model counts trials up to and including the first success, with support starting at 1?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Binomial",
+    "Geometric",
+    "Poisson",
+    "Hypergeometric"
+   ],
+   "correct": 1,
+   "why": [
+    "counts successes in a fixed number of trials",
+    "",
+    "counts events in a fixed interval",
+    "draws without replacement from a finite pool"
+   ]
+  },
+  "solution": "Geometric on $\\{1,2,\\dots\\}$ stops at the first success, so trials are counted from 1.",
+  "hints": [
+   "Match the story to the model."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a continuous random variable $X$ with density $f$, state the CDF $F(x)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$F(x)=\\int_{-\\infty}^{x} f(t)\\,dt$",
+    "$F(x)=f(x)$",
+    "$F(x)=\\int_{x}^{\\infty} f(t)\\,dt$",
+    "$F(x)=\\sum_t f(t)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "density is not the cumulative probability",
+    "upper tail, not the CDF",
+    "sums a density, which is a discrete rule"
+   ]
+  },
+  "solution": "The CDF is the area under $f$ to the left of $x$.",
+  "hints": [
+   "Area to the left."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For a continuous random variable $X$ with density $f$, what is $P(X=a)$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0$",
+    "$f(a)$",
+    "$F(a)$",
+    "$1$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a density value, not a probability",
+    "the CDF counts all mass to the left of $a$",
+    "the total probability"
+   ]
+  },
+  "solution": "A single point has zero width, so its area and its probability are 0.",
+  "hints": [
+   "A single point has zero area."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $u=F(x)$ for a continuous $X$ with CDF $F$. Write $P(X>x)$ in terms of $u$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1-u",
+   "vars": [
+    "u"
+   ],
+   "also": [
+    "-u+1"
+   ]
+  },
+  "check": null,
+  "solution": "$P(X>x)=1-F(x)=1-u$.",
+  "hints": [
+   "Complement of the CDF."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0031",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Using the 68–95–99.7 rule, about what share of a normal distribution lies within 2 SD of the mean?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "About 68%",
+    "About 95%",
+    "About 99.7%",
+    "About 50%"
+   ],
+   "correct": 1,
+   "why": [
+    "that is the share within 1 SD",
+    "",
+    "that is the share within 3 SD",
+    "half the share, one-sided"
+   ]
+  },
+  "solution": "The rule gives about 95% within $\\pm 2\\sigma$.",
+  "hints": [
+   "Match the SD multiple to the share."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0032",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the standardisation of $X\\sim N(\\mu,\\sigma^2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$z=\\frac{x-\\mu}{\\sigma}$",
+    "$z=\\frac{x-\\mu}{\\sigma^2}$",
+    "$z=(x-\\mu)\\sigma$",
+    "$z=\\frac{x}{\\sigma}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "divides by the variance, not the SD",
+    "multiplies by the SD",
+    "forgets to subtract the mean"
+   ]
+  },
+  "solution": "Subtract the mean, then divide by the standard deviation.",
+  "hints": [
+   "Subtract the mean, divide by the SD."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0033",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $X_1\\sim N(\\mu_1,\\sigma_1^2)$ and $X_2\\sim N(\\mu_2,\\sigma_2^2)$ be independent. Write $\\operatorname{Var}(X_1+X_2)$ in terms of $\\sigma_1$ and $\\sigma_2$. Type $\\sigma_1$ and $\\sigma_2$ as s1 and s2.",
+  "answer": {
+   "kind": "expression",
+   "value": "s1^2+s2^2",
+   "vars": [
+    "s1",
+    "s2"
+   ],
+   "also": [
+    "s2^2+s1^2"
+   ]
+  },
+  "check": null,
+  "solution": "For independent variables, variances add: $\\sigma_1^2+\\sigma_2^2$.",
+  "hints": [
+   "Variances add for independent sums."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0034",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the memoryless property of an exponential random variable $X$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(X>s+t\\mid X>s)=P(X>t)$",
+    "$P(X>s+t)=P(X>s)+P(X>t)$",
+    "$P(X>s+t\\mid X>s)=P(X>s+t)$",
+    "$P(X\\le t)=1-e^{\\lambda t}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "treats survival probabilities as additive",
+    "ignores the condition $X>s$",
+    "sign error: the exponent should be negative"
+   ]
+  },
+  "solution": "Given survival to $s$, the remaining wait has the same distribution as a fresh wait.",
+  "hints": [
+   "The past does not change the future wait."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0035",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the variance of a uniform random variable on $[a,b]$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{(b-a)^2}{12}$",
+    "$\\frac{b-a}{12}$",
+    "$\\frac{(b-a)^2}{2}$",
+    "$\\frac{b^2-a^2}{12}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets to square the width",
+    "wrong divisor for a uniform",
+    "uses the endpoints' squares, not the width"
+   ]
+  },
+  "solution": "The variance is $(b-a)^2/12$, the squared width over 12.",
+  "hints": [
+   "The width enters squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0036",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X$ is exponential with rate $\\lambda$. Write $E[X]$ in terms of $\\lambda$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/lam",
+   "vars": [
+    "lam"
+   ],
+   "also": [
+    "lam^(-1)"
+   ]
+  },
+  "check": null,
+  "solution": "The mean of an exponential with rate $\\lambda$ is $1/\\lambda$.",
+  "hints": [
+   "Rate and mean are reciprocals."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the definition of $\\operatorname{Cov}(X,Y)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$E[XY]-E[X]E[Y]$",
+    "$E[X]E[Y]-E[XY]$",
+    "$E[XY]$",
+    "$E[X^2]-E[X]^2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "sign reversed",
+    "forgets to subtract the product of means",
+    "that is the variance of $X$, not the covariance"
+   ]
+  },
+  "solution": "Covariance is the expected product minus the product of expectations.",
+  "hints": [
+   "Expected product minus product of expected values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the correlation $\\rho(X,Y)$ in terms of covariance and standard deviations.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\rho=\\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X\\sigma_Y}$",
+    "$\\rho=\\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X+\\sigma_Y}$",
+    "$\\rho=\\operatorname{Cov}(X,Y)\\,\\sigma_X\\sigma_Y$",
+    "$\\rho=\\frac{\\operatorname{Cov}(X,Y)}{\\sigma_X^2+\\sigma_Y^2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "adds the SDs instead of multiplying",
+    "multiplies instead of dividing",
+    "adds the variances, which is not the normalising factor"
+   ]
+  },
+  "solution": "Dividing by the product of SDs puts correlation on the scale from $-1$ to $1$.",
+  "hints": [
+   "Normalise by the product of SDs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Let $v_x=\\operatorname{Var}(X)$, $v_y=\\operatorname{Var}(Y)$ and $c=\\operatorname{Cov}(X,Y)$. Write $\\operatorname{Var}(X-Y)$ in terms of $v_x$, $v_y$ and $c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "vx+vy-2*c",
+   "vars": [
+    "vx",
+    "vy",
+    "c"
+   ],
+   "also": [
+    "vy+vx-2*c",
+    "vx+vy-c-c"
+   ]
+  },
+  "check": null,
+  "solution": "$\\operatorname{Var}(X-Y)=v_x+v_y-2c$, since the covariance term flips sign.",
+  "hints": [
+   "The minus sign enters the covariance term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0040",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State Markov's inequality for a nonnegative $X$ and $a>0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$P(X\\ge a)\\le \\frac{E[X]}{a}$",
+    "$P(X\\ge a)\\ge \\frac{E[X]}{a}$",
+    "$P(X\\ge a)\\le \\frac{E[X]^2}{a}$",
+    "$P(X\\ge a)\\le \\frac{a}{E[X]}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reverses the inequality",
+    "squares the mean; the bound uses it linearly",
+    "inverts the ratio"
+   ]
+  },
+  "solution": "Since $X\\ge a\\cdot\\mathbf 1_{X\\ge a}$, taking expectations gives $E[X]\\ge aP(X\\ge a)$.",
+  "hints": [
+   "Compare $X$ with $a$ times the event."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0041",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the bound Chebyshev's inequality gives on $P(|X-\\mu|\\ge k\\sigma)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{1}{k^2}$",
+    "$\\frac{1}{k}$",
+    "$1-\\frac{1}{k^2}$",
+    "$k^2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets the square on $k$",
+    "that bounds being within $k$ SDs, which is the complement",
+    "inverts the bound and loses the square"
+   ]
+  },
+  "solution": "Chebyshev gives $P(|X-\\mu|\\ge t)\\le\\sigma^2/t^2$. With $t=k\\sigma$ this is $1/k^2$.",
+  "hints": [
+   "Put $t=k\\sigma$ into the variance bound."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0042",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $t>0$, Chebyshev's inequality bounds $P(|X-\\mu|\\ge t)$ in terms of $\\sigma$ and $t$. Write the bound.",
+  "answer": {
+   "kind": "expression",
+   "value": "sigma^2/t^2",
+   "vars": [
+    "sigma",
+    "t"
+   ],
+   "also": [
+    "(sigma/t)^2",
+    "sigma^2*t^(-2)"
+   ],
+   "domain": [
+    0.3,
+    2.7
+   ]
+  },
+  "check": null,
+  "solution": "The bound is $\\sigma^2/t^2$.",
+  "hints": [
+   "Variance over the squared distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0043",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the law of large numbers.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The sample mean approaches the population mean as $n$ grows",
+    "The sample mean becomes normally distributed for any $n$",
+    "The sample mean equals the population mean for every $n$",
+    "The population itself becomes normal as $n$ grows"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the CLT's claim about shape",
+    "sample means vary, so they rarely match exactly",
+    "the population's shape does not change"
+   ]
+  },
+  "solution": "The LLN says the sample mean converges to $\\mu$ as $n\\to\\infty$.",
+  "hints": [
+   "The LLN is about where the mean goes, not its shape."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0044",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the standard error of the sample mean of $n$ independent draws, each with SD $\\sigma$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{\\sigma}{\\sqrt n}$",
+    "$\\frac{\\sigma}{n}$",
+    "$\\sigma\\sqrt n$",
+    "$\\frac{\\sigma^2}{n}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "divides by $n$, not $\\sqrt n$",
+    "grows with $n$ instead of shrinking",
+    "the variance of the mean, not its SD"
+   ]
+  },
+  "solution": "$\\operatorname{Var}(\\bar X)=\\sigma^2/n$, so the standard error is $\\sigma/\\sqrt n$.",
+  "hints": [
+   "Take the square root of the variance of the mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0045",
+  "tier": "a",
+  "type": "recall",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sample of $n$ independent draws, each with SD $s$. Write the standard error of the sample mean in terms of $s$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "s/sqrt(n)",
+   "vars": [
+    "s",
+    "n"
+   ],
+   "also": [
+    "s*n^(-1/2)",
+    "s/n^0.5"
+   ]
+  },
+  "check": null,
+  "solution": "The standard error is $s/\\sqrt n$.",
+  "hints": [
+   "Divide by the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0046",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A password is 3 letters from the 26 English letters (repeats allowed), then 2 digits from 0 to 9 (repeats allowed). Count the passwords.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1757600,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "26**3*10**2",
+  "solution": "Letters: $26^3=17576$. Digits: $10^2=100$. Multiply: $1757600$.",
+  "hints": [
+   "Multiply the choices for each slot."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0047",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A committee of 3 is chosen from 8 people. Order does not matter. Count the committees.",
+  "answer": {
+   "kind": "numeric",
+   "value": 56,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.comb(8,3)",
+  "solution": "Unordered choice: $\\binom{8}{3}=56$.",
+  "hints": [
+   "Order does not matter, so use combinations."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0048",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Five people line up in a row. Count the arrangements in which a given person is first.",
+  "answer": {
+   "kind": "numeric",
+   "value": 24,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.factorial(4)",
+  "solution": "Fix the first person, then arrange the other four: $4!=24$.",
+  "hints": [
+   "Fix the constrained position first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A 4-digit PIN uses four different digits from 0 to 9, in order. Count the PINs.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5040,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "10*9*8*7",
+  "solution": "Ordered, no repeats: $10\\cdot9\\cdot8\\cdot7=5040$.",
+  "hints": [
+   "Each digit is one fewer than the last."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all expressions that count the ways to choose 3 of 10 people, order ignored.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\binom{10}{3}$",
+    "$\\frac{10!}{3!\\,7!}$",
+    "$\\frac{10\\cdot 9\\cdot 8}{3!}$",
+    "$10\\cdot 9\\cdot 8$",
+    "$\\binom{10}{7}$"
+   ],
+   "correct": [
+    0,
+    1,
+    2,
+    4
+   ]
+  },
+  "solution": "$\\binom{10}{3}=\\frac{10!}{3!\\,7!}=\\frac{10\\cdot9\\cdot8}{6}$, and $\\binom{10}{7}=\\binom{10}{3}$. The product $10\\cdot9\\cdot8$ counts ordered picks.",
+  "hints": [
+   "Ordered counts are $3!$ times too large."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $f(n)$ be the number of ways to choose 2 of $n$ distinct items, order ignored. Write $f(n)$ as a polynomial in $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n*(n-1)/2",
+   "vars": [
+    "n"
+   ],
+   "also": [
+    "(n^2-n)/2",
+    "n^2/2-n/2"
+   ]
+  },
+  "check": null,
+  "solution": "Ordered picks are $n(n-1)$, and each pair appears twice, so $f(n)=n(n-1)/2$.",
+  "hints": [
+   "Divide the ordered count by $2!$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A fair six-sided die is rolled once. Find $P(\\text{result}\\ge 5)$ as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/3",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(2,6)",
+  "solution": "Outcomes 5 and 6 out of 6: $2/6=1/3$.",
+  "hints": [
+   "Count favourable outcomes over the total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two fair dice are rolled. Find $P(\\text{sum}=7\\text{ or }11)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2222222222222222,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(6,36)+Fraction(2,36)",
+  "solution": "Sum 7 has 6 outcomes and sum 11 has 2. They are exclusive: $8/36=2/9$.",
+  "hints": [
+   "The two sums cannot happen together."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A card is drawn from a standard 52-card deck. Find $P(\\text{red or king})$ as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "7/13",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(26+4-2,52)",
+  "solution": "Red: 26. Kings: 4. Red kings: 2, counted twice. $(26+4-2)/52=28/52=7/13$.",
+  "hints": [
+   "Subtract the red kings, which are in both events."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0055",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(A)=0.3$, $P(B)=0.5$ and $P(A\\cap B)=0.1$. Find $P(A\\cup B)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,10)+Fraction(5,10)-Fraction(1,10)",
+  "solution": "$P(A\\cup B)=0.3+0.5-0.1=0.7$.",
+  "hints": [
+   "Subtract the overlap once."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0056",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A bag holds 7 red and 13 blue balls. One ball is drawn at random. Find $P(\\text{not red})$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.65,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(13,20)",
+  "solution": "Blue: $13/20=0.65$.",
+  "hints": [
+   "Count the blue balls over all balls."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0057",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.axioms"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(A)=0.5$, $P(B)=0.4$ and $P(A\\cap B)=0.2$. Find $P(A\\cup B)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.9$",
+    "$0.7$",
+    "$0.2$",
+    "$0.1$"
+   ],
+   "correct": 1,
+   "why": [
+    "adds both and forgets the overlap",
+    "",
+    "reports only the overlap",
+    "subtracts $P(B)$ from $P(A)$"
+   ]
+  },
+  "solution": "$P(A\\cup B)=0.5+0.4-0.2=0.7$.",
+  "hints": [
+   "Add, then remove the overlap."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A bag has 3 red and 5 blue marbles. Two are drawn without replacement. Find $P(\\text{both red})$ as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/28",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(3,8)*Fraction(2,7)",
+  "solution": "$P(\\text{first red})=3/8$, then $P(\\text{second red}\\mid\\text{first red})=2/7$. Product: $6/56=3/28$.",
+  "hints": [
+   "Multiply the first chance by the conditional second chance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(A)=0.6$, $P(B\\mid A)=0.5$ and $P(B\\mid A^c)=0.2$. Find $P(B)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.38,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(6,10)*Fraction(5,10)+Fraction(4,10)*Fraction(2,10)",
+  "solution": "$P(B)=0.6\\cdot0.5+0.4\\cdot0.2=0.38$.",
+  "hints": [
+   "Split by $A$ and $A^c$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A fair die is rolled. Given the result is even, find $P(\\text{result is }6)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/3",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1,3)",
+  "solution": "Even results: 2, 4, 6. Of these, one is 6: $1/3$.",
+  "hints": [
+   "Restrict to the even outcomes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A factory's machine M1 makes 60% of items, with 2% defective. M2 makes the other 40%, with 5% defective. Find $P(\\text{a random item is defective})$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.032,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(6,10)*Fraction(2,100)+Fraction(4,10)*Fraction(5,100)",
+  "solution": "$0.6\\cdot0.02+0.4\\cdot0.05=0.012+0.020=0.032$.",
+  "hints": [
+   "Weight each machine's defect rate by its share."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(A)=0.8$, $P(B)=0.5$ and $P(A\\cap B)=0.2$. Find $P(B\\mid A)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.4$",
+    "$0.2$",
+    "$0.625$",
+    "$0.25$"
+   ],
+   "correct": 3,
+   "why": [
+    "this is $P(A\\mid B)$: conditioning swapped",
+    "joint probability, not conditional",
+    "divides $P(B)$ by $P(A)$ instead",
+    ""
+   ]
+  },
+  "solution": "$P(B\\mid A)=P(A\\cap B)/P(A)=0.2/0.8=0.25$.",
+  "hints": [
+   "The denominator is the given event."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A bag has $n$ marbles, $r$ of them red. Two are drawn without replacement. Write $P(\\text{both red})$ as a formula in $r$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "r*(r-1)/(n*(n-1))",
+   "vars": [
+    "r",
+    "n"
+   ],
+   "also": [
+    "r*(r-1)/n/(n-1)",
+    "(r^2-r)/(n^2-n)"
+   ],
+   "domain": {
+    "r": [
+     1.5,
+     6
+    ],
+    "n": [
+     7,
+     12
+    ]
+   }
+  },
+  "check": null,
+  "solution": "The first draw is red with $r/n$, the second with $(r-1)/(n-1)$.",
+  "hints": [
+   "The second chance uses one fewer of each."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0064",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(A)=0.3$, $P(B\\mid A)=0.5$ and $P(B)=0.25$. Find $P(A\\mid B)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,10)*Fraction(1,2)/Fraction(1,4)",
+  "solution": "$P(A\\mid B)=P(B\\mid A)P(A)/P(B)=0.5\\cdot0.3/0.25=0.6$.",
+  "hints": [
+   "Bayes: multiply by the prior, divide by $P(B)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0065",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A disease affects 1% of people. A test is positive for 90% of the sick and for 5% of the healthy. Find $P(\\text{sick}\\mid\\text{positive})$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.15384615384615385,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(1,100)*Fraction(9,10)/(Fraction(1,100)*Fraction(9,10)+Fraction(99,100)*Fraction(5,100))",
+  "solution": "Positive: $0.009+0.0495=0.0585$. Sick and positive: $0.009$. Ratio $\\approx0.1538$.",
+  "hints": [
+   "Compute $P(\\text{positive})$ over both groups first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0066",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "1 in 500 people has a condition. A test is positive for 99% of those with it and for 2% of those without. Find $P(\\text{condition}\\mid\\text{positive})$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0902461257976299,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(1,500)*Fraction(99,100)/(Fraction(1,500)*Fraction(99,100)+Fraction(499,500)*Fraction(2,100))",
+  "solution": "Joint: $0.00198$. Positive overall: $0.00198+0.01996$. Ratio $\\approx0.0902$.",
+  "hints": [
+   "A rare condition keeps the posterior low."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(B\\mid A)=0.8$, $P(A)=0.25$ and $P(B)=0.4$. Find $P(A\\mid B)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.2$",
+    "$0.5$",
+    "$0.8$",
+    "$0.32$"
+   ],
+   "correct": 1,
+   "why": [
+    "joint probability $P(A\\cap B)$, not divided by $P(B)$",
+    "",
+    "the likelihood itself, with conditioning not reversed",
+    "multiplied by $P(B)$ instead of dividing"
+   ]
+  },
+  "solution": "$P(A\\mid B)=0.8\\cdot0.25/0.4=0.5$.",
+  "hints": [
+   "Divide the joint by $P(B)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A box holds a fair coin and a two-headed coin, each chosen with probability $1/2$. A flip shows heads. Find $P(\\text{two-headed}\\mid\\text{heads})$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/3",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1,2)*1/(Fraction(1,2)*1+Fraction(1,2)*Fraction(1,2))",
+  "solution": "Joint: two-headed and heads $=1/2$. Heads overall $=1/2+1/4=3/4$. Ratio $2/3$.",
+  "hints": [
+   "Weight each coin by its chance of heads."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Prior $P(H)=p$, $P(D\\mid H)=q$ and $P(D\\mid H^c)=r$. Write $P(H\\mid D)$ in terms of $p$, $q$ and $r$.",
+  "answer": {
+   "kind": "expression",
+   "value": "p*q/(p*q+(1-p)*r)",
+   "vars": [
+    "p",
+    "q",
+    "r"
+   ],
+   "also": [
+    "q*p/(q*p+r*(1-p))",
+    "p*q/(p*q+r-p*r)"
+   ],
+   "domain": {
+    "p": [
+     0.1,
+     0.9
+    ],
+    "q": [
+     0.2,
+     0.9
+    ],
+    "r": [
+     0.05,
+     0.5
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Bayes gives $P(H\\mid D)=pq/(pq+(1-p)r)$, with the denominator from total probability.",
+  "hints": [
+   "Denominator: total probability of $D$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A fair coin is tossed twice. $A$ is heads on the first toss and $B$ is heads on the second. Find $P(A\\cap B)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1,2)*Fraction(1,2)",
+  "solution": "Tosses are independent, so $P(A\\cap B)=\\tfrac12\\cdot\\tfrac12=\\tfrac14$.",
+  "hints": [
+   "Tosses do not affect each other."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$A$ and $B$ are independent with $P(A)=0.4$ and $P(B)=0.5$. Find $P(A\\cup B)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(4,10)+Fraction(5,10)-Fraction(4,10)*Fraction(5,10)",
+  "solution": "$P(A\\cap B)=0.2$, so $P(A\\cup B)=0.4+0.5-0.2=0.7$.",
+  "hints": [
+   "Independence gives the overlap as a product."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$P(A)=0.3$, $P(B)=0.6$ and $P(A\\cap B)=0.18$. Find $P(A\\mid B)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.3,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(18,100)/Fraction(6,10)",
+  "solution": "$P(A\\mid B)=0.18/0.6=0.3$, which equals $P(A)$, so $A$ and $B$ are independent.",
+  "hints": [
+   "Compare the conditional with the marginal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0073",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fair die is rolled once. Select all pairs of events that are independent.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Even and at most 4",
+    "Odd and at most 4",
+    "Even and at most 3",
+    "Even and six",
+    "Odd and even"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Even and at most 4: $P=1/3=\\tfrac12\\cdot\\tfrac23$. Odd and at most 4: $P(\\{1,3\\})=1/3=\\tfrac12\\cdot\\tfrac23$. The other pairs fail the product rule.",
+  "hints": [
+   "Check $P(A\\cap B)$ against $P(A)P(B)$ for each pair."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0074",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Events $A$, $B$ and $C$ are independent with $P(A)=0.5$, $P(B)=0.2$ and $P(C)=0.4$. Find the probability that none of the three occurs, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.24,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(1,2)*Fraction(8,10)*Fraction(6,10)",
+  "solution": "Complements multiply: $0.5\\cdot0.8\\cdot0.6=0.24$.",
+  "hints": [
+   "Complements of independent events are independent."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0075",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A card is drawn from a standard 52-card deck. Find $P(\\text{king}\\mid\\text{red})$ as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/13",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(2,26)",
+  "solution": "Red cards: 26, of which 2 are kings. $2/26=1/13$, equal to $P(\\text{king})=4/52$, so they are independent.",
+  "hints": [
+   "Restrict to the 26 red cards."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X$ takes the values 0, 1, 2 with $P(X=0)=0.2$ and $P(X=1)=0.5$. Find $P(X=2)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.3,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1-Fraction(2,10)-Fraction(5,10)",
+  "solution": "The PMF sums to 1: $1-0.2-0.5=0.3$.",
+  "hints": [
+   "A PMF sums to 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ is the result of a fair die. Let $Y=|X-3|$. Find $P(Y=1)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/3",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(2,6)",
+  "solution": "$|X-3|=1$ when $X=2$ or $X=4$: two of six outcomes.",
+  "hints": [
+   "Find the $x$ values that map to $y=1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ has PMF $p(1)=0.1$, $p(2)=0.4$, $p(3)=0.3$ and $p(4)=0.2$. Find $P(X\\ge 3)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,10)+Fraction(2,10)",
+  "solution": "$p(3)+p(4)=0.3+0.2=0.5$.",
+  "hints": [
+   "Add the tail values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ takes 0, 1, 2, 3 with probabilities 0.4, 0.3, 0.2, 0.1. Find $F(1)=P(X\\le 1)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(4,10)+Fraction(3,10)",
+  "solution": "$F(1)=p(0)+p(1)=0.4+0.3=0.7$.",
+  "hints": [
+   "The CDF includes the point 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A random variable has PMF $p(k)=c\\,\\lambda^k/k!$ for $k=0,1,2,\\dots$, with $\\lambda>0$. Write $c$ in terms of $\\lambda$.",
+  "answer": {
+   "kind": "expression",
+   "value": "exp(-lam)",
+   "vars": [
+    "lam"
+   ],
+   "also": [
+    "1/exp(lam)",
+    "exp(-1*lam)"
+   ]
+  },
+  "check": null,
+  "solution": "The series $\\sum_k \\lambda^k/k!=e^\\lambda$ must equal $1/c$, so $c=e^{-\\lambda}$.",
+  "hints": [
+   "Normalise: the PMF must sum to 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ is uniform on $\\{-2,-1,0,1,2\\}$. Find $P(X^2\\le 1)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{3}{5}$",
+    "$\\frac{2}{5}$",
+    "$\\frac{1}{5}$",
+    "$\\frac{4}{5}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "drops $x=0$, which also satisfies $x^2\\le 1$",
+    "uses $X^2=1$ only, not $X^2\\le 1$",
+    "keeps $P(X\\le 1)$: the square was not applied"
+   ]
+  },
+  "solution": "$X^2\\le1$ holds for $X\\in\\{-1,0,1\\}$, so $P=3/5$.",
+  "hints": [
+   "List the values whose square is at most 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0082",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X$ takes the values 1, 2, 3, 4 with probabilities 0.1, 0.2, 0.3, 0.4. Find $E[X]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,10)*1+Fraction(2,10)*2+Fraction(3,10)*3+Fraction(4,10)*4",
+  "solution": "$E[X]=0.1+0.4+0.9+1.6=3$.",
+  "hints": [
+   "Weight each value by its probability."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0083",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A bet pays \\$9 with probability 0.2 and costs \\$1 with probability 0.8. Find the expected net gain in dollars.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,10)*9-Fraction(8,10)*1",
+  "solution": "$E=0.2\\cdot 9+0.8\\cdot(-1)=1.8-0.8=1$.",
+  "hints": [
+   "A loss is a negative gain."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0084",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fair die is rolled 60 times. Find the expected number of sixes.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "60*Fraction(1,6)",
+  "solution": "Indicator for each roll with $P=1/6$. Sum: $60\\cdot(1/6)=10$.",
+  "hints": [
+   "Sum indicators over the rolls."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ is uniform on $\\{1,2,3,4\\}$. Find $E[X^2]$ as a fraction in lowest terms.",
+  "answer": {
+   "kind": "numeric",
+   "value": "15/2",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1+4+9+16,4)",
+  "solution": "$E[X^2]=(1+4+9+16)/4=30/4=15/2$.",
+  "hints": [
+   "Square each value first, then average."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$E[X]=4$. Find $E[3X-2]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3*4-2",
+  "solution": "Linearity: $3E[X]-2=12-2=10$.",
+  "hints": [
+   "Expectation passes through linear maps."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ and $Y$ are independent. $X$ is 1 or 2 with equal probability, and $Y$ is 0 or 3 with equal probability. Find $E[XY]$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "9/4",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(3,2)*Fraction(3,2)",
+  "solution": "Independence: $E[XY]=E[X]E[Y]=\\tfrac32\\cdot\\tfrac32=\\tfrac94$.",
+  "hints": [
+   "Independence lets the expectation of a product split."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ takes 0, 1, 2 with probabilities 0.5, 0.3, 0.2. Find $\\operatorname{Var}(X)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.61,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,10)*1+Fraction(2,10)*4-(Fraction(3,10)*1+Fraction(2,10)*2)**2",
+  "solution": "$E[X]=0.7$, $E[X^2]=0.3+0.8=1.1$. $\\operatorname{Var}=1.1-0.49=0.61$.",
+  "hints": [
+   "Use $E[X^2]-E[X]^2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two independent fair dice have sum $S$. Find $\\operatorname{Var}(S)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "35/6",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "2*(Fraction(91,6)-Fraction(7,2)**2)",
+  "solution": "One die: $E[X^2]=91/6$, $E[X]^2=49/4$, variance $35/12$. Two independent dice: $35/6$.",
+  "hints": [
+   "Compute one die's variance, then add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$\\operatorname{Var}(X)=2$. Find $\\operatorname{Var}(3X-4)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 18,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "9*2",
+  "solution": "$\\operatorname{Var}(3X-4)=3^2\\cdot2=18$.",
+  "hints": [
+   "The shift drops out, the scale enters squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0091",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$\\operatorname{SD}(X)=1.5$. Find $\\operatorname{SD}(2X+1)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*Fraction(3,2)",
+  "solution": "The SD scales by $|2|$ and ignores the shift: $2\\cdot1.5=3$.",
+  "hints": [
+   "SD scales by the factor, not its square."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0092",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Four independent variables each have variance 2.5. Find the variance of their sum.",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*Fraction(5,2)",
+  "solution": "Variances add for independent terms: $4\\cdot2.5=10$.",
+  "hints": [
+   "Independent variances add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0093",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ equals 0 with probability $\\tfrac14$ and 4 with probability $\\tfrac34$. Find $\\operatorname{Var}(X)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$12$",
+    "$9$",
+    "$3$",
+    "$\\sqrt{3}$"
+   ],
+   "correct": 2,
+   "why": [
+    "uses $E[X^2]$ and forgets to subtract $E[X]^2$",
+    "squares the mean instead of subtracting it",
+    "",
+    "reports the SD instead of the variance"
+   ]
+  },
+  "solution": "$E[X]=3$, $E[X^2]=12$, so $\\operatorname{Var}=12-9=3$.",
+  "hints": [
+   "Compute both moments first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0094",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X\\sim\\mathrm{Bin}(4,0.5)$. Find $P(X=2)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.375,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(6,16)",
+  "solution": "$\\binom42(0.5)^4=6/16=0.375$.",
+  "hints": [
+   "Choose the 2 successes, then multiply."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X\\sim\\mathrm{Bin}(10,0.3)$. Find $P(X=0)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0282475249,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(7,10)**10",
+  "solution": "With no successes, every trial fails: $0.7^{10}$.",
+  "hints": [
+   "Only one arrangement has zero successes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ counts trials up to and including the first success, starting at 1, with $p=0.2$. Find $P(X=3)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.128,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(4,5)**2*Fraction(1,5)",
+  "solution": "Two failures then a success: $0.8^2\\cdot0.2=0.128$.",
+  "hints": [
+   "Failures first, then one success."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X\\sim\\mathrm{Poisson}(2)$. Find $P(X=0)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.1353352832366127,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.exp(-2)",
+  "solution": "$P(X=0)=e^{-\\lambda}=e^{-2}\\approx0.1353$.",
+  "hints": [
+   "Only the $k=0$ term of the PMF is needed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ counts trials up to and including the first success, starting at 1, with $p=0.25$. Find $E[X]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1/Fraction(1,4)",
+  "solution": "Mean of Geometric on $\\{1,2,\\dots\\}$ is $1/p=4$.",
+  "hints": [
+   "The mean is the reciprocal of $p$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.discrete-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Five cards are dealt without replacement from a 52-card deck. Let $X$ be the number of hearts (13 in the deck). Find $P(X=2)$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\approx0.2637$",
+    "$\\approx0.2743$",
+    "$\\approx0.3670$",
+    "$\\approx0.2238$"
+   ],
+   "correct": 1,
+   "why": [
+    "binomial with $p=1/4$: wrong, draws are without replacement",
+    "",
+    "$P(X\\ge 2)$ instead of $P(X=2)$",
+    "Poisson with mean $1.25$: a wrong model for a fixed deck"
+   ]
+  },
+  "solution": "Hypergeometric: $\\binom{13}{2}\\binom{39}{3}/\\binom{52}{5}\\approx0.2743$.",
+  "hints": [
+   "Count hands with exactly two hearts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0100",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X$ has density $f(x)=2x$ on $[0,1]$. Find $P(X\\le 0.5)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.25,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(1,2)**2",
+  "solution": "$F(x)=x^2$, so $F(0.5)=0.25$.",
+  "hints": [
+   "The CDF is the area to the left."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0101",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ has density $f(x)=3x^2$ on $[0,1]$. Find $P(X>0.5)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.875,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "1-Fraction(1,2)**3",
+  "solution": "$F(0.5)=0.125$, so $P(X>0.5)=0.875$.",
+  "hints": [
+   "Use the complement of the CDF."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0102",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ has density $f(x)=2x$ on $[0,1]$. Find the median of $X$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7071067811865476,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.sqrt(0.5)",
+  "solution": "Solve $F(m)=m^2=1/2$, so $m=\\sqrt{0.5}\\approx0.7071$.",
+  "hints": [
+   "The median solves $F(m)=1/2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ has density $f(x)=2x$ on $[0,1]$. Find $E[X]$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "2/3",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "2*Fraction(1,3)",
+  "solution": "$\\int_0^1 x\\cdot 2x\\,dx=2/3$.",
+  "hints": [
+   "Integrate $x f(x)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ has density $f(x)=2(1-x)$ on $[0,1]$. Find $P(X\\le 0.25)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "7/16",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "2*Fraction(1,4)-Fraction(1,4)**2",
+  "solution": "$F(x)=2x-x^2$, so $F(0.25)=0.5-0.0625=7/16$.",
+  "hints": [
+   "Integrate the density from 0 to 0.25."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.pdf-cdf"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ has density $f(x)=cx$ on $[0,L]$, with $c$ chosen so $f$ integrates to 1. Write $c$ in terms of $L$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2/L^2",
+   "vars": [
+    "L"
+   ],
+   "also": [
+    "2*L^(-2)",
+    "2/(L*L)"
+   ],
+   "domain": [
+    0.5,
+    3
+   ]
+  },
+  "check": null,
+  "solution": "$\\int_0^L cx\\,dx=cL^2/2=1$, so $c=2/L^2$.",
+  "hints": [
+   "Integrate, then set the total to 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0106",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Scores are $N(100,15^2)$. Using the 68–95–99.7 rule, find $P(85\\le X\\le 115)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.68,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(68,100)",
+  "solution": "$85$ and $115$ are $\\pm1\\sigma$ from the mean, which holds about 68%.",
+  "hints": [
+   "Convert the bounds to SD multiples."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X\\sim N(50,8^2)$. Find the z-score of $x=62$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(62-50,8)",
+  "solution": "$z=(62-50)/8=1.5$.",
+  "hints": [
+   "Subtract the mean, divide by the SD."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X\\sim N(100,15^2)$. Using the 68–95–99.7 rule, find $P(X>130)$ as a decimal. The exact normal tail is also accepted.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.025,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.1
+  },
+  "check": "Fraction(1,2)*(1-Fraction(95,100))",
+  "solution": "$130=\\mu+2\\sigma$. The rule puts 95% within 2 SD, so each tail has $0.025$. The exact tail $0.0228$ is also accepted.",
+  "hints": [
+   "Half of the share outside $\\pm2\\sigma$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0109",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X_1\\sim N(3,4)$ and $X_2\\sim N(5,5)$ are independent, written as $N(\\mu,\\sigma^2)$. Find $\\operatorname{Var}(X_1+X_2)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4+5",
+  "solution": "Variances add for independent normals: $4+5=9$.",
+  "hints": [
+   "Add the variances, not the SDs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0110",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$Z\\sim N(0,1)$. Using the 68–95–99.7 rule, find $P(Z>1)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.16,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(1,2)*(1-Fraction(68,100))",
+  "solution": "Outside $\\pm1\\sigma$ is about 32%. Each tail is 16%.",
+  "hints": [
+   "Split the outside share between the two tails."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0111",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Heights are $N(40,5^2)$. Which value is 1.5 standard deviations above the mean?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$47.5$",
+    "$77.5$",
+    "$41.5$",
+    "$45$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uses the variance $25$ as the step",
+    "adds 1.5 instead of 1.5 times the SD",
+    "takes one SD, not 1.5"
+   ]
+  },
+  "solution": "$40+1.5\\cdot5=47.5$.",
+  "hints": [
+   "Multiply the z-score by the SD, then add the mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ is exponential with rate 0.5 per minute. Find $P(X>2)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.36787944117144233,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.exp(-1)",
+  "solution": "$P(X>t)=e^{-\\lambda t}=e^{-0.5\\cdot 2}=e^{-1}\\approx0.3679$.",
+  "hints": [
+   "Use $P(X>t)=e^{-\\lambda t}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ is exponential with mean 4 minutes. Find $P(X>6\\mid X>2)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.36787944117144233,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.exp(-1)",
+  "solution": "Memoryless: $P(X>6\\mid X>2)=P(X>4)=e^{-4/4}=e^{-1}\\approx0.3679$.",
+  "hints": [
+   "The past wait is forgotten."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X$ is uniform on $[2,10]$. Find $P(X\\le 5)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/8",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(5-2,8)",
+  "solution": "Width of $[2,5]$ over width 8: $3/8$.",
+  "hints": [
+   "Uniform probability is a ratio of lengths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ is uniform on $[0,6]$. Find $\\operatorname{Var}(X)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction((6-0)**2,12)",
+  "solution": "$(b-a)^2/12=36/12=3$.",
+  "hints": [
+   "Use $(b-a)^2/12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ is Gamma with shape 3 and rate 2. Find $E[X]$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/2",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(3,2)",
+  "solution": "Gamma mean is shape over rate: $3/2$.",
+  "hints": [
+   "Mean is shape divided by rate."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ is exponential with rate 2. Find the median of $X$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\frac{\\ln 2}{2}$",
+    "$\\ln 2$",
+    "$\\frac{1}{2}$",
+    "$2\\ln 2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgot to divide by the rate",
+    "that is the mean, $1/\\lambda$",
+    "multiplied by the rate instead of dividing"
+   ]
+  },
+  "solution": "Solve $1-e^{-2m}=1/2$: $m=\\ln 2/2\\approx0.347$.",
+  "hints": [
+   "Set $F(m)=1/2$ and solve for $m$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0118",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Joint PMF of $X$ and $Y$:\n\n| | $Y=0$ | $Y=1$ |\n|---|---|---|\n| $X=0$ | 0.2 | 0.1 |\n| $X=1$ | 0.3 | 0.4 |\n\nFind $\\operatorname{Cov}(X,Y)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/20",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(4,10)-Fraction(7,10)*Fraction(5,10)",
+  "solution": "$E[X]=0.7$, $E[Y]=0.5$, $E[XY]=P(1,1)=0.4$. $\\operatorname{Cov}=0.4-0.35=0.05=1/20$.",
+  "hints": [
+   "$E[XY]$ only counts $X=1$ and $Y=1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0119",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$\\operatorname{Var}(X)=4$, $\\operatorname{Var}(Y)=9$ and $\\operatorname{Cov}(X,Y)=3$. Find $\\operatorname{Var}(X+Y)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 19,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4+9+2*3",
+  "solution": "$\\operatorname{Var}(X+Y)=4+9+2\\cdot3=19$.",
+  "hints": [
+   "Include $2\\operatorname{Cov}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0120",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "With $\\operatorname{Var}(X)=4$, $\\operatorname{Var}(Y)=9$ and $\\operatorname{Cov}(X,Y)=3$, find the correlation $\\rho(X,Y)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(3)/(2*3)",
+  "solution": "$\\rho=3/(2\\cdot3)=1/2$.",
+  "hints": [
+   "Divide by the product of SDs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$\\operatorname{Cov}(X,Y)=-2$, $\\operatorname{Var}(X)=1$ and $\\operatorname{Var}(Y)=16$. Find $\\operatorname{Var}(X-Y)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 21,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1+16-2*(-2)",
+  "solution": "$\\operatorname{Var}(X-Y)=1+16-2\\cdot(-2)=21$.",
+  "hints": [
+   "A negative covariance adds to $\\operatorname{Var}(X-Y)$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$\\operatorname{Cov}(X,Y)=1$. Find $\\operatorname{Cov}(2X,3Y)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*3*1",
+  "solution": "Covariance is bilinear: $2\\cdot3\\cdot1=6$.",
+  "hints": [
+   "Constants come out of covariance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For independent $X$ and $Y$ with finite variances, select all true statements.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "$\\operatorname{Cov}(X,Y)=0$",
+    "$\\rho(X,Y)=1$",
+    "$E[XY]=E[X]E[Y]$",
+    "$\\operatorname{Var}(X+Y)=\\operatorname{Var}(X)+\\operatorname{Var}(Y)$",
+    "$\\operatorname{Cov}(X,Y)=0$ implies $X$ and $Y$ are independent"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "solution": "Independence gives zero covariance, the product rule, and additive variances. Zero covariance does not imply independence in general.",
+  "hints": [
+   "Independence is stronger than zero covariance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "$X\\ge 0$ has mean 2. Using Markov's inequality, bound $P(X\\ge 8)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.25,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(2,8)",
+  "solution": "$P(X\\ge 8)\\le 2/8=0.25$.",
+  "hints": [
+   "Mean over the threshold."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X\\ge 0$ has mean 4. Using Markov's inequality, bound $P(X\\ge 10)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.4,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(4,10)",
+  "solution": "$P(X\\ge10)\\le 4/10=0.4$.",
+  "hints": [
+   "Mean over the threshold."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X$ has mean 10 and variance 4. Using Chebyshev's inequality, bound $P(|X-10|\\ge 5)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.16,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(4,25)",
+  "solution": "$\\sigma^2/t^2=4/25=0.16$.",
+  "hints": [
+   "Variance over the squared distance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0127",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X$ has mean $\\mu$ and SD $\\sigma$. Using Chebyshev's inequality, bound $P(|X-\\mu|\\ge 3\\sigma)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/9",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1,9)",
+  "solution": "$\\sigma^2/(3\\sigma)^2=1/9$.",
+  "hints": [
+   "Put $t=3\\sigma$ into the bound."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0128",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "$X\\ge 0$ has mean 1.5. Using Markov's inequality, bound $P(X\\ge 3)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "Fraction(3,2)/3",
+  "solution": "$P(X\\ge3)\\le 1.5/3=0.5$.",
+  "hints": [
+   "Divide the mean by the threshold."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0129",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.tail-bounds"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X\\ge 0$ has mean 2 and variance 1. Apply Markov's inequality and Chebyshev's inequality (in the form $P(|X-\\mu|\\ge a)\\le\\sigma^2/a^2$) to $P(X\\ge 6)$. Which is the smaller of the two bounds they give?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0.0625$",
+    "$0.3333$",
+    "$0.25$",
+    "$0.5$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "valid but looser: Markov bound",
+    "Chebyshev with distance 2 instead of 4",
+    "Markov with threshold $6-\\mu=4$, which is not the event"
+   ]
+  },
+  "solution": "Markov: $2/6=0.3333$. Since $X\\ge6$ implies $|X-2|\\ge4$, Chebyshev gives $1/16=0.0625$, the smaller of the two.",
+  "hints": [
+   "Turn the event into a distance from the mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0130",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Each draw has SD 10. Find the standard error of the mean of $n=100$ independent draws.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(10,10)",
+  "solution": "$\\sigma/\\sqrt n=10/10=1$.",
+  "hints": [
+   "Divide the SD by the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Each draw has SD 12. Find the standard error of the mean of $n=36$ independent draws.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(12,6)",
+  "solution": "$12/\\sqrt{36}=12/6=2$.",
+  "hints": [
+   "The root of 36 is 6."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "$X\\sim\\mathrm{Bin}(100,0.5)$. Approximate $X$ by a normal with the same mean and SD, with no continuity correction. Using the 68–95–99.7 rule, find $P(X\\ge 60)$ as a decimal. The exact normal tail is also accepted.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.025,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.1
+  },
+  "check": "Fraction(1,2)*(1-Fraction(95,100))",
+  "solution": "Mean 50, SD 5. $60=\\mu+2\\sigma$, so the upper tail is $(1-0.95)/2=0.025$. The exact normal tail $0.0228$ is also accepted.",
+  "hints": [
+   "Find the mean and SD of the binomial first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find the SD of $X\\sim\\mathrm{Bin}(16,0.5)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "math.sqrt(Fraction(16)*Fraction(1,4))",
+  "solution": "$\\sqrt{np(1-p)}=\\sqrt{16\\cdot0.25}=\\sqrt{4}=2$.",
+  "hints": [
+   "Use $\\sqrt{np(1-p)}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A fair coin is flipped 10000 times. Find the SD of the sample proportion of heads, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.005,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.sqrt(0.25/10000)",
+  "solution": "Per-flip variance $0.25$. SD of the proportion: $\\sqrt{0.25/10000}=0.005$.",
+  "hints": [
+   "Divide the per-flip variance by $n$ before the root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t2-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T2",
+  "tags": [
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The standard error of a sample mean is $s$ with sample size $n$. How many times larger must $n$ be to halve the standard error?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4",
+  "solution": "Halving $\\sigma/\\sqrt n$ needs $\\sqrt n$ doubled, so $n$ quadruples.",
+  "hints": [
+   "Standard error scales with the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

@@ -1,0 +1,1426 @@
+[
+ {
+  "id": "t1-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.sets",
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A table has 1000 rows. Column A is non-null in 700 rows and column B is non-null in 600 rows. What is the smallest possible number of rows where both are non-null?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$300$",
+    "$0$",
+    "$420$",
+    "$600$",
+    "$1300$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "assumed the two sets can be disjoint, ignoring that $|A\\cup B|\\le 1000$",
+    "assumed independence: $0.7\\cdot0.6\\cdot1000$, which is one scenario not the minimum",
+    "this is the largest possible overlap, $\\min(700,600)$",
+    "added the sizes with no overlap correction"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Inclusion-exclusion: $|A\\cap B|=|A|+|B|-|A\\cup B|$",
+    "weight": 2
+   },
+   {
+    "text": "Bound $|A\\cup B|\\le1000$ and see it makes the overlap smallest",
+    "weight": 1
+   },
+   {
+    "text": "Value",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $A,B$ be the row sets with non-null values (sets).\n$|A\\cap B|=|A|+|B|-|A\\cup B|$.\nOverlap is smallest when the union is largest: $|A\\cup B|\\le1000$ (inequality).\n$|A\\cap B|\\ge700+600-1000=300$.\nAttained when every row has at least one non-null.",
+  "hints": [
+   "Write the overlap using the union, then bound the union."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.sets",
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "1000 rows carry two binary flags $a_i,b_i\\in\\{0,1\\}$. Summed over all rows, $\\sum_i (a_i+b_i)=1270$. Exactly 180 rows have $a_i=b_i=0$. How many rows have $a_i=b_i=1$? Give a count.",
+  "answer": {
+   "kind": "numeric",
+   "value": 450,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Partition rows by flag pattern: none, exactly one, both",
+    "weight": 1
+   },
+   {
+    "text": "Rows with a flag set: $n_1+n_2=820$",
+    "weight": 1
+   },
+   {
+    "text": "Sum equation $n_1+2n_2=1270$",
+    "weight": 1
+   },
+   {
+    "text": "Solve for $n_2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Partition rows (sets): $n_0=180$, $n_1$ with exactly one flag, $n_2$ with both.\n$n_1+n_2=1000-180=820$.\nThe sum counts each both-row twice (sigma): $n_1+2n_2=1270$.\nSubtract: $n_2=1270-820=450$.",
+  "hints": [
+   "A row with both flags adds 2 to the sum; a row with one adds 1."
+  ],
+  "check": "1270-(1000-180)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.functions",
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A learning rate decays as $\\eta(t)=\\dfrac{0.1}{1+0.05t}$ for epoch $t=0,1,2,\\dots$ What is the smallest integer epoch $t$ with $\\eta(t)<0.01$ (strict)?",
+  "answer": {
+   "kind": "numeric",
+   "value": 181,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Write $\\dfrac{0.1}{1+0.05t}<0.01$",
+    "weight": 1
+   },
+   {
+    "text": "Rearrange to $t>180$ (flip nothing: denominator positive)",
+    "weight": 2
+   },
+   {
+    "text": "Strict bound gives 181, not 180",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Need $0.1<0.01(1+0.05t)$ since $1+0.05t>0$ (inequalities).\n$10<1+0.05t$, so $t>180$.\nAt $t=180$, $\\eta(180)=0.1/10=0.01$, not below (function value check).\nSmallest integer: $t=181$.",
+  "hints": [
+   "Check the boundary epoch directly."
+  ],
+  "check": "int(round((0.1/0.01-1)/0.05))+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.functions",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A model outputs $p=\\sigma(z)=\\dfrac{1}{1+e^{-z}}$. For $p=0.8$, find the logit $z$. Use the natural log; answer as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.3862943611198906,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Invert: $1/p=1+e^{-z}$",
+    "weight": 2
+   },
+   {
+    "text": "$e^{-z}=0.25$",
+    "weight": 1
+   },
+   {
+    "text": "$z=\\ln 4$ with sign right",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Invert the function (functions): $1/p=1+e^{-z}$.\n$e^{-z}=1/0.8-1=0.25$.\nTake logs (exp-log): $-z=\\ln0.25$, so $z=\\ln4$.\n$z\\approx1.386$.",
+  "hints": [
+   "Solve $\\sigma(z)=0.8$ for $e^{-z}$ first."
+  ],
+  "check": "math.log(0.8/(1-0.8))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities",
+   "t1.derivative",
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Gradient descent $w\\leftarrow w-\\eta f'(w)$ runs on $f(w)=2w^2$ with step $\\eta>0$. For which $\\eta$ does $w_k\\to0$ from every start $w_0\\ne0$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$0<\\eta<0.5$",
+    "$0<\\eta<0.25$",
+    "$0<\\eta<1$",
+    "$0<\\eta\\le0.5$",
+    "$0<\\eta<2$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "required only $1-4\\eta>0$ and ignored the negative side $1-4\\eta>-1$",
+    "used $f'(w)=2w$, giving factor $1-2\\eta$",
+    "at $\\eta=0.5$ the factor is $-1$, so $w_k$ flips sign forever and never converges",
+    "used $f'(w)=w$, giving factor $1-\\eta$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$f'(w)=4w$ so $w_{k+1}=(1-4\\eta)w_k$",
+    "weight": 2
+   },
+   {
+    "text": "Convergence iff $|1-4\\eta|<1$",
+    "weight": 1
+   },
+   {
+    "text": "Solve the absolute-value inequality, strict ends",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f'(w)=4w$ (deriv-rules), so $w_{k+1}=(1-4\\eta)w_k$ (derivative as update).\n$w_k=(1-4\\eta)^kw_0\\to0$ iff $|1-4\\eta|<1$.\n$-1<1-4\\eta<1$ gives $0<\\eta<0.5$ (inequalities).\nAt $\\eta=0.5$ the factor is $-1$: no convergence.",
+  "hints": [
+   "Find the multiplier applied to $w$ each step."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.inequalities",
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Batch $i$ ($i=1,2,\\dots$) takes $3i+2$ ms. A job runs batches in order with a total budget of 1000 ms. How many complete batches fit? Give a count.",
+  "answer": {
+   "kind": "numeric",
+   "value": 24,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Total time $\\sum_{i=1}^n(3i+2)=\\tfrac32n(n+1)+2n$",
+    "weight": 2
+   },
+   {
+    "text": "Set up $\\le1000$ and test integers near the root",
+    "weight": 1
+   },
+   {
+    "text": "Check $n=25$ fails",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Total (sigma): $3\\cdot\\tfrac{n(n+1)}2+2n=1.5n^2+3.5n$.\nNeed $1.5n^2+3.5n\\le1000$ (inequalities).\n$n=24$: $864+84=948\\le1000$.\n$n=25$: $937.5+87.5=1025>1000$.\nAnswer 24.",
+  "hints": [
+   "Sum the arithmetic part with $n(n+1)/2$."
+  ],
+  "check": "max(n for n in range(1,200) if sum(3*i+2 for i in range(1,n+1))<=1000)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.sigma",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Attention for token $i$ in a 50-token context costs $3i^2-2i$ units, $i=1,\\dots,50$. What is the total cost in units?",
+  "answer": {
+   "kind": "numeric",
+   "value": 126225,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Split into $3\\sum i^2-2\\sum i$",
+    "weight": 1
+   },
+   {
+    "text": "$\\sum i^2=n(n+1)(2n+1)/6=42925$",
+    "weight": 1
+   },
+   {
+    "text": "$\\sum i=1275$",
+    "weight": 1
+   },
+   {
+    "text": "Combine: $128775-2550$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Split the sum (sigma): $3\\sum i^2-2\\sum i$.\n$\\sum_{1}^{50}i^2=\\tfrac{50\\cdot51\\cdot101}{6}=42925$.\n$\\sum_{1}^{50}i=1275$.\nTotal $=3(42925)-2(1275)=128775-2550=126225$.",
+  "hints": [
+   "Use the closed forms for $\\sum i$ and $\\sum i^2$."
+  ],
+  "check": "sum(3*i**2-2*i for i in range(1,51))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.sigma",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Daily traffic multipliers over four days are $1.02,\\ 0.97,\\ 1.05,\\ 1.01$. What constant daily growth rate, in percent, gives the same four-day total growth?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.209352105833588,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Total growth is the product $\\prod g_i$, not the sum of rates",
+    "weight": 2
+   },
+   {
+    "text": "Take the geometric mean: fourth root (or mean of logs)",
+    "weight": 1
+   },
+   {
+    "text": "Convert to percent",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Growth compounds, so the total factor is a product (sigma): $1.02\\cdot0.97\\cdot1.05\\cdot1.01\\approx1.0490$.\nConstant rate $r$: $(1+r)^4=1.0490$.\n$\\ln(1+r)=\\tfrac14\\ln1.0490$ (exp-log).\n$1+r\\approx1.01207$, so $r\\approx1.21\\%$. The arithmetic mean $1.25\\%$ is the trap.",
+  "hints": [
+   "Multiply factors, then take a fourth root."
+  ],
+  "check": "(1.02*0.97*1.05*1.01)**0.25*100-100",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series",
+   "t1.exp-log",
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Learning rates are $\\eta_k=0.5\\cdot0.8^k$ for $k=0,1,2,\\dots$ What is the smallest $n$ such that the sum of the first $n$ rates ($k=0,\\dots,n-1$) exceeds $2.4$? Give a count.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "tol": 0,
+   "rel": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Closed form $S_n=0.5\\frac{1-0.8^n}{0.2}=2.5(1-0.8^n)$",
+    "weight": 2
+   },
+   {
+    "text": "Reduce to $0.8^n<0.04$",
+    "weight": 1
+   },
+   {
+    "text": "Solve with logs (flip when dividing by $\\ln0.8<0$), round up",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "Geometric sum (geom-series): $S_n=2.5(1-0.8^n)$; the infinite sum is $2.5$.\n$S_n>2.4$ gives $0.8^n<0.04$ (inequalities).\nLogs (exp-log): $n\\ln0.8<\\ln0.04$, and $\\ln0.8<0$ flips the sign: $n>\\ln0.04/\\ln0.8\\approx14.43$.\nSmallest integer: 15.",
+  "hints": [
+   "Total possible is 2.5, so you need 0.1 of headroom left."
+  ],
+  "check": "min([n for n in range(1,500) if sum(0.5*0.8**k for k in range(n))>2.4])",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.geom-series",
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An agent earns reward 3 at each of 10 steps, step $k=0,1,\\dots,9$, discounted by $0.8^k$ (so step 0 is undiscounted). What is the total discounted return?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$13.39$",
+    "$15.00$",
+    "$12.99$",
+    "$3.35$",
+    "$30.00$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "the infinite-horizon value $3/(1-0.8)$",
+    "summed only 9 terms (used exponent $n-1$)",
+    "divided by $\\gamma=0.8$ instead of $1-\\gamma$",
+    "ignored the discount: $3\\times10$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identify first term 3 and ratio 0.8",
+    "weight": 1
+   },
+   {
+    "text": "Finite sum formula $a\\frac{1-r^n}{1-r}$ with $n=10$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Terms $3\\cdot0.8^k$: first term 3, ratio 0.8, $n=10$ terms (sigma).\n$S=3\\,\\dfrac{1-0.8^{10}}{1-0.8}=15(1-0.10737)$ (geom-series).\n$S\\approx13.39$.",
+  "hints": [
+   "Count the terms carefully: $k$ runs from 0 to 9."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log",
+   "t1.geom-series"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dataset grows by 8% each month. After how many months, as a decimal, does it first reach three times its initial size? (Continuous time, fractional months allowed.)",
+  "answer": {
+   "kind": "numeric",
+   "value": 14.274914586003177,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Model $1.08^m=3$",
+    "weight": 1
+   },
+   {
+    "text": "Take logs",
+    "weight": 1
+   },
+   {
+    "text": "Solve $m=\\ln3/\\ln1.08$",
+    "weight": 1
+   },
+   {
+    "text": "Decimal value",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Size after $m$ months is $1.08^m$ times the start (geom-series).\nSet $1.08^m=3$.\nTake logs (exp-log): $m=\\ln3/\\ln1.08=1.0986/0.07696$.\n$m\\approx14.27$.",
+  "hints": [
+   "Take logs of both sides."
+  ],
+  "check": "math.log(3)/math.log(1.08)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.exp-log",
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Test loss follows $L(n)=5\\,n^{-0.3}$ for $n$ training examples. By what factor must $n$ grow to halve the loss?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\approx10.08$",
+    "$\\approx1.23$",
+    "$2.00$",
+    "$\\approx3.33$",
+    "$\\approx6.67$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "computed $2^{0.3}$, forgetting the exponent must be inverted",
+    "assumed loss halves when data doubles",
+    "computed $1/0.3$, dropping the base-2 step",
+    "computed $2/0.3$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Set $(n'/n)^{-0.3}=1/2$",
+    "weight": 2
+   },
+   {
+    "text": "Raise both sides to the power $-1/0.3$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $2^{1/0.3}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Want $L(n')=L(n)/2$: $(n'/n)^{-0.3}=\\tfrac12$ (functions, power law).\n$n'/n=(\\tfrac12)^{-1/0.3}=2^{10/3}$ (exp-log).\n$2^{3.333}\\approx10.08$.\nOn a log-log plot that is a run of $\\log_{10}(10.08)\\approx1.0$ per halving.",
+  "hints": [
+   "Ratios of $n$ appear inside the power; solve for the ratio."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale",
+   "t1.exp-log",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "On a log-log plot, a power law $L=a\\,n^{b}$ passes through $(n,L)=(10^3,\\,0.80)$ and $(10^5,\\,0.20)$. Find the exponent $b$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": -0.3010299956639812,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Straight line on log-log: $\\log L=\\log a+b\\log n$",
+    "weight": 1
+   },
+   {
+    "text": "Slope = $\\Delta\\log L/\\Delta\\log n$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate with $\\log_{10}$: $-0.602/2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Taking logs: $\\log L=\\log a+b\\log n$, a line of slope $b$ (log-scale).\n$\\Delta\\log_{10}L=\\log_{10}(0.2/0.8)=-0.602$.\n$\\Delta\\log_{10}n=5-3=2$.\n$b=-0.301$.",
+  "hints": [
+   "Convert both axes to log10 first."
+  ],
+  "check": "math.log10(0.20/0.80)/math.log10(1e5/1e3)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.log-scale",
+   "t1.functions",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Model A has $7\\times10^9$ parameters and test loss $3.20$. Across model sizes, loss falls by a fixed $0.05$ for every factor of 10 in parameter count. Predict the loss of model B with $1.3\\times10^{12}$ parameters. Give it to 2 decimal places.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.086557734385371,
+   "tol": 0.01,
+   "rel": 0,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Orders of magnitude gap $=\\log_{10}(1.3\\times10^{12}/7\\times10^9)$",
+    "weight": 2
+   },
+   {
+    "text": "Loss is linear in $\\log_{10}$ params with slope $-0.05$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate: $3.20-0.05\\cdot2.269$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Loss is linear in $\\log_{10}N$ (log-scale): $L=3.20-0.05\\,\\Delta$.\n$\\Delta=\\log_{10}(1.3\\times10^{12})-\\log_{10}(7\\times10^{9})=12.114-9.845=2.269$.\n$L_B=3.20-0.05(2.269)\\approx3.087$.\nTrap: using $\\ln$ for 'factor of 10' gives 2.94.",
+  "hints": [
+   "Count factors of 10 between the sizes, fractional allowed."
+  ],
+  "check": "3.20-0.05*math.log10(1.3e12/7e9)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.derivative",
+   "t1.deriv-rules",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Training loss is $L(t)=4e^{-0.05t}+1.5$ with $t$ in epochs. What is the instantaneous rate $dL/dt$ at $t=10$, in loss units per epoch? (Negative means falling.)",
+  "answer": {
+   "kind": "numeric",
+   "value": -0.1213061319425267,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Differentiate the exponential with the chain factor $-0.05$",
+    "weight": 2
+   },
+   {
+    "text": "The constant 1.5 drops out",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate at $t=10$: $-0.2e^{-0.5}$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\dfrac{d}{dt}e^{-0.05t}=-0.05e^{-0.05t}$ (deriv-rules).\n$L'(t)=-0.2e^{-0.05t}$; the constant vanishes.\n$L'(10)=-0.2e^{-0.5}$ (derivative as rate).\n$\\approx-0.121$ loss per epoch.",
+  "hints": [
+   "Chain rule: the inner derivative of $-0.05t$ is $-0.05$."
+  ],
+  "check": "((4*math.exp(-0.05*10.0001)+1.5)-(4*math.exp(-0.05*9.9999)+1.5))/0.0002",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.derivative",
+   "t1.deriv-rules",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Active users are $U(t)=2000+150t-3t^2$ with $t$ in days. How fast, in users per day, is $U$ changing at exactly $t=10$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$90$",
+    "$84$",
+    "$120$",
+    "$168$",
+    "$3200$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "average rate over $[10,12]$, a secant slope not the instantaneous rate",
+    "differentiated $3t^2$ as $3t$",
+    "total change $U(12)-U(10)$, not divided by the 2 days",
+    "the value $U(10)$ itself"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Rate at an instant is $U'(t)$",
+    "weight": 1
+   },
+   {
+    "text": "$U'(t)=150-6t$ by the power rule",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate at $t=10$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Instantaneous rate is the derivative (derivative).\n$U'(t)=150-6t$ (deriv-rules).\n$U'(10)=150-60=90$ users per day.",
+  "hints": [
+   "Differentiate term by term."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules",
+   "t1.exp-log",
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Logistic loss for one example is $\\ell(w)=\\ln\\!\\big(1+e^{-ywx}\\big)$ with $y=1$, $x=2$ (natural log). Find $\\ell'(w)$ at $w=0.5$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": -0.5378828427399902,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Chain rule on $\\ln(u)$: $u'/u$",
+    "weight": 1
+   },
+   {
+    "text": "Inner derivative $u'=-yx\\,e^{-ywx}$",
+    "weight": 2
+   },
+   {
+    "text": "Substitute $w=0.5$: $-2e^{-1}/(1+e^{-1})$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Let $u=1+e^{-ywx}$. Then $\\ell'=u'/u$ (deriv-rules, chain).\n$u'=-yx\\,e^{-ywx}$, so $\\ell'=\\dfrac{-yx\\,e^{-ywx}}{1+e^{-ywx}}$.\nAt $w=0.5$, $ywx=1$: $\\ell'=-2\\dfrac{e^{-1}}{1+e^{-1}}=-2\\sigma(-1)$.\n$\\approx-0.538$.",
+  "hints": [
+   "Apply the chain rule twice: log, then the exponential."
+  ],
+  "check": "(math.log(1+math.exp(-2*(0.5+1e-6)))-math.log(1+math.exp(-2*(0.5-1e-6))))/2e-6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.deriv-rules",
+   "t1.exp-log",
+   "t1.derivative"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An entropy term is $h(p)=-p\\ln p$ (natural log). What is $h'(p)$ at $p=0.1$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\approx1.30$",
+    "$\\approx2.30$",
+    "$\\approx3.30$",
+    "$\\approx-1.30$",
+    "$-10$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "product rule with the second term $p\\cdot\\tfrac1p$ dropped",
+    "sign slip on the $+1$: $-\\ln p-(-1)$",
+    "dropped the leading minus sign",
+    "differentiated only $\\ln p$ and ignored the factor $p$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Product rule: $(-p)'\\ln p+(-p)(\\ln p)'$",
+    "weight": 2
+   },
+   {
+    "text": "Simplify to $-\\ln p-1$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate at 0.1",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Product rule (deriv-rules): $h'=-\\ln p-p\\cdot\\tfrac1p=-\\ln p-1$.\nAt $p=0.1$: $-\\ln0.1=2.3026$ (exp-log).\n$h'(0.1)=2.3026-1=1.3026$.",
+  "hints": [
+   "The product rule gives two terms; the second simplifies to a constant."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points",
+   "t1.deriv-rules",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Per-sample cost at batch size $b>0$ (real-valued) is $C(b)=\\dfrac{1800}{b}+2b$ ms. What is the minimum value of $C$, in ms?",
+  "answer": {
+   "kind": "numeric",
+   "value": 120,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Set $C'(b)=-1800/b^2+2=0$",
+    "weight": 2
+   },
+   {
+    "text": "Solve $b=30$ and confirm it is a minimum ($C''>0$)",
+    "weight": 1
+   },
+   {
+    "text": "Minimum value $C(30)=120$, not the argmin 30",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$C'(b)=-1800b^{-2}+2$ (deriv-rules).\nCritical point: $b^2=900$, $b=30$ (critical-points).\n$C''(b)=3600b^{-3}>0$: a minimum.\n$C(30)=60+60=120$ ms. Trap: answering $b=30$.",
+  "hints": [
+   "Set the derivative to zero, then plug back in."
+  ],
+  "check": "min(1800/(i/100)+2*(i/100) for i in range(1,50000))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.critical-points",
+   "t1.deriv-rules",
+   "t1.inequalities"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Throughput with $x$ workers is $f(x)=x^3-9x^2+24x$ for $0\\le x\\le8$ (real $x$). What is the global maximum of $f$ on this interval?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$128$",
+    "$20$",
+    "$16$",
+    "$0$",
+    "$-64$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "the local maximum at $x=2$, missing the endpoint",
+    "the local minimum at $x=4$",
+    "the left endpoint value $f(0)$ only",
+    "dropped the $24x$ term when evaluating $f(8)$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$f'(x)=3(x-2)(x-4)$ gives critical points 2 and 4",
+    "weight": 2
+   },
+   {
+    "text": "Compare $f$ at critical points and both endpoints",
+    "weight": 1
+   },
+   {
+    "text": "Pick the largest: $f(8)=128$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$f'(x)=3x^2-18x+24=3(x-2)(x-4)$ (deriv-rules).\nCritical points $x=2,4$; also check endpoints (critical-points).\n$f(0)=0,\\ f(2)=20,\\ f(4)=16,\\ f(8)=512-576+192=128$.\nGlobal max is 128 at the boundary $x=8$.",
+  "hints": [
+   "A global maximum on a closed interval may sit at an endpoint."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.integral",
+   "t1.exp-log",
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A server sees requests at rate $r(t)=120e^{-0.1t}$ requests per second, $t$ in seconds. How many requests arrive during $0\\le t\\le20$? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1037.5976601160648,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Total = $\\int_0^{20}r(t)\\,dt$",
+    "weight": 1
+   },
+   {
+    "text": "Antiderivative $-1200e^{-0.1t}$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate limits: $1200(1-e^{-2})$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Accumulated requests are the integral of the rate (integral).\n$\\int120e^{-0.1t}dt=-1200e^{-0.1t}$ (deriv-rules check: derivative gives back $120e^{-0.1t}$).\n$[-1200e^{-0.1t}]_0^{20}=1200(1-e^{-2})$ (exp-log).\n$\\approx1037.6$ requests.",
+  "hints": [
+   "Rate integrates to a count."
+  ],
+  "check": "sum(120*math.exp(-0.1*(i+0.5)*0.001)*0.001 for i in range(20000))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.integral",
+   "t1.deriv-rules",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Gradient norm over a training phase is $g(t)=3t^2+2$ for $1\\le t\\le4$. What is the average value of $g$ over this interval?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$23$",
+    "$69$",
+    "$17.25$",
+    "$27.5$",
+    "$34.5$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "the integral $\\int_1^4g$, not divided by the length 3",
+    "divided the integral by 4 instead of the interval length 3",
+    "averaged the endpoint values $(5+50)/2$, valid only for linear $g$",
+    "divided the integral by 2"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Average $=\\frac{1}{b-a}\\int_a^b g$",
+    "weight": 1
+   },
+   {
+    "text": "Antiderivative $t^3+2t$",
+    "weight": 1
+   },
+   {
+    "text": "Integral $=72-3=69$",
+    "weight": 1
+   },
+   {
+    "text": "Divide by 3",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Average value $=\\frac1{4-1}\\int_1^4(3t^2+2)\\,dt$ (integral).\nAntiderivative $t^3+2t$ (deriv-rules).\n$[t^3+2t]_1^4=72-3=69$.\n$69/3=23$.",
+  "hints": [
+   "Divide by the interval length, not the endpoint count."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.vectors",
+   "t1.dot-norm",
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Three embeddings are $a=(1,2,3)$, $b=(4,0,-3)$, $c=(-2,1,6)$. How far, in Euclidean distance as a decimal, is their centroid from $a$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.4142135623730951,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Centroid = componentwise mean $(1,1,2)$",
+    "weight": 2
+   },
+   {
+    "text": "Difference vector from $a$: $(0,-1,-1)$",
+    "weight": 1
+   },
+   {
+    "text": "Norm $\\sqrt2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Centroid $=\\tfrac13(a+b+c)$ componentwise (vectors, sigma): $(3,3,6)/3=(1,1,2)$.\nDifference: $(1,1,2)-(1,2,3)=(0,-1,-1)$.\nNorm (dot-norm): $\\sqrt{0+1+1}=\\sqrt2\\approx1.414$.",
+  "hints": [
+   "Average each coordinate separately."
+  ],
+  "check": "math.dist([(1+4-2)/3,(2+0+1)/3,(3-3+6)/3],[1,2,3])",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.vectors",
+   "t1.sigma"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A design matrix has columns $c_1=(1,2,3)$, $c_2=(2,1,0)$, $c_3=(4,5,k)$. For which $k$ is $c_3$ an exact linear combination of $c_1$ and $c_2$ (perfect collinearity)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$6$",
+    "$12$",
+    "$3$",
+    "$5$",
+    "$0$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "scaled only $c_1$ by 4 to match the first entry",
+    "swapped the coefficients ($c_1+2c_2$) instead of $2c_1+c_2$",
+    "copied the second entry of $c_3$",
+    "used only $c_2$'s third entry"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Set $c_3=\\alpha c_1+\\beta c_2$",
+    "weight": 1
+   },
+   {
+    "text": "Solve the first two components: $\\alpha+2\\beta=4,\\ 2\\alpha+\\beta=5$",
+    "weight": 2
+   },
+   {
+    "text": "Third component $3\\alpha+0\\beta=k$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Write $c_3=\\alpha c_1+\\beta c_2$ (vectors).\nFirst two entries: $\\alpha+2\\beta=4$, $2\\alpha+\\beta=5$.\nSolve: $\\alpha=2,\\ \\beta=1$.\nThird entry: $k=3\\alpha+0\\cdot\\beta=6$.",
+  "hints": [
+   "Two equations from the first two entries fix both coefficients."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm",
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Embeddings $a=(1,2,2)$ and $b=(2,0,1)$ are compared. What is their cosine similarity, as a decimal in $[-1,1]$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.5962847939999439,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Dot product $a\\cdot b=4$",
+    "weight": 1
+   },
+   {
+    "text": "Norms $|a|=3$, $|b|=\\sqrt5$",
+    "weight": 2
+   },
+   {
+    "text": "Cosine $=\\dfrac{a\\cdot b}{|a||b|}\\approx0.596$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$a\\cdot b=2+0+2=4$ (dot-norm).\n$|a|=\\sqrt{1+4+4}=3$, $|b|=\\sqrt{4+0+1}=\\sqrt5$.\n$\\cos\\theta=\\dfrac{4}{3\\sqrt5}\\approx0.596$.",
+  "hints": [
+   "Divide the dot product by both norms."
+  ],
+  "check": "(1*2+2*0+2*1)/(math.sqrt(1+4+4)*math.sqrt(4+0+1))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.dot-norm",
+   "t1.vectors",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Feature vector $x=(6,2)$ is projected onto the direction of $d=(3,4)$. What is the length (scalar component) of $x$ along $d$? Positive means the same direction.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$5.2$",
+    "$26$",
+    "$1.04$",
+    "$\\approx6.32$",
+    "$\\approx0.82$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "unnormalised dot product $x\\cdot d$",
+    "coefficient of the vector projection, $(x\\cdot d)/|d|^2$, not the length",
+    "the length $|x|$ of $x$ itself",
+    "cosine similarity, a unitless value"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Scalar component $=x\\cdot\\hat d$ with $\\hat d=d/|d|$",
+    "weight": 2
+   },
+   {
+    "text": "$x\\cdot d=26$, $|d|=5$",
+    "weight": 1
+   },
+   {
+    "text": "$26/5=5.2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Unit direction $\\hat d=d/|d|=(0.6,0.8)$ since $|d|=5$ (dot-norm).\nComponent $=x\\cdot\\hat d=3.6+1.6=5.2$ (vectors).",
+  "hints": [
+   "Normalise the direction before dotting."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx",
+   "t1.derivative",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Loss follows $L(n)=3\\ln n$ (natural log) for $n$ examples. Use the tangent line at $n=2000$ to estimate $L(2400)-L(2000)$, as a decimal. Give the tangent estimate, not the exact difference.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Tangent: $\\Delta L\\approx L'(2000)\\,\\Delta n$",
+    "weight": 2
+   },
+   {
+    "text": "$L'(n)=3/n$",
+    "weight": 1
+   },
+   {
+    "text": "$\\tfrac3{2000}\\cdot400=0.6$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Linear approximation (linear-approx): $\\Delta L\\approx L'(2000)\\Delta n$.\n$L'(n)=3/n$ (derivative, exp-log): $L'(2000)=0.0015$.\n$\\Delta L\\approx0.0015\\times400=0.6$.\n(The exact change is 0.547.)",
+  "hints": [
+   "Multiply the slope at 2000 by the step of 400."
+  ],
+  "check": "3/2000*400",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t1-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T1",
+  "tags": [
+   "t1.linear-approx",
+   "t1.exp-log",
+   "t1.deriv-rules"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A logistic-regression coefficient of $0.5$ multiplies the odds by $e^{0.5}$. Estimate $e^{0.5}$ with the second-order Taylor polynomial of $e^x$ at $0$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1.625$",
+    "$1.5$",
+    "$1.75$",
+    "$1.125$",
+    "$1.875$"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "first-order (tangent) estimate only",
+    "used $x^2$ instead of $x^2/2$",
+    "dropped the linear term: $1+x^2/2$",
+    "added a cubic term $x^3$ with no factorial, and $x^2$ without 2"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "All derivatives of $e^x$ at 0 equal 1",
+    "weight": 1
+   },
+   {
+    "text": "$T_2(x)=1+x+x^2/2$",
+    "weight": 2
+   },
+   {
+    "text": "Evaluate at 0.5",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Every derivative of $e^x$ is $e^x$ (deriv-rules), equal to 1 at 0.\n$T_2(x)=1+x+\\tfrac{x^2}{2}$ (linear-approx).\n$T_2(0.5)=1+0.5+0.125=1.625$.\n(True value $1.6487$.)",
+  "hints": [
+   "Do not forget the factorial in the quadratic term."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

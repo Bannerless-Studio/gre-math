@@ -1,0 +1,4560 @@
+[
+  {
+    "id": "t9-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which quantity is the average treatment effect (ATE)?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The gap between the observed means of treated and untreated groups",
+        "Average outcome if all units are treated minus average outcome if all units are untreated",
+        "The change in one unit's outcome before and after treatment",
+        "The correlation between treatment and outcome"
+      ],
+      "correct": 1,
+      "why": [
+        "the naive gap mixes the effect with selection bias",
+        "",
+        "one unit cannot be seen both treated and untreated, so this is not an average effect",
+        "correlation measures association, not a contrast of potential outcomes"
+      ]
+    },
+    "solution": "ATE is $E[Y(1)-Y(0)]$, the mean of the difference between the two potential outcomes over all units.",
+    "hints": [
+      "Compare the two potential outcomes for everyone."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which assumption says one unit's outcome depends only on its own treatment, not on how other units were treated?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Positivity",
+        "SUTVA",
+        "Ignorability",
+        "Monotonicity"
+      ],
+      "correct": 1,
+      "why": [
+        "positivity says every unit has a nonzero chance of each treatment",
+        "",
+        "ignorability says treatment is independent of potential outcomes given covariates, not that units do not interact",
+        "monotonicity is an instrument assumption about the direction of the effect"
+      ]
+    },
+    "solution": "SUTVA, the stable unit treatment value assumption, rules out interference between units and hidden versions of treatment.",
+    "hints": [
+      "Think about interference between units."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a binary treatment, how many potential outcomes does each unit have? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Each unit has $Y(1)$ and $Y(0)$. Only one of them is observed.",
+    "hints": [
+      "One outcome for each treatment level."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A randomised trial puts 50 units on treatment and 50 on control, with mean outcomes 60 points for treated and 45 for control. Estimate the ATE in points.",
+    "answer": {
+      "kind": "numeric",
+      "value": 15,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "60-45",
+    "solution": "Randomisation makes the control mean a fair stand-in for untreated outcomes, so $60-45=15$ points.",
+    "hints": [
+      "A randomised difference in means estimates the ATE."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "In a study without randomisation, the naive gap in mean outcomes is 10 points, and treated units would have scored 6 points higher than controls even without treatment. Find the average effect on the treated (ATT) in points.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "10-6",
+    "solution": "Naive gap $=$ ATT $+$ selection bias, so ATT $=10-6=4$ points.",
+    "hints": [
+      "Subtract the selection bias from the naive gap."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a randomised trial, the treated mean is 3.72 kg and the control mean is 2.95 kg. Give the ATE in kg as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.77,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(372,100)-Fraction(295,100)",
+    "solution": "$3.72-2.95=0.77$ kg.",
+    "hints": [
+      "Subtract the control mean from the treated mean."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A trial estimates the mean outcome under treatment as $\\mu_1$ and under control as $\\mu_0$. Write the ATE in terms of $\\mu_1$ and $\\mu_0$.",
+    "answer": {
+      "kind": "expression",
+      "value": "mu1-mu0",
+      "vars": [
+        "mu1",
+        "mu0"
+      ],
+      "also": [
+        "-mu0+mu1",
+        "mu1-1*mu0"
+      ]
+    },
+    "check": null,
+    "solution": "Randomisation gives $E[Y(1)]=\\mu_1$ and $E[Y(0)]=\\mu_0$, so the ATE is $\\mu_1-\\mu_0$.",
+    "hints": [
+      "Subtract the control mean from the treated mean."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Four units have potential outcomes Y(1) of 5, 7, 6 and 8 and Y(0) of 3, 4, 6 and 5, in that order. Find the sample ATE in points.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(sum([5,7,6,8])-sum([3,4,6,5]),4)",
+    "solution": "Unit-level effects are 2, 3, 0 and 3. Their mean is $8/4=2$ points.",
+    "hints": [
+      "Average the unit-level differences."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-po"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The population ATE is 3.0 points, the fraction treated is 0.4 and the ATT is 4.0 points. Find the average effect on the untreated (ATU) in points, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.3333333333333335,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(3)-Fraction(2,5)*4)/Fraction(3,5)",
+    "solution": "$ATE = p\\,ATT + (1-p)\\,ATU$ with $p=0.4$, so $3=1.6+0.6\\,ATU$ and $ATU=7/3\\approx 2.333$ points.",
+    "hints": [
+      "Write the ATE as a weighted average of ATT and ATU."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which kind of variable is caused by both treatment and outcome?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Confounder",
+        "Mediator",
+        "Collider",
+        "Instrument"
+      ],
+      "correct": 2,
+      "why": [
+        "a confounder causes both treatment and outcome, so arrows leave it",
+        "a mediator lies on the path from treatment to outcome",
+        "",
+        "an instrument causes treatment only, not the outcome"
+      ]
+    },
+    "solution": "A collider has arrows into it from both treatment and outcome, as in $T \\to C \\leftarrow Y$. Conditioning on it opens a path.",
+    "hints": [
+      "Look at which way the arrows point."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which move blocks the back-door path from treatment to outcome through a confounder?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Condition on a collider",
+        "Condition on the confounder",
+        "Condition on a mediator",
+        "Drop the outcome from the model"
+      ],
+      "correct": 1,
+      "why": [
+        "conditioning on a collider opens a new path",
+        "",
+        "conditioning on a mediator blocks the effect you want to measure",
+        "dropping the outcome removes the question, not the bias"
+      ]
+    },
+    "solution": "Adjusting for the confounder closes the back-door path $T \\leftarrow Z \\rightarrow Y$, leaving only causal paths.",
+    "hints": [
+      "Which variable is a common cause?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a DAG with arrows $Z \\to T$, $Z \\to Y$ and $T \\to Y$, how many arrows leave $Z$? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "Two arrows leave $Z$, one to $T$ and one to $Y$. $Z$ is a common cause, so it is a confounder.",
+    "hints": [
+      "Count the arrows whose tail is $Z$."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Mild stratum (share 0.6) recovers with probability 0.90 if treated and 0.80 if control; severe stratum (share 0.4) with 0.70 if treated and 0.40 if control. Adjusting for severity, find the average treatment effect on recovery as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.18,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(6,10)*(Fraction(9,10)-Fraction(8,10))+Fraction(4,10)*(Fraction(7,10)-Fraction(4,10))",
+    "solution": "Weight the stratum effects by population shares: $0.6\\cdot 0.10+0.4\\cdot 0.30=0.18$.",
+    "hints": [
+      "Average the stratum effects with population weights."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a chain $T \\to M \\to Y$ with no other paths, the linear effect of $T$ on $M$ is 0.6 and of $M$ on $Y$ is 0.5. Find the total effect of $T$ on $Y$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.3,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(6,10)*Fraction(5,10)",
+    "solution": "Along a directed chain, effects multiply: $0.6\\cdot 0.5=0.3$.",
+    "hints": [
+      "Multiply coefficients along the directed path."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t9-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Linear model: $T = 0.4Z + \\varepsilon_T$ and $Y = 0.5Z + \\varepsilon_Y$, with $\\mathrm{Var}(Z)=1$, $\\mathrm{Var}(T)=1$, independent errors, and no direct effect of $T$ on $Y$. Find the slope of $Y$ on $T$ from a regression with no adjustment.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.2,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(4,10)*Fraction(5,10)/Fraction(1)",
+    "solution": "$\\mathrm{Cov}(T,Y)=0.4\\cdot 0.5\\cdot 1=0.2$. The slope is $\\mathrm{Cov}(T,Y)/\\mathrm{Var}(T)=0.2$.",
+    "hints": [
+      "A regression slope is a covariance divided by the variance of the regressor."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A DAG has $Z \\to T$, $Z \\to Y$ and $T \\to Y$. What should you adjust for to estimate the effect of $T$ on $Y$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Nothing, because $Z$ is only correlated with $T$",
+        "$Z$, to block the back-door path $T \\leftarrow Z \\to Y$",
+        "Nothing, because $Z$ lies on the causal path from $T$ to $Y$",
+        "$Y$, to remove its variance"
+      ],
+      "correct": 1,
+      "why": [
+        "correlation is not a reason to skip the back-door path",
+        "",
+        "$Z$ points into $T$, so it is a common cause, not a mediator",
+        "adjusting for the outcome removes the effect itself"
+      ]
+    },
+    "solution": "$Z$ is a confounder. Adjusting for it closes the back-door path and keeps the direct arrow $T \\to Y$.",
+    "hints": [
+      "Which path carries spurious association?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Let $T$ and $Y$ be independent fair coins taking values 0 or 1, and let $C=1$ when $T+Y\\geq 1$. Given $C=1$, find $P(T=1 \\mid C=1)$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.6666666666666666,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,3)",
+    "solution": "Given $C=1$, the pairs $(0,1)$, $(1,0)$ and $(1,1)$ are equally likely. $T=1$ in two of them, so the probability is $2/3$.",
+    "hints": [
+      "List the outcomes where C equals one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-dag"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A binary confounder $Z$ has $P(Z=1)=p$. Write the back-door adjusted mean $E[Y \\mid do(T=1)]$ in terms of $p$, $m_1=E[Y \\mid T=1, Z=1]$ and $m_0=E[Y \\mid T=1, Z=0]$.",
+    "answer": {
+      "kind": "expression",
+      "value": "p*m1+(1-p)*m0",
+      "vars": [
+        "p",
+        "m1",
+        "m0"
+      ],
+      "also": [
+        "m0+p*(m1-m0)",
+        "(1-p)*m0+p*m1"
+      ],
+      "domain": {
+        "p": [
+          0.1,
+          0.9
+        ],
+        "m1": [
+          0.3,
+          2.7
+        ],
+        "m0": [
+          0.3,
+          2.7
+        ]
+      }
+    },
+    "check": null,
+    "solution": "Average the treated-arm means over $Z$ with weights $P(Z=z)$: $p\\,m_1+(1-p)\\,m_0$.",
+    "hints": [
+      "Weight each stratum by its probability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does a difference-in-differences design compare?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Changes over time in treated units minus changes over time in control units",
+        "Treated and control outcomes after treatment only",
+        "One unit's outcome under two treatments in the same period",
+        "Correlation of treatment with outcome over time"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "it ignores pre-period gaps, so baseline differences remain in the estimate",
+        "one unit cannot take two treatments in the same period in this design",
+        "correlation is not a difference-in-differences contrast"
+      ]
+    },
+    "solution": "DiD subtracts the control group's before-after change, which proxies the trend the treated group would have followed.",
+    "hints": [
+      "Take a difference twice: across groups and across periods."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which property makes an instrument valid for estimating a treatment effect?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It affects the outcome directly, not only through treatment",
+        "It is correlated with treatment and affects the outcome only through treatment",
+        "It is caused by both treatment and outcome",
+        "It is the outcome measured in an earlier period"
+      ],
+      "correct": 1,
+      "why": [
+        "a direct effect on the outcome breaks the exclusion restriction",
+        "",
+        "a variable caused by treatment and outcome is a collider, not an instrument",
+        "a lagged outcome is usually a confounder, not an instrument"
+      ]
+    },
+    "solution": "Relevance: the instrument moves treatment. Exclusion: it touches the outcome only through treatment.",
+    "hints": [
+      "Relevance and exclusion are the two conditions."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a treated unit with propensity score $ps$, write the inverse-probability weight used for the ATE.",
+    "answer": {
+      "kind": "expression",
+      "value": "1/ps",
+      "vars": [
+        "ps"
+      ],
+      "also": [
+        "ps^(-1)",
+        "1*ps^(-1)"
+      ],
+      "domain": {
+        "ps": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    "check": null,
+    "solution": "The ATE weight is $1/ps$ for a treated unit and $1/(1-ps)$ for a control unit.",
+    "hints": [
+      "Use the reciprocal of the probability of the unit's own treatment."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Treated units have outcome 10 before and 16 after treatment, and control units 12 before and 15 after. Find the difference-in-differences estimate in points.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(16-10)-(15-12)",
+    "solution": "Treated change $6$ minus control change $3$ gives $3$ points.",
+    "hints": [
+      "Subtract the control change from the treated change."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A control unit has propensity score 0.2, and its inverse-probability weight for the ATE is $1/(1-ps)$. Give the weight as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1/(1-Fraction(2,10))",
+    "solution": "$1/(1-0.2)=1/0.8=1.25$.",
+    "hints": [
+      "The control weight uses one minus the propensity."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An instrument moves the outcome by 0.6 points per unit (reduced form) and moves treatment by 0.3 per unit (first stage). Find the IV (Wald) estimate of the effect of treatment on the outcome, in points per unit of treatment.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(6,10)/Fraction(3,10)",
+    "solution": "IV estimate $=0.6/0.3=2$ points per unit of treatment.",
+    "hints": [
+      "Divide the reduced form by the first stage."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A matched design pairs each treated unit with a control similar on age and income. Which risk remains after matching?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Unmeasured confounding survives matching on observed covariates",
+        "Matching always increases the sample size",
+        "Matching makes treatment randomised",
+        "Matching removes the need for common support"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "matching selects a subset of controls and usually shrinks the sample",
+        "matching balances observed covariates but does not randomise treatment",
+        "common support is still needed, so removing it is a wrong step"
+      ]
+    },
+    "solution": "Matching balances only the variables you measured. A confounder you did not record still biases the matched comparison.",
+    "hints": [
+      "What does matching not see?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Four group means: treated before $tp$, treated after $tq$, control before $cp$, control after $cq$. Write the difference-in-differences estimate as an expression in these four means.",
+    "answer": {
+      "kind": "expression",
+      "value": "(tq-tp)-(cq-cp)",
+      "vars": [
+        "tp",
+        "tq",
+        "cp",
+        "cq"
+      ],
+      "also": [
+        "tq-tp-cq+cp",
+        "(tq-cq)-(tp-cp)"
+      ]
+    },
+    "check": null,
+    "solution": "Take the treated change $tq-tp$ and subtract the control change $cq-cp$.",
+    "hints": [
+      "Subtract the two changes."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.causal-quasi"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Instrument value 1 gives mean outcome 3.5 and treatment rate 0.7, and value 0 gives mean outcome 2.0 and treatment rate 0.4. Find the IV estimate of the treatment effect, in outcome points per unit of treatment.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(Fraction(35,10)-2)/(Fraction(7,10)-Fraction(4,10))",
+    "solution": "Outcome gap $1.5$ over treatment-rate gap $0.3$ gives $5$.",
+    "hints": [
+      "Divide the outcome gap by the treatment-rate gap."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does it mean for a time series to be stationary?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Constant mean and variance, with autocovariance that depends only on the lag",
+        "A straight-line trend over time",
+        "Values that are independent of each other at every lag",
+        "A series whose values never change"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a trend makes the mean change over time, so the series is non-stationary",
+        "independence is white noise, one special stationary case rather than the requirement",
+        "a constant series has zero variance, a narrow special case"
+      ]
+    },
+    "solution": "Weak stationarity needs a constant mean, a constant variance, and autocovariance $\\gamma_k$ that depends only on the lag $k$.",
+    "hints": [
+      "Think about what must not drift over time."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which operation removes a linear trend in one step?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "First difference, $y_t - y_{t-1}$",
+        "Lag-12 difference only",
+        "Squaring each value",
+        "Replacing the series by its overall mean"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a lag-12 difference targets seasonality rather than a linear trend",
+        "squaring changes scale and leaves the trend in place",
+        "a single mean discards the time order"
+      ]
+    },
+    "solution": "The first difference of a straight line is constant, so the trend disappears.",
+    "hints": [
+      "What is the change between neighbouring points on a line?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the lag-0 autocorrelation of any series, using the standard definition? Give a number.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$\\rho_0=\\gamma_0/\\gamma_0=1$ by definition.",
+    "hints": [
+      "Divide the variance by itself."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Series values are $y_1=10$, $y_2=13$, $y_3=17$ and $y_4=20$. Find the first difference $y_4-y_3$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "20-17",
+    "solution": "$20-17=3$.",
+    "hints": [
+      "Subtract the previous value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Quarterly series: $y_1=12$, $y_2=15$, $y_3=11$, $y_4=18$, $y_5=14$. Find the seasonal difference $y_5-y_1$ at lag 4.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "14-12",
+    "solution": "$14-12=2$.",
+    "hints": [
+      "The seasonal lag is the season length, here 4."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The autocovariance at lag 1 is $\\gamma_1=1.2$ and the variance is $\\gamma_0=4.0$. Find the lag-1 autocorrelation $\\rho_1=\\gamma_1/\\gamma_0$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.3,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(12,10)/Fraction(4)",
+    "solution": "$\\rho_1=1.2/4.0=0.3$.",
+    "hints": [
+      "Divide the lag-1 autocovariance by the variance."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series rises steadily and has strong positive autocorrelation at lags 1 to 10. Which first step is most sensible?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Take first differences to remove the trend, then re-examine the autocorrelation",
+        "Compute the variance of the raw values and stop",
+        "Drop the first 10 rows, since they are most correlated",
+        "Standardise each row by the overall mean"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the variance of a trending series does not show whether it is stationary",
+        "dropping rows does not change the dependence structure",
+        "subtracting one overall mean keeps the trend in place"
+      ]
+    },
+    "solution": "A trend makes autocorrelation high at many lags. Differencing removes it, so the remaining dependence can be read.",
+    "hints": [
+      "Remove the trend before reading the correlations."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Four quarterly means are 20, 26, 22 and 32 (in units). Using the overall mean of these four as the baseline, find the seasonal effect of quarter 2 in units.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(26)-Fraction(sum([20,26,22,32]),4)",
+    "solution": "The overall mean is $100/4=25$, so quarter 2 has effect $26-25=1$.",
+    "hints": [
+      "Compare quarter 2 with the average of all four."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-decomp"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A white-noise series has variance 9 and no autocorrelation. Find the variance of its first difference $y_t-y_{t-1}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 18,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*Fraction(9)",
+    "solution": "$\\mathrm{Var}(y_t-y_{t-1})=\\mathrm{Var}(y_t)+\\mathrm{Var}(y_{t-1})=9+9=18$.",
+    "hints": [
+      "Variances of independent terms add."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For the AR(1) model $y_t=\\phi y_{t-1}+\\varepsilon_t$, what is the stationarity condition on $\\phi$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$|\\phi|<1$",
+        "$\\phi>1$",
+        "$\\phi=0$ always",
+        "$\\phi^2>1$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a coefficient above one gives an explosive, non-stationary series",
+        "phi equal to zero is white noise, a special case rather than the requirement",
+        "phi squared above one is the explosive case"
+      ]
+    },
+    "solution": "Stationarity needs $|\\phi|<1$. Then the variance is finite and the autocorrelations decay as $\\phi^k$.",
+    "hints": [
+      "Think about repeated multiplication by phi."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which ACF and PACF pattern signals an MA(q) process?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "ACF cuts off after lag q, PACF tails off gradually",
+        "PACF cuts off after lag p, ACF tails off",
+        "Both ACF and PACF are zero at every lag",
+        "ACF equals 1 at every lag"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the AR(p) signature, not MA",
+        "all-zero correlations mean white noise",
+        "a constant ACF of 1 is a deterministic series, not MA"
+      ]
+    },
+    "solution": "MA(q) has autocorrelation zero beyond lag q. Its partial autocorrelation tails off.",
+    "hints": [
+      "Which function cuts off for MA, which for AR?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For an AR(1) with coefficient $\\phi$, write the autocorrelation at lag $k$ in terms of $\\phi$ and $k$.",
+    "answer": {
+      "kind": "expression",
+      "value": "phi^k",
+      "vars": [
+        "phi",
+        "k"
+      ],
+      "also": [
+        "exp(k*ln(phi))"
+      ],
+      "domain": {
+        "phi": [
+          0.1,
+          0.9
+        ],
+        "k": [
+          1,
+          6
+        ]
+      }
+    },
+    "check": null,
+    "solution": "For AR(1), $\\rho_k=\\phi^k$, so the correlation decays geometrically with lag.",
+    "hints": [
+      "Each extra lag multiplies by phi once more."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "An AR(1) process has $\\phi=0.5$ and zero mean. Find the lag-2 autocorrelation $\\rho_2$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(1,2)**2",
+    "solution": "$\\rho_2=\\phi^2=0.25$.",
+    "hints": [
+      "Square phi."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An AR(1) process has $\\phi=0.8$ and innovation variance $0.36$. Find the stationary variance of $y_t$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(36,100)/(1-Fraction(64,100))",
+    "solution": "$\\mathrm{Var}(y)=\\sigma^2/(1-\\phi^2)=0.36/0.36=1$.",
+    "hints": [
+      "Divide the innovation variance by one minus phi squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t9-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An AR(1) model is $y_t=5+0.5\\,y_{t-1}+\\varepsilon_t$ with zero-mean noise. Find the long-run mean $E[y_t]$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(5)/(1-Fraction(1,2))",
+    "solution": "At the long-run mean, $\\mu=5+0.5\\mu$, so $\\mu=5/0.5=10$.",
+    "hints": [
+      "Set the mean equal to its own next value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A series needs one first difference to become stationary, and the differenced series behaves as AR(1). Which ARIMA order fits?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "ARIMA(1,0,0)",
+        "ARIMA(1,1,0)",
+        "ARIMA(0,1,1)",
+        "ARIMA(1,2,0)"
+      ],
+      "correct": 1,
+      "why": [
+        "skips the differencing the series needs",
+        "",
+        "this puts the moving-average term where the AR term belongs",
+        "two differences overshoot a series that needed only one"
+      ]
+    },
+    "solution": "The middle number counts differences, so $d=1$. The AR part is $p=1$ and the MA part is $q=0$.",
+    "hints": [
+      "The middle index counts differences."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "An MA(1) process is $y_t=\\varepsilon_t+0.6\\,\\varepsilon_{t-1}$ with unit noise variance. Find the lag-1 autocorrelation $\\rho_1$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.4411764705882353,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(6,10)/(1+Fraction(6,10)**2)",
+    "solution": "$\\rho_1=\\theta/(1+\\theta^2)=0.6/1.36=15/34\\approx 0.4412$.",
+    "hints": [
+      "Divide theta by one plus theta squared."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-arima"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A random walk $y_t=y_{t-1}+\\varepsilon_t$ starts at $y_0=0$, and each innovation has variance 2. Find $\\mathrm{Var}(y_4)$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4*2",
+    "solution": "$\\mathrm{Var}(y_4)=4\\sigma^2=8$, since the innovations are independent.",
+    "hints": [
+      "Each step adds one independent innovation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What must each training fit exclude in a rolling-origin evaluation?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Every observation after its forecast origin",
+        "A random sample of earlier rows",
+        "Only the most recent observation",
+        "Nothing, since all rows may be used"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "random sampling breaks time order and can leak future values",
+        "one point is too little to fit a forecast model",
+        "using later data leaks the future into the forecast"
+      ]
+    },
+    "solution": "Each fit may only use observations up to its origin, so the forecast is judged on data it has not seen.",
+    "hints": [
+      "Time order must not leak backwards."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which forecast is the naive baseline for a random walk?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The last observed value, carried forward",
+        "The mean of all training values",
+        "A linear trend fitted to all rows",
+        "The median of the last year"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the training mean ignores the recent level that a random walk keeps",
+        "a fitted trend is a model, not the naive baseline",
+        "a window median is a smoothing forecast, not the naive one"
+      ]
+    },
+    "solution": "The naive forecast repeats the last value. For a random walk it is the optimal one-step forecast.",
+    "hints": [
+      "Which single value is most recent?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The naive one-step forecast of $y_t$ uses how many previous observations? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "It repeats $y_{t-1}$, so it uses one previous value.",
+    "hints": [
+      "Only the latest value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Actuals for two steps are 10 and 12, and the forecasts are 9 and 13. Find the mean absolute error.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "(abs(10-9)+abs(12-13))/2",
+    "solution": "$|10-9|=1$ and $|12-13|=1$, so MAE $=(1+1)/2=1$.",
+    "hints": [
+      "Take absolute errors first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A training series is 2, 4, 5, 9, and the out-of-sample forecast MAE is 2. Find MASE as a decimal, where the scale is the in-sample mean absolute error of the one-step naive forecast on the training series.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.8571428571428571,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2)/Fraction(7,3)",
+    "solution": "In-sample naive errors are $2,1,4$, mean $7/3$. MASE $=2/(7/3)=6/7\\approx 0.857$.",
+    "hints": [
+      "The scale uses the naive errors inside the training data."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The last observed value is 40 and the next three actual values are 42, 38 and 41. Forecast all three steps with 40 and find the mean absolute error as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.6666666666666667,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(2)+2+1)/3",
+    "solution": "Errors are $2,2,1$, so MAE $=5/3\\approx 1.667$.",
+    "hints": [
+      "Average the absolute errors over the three steps."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A monthly series with period 12 is forecast by repeating the value from 12 months earlier. Which baseline is this?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Seasonal naive",
+        "Training mean",
+        "Drift",
+        "Simple exponential smoothing"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the mean ignores season entirely",
+        "drift adds a straight-line trend, not a seasonal lag",
+        "smoothing averages recent levels rather than copying a lag"
+      ]
+    },
+    "solution": "The seasonal naive forecast copies the value one season earlier.",
+    "hints": [
+      "It copies a lag equal to the season length."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A one-step point forecast is 100 units and the forecast error has standard deviation 5 units. Using $z=1.96$, find the upper bound of the 95% prediction interval, in units.",
+    "answer": {
+      "kind": "numeric",
+      "value": 109.8,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "100+Fraction(196,100)*5",
+    "solution": "Upper bound $=100+1.96\\cdot 5=109.8$ units.",
+    "hints": [
+      "Add z times the error standard deviation to the forecast."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ts-eval"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A series has 20 observations, and a rolling origin starts with 10 training points and advances one point per step, forecasting one step ahead. How many one-step forecasts are made?",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "20-10",
+    "solution": "Origins at 10, 11, ..., 19 give forecasts for points 11 to 20, which is 10 forecasts.",
+    "hints": [
+      "Count the origins from the first to the last."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does the posterior distribution represent?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The prior updated by the likelihood of the observed data",
+        "The likelihood function alone, rescaled to sum to one",
+        "The sampling distribution of the data",
+        "The prior with no data used"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the likelihood is one ingredient; the posterior also includes the prior",
+        "the sampling distribution describes data given parameters, the reverse of the posterior",
+        "with no data, the result is the prior, not the posterior"
+      ]
+    },
+    "solution": "Bayes' rule gives posterior proportional to prior times likelihood.",
+    "hints": [
+      "Which two ingredients does Bayes' rule multiply?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which prior and likelihood pair gives a Beta posterior for coin flips?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Beta prior with Bernoulli likelihood",
+        "Normal prior with Bernoulli likelihood",
+        "Uniform prior with Bernoulli likelihood, giving a Gamma posterior",
+        "Beta prior with Normal likelihood"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a normal prior does not stay normal under a Bernoulli likelihood",
+        "a uniform prior is Beta(1,1), so the posterior is Beta, not Gamma",
+        "a normal likelihood does not match a Beta prior for this update"
+      ]
+    },
+    "solution": "A Beta prior times a Bernoulli likelihood gives a Beta posterior, with successes and failures added to the parameters.",
+    "hints": [
+      "Add the counts to the prior parameters."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the mean of a Beta$(a,b)$ distribution in terms of $a$ and $b$.",
+    "answer": {
+      "kind": "expression",
+      "value": "a/(a+b)",
+      "vars": [
+        "a",
+        "b"
+      ],
+      "also": [
+        "a*(a+b)^(-1)",
+        "1/(1+b/a)"
+      ]
+    },
+    "check": null,
+    "solution": "The mean of Beta$(a,b)$ is $a/(a+b)$.",
+    "hints": [
+      "Successes over total."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t9-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A Beta(2,2) prior is updated by 6 successes in 10 Bernoulli trials. Find the posterior mean as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5714285714285714,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2+6,2+2+10)",
+    "solution": "The posterior is Beta(8,6), with mean $8/14=4/7\\approx 0.571$.",
+    "hints": [
+      "Add successes to a and failures to b."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A Beta(1,1) prior is updated by 3 successes in 3 trials. Find the posterior mean as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.8,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(4,5)",
+    "solution": "The posterior Beta(4,1) has mean $4/5=0.8$.",
+    "hints": [
+      "New a is 1 plus successes, new b is 1 plus failures."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A Beta(3,7) prior is updated by 2 successes in 5 trials. Find the posterior mean as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.3333333333333333,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(3+2,3+7+5)",
+    "solution": "The posterior Beta(5,10) has mean $5/15=1/3\\approx 0.333$.",
+    "hints": [
+      "The posterior mean is the new a over the new total."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a posterior Beta$(a,b)$ with $a>1$ and $b>1$, which expression is the MAP estimate, the mode?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$(a-1)/(a+b-2)$",
+        "$a/(a+b)$",
+        "$(a+1)/(a+b+2)$",
+        "$b/(a+b)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is the posterior mean, not the mode",
+        "a shifted mean, not the mode",
+        "the failure share, not the mode"
+      ]
+    },
+    "solution": "The Beta mode is $(a-1)/(a+b-2)$ when both parameters exceed one.",
+    "hints": [
+      "Subtract one from each parameter before forming the ratio."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A posterior is Beta(1,1), the uniform distribution on 0 to 1. Find the width of its central interval that holds probability 0.9, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.9,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(95,100)-Fraction(5,100)",
+    "solution": "A uniform has quantiles $0.05$ and $0.95$, so the width is $0.9$.",
+    "hints": [
+      "Leave 0.05 of probability in each tail."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-conj"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A Beta(2,2) prior is updated by 0 successes in 4 trials. Find the predictive probability that the next trial succeeds, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,8)",
+    "solution": "The posterior is Beta(2,6), and the predictive success probability equals its mean $2/8=0.25$.",
+    "hints": [
+      "The predictive chance equals the posterior mean."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For a symmetric proposal, what is the Metropolis acceptance probability of a move from $\\theta$ to $\\theta'$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$\\min(1,\\,p(\\theta')/p(\\theta))$",
+        "$p(\\theta')/p(\\theta)$ always",
+        "1 always",
+        "$p(\\theta)/p(\\theta')$ always"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "without the cap at one the value could exceed one, which is not a probability",
+        "accepting every proposal ignores the target density",
+        "that ratio is inverted and favours staying put"
+      ]
+    },
+    "solution": "Accept with probability $\\min(1, p(\\theta')/p(\\theta))$, where $p$ is the target density.",
+    "hints": [
+      "Compare the target density at the two points."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which diagnostic checks whether MCMC chains started at different points reach the same distribution?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Trace plots and $\\hat R$",
+        "Mean squared error on a held-out test set",
+        "A confusion matrix",
+        "An ROC curve"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "test error measures prediction, not whether chains mix",
+        "confusion matrices belong to classifier outputs",
+        "ROC curves describe classifier thresholds, not sampler convergence"
+      ]
+    },
+    "solution": "Overlapping traces and $\\hat R$ near one suggest the chains agree.",
+    "hints": [
+      "Think of chains as independent runs from different starts."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A proposal has a higher target density than the current point, and the proposal is symmetric. Find its acceptance probability. Give a number.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "The ratio exceeds one, so the cap gives $1$.",
+    "hints": [
+      "A ratio above one is capped at one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Current density $p(\\theta)=0.4$, proposal density $p(\\theta')=0.1$, symmetric proposal. Find the acceptance probability as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(1,10)/Fraction(4,10)",
+    "solution": "$0.1/0.4=0.25$.",
+    "hints": [
+      "Divide the new density by the old one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Current density is 0.2 and proposal density is 0.5, with a symmetric proposal. Find the acceptance probability.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "min(1, Fraction(5,10)/Fraction(2,10))",
+    "solution": "$0.5/0.2=2.5$, capped at 1.",
+    "hints": [
+      "Cap the ratio at one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A posterior predictive check: replicated data give an average of 30 exceedances above 50 in 100 new points, but the observed data have 42 exceedances. Find observed minus replicated average, in counts.",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "42-30",
+    "solution": "$42-30=12$ extra exceedances.",
+    "hints": [
+      "Subtract the replicated average from the observed count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A trace plot shows the chain stuck at one value for 500 iterations. What is the most likely problem?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Poor mixing: the proposal is too small or the chain is stuck",
+        "Perfect convergence to the mode",
+        "Too many draws were taken",
+        "The likelihood is too flat to sample"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a stuck trace shows the chain is not exploring, the opposite of convergence",
+        "more draws do not explain values that never move",
+        "a flat likelihood is an identifiability issue, not a stuck chain"
+      ]
+    },
+    "solution": "A flat trace means the proposal rarely moves the chain. Widen the proposal or reparameterise.",
+    "hints": [
+      "Look at how far the chain moves per step."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A chain has 1000 draws, with autocorrelation 0.5 at lag 1, 0.25 at lag 2 and zero at later lags. Using $ESS = N/(1+2\\sum_k \\rho_k)$ over lags 1 and 2, find the effective sample size.",
+    "answer": {
+      "kind": "numeric",
+      "value": 400,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1000/(1+2*(Fraction(1,2)+Fraction(1,4)))",
+    "solution": "$\\sum\\rho=0.75$, so $ESS=1000/2.5=400$.",
+    "hints": [
+      "Add the autocorrelations first, then apply the formula."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.bayes-mcmc"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Current density is 0.6, proposal density is 0.3 and the proposal is symmetric. Given a uniform draw $u=0.7$, does the move get accepted?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Accept, because 0.7 is above 0.5",
+        "Reject, because 0.7 is above the acceptance probability 0.5",
+        "Accept, because the new density is lower",
+        "Reject, because the density ratio is above one"
+      ],
+      "correct": 1,
+      "why": [
+        "comparing u with the probability this way inverts the rule",
+        "",
+        "lower density does not force acceptance",
+        "the ratio is 0.5, below one, so this reason is wrong"
+      ]
+    },
+    "solution": "The acceptance probability is $0.3/0.6=0.5$. Accept only when $u \\le 0.5$, so $u=0.7$ rejects.",
+    "hints": [
+      "Accept when the uniform draw is at most the acceptance probability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the cold-start problem in collaborative filtering?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "A new user or item has too few ratings to estimate similarities",
+        "Model fitting is too slow on large data",
+        "Ratings are always missing for the same items",
+        "Similarity values are always negative"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "slow fitting is a compute problem, not cold start",
+        "missing data is normal, cold start is about new entities",
+        "similarities can be positive or negative, so this is not the issue"
+      ]
+    },
+    "solution": "Cold start arises when a new user or item has no interaction history to compare against.",
+    "hints": [
+      "Who has no history yet?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which signal is implicit feedback?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "A purchase or click, with no explicit star rating",
+        "A one-to-five star rating from the user",
+        "A written review with a score",
+        "An answer to a satisfaction survey"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a star rating is explicit feedback, the opposite case",
+        "a review with a score is explicit feedback",
+        "a survey answer is explicit feedback"
+      ]
+    },
+    "solution": "Implicit feedback is inferred from behaviour. Explicit feedback is a rating or answer the user gives on purpose.",
+    "hints": [
+      "Is the preference stated, or inferred from behaviour?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is the cosine similarity between a non-zero vector and itself? Give a number.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1",
+    "solution": "$u\\cdot u/(\\|u\\|\\,\\|u\\|)=1$.",
+    "hints": [
+      "The angle between a vector and itself is zero."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Find the cosine similarity between $u=(3,4)$ and $v=(4,3)$. Give a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.96,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(24,25)",
+    "solution": "$u\\cdot v=24$, and both norms are 5, so $24/25=0.96$.",
+    "hints": [
+      "Dot product over the product of the norms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "User 1 bought items A, B, C and D, and user 2 bought A, B and E. Find the Jaccard similarity of the two baskets as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.4,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,5)",
+    "solution": "The intersection $\\{A,B\\}$ has 2 items and the union has 5, so $2/5=0.4$.",
+    "hints": [
+      "Intersection over union."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A user's mean rating is 3.5, and a neighbour with mean rating 3.0 rated the item 4.0. Predict the user's rating for the item with the mean-centred method, on the 1 to 5 scale.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(35,10)+(Fraction(4)-Fraction(3))",
+    "solution": "Prediction $=3.5+(4.0-3.0)=4.5$.",
+    "hints": [
+      "Add the neighbour's deviation from their own mean."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A user views a product but never rates it. How should the view enter a collaborative filter?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "As a weak positive signal, not as a rating of 0",
+        "As a rating of 0 out of 5",
+        "Drop all users who have no ratings",
+        "As the mean rating of 3 for every view"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a view is not a low rating, and zero would treat missing as dislike",
+        "dropping users is not the modelling step asked",
+        "imputing a fixed 3 invents a rating the user never gave"
+      ]
+    },
+    "solution": "Views are implicit and noisy. Weight them as positive evidence, not as explicit scores.",
+    "hints": [
+      "Views say interest, not a score."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A user's four most similar neighbours have similarities 0.9, 0.5, 0.3 and 0.1, and ratings 5, 3, 4 and 1 for the item. Find the similarity-weighted average rating on the 1 to 5 scale, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.055555555555555,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(9,10)*5+Fraction(5,10)*3+Fraction(3,10)*4+Fraction(1,10)*1)/(Fraction(9,10)+Fraction(5,10)+Fraction(3,10)+Fraction(1,10))",
+    "solution": "Weighted sum $7.3$ over total weight $1.8$ gives $73/18\\approx 4.056$.",
+    "hints": [
+      "Multiply each rating by its similarity, then divide by the sum of similarities."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-cf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Among 10 users, item X is liked by 4 and item Y by 5, and 2 users like both. Find $P(Y \\mid X)$ as a decimal, using these empirical counts.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,4)",
+    "solution": "Users who like X number 4. Of them, 2 like Y, so $P(Y\\mid X)=2/4=0.5$.",
+    "hints": [
+      "Restrict to users who like X first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In matrix factorisation, what is the predicted rating for a user and an item?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The dot product of the user vector and the item vector",
+        "The sum of all ratings for the item",
+        "The average of the user's ratings",
+        "The cosine distance between two items"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a sum over ratings is not a factor model",
+        "a user mean is a baseline, not a factorisation",
+        "a distance between items does not give a rating"
+      ]
+    },
+    "solution": "The prediction is $\\hat r_{ui}=u_u \\cdot v_i$, the inner product of latent factor vectors.",
+    "hints": [
+      "Latent factors multiply pairwise."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Why does the factorisation loss include a regularisation term?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "To keep the factor vectors small and reduce overfitting to observed ratings",
+        "To round ratings to whole numbers",
+        "To force the factors to be orthogonal",
+        "To fill in the missing entries"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "rounding is a post-processing step, not regularisation",
+        "orthogonality is an SVD property, not the purpose of the penalty",
+        "factorisation fits observed entries only, so missing entries stay missing"
+      ]
+    },
+    "solution": "The penalty $\\lambda(\\|u\\|^2+\\|v\\|^2)$ shrinks factors toward zero, so the fit generalises to unseen ratings.",
+    "hints": [
+      "Penalise large factor norms."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A rank-$k$ factorisation of an $m$ by $n$ rating matrix uses user factors and item factors. Write the number of free parameters in terms of $k$, $m$ and $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "k*(m+n)",
+      "vars": [
+        "k",
+        "m",
+        "n"
+      ],
+      "also": [
+        "k*m+k*n"
+      ]
+    },
+    "check": null,
+    "solution": "User factors give $km$ parameters and item factors give $kn$, a total of $k(m+n)$.",
+    "hints": [
+      "Count the user matrix and the item matrix separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "User factor $u=(2,1)$ and item factor $v=(1,3)$. Find the predicted rating $u\\cdot v$ on the rating scale.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2*1+1*3",
+    "solution": "$2\\cdot 1+1\\cdot 3=5$.",
+    "hints": [
+      "Multiply componentwise and add."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Global mean rating 3.5, user bias 0.5, item bias $-0.25$, and factor dot product 1.0. Find the predicted rating $\\mu+b_u+b_i+u\\cdot v$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.75,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(35,10)+Fraction(1,2)-Fraction(1,4)+1",
+    "solution": "$3.5+0.5-0.25+1.0=4.75$.",
+    "hints": [
+      "Add every term in the model."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "One observed rating is $r=4$ with factors $u=(1,2)$ and $v=(1,1)$, and the objective is $(r-u\\cdot v)^2+\\lambda(\\|u\\|^2+\\|v\\|^2)$ with $\\lambda=0.1$. Find the objective value for this rating.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.7,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1+Fraction(1,10)*(1+4+1+1)",
+    "solution": "$u\\cdot v=3$, so the error is 1 and its square is 1. The penalty is $0.1\\cdot 7=0.7$. Total $1.7$.",
+    "hints": [
+      "Compute the dot product before the squared error."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For one observed rating, the loss is $e^2+\\lambda\\|u\\|^2$ with error $e=r-\\hat r$. Which stochastic gradient step on the user vector $u$ is correct, with learning rate $\\eta$ and the factor 2 absorbed into $\\eta$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "$u \\leftarrow u+\\eta\\,(e\\,v-\\lambda u)$",
+        "$u \\leftarrow u-\\eta\\,(e\\,v+\\lambda u)$",
+        "$u \\leftarrow u+\\eta\\,(v-\\lambda u)$",
+        "$u \\leftarrow u+\\eta\\,(e\\,u-\\lambda v)$"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the sign on the error term is flipped",
+        "the step ignores the size of the error",
+        "it uses $u$ in the error term and $v$ in the penalty"
+      ]
+    },
+    "solution": "The gradient of the squared error with respect to $u$ is $-2e\\,v$, so the step moves $u$ along $e\\,v$ and shrinks it by $\\lambda u$.",
+    "hints": [
+      "Differentiate the squared error with respect to u."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "For a user factor $u=(1,2)$ and item factor $v=(3,1)$, the observed rating is 4. Find the residual, rating minus prediction.",
+    "answer": {
+      "kind": "numeric",
+      "value": -1,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4-(1*3+2*1)",
+    "solution": "Prediction $=3+2=5$, so the residual is $4-5=-1$.",
+    "hints": [
+      "Residual is observed minus predicted."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.recsys-mf"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A matrix of 100 users by 50 items is approximated with rank 5 factors. How many free parameters do the user and item factors have in total?",
+    "answer": {
+      "kind": "numeric",
+      "value": 750,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "5*(100+50)",
+    "solution": "Users: $5\\cdot 100=500$. Items: $5\\cdot 50=250$. Total $750$.",
+    "hints": [
+      "Count user factors and item factors separately."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does precision at $k$ measure?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The fraction of the top $k$ recommended items that are relevant",
+        "The fraction of all relevant items that appear in the top $k$",
+        "The position of the first relevant item",
+        "The average of the relevance grades"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that describes recall at k, which divides by all relevant items",
+        "that describes reciprocal rank",
+        "averaging grades ignores which items are in the list"
+      ]
+    },
+    "solution": "Precision at $k$ counts relevant items among the first $k$ slots, divided by $k$.",
+    "hints": [
+      "Divide by the list length k, not by all relevant items."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Which metric discounts relevant items that appear lower in the list?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "NDCG",
+        "Accuracy",
+        "Precision at $k$",
+        "A count of relevant items"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "accuracy ignores rank order and suits classification",
+        "precision at k treats every position in the top k equally",
+        "a count ignores rank entirely"
+      ]
+    },
+    "solution": "NDCG divides each gain by $\\log_2(i+1)$ at rank $i$, so lower positions count less.",
+    "hints": [
+      "Which metric weights position?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "For one query, the first relevant item is at rank 4. Give its reciprocal rank as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(1,4)",
+    "solution": "Reciprocal rank $=1/4=0.25$.",
+    "hints": [
+      "Reciprocal of the rank."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t9-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A ranked list of five items has relevance R, N, R, N, N, where R is relevant and N is not. Find precision at 5 as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.4,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,5)",
+    "solution": "Two relevant items in five slots: $2/5=0.4$.",
+    "hints": [
+      "Count relevant items in the top five and divide by five."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "The same list R, N, R, N, N has 4 relevant items in total in the catalogue. Find recall at 5 as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,4)",
+    "solution": "Two relevant items are retrieved out of four, so $2/4=0.5$.",
+    "hints": [
+      "Divide by all relevant items, not by k."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "The same list R, N, R, N, N, with exactly two relevant items in total. Find average precision as a decimal, averaging precision at each rank that holds a relevant item, divided by the total relevant count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.8333333333333334,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(1,1)+Fraction(2,3))/2",
+    "solution": "Precision at rank 1 is $1$ and at rank 3 is $2/3$. AP $=(1+2/3)/2=5/6\\approx 0.833$.",
+    "hints": [
+      "Read precision at each rank where a relevant item appears."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A search page shows the top results first, and users read top results most. Why prefer NDCG to precision at $k$?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "NDCG rewards placing relevant items higher, precision does not",
+        "NDCG counts only the first item",
+        "NDCG ignores graded relevance",
+        "NDCG needs no ideal ranking"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "NDCG reads every position, only discounting lower ranks",
+        "NDCG uses graded relevance, so ignoring grades is the wrong way round",
+        "NDCG divides by the ideal DCG, so it does need an ideal ranking"
+      ]
+    },
+    "solution": "NDCG weights each position by a discount, so moving a relevant item up raises the score. Precision does not change inside the top $k$.",
+    "hints": [
+      "Does the metric care where in the list the hit sits?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A ranked list has R, N, R in positions 1 to 3 with binary relevance, and the query has two relevant items in total. Find NDCG at 3 as a decimal, with discount $1/\\log_2(i+1)$ at rank $i$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.9197207891481877,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "1.5/(1+1/math.log(3,2))",
+    "solution": "DCG $=1+1/2=1.5$. Ideal DCG puts both relevant items first: $1+1/\\log_2 3\\approx 1.631$. NDCG $\\approx 0.920$.",
+    "hints": [
+      "The ideal ranking is the best possible order for the same items."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.ranking-metrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two queries have their first relevant item at rank 2 and rank 5. Find the mean reciprocal rank as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.35,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(1,2)+Fraction(1,5))/2",
+    "solution": "Reciprocal ranks are $0.5$ and $0.2$, mean $0.35$.",
+    "hints": [
+      "Average the two reciprocal ranks."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does add-one (Laplace) smoothing do to an unseen bigram?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Gives it a small non-zero probability",
+        "Gives it probability zero",
+        "Gives it probability one",
+        "Removes it from the vocabulary"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "zero probability is what smoothing is meant to avoid",
+        "a probability of one would make every other bigram impossible",
+        "smoothing changes counts, not the vocabulary"
+      ]
+    },
+    "solution": "Adding one to every count keeps unseen bigrams above zero, so no sentence gets probability zero.",
+    "hints": [
+      "Every count goes up by one."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does perplexity measure for a language model?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The exponential of the average negative log probability per token",
+        "The number of distinct words",
+        "The sum of token probabilities",
+        "The accuracy of a classifier"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "vocabulary size counts words, not uncertainty",
+        "token probabilities sum to one over the vocabulary by construction",
+        "accuracy measures labels, not likelihood"
+      ]
+    },
+    "solution": "Perplexity is $\\exp(-\\frac{1}{N}\\sum \\ln p_i)$. Lower means the model is less surprised by the text.",
+    "hints": [
+      "Think of it as an effective number of choices per token."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In a trigram model, how many previous tokens form the context of each prediction? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "2",
+    "solution": "A trigram conditions on the two preceding tokens.",
+    "hints": [
+      "A trigram has three tokens, the last one predicted."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Bigram counts: count(the cat) = 3 and count(the) = 10. Find $P(\\mathrm{cat} \\mid \\mathrm{the})$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.3,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(3,10)",
+    "solution": "$3/10=0.3$.",
+    "hints": [
+      "Divide the bigram count by the count of the context word."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Using add-one smoothing with vocabulary size 20, count(the cat) = 3 and count(the) = 10. Find the smoothed $P(\\mathrm{cat} \\mid \\mathrm{the})$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.13333333333333333,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(3+1,10+20)",
+    "solution": "$(3+1)/(10+20)=4/30\\approx 0.133$.",
+    "hints": [
+      "Add the vocabulary size to the context count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A 4-token text has probability $1/16$ under a model. Find its perplexity as a decimal, using $\\mathrm{PP}=P^{-1/N}$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.0,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "16**0.25",
+    "solution": "$16^{1/4}=2$.",
+    "hints": [
+      "Take the N-th root of one over the probability."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A tokeniser must handle rare and unseen words. Which choice most reduces out-of-vocabulary words?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Subword tokenisation such as byte-pair encoding",
+        "Lowercasing all text only",
+        "A whole-word vocabulary from the training set only",
+        "Removing stop words"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "lowercasing merges case variants but cannot form unseen words",
+        "whole-word vocabularies cannot represent unseen words, so OOV rises",
+        "stop-word removal changes content, not coverage"
+      ]
+    },
+    "solution": "Subwords split rare words into known pieces, so almost every string has a representation.",
+    "hints": [
+      "Smaller pieces can cover new words."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A naive Bayes text classifier has priors 0.5 for spam and 0.5 for ham, and the word free has likelihood 0.2 under spam and 0.05 under ham. Find $P(\\mathrm{spam} \\mid \\mathrm{free})$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.8,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,10)*Fraction(1,2)/(Fraction(2,10)*Fraction(1,2)+Fraction(5,100)*Fraction(1,2))",
+    "solution": "$0.2\\cdot 0.5/(0.2\\cdot 0.5+0.05\\cdot 0.5)=0.1/0.125=0.8$.",
+    "hints": [
+      "Apply Bayes rule with the two priors."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.nlp-ngram"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Trigram counts: count(the, cat, sat) = 2 and count(the, cat) = 5. Find $P(\\mathrm{sat} \\mid \\mathrm{the}, \\mathrm{cat})$ as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.4,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,5)",
+    "solution": "$2/5=0.4$.",
+    "hints": [
+      "The context is the two preceding words."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Why can a leaderboard of many models with tiny score gaps mislead?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Run-to-run noise from seeds and data splits can exceed the reported gap",
+        "The leaderboard has too few columns",
+        "Higher scores always mean worse models",
+        "Ranks are sorted alphabetically"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "column count is not a validity issue",
+        "higher is usually better, so this inverts the metric",
+        "sorting is a display choice, not a source of error"
+      ]
+    },
+    "solution": "When gaps are smaller than the noise, the top rank can change with a different seed.",
+    "hints": [
+      "Would the order survive a different random seed?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What must be recorded to reproduce a training run?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Code version, data version, random seeds and configuration",
+        "Only the final test score",
+        "Only the model file size",
+        "Only the date and time of the run"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a score alone cannot rebuild the run",
+        "file size cannot reproduce a fit",
+        "a timestamp does not fix the inputs"
+      ]
+    },
+    "solution": "A run is determined by its code, data, seeds and settings. Record all four.",
+    "hints": [
+      "Everything that feeds the fit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write the standard error of the mean of $n$ independent runs whose scores have standard deviation $s$, in terms of $s$ and $n$.",
+    "answer": {
+      "kind": "expression",
+      "value": "s/sqrt(n)",
+      "vars": [
+        "s",
+        "n"
+      ],
+      "also": [
+        "s*n^(-1/2)",
+        "sqrt(s^2/n)"
+      ],
+      "domain": {
+        "s": [
+          0.2,
+          3
+        ],
+        "n": [
+          1,
+          30
+        ]
+      }
+    },
+    "check": null,
+    "solution": "The standard error is $s/\\sqrt{n}$.",
+    "hints": [
+      "Divide the spread by the square root of the number of runs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Sixteen runs have run-to-run standard deviation $s=0.4$. Find the standard error of the mean score, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.1,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(4,10)/4",
+    "solution": "$0.4/\\sqrt{16}=0.4/4=0.1$.",
+    "hints": [
+      "The square root of the run count is 4."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Two models have mean scores 0.82 and 0.80, and the standard error of their difference is 0.03. Find the gap divided by its standard error, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.6666666666666666,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(2,100)/Fraction(3,100)",
+    "solution": "Gap $0.02$ over standard error $0.03$ is $2/3\\approx 0.667$.",
+    "hints": [
+      "Compute the gap first, then divide by the standard error."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Four seeds give scores 0.80, 0.84, 0.82 and 0.78. Find the mean score as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.81,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(80,100)+Fraction(84,100)+Fraction(82,100)+Fraction(78,100))/4",
+    "solution": "The sum $3.24$ divided by 4 is $0.81$.",
+    "hints": [
+      "Add the four scores, then divide by four."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A team tries 20 random seeds on the test set and reports the best score. What is the main problem?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Choosing the best run on the test set inflates the reported score",
+        "Running 20 seeds makes the job too slow",
+        "Test sets should never be used at all",
+        "Seeds reduce variance, which is always bad"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "speed is not a validity issue",
+        "the test set is for one final report, so the flaw is choosing on it",
+        "seeds reduce noise, so this reverses the point"
+      ]
+    },
+    "solution": "Picking the maximum over many noisy runs favours lucky ones. Select on validation, then report test once.",
+    "hints": [
+      "What did the selection use?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Five runs score 0.71, 0.74, 0.69, 0.73 and 0.70. Find the spread, meaning the maximum minus the minimum, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.05,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(74,100)-Fraction(69,100)",
+    "solution": "$0.74-0.69=0.05$.",
+    "hints": [
+      "Subtract the lowest from the highest."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.mlops-track"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Dataset version 1 has 1000 rows, and version 2 adds 250 rows and removes 50 duplicate rows. How many rows does version 2 have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 1200,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "1000+250-50",
+    "solution": "$1000+250-50=1200$.",
+    "hints": [
+      "Removed rows subtract from the total."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What is concept drift?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The relationship between inputs and the target changes over time",
+        "The input distribution changes while the relationship stays the same",
+        "A new model version replaces the old one",
+        "The logging format changes"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that describes covariate shift, which is data drift",
+        "a new model version is a deployment event, not drift",
+        "a logging change is a pipeline change"
+      ]
+    },
+    "solution": "Concept drift means $P(y\\mid x)$ changes. The same inputs now map to different targets.",
+    "hints": [
+      "What changes: the inputs, or the link from inputs to target?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Train-serve skew usually comes from what?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Features computed differently at training time and at serving time",
+        "A test set that is too large",
+        "A fixed random seed during training",
+        "Keeping the model in version control"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "test set size does not create skew",
+        "fixed seeds improve reproducibility",
+        "version control is good practice and does not cause skew"
+      ]
+    },
+    "solution": "When the training pipeline and the serving pipeline disagree, the model sees different inputs in production.",
+    "hints": [
+      "Two code paths for one feature."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In an A/B test, the control conversion rate is 0.10 and the treatment rate is 0.12. Find the absolute lift as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.02,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(12,100)-Fraction(10,100)",
+    "solution": "$0.12-0.10=0.02$.",
+    "hints": [
+      "Subtract control from treatment."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "In the same A/B test, the control rate is 0.10 and the treatment rate is 0.12. Find the relative lift as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.2,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(12,100)-Fraction(10,100))/Fraction(10,100)",
+    "solution": "$0.02/0.10=0.2$.",
+    "hints": [
+      "Divide the absolute lift by the control rate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A feature has training mean 50 and training standard deviation 10, and its serving mean is 55. Find the shift in training standard deviations, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(55-50,10)",
+    "solution": "$(55-50)/10=0.5$ standard deviations.",
+    "hints": [
+      "Standardise the shift by the training spread."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A model's baseline error rate is 0.05, and an alert fires when the error rate reaches 1.5 times the baseline. Find the alert threshold as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.075,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(5,100)*Fraction(3,2)",
+    "solution": "$0.05\\cdot 1.5=0.075$.",
+    "hints": [
+      "Multiply the baseline by 1.5."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which signal flags data drift without waiting for labels?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "A shift in input feature distributions compared with training",
+        "A drop in accuracy on labels that arrive a month later",
+        "The model version number",
+        "A new engineer joining the team"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "accuracy needs labels, which arrive late, so it is a slow signal",
+        "a version number is metadata and says nothing about inputs",
+        "team changes are unrelated to the data"
+      ]
+    },
+    "solution": "Input monitoring compares current feature distributions with the training distributions. It needs no labels.",
+    "hints": [
+      "Which quantity is available at serving time without labels?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A treatment receives a traffic share of 0.10 out of 20000 daily users. How many users per day get the treatment?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2000,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "20000*Fraction(10,100)",
+    "solution": "$0.1\\cdot 20000=2000$.",
+    "hints": [
+      "Multiply the share by the total."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.drift"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A category's share of traffic rises from 0.20 in training to 0.30 in serving. Find the relative change in that share as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.5,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(Fraction(3,10)-Fraction(2,10))/Fraction(2,10)",
+    "solution": "$(0.30-0.20)/0.20=0.5$.",
+    "hints": [
+      "Divide the change by the training share."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0127",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does demographic parity require?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Equal positive prediction rates across groups",
+        "Equal error rates across groups",
+        "Equal outcome base rates across groups",
+        "Equal group sizes in the data"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "equal error rates is the equalised odds requirement",
+        "base rates are data facts that parity ignores",
+        "group sizes are not a fairness criterion"
+      ]
+    },
+    "solution": "Parity asks that the share of positive decisions be the same for each group, whatever the labels.",
+    "hints": [
+      "Look only at the decisions, not the true labels."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0128",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does equalised odds require?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Equal true-positive and false-positive rates across groups",
+        "Equal positive prediction rates only",
+        "Equal overall accuracy only",
+        "Equal mean predicted score only"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is demographic parity, which ignores true labels",
+        "equal accuracy can hide different error rates",
+        "a mean score is not the criterion"
+      ]
+    },
+    "solution": "Equalised odds conditions on the true label, so error rates match in both classes.",
+    "hints": [
+      "Condition on the true label."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0129",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A classifier selects a fraction 0.3 of group A and 0.2 of group B. Find the demographic parity gap, A minus B, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.1,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(3,10)-Fraction(2,10)",
+    "solution": "$0.30-0.20=0.10$.",
+    "hints": [
+      "Compare the selection rates."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "probe": true,
+    "id": "t9-0130",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Group A has 50 applicants with 20 selected, and group B has 40 applicants with 12 selected. Find the selection-rate gap, A minus B, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.1,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(20,50)-Fraction(12,40)",
+    "solution": "Rates are $0.40$ and $0.30$, so the gap is $0.10$.",
+    "hints": [
+      "Compute each group's rate first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0131",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Group A has 80 truly positive applicants with 60 selected, and group B has 50 truly positive with 25 selected. Find the true-positive rate gap, A minus B, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.25,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(60,80)-Fraction(25,50)",
+    "solution": "TPR A $=0.75$, TPR B $=0.50$, gap $0.25$.",
+    "hints": [
+      "Divide selected positives by all positives in each group."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0132",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Group A has 100 truly negative applicants with 10 wrongly selected, and group B has 60 truly negative with 12 wrongly selected. Find the false-positive rate gap, B minus A, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.1,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(12,60)-Fraction(10,100)",
+    "solution": "FPR A $=0.10$, FPR B $=0.20$, so B minus A is $0.10$.",
+    "hints": [
+      "Divide false positives by true negatives."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0133",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Which statement about the fairness impossibility results is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Calibration and equal error rates cannot all hold when base rates differ, except for a perfect predictor",
+        "Calibration and parity always hold together",
+        "Equal base rates make all criteria impossible to satisfy",
+        "Dropping the protected attribute guarantees fairness"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "they hold together only in special cases, so always is wrong",
+        "equal base rates remove the conflict, which inverts the result",
+        "removing the attribute does not remove proxies, so the guarantee fails"
+      ]
+    },
+    "solution": "With different base rates, a calibrated score cannot also have equal false-positive and false-negative rates unless it is perfect.",
+    "hints": [
+      "Base rates drive the conflict."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0134",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A group has base rate 0.2 positives, and the classifier has true-positive rate 0.8 and false-positive rate 0.1. Find the positive predictive value, the chance a positive prediction is correct, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.6666666666666666,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(8,10)*Fraction(2,10)/(Fraction(8,10)*Fraction(2,10)+Fraction(1,10)*Fraction(8,10))",
+    "solution": "PPV $=0.16/(0.16+0.08)=2/3\\approx 0.667$.",
+    "hints": [
+      "Count expected true and false positives per 100 people."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0135",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.fairness"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Selection rates are 0.40 for group A and 0.25 for group B. Find the disparate impact ratio, B divided by A, as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.625,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "Fraction(25,100)/Fraction(40,100)",
+    "solution": "$0.25/0.40=0.625$.",
+    "hints": [
+      "Divide the lower rate by the higher rate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0136",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does k-anonymity require of a released table?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Each combination of quasi-identifiers appears in at least $k$ records",
+        "The table has at least $k$ columns",
+        "Each record has $k$ unique identifiers",
+        "$k$ different models were trained on it"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "column count is unrelated to anonymity",
+        "unique identifiers would reveal identity, the opposite of the goal",
+        "model count is not part of anonymity"
+      ]
+    },
+    "solution": "Records become indistinguishable within groups of size at least $k$ on the quasi-identifiers.",
+    "hints": [
+      "Group records by their quasi-identifiers."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0137",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "What does a smaller privacy budget $\\varepsilon$ mean in differential privacy?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Stronger privacy, since outputs change less when one person is added or removed",
+        "Weaker privacy, since more noise is added",
+        "A larger sample is needed",
+        "The model becomes more accurate"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "less noise weakens privacy, so this inverts the relation",
+        "epsilon bounds privacy loss, not sample size",
+        "accuracy usually falls as privacy strengthens"
+      ]
+    },
+    "solution": "Smaller $\\varepsilon$ means tighter bounds on how much any one person can change the output.",
+    "hints": [
+      "Epsilon bounds how much one person can shift the output."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0138",
+    "tier": "a",
+    "type": "recall",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A table is 3-anonymous on its quasi-identifiers. What is the smallest group size? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "3",
+    "solution": "$k$-anonymity with $k=3$ means every group has at least 3 records, so the smallest is 3.",
+    "hints": [
+      "k is the minimum group size."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0139",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A table's quasi-identifier groups have sizes 4, 3 and 5. What is the largest $k$ for which the table is $k$-anonymous?",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "min(4,3,5)",
+    "solution": "Anonymity is set by the smallest group, here 3.",
+    "hints": [
+      "k is limited by the smallest group."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0140",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Of 1000 people, 800 sit in quasi-identifier groups of size 10 and 200 in groups of size 2, and a record's re-identification risk is $1/g$ for group size $g$. Find the average risk over all 1000 people as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0.18,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "(800*Fraction(1,10)+200*Fraction(1,2))/1000",
+    "solution": "Average $=(800\\cdot 0.1+200\\cdot 0.5)/1000=180/1000=0.18$.",
+    "hints": [
+      "Weight each group's risk by its number of people."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0141",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "A counting query has sensitivity $\\Delta=1$, and Laplace noise with scale $b=\\Delta/\\varepsilon$ is added with $\\varepsilon=0.5$. Find the noise scale $b$.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "Fraction(1)/Fraction(1,2)",
+    "solution": "$b=1/0.5=2$.",
+    "hints": [
+      "Divide sensitivity by epsilon."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0142",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A release removes names but keeps zip code, birth date and sex. What is the main risk?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Re-identification by linking these fields to public records",
+        "The file size grows too large to store",
+        "Dropping names changes the statistics",
+        "Zip codes are public, so there is no risk"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "file size is not a privacy risk",
+        "dropping names rarely changes the statistics that matter here",
+        "public zip codes make linking easier, not harmless"
+      ]
+    },
+    "solution": "Quasi-identifiers can single out a person when matched against outside data.",
+    "hints": [
+      "What can an outsider link to?"
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0143",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A counting query is released with $\\varepsilon=0.1$, and for neighbouring datasets the probability ratio of any output is bounded by $e^{\\varepsilon}$. Find this bound as a decimal.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.1051709180756477,
+      "form": "decimal",
+      "rel": 0.02
+    },
+    "check": "math.exp(0.1)",
+    "solution": "$e^{0.1}\\approx 1.105$.",
+    "hints": [
+      "Evaluate the exponential of epsilon."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t9-0144",
+    "tier": "b",
+    "type": "micro",
+    "level": "T9",
+    "tags": [
+      "t9.privacy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "A release suppresses every group with fewer than 5 records, and the group sizes are 7, 4, 9 and 2. How many records are suppressed?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "tol": 0,
+      "form": "exact"
+    },
+    "check": "4+2",
+    "solution": "Groups of size 4 and 2 are suppressed, giving $4+2=6$ records.",
+    "hints": [
+      "Only groups under the threshold count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]

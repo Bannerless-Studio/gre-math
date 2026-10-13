@@ -1,0 +1,4123 @@
+[
+ {
+  "id": "t8-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A dense layer maps $n_{\\text{in}}$ inputs to $n_{\\text{out}}$ outputs and has one bias per output. Which expression counts its trainable parameters?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n_{\\text{in}}\\,n_{\\text{out}}$",
+    "$n_{\\text{in}}+n_{\\text{out}}$",
+    "$n_{\\text{in}}(n_{\\text{out}}+1)$",
+    "$n_{\\text{in}}\\,n_{\\text{out}}+n_{\\text{out}}$"
+   ],
+   "correct": 3,
+   "why": [
+    "forgets the bias vector",
+    "adds sizes instead of counting weights",
+    "puts one bias per input, not per output",
+    ""
+   ]
+  },
+  "solution": "The weight matrix is $n_{\\text{out}}\\times n_{\\text{in}}$. Add one bias per output: $n_{\\text{in}}n_{\\text{out}}+n_{\\text{out}}$.",
+  "hints": [
+   "Count the weight matrix, then the bias vector."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does a stack of linear layers with no activation function add no expressive power?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Its output is always non-negative",
+    "It collapses to a single linear map",
+    "Each layer needs a larger bias",
+    "Backprop cannot compute its gradient"
+   ],
+   "correct": 1,
+   "why": [
+    "sign of the outputs is not the issue",
+    "",
+    "biases stay linear in the inputs",
+    "gradients are still computed correctly"
+   ]
+  },
+  "solution": "Products of matrices are one matrix. $W_2(W_1x)=(W_2W_1)x$, so depth alone adds nothing.",
+  "hints": [
+   "Multiply the two weight matrices together."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the pre-activation $z$ of one neuron with inputs $x_1,x_2$, weights $w_1,w_2$ and bias $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "w1*x1+w2*x2+b",
+   "vars": [
+    "x1",
+    "x2",
+    "w1",
+    "w2",
+    "b"
+   ],
+   "also": [
+    "x1*w1+x2*w2+b",
+    "b+w2*x2+w1*x1"
+   ]
+  },
+  "check": null,
+  "solution": "The pre-activation is the weighted sum plus the bias, before the activation.\n$z=w_1x_1+w_2x_2+b$",
+  "hints": [
+   "Weighted sum first, then add the bias."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fully connected network has layer widths $4$, $6$ and $3$, with a bias on every neuron it feeds. Count all trainable parameters.",
+  "answer": {
+   "kind": "numeric",
+   "value": 51,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*6+6+6*3+3",
+  "solution": "Layer one has $4\\cdot6+6=30$ parameters.\nLayer two has $6\\cdot3+3=21$. Total $51$.",
+  "hints": [
+   "Count each weight matrix and its bias vector separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A neuron has inputs $x=(2,-1)$, weights $w=(1.5,\\,2)$, bias $b=1$, and outputs $\\max(0,z)$ with $z=w\\cdot x+b$. Find its output.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "max(0,Fraction(3,2)*2+2*(-1)+1)",
+  "solution": "$z=1.5\\cdot2+2\\cdot(-1)+1=2$.\nReLU keeps the positive value, so the output is $2$.",
+  "hints": [
+   "Compute $z$ first, then apply the max."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Select all statements that are true.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Stacking linear layers without a nonlinearity adds expressive power",
+    "One hidden layer with a nonlinearity can approximate many continuous functions on a bounded set",
+    "Each hidden unit forms a weighted sum of its inputs and then applies a function",
+    "The parameter count does not depend on the layer widths"
+   ],
+   "correct": [
+    1,
+    2
+   ]
+  },
+  "solution": "A nonlinear hidden layer gives approximation power.\nEach unit is a weighted sum then a function. Parameter counts grow with width.",
+  "hints": [
+   "Check each statement against weighted sums and nonlinearities."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Input $x=2$, hidden units $h_1=\\max(0,x-3)$ and $h_2=\\max(0,2x-1)$, and output $y=2h_1+h_2-\\tfrac12$. Find $y$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*max(0,2-3)+max(0,2*2-1)-Fraction(1,2)",
+  "solution": "$h_1=0$ and $h_2=3$.\nSo $y=0+3-\\tfrac12=\\tfrac52$.",
+  "hints": [
+   "Evaluate each max first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A layer maps a flattened $28\\times28$ grayscale image to $128$ units, with a bias on each unit. How many trainable parameters does it have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 100480,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "784*128+128",
+  "solution": "Inputs are $28\\cdot28=784$. Weights $784\\cdot128=100352$, plus $128$ biases gives $100480$.",
+  "hints": [
+   "Flatten the image first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.mlp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A network has $x\\in\\mathbb R^5$, a hidden layer of $8$ units and output $\\mathbb R^3$. Count the weights in the output layer, ignoring biases.",
+  "answer": {
+   "kind": "numeric",
+   "value": 24,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3*8",
+  "solution": "The output layer maps $8$ hidden units to $3$ outputs. Its weight matrix is $3\\times8$, so $24$ weights.",
+  "hints": [
+   "Output layer is outputs by hidden units."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement about the sigmoid $\\sigma(z)=1/(1+e^{-z})$ is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Its range is $(-1,1)$",
+    "Its derivative equals $\\sigma(z)$",
+    "It is exactly zero for every negative $z$",
+    "Its derivative is $\\sigma(z)(1-\\sigma(z))$"
+   ],
+   "correct": 3,
+   "why": [
+    "that is tanh's range; sigmoid's range is $(0,1)$",
+    "drops the factor $1-\\sigma$",
+    "that describes ReLU",
+    ""
+   ]
+  },
+  "solution": "Differentiating gives $\\sigma'=\\sigma(1-\\sigma)$.\nThe range is $(0,1)$ and the output never reaches zero.",
+  "hints": [
+   "Differentiate $1/(1+e^{-z})$ with the chain rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the main reason sigmoid networks suffer vanishing gradients with depth?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Sigmoid outputs exceed 1",
+    "Each sigmoid derivative is at most $\\tfrac14$, so products shrink",
+    "Biases are always zero",
+    "Large derivatives multiply together"
+   ],
+   "correct": 1,
+   "why": [
+    "outputs in $(0,1)$ are fine",
+    "",
+    "bias values do not set this",
+    "that causes exploding gradients, not vanishing"
+   ]
+  },
+  "solution": "The sigmoid derivative peaks at $\\tfrac14$.\nMultiplying many such factors drives the gradient toward zero.",
+  "hints": [
+   "Find the largest value of the sigmoid derivative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "State the maximum value of the sigmoid derivative $\\sigma'(z)$ over all real $z$. Give a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)",
+  "solution": "$\\sigma'=\\sigma(1-\\sigma)$ peaks at $\\sigma=\\tfrac12$, where it equals $\\tfrac14$.",
+  "hints": [
+   "The product $\\sigma(1-\\sigma)$ is largest when $\\sigma=\\tfrac12$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Find $\\sigma(z)$ for $z=\\ln 3$, where $\\sigma(z)=1/(1+e^{-z})$. Give a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,4)",
+  "solution": "$e^{-\\ln3}=\\tfrac13$, so $\\sigma=1/(1+\\tfrac13)=\\tfrac34$.",
+  "hints": [
+   "Write $e^{-\\ln 3}$ as a fraction."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Given $\\tanh z=\\tfrac35$, find $\\tanh'(z)$ using $\\tanh'=1-\\tanh^2$. Give a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "16/25",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1-Fraction(3,5)**2",
+  "solution": "$1-\\tfrac{9}{25}=\\tfrac{16}{25}$.",
+  "hints": [
+   "Square $\\tfrac35$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the derivative of softplus $\\ln(1+e^{z})$ as an expression in $z$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/(1+exp(-z))",
+   "vars": [
+    "z"
+   ],
+   "also": [
+    "exp(z)/(1+exp(z))",
+    "1-1/(1+exp(z))"
+   ],
+   "domain": {
+    "z": [
+     -3,
+     3
+    ]
+   }
+  },
+  "check": null,
+  "solution": "The derivative is $e^{z}/(1+e^{z})$.\nThat equals the sigmoid $1/(1+e^{-z})$.",
+  "hints": [
+   "Use the chain rule on $\\ln$ and multiply by the inner derivative $e^{z}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Ten sigmoid layers each pass a derivative of at most $\\tfrac14$. Find the largest possible product of the ten derivatives, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/1048576",
+   "tol": 0,
+   "form": "fraction"
+  },
+  "check": "Fraction(1,4)**10",
+  "solution": "The largest product is $(1/4)^{10}=1/4^{10}$.\n$4^{10}=1048576$.",
+  "hints": [
+   "Multiply $\\tfrac14$ by itself ten times."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Leaky ReLU is $f(z)=z$ for $z\\ge0$ and $f(z)=0.1\\,z$ for $z<0$. Find $f(-5)$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-1/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,10)*(-5)",
+  "solution": "$z=-5<0$, so $f(-5)=0.1\\cdot(-5)=-\\tfrac12$.",
+  "hints": [
+   "Check which branch applies to $z=-5$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.activations"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which activation functions have outputs in $(0,1)$ for every real input? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Sigmoid",
+    "Tanh",
+    "ReLU",
+    "One component of a softmax output over three classes"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "solution": "Sigmoid and softmax components lie strictly in $(0,1)$.\nTanh goes negative and ReLU is unbounded above.",
+  "hints": [
+   "Think about the range of each function."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For softmax probabilities $p_i$ and true class $y$, what is $\\partial L/\\partial z_i$ when $L=-\\log p_y$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$p_i$",
+    "$\\mathbf 1[i=y]-p_i$",
+    "$-p_i$",
+    "$p_i-\\mathbf 1[i=y]$"
+   ],
+   "correct": 3,
+   "why": [
+    "forgets the target indicator",
+    "sign flipped relative to the correct gradient",
+    "forgets the indicator and flips the sign",
+    ""
+   ]
+  },
+  "solution": "Write $L=-z_y+\\log\\sum_j e^{z_j}$ and differentiate.\nThe result is $p_i-\\mathbf 1[i=y]$.",
+  "hints": [
+   "Differentiate the log-sum-exp term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why is the maximum logit subtracted before exponentiating in softmax?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It makes all probabilities equal",
+    "It leaves the output unchanged and avoids overflow",
+    "It makes the logits non-negative",
+    "It scales each row to unit variance"
+   ],
+   "correct": 1,
+   "why": [
+    "equal probabilities are not the effect",
+    "",
+    "logits can still be negative after shifting",
+    "that describes batch norm, not softmax"
+   ]
+  },
+  "solution": "Softmax is invariant to adding a constant to all logits.\nSubtracting the maximum keeps every exponent at most zero.",
+  "hints": [
+   "Multiply top and bottom by $e^{-c}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For two logits $z_1,z_2$, write the softmax probability $p_1$ of class 1 as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "exp(z1)/(exp(z1)+exp(z2))",
+   "vars": [
+    "z1",
+    "z2"
+   ],
+   "also": [
+    "1/(1+exp(z2-z1))",
+    "1/(1+exp(-(z1-z2)))"
+   ],
+   "domain": {
+    "z1": [
+     -2,
+     2
+    ],
+    "z2": [
+     -2,
+     2
+    ]
+   }
+  },
+  "check": null,
+  "solution": "$p_1=e^{z_1}/(e^{z_1}+e^{z_2})$.\nDividing top and bottom by $e^{z_1}$ gives $1/(1+e^{z_2-z_1})$.",
+  "hints": [
+   "Divide top and bottom by $e^{z_1}$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0022",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Logits are $z=(1,0)$. Find the softmax probability of class 1 as a decimal in $[0,1]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7310585786300049,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1/(1+math.exp(-1))",
+  "solution": "$p_1=e/(e+1)=1/(1+e^{-1})$.\nThat is about $0.731$.",
+  "hints": [
+   "Divide $e$ by $e+1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Predicted probabilities are $(0.5,\\,0.25,\\,0.25)$ and the true class is class 2. Give the cross-entropy $-\\log_2 p_y$ in bits, with $\\log_2$ base 2.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.0,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "-math.log(0.25,2)",
+  "solution": "Only the true class counts.\n$0.25=2^{-2}$, so $-\\log_2 0.25=2$ bits.",
+  "hints": [
+   "Write $0.25$ as a power of 2."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Predicted probabilities are $p=(0.2,\\,0.5,\\,0.3)$ and the true class is class 3. Find $\\partial L/\\partial z_3$ for $L=-\\log p_3$, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-7/10",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(3,10)-1",
+  "solution": "The gradient is $p_3-1=0.3-1=-0.7$.",
+  "hints": [
+   "Use $p_i-\\mathbf 1[i=y]$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two logits $z_1,z_2$ feed a softmax. For $L=-\\log p_1$, write $\\partial L/\\partial z_1$ as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "-exp(z2)/(exp(z1)+exp(z2))",
+   "vars": [
+    "z1",
+    "z2"
+   ],
+   "also": [
+    "-1/(1+exp(z1-z2))",
+    "exp(z1)/(exp(z1)+exp(z2))-1"
+   ],
+   "domain": {
+    "z1": [
+     -2,
+     2
+    ],
+    "z2": [
+     -2,
+     2
+    ]
+   }
+  },
+  "check": null,
+  "solution": "The gradient is $p_1-1$.\nThat equals $-e^{z_2}/(e^{z_1}+e^{z_2})$.",
+  "hints": [
+   "Subtract one from the probability of class 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Logits are $(500,\\,502)$. Subtract the largest logit before exponentiating, then give the softmax probability of class 2 as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8807970779778823,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "1/(1+math.exp(-2))",
+  "solution": "Subtracting $502$ gives logits $(-2,0)$.\nSo $p_2=1/(1+e^{-2})\\approx0.881$.",
+  "hints": [
+   "Subtract the largest logit from both."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.softmax-ce"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Logits are $(a,b,c)$ and softmax gives probabilities $p$. Select all statements that are true.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The outputs $p$ sum to 1",
+    "Adding the same constant to every logit leaves $p$ unchanged",
+    "Each output can be negative",
+    "The largest logit always gets probability 1"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Softmax outputs are positive and sum to 1.\nAdding a constant cancels in the ratio.",
+  "hints": [
+   "Check the ratio $e^{a}/\\sum_j e^{z_j}$ after adding a constant."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In backpropagation, what does one backward step compute for a node?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The upstream gradient times the local derivative, by the chain rule",
+    "The upstream gradient times the local output",
+    "The weights summed over the layer",
+    "The loss value minus the bias"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uses the output where the derivative belongs",
+    "sums weights, not gradients",
+    "mixes the loss with the bias"
+   ]
+  },
+  "solution": "Each node multiplies the gradient from above by its own local derivative.\nIt passes the product to its inputs.",
+  "hints": [
+   "Apply the chain rule one node at a time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does backprop need the forward-pass values?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Local derivatives depend on them, so they must be stored",
+    "Backprop avoids computing derivatives",
+    "It doubles the batch size",
+    "It replaces the chain rule with sums"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "derivatives are still computed",
+    "batch size is unrelated",
+    "the chain rule is kept"
+   ]
+  },
+  "solution": "The derivative $\\sigma'(z)$ depends on the forward value $z$.\nStoring forward values avoids recomputing them.",
+  "hints": [
+   "Which numbers does $\\sigma'(z)$ need?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For $z=wx+b$ and $L=z^2$, write $\\partial L/\\partial w$ as an expression in $w,x,b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "2*(w*x+b)*x",
+   "vars": [
+    "w",
+    "x",
+    "b"
+   ],
+   "also": [
+    "2*x*(w*x+b)",
+    "2*w*x*x+2*b*x"
+   ],
+   "domain": {
+    "w": [
+     -2,
+     2
+    ],
+    "x": [
+     -2,
+     2
+    ],
+    "b": [
+     -2,
+     2
+    ]
+   }
+  },
+  "check": null,
+  "solution": "The chain rule gives $\\partial L/\\partial z\\cdot\\partial z/\\partial w=2z\\cdot x$.",
+  "hints": [
+   "Multiply the derivative of $z^2$ by $\\partial z/\\partial w$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0031",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Let $z=wx+b$ and $L=z^2$. With $w=3$, $x=2$, $b=1$, find $\\partial L/\\partial w$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 28,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*(3*2+1)*2",
+  "solution": "$z=7$, so $\\partial L/\\partial z=14$.\nAlso $\\partial z/\\partial w=x=2$, giving $28$.",
+  "hints": [
+   "Multiply $2z$ by $x$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Scalars: $h=w_1x$, $y=w_2h$, $L=(y-4)^2$. At $x=1$, $w_1=2$, $w_2=3$, find $\\partial L/\\partial w_1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*(3*2*1-4)*3*1",
+  "solution": "Here $h=2$ and $y=6$, so $\\partial L/\\partial y=2(6-4)=4$.\nThen $\\partial L/\\partial w_1=4\\cdot w_2\\cdot x=12$.",
+  "hints": [
+   "Chain three local derivatives."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sigmoid neuron has $a=\\sigma(wx)$. At $w=0$ and $x=2$, find $\\partial a/\\partial w$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)*2",
+  "solution": "$\\partial a/\\partial w=\\sigma'(wx)\\,x$.\nAt $wx=0$, $\\sigma'=\\tfrac14$, so the result is $\\tfrac14\\cdot2=\\tfrac12$.",
+  "hints": [
+   "Recall the sigmoid derivative at zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about the backward pass through $y=\\mathrm{ReLU}(z)$ are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The gradient is zero where $z<0$",
+    "The gradient is 1 where $z<0$",
+    "The gradient is multiplied by $z$",
+    "The upstream gradient passes unchanged where $z>0$"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "solution": "ReLU's local derivative is an indicator, 1 for $z>0$ and 0 for $z<0$.\nMultiplying by $z$ is not part of the rule.",
+  "hints": [
+   "The local derivative of ReLU is a step function."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Let $u=x^2$, $v=3x$ and $L=uv$. At $x=2$, find $dL/dx$, summing both paths through $x$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 36,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "9*2**2",
+  "solution": "$L=3x^3$, so $dL/dx=9x^2=36$.\nThe two paths give $v\\cdot2x+u\\cdot3=24+12=36$.",
+  "hints": [
+   "Use the product rule across the two paths."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.backprop"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A dense layer $y=Wx+b$ has $W\\in\\mathbb R^{2\\times3}$, upstream gradient $\\partial L/\\partial y=(1,-2)$ and $x=(4,0,1)$. Find $\\partial L/\\partial W_{23}$, the weight from input 3 to output 2.",
+  "answer": {
+   "kind": "numeric",
+   "value": -2,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "-2*1",
+  "solution": "$\\partial L/\\partial W_{ij}=\\delta_i x_j$.\nSo $\\delta_2x_3=(-2)(1)=-2$.",
+  "hints": [
+   "Multiply the gradient of output 2 by input 3."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does momentum add to plain SGD?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A per-parameter step size from squared gradients",
+    "Weight decay applied at every step",
+    "An exponential moving average of past gradients",
+    "A larger batch size automatically"
+   ],
+   "correct": 2,
+   "why": [
+    "that describes RMSprop, not momentum",
+    "weight decay is a separate penalty",
+    "",
+    "batch size is not set by momentum"
+   ]
+  },
+  "solution": "Momentum keeps a velocity $v_t=\\beta v_{t-1}+g_t$.\nThat is a decaying average of past gradients.",
+  "hints": [
+   "Momentum accumulates the gradient over steps."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does RMSprop divide each step by?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The total number of training steps",
+    "The loss value",
+    "A running root-mean-square of recent gradients",
+    "The learning-rate schedule"
+   ],
+   "correct": 2,
+   "why": [
+    "not a per-step quantity",
+    "the loss is not a gradient scale",
+    "",
+    "the schedule scales the rate, not the gradients"
+   ]
+  },
+  "solution": "RMSprop keeps a running average $v_t$ of $g_t^2$.\nIt divides the step by $\\sqrt{v_t}$.",
+  "hints": [
+   "Think about the size of recent gradients."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For one parameter $w$ with gradient $g$ and learning rate $\\mathrm{lr}$, write the plain SGD update $w_{\\text{new}}$.",
+  "answer": {
+   "kind": "expression",
+   "value": "w-lr*g",
+   "vars": [
+    "w",
+    "lr",
+    "g"
+   ],
+   "also": [
+    "w-g*lr",
+    "-lr*g+w"
+   ],
+   "domain": {
+    "w": [
+     -2,
+     2
+    ],
+    "lr": [
+     0.1,
+     1
+    ],
+    "g": [
+     -2,
+     2
+    ]
+   }
+  },
+  "check": null,
+  "solution": "SGD subtracts the learning rate times the gradient.\n$w_{\\text{new}}=w-\\mathrm{lr}\\,g$.",
+  "hints": [
+   "Move against the gradient."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0040",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "One SGD step has $w=2$, gradient $g=0.5$ and learning rate $0.1$. Find the new $w$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "39/20",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2-Fraction(1,10)*Fraction(1,2)",
+  "solution": "$w_{\\text{new}}=2-0.1\\cdot0.5=1.95=\\tfrac{39}{20}$.",
+  "hints": [
+   "Multiply the learning rate by the gradient first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Momentum with $\\beta=0.9$ uses $v_t=\\beta v_{t-1}+g_t$ with $v_0=0$ and gradients $g_1=1$, $g_2=3$. Find $v_2$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "39/10",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(9,10)*1+3",
+  "solution": "$v_1=1$.\n$v_2=0.9\\cdot1+3=3.9=\\tfrac{39}{10}$.",
+  "hints": [
+   "Compute $v_1$ before $v_2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Adam's first moment is $m_t=\\beta_1 m_{t-1}+(1-\\beta_1)g_t$ with $\\beta_1=0.9$, $m_0=0$, $g_1=2$, $g_2=4$, and the bias-corrected value is $\\hat m_2=m_2/(1-\\beta_1^2)$. Find $\\hat m_2$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "58/19",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(Fraction(9,10)*Fraction(2,10)+Fraction(4,10))/(1-Fraction(9,10)**2)",
+  "solution": "$m_1=0.2$ and $m_2=0.9\\cdot0.2+0.1\\cdot4=0.58$.\n$\\hat m_2=0.58/0.19=\\tfrac{58}{19}$.",
+  "hints": [
+   "Compute $m_1$, then $m_2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the RMSprop update of one parameter $w$, with learning rate $\\mathrm{lr}$, gradient $g$ and running mean of squared gradients $v$. Ignore $\\epsilon$.",
+  "answer": {
+   "kind": "expression",
+   "value": "w-lr*g/sqrt(v)",
+   "vars": [
+    "w",
+    "lr",
+    "g",
+    "v"
+   ],
+   "also": [
+    "w-lr*g*v^(-1/2)",
+    "w-(lr*g)/sqrt(v)"
+   ],
+   "domain": {
+    "w": [
+     -2,
+     2
+    ],
+    "lr": [
+     0.1,
+     1
+    ],
+    "g": [
+     -2,
+     2
+    ],
+    "v": [
+     0.5,
+     3
+    ]
+   }
+  },
+  "check": null,
+  "solution": "The step is scaled by $1/\\sqrt{v}$, so each parameter gets its own effective step.\n$w_{\\text{new}}=w-\\mathrm{lr}\\,g/\\sqrt{v}$.",
+  "hints": [
+   "Divide the gradient by the root of $v$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Gradient descent on $f(w)=w^2$ starts at $w_0=1$ with learning rate $0.6$. Find $w_1$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-1/5",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1-2*Fraction(3,5)",
+  "solution": "The gradient is $2w_0=2$.\n$w_1=1-0.6\\cdot2=-0.2=-\\tfrac15$.",
+  "hints": [
+   "The gradient of $w^2$ is $2w$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.optimizers"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about Adam, compared with plain SGD, are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "It scales each step by a running estimate of squared gradients",
+    "Every step has exactly the learning-rate size",
+    "It keeps a running average of gradients",
+    "It has no hyperparameters beyond the learning rate"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Adam divides by the root of a second-moment average and tracks a first-moment average.\nIt has $\\beta_1$, $\\beta_2$ and $\\epsilon$.",
+  "hints": [
+   "List what Adam stores per parameter."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which weight variance does He initialisation target for a ReLU layer with fan-in $n$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$1/n$",
+    "$2/n$",
+    "$1/(2n)$",
+    "$n$"
+   ],
+   "correct": 1,
+   "why": [
+    "Xavier-style for linear or tanh layers, ignores that ReLU zeroes half",
+    "",
+    "a scale slip that halves the target",
+    "grows with fan-in, so signals explode"
+   ]
+  },
+  "solution": "He sets $\\operatorname{Var}(w)=2/n$.\nThe factor $2$ offsets the half of units that ReLU zeroes.",
+  "hints": [
+   "ReLU keeps only the positive half of the signal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Over which values does batch normalisation compute its mean and variance?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Over the features of one sample",
+    "Over the batch, separately for each feature",
+    "Over the whole dataset once at the start",
+    "Over the time steps of one sequence"
+   ],
+   "correct": 1,
+   "why": [
+    "that describes layer norm",
+    "",
+    "statistics are recomputed per batch",
+    "that is specific to recurrent nets"
+   ]
+  },
+  "solution": "Each feature is normalised by its mean and variance across the mini-batch.",
+  "hints": [
+   "Look at which axis the mean is taken over."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the normalised value $\\hat x$ of input $x$, given mean $\\mu$ and standard deviation $\\sigma$, ignoring $\\epsilon$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(x-mu)/sigma",
+   "vars": [
+    "x",
+    "mu",
+    "sigma"
+   ],
+   "also": [
+    "(x-mu)*sigma^(-1)",
+    "x/sigma-mu/sigma"
+   ],
+   "domain": {
+    "x": [
+     -2,
+     2
+    ],
+    "mu": [
+     -1,
+     1
+    ],
+    "sigma": [
+     0.5,
+     2
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Subtract the mean and divide by the standard deviation.\n$\\hat x=(x-\\mu)/\\sigma$.",
+  "hints": [
+   "Centre first, then scale."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A ReLU layer has fan-in $32$ and He initialisation with weight variance $2/n_{\\text{in}}$. Find the weight standard deviation as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.25,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sqrt(2/32)",
+  "solution": "$\\sqrt{2/32}=\\sqrt{1/16}=0.25$.",
+  "hints": [
+   "Take the square root of $2/32$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Layer norm on the features $(1,2,3,6)$ uses the population standard deviation (divide by $n$), no scale or shift, and ignores $\\epsilon$. Find the normalised value of the feature $6$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.6035674514745464,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "3/math.sqrt(3.5)",
+  "solution": "The mean is $3$ and the population variance is $14/4=3.5$.\nSo $\\hat x=(6-3)/\\sqrt{3.5}\\approx1.604$.",
+  "hints": [
+   "Compute the mean, then the variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Batch norm on one channel sees the batch values $2,4,6,8$, with population variance, $\\epsilon=0$, $\\gamma=2$ and $\\beta=1$. Find the output for the value $8$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.6832815729997477,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "2*(8-5)/math.sqrt(5)+1",
+  "solution": "The batch mean is $5$ and the population variance is $5$.\nOutput $=2\\cdot3/\\sqrt5+1\\approx3.683$.",
+  "hints": [
+   "Normalise first, then apply $\\gamma$ and $\\beta$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Xavier (Glorot) initialisation uses weight variance $2/(n_{\\text{in}}+n_{\\text{out}})$. Find it for $n_{\\text{in}}=100$ and $n_{\\text{out}}=50$, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/75",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,150)",
+  "solution": "$2/(100+50)=2/150=\\tfrac{1}{75}$.",
+  "hints": [
+   "Add the two fan sizes first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A batch-norm layer normalises $64$ channels and learns one scale and one shift per channel. How many learnable parameters does it have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 128,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*64",
+  "solution": "Each channel adds $\\gamma$ and $\\beta$, so $2\\cdot64=128$.",
+  "hints": [
+   "Count two learnable values per channel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.init-norm"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about layer norm and batch norm are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Layer norm statistics do not depend on batch size",
+    "Batch norm normalises each sample across its own features",
+    "Layer norm is common in transformers",
+    "Batch norm works with batch size 1 in training"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Layer norm uses one sample's features, so batch size does not matter.\nBatch norm needs a batch to estimate statistics.",
+  "hints": [
+   "Ask which axis each method averages over."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For the penalty $\\frac{\\lambda}{2}\\lVert w\\rVert^2$ added to the loss, what does it add to the gradient with respect to $w$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\lambda$",
+    "$w/\\lambda$",
+    "$\\lambda w$",
+    "$\\lambda w^2$"
+   ],
+   "correct": 2,
+   "why": [
+    "a constant shift, not a function of $w$",
+    "inverts the penalty",
+    "",
+    "squares the weights in the gradient"
+   ]
+  },
+  "solution": "The derivative of $\\frac{\\lambda}{2}w^2$ is $\\lambda w$.\nEach weight shrinks toward zero.",
+  "hints": [
+   "Differentiate the penalty term."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "With inverted dropout and keep probability $p$, what happens to kept units at training time?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "They are scaled by $p$",
+    "They are scaled by $1/p$",
+    "All units are scaled by $p$",
+    "Dropped units are scaled by $1/p$"
+   ],
+   "correct": 1,
+   "why": [
+    "test-time scaling is the non-inverted version",
+    "",
+    "all units are not scaled",
+    "dropped units output zero, so scaling them does nothing"
+   ]
+  },
+  "solution": "Scaling by $1/p$ keeps the expected activation the same.\nNothing changes at test time.",
+  "hints": [
+   "Keep the expected value unchanged."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Label smoothing with $\\varepsilon=0.1$ over $K=5$ classes gives the true-class target $1-\\varepsilon+\\varepsilon/K$. Find that target as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "23/25",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1-Fraction(1,10)+Fraction(1,10)/5",
+  "solution": "$0.9+0.1/5=0.92=\\tfrac{23}{25}$.",
+  "hints": [
+   "Add the spread share to the reduced true-class mass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Inverted dropout has keep probability $0.8$, and a kept unit has activation $5$. What value does it output at training time, as a fraction?",
+  "answer": {
+   "kind": "numeric",
+   "value": "25/4",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(5)/Fraction(4,5)",
+  "solution": "$5/0.8=6.25=\\tfrac{25}{4}$.",
+  "hints": [
+   "Divide by the keep probability."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "One gradient step on $L_{\\text{data}}+\\frac{\\lambda}{2}w^2$ uses $\\lambda=0.5$, learning rate $0.1$ and $w=2$, where the data-loss gradient is zero. Find the new $w$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "19/10",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2-Fraction(1,10)*Fraction(1,2)*2",
+  "solution": "The penalty gradient is $\\lambda w=1$.\nSo $w_{\\text{new}}=2-0.1\\cdot1=1.9$.",
+  "hints": [
+   "Only the penalty gradient is nonzero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Label smoothing with $\\varepsilon=0.2$ spreads $\\varepsilon$ uniformly over all $K=4$ classes, true class included. Find the target of each wrong class as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/20",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(2,10)/4",
+  "solution": "Smoothing adds $\\varepsilon/K=0.2/4=0.05$ to every class, so each wrong class has target $\\tfrac1{20}$.",
+  "hints": [
+   "Divide $\\varepsilon$ by the number of classes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Validation losses at epochs 1 to 7 are $0.9,\\ 0.7,\\ 0.6,\\ 0.62,\\ 0.65,\\ 0.7,\\ 0.8$. Early stopping with patience $2$ halts once the loss has failed to beat the best so far in $2$ consecutive epochs; give the epoch where it halts.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(lambda L: min(e for e in range(3,len(L)+1) if min(L[e-2:e])>=min(L[:e-2])))([0.9,0.7,0.6,0.62,0.65,0.7,0.8])",
+  "solution": "The best loss is $0.6$ at epoch $3$.\nEpochs $4$ and $5$ both fail to beat it, so training halts after epoch $5$; epochs $6$ and $7$ never run.",
+  "hints": [
+   "Track the best loss so far and count consecutive epochs that fail to beat it."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A model has weights $w=(3,4)$ and penalty $\\frac{\\lambda}{2}\\lVert w\\rVert^2$ with $\\lambda=0.2$. Find the penalty value as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,5)/2*(9+16)",
+  "solution": "$\\lVert w\\rVert^2=25$.\nPenalty $=0.1\\cdot25=\\tfrac52$.",
+  "hints": [
+   "Square the norm first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.regularization"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which of these reduce overfitting in deep networks? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Dropout",
+    "Data augmentation",
+    "Raising the learning rate tenfold",
+    "Removing weight decay"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Dropout and augmentation discourage memorising the training rows.\nA larger learning rate and no weight decay do not regularise.",
+  "hints": [
+   "Think about what limits memorisation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Training and validation losses are both high and close together. What does this suggest?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Overfitting, because the model memorised the training rows",
+    "Underfitting, meaning high bias",
+    "Leakage, because validation rows reached training",
+    "Exploding gradients"
+   ],
+   "correct": 1,
+   "why": [
+    "overfitting shows low training loss with high validation loss",
+    "",
+    "leakage makes validation look too good",
+    "exploding gradients show spikes or NaNs"
+   ]
+  },
+  "solution": "High training loss means the model is too simple or under-trained.\nBoth curves high and close is the underfitting pattern.",
+  "hints": [
+   "Compare the training loss level with the validation loss."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Loss rises sharply and turns NaN within the first few steps. Which cause is most likely?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Regularisation strength too high",
+    "Learning rate too high",
+    "Validation set too small",
+    "Batch size too large"
+   ],
+   "correct": 1,
+   "why": [
+    "strong regularisation slows training, it does not diverge",
+    "",
+    "validation size does not affect training loss",
+    "a large batch smooths gradients, it does not cause divergence"
+   ]
+  },
+  "solution": "Steps that are too large overshoot and the loss blows up.\nLowering the learning rate is the first fix.",
+  "hints": [
+   "Think about step size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Train accuracy is $98$ percent and validation accuracy is $71$ percent. Report the gap in percentage points as a plain number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 27,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "98-71",
+  "solution": "The gap is $98-71=27$ percentage points.",
+  "hints": [
+   "Subtract the validation value from the training value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Train accuracy and validation accuracy, in percent, are $95$ and $80$ at epoch $5$, and $99$ and $78$ at epoch $10$. Find the gap at epoch 10 in percentage points as a plain number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 21,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "99-78",
+  "solution": "At epoch 10 the gap is $99-78=21$ points, up from $15$ at epoch 5.",
+  "hints": [
+   "Use the epoch 10 row only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Step decay starts the learning rate at $0.1$ and halves it at the start of epochs $10$, $20$, $30$ and so on, with epochs numbered from $0$. Find the learning rate in epoch $25$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/40",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,10)*Fraction(1,4)",
+  "solution": "Two halvings have happened, at epochs $10$ and $20$.\n$0.1\\cdot\\tfrac14=\\tfrac1{40}$.",
+  "hints": [
+   "Count the halvings before epoch 25."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $10$-class classifier starts with uniform predictions. Give its cross-entropy loss in nats as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.302585092994046,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.log(10)",
+  "solution": "Uniform predictions give $p_y=1/10$, so $L=-\\ln(1/10)=\\ln10\\approx2.3026$.",
+  "hints": [
+   "Take the negative log of one tenth."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which observations suggest overfitting? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Training loss falls while validation loss rises",
+    "Both losses are high and flat",
+    "The gap between training and validation loss keeps widening",
+    "Training loss is NaN"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Overfitting shows a widening gap with validation getting worse.\nFlat high losses point to underfitting, and NaN to divergence.",
+  "hints": [
+   "Overfitting means the model fits training rows better than new rows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Three learning rates give final losses: $10^{-3}$ gives $2.1$, $10^{-2}$ gives $0.9$, and $10^{-1}$ gives $1.4$. Take the ratio of the largest loss to the smallest, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "7/3",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(21,10)/Fraction(9,10)",
+  "solution": "The ratio is $2.1/0.9=\\tfrac{21}{9}=\\tfrac73$.",
+  "hints": [
+   "Use the first and second losses only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.training-diag"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Starting from learning rate $\\mathrm{lr}_0$, the rate is halved $k$ times. Write the rate after $k$ halvings as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "lr0*0.5^k",
+   "vars": [
+    "lr0",
+    "k"
+   ],
+   "also": [
+    "lr0/2^k",
+    "lr0*2^(-k)"
+   ],
+   "domain": {
+    "lr0": [
+     0.01,
+     1
+    ],
+    "k": [
+     0,
+     5
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Each halving multiplies by $\\tfrac12$.\nSo the rate is $\\mathrm{lr}_0(\\tfrac12)^k$.",
+  "hints": [
+   "Each halving multiplies by one half."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which formula gives the output width for input width $n$, kernel $k$, padding $p$ and stride $s$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(n+2p-k)\\cdot s+1$",
+    "$n-k+1$",
+    "$\\lfloor (n-k)/s\\rfloor$",
+    "$\\lfloor (n+2p-k)/s\\rfloor+1$"
+   ],
+   "correct": 3,
+   "why": [
+    "multiplies by the stride instead of dividing",
+    "ignores padding and stride",
+    "drops the padding and the plus one",
+    ""
+   ]
+  },
+  "solution": "Padding adds $p$ on each side.\nThe window slides in steps of $s$, so the count is $\\lfloor(n+2p-k)/s\\rfloor+1$.",
+  "hints": [
+   "Count the window positions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For stride $1$ and an odd kernel size $k$, which padding keeps the output the same size as the input?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$p=k$",
+    "$p=(k-1)/2$",
+    "$p=k/2$",
+    "$p=0$"
+   ],
+   "correct": 1,
+   "why": [
+    "grows the output by $k$ on each side",
+    "",
+    "not an integer for odd $k$",
+    "shrinks the output by $k-1$"
+   ]
+  },
+  "solution": "With $p=(k-1)/2$ we get $n+2p-k+1=n$.\nThe output equals the input.",
+  "hints": [
+   "Solve $n+2p-k+1=n$ for $p$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two stacked $3\\times3$ convolutions with stride $1$. What is the receptive field side length in input pixels?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1+(3-1)+(3-1)",
+  "solution": "Each $3\\times3$ layer adds $3-1=2$.\nSo $1+2+2=5$.",
+  "hints": [
+   "Start from one pixel and add $k-1$ per layer."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0076",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Input width $32$, kernel $3$, no padding, stride $2$. Find the output width.",
+  "answer": {
+   "kind": "numeric",
+   "value": 15,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(32+0-3)//2+1",
+  "solution": "$\\lfloor(32-3)/2\\rfloor+1=\\lfloor14.5\\rfloor+1=15$.",
+  "hints": [
+   "Apply the width formula with $p=0$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A convolution has $3\\times3$ kernels, $16$ input channels and $8$ output channels, with one bias per output channel. How many trainable parameters does it have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1160,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3*3*16*8+8",
+  "solution": "Weights: $3\\cdot3\\cdot16\\cdot8=1152$.\nBiases: $8$. Total $1160$.",
+  "hints": [
+   "Weights per output channel first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Input width $28$, kernel $5$, padding $2$, stride $2$. Find the output width.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(28+4-5)//2+1",
+  "solution": "$\\lfloor(28+4-5)/2\\rfloor+1=13+1=14$.",
+  "hints": [
+   "Add $2p$ before subtracting the kernel."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Two layers: a $3\\times3$ convolution with stride $2$, then a $3\\times3$ convolution with stride $1$. Find the receptive field in input pixels.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1+(3-1)*1+(3-1)*2",
+  "solution": "The first layer adds $(3-1)\\cdot1=2$, giving $3$, and its stride doubles the step.\nThe second adds $(3-1)\\cdot2=4$. Total $7$.",
+  "hints": [
+   "Each layer's added size is $(k-1)$ times the current step."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about a $1\\times1$ convolution are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "It mixes channels independently at each pixel",
+    "It changes the spatial size of its input at stride 1",
+    "Each input-output channel pair has one weight",
+    "It looks at $3\\times3$ neighbourhoods"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "A $1\\times1$ kernel sees one pixel across all channels.\nSpatial size is unchanged at stride 1.",
+  "hints": [
+   "What does the kernel see at each position?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.conv"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A convolution has $k\\times k$ kernels with $C_{\\text{in}}$ input and $C_{\\text{out}}$ output channels, no bias. Write the weight count as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "k^2*Cin*Cout",
+   "vars": [
+    "k",
+    "Cin",
+    "Cout"
+   ],
+   "also": [
+    "k*k*Cin*Cout",
+    "Cout*Cin*k^2"
+   ],
+   "domain": {
+    "k": [
+     1,
+     7
+    ],
+    "Cin": [
+     1,
+     64
+    ],
+    "Cout": [
+     1,
+     64
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Each output channel holds $C_{\\text{in}}$ kernels of $k^2$ weights.\nThe count is $k^2C_{\\text{in}}C_{\\text{out}}$.",
+  "hints": [
+   "Multiply the kernel area by both channel counts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why do residual connections make very deep networks easier to train?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "They remove the need for any nonlinearity",
+    "They give gradients a direct identity path to earlier layers",
+    "They replace pooling layers",
+    "They force each block to output its input unchanged"
+   ],
+   "correct": 1,
+   "why": [
+    "residual blocks keep their nonlinearities",
+    "",
+    "they are used alongside pooling, not instead",
+    "the block adds to its input, it does not copy it"
+   ]
+  },
+  "solution": "The identity shortcut passes gradient straight back.\nEarly layers still receive signal.",
+  "hints": [
+   "Consider what the shortcut carries backward."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does $2\\times2$ max pooling with stride $2$ do to spatial size?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Halves the height and width",
+    "Halves the channel count",
+    "Doubles the height and width",
+    "Keeps the size and halves the values"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "pooling acts on space, not channels",
+    "pooling shrinks, it does not grow",
+    "values are maxed, not halved"
+   ]
+  },
+  "solution": "Each $2\\times2$ window yields one value and the stride moves two pixels.\nHeight and width are each halved.",
+  "hints": [
+   "Count the windows along each side."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2\\times2$ max pool with stride $2$ is applied to a $28\\times28$ feature map. What is the output side length?",
+  "answer": {
+   "kind": "numeric",
+   "value": 14,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "28//2",
+  "solution": "Non-overlapping windows of size $2$ tile $28$ into $14$ positions per side.",
+  "hints": [
+   "Divide the side by the window size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $32\\times32\\times64$ feature map passes through $2\\times2$ max pooling with stride $2$ and no padding. Count the output values.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16384,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "16*16*64",
+  "solution": "The output is $16\\times16\\times64$.\nThat has $16\\cdot16\\cdot64=16384$ values.",
+  "hints": [
+   "Pooling halves height and width, not channels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A residual block has two $3\\times3$ convolutions with $64$ input and $64$ output channels, no biases. Count its weights.",
+  "answer": {
+   "kind": "numeric",
+   "value": 73728,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*9*64*64",
+  "solution": "Each convolution has $9\\cdot64\\cdot64=36864$ weights.\nTwo of them give $73728$.",
+  "hints": [
+   "Count the kernel area times both channel counts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $7\\times7\\times512$ feature map feeds a dense layer with $1000$ outputs, with a bias on each output. Count its trainable parameters.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25089000,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "7*7*512*1000+1000",
+  "solution": "Inputs $7\\cdot7\\cdot512=25088$.\nWeights $25088\\cdot1000$, plus $1000$ biases, gives $25089000$.",
+  "hints": [
+   "Flatten the map before the dense layer."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about a residual block $y=F(x)+x$ are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The shortcut adds the input to the block output",
+    "The block output must equal its input",
+    "The shortcut eases learning near the identity",
+    "Batch norm is never used in residual blocks"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "The block learns a residual $F(x)$ added to $x$.\nIf $F$ is near zero, the block is near identity.",
+  "hints": [
+   "Think about what $F$ has to learn."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $1\\times1$ convolution maps $256$ input channels to $64$ output channels, with one bias per output channel. Count its trainable parameters.",
+  "answer": {
+   "kind": "numeric",
+   "value": 16448,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "256*64+64",
+  "solution": "Weights $256\\cdot64=16384$.\nBiases $64$. Total $16448$.",
+  "hints": [
+   "Count weights and biases separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.cnn-arch"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2\\times2$ max pool with stride $2$ is applied to a map of side $n$, with $n$ even. Write the output side length as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "n/2",
+   "vars": [
+    "n"
+   ],
+   "also": [
+    "n*0.5",
+    "(1/2)*n"
+   ],
+   "domain": {
+    "n": [
+     2,
+     40
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Each pair of pixels becomes one output position.\nSo the side halves to $n/2$.",
+  "hints": [
+   "Two input positions per output position."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why do gradients in a vanilla RNN tend to vanish over long sequences?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Each step adds independent noise that cancels the gradient",
+    "The gradient is multiplied by the recurrent Jacobian at each step, whose norm is often below 1",
+    "The output layer has too few units",
+    "The loss is summed over time instead of averaged"
+   ],
+   "correct": 1,
+   "why": [
+    "noise is not the mechanism",
+    "",
+    "output width does not set time propagation",
+    "sum versus mean scales the loss, not the decay"
+   ]
+  },
+  "solution": "Backprop through time multiplies one recurrent Jacobian per step.\nProducts of factors below 1 shrink toward zero.",
+  "hints": [
+   "Count the multiplications across time steps."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does an LSTM forget gate do?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Decides how much of the input is written to memory",
+    "Outputs the final prediction",
+    "Scales the previous cell state, deciding how much to keep",
+    "Applies pooling to the hidden state"
+   ],
+   "correct": 2,
+   "why": [
+    "that is the input gate",
+    "that is the output step",
+    "",
+    "LSTMs do not pool"
+   ]
+  },
+  "solution": "The forget gate is a sigmoid in $(0,1)$ that multiplies the previous cell state.\nValues near 1 keep memory.",
+  "hints": [
+   "Its output multiplies the old cell state."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A linear recurrence has $h_t=a\\,h_{t-1}+b\\,x_t$ with $h_0=0$. Write $h_2$ as an expression in $a$, $b$, $x_1$, $x_2$.",
+  "answer": {
+   "kind": "expression",
+   "value": "a*b*x1+b*x2",
+   "vars": [
+    "a",
+    "b",
+    "x1",
+    "x2"
+   ],
+   "also": [
+    "b*x2+a*b*x1",
+    "b*(x2+a*x1)"
+   ]
+  },
+  "check": null,
+  "solution": "$h_1=b\\,x_1$.\n$h_2=a\\,h_1+b\\,x_2=ab\\,x_1+b\\,x_2$.",
+  "hints": [
+   "Substitute $h_1$ into the update for $h_2$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A scalar recurrence $h_t=0.5\\,h_{t-1}$ starts at $h_0=1$. Find $h_4$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/16",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)**4",
+  "solution": "Four steps each multiply by $\\tfrac12$, giving $(\\tfrac12)^4=\\tfrac1{16}$.",
+  "hints": [
+   "Multiply by the same factor four times."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Scalar recurrence $h_t=a\\,h_{t-1}+b\\,x_t$ has $a=\\tfrac12$, $b=2$, $h_0=0$ and inputs $x_1=1$, $x_2=0$, $x_3=1$. Find $h_3$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "5/2",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,2)*(Fraction(1,2)*(2*1)+2*0)+2*1",
+  "solution": "$h_1=2$, $h_2=\\tfrac12\\cdot2+0=1$.\n$h_3=\\tfrac12\\cdot1+2=\\tfrac52$.",
+  "hints": [
+   "Carry the state forward one step at a time."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Scalar recurrence $h_t=w\\,h_{t-1}$ with $w=3$. Find $\\partial h_4/\\partial h_0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 81,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3**4",
+  "solution": "The derivative is the product of four factors of $w=3$.\nSo $3^4=81$.",
+  "hints": [
+   "Each step contributes one factor of $w$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which gates does a GRU have? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Update gate",
+    "Reset gate",
+    "Forget gate",
+    "Output gate"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "A GRU has an update gate and a reset gate.\nIt has no separate forget or output gate.",
+  "hints": [
+   "A GRU merges some LSTM gates."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A vanilla RNN cell with input size $10$ and hidden size $20$ has an input weight matrix, a hidden-to-hidden weight matrix and a bias on each hidden unit. Count its trainable parameters.",
+  "answer": {
+   "kind": "numeric",
+   "value": 620,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "20*(10+20)+20",
+  "solution": "Input and recurrent weights give $20\\cdot(10+20)=600$.\nBiases add $20$, total $620$.",
+  "hints": [
+   "Count the two weight blocks and the biases."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.rnn"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An LSTM with input size $10$ and hidden size $20$ has four gates, each with the same shape as one RNN cell of those sizes. Count its trainable parameters.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2480,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*(20*(10+20)+20)",
+  "solution": "Each gate has $620$ parameters.\nFour gates give $2480$.",
+  "hints": [
+   "Multiply one cell's count by four."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In scaled dot-product attention, why divide the scores by $\\sqrt{d_k}$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "To normalise values to unit norm",
+    "To make scores non-negative",
+    "To stop dot products growing with dimension, so softmax does not saturate",
+    "To turn keys into queries"
+   ],
+   "correct": 2,
+   "why": [
+    "values are not normalised by this",
+    "scores can still be negative",
+    "",
+    "queries and keys are separate projections"
+   ]
+  },
+  "solution": "Dot products of random vectors have variance proportional to $d_k$.\nDividing by $\\sqrt{d_k}$ keeps the softmax in its useful range.",
+  "hints": [
+   "Think about how large dot products get in high dimension."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does a causal mask do in self-attention?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Zeroes the values after the softmax",
+    "Drops the query vectors",
+    "Sets scores for future positions to $-\\infty$ before the softmax",
+    "Adds positional encodings"
+   ],
+   "correct": 2,
+   "why": [
+    "zeroing after the softmax does not renormalise the row",
+    "queries are kept",
+    "",
+    "that is a separate step"
+   ]
+  },
+  "solution": "A future key's score becomes $-\\infty$, so its softmax weight is zero.\nThe remaining weights still sum to 1.",
+  "hints": [
+   "Where does the mask enter the computation?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "For query $q=(q_1,q_2)$ and key $k=(k_1,k_2)$ with dimension $d=2$, write the scaled dot-product score as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "(q1*k1+q2*k2)/sqrt(2)",
+   "vars": [
+    "q1",
+    "q2",
+    "k1",
+    "k2"
+   ],
+   "also": [
+    "(q1*k1+q2*k2)*2^(-1/2)",
+    "(k1*q1+k2*q2)/sqrt(2)"
+   ]
+  },
+  "check": null,
+  "solution": "The score is $q\\cdot k/\\sqrt{d}$ with $d=2$.",
+  "hints": [
+   "Dot product first, then divide by the square root of the dimension."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0103",
+  "probe": true,
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "One query $q=(1,0)$ and keys $k_1=(1,0)$, $k_2=(0,1)$ with dimension $d=2$ give scores $s_j=q\\cdot k_j/\\sqrt d$ followed by softmax. Give the weight on key $1$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6697615493266569,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.exp(1/math.sqrt(2))/(math.exp(1/math.sqrt(2))+1)",
+  "solution": "$s_1=1/\\sqrt2\\approx0.707$ and $s_2=0$.\nWeight on key 1 $=e^{s_1}/(e^{s_1}+1)\\approx0.670$.",
+  "hints": [
+   "Softmax the two scores."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Attention weights on two values are $(0.25,\\,0.75)$, and the scalar values are $v_1=4$ and $v_2=8$. Find the output as a plain number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,4)*4+Fraction(3,4)*8",
+  "solution": "$0.25\\cdot4+0.75\\cdot8=1+6=7$.",
+  "hints": [
+   "Weight each value, then add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A causal mask on a length-$4$ sequence lets query $i$ attend to keys $j\\le i$, with positions $1$ to $4$. How many query-key pairs are allowed?",
+  "answer": {
+   "kind": "numeric",
+   "value": 10,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*5//2",
+  "solution": "Query $i$ sees $i$ keys, so the count is $1+2+3+4=10$.",
+  "hints": [
+   "Sum the visible keys per query."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Multi-head attention with model width $512$ has projections $W_Q$, $W_K$, $W_V$ and $W_O$, each $512\\times512$ with no biases. Count the total weights.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1048576,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "4*512*512",
+  "solution": "Four matrices of $512\\cdot512=262144$ weights each give $1048576$.",
+  "hints": [
+   "Count the four projection matrices."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about attention weights from a softmax over three or more keys are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Each row of weights sums to 1",
+    "Weights can be negative",
+    "Weights depend on the values as well as the queries and keys",
+    "Each weight lies in $(0,1)$"
+   ],
+   "correct": [
+    0,
+    3
+   ]
+  },
+  "solution": "Softmax outputs are positive and sum to 1.\nThe weights come from queries and keys only.",
+  "hints": [
+   "The weights are computed from scores, before values are used."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.attention"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A dot product gives $q\\cdot k=6$ with dimension $d=4$. Find the scaled score $q\\cdot k/\\sqrt d$ as a plain number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(6,2)",
+  "solution": "$\\sqrt4=2$, so $6/2=3$.",
+  "hints": [
+   "Take the square root of $d$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does a transformer need positional encoding?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Attention alone ignores token order, so position must be added",
+    "Positional encodings replace the value vectors",
+    "They normalise each token to unit length",
+    "They turn the output into probabilities"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "values are still computed from the tokens",
+    "that is the role of layer norm",
+    "that is the role of the softmax"
+   ]
+  },
+  "solution": "Attention is permutation-invariant.\nAdding position vectors to the inputs lets the model use order.",
+  "hints": [
+   "Shuffle the tokens and ask what changes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In multi-head attention, what does the output projection $W_O$ do?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Computes the softmax weights",
+    "Adds the causal mask",
+    "Maps the concatenated heads back to model width",
+    "Replaces the residual connection"
+   ],
+   "correct": 2,
+   "why": [
+    "softmax lives inside each head",
+    "masking acts on scores, not in $W_O$",
+    "",
+    "the residual connection is separate"
+   ]
+  },
+  "solution": "The heads are concatenated, then $W_O$ maps them back to model width.",
+  "hints": [
+   "Think about the width of the concatenated heads."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A transformer has model width $512$ split across $8$ heads of equal size. Find the head dimension $d_k$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 64,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "512//8",
+  "solution": "$512/8=64$.",
+  "hints": [
+   "Divide width by head count."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A transformer feed-forward block maps width $512$ up to $2048$ and back, with weights only and no biases. Count its weights.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2097152,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*512*2048",
+  "solution": "Up: $512\\cdot2048=1048576$.\nDown: the same. Total $2097152$.",
+  "hints": [
+   "Count both directions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Single-head self-attention over a sequence of $1024$ tokens builds a full score matrix. How many entries does it have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1048576,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "1024**2",
+  "solution": "The matrix is $1024\\times1024$.",
+  "hints": [
+   "Each token scores every token."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Twelve heads each project width $768$ down to $64$ for queries, with no biases. Count the total query-projection weights across all heads.",
+  "answer": {
+   "kind": "numeric",
+   "value": 589824,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "12*768*64",
+  "solution": "Each head has $768\\cdot64=49152$ weights.\nTwelve heads give $589824$.",
+  "hints": [
+   "Count one head, then multiply by the head count."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about a transformer block are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Residual connections wrap the attention and feed-forward sublayers",
+    "Tokens are processed by recurrence across positions",
+    "Attention mixes information across all positions",
+    "A convolution kernel does the mixing"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Residual paths and attention over positions are core.\nTransformers avoid recurrence and convolution across tokens.",
+  "hints": [
+   "Which operation lets every token see every other token?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Sinusoidal positional encoding uses $\\mathrm{PE}_{(pos,2i)}=\\sin\\!\\big(pos/10000^{2i/d}\\big)$ with $d=4$. Find $\\mathrm{PE}_{(pos,2i)}$ for $pos=2$ and $i=1$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.01999866669333308,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "math.sin(2/10000**(2*1/4))",
+  "solution": "Here $2i/d=\\tfrac12$, so $10000^{1/2}=100$ and the argument is $0.02$.\n$\\sin(0.02)\\approx0.0200$.",
+  "hints": [
+   "Evaluate the power before the sine."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transformer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For a batch of $b$ sequences of length $n$, one head builds an $n\\times n$ score matrix per sequence. Write the total number of score entries as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "b*n^2",
+   "vars": [
+    "b",
+    "n"
+   ],
+   "also": [
+    "n*n*b",
+    "n^2*b"
+   ],
+   "domain": {
+    "b": [
+     1,
+     8
+    ],
+    "n": [
+     1,
+     512
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Each sequence contributes $n^2$ entries.\nThe total is $b\\,n^2$.",
+  "hints": [
+   "Multiply the per-sequence count by the batch size."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Fine-tuning a pretrained CNN on a very small labelled set. What is usually the safest starting plan?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Retrain every layer from random initialisation",
+    "Freeze the early layers and train a new output head",
+    "Use a large learning rate on all layers at once",
+    "Discard the pretrained weights except the last layer"
+   ],
+   "correct": 1,
+   "why": [
+    "throws away useful features, so it overfits with little data",
+    "",
+    "large steps overwrite the pretrained features",
+    "keeping early layers is the point"
+   ]
+  },
+  "solution": "Early layers hold generic features, so freezing them limits overfitting.\nOnly the new head needs to learn from the data.",
+  "hints": [
+   "Ask which layers hold generic features."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why do early CNN layers transfer well across tasks?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "They memorise the training labels",
+    "They learn generic features such as edges and textures",
+    "They output class probabilities",
+    "They hold most of the parameters"
+   ],
+   "correct": 1,
+   "why": [
+    "labels are not stored in early layers",
+    "",
+    "probabilities come from the last layer",
+    "parameter counts are not the reason"
+   ]
+  },
+  "solution": "Edges and textures appear in many image tasks.\nEarly filters are reused across domains.",
+  "hints": [
+   "Think about what every image task shares."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A frozen backbone is followed by a new head with $2048$ inputs, $10$ outputs and a bias on each output. Count the trainable parameters of the head.",
+  "answer": {
+   "kind": "numeric",
+   "value": 20490,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2048*10+10",
+  "solution": "$2048\\cdot10=20480$ weights.\nPlus $10$ biases gives $20490$.",
+  "hints": [
+   "Count weights and biases separately."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A new classifier head takes $512$ features and has $5$ classes, with a bias on each class. Count its trainable parameters.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2565,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "512*5+5",
+  "solution": "Weights $512\\cdot5=2560$.\nBiases $5$. Total $2565$.",
+  "hints": [
+   "Weights first, then biases."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Pretraining used learning rate $0.01$, and fine-tuning uses one-tenth of that for the backbone. Find the backbone learning rate as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "1/1000",
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "Fraction(1,100)/10",
+  "solution": "$0.01/10=0.001=\\tfrac{1}{1000}$.",
+  "hints": [
+   "Divide the pretraining rate by ten."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A frozen backbone has $10{,}000{,}000$ parameters and the trainable head has $20{,}000$. Give the trainable share of all parameters as a decimal in $[0,1]$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.001996007984031936,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "check": "20000/10020000",
+  "solution": "The total is $10{,}020{,}000$.\nThe share is $20000/10020000\\approx0.0020$.",
+  "hints": [
+   "Divide the trainable count by the total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "When labelled data is scarce, which practices help? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Freeze the early layers",
+    "Train all weights from random initialisation",
+    "Start from a pretrained backbone",
+    "Use a very large learning rate"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Freezing and pretrained starts reuse features learned on large data.\nRandom init and large steps need much data or risk damage.",
+  "hints": [
+   "Reuse what is already learned."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A backbone has $N$ weights split evenly over $L$ layers, and the first $m$ layers are frozen. Write the trainable backbone weight count as an expression.",
+  "answer": {
+   "kind": "expression",
+   "value": "N*(L-m)/L",
+   "vars": [
+    "N",
+    "L",
+    "m"
+   ],
+   "also": [
+    "N*(1-m/L)",
+    "N*(L-m)*L^(-1)"
+   ],
+   "domain": {
+    "N": [
+     1,
+     100
+    ],
+    "L": [
+     2,
+     20
+    ],
+    "m": [
+     0,
+     1.5
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Each layer holds $N/L$ weights, and $L-m$ layers remain trainable.\nThe count is $N(L-m)/L$.",
+  "hints": [
+   "Each layer holds an equal share."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t8-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T8",
+  "tags": [
+   "t8.transfer"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A frozen backbone embeds each image once per version. For $200$ images, each shown in $3$ augmented versions, how many feature vectors are produced?",
+  "answer": {
+   "kind": "numeric",
+   "value": 600,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "200*3",
+  "solution": "$200\\cdot3=600$ feature vectors.",
+  "hints": [
+   "Multiply images by versions."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

@@ -73,6 +73,7 @@
     var frac = m[3] || '';
     var digits = (m[2] || '') + frac;
     if (!digits || frac.length > 12) return null;
+    if (digits.replace(/^0+/, '').length > 15) return null;   // A5: past 15 significant digits the rational compare would round
     var p1 = Number(m[1] + (m[2] || '0') + frac);
     var q1 = Math.pow(10, frac.length);
     var r1 = makeRat(p1, q1);
@@ -122,7 +123,14 @@
     // Phone keyboards and pasted text: real minus, times, divide, pi, and ** for powers.
     var s = String(src).replace(/[\u2212\u2013\u2014]/g, '-').replace(/[\u00d7\u00b7\u22c5]/g, '*')
       .replace(/\u00f7/g, '/').replace(/\u03c0/g, 'pi').replace(/\*\*/g, '^'), i = 0, toks = [];
-    var words = Object.keys(FN).concat(Object.keys(CONST), vars)
+    // X_1 and X1 name the same declared variable, whichever spelling the pack declares; case is preserved.
+    var alias = {};
+    vars.forEach(function (v) {
+      var m1 = /^([A-Za-z]+)(\d+)$/.exec(v), m2 = /^([A-Za-z]+)_(\d+)$/.exec(v);
+      var other = m1 ? m1[1] + '_' + m1[2] : m2 ? m2[1] + m2[2] : null;
+      if (other && vars.indexOf(other) < 0) alias[other] = v;
+    });
+    var words = Object.keys(FN).concat(Object.keys(CONST), vars, Object.keys(alias))
       .filter(function (w) { return w.length > 0; })
       .sort(function (a, b) { return b.length - a.length; });
     while (i < s.length) {
@@ -143,6 +151,7 @@
         }
         if (w === null) { toks.push({ t: 'id', name: c }); i++; continue; }
         i += w.length;
+        if (alias[w] !== undefined) w = alias[w];
         if (vars.indexOf(w) >= 0) toks.push({ t: 'var', name: w });
         else if (isFuncName(w)) toks.push({ t: 'fn', name: w });
         else toks.push({ t: 'const', name: w });
@@ -342,7 +351,7 @@
     var out = {};
     vars.forEach(function (v) { out[v] = DEFAULT_DOMAIN; });
     if (raw === undefined || raw === null) return out;
-    var okPair = function (p) { return Array.isArray(p) && p.length === 2 && isNum(p[0]) && isNum(p[1]) && p[0] <= p[1]; };
+    var okPair = function (p) { return Array.isArray(p) && p.length === 2 && isNum(p[0]) && isNum(p[1]) && p[0] < p[1]; };
     if (Array.isArray(raw)) {                       // one interval for every var
       if (!okPair(raw)) return null;
       vars.forEach(function (v) { out[v] = raw; });
@@ -371,6 +380,12 @@
   // undefined when the node throws; NaN/Infinity pass through and are filtered by the caller.
   function tryEval(ast, env) {
     try { return evalExpr(ast, env); } catch (e) { return undefined; }
+  }
+  // Sum of |summands| through + and -: the scale float cancellation noise is relative to.
+  function absSum(ast, env) {
+    if (ast.type === 'bin' && (ast.op === '+' || ast.op === '-')) return absSum(ast.l, env) + absSum(ast.r, env);
+    if (ast.type === 'neg') return absSum(ast.x, env);
+    return Math.abs(tryEval(ast, env));
   }
   function evalAll(ast, pts) { return pts.map(function (env) { return tryEval(ast, env); }); }
   function finite(x) { return typeof x === 'number' && isFinite(x); }
@@ -422,7 +437,7 @@
     if (pr.error) return bad('unparsable', pr.error);
     var val = tryEval(pr.ast, {});
     if (!finite(val)) return bad('unparsable', 'not a finite number');
-    var canonText = canon(pr.ast);
+    var canonText; try { canonText = canon(pr.ast); } catch (e) { return bad('unparsable', 'expression too deep'); }
     // Exact form with a rational target: arithmetic on typed numbers, like (1/2) or 1/2+1/3, is compared as rationals.
     if (form === 'exact' && target.p !== null) {
       var er = exactRat(pr.ast);
@@ -456,7 +471,7 @@
     var tp = parseExpr(typed, vars);
     if (tp.error) return bad('unparsable', tp.error);
 
-    var parsed = canon(tp.ast);
+    var parsed; try { parsed = canon(tp.ast); } catch (e) { return bad('unparsable', 'expression too deep'); }
     var pts = samplePoints(vars, domain, n, fnv(spec.value + '|' + vars.join(',')));
     var typedVals = evalAll(tp.ast, pts);
     if (typedVals.every(function (v) { return v === undefined; })) return bad('unparsable', 'evaluates nowhere');
@@ -475,12 +490,14 @@
         if (tvals[k0] !== 0) aZero = false;
         if (typedVals[k0] !== 0) bZero = false;
       }
-      var slack = (aZero || bZero) ? ZERO_FLOOR * Math.max(1, scale) : 0;
+      var slack = 0;
       for (var k = 0; k < pts.length; k++) {
         var a = tvals[k], b = typedVals[k];
+        if (finite(a) && !finite(b)) { match = false; continue; }   // A2: typed undefined where the target is defined
         if (!finite(a) || !finite(b)) continue;
         valid += 1;
-        if (Math.abs(a - b) > REL_TOL * Math.max(Math.abs(a), Math.abs(b)) + slack) match = false;
+        var sl = aZero ? ZERO_FLOOR * Math.max(absSum(tp.ast, pts[k]), 0) : bZero ? ZERO_FLOOR * absSum(targets[j], pts[k]) : 0;
+        if (Math.abs(a - b) > REL_TOL * Math.max(Math.abs(a), Math.abs(b)) + sl) match = false;
       }
       if (valid < MIN_VALID) {
         if (j === 0) {
@@ -536,6 +553,114 @@
     return verdict(same, got.join(','));
   }
 
+
+  // ---- code (Python run in the page; engine/pyworker.js + engine/pyharness.py produce the raw result)
+  // checkCode(spec, result): result is the harness object {status, stdout, results|error, stage}. Pure JS, no Python.
+  // Equality (docs/SPEC.md 3.4):
+  // - numbers: |a-b| <= tol * max(1, |b|), tol = spec.tol or CODE_TOL. Python int 1 and float 1.0 are equal (JSON
+  //   cannot tell them apart). When spec.tol is absent and `expect` is an integer, an integer-valued result must match
+  //   exactly and a fractional one must round to it (1e12 + 500 is not 1e12); set tol to opt out.
+  // - true/false never equal 1/0; strings exact (whitespace counts); null equals null only.
+  // - lists in order, same length; dict keys unordered, same key set (a DataFrame's column order is ignored).
+  // - tags from the harness: {"__f": "nan"|"inf"|"-inf"} non-finite floats (nan equals nan), {"__i": "<digits>"} an
+  //   int beyond 2^53 - 1, compared as exact digits. The same tags are accepted in `expect`. A dict that is exactly
+  //   one of these one-key shapes is read as the tag.
+  var CODE_TOL = 1e-9;
+  function tagOf(v, key) {
+    return v !== null && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === 1 &&
+      typeof v[key] === 'string' ? v[key] : null;
+  }
+  function fTag(v) { return tagOf(v, '__f'); }
+  function fVal(tag) { return tag === 'nan' ? NaN : tag === 'inf' ? Infinity : tag === '-inf' ? -Infinity : null; }
+  function bigDigits(v) {
+    var t = tagOf(v, '__i');
+    if (t !== null) return /^-?\d+$/.test(t) ? t.replace(/^(-?)0+(?=\d)/, '$1') : null;
+    return typeof v === 'number' && Number.isSafeInteger(v) ? String(v) : null;
+  }
+  function numEq(got, want, tol, exactInt) {
+    if (typeof got !== 'number' || typeof want !== 'number') return false;
+    if (isNaN(got) || isNaN(want)) return isNaN(got) && isNaN(want);
+    if (!isFinite(got) || !isFinite(want)) return got === want;
+    if (exactInt && Number.isSafeInteger(want)) {
+      if (Number.isInteger(got)) return got === want;
+      if (Math.abs(got - want) >= 0.5) return false;
+    }
+    return Math.abs(got - want) <= tol * Math.max(1, Math.abs(want));
+  }
+  function codeEq(got, want, tol, exactInt) {
+    if (tagOf(got, '__i') !== null || tagOf(want, '__i') !== null) {
+      var gd = bigDigits(got), wd = bigDigits(want);
+      return gd !== null && gd === wd;
+    }
+    var gt = fTag(got), wt = fTag(want);
+    if (gt !== null || wt !== null) {
+      return numEq(gt !== null ? fVal(gt) : got, wt !== null ? fVal(wt) : want, tol, false);
+    }
+    if (typeof want === 'number') return numEq(got, want, tol, exactInt);
+    if (want === null || typeof want === 'string' || typeof want === 'boolean') return got === want;
+    if (Array.isArray(want)) {
+      if (!Array.isArray(got) || got.length !== want.length) return false;
+      for (var i = 0; i < want.length; i++) if (!codeEq(got[i], want[i], tol, exactInt)) return false;
+      return true;
+    }
+    if (typeof want === 'object') {
+      if (got === null || typeof got !== 'object' || Array.isArray(got)) return false;
+      var wk = Object.keys(want), gk = Object.keys(got);
+      if (wk.length !== gk.length) return false;
+      for (var j = 0; j < wk.length; j++) {
+        if (!Object.prototype.hasOwnProperty.call(got, wk[j]) || !codeEq(got[wk[j]], want[wk[j]], tol, exactInt)) return false;
+      }
+      return true;
+    }
+    return false;
+  }
+  // Short text of a JSON value for the "input -> expected / got" line.
+  function showVal(v) {
+    var t = fTag(v);
+    if (t !== null) return t === 'nan' ? 'nan' : t === 'inf' ? 'inf' : '-inf';
+    var bi = tagOf(v, '__i');
+    if (bi !== null) return bi;
+    var s = JSON.stringify(v);
+    if (s === undefined) s = String(v);
+    return s.length > 160 ? s.slice(0, 157) + '...' : s;
+  }
+  function showArgs(args) { return (args || []).map(showVal).join(', '); }
+  function checkCode(spec, result) {
+    var tests = spec && Array.isArray(spec.tests) ? spec.tests : null;
+    if (!tests || !tests.length) return bad('bad-spec', 'no tests');
+    if (!result || typeof result !== 'object') return bad('no-runtime', 'no result from the Python runner');
+    if (result.status === 'timeout') {
+      return { ok: false, parsed: 'timed out', attempt: true, error: 'timeout', detail: 'timed out', tests: [], first: null, stdout: result.stdout || '' };
+    }
+    if (result.status === 'unavailable') return bad('no-runtime', result.error ? String(result.error) : 'Python did not load');
+    if (result.status === 'error') {
+      return { ok: false, parsed: 'error', attempt: true, error: 'runtime-error', detail: String(result.error || 'error'),
+        tests: [], first: null, stdout: result.stdout || '' };
+    }
+    if (result.status !== 'ok' || !Array.isArray(result.results) || result.results.length !== tests.length) {
+      return bad('no-runtime', 'malformed runner result');
+    }
+    var hasTol = typeof spec.tol === 'number' && spec.tol >= 0, tol = hasTol ? spec.tol : CODE_TOL;
+    var rows = [], first = null, passed = 0;
+    for (var i = 0; i < tests.length; i++) {
+      var r = result.results[i] || {}, t = tests[i];
+      var row = { args: t.args, expect: t.expect };
+      if (typeof r.error === 'string') { row.pass = false; row.error = r.error; }
+      else { row.got = r.got; row.pass = codeEq(r.got, t.expect, tol, !hasTol); }
+      if (row.pass) passed += 1; else if (first === null) first = i;
+      rows.push(row);
+    }
+    var ok = passed === tests.length;
+    return { ok: ok, parsed: passed + '/' + tests.length, attempt: true, tests: rows, first: first, stdout: result.stdout || '' };
+  }
+  // One line for the first failing test: "f(args) -> expected E, got G" (or the error it raised).
+  function codeFailLine(spec, report) {
+    if (!report || report.first === null || report.first === undefined) return '';
+    var row = report.tests[report.first], call = (spec.entry || 'f') + '(' + showArgs(row.args) + ')';
+    if (row.error) return call + ' raised ' + row.error;
+    return call + ' -> expected ' + showVal(row.expect) + ', got ' + showVal(row.got);
+  }
+
   // check(spec, typed) -> {ok, parsed, attempt, error?, detail?}
   function check(spec, typed) {
     if (!spec || typeof spec !== 'object') return bad('bad-spec');
@@ -544,6 +669,7 @@
       case 'expression': return checkExpression(spec, typed);
       case 'mcq': return checkMcq(spec, typed);
       case 'multi': return checkMulti(spec, typed);
+      case 'code': return checkCode(spec, typed);
       default: return bad('unsupported-kind', String(spec.kind));
     }
   }
@@ -552,9 +678,16 @@
     parseExpr: parseExpr,
     evalExpr: evalExpr,
     check: check,
+    checkCode: checkCode,
+    codeEq: codeEq,
+    codeFailLine: codeFailLine,
+    codeShow: showVal,
+    codeArgs: showArgs,
+    CODE_TOL: CODE_TOL,
     toLatex: toLatex,
     canon: canon,
     parseNumber: parseNumber,
+    toIndex: toIndex,
     FORMS: FORMS
   };
 });

@@ -3,6 +3,7 @@
 
 Numeric items: the `check` expression is evaluated independently and must equal
 `answer.value` within max(`answer.tol`, `answer.rel` * |value|); rel is 0 to 0.1. mcq items: 4 distinct options, valid index.
+Code items (answer.kind code, Python in the browser): structure only here; tools/run_code_items.py proves the key.
 Also cross-checks tags/level against techniques.json and prints per-technique counts.
 """
 import json
@@ -207,6 +208,28 @@ def check_multi(item, errors):
         errors.append("multi correct selects every option")
 
 
+def check_code(item, errors):
+    """Structure only. The key itself is proven by tools/run_code_items.py (runs the reference code against the tests)."""
+    ans = item["answer"]
+    tests = ans.get("tests")
+    if ans.get("lang") != "python":
+        errors.append("code lang must be python")
+    if not isinstance(ans.get("entry"), str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", ans["entry"]):
+        errors.append("code entry must be an identifier")
+    if not isinstance(tests, list) or len(tests) < 3:
+        errors.append("code needs >= 3 tests")
+    elif not all(isinstance(t, dict) and isinstance(t.get("args"), list) and "expect" in t for t in tests):
+        errors.append("every code test needs args (list) and expect")
+    if any(p not in ("numpy", "pandas") for p in ans.get("packages", [])):
+        errors.append("code packages must be numpy and/or pandas")
+    if not isinstance(ans.get("starter"), str) or not ans.get("starter", "").strip():
+        errors.append("code needs a starter")
+    elif isinstance(ans.get("entry"), str) and not re.search(r"def\s+" + re.escape(ans["entry"]) + r"\s*\(", ans["starter"]):
+        errors.append("starter must define the entry function")
+    if not re.search(r"```[A-Za-z0-9_+-]*[ \t]*\n.*?```", item.get("solution", ""), re.S):
+        errors.append("code solution must hold the reference code in a fenced block")
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--batch=")]
     batch = next((a[len("--batch="):] for a in sys.argv[1:] if a.startswith("--batch=")), None)
@@ -252,6 +275,8 @@ def main():
             check_expression(item, errors)
         elif kind == "multi":
             check_multi(item, errors)
+        elif kind == "code":
+            check_code(item, errors)
         else:
             errors.append(f"unsupported answer kind {kind!r} in this batch")
         # Category guards found in T4 review: options are shuffled at play time, so text must never cite a position;

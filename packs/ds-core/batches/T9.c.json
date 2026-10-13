@@ -1,0 +1,1550 @@
+[
+ {
+  "id": "t9-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.causal-po",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Six units have potential outcomes (both known, for teaching):\n\n| Unit | $Y(1)$ | $Y(0)$ |\n|---|---|---|\n| A | 8 | 5 |\n| B | 6 | 6 |\n| C | 9 | 4 |\n| D | 5 | 5 |\n| E | 7 | 3 |\n| F | 7 | 5 |\n\nUnits A, C, E get treatment; B, D, F do not. The naive estimate is the observed treated mean minus the observed control mean. Its bias as an estimate of the ATE is naive minus ATE. Give the bias as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.3333333333333335,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Observed treated mean uses $Y(1)$ of A, C, E: 8",
+    "weight": 2
+   },
+   {
+    "text": "Observed control mean uses $Y(0)$ of B, D, F: 16/3",
+    "weight": 1
+   },
+   {
+    "text": "ATE averages all six unit effects: 14/6",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "causal-po: observed treated mean $=(8+9+7)/3=8$.\nObserved control mean $=(6+5+5)/3=16/3$.\nNaive $=8-16/3=8/3$.\nATE uses all six effects: $(3+0+5+0+4+2)/6=7/3$ (expectation over every unit).\nBias $=8/3-7/3=1/3\\approx0.3333$.\nTrap: ATT is $4$, not the ATE.",
+  "hints": [
+   "ATE averages $Y(1)-Y(0)$ over all six units."
+  ],
+  "check": "(8+9+7)/3-(6+5+5)/3-sum([3,0,5,0,4,2])/6",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.causal-po",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Outcome means: treated group 70; control group 58. Treated units would have averaged 64 without treatment. Control units would have averaged 60 had they been treated. 40% of units are treated. Give the ATE (average effect over everyone) as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.6000000000000005,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "ATT $=70-64=6$",
+    "weight": 2
+   },
+   {
+    "text": "Effect on controls $=60-58=2$",
+    "weight": 1
+   },
+   {
+    "text": "Weight by group shares 0.4 and 0.6 (total expectation)",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "causal-po: ATT $=E[Y(1)-Y(0)\\mid T=1]=70-64=6$.\nEffect among controls $=60-58=2$.\nconditional: ATE $=0.4\\cdot6+0.6\\cdot2=3.6$.\nTrap: naive $70-58=12$ mixes ATT with selection bias $64-58=6$.",
+  "hints": [
+   "Split the population by treatment status and weight each group's effect by its share."
+  ],
+  "check": "0.4*(70-64)+0.6*(60-58)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.causal-dag",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Causal graph edges: $W\\to X$, $W\\to Y$, $X\\to M$, $M\\to Y$, $X\\to Y$, $X\\to C$, $Y\\to C$. All variables are observed. Which adjustment set identifies the total effect of $X$ on $Y$ by regression?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\{W\\}$",
+    "$\\{W, M\\}$",
+    "$\\{W, C\\}$",
+    "$\\{M\\}$",
+    "$\\{\\}$ (no adjustment)"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "conditioning on mediator $M$ blocks part of the effect",
+    "conditioning on collider $C$ opens $X\\leftarrow\\ldots\\to Y$ via $C$",
+    "leaves the backdoor $X\\leftarrow W\\to Y$ open and blocks a causal path",
+    "leaves the backdoor $X\\leftarrow W\\to Y$ open"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Backdoor path $X\\leftarrow W\\to Y$ must be blocked",
+    "weight": 2
+   },
+   {
+    "text": "Do not condition on mediator $M$ (descendant on causal path)",
+    "weight": 2
+   },
+   {
+    "text": "Do not condition on collider $C$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "causal-dag: the only backdoor path is $X\\leftarrow W\\to Y$; block with $W$.\n$M$ lies on $X\\to M\\to Y$, a causal path for the total effect; adjusting removes it.\nindependence: $C$ is a collider of $X$ and $Y$; conditioning induces dependence.\nAnswer $\\{W\\}$.",
+  "hints": [
+   "List backdoor paths first, then check mediators and colliders."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.causal-dag",
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Recovery counts by severity (Simpson's setting):\n\n| Severity | Drug: recovered/n | No drug: recovered/n |\n|---|---|---|\n| Mild | 18/20 | 64/80 |\n| Severe | 40/80 | 6/20 |\n\nSeverity confounds the drug choice. Standardise to the whole sample (100 mild, 100 severe patients). Give the adjusted risk difference (drug minus no drug) as a decimal in 0 to 1 units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.15,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Stratum risks: mild 0.90 vs 0.80, severe 0.50 vs 0.30",
+    "weight": 2
+   },
+   {
+    "text": "Weights from whole sample: 0.5 and 0.5",
+    "weight": 2
+   },
+   {
+    "text": "Adjusted difference, not pooled 0.58 vs 0.70",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "causal-dag: severity is a common cause; stratify.\nproportions: mild $0.90-0.80=0.10$; severe $0.50-0.30=0.20$.\nPopulation shares are $100/200=0.5$ each.\nAdjusted $=0.5(0.10)+0.5(0.20)=0.15$.\nTrap: pooled $0.58-0.70=-0.12$ flips the sign.",
+  "hints": [
+   "Compute the difference within each stratum, then average with population weights."
+  ],
+  "check": "0.5*(18/20-64/80)+0.5*(40/80-6/20)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.causal-quasi",
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A policy hits one region. Mean outcomes (each cell has $n=100$ people, individual sd $=10$, cells independent):\n\n| Group | Before | After |\n|---|---|---|\n| Treated region | 40 | 52 |\n| Control region | 38 | 44 |\n\nThe difference-in-differences estimate is tested against 0. Give the $z$ statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.0,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "DiD $=(52-40)-(44-38)=6$",
+    "weight": 2
+   },
+   {
+    "text": "Variance of four independent cell means adds: $4\\cdot100/100=4$",
+    "weight": 2
+   },
+   {
+    "text": "$z=6/2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "causal-quasi: DiD removes the common trend: $12-6=6$.\nhypothesis: each cell mean has variance $10^2/100=1$.\nFour independent cells give variance $4$, se $=2$.\n$z=6/2=3$.\nTrap: using only two cells gives se $\\sqrt2$.",
+  "hints": [
+   "Variances of independent cell means add, even with a minus sign."
+  ],
+  "check": "((52-40)-(44-38))/math.sqrt(4*10**2/100)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.causal-quasi",
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A randomised encouragement $Z$ shifts treatment uptake. Mean outcome: 24.2 when $Z=1$, 21.8 when $Z=0$. Uptake rate: 0.70 when $Z=1$, 0.30 when $Z=0$. Assuming valid instrument and monotonicity, what is the effect among compliers (Wald/IV estimate)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "6.0",
+    "2.4",
+    "3.43",
+    "0.96",
+    "8.0"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "reports the intent-to-treat effect and ignores take-up",
+    "divides by the uptake in the encouraged arm (0.70) instead of the uptake difference",
+    "multiplies ITT by the uptake difference",
+    "divides by the control uptake (0.30)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "ITT $=24.2-21.8=2.4$",
+    "weight": 2
+   },
+   {
+    "text": "First stage $=0.70-0.30=0.40$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio of slopes: $2.4/0.4$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "causal-quasi: instrument $Z$ moves $Y$ only through uptake.\nols-simple: IV slope $=\\text{Cov}(Z,Y)/\\text{Cov}(Z,T)$, the ratio of reduced form to first stage.\nITT $=2.4$; first stage $=0.40$.\nLATE $=2.4/0.4=6$.",
+  "hints": [
+   "Divide the effect of $Z$ on $Y$ by the effect of $Z$ on uptake."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ts-decomp",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Quarterly series, $t=1,\\dots,8$: 20, 30, 50, 24, 22, 34, 54, 26. Estimate the trend at $t=3$ with the centred $2\\times4$ moving average (weights $\\tfrac18,\\tfrac14,\\tfrac14,\\tfrac14,\\tfrac18$ on $t=1..5$). Give the detrended value $y_3-\\text{trend}_3$ (raw additive seasonal estimate) as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 18.75,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Even period 4 needs half-weight ends over $t=1..5$",
+    "weight": 2
+   },
+   {
+    "text": "Trend $=125/4=31.25$",
+    "weight": 2
+   },
+   {
+    "text": "Detrended $=50-31.25$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ts-decomp: even period, so centre with half weights.\nTrend$_3=(0.5\\cdot20+30+50+24+0.5\\cdot22)/4=31.25$.\nexpectation: weights sum to 1, so the trend is a local mean.\nSeasonal estimate $=50-31.25=18.75$.\nTrap: plain 4-term mean of $t=2..5$ is off-centre.",
+  "hints": [
+   "Use $\\tfrac12$ weight on both end terms."
+  ],
+  "check": "50-(0.5*20+30+50+24+0.5*22)/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ts-decomp",
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Quarterly sales follow trend $\\times$ seasonal index, with indices $Q1=0.8$, $Q2=1.0$, $Q3=1.3$, $Q4=0.9$. Observed in $t=1..4$: 80, 110, 156, 126. Fit an OLS line to the deseasonalised values against $t$, then forecast sales at $t=5$ (Q1 of next year). Which value?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "120",
+    "150",
+    "112",
+    "195",
+    "187.5"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "forgets to reapply the Q1 index",
+    "uses the last deseasonalised value $140$ as the trend",
+    "applies the Q3 index instead of Q1",
+    "divides by the index instead of multiplying"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Deseasonalise by dividing: 100, 110, 120, 140",
+    "weight": 2
+   },
+   {
+    "text": "OLS slope $13$, intercept $85$; trend$_5=150$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply by Q1 index $0.8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ts-decomp: divide by index: $100,110,120,140$.\nols-simple: $\\bar t=2.5$, $\\bar y=117.5$, $S_{xy}=65$, $S_{xx}=5$, slope $13$, intercept $85$.\nTrend at $t=5$: $85+65=150$.\nForecast $=150\\times0.8=120$.",
+  "hints": [
+   "Fit the line on deseasonalised data, then put the seasonal index back."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ts-arima",
+   "t2.normal"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A stationary series follows $Y_t=4+0.6\\,Y_{t-1}+\\varepsilon_t$ with $\\varepsilon_t\\sim N(0,9)$ i.i.d. Give $P(Y_t>13)$ in the stationary regime, as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.21185539858339664,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Stationary mean $4/(1-0.6)=10$",
+    "weight": 1
+   },
+   {
+    "text": "Stationary variance $9/(1-0.36)=14.0625$, sd $3.75$",
+    "weight": 2
+   },
+   {
+    "text": "$z=(13-10)/3.75=0.8$, tail $\\approx0.2119$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ts-arima: mean $\\mu=c/(1-\\phi)=10$.\nVariance $=\\sigma^2/(1-\\phi^2)=9/0.64=14.0625$, sd $=3.75$.\nnormal: $Y_t\\sim N(10,3.75^2)$, $z=3/3.75=0.8$.\n$P(Z>0.8)=0.2119$.\nTrap: using $\\sigma=3$ gives $z=1$, $0.1587$.",
+  "hints": [
+   "Stationary $\\text{Var}=\\sigma^2/(1-\\phi^2)$."
+  ],
+  "check": "1-0.5*(1+math.erf(((13-4/(1-0.6))/math.sqrt(9/(1-0.6**2)))/math.sqrt(2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ts-arima",
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Zero-mean series $X_t=\\varepsilon_t+0.5\\,\\varepsilon_{t-1}$, $\\varepsilon_t\\sim N(0,4)$ i.i.d., parameters known. At time $t$ the shock $\\varepsilon_t$ is observed. Give the half-width of the 95% prediction interval for $X_{t+2}$ (use $z=1.96$) as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.382693235899588,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Two-step point forecast is $0$: both noise terms are in the future",
+    "weight": 2
+   },
+   {
+    "text": "Error is $\\varepsilon_{t+2}+0.5\\varepsilon_{t+1}$, variance $4(1+0.25)=5$",
+    "weight": 2
+   },
+   {
+    "text": "Half-width $1.96\\sqrt5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ts-arima: $X_{t+2}=\\varepsilon_{t+2}+0.5\\varepsilon_{t+1}$, both unknown; forecast $0$.\nError variance $=4(1+0.25)=5$.\nci: half-width $=1.96\\sqrt5\\approx4.383$.\nTrap: one-step variance $4$ gives $3.92$.",
+  "hints": [
+   "Past shocks vanish from the MA(1) forecast after one step."
+  ],
+  "check": "1.96*math.sqrt(4*(1+0.5**2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ts-eval",
+   "t6.reg-metrics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Training series: 10, 12, 15, 14, 18. Test actuals: 20, 22, 19. Forecasts: 18, 23, 21. MASE is test MAE divided by the in-sample MAE of the one-step naive forecast (previous value). Give MASE as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6666666666666667,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Test absolute errors 2, 1, 2: MAE $5/3$",
+    "weight": 1
+   },
+   {
+    "text": "Naive in-sample errors 2, 3, 1, 4: MAE $2.5$",
+    "weight": 2
+   },
+   {
+    "text": "MASE $=(5/3)/2.5$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ts-eval: test MAE $=(2+1+2)/3=5/3$.\nreg-metrics: naive in-sample abs diffs $2,3,1,4$, mean $2.5$.\nMASE $=1.6667/2.5=0.6667$.\nBelow 1 beats the naive forecast.",
+  "hints": [
+   "Scale by the training naive error, using four differences."
+  ],
+  "check": "((2+1+2)/3)/((2+3+1+4)/4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ts-eval",
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Expanding-window time-series CV on a series of 20 points. First training set has 8 points. Each fold tests the next 3 points, then the window advances by 3 points; folds need a full test block within the 20 points. A model is refit on each fold. Give the total number of training rows used across all folds, as an integer.",
+  "answer": {
+   "kind": "numeric",
+   "value": 50,
+   "tol": 0,
+   "form": "exact"
+  },
+  "rubric": [
+   {
+    "text": "Test blocks start at 9, 12, 15, 18: 4 folds",
+    "weight": 2
+   },
+   {
+    "text": "Training sizes 8, 11, 14, 17",
+    "weight": 2
+   },
+   {
+    "text": "Sum $=50$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ts-eval: a block starting at $s$ needs $s+2\\le20$, so $s\\le18$.\ncv: starts $9,12,15,18$ give 4 folds, never shuffled.\nTraining rows are $s-1$: $8,11,14,17$.\nTotal $=50$.",
+  "hints": [
+   "Count how many 3-point blocks fit after point 8."
+  ],
+  "check": "sum(8+3*k for k in range(4))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-conj",
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Success probability $\\theta$ has prior Beta(2, 8). Batch 1: 15 successes in 40 trials. Batch 2 (later): 6 successes in 10 trials. Give the posterior predictive probability that the next single trial succeeds, as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.38333333333333336,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Beta updating is additive over batches: Beta(23, 37)",
+    "weight": 2
+   },
+   {
+    "text": "Posterior predictive for one trial equals posterior mean",
+    "weight": 2
+   },
+   {
+    "text": "$23/60$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "bayes-conj: add successes to $\\alpha$, failures to $\\beta$.\nAfter batch 1: Beta$(17,33)$.\nAfter batch 2 (4 failures): Beta$(23,37)$.\nbayes: $P(\\text{success})=E[\\theta]=23/60=0.3833$.\nTrap: ignoring the prior gives $21/50=0.42$.",
+  "hints": [
+   "Updating in two batches equals updating once on pooled data."
+  ],
+  "check": "(2+15+6)/(2+8+40+10)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-conj",
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Prior $\\mu\\sim N(100,15^2)$. Data: $n=9$ draws from $N(\\mu,12^2)$ (known sd) with sample mean 108. Give the upper end of the central 95% credible interval for $\\mu$ (use $z=1.96$), as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 115.04416159452356,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Precisions: prior $1/225$, data $9/144$",
+    "weight": 2
+   },
+   {
+    "text": "Posterior mean $\\approx107.47$",
+    "weight": 1
+   },
+   {
+    "text": "Posterior sd $=1/\\sqrt{0.06694}\\approx3.865$; upper end $=107.47+1.96\\cdot3.865$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "bayes-conj: precisions add: $1/225+9/144=0.066944$.\nPosterior mean $=(100/225+9\\cdot108/144)/0.066944=107.47$.\nPosterior sd $=3.865$.\nci: upper $=107.47+1.96(3.865)=115.04$.\nTrap: data-only interval ends at $115.84$.",
+  "hints": [
+   "Weight prior mean and sample mean by precision."
+  ],
+  "check": "(100/15**2+9*108/12**2)/(1/15**2+9/12**2)+1.96/math.sqrt(1/15**2+9/12**2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-mcmc",
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A posterior is known up to a constant: $\\pi(\\theta)\\propto\\theta^{4}e^{-2\\theta}$ for $\\theta>0$. Random-walk Metropolis sits at $\\theta=2$ and proposes $\\theta'=3$ from a symmetric proposal. Give the acceptance probability as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6851348713853518,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Symmetric proposal: ratio is $\\pi(\\theta')/\\pi(\\theta)$",
+    "weight": 2
+   },
+   {
+    "text": "Normalising constant cancels",
+    "weight": 1
+   },
+   {
+    "text": "$(3/2)^4e^{-2}=0.6852$, capped at 1",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "bayes-mcmc: acceptance $=\\min(1,\\pi(\\theta')/\\pi(\\theta))$.\ncont-dists: the kernel is a Gamma(5, 2) shape, constant cancels.\nRatio $=(3/2)^4e^{-2(3-2)}=5.0625\\times0.13534=0.6852$.\nTrap: forgetting the exponential gives $5.06$, capped to $1$.",
+  "hints": [
+   "Only the kernel ratio matters; the constant cancels."
+  ],
+  "check": "min(1,(3/2)**4*math.exp(-2*(3-2)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-mcmc",
+   "t2.lln-clt"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A chain of $N=2000$ draws has autocorrelation $\\rho_k=0.5^k$ (AR(1)-like) and posterior sd 3. Use effective sample size $\\text{ESS}=N\\,\\frac{1-\\rho}{1+\\rho}$ with $\\rho=0.5$. Give the Monte Carlo standard error of the posterior mean, $\\text{sd}/\\sqrt{\\text{ESS}}$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.11618950038622251,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "ESS $=2000\\cdot0.5/1.5\\approx666.7$",
+    "weight": 2
+   },
+   {
+    "text": "MCSE uses ESS, not $N$",
+    "weight": 2
+   },
+   {
+    "text": "$3/\\sqrt{666.7}\\approx0.1162$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "bayes-mcmc: positive autocorrelation shrinks information: ESS $=2000(0.5/1.5)=666.7$.\nlln-clt: CLT variance of the mean is $\\text{sd}^2/\\text{ESS}$.\nMCSE $=3/\\sqrt{666.7}=0.1162$.\nTrap: using $N$ gives $0.067$.",
+  "hints": [
+   "Replace $N$ by ESS in the standard-error formula."
+  ],
+  "check": "3/math.sqrt(2000*(1-0.5)/(1+0.5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-cf",
+   "t4.matrix-ops"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "User A rated item 1 as 4 and item 2 as 2; item 3 is unrated. User B: items 1, 2, 3 rated 5, 1, 4. User C: items 1, 2, 3 rated 2, 4, 5. Similarity is cosine over the items rated by A (items 1 and 2). Predict A's rating of item 3 as the similarity-weighted average of B's and C's item-3 ratings. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.453318449966248,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "cos(A,B) $=22/\\sqrt{20\\cdot26}\\approx0.9648$",
+    "weight": 2
+   },
+   {
+    "text": "cos(A,C) $=16/20=0.8$",
+    "weight": 1
+   },
+   {
+    "text": "Weighted mean $(0.9648\\cdot4+0.8\\cdot5)/1.7648\\approx4.453$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "recsys-cf: use only co-rated items 1, 2.\nmatrix-ops: cos = dot / product of norms. $A\\cdot B=22$, $|A|=\\sqrt{20}$, $|B|=\\sqrt{26}$: $0.9648$.\n$A\\cdot C=16$, $|C|=\\sqrt{20}$: $0.8$.\nPrediction $=(0.9648\\cdot4+0.8\\cdot5)/(0.9648+0.8)=4.453$.",
+  "hints": [
+   "Compute cosine on A's two rated items only."
+  ],
+  "check": "((4*5+2*1)/(math.sqrt(20)*math.sqrt(26))*4+(4*2+2*4)/(math.sqrt(20)*math.sqrt(20))*5)/((4*5+2*1)/(math.sqrt(20)*math.sqrt(26))+(4*2+2*4)/(math.sqrt(20)*math.sqrt(20)))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-cf",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "User A has mean rating 3. Neighbour B (mean 4, similarity 0.8) rated item X as 5. Neighbour C (mean 2.5, similarity 0.4) rated item X as 4. Using mean-centred user-based CF, $\\hat r_{AX}=\\bar r_A+\\frac{\\sum s\\,(r-\\bar r)}{\\sum |s|}$. What is the prediction?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "4.17",
+    "4.67",
+    "4.40",
+    "1.17",
+    "3.70"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "no centring: weighted mean of raw ratings",
+    "drops the denominator",
+    "forgets to add back $\\bar r_A$",
+    "divides by the number of neighbours, not $\\sum|s|$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Centre: B gives $+1$, C gives $+1.5$",
+    "weight": 2
+   },
+   {
+    "text": "Weighted sum $0.8+0.6=1.4$ over $\\sum|s|=1.2$",
+    "weight": 2
+   },
+   {
+    "text": "Add back $\\bar r_A=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "recsys-cf: neighbour deviations $5-4=+1$, $4-2.5=+1.5$.\ndescriptive: weighted deviation $=(0.8\\cdot1+0.4\\cdot1.5)/1.2=1.1667$.\nPrediction $=3+1.1667=4.17$.",
+  "hints": [
+   "Predict A's deviation from A's own mean."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-mf",
+   "t4.gradient"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Model: $\\hat r=\\mu+b_u+b_i+p\\cdot q$ with $\\mu=3.5$, $b_u=0.4$, $b_i=-0.3$, $p=(1.2,-0.5)$, $q=(0.8,0.6)$. True rating $r=5$. One SGD step on squared error plus ridge: $p\\leftarrow p+\\eta\\,(e\\,q-\\lambda p)$ with $e=r-\\hat r$, $\\eta=0.1$, $\\lambda=0.05$. Give the new first component of $p$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.2531999999999999,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "$\\hat r=3.6+0.96-0.30=4.26$",
+    "weight": 2
+   },
+   {
+    "text": "$e=0.74$",
+    "weight": 1
+   },
+   {
+    "text": "Update first component using $q_1=0.8$ and $\\lambda p_1$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "recsys-mf: prediction $=3.5+0.4-0.3+(0.96-0.30)=4.26$.\nError $e=0.74$.\ngradient: step on $p_1$: $1.2+0.1(0.74\\cdot0.8-0.05\\cdot1.2)$.\n$=1.2+0.1(0.592-0.06)=1.2532$.\nTrap: skipping the biases gives a wrong $\\hat r$ and error.",
+  "hints": [
+   "Prediction needs the biases and the dot product."
+  ],
+  "check": "1.2+0.1*((5-(3.5+0.4-0.3+1.2*0.8-0.5*0.6))*0.8-0.05*1.2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-mf",
+   "t4.normal-eq",
+   "t6.ridge-lasso"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "ALS step for one user. Item factors $q_1=(1,0)$, $q_2=(0,1)$, $q_3=(1,1)$. The user's ratings of these items are 3, 2, 3. Solve the ridge problem $\\min_p \\sum_i (r_i-p\\cdot q_i)^2+\\lambda\\|p\\|^2$ with $\\lambda=1$. Then predict the rating for an item with $q=(1,2)$. Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.875,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Normal equations $(Q^TQ+\\lambda I)p=Q^Tr$",
+    "weight": 2
+   },
+   {
+    "text": "$Q^TQ+I=\\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$, $Q^Tr=(6,5)$, so $p=(13/8,9/8)$",
+    "weight": 2
+   },
+   {
+    "text": "Prediction $13/8+18/8=31/8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "recsys-mf: fix items, solve user vector by ridge.\nnormal-eq: $Q^TQ=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$; add $\\lambda I$: $\\begin{pmatrix}3&1\\\\1&3\\end{pmatrix}$, det $8$.\n$Q^Tr=(3+3,\\,2+3)=(6,5)$.\nridge-lasso: $p=\\tfrac18(18-5,\\,-6+15)=(13/8,9/8)$.\nPrediction $=13/8+2\\cdot9/8=3.875$.",
+  "hints": [
+   "Solve $(Q^TQ+\\lambda I)p=Q^Tr$."
+  ],
+  "check": "(13/8)*1+(9/8)*2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ranking-metrics",
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A ranker returns four items with graded relevance $0,3,1,2$ in rank order. Use gain $2^{rel}-1$ and discount $1/\\log_2(i+1)$ at position $i$. What is NDCG@4?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.661",
+    "0.519",
+    "6.21",
+    "1.000",
+    "0.683"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used discount $1/i$ instead of $1/\\log_2(i+1)$",
+    "reported DCG without normalising by the ideal ranking",
+    "ignored positions and just compared the multiset of gains",
+    "used linear gain $rel$ instead of $2^{rel}-1$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "DCG $=7/\\log_23+1/2+3/\\log_25\\approx6.2085$",
+    "weight": 2
+   },
+   {
+    "text": "Ideal order $3,2,1,0$: IDCG $\\approx9.3928$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio $0.661$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ranking-metrics: gains $0,7,1,3$ at positions 1..4.\nDCG $=0+4.4165+0.5+1.2920=6.2085$.\nclf-metrics: rank quality is normalised by the best order. IDCG uses sorted gains $7,3,1,0$: $7+1.8928+0.5=9.3928$.\nNDCG $=6.2085/9.3928=0.661$.",
+  "hints": [
+   "Sort the relevances to get the ideal DCG."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.ranking-metrics",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Three queries, binary relevance, ranked lists (R = relevant):\nQ1: ranks 1 and 3 are R; 2 relevant items exist in total.\nQ2: ranks 2 and 4 are R; 3 relevant items exist in total (one never retrieved).\nQ3: rank 5 only is R; 1 relevant item exists.\nAP divides the sum of precision@k at relevant ranks by the total relevant count. What is MAP?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.456",
+    "0.567",
+    "0.511",
+    "0.333",
+    "1.367"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "that is MRR, not MAP",
+    "divided Q2 by the 2 retrieved relevant items, not 3",
+    "that is mean precision@5",
+    "summed the APs without averaging over queries"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "AP$_1=(1+2/3)/2=0.8333$",
+    "weight": 1
+   },
+   {
+    "text": "AP$_2=(1/2+2/4)/3=0.3333$ (divide by 3)",
+    "weight": 2
+   },
+   {
+    "text": "AP$_3=0.2$; mean $=0.4556$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "ranking-metrics: AP$_1=(1/1+2/3)/2=0.8333$.\nAP$_2=(1/2+2/4)/3=0.3333$.\nAP$_3=1/5=0.2$.\nexpectation: MAP is the mean over queries: $(0.8333+0.3333+0.2)/3=0.456$.",
+  "hints": [
+   "Divide by total relevant items, not retrieved ones."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.nlp-ngram",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Training corpus (three sentences): `<s> the cat sat </s>`, `<s> the dog sat </s>`, `<s> the cat ran </s>`. Bigram model with add-one smoothing: $P(w\\mid v)=\\frac{c(v,w)+1}{c(v)+V}$ where $V=6$ is the number of predictable word types (the, cat, sat, dog, ran, `</s>`). Give the perplexity of `<s> the cat sat </s>` (four predicted tokens, geometric mean of inverse probabilities) as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.9129506302439405,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Counts: $c(\\langle s\\rangle)=3$, $c(\\text{the})=3$, $c(\\text{cat})=2$, $c(\\text{sat})=2$",
+    "weight": 1
+   },
+   {
+    "text": "Four smoothed probabilities $4/9,\\,3/9,\\,2/8,\\,3/8$",
+    "weight": 2
+   },
+   {
+    "text": "Perplexity $=P^{-1/4}=72^{1/4}\\approx2.913$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "nlp-ngram: $P(\\text{the}|\\langle s\\rangle)=4/9$, $P(\\text{cat}|\\text{the})=(2+1)/9=1/3$.\n$P(\\text{sat}|\\text{cat})=(1+1)/8=1/4$, $P(\\langle/s\\rangle|\\text{sat})=(2+1)/8=3/8$.\nconditional: sentence probability is the product $=1/72$.\nPerplexity $=72^{1/4}=2.913$.",
+  "hints": [
+   "Multiply the four smoothed conditionals, then take the inverse fourth root."
+  ],
+  "check": "(((3+1)/(3+6))*((2+1)/(3+6))*((1+1)/(2+6))*((2+1)/(2+6)))**(-1/4)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.nlp-ngram",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A unigram model assigns $P(a)=0.4$, $P(b)=0.4$, $P(c)=0.2$. A test sequence of 8 tokens is `a a b c a b a c` (4 a, 2 b, 2 c). Give the model's perplexity on this sequence (base-2 cross-entropy per token, then $2^H$) as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.9730177875068025,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Token counts weight $\\log_2$ probs: 4, 2, 2",
+    "weight": 1
+   },
+   {
+    "text": "Cross-entropy $=(6\\cdot1.3219+2\\cdot2.3219)/8\\approx1.572$ bits",
+    "weight": 2
+   },
+   {
+    "text": "Perplexity $2^{1.572}\\approx2.973$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "nlp-ngram: perplexity $=2^{H}$ with $H=-\\frac1N\\sum\\log_2 P(w_t)$.\nexpectation: $H$ is the empirical mean of $-\\log_2P$.\n$H=(6\\cdot1.3219+2\\cdot2.3219)/8=1.5719$.\nPerplexity $=2.973$.\nTrap: the empirical-frequency model gives $2.83$.",
+  "hints": [
+   "Weight each token's surprisal by its count."
+  ],
+  "check": "2**(-(4*math.log2(0.4)+2*math.log2(0.4)+2*math.log2(0.2))/8)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.mlops-track",
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two configs were each run with 5 seeds. Seed-to-seed sd of the metric is 0.6 for both (treat as known). Config B's mean beats A's by 0.9. Give the $z$ statistic for the difference of means as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.3717082451262845,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Seed variation is the noise: sd 0.6 per run",
+    "weight": 1
+   },
+   {
+    "text": "se of difference $=0.6\\sqrt{2/5}\\approx0.3795$",
+    "weight": 2
+   },
+   {
+    "text": "$z=0.9/0.3795\\approx2.37$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "mlops-track: log every seed; one run per config hides variance.\nt-tests: se of a difference of two means of $n=5$: $0.6\\sqrt{1/5+1/5}=0.3795$.\n$z=0.9/0.3795=2.372$.\nTrap: using $0.6/\\sqrt5$ (one mean) gives $3.35$.",
+  "hints": [
+   "Standard error of a difference adds both variances."
+  ],
+  "check": "0.9/(0.6*math.sqrt(2/5))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.mlops-track",
+   "t6.cv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A run logs: git SHA, full config, library lockfile hash, data snapshot hash, and the model seed. The 80/20 train/test split is drawn inside the script with an unseeded random generator. Two reruns report different test AUC. Which single addition makes the run exactly reproducible?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Log the split seed or the split row indices",
+    "Log the GPU model",
+    "Log more evaluation metrics",
+    "Log wall-clock training time",
+    "Log the author's name"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "everything else needed is already pinned; hardware is not the cause here",
+    "extra metrics do not fix the differing split",
+    "timing is not an input to the result",
+    "metadata with no effect on results"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Identify the unseeded split as the only unpinned input",
+    "weight": 2
+   },
+   {
+    "text": "Fixing it requires a stored seed or indices",
+    "weight": 2
+   },
+   {
+    "text": "Other pinned items are not the cause",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "mlops-track: reproduction needs every input fixed: code, config, environment, data, and randomness.\ncv: the split decides which rows are tested, so test AUC changes between reruns.\nOnly the split randomness is unrecorded; store its seed or indices.",
+  "hints": [
+   "Which input to the run is still random?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.drift",
+   "t2.discrete-rv"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Feature bins in training vs this week:\n\n| Bin | Training share | This week |\n|---|---|---|\n| Low | 0.5 | 0.4 |\n| Mid | 0.3 | 0.3 |\n| High | 0.2 | 0.3 |\n\nPSI $=\\sum_b (a_b-e_b)\\ln(a_b/e_b)$ with natural log, $e$=training, $a$=this week. Give PSI as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.06286086594223739,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Mid bin contributes 0",
+    "weight": 1
+   },
+   {
+    "text": "Low: $(-0.1)\\ln0.8=0.0223$",
+    "weight": 2
+   },
+   {
+    "text": "High: $0.1\\ln1.5=0.0405$; total $0.0629$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "drift: PSI compares two binned distributions; each term is $\\ge0$.\ndiscrete-rv: treat bins as pmfs.\nLow: $(0.4-0.5)\\ln0.8=0.02231$.\nMid: $0$.\nHigh: $(0.1)\\ln1.5=0.04055$.\nPSI $=0.0629$ (below the usual 0.1 alert level).",
+  "hints": [
+   "Both signs in each term are equal, so every bin adds a non-negative amount."
+  ],
+  "check": "(0.4-0.5)*math.log(0.4/0.5)+(0.3-0.3)*math.log(1)+(0.3-0.2)*math.log(0.3/0.2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.drift",
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A classifier trained when 10% of cases were positive outputs a calibrated probability of 0.5 for a case. After deployment, the positive prevalence is 30% (label shift; $P(x|y)$ unchanged). What is the corrected posterior probability?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.794",
+    "0.500",
+    "0.300",
+    "0.750",
+    "0.700"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "left unadjusted",
+    "replaced by the new prevalence",
+    "multiplied odds by 3, the ratio of prevalences, not of odds",
+    "added the 20-point prevalence shift"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Odds scale by ratio of prior odds",
+    "weight": 2
+   },
+   {
+    "text": "Prior odds $0.3/0.7$ over $0.1/0.9$ $=27/7\\approx3.857$",
+    "weight": 2
+   },
+   {
+    "text": "Posterior odds $3.857$, probability $0.794$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "drift: under label shift only the prior moves.\nbayes: posterior odds $=$ likelihood ratio $\\times$ prior odds. The likelihood ratio is fixed, so new odds $=$ old odds $\\times\\frac{0.3/0.7}{0.1/0.9}$.\nOld odds $=1$; factor $=27/7=3.857$.\nProbability $=3.857/4.857=0.794$.",
+  "hints": [
+   "Rescale the odds by the ratio of new to old prior odds."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.fairness",
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Confusion counts by group (positive = predicted positive):\n\n| Group | TP | FP | FN | TN |\n|---|---|---|---|---|\n| A | 40 | 10 | 20 | 30 |\n| B | 15 | 15 | 5 | 65 |\n\nWhat is the equal-opportunity gap, $|\\text{TPR}_A-\\text{TPR}_B|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.083",
+    "0.200",
+    "0.063",
+    "0.300",
+    "0.600"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "that is the demographic-parity (selection rate) gap, $0.5-0.3$",
+    "that is the false-positive-rate gap",
+    "that is the precision gap, $0.8-0.5$",
+    "that is the selection-rate ratio, $0.3/0.5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "TPR $=TP/(TP+FN)$ per group",
+    "weight": 2
+   },
+   {
+    "text": "A: $40/60=0.667$; B: $15/20=0.75$",
+    "weight": 2
+   },
+   {
+    "text": "Absolute gap $0.0833$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "fairness: equal opportunity compares true positive rates.\nclf-metrics: TPR$_A=40/60=0.6667$, TPR$_B=15/20=0.75$.\nGap $=0.0833$.\nOther gaps: selection $0.2$, FPR $0.0625$, precision $0.3$.",
+  "hints": [
+   "Use only the actual-positive rows of each group."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.fairness",
+   "t2.bayes"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Two groups have base rates 0.5 and 0.2. One classifier has TPR 0.8 and FPR 0.1 in both groups (equalised odds holds). Give the absolute difference in precision (PPV) between the groups as a decimal in 0 to 1 units.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.22222222222222232,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "PPV $=\\pi\\,\\text{TPR}/(\\pi\\,\\text{TPR}+(1-\\pi)\\,\\text{FPR})$",
+    "weight": 2
+   },
+   {
+    "text": "A: $0.40/0.45=0.8889$; B: $0.16/0.24=0.6667$",
+    "weight": 2
+   },
+   {
+    "text": "Gap $0.2222$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "fairness: with unequal base rates, equal TPR and FPR force unequal PPV (the impossibility result).\nbayes: PPV$=P(y=1|\\hat y=1)$ by Bayes.\nA: $0.4/(0.4+0.05)=0.8889$.\nB: $0.16/(0.16+0.08)=0.6667$.\nGap $=0.2222$.",
+  "hints": [
+   "Apply Bayes' rule in each group."
+  ],
+  "check": "abs(0.5*0.8/(0.5*0.8+0.5*0.1)-0.2*0.8/(0.2*0.8+0.8*0.1))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f031",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.privacy",
+   "t2.cont-dists"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A count query (sensitivity 1) is released with the Laplace mechanism at $\\varepsilon=0.5$. The noise is Laplace with scale $b=1/\\varepsilon$, so $P(|N|>t)=e^{-t/b}$. Give the probability that the noise exceeds 3 in absolute value, as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.22313016014842982,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Scale $b=\\Delta/\\varepsilon=2$",
+    "weight": 2
+   },
+   {
+    "text": "Two-sided tail $e^{-t/b}$",
+    "weight": 2
+   },
+   {
+    "text": "$e^{-1.5}\\approx0.2231$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.5,
+  "solution": "privacy: Laplace mechanism scale $b=\\Delta/\\varepsilon=1/0.5=2$.\ncont-dists: Laplace tail $P(|N|>t)=e^{-t/b}$.\n$e^{-3/2}=0.2231$.\nTrap: $e^{-3}=0.0498$ forgets the scale.",
+  "hints": [
+   "Scale is sensitivity over epsilon."
+  ],
+  "check": "math.exp(-3*0.5/1)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-f032",
+  "tier": "c",
+  "type": "full",
+  "level": "T9",
+  "tags": [
+   "t9.privacy",
+   "t2.variance"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "The mean of 100 values bounded in $[0,50]$ has sensitivity $50/100=0.5$. An analyst releases the mean twice, each time with Laplace noise at $\\varepsilon=0.25$ (independent noise, total budget 0.5 by sequential composition), and averages the two releases. Laplace sd is $\\sqrt2\\,b$. Give the sd of the averaged noise as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.0,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "rubric": [
+   {
+    "text": "Scale per release $b=0.5/0.25=2$",
+    "weight": 1
+   },
+   {
+    "text": "Single-release sd $=2\\sqrt2\\approx2.83$",
+    "weight": 2
+   },
+   {
+    "text": "Average of 2 independent: sd $/\\sqrt2=2.0$",
+    "weight": 2
+   }
+  ],
+  "pass": 3.5,
+  "solution": "privacy: each release has $b=0.5/0.25=2$; budgets add to $0.5$.\nvariance: independent noise averages to variance $\\sigma^2/2$.\nsd$=2\\sqrt2/\\sqrt2=2.0$.\nA single release at $\\varepsilon=0.5$ has sd $1.414$, so splitting the budget costs accuracy.",
+  "hints": [
+   "Independent noise shrinks by $\\sqrt2$ on averaging."
+  ],
+  "check": "math.sqrt(2)*(0.5/0.25)/math.sqrt(2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

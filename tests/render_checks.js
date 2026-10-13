@@ -186,5 +186,47 @@ S.eq('paragraphs split on blank lines', T.md('a\n\nb'), '<p>a</p><p>b</p>');
   S.check('a non-string figure is rejected', R.renderItem(Object.assign({}, item, { figure: 5 }), 'I').errors.length > 0);
 }
 
+// Display math is a block: no <br> before or after it, inline math keeps its line breaks.
+{
+  const m = (x) => T.md(x, false, (t, d) => (d ? '[D:' + t + ']' : '[' + t + ']'));
+  S.eq('no <br> around a display block', m('*Move:*\n$$a$$\ntext'), '<p><em>Move:</em>[D:a]text</p>');
+  S.eq('a line break beside inline math stays', m('x\n$a$\ny'), '<p>x<br>[a]<br>y</p>');
+}
+// Teach card v2 italics: *label:* is <em>; stars in arithmetic and code stay literal.
+{
+  const m = (x) => T.md(x, false, (t, d) => '[' + (d ? 'D:' : '') + t + ']');
+  S.check('italic label becomes em', m('*When:* a').includes('<em>When:</em>'));
+  S.check('2*x+3*y stays literal', !m('2*x+3*y').includes('<em>') && !m('a * b * c').includes('<em>'));
+  S.check('stars inside a code span stay literal', !m('`*z*`').includes('<em>'));
+  S.check('stars inside math stay literal', !m('$a*b*c$').includes('<em>'));
+  S.check('display math after a label is kept', m('*Move:*\n$$a=b$$\nThen').includes('[D:a=b]'));
+  S.check('bold label still works', m('**When:** a').includes('<strong>When:</strong>'));
+  S.check('fenced block in a teach card', m('*Example:* t\n\n```sql\nSELECT 1;\n```').includes('<pre><code>SELECT 1;</code></pre>'));
+}
+
+// GFM pipe tables
+{
+  const t = (src) => r(src).html;
+  const a = t('Data:\n\n| x | y |\n|---|---|\n| 1 | 2 |\n| 3 | 4 |');
+  S.check('pipe table renders thead and tbody', a.includes('<table><thead><tr><th>x</th><th>y</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td></tr></tbody></table>'), a);
+  S.check('table sits in a scroll box and text before it stays a paragraph', a.includes('<div class="tblwrap">') && a.startsWith('<p>Data:</p>'), a);
+  S.check('table directly after a text line (same paragraph) still renders', t('Given:\n| a | b |\n|---|---|\n| 1 | 2 |').includes('<td>1</td>'));
+  const al = t('| l | c | r |\n|:--|:-:|--:|\n| 1 | 2 | 3 |');
+  S.check('alignment from separator colons', al.includes('<th style="text-align:left">l</th>') && al.includes('<th style="text-align:center">c</th>') && al.includes('<td style="text-align:right">3</td>'), al);
+  const m1 = r('| f | v |\n|---|---|\n| $\\frac{a}{b}$ | **b** `c` |');
+  S.check('math, bold and code render inside cells', m1.errors.length === 0 && m1.html.includes('<td><span role="math"') && m1.html.includes('<strong>b</strong> <code>c</code>'), m1.html);
+  const m2 = t('| e | v |\n|---|---|\n| $|x|$ | 1 |');
+  S.check('pipe inside math is not a cell break', (m2.match(/<td>/g) || []).length === 2, m2);
+  const c = t('| e | v |\n|---|---|\n| `a|b` | 1 |');
+  S.check('pipe inside a code span is not a cell break', c.includes('<code>a|b</code>') && (c.match(/<td>/g) || []).length === 2, c);
+  S.check('escaped pipe is a literal pipe', t('| e | v |\n|---|---|\n| a\\|b | 1 |').includes('<td>a|b</td>'));
+  const nt = t('| a | b |\n| 1 | 2 |');
+  S.check('separator-less pipe lines stay text', !nt.includes('<table') && nt.includes('| a | b |<br>| 1 | 2 |'), nt);
+  S.check('table inside a fence stays code', t('```\n| a | b |\n|---|---|\n| 1 | 2 |\n```').includes('<pre><code>| a | b |') && !t('```\n| a | b |\n|---|---|\n| 1 | 2 |\n```').includes('<table'));
+  S.check('table cells are HTML-escaped', t('| a | b |\n|---|---|\n| <i>x</i> | & |').includes('<td>&lt;i&gt;x&lt;/i&gt;</td><td>&amp;</td>'));
+  S.check('inline mode never builds a table', !T.md('| a | b |\n|---|---|\n| 1 | 2 |', true).includes('<table'));
+  S.check('ragged row is padded to header width', (t('| a | b |\n|---|---|\n| 1 |').match(/<td>/g) || []).length === 2);
+}
+
 const res = S.done();
 process.exitCode = res.failed ? 1 : 0;

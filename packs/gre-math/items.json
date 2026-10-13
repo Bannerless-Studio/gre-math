@@ -1455,10 +1455,10 @@
    ],
    "correct": 2,
    "why": [
-    "",
-    "",
-    "",
-    "multiplying by an expression that can be zero can add or lose solutions"
+    "not required: a root can be negative",
+    "not required: a root can be a fraction",
+    "correct: $x=2$ makes the denominator zero, so candidates must avoid it",
+    "false: multiplying by an expression that can be zero can add or lose solutions"
    ]
   },
   "solution": "Multiplying by $x-2$ is only safe when $x\\neq 2$. Check candidate roots against the excluded value.",
@@ -2609,10 +2609,10 @@
    ],
    "correct": 2,
    "why": [
-    "",
-    "",
-    "",
-    "continuity alone does not guarantee an inverse"
+    "false: an even function gives the same output for $x$ and $-x$",
+    "false: repeated values mean two inputs share an output",
+    "correct: each output comes from exactly one input",
+    "false: continuity alone does not guarantee an inverse"
    ]
   },
   "solution": "An inverse exists exactly when each output comes from only one input, that is, when $f$ is one-to-one.",
@@ -24783,8 +24783,9 @@
   "answer": {
    "kind": "numeric",
    "value": "1.570796327",
-   "form": "decimal",
-   "tol": 1e-06
+   "tol": 0.031416,
+   "rel": 0.02,
+   "form": "decimal"
   },
   "check": "math.pi/2",
   "solution": "The integral separates into $\\frac{\\pi}{2}\\cdot\\frac12\\cdot2=\\frac{\\pi}{2}$.",
@@ -24849,8 +24850,9 @@
   "answer": {
    "kind": "numeric",
    "value": "4.188790205",
-   "form": "decimal",
-   "tol": 1e-06
+   "tol": 0.083776,
+   "rel": 0.02,
+   "form": "decimal"
   },
   "check": "4*math.pi/3",
   "solution": "$\\int_0^{2\\pi}\\int_0^{\\pi}\\int_0^1\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta=\\frac{4\\pi}{3}$.",
@@ -25629,8 +25631,9 @@
   "answer": {
    "kind": "numeric",
    "value": "3.141592654",
-   "form": "decimal",
-   "tol": 1e-06
+   "tol": 0.062832,
+   "rel": 0.02,
+   "form": "decimal"
   },
   "check": "math.pi",
   "solution": "$Q_x-P_y=1$, so the integral equals the area $\\pi$.",
@@ -29145,10 +29148,10 @@
    ],
    "correct": 3,
    "why": [
-    "",
-    "",
-    "",
-    "assumed a subspace must contain unit vectors"
+    "required: a subspace must contain $\\mathbf 0$",
+    "required: closure under addition",
+    "required: closure under scalar multiplication",
+    "correct: unit vectors are not required"
    ]
   },
   "check": null,
@@ -40591,7 +40594,7 @@
   ],
   "critical": [],
   "difficulty": 2,
-  "prompt": "Let $A=\\left\\{\\frac{m}{n}: m,n\\in\\mathbb{N},\\ m+n\\le 4\\right\\}$. Find $\\sup A+\\inf A$.",
+  "prompt": "Let $\\mathbb N=\\{1,2,3,\\dots\\}$ and $A=\\left\\{\\frac{m}{n}: m,n\\in\\mathbb{N},\\ m+n\\le 4\\right\\}$. Find $\\sup A+\\inf A$.",
   "answer": {
    "kind": "numeric",
    "value": "10/3",
@@ -51904,8 +51907,8 @@
    "t9.geometry-misc"
   ],
   "critical": [],
-  "difficulty": 2,
-  "prompt": "The shear $(x,y)\\mapsto(x+2y,\\ y)$ sends $(x,y)$ to a point. Give its first coordinate as a function of $x$ and $y$.",
+  "difficulty": 1,
+  "prompt": "Let $M=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$. Give the first coordinate of $M\\begin{pmatrix}x\\\\y\\end{pmatrix}$ as a function of $x$ and $y$.",
   "answer": {
    "kind": "expression",
    "value": "x+2*y",
@@ -51923,9 +51926,9 @@
    ]
   },
   "check": null,
-  "solution": "Read the first output coordinate of the shear formula.",
+  "solution": "The first row of $M$ is $(1,2)$, so the first coordinate is $1\\cdot x+2\\cdot y=x+2y$.",
   "hints": [
-   "Read the first output coordinate."
+   "Multiply the first row of $M$ by the column $(x,y)^T$."
   ],
   "source": {
    "type": "original",

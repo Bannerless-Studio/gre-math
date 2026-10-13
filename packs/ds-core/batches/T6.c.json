@@ -1,0 +1,1664 @@
+[
+ {
+  "id": "t6-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup",
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Train rows $(x,y)$: $(1,2),(2,3),(3,7)$. Test rows: $(4,8),(5,10)$. Fit $\\hat y=a+bx$ by least squares on the train rows only. Report the test mean squared error (mean of squared errors over the 2 test rows).",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.625,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Fit on train only: $b=2.5$, $a=-1$",
+    "weight": 2
+   },
+   {
+    "text": "Predict test rows: $9$ and $11.5$",
+    "weight": 1
+   },
+   {
+    "text": "Average squared test errors",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Fit on train rows only (ml-setup): $\\bar x=2$, $\\bar y=4$, $S_{xy}=5$, $S_{xx}=2$.\n$b=2.5$, $a=-1$ (ols-simple).\nTest predictions: $9$ and $11.5$; errors $-1$ and $-1.5$.\nMSE $=(1+2.25)/2=1.625$.\nTrap: refitting with the test rows leaks them.",
+  "hints": [
+   "Never use test rows to fit $a$ and $b$."
+  ],
+  "check": "(1+2.25)/2",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.ml-setup",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A feature has train values $2,4,6$. A test row has $x=10$. Standardise it as a pipeline must: $z=(x-\\bar x)/s$ with train statistics only and $s$ the sample sd (divisor $n-1$). What is $z$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "3",
+    "1.32",
+    "3.67",
+    "1.5",
+    "5"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used mean and sd of all four values, leaking the test row",
+    "used population sd of train (divisor $n$)",
+    "divided by the variance instead of the sd",
+    "skipped centring"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Train mean 4, sample sd 2",
+    "weight": 2
+   },
+   {
+    "text": "Apply those statistics to the test value",
+    "weight": 1
+   },
+   {
+    "text": "Reject statistics that include the test row",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Train statistics only (ml-setup): $\\bar x=4$, $s=\\sqrt{8/2}=2$ (descriptive).\n$z=(10-4)/2=3$.\nTrap: pooling all four values gives 1.32 and leaks the test row.",
+  "hints": [
+   "Which rows may feed the mean and sd?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance",
+   "t2.variance",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "At $x_0$ the true value is $f(x_0)=5$ and noise has variance $\\sigma^2=1$. Refitting on four equally likely training sets gives predictions $6,8,7,7$ at $x_0$. Expected squared test error at $x_0$? Use divisor 4 for the variance of the predictions.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5.5,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Mean prediction 7, bias $2$",
+    "weight": 2
+   },
+   {
+    "text": "Prediction variance $0.5$",
+    "weight": 1
+   },
+   {
+    "text": "Add bias$^2$ + variance + noise",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Mean prediction $=7$, so bias $=2$ and bias$^2=4$ (bias-variance).\nVariance of $6,8,7,7$ with divisor 4: $(1+1+0+0)/4=0.5$ (variance).\nExpected error $=4+0.5+1=5.5$.\nTrap: omitting noise gives 4.5.",
+  "hints": [
+   "Decompose error into three terms."
+  ],
+  "check": "4+(1+1+0+0)/4+1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.bias-variance",
+   "t2.variance",
+   "t6.bagging"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A flexible model has bias$^2=0.25$, prediction variance $5$ across training sets and noise variance $2$ (expected test MSE $7.25$). Average 4 fits trained on independent training sets. Bias is unchanged. Expected test MSE of the average?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "3.5",
+    "7.25",
+    "1.81",
+    "3.31",
+    "5.25"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "variance falls to $5/4$: $0.25+1.25+2$",
+    "assumed averaging changes nothing",
+    "divided the whole MSE by 4",
+    "also divided bias$^2$ by 4",
+    "dropped the noise term"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Averaging 4 independent fits divides variance by 4",
+    "weight": 2
+   },
+   {
+    "text": "Keep bias$^2$ and noise unchanged",
+    "weight": 1
+   },
+   {
+    "text": "Sum the three terms",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Variance of the mean of 4 independent fits is $5/4=1.25$ (variance).\nBias$^2$ stays $0.25$; noise stays $2$ (bias-variance).\nTotal $0.25+1.25+2=3.5$.\nTrap: noise is irreducible, so dividing everything by 4 is wrong.",
+  "hints": [
+   "Which of the three terms can averaging shrink?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso",
+   "t4.normal-eq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Model $\\hat y=wx$ (no intercept) on points $(x,y)$: $(1,2),(2,3)$. Ridge minimises $\\sum(y-wx)^2+\\lambda w^2$ with $\\lambda=2$. What does it predict at $x=3$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.4285714285714284,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Normal equation with penalty: $(\\sum x^2+\\lambda)w=\\sum xy$",
+    "weight": 2
+   },
+   {
+    "text": "$w=8/7$",
+    "weight": 1
+   },
+   {
+    "text": "Predict at $x=3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Setting the derivative to zero (normal-eq): $(\\sum x^2+\\lambda)w=\\sum xy$ (ridge).\n$\\sum x^2=5$, $\\sum xy=8$, so $w=8/7$.\nPrediction at 3: $24/7\\approx3.43$.\nTrap: OLS gives $w=1.6$ and prediction 4.8.",
+  "hints": [
+   "Add $\\lambda$ to $\\sum x^2$ only."
+  ],
+  "check": "3*8/(5+2)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.ridge-lasso",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Lasso minimises $\\tfrac12\\lVert y-Xw\\rVert^2+\\lambda\\lVert w\\rVert_1$ with orthonormal columns ($X^\\top X=I$) and $\\lambda=1$. Then each coefficient is $\\mathrm{sign}(b)\\max(|b|-\\lambda,0)$ from its OLS value $b$. OLS gives $(3,-0.8,1.5)$. What is $\\lVert w_{\\text{lasso}}\\rVert_1$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "2.5",
+    "2.65",
+    "4.3",
+    "5.3",
+    "3.8"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "soft-threshold: $(2,0,0.5)$",
+    "applied the ridge shrink $b/(1+\\lambda)$",
+    "subtracted $\\lambda$ from $|b|$ without clipping at zero",
+    "reported the OLS norm",
+    "used $\\lambda=0.5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Soft-threshold each coefficient by $\\lambda$",
+    "weight": 2
+   },
+   {
+    "text": "The small coefficient is set exactly to 0",
+    "weight": 1
+   },
+   {
+    "text": "Sum absolute values",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Soft-threshold (ridge-lasso): $3\\to2$, $-0.8\\to0$ since $|{-0.8}|<1$, $1.5\\to0.5$.\n$\\lVert w\\rVert_1=2+0+0.5=2.5$.\nTrap: lasso zeroes small coefficients; ridge only scales them.",
+  "hints": [
+   "What happens when $|b|<\\lambda$?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.logistic",
+   "t4.grad-descent",
+   "t1.exp-log"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Logistic model $p=\\sigma(b+wx)$, $\\sigma(z)=1/(1+e^{-z})$, start $b=w=0$. Data $(x,y)$: $(-1,0),(1,1),(2,1)$. Take one gradient-descent step on the mean log-loss with learning rate $1.5$, updating both parameters from the starting point. What is $P(y=1)$ at $x=1$ afterwards (decimal)?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7772998611746911,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "All $p=0.5$; residuals $0.5,-0.5,-0.5$",
+    "weight": 1
+   },
+   {
+    "text": "Gradients $\\partial_w=-2/3$, $\\partial_b=-1/6$",
+    "weight": 2
+   },
+   {
+    "text": "Update to $w=1$, $b=0.25$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate $\\sigma(1.25)$",
+    "weight": 1
+   }
+  ],
+  "pass": 4,
+  "solution": "At zero parameters every $p=0.5$, residuals $p-y=0.5,-0.5,-0.5$ (logistic).\n$\\partial_b=-1/6$; $\\partial_w=(-0.5-0.5-1)/3=-2/3$ (grad-descent).\n$b=0.25$, $w=1.5\\cdot2/3=1$.\n$z=0.25+1=1.25$; $\\sigma(1.25)=0.777$ (exp-log).",
+  "hints": [
+   "Gradient of mean log-loss is the mean of $(p-y)\\cdot$ input."
+  ],
+  "check": "1/(1+math.exp(-1.25))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.logistic",
+   "t1.log-scale"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A logistic model has log-odds $-1+0.7x$. By what factor do the odds multiply when $x$ rises from 1 to 4?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "8.17",
+    "2.1",
+    "2.01",
+    "0.89",
+    "16.44"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$e^{0.7\\cdot3}=e^{2.1}$",
+    "reported the change in log-odds",
+    "factor for a one-unit rise, $e^{0.7}$",
+    "reported the probability change in log-odds form, $\\sigma(2.1)$",
+    "used $e^{0.7\\cdot4}$, the full $x=4$ rather than the change"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Log-odds change is $0.7\\cdot3=2.1$",
+    "weight": 2
+   },
+   {
+    "text": "Exponentiate to get an odds factor",
+    "weight": 1
+   },
+   {
+    "text": "Distinguish from probability ratio",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Log-odds rise by $0.7\\cdot3=2.1$ (logistic).\nOdds multiply by $e^{2.1}=8.17$ (log-scale).\nTrap: 2.1 is the log-odds change, not the odds factor.",
+  "hints": [
+   "Coefficients are additive on the log-odds scale."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.loss",
+   "t1.functions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Residuals $r=y-\\hat y$ are $0.5,-2,3$. Huber loss with $\\delta=1$ is $\\tfrac12r^2$ if $|r|\\le\\delta$, else $\\delta(|r|-\\tfrac12\\delta)$. What is the mean Huber loss?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.375,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$0.5$ is in the quadratic zone: $0.125$",
+    "weight": 1
+   },
+   {
+    "text": "$-2$ and $3$ use the linear zone: $1.5$, $2.5$",
+    "weight": 2
+   },
+   {
+    "text": "Average over 3",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$|0.5|\\le1$: $0.125$ (loss).\n$|-2|>1$: $2-0.5=1.5$ (piecewise function).\n$|3|>1$: $2.5$.\nMean $=4.125/3=1.375$.\nTrap: squaring the large residuals gives $4.42$.",
+  "hints": [
+   "Which residuals are beyond $\\delta$?"
+  ],
+  "check": "(0.125+1.5+2.5)/3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.loss",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Fit a constant $c$ to $y=1,2,4,9,14$ by minimising squared error. What total absolute error $\\sum|y-c|$ does that constant give on the training data?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "22",
+    "20",
+    "118",
+    "138",
+    "4"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$c=6$ (mean): $5+4+2+3+8$",
+    "used the median 4 (the absolute-loss fit)",
+    "reported squared error at the mean",
+    "reported squared error at the median",
+    "reported the median itself"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Squared loss gives the mean $c=6$",
+    "weight": 2
+   },
+   {
+    "text": "Compute absolute deviations from 6",
+    "weight": 1
+   },
+   {
+    "text": "Sum them",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Squared loss is minimised by the mean (loss): $c=30/5=6$.\nDeviations: $5,4,2,3,8$; sum $=22$.\nTrap: the median 4 minimises absolute loss and gives 20.",
+  "hints": [
+   "Which centre does squared loss pick?"
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.knn",
+   "t1.dot-norm",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "k-NN regression, $k=3$, Euclidean distance, prediction = inverse-distance weighted mean (weight $1/d$) of the 3 nearest targets. Query $(1,2)$.\n\n| point | $x_1$ | $x_2$ | $y$ |\n|---|---|---|---|\n| A | 0 | 0 | 1 |\n| B | 1 | 0 | 9 |\n| C | 2 | 2 | 4 |\n| D | 0 | 3 | 8 |\n| E | 4 | 1 | 10 |\n\nWhat is the prediction?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.414213562373095,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Distances: C $1$, D $\\sqrt2$, B $2$",
+    "weight": 2
+   },
+   {
+    "text": "Weights $1,0.707,0.5$",
+    "weight": 1
+   },
+   {
+    "text": "Weighted mean",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Distances to $(1,2)$ (dot-norm): C $1$, D $\\sqrt2$, B $2$, A $\\sqrt5$, E $\\sqrt{10}$ (knn).\nNeighbours C, D, B with weights $1,0.707,0.5$.\n$(4+5.657+4.5)/2.207=6.41$ (expectation).\nTrap: the plain mean gives 7.",
+  "hints": [
+   "Rank the five distances first."
+  ],
+  "check": "(4*1+8/math.sqrt(2)+9/2)/(1+1/math.sqrt(2)+0.5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.knn",
+   "t1.dot-norm",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Features are (age in years, income in thousands of dollars). Query $(30,50)$. Candidates: P1 $(31,80)$, P2 $(45,52)$. Feature sds are $10$ (age) and $25$ (income). After standardising each coordinate (divide each difference by its sd), what is the Euclidean distance from the query to its nearest candidate?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1.20",
+    "1.50",
+    "15.1",
+    "30.0",
+    "1.45"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "P1: $\\sqrt{0.1^2+1.2^2}$",
+    "P2 on the standardised scale (the farther one)",
+    "P2 raw (raw nearest, wrong scale)",
+    "P1 raw distance",
+    "forgot the square root for P1"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Scale differences: P1 $(0.1,1.2)$, P2 $(1.5,0.08)$",
+    "weight": 2
+   },
+   {
+    "text": "Distances 1.204 and 1.502",
+    "weight": 1
+   },
+   {
+    "text": "Pick the smaller",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Scaled differences (descriptive): P1 $(0.1,1.2)$, P2 $(1.5,0.08)$.\nDistances (dot-norm): P1 $1.204$, P2 $1.502$.\nNearest is P1 at $1.20$; raw scale picks P2 (15.1).\nTrap: raw distances are dominated by income.",
+  "hints": [
+   "Divide each coordinate difference by its sd before squaring."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes",
+   "t2.bayes",
+   "t2.independence"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Bernoulli naive Bayes on 6 emails (3 spam, 3 ham). Emails containing each word:\n\n| word | spam (of 3) | ham (of 3) |\n|---|---|---|\n| free | 2 | 1 |\n| meeting | 1 | 2 |\n| winner | 2 | 0 |\n\nUse $P(\\text{word}\\mid c)=(\\text{count}+1)/(3+2)$ and priors from counts. A new email contains exactly free, meeting, winner. Use only these three present-word factors. $P(\\text{spam}\\mid\\text{email})$ as a decimal?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Smoothed likelihoods spam $0.6,0.4,0.6$; ham $0.4,0.6,0.2$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply with prior $0.5$",
+    "weight": 1
+   },
+   {
+    "text": "Normalise with Bayes",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Smoothed (naive-bayes): spam $0.6,0.4,0.6$; ham $0.4,0.6,0.2$.\nIndependent product (independence): spam $0.5\\cdot0.144=0.072$; ham $0.5\\cdot0.048=0.024$.\nBayes: $0.072/0.096=0.75$.\nTrap: without smoothing, $P(\\text{winner}\\mid\\text{ham})=0$ zeroes ham.",
+  "hints": [
+   "Add one to each count, two to each denominator."
+  ],
+  "check": "0.072/(0.072+0.024)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.naive-bayes",
+   "t2.bayes",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Multinomial naive Bayes, vocabulary of 3 words, add-one smoothing. Class A: 10 tokens total, word $w$ appears 0 times. Class B: 5 tokens total, $w$ appears 2 times. Priors $P(A)=0.8$, $P(B)=0.2$. A document is the single token $w$. What is $P(B\\mid\\text{doc})$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.549",
+    "0.830",
+    "1.0",
+    "0.6",
+    "0.951"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$0.2\\cdot\\tfrac38$ vs $0.8\\cdot\\tfrac1{13}$",
+    "ignored the priors",
+    "no smoothing: A gets zero likelihood",
+    "added 1 to the numerator but not $V=3$ to the denominator",
+    "swapped the priors"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Smoothed $P(w|A)=1/13$, $P(w|B)=3/8$",
+    "weight": 2
+   },
+   {
+    "text": "Multiply by priors",
+    "weight": 1
+   },
+   {
+    "text": "Normalise",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Smoothed (naive-bayes): $P(w|A)=(0+1)/(10+3)=1/13$; $P(w|B)=(2+1)/(5+3)=3/8$.\nJoint: A $0.8/13=0.0615$; B $0.2\\cdot0.375=0.075$ (conditional).\nPosterior B $=0.075/0.1365=0.549$.\nTrap: denominator gets $+V$, not $+1$.",
+  "hints": [
+   "Add the vocabulary size to the denominator."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.trees",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Binary classification tree, Gini impurity $1-\\sum p_k^2$. Splits are thresholds midway between consecutive $x$ values. Gain = parent Gini minus size-weighted child Gini.\n\n| $x$ | 1 | 2 | 3 | 4 | 5 | 6 |\n|---|---|---|---|---|---|---|\n| $y$ | 0 | 0 | 0 | 1 | 0 | 1 |\n\nWhat is the largest gain over all five splits?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2222222222222222,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Parent Gini $4/9$",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate all five splits",
+    "weight": 2
+   },
+   {
+    "text": "Best at $x\\le3.5$, gain $2/9$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Parent: 2 ones of 6, Gini $4/9$ (trees).\nWeighted child Gini by split (expectation): $\\le1.5$: $0.400$; $\\le2.5$: $0.333$; $\\le3.5$: $0.222$; $\\le4.5$: $0.417$; $\\le5.5$: $0.267$.\nBest is $\\le3.5$: $4/9-2/9=2/9=0.222$.\nTrap: the pure left child looks good but the right side stays mixed.",
+  "hints": [
+   "Tabulate weighted child impurity for each threshold."
+  ],
+  "check": "4/9-(0.5*(1-(2/3)**2-(1/3)**2))",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.trees",
+   "t1.log-scale",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A node has 12 samples: 8 positive, 4 negative. A split sends 4 samples (all positive) left and 8 samples (4 positive, 4 negative) right. Using entropy in bits (base 2), what is the information gain?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.252",
+    "0.418",
+    "0.174",
+    "0.111",
+    "0.585"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$0.918-\\tfrac8{12}\\cdot1$",
+    "averaged child entropies without size weights",
+    "used natural log",
+    "reported the Gini gain",
+    "swapped the child weights"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Parent entropy $H(2/3)=0.918$",
+    "weight": 1
+   },
+   {
+    "text": "Child entropies $0$ and $1$",
+    "weight": 1
+   },
+   {
+    "text": "Weight by $4/12$ and $8/12$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "Parent: $H=-\\tfrac23\\log_2\\tfrac23-\\tfrac13\\log_2\\tfrac13=0.918$ (log-scale).\nChildren: left $0$, right $1$; weights $1/3$, $2/3$ (expectation).\nWeighted $=0.667$; gain $=0.252$.\nTrap: unweighted mean gives 0.418.",
+  "hints": [
+   "Weight each child by its share of the samples."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.bagging",
+   "t2.variance",
+   "t2.joint-cov"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "An average of $B=10$ trees. At a given $x$ each tree's prediction has variance $4$ across training sets, and any two trees have correlation $0.3$. Variance of the average?",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.48,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Variance of an average of correlated terms",
+    "weight": 2
+   },
+   {
+    "text": "$\\rho\\sigma^2=1.2$",
+    "weight": 1
+   },
+   {
+    "text": "$(1-\\rho)\\sigma^2/B=0.28$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "For equal variance $\\sigma^2$ and correlation $\\rho$ (joint-cov): $\\mathrm{Var}=\\rho\\sigma^2+(1-\\rho)\\sigma^2/B$ (variance).\n$=1.2+0.7\\cdot4/10=1.2+0.28=1.48$ (bagging).\nTrap: independence gives $0.4$.",
+  "hints": [
+   "Correlation puts a floor under the variance."
+  ],
+  "check": "0.3*4+0.7*4/10",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.bagging",
+   "t3.bootstrap",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A bootstrap sample draws $n=5$ rows with replacement from 5 distinct rows. Expected number of distinct rows in the sample?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "3.36",
+    "3.16",
+    "4.0",
+    "1.64",
+    "2.5"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$5(1-0.8^5)$",
+    "used the large-$n$ limit $5(1-1/e)$",
+    "used $5\\cdot0.8$, one draw only",
+    "reported the expected out-of-bag count",
+    "assumed half"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Row missed by one draw: $0.8$",
+    "weight": 1
+   },
+   {
+    "text": "Missed by all 5 draws: $0.8^5=0.328$",
+    "weight": 2
+   },
+   {
+    "text": "Linearity of expectation over 5 rows",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "A row is missed by all 5 draws with probability $0.8^5=0.328$ (bootstrap).\nExpected distinct rows $=5(1-0.328)$ by indicator sums (expectation).\n$=3.36$.\nTrap: $1-1/e$ is only the limit as $n$ grows.",
+  "hints": [
+   "Sum indicators 'row appears at least once'."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.boosting",
+   "t6.loss",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Gradient boosting, squared loss. Targets $y=1,3,8$ at $x=1,2,3$. Start $F_0=$ mean of $y$. Fit a stump to the residuals with split $x\\le2$ (leaf value = mean residual in the leaf). Learning rate $0.5$: $F_1=F_0+0.5\\cdot\\text{leaf}$. Training MSE of $F_1$?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.6666666666666665,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "$F_0=4$, residuals $-3,-1,4$",
+    "weight": 1
+   },
+   {
+    "text": "Leaf values $-2$ and $4$",
+    "weight": 1
+   },
+   {
+    "text": "$F_1=3,3,6$",
+    "weight": 1
+   },
+   {
+    "text": "MSE $=8/3$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$F_0=4$; residuals $-3,-1,4$ (loss).\nLeaves: left mean $-2$, right $4$ (boosting).\n$F_1=4-1=3$, $3$, $4+2=6$.\nSquared errors $4,0,4$; MSE $=8/3=2.67$ (descriptive).\nStart MSE was 8.67.",
+  "hints": [
+   "Residuals of squared loss are the negative gradient."
+  ],
+  "check": "(4+0+4)/3",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.boosting",
+   "t1.exp-log",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "AdaBoost with 5 points, initial weights $0.2$ each. The weak learner misclassifies 1 point (weighted error $\\varepsilon=0.2$), with $\\alpha=\\tfrac12\\ln\\frac{1-\\varepsilon}{\\varepsilon}$. Weights are multiplied by $e^{-\\alpha}$ (correct) or $e^{\\alpha}$ (wrong), then normalised to sum 1. New weight of one correctly classified point?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.125",
+    "0.1",
+    "0.2",
+    "0.0625",
+    "0.4"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$0.1/0.8$",
+    "did not normalise",
+    "weights unchanged",
+    "halved the normalised weight again",
+    "weight of the misclassified point before normalising"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "$\\alpha=\\tfrac12\\ln4$, so $e^{\\alpha}=2$",
+    "weight": 2
+   },
+   {
+    "text": "Raw weights: correct $0.1$, wrong $0.4$",
+    "weight": 1
+   },
+   {
+    "text": "Normalise by total $0.8$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$\\alpha=\\tfrac12\\ln4=\\ln2$, so $e^{\\alpha}=2$ (exp-log).\nRaw weights: correct $0.2/2=0.1$ each; wrong $0.4$ (boosting).\nTotal $=0.4+0.4=0.8$; correct point $0.1/0.8=0.125$.\nWrong point gets $0.5$.",
+  "hints": [
+   "Sum the raw weights before dividing."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.svm",
+   "t6.loss",
+   "t1.dot-norm"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Soft-margin linear SVM objective $\\tfrac12\\lVert w\\rVert^2+C\\sum\\max(0,1-y(w\\cdot x+b))$ with $w=(1,-1)$, $b=0.5$, $C=2$. Points $(x_1,x_2;y)$: $(2,0;+1)$, $(0,1;+1)$, $(1,2;-1)$. Objective value?",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Margins $y(w\\cdot x+b)$: $2.5,-0.5,0.5$",
+    "weight": 2
+   },
+   {
+    "text": "Hinge losses $0,1.5,0.5$",
+    "weight": 1
+   },
+   {
+    "text": "$\\tfrac12\\lVert w\\rVert^2=1$ plus $C\\cdot2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Scores $w\\cdot x+b$ (dot-norm): $2.5$, $-0.5$, $-0.5$; times labels: $2.5,-0.5,0.5$.\nHinge (loss): $0,\\;1.5,\\;0.5$; sum $2$.\n$\\tfrac12\\lVert w\\rVert^2=\\tfrac12\\cdot2=1$ (svm).\nObjective $=1+2\\cdot2=5$.\nTrap: forgetting the sign of the negative-class score.",
+  "hints": [
+   "Multiply each score by its label before the hinge."
+  ],
+  "check": "0.5*2+2*(0+1.5+0.5)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.svm",
+   "t1.dot-norm",
+   "t1.vectors"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A hard-margin SVM boundary is $w^\\top x+b=0$ with $w=(3,4)$, $b=-5$. What is the Euclidean distance from the point $(3,1)$ to the boundary?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1.6",
+    "8",
+    "0.32",
+    "1.14",
+    "0.4"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$|3\\cdot3+4\\cdot1-5|/\\lVert w\\rVert=8/5$",
+    "functional margin, not divided by $\\lVert w\\rVert$",
+    "divided by $\\lVert w\\rVert^2$",
+    "divided by the L1 norm 7",
+    "full margin width $2/\\lVert w\\rVert$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Score $w\\cdot x+b=8$",
+    "weight": 2
+   },
+   {
+    "text": "$\\lVert w\\rVert=5$",
+    "weight": 1
+   },
+   {
+    "text": "Distance $=8/5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Score at $(3,1)$: $9+4-5=8$ (vectors).\n$\\lVert w\\rVert=\\sqrt{9+16}=5$ (dot-norm).\nDistance $=8/5=1.6$ (svm).\nTrap: the score 8 is a functional margin, not a distance.",
+  "hints": [
+   "Divide the score by the length of $w$."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.cv",
+   "t3.estimators",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Leave-one-out cross-validation for the model 'predict the mean of the training fold'. Data $y=1,3,5,11$. What is the LOOCV mean squared error?",
+  "answer": {
+   "kind": "numeric",
+   "value": 24.88888888888889,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Held-out predictions $6.33,\\,5.67,\\,5,\\,3$",
+    "weight": 2
+   },
+   {
+    "text": "Squared errors $256/9,\\,64/9,\\,0,\\,64$",
+    "weight": 1
+   },
+   {
+    "text": "Average over 4 folds",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Leave out each point and take the mean of the other three (cv): $19/3,\\,17/3,\\,5,\\,3$.\nErrors: $-16/3,\\,-8/3,\\,0,\\,8$ (estimators).\nSquares: $256/9,\\,64/9,\\,0,\\,64$; mean $=224/9=24.9$ (descriptive).\nTrap: in-sample residuals would give 14.",
+  "hints": [
+   "Each fold's prediction excludes its own point."
+  ],
+  "check": "(256/9+64/9+0+64)/4",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.cv",
+   "t3.estimators",
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "5-fold CV gives fold MSEs $4,6,5,9,6$. Treat the folds as independent. What is the standard error of their mean, $s/\\sqrt5$ with $s$ the sample sd (divisor $n-1$)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.837",
+    "1.87",
+    "0.75",
+    "3.5",
+    "0.374"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$\\sqrt{3.5}/\\sqrt5$",
+    "reported $s$, not the standard error",
+    "used divisor 5 for the sd",
+    "reported the sample variance",
+    "divided $s$ by 5 instead of $\\sqrt5$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Mean 6, squared deviations sum 14",
+    "weight": 1
+   },
+   {
+    "text": "$s=\\sqrt{14/4}=1.871$",
+    "weight": 2
+   },
+   {
+    "text": "Divide by $\\sqrt5$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Mean $=6$; deviations $-2,0,-1,3,0$; sum of squares $14$ (estimators).\n$s=\\sqrt{14/4}=1.871$.\nSE $=1.871/\\sqrt5=0.837$ (ci).\nTrap: dividing by $5$ rather than $\\sqrt5$.",
+  "hints": [
+   "Standard error is sd over the square root of the count."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics",
+   "t2.bayes",
+   "t2.conditional"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "On a balanced test set (half positive) a classifier has TPR $0.90$ and FPR $0.05$. In deployment only 2% of cases are positive and TPR and FPR stay the same. Precision in deployment (decimal)?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2686567164179104,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Deployment positives $0.02\\cdot0.9=0.018$",
+    "weight": 1
+   },
+   {
+    "text": "False alarms $0.98\\cdot0.05=0.049$",
+    "weight": 1
+   },
+   {
+    "text": "Precision $=0.018/0.067$",
+    "weight": 2
+   }
+  ],
+  "pass": 3,
+  "solution": "Per 1 case (conditional): true positives $0.02\\cdot0.9=0.018$.\nFalse positives $0.98\\cdot0.05=0.049$ (bayes).\nPrecision $=0.018/0.067=0.269$ (clf-metrics).\nTrap: balanced-set precision is 0.947.",
+  "hints": [
+   "Precision depends on prevalence; TPR and FPR do not."
+  ],
+  "check": "0.018/(0.018+0.049)",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.clf-metrics",
+   "t3.descriptive",
+   "t2.expectation"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Three-class confusion matrix (rows true, columns predicted):\n\n| true \\ pred | A | B | C |\n|---|---|---|---|\n| A | 16 | 2 | 2 |\n| B | 2 | 6 | 2 |\n| C | 1 | 1 | 3 |\n\nMacro-averaged recall (unweighted mean of the 3 class recalls)?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.667",
+    "0.714",
+    "0.645",
+    "0.8",
+    "0.6"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$(0.8+0.6+0.6)/3$",
+    "reported accuracy $25/35$ (micro average)",
+    "averaged precision instead of recall",
+    "reported recall of class A only",
+    "reported only recall of B and C"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Row sums 20, 10, 5",
+    "weight": 1
+   },
+   {
+    "text": "Recalls $0.8,0.6,0.6$",
+    "weight": 2
+   },
+   {
+    "text": "Unweighted mean",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Recall = diagonal over row sum (clf-metrics): A $16/20$, B $6/10$, C $3/5$.\nMacro mean (expectation): $(0.8+0.6+0.6)/3=0.667$.\nAccuracy $25/35=0.714$ weights big classes more.\nTrap: macro treats the small class equally.",
+  "hints": [
+   "Divide each diagonal cell by its row total."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr",
+   "t2.counting"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Six items ranked by score:\n\n| score | 0.9 | 0.8 | 0.6 | 0.6 | 0.3 | 0.1 |\n|---|---|---|---|---|---|---|\n| label | + | + | - | + | - | - |\n\nAUC = share of (positive, negative) pairs where the positive scores higher, ties count $\\tfrac12$. AUC (decimal)?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.9444444444444444,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "9 positive-negative pairs",
+    "weight": 1
+   },
+   {
+    "text": "Pairs won: $3+3+2$",
+    "weight": 2
+   },
+   {
+    "text": "Tie adds $\\tfrac12$: $8.5/9$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "$3$ positives $\\times$ $3$ negatives $=9$ pairs (counting).\nPositive 0.9 beats 3 negatives; 0.8 beats 3.\nPositive 0.6 beats 2, ties the other negative 0.6: $2.5$ (roc-pr).\nAUC $=8.5/9=0.944$.\nTrap: counting the tie as a loss gives $0.889$.",
+  "hints": [
+   "Count pairs, not ranks."
+  ],
+  "check": "8.5/9",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.roc-pr",
+   "t2.conditional",
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A ranking from top to bottom has labels $-,+,+,-,+,-$. Average precision = mean of the precision at each positive's rank (over the 3 positives). What is it?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.589",
+    "0.556",
+    "0.667",
+    "0.5",
+    "0.461"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$(\\tfrac12+\\tfrac23+\\tfrac35)/3$",
+    "reported the AUC $5/9$",
+    "reported precision at rank 3 only",
+    "reported final precision at rank 6",
+    "averaged precision over all 6 ranks"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Precision at ranks 2, 3, 5",
+    "weight": 2
+   },
+   {
+    "text": "Values $\\tfrac12,\\tfrac23,\\tfrac35$",
+    "weight": 1
+   },
+   {
+    "text": "Average over the 3 positives",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Positives sit at ranks 2, 3, 5 (conditional).\nPrecision there: $1/2$, $2/3$, $3/5$ (clf-metrics).\nAP $=(0.5+0.667+0.6)/3=0.589$ (roc-pr).\nTrap: averaging at negative ranks too gives 0.461.",
+  "hints": [
+   "Evaluate precision only at the positives."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f029",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics",
+   "t3.descriptive",
+   "t6.ml-setup"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Test rows have $y=4,6,10$ and predictions $5,6,8$. The training mean of $y$ is $5$. Compute test $R^2=1-\\mathrm{SSE}/\\mathrm{SST}$ with SST measured around the training mean. What is it?",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.8148148148148149,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "SSE $=5$",
+    "weight": 1
+   },
+   {
+    "text": "SST around 5 $=27$",
+    "weight": 2
+   },
+   {
+    "text": "$R^2=1-5/27$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "SSE $=1+0+4=5$ (reg-metrics).\nSST around the train mean: $1+1+25=27$ (ml-setup).\n$R^2=1-5/27=0.815$.\nTrap: the test mean $6.67$ gives SST $18.7$ and $0.732$.",
+  "hints": [
+   "Which mean does the baseline model use?"
+  ],
+  "check": "1-5/27",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f030",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.reg-metrics",
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A regression with 3 predictors and an intercept, fit on $n=12$ rows, has $R^2=0.85$. Adjusted $R^2=1-(1-R^2)\\frac{n-1}{n-p-1}$ with $p=3$. What is it?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.794",
+    "0.817",
+    "0.775",
+    "0.85",
+    "0.15"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$1-0.15\\cdot\\tfrac{11}{8}$",
+    "used $n-p$ in the denominator",
+    "used $n$ instead of $n-1$ in the numerator",
+    "reported plain $R^2$",
+    "reported $1-R^2$"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Degrees of freedom $n-1=11$, $n-p-1=8$",
+    "weight": 2
+   },
+   {
+    "text": "Scale factor $1.375$",
+    "weight": 1
+   },
+   {
+    "text": "Subtract from 1",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Residual df $=n-p-1=8$ (ols-multi).\nAdj $R^2=1-0.15\\cdot11/8=1-0.206=0.794$ (reg-metrics).\nTrap: using $n-p=9$ as the residual df gives $0.817$.",
+  "hints": [
+   "Count degrees of freedom carefully."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f031",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.tuning",
+   "t2.expectation",
+   "t6.roc-pr"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Calibrated probabilities of the positive class for 5 items: $0.05,0.08,0.15,0.40,0.90$. A false positive costs 1 dollar and a false negative costs 9 dollars. Choose flag or not for each item to minimise expected cost. Total expected cost in dollars?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.72,
+   "tol": 0,
+   "rel": 0.02,
+   "form": "decimal"
+  },
+  "rubric": [
+   {
+    "text": "Flag cost $1-p$, skip cost $9p$",
+    "weight": 2
+   },
+   {
+    "text": "Pick the smaller per item",
+    "weight": 1
+   },
+   {
+    "text": "Sum $=2.72$",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Flag costs $(1-p)\\cdot1$; skip costs $9p$ (expectation).\nBreak-even $p=0.1$ (tuning).\nMin per item: $0.45,\\,0.72,\\,0.85,\\,0.60,\\,0.10$ (roc-pr threshold).\nTotal $=2.72$.\nTrap: threshold 0.5 costs $6.22$.",
+  "hints": [
+   "Optimal threshold is $c_{FP}/(c_{FP}+c_{FN})$."
+  ],
+  "check": "0.45+0.72+0.85+0.6+0.1",
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t6-f032",
+  "tier": "c",
+  "type": "full",
+  "level": "T6",
+  "tags": [
+   "t6.tuning",
+   "t2.expectation",
+   "t6.clf-metrics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Calibration bins on 100 predictions:\n\n| bin | n | mean predicted | observed rate |\n|---|---|---|---|\n| high | 10 | 0.8 | 0.6 |\n| mid | 30 | 0.3 | 0.4 |\n| low | 60 | 0.1 | 0.05 |\n\nExpected calibration error: sum over bins of $\\frac{n_b}{N}\\,|\\text{observed}-\\text{predicted}|$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "0.08",
+    "0.117",
+    "0.35",
+    "0.04",
+    "0.0085"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "$0.1(0.2)+0.3(0.1)+0.6(0.05)$",
+    "unweighted mean of the gaps",
+    "unweighted sum of the gaps",
+    "signed gaps cancelled",
+    "squared gaps (Brier-style)"
+   ]
+  },
+  "rubric": [
+   {
+    "text": "Gaps $0.2,0.1,0.05$",
+    "weight": 1
+   },
+   {
+    "text": "Bin weights $0.1,0.3,0.6$",
+    "weight": 2
+   },
+   {
+    "text": "Weighted sum of absolute gaps",
+    "weight": 1
+   }
+  ],
+  "pass": 3,
+  "solution": "Gaps $|obs-pred|$: $0.2,\\,0.1,\\,0.05$ (tuning).\nWeights $n_b/N=0.1,\\,0.3,\\,0.6$ (expectation).\nECE $=0.02+0.03+0.03=0.08$ (clf-metrics).\nTrap: signed gaps partly cancel to 0.04.",
+  "hints": [
+   "Weight bins by how many predictions they hold."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

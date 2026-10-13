@@ -153,3 +153,51 @@ img, table, pre { max-width: 100%; }
 .sol .prose { margin-top: 6px; }
 
 .reveal .primary{margin-top:12px}
+
+/* Code answers: editor, run results, fenced blocks in prose */
+.prose pre, .stdout {
+  margin: .6em 0; padding: 10px 12px; overflow-x: auto; background: var(--bg); border: 1px solid var(--line);
+  border-radius: 8px; font: .88rem/1.45 ui-monospace, Menlo, Consolas, monospace; white-space: pre; max-height: 40vh;
+}
+.prose pre code { background: none; padding: 0; font: inherit; }
+.stdout { white-space: pre-wrap; overflow-wrap: anywhere; }
+.code { margin-top: 16px; display: grid; gap: 8px; }
+.editor {
+  width: 100%; min-height: 12.5em; padding: 10px 12px; resize: vertical; tab-size: 4; white-space: pre; overflow: auto;
+  font: .9rem/1.5 ui-monospace, Menlo, Consolas, monospace; color: var(--ink); background: var(--card);
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+.editor:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.code .note { margin: 0; }
+.code-actions { display: flex; gap: 10px; }
+.code-actions button { flex: 1; min-height: 44px; }
+.code-out { margin-top: 10px; min-height: 1.4em; }
+.code-out .note, .bad-line { margin: 0 0 8px; overflow-wrap: anywhere; }
+.bad-line { color: var(--bad); font-weight: 600; }
+.tests { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; font: .86rem/1.4 ui-monospace, Menlo, Consolas, monospace; }
+.tests li { overflow-wrap: anywhere; }
+.tests .pass b { color: var(--ok); }
+.tests .fail b { color: var(--bad); }
+.editor:disabled,button:disabled{opacity:.55;cursor:default}
+
+/* Teach card v2 (docs/TEACH_CARDS.md): labelled paragraphs, display math, fenced code */
+.teach { overflow-wrap: anywhere; min-width: 0; }
+.teach p { margin: 0 0 .6em; line-height: 1.55; }
+.teach p:last-child { margin-bottom: 0; }
+.teach em { font-style: italic; }
+.teach p > em:first-child { font-weight: 650; color: var(--accent); }
+.teach .katex-display { margin: .55em 0; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+/* a wide display block scrolls sideways: thin visible scrollbar plus edge fades that show only while more is hidden */
+.teach .katex-display { scrollbar-width: thin; scrollbar-color: var(--muted, #888) transparent;
+  background: linear-gradient(to right, var(--card, Canvas) 30%, transparent) left center / 36px 100% no-repeat local,
+    linear-gradient(to left, var(--card, Canvas) 30%, transparent) right center / 36px 100% no-repeat local,
+    linear-gradient(to right, rgba(128,128,128,.6), transparent) left center / 18px 100% no-repeat scroll,
+    linear-gradient(to left, rgba(128,128,128,.6), transparent) right center / 18px 100% no-repeat scroll; }
+@media (max-width: 600px) { .teach .katex-display { font-size: .9em; } }
+/* GFM pipe tables: compact, bordered, scrolls sideways inside its own box */
+.prose .tblwrap { margin: .5em 0 .7em; max-width: 100%; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--muted, #888) transparent; }
+.prose table { border-collapse: collapse; font-size: .92em; line-height: 1.35; width: auto; max-width: none; }
+.prose th, .prose td { border: 1px solid var(--line, rgba(128,128,128,.45)); padding: .25em .6em; text-align: left; vertical-align: top; }
+.prose th { background: rgba(128,128,128,.14); font-weight: 650; }
+.prose td .katex-display { margin: .2em 0; }
+.teach pre { margin: .6em 0 .8em; max-width: 100%; }

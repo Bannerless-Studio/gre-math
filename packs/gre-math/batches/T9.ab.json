@@ -5366,8 +5366,8 @@
       "t9.geometry-misc"
     ],
     "critical": [],
-    "difficulty": 2,
-    "prompt": "The shear $(x,y)\\mapsto(x+2y,\\ y)$ sends $(x,y)$ to a point. Give its first coordinate as a function of $x$ and $y$.",
+    "difficulty": 1,
+    "prompt": "Let $M=\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$. Give the first coordinate of $M\\begin{pmatrix}x\\\\y\\end{pmatrix}$ as a function of $x$ and $y$.",
     "answer": {
       "kind": "expression",
       "value": "x+2*y",
@@ -5385,9 +5385,9 @@
       ]
     },
     "check": null,
-    "solution": "Read the first output coordinate of the shear formula.",
+    "solution": "The first row of $M$ is $(1,2)$, so the first coordinate is $1\\cdot x+2\\cdot y=x+2y$.",
     "hints": [
-      "Read the first output coordinate."
+      "Multiply the first row of $M$ by the column $(x,y)^T$."
     ],
     "source": {
       "type": "original",

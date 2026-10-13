@@ -1,0 +1,4323 @@
+[
+ {
+  "id": "t3-0001",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which summary of a data set is robust, so one extreme value barely moves it?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The median",
+    "The mean",
+    "The sample variance",
+    "The range"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the mean moves with any extreme value",
+    "variance measures spread and is pulled by outliers",
+    "the range is set by the single largest and smallest values"
+   ]
+  },
+  "solution": "The median depends only on the middle order statistics.",
+  "hints": [
+   "Robust means the summary depends on ranks, not on the size of each value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0002",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the interquartile range in terms of the quartiles $Q_1$ and $Q_3$.",
+  "answer": {
+   "kind": "expression",
+   "value": "Q3-Q1",
+   "vars": [
+    "Q3",
+    "Q1"
+   ],
+   "also": [
+    "-Q1+Q3",
+    "Q3-1*Q1"
+   ]
+  },
+  "check": null,
+  "solution": "IQR is the upper quartile minus the lower quartile.",
+  "hints": [
+   "Spread between the two quartiles."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0003",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write the sample mean $\\bar x$ in terms of the sum $S$ of $n$ values.",
+  "answer": {
+   "kind": "expression",
+   "value": "S/n",
+   "vars": [
+    "S",
+    "n"
+   ],
+   "also": [
+    "S*n^(-1)",
+    "1/n*S"
+   ]
+  },
+  "check": null,
+  "solution": "The mean is the total divided by the count.",
+  "hints": [
+   "Divide the total by the number of values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Data: $3, 8, 8, 10, 15, 21$. Give the median.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(8+10)/2",
+  "solution": "Six values, so the median is the mean of the 3rd and 4th: $(8+10)/2=9$.",
+  "hints": [
+   "Sort first, then average the two middle values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Data: $2, 5, 7, 9, 12, 14, 20, 23$. Using the median of each half, give the IQR.",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "((14+20)/2)-((5+7)/2)",
+  "solution": "Halves $2,5,7,9$ and $12,14,20,23$ have medians $6$ and $17$, so IQR $=17-6=11$.",
+  "hints": [
+   "Split at the overall median, then take each half's median."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Values $10, 12, 11, 13, 14$ have mean 12. A sixth value $50$ is added. Give the new mean minus 12, as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "19/3",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "Fraction(10+12+11+13+14+50,6)-12",
+  "solution": "New sum $110$ over $6$ is $55/3$. Minus $12$ gives $19/3$.",
+  "hints": [
+   "Find the new total before dividing by the new count."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which summaries are robust to one very large outlier? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Mean",
+    "Median",
+    "Range",
+    "Interquartile range"
+   ],
+   "correct": [
+    1,
+    3
+   ]
+  },
+  "solution": "Median and IQR depend on ranks. Mean and range move with the outlier.",
+  "hints": [
+   "Ask whether the statistic changes when only the largest value grows."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sample has mean 50 and sd 8. Give the z-score of the value 62.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(62-50)/8",
+  "solution": "$z=(62-50)/8=1.5$.",
+  "hints": [
+   "A z-score is the distance from the mean in sd units."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Data: $2, 4, 4, 6$. Using divisor $n-1$, give the sample variance as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.6666666666666665,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "sum((x-4)**2 for x in [2,4,4,6])/(4-1)",
+  "solution": "Deviations from 4 are $-2,0,0,2$. Squares sum to $8$, and $8/3$ is the variance.",
+  "hints": [
+   "Square deviations from the mean, then divide by $n-1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0010",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which expression is the standard error of the sample mean of $n$ independent draws, with population sd $\\sigma$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\sigma/\\sqrt{n}$",
+    "$\\sigma/n$",
+    "$\\sigma\\sqrt{n}$",
+    "$\\sigma^2/n$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "divides by $n$, not $\\sqrt n$",
+    "grows with $n$",
+    "that is the variance of the mean, not its sd"
+   ]
+  },
+  "solution": "The variance of the mean is $\\sigma^2/n$, so its sd is $\\sigma/\\sqrt n$.",
+  "hints": [
+   "The variance of the mean is $\\sigma^2/n$; take the square root for the sd."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0011",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which sampling method gives every unit a known, non-zero chance of selection?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Simple random sampling",
+    "Convenience sampling",
+    "Voluntary response sampling",
+    "Quota sampling"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "units are picked by ease, so their chances are unknown",
+    "self-selection makes the chances unknown",
+    "quota fills by judgement, so the chances are unknown"
+   ]
+  },
+  "solution": "Random sampling from a frame gives known selection probabilities.",
+  "hints": [
+   "Known selection probabilities are what make inference valid."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0012",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the variance of the sample proportion $\\hat p$ from $n$ independent trials with success probability $p$.",
+  "answer": {
+   "kind": "expression",
+   "value": "p*(1-p)/n",
+   "vars": [
+    "p",
+    "n"
+   ],
+   "also": [
+    "p*(1-p)*n^(-1)",
+    "(p-p^2)/n"
+   ]
+  },
+  "check": null,
+  "solution": "One trial has variance $p(1-p)$, and the mean of $n$ trials divides by $n$.",
+  "hints": [
+   "Start from the variance of one Bernoulli trial."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A population has sd $12$. Give the standard error of the mean of a random sample of $n=36$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "12/math.sqrt(36)",
+  "solution": "$\\sigma/\\sqrt n=12/6=2$.",
+  "hints": [
+   "Standard error is sd divided by the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a population the proportion of yes is $0.3$. Give the standard error of the sample proportion from $n=100$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0458257569495584,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(0.3*(1-0.3)/100)",
+  "solution": "$\\sqrt{0.3\\cdot0.7/100}=\\sqrt{0.0021}\\approx0.04583$.",
+  "hints": [
+   "Use the Bernoulli variance $p(1-p)$ before dividing by $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A population has mean $50$ and sd $10$. A sample of $n=25$ is drawn. Using $\\Phi(1)=0.8413$, give the probability that the sample mean exceeds $52$, as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.1587,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1-0.8413",
+  "solution": "The sample mean has sd $10/5=2$, so $z=(52-50)/2=1$ and $P=1-0.8413=0.1587$.",
+  "hints": [
+   "Find the standard error of the mean first, then standardise."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about the sampling distribution of the sample mean are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Its mean equals the population mean $\\mu$",
+    "Its sd equals the population sd $\\sigma$",
+    "Its sd falls as $n$ grows",
+    "It is exactly normal for every population"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "The mean is unbiased and the sd is $\\sigma/\\sqrt n$, which shrinks. The sd is not $\\sigma$, and normality is not guaranteed.",
+  "hints": [
+   "Check the mean first, then the sd, against $\\sigma/\\sqrt n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "How many times larger must $n$ be to halve the standard error of the sample mean?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2**2",
+  "solution": "$SE\\propto 1/\\sqrt n$. Halving needs $\\sqrt n$ doubled, so $n$ quadruples.",
+  "hints": [
+   "Square the factor you need on the standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.sampling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The population variance of $X$ is $0.64$. Give the standard deviation of the mean of a sample of $n=16$, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(0.64/16)",
+  "solution": "Variance of the mean is $0.64/16=0.04$, so its sd is $0.2$.",
+  "hints": [
+   "Divide the variance by $n$ first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0019",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which divisor makes the sample variance an unbiased estimator of $\\sigma^2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n-1$",
+    "$n$",
+    "$n+1$",
+    "$2n$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "gives the biased (maximum likelihood) variance",
+    "shrinks the estimate further",
+    "doubles the denominator, which shrinks the estimate"
+   ]
+  },
+  "solution": "Dividing by $n-1$ removes the downward bias of the $n$ divisor.",
+  "hints": [
+   "Dividing by $n$ gives a downward bias."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0020",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which property means the average value of an estimator equals the true parameter?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Unbiasedness",
+    "Consistency",
+    "Efficiency",
+    "Sufficiency"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "consistency concerns convergence as $n$ grows, not the average at fixed $n$",
+    "efficiency compares variances among unbiased estimators",
+    "sufficiency concerns keeping all the information"
+   ]
+  },
+  "solution": "Unbiased means $E[\\hat\\theta]=\\theta$ at every sample size.",
+  "hints": [
+   "Think about the expected value of the estimator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0021",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the mean squared error of an estimator in terms of its variance $v$ and bias $b$.",
+  "answer": {
+   "kind": "expression",
+   "value": "v+b^2",
+   "vars": [
+    "v",
+    "b"
+   ],
+   "also": [
+    "b^2+v",
+    "v+b*b"
+   ]
+  },
+  "check": null,
+  "solution": "MSE is variance plus squared bias.",
+  "hints": [
+   "Squared error splits into spread plus systematic error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "An estimator $T$ has mean $\\theta+0.5$ and variance $4$. Give its mean squared error.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.25,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4+0.5**2",
+  "solution": "MSE $=$ variance $+$ bias$^2=4+0.25=4.25$.",
+  "hints": [
+   "Bias is the mean of the estimator minus the true value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Data: $1, 3, 5, 7$. Using divisor $n$, give the variance estimate.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum((x-4)**2 for x in [1,3,5,7])/4",
+  "solution": "Mean $4$, squared deviations $9+1+1+9=20$, divided by $4$ gives $5$.",
+  "hints": [
+   "Here the divisor is $n$, not $n-1$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A true variance is $\\sigma^2=9$. The estimator divides the sum of squared deviations by $n=10$. Give its bias $E[\\hat\\sigma^2]-\\sigma^2$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "-9/10",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "Fraction(9,10)*9-9",
+  "solution": "$E[\\hat\\sigma^2]=\\frac{n-1}{n}\\sigma^2=8.1$, so the bias is $-0.9$.",
+  "hints": [
+   "The expected value shrinks by the factor $(n-1)/n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Estimator A has variance $2.5$ and no bias. Estimator B has variance $1$ and bias $1.5$. Give MSE(B) minus MSE(A).",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.75,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(1+1.5**2)-2.5",
+  "solution": "MSE(B) $=1+2.25=3.25$ and MSE(A) $=2.5$, so the difference is $0.75$.",
+  "hints": [
+   "MSE adds squared bias to variance."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about estimators are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Bias is $E[\\hat\\theta]-\\theta$",
+    "An unbiased estimator always has the smallest MSE",
+    "MSE equals variance plus squared bias",
+    "Consistency means variance is exactly zero at every $n$"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "Bias and the MSE split are standard. Unbiased does not mean lowest MSE, and consistency is about large $n$.",
+  "hints": [
+   "Test each claim against the MSE decomposition."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.estimators"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sample of $n$ independent values each has variance $\\sigma^2$. Write the variance of the sample mean in terms of $\\sigma$ and $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "sigma^2/n",
+   "vars": [
+    "sigma",
+    "n"
+   ],
+   "also": [
+    "sigma^2*n^(-1)",
+    "sigma*sigma/n"
+   ]
+  },
+  "check": null,
+  "solution": "Variances of independent values add, so the mean has variance $\\sigma^2/n$.",
+  "hints": [
+   "Variances of independent sums add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0028",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What is the maximum likelihood estimate of the rate $\\lambda$ of a Poisson model from $n$ counts with total $S$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$S/n$",
+    "$S/(n-1)$",
+    "$S$",
+    "$\\sqrt{S/n}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "uses the $n-1$ divisor, which is not the MLE",
+    "is the total, not a rate",
+    "is a standard deviation form, not the rate"
+   ]
+  },
+  "solution": "Setting the Poisson score to zero gives the sample mean.",
+  "hints": [
+   "Differentiate the log-likelihood in lambda."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0029",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the Bernoulli maximum likelihood estimate $\\hat p$ from $k$ successes in $n$ trials.",
+  "answer": {
+   "kind": "expression",
+   "value": "k/n",
+   "vars": [
+    "k",
+    "n"
+   ],
+   "also": [
+    "k*n^(-1)",
+    "1/n*k"
+   ]
+  },
+  "check": null,
+  "solution": "The log-likelihood $k\\ln p+(n-k)\\ln(1-p)$ is maximised at $k/n$.",
+  "hints": [
+   "Differentiate the Bernoulli log-likelihood in $p$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0030",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why is the log-likelihood maximised in place of the likelihood?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It has the same maximiser and turns products into sums",
+    "It moves the maximiser to another parameter value",
+    "It makes the observations independent",
+    "It removes the need for a model"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a monotone transform keeps the maximiser fixed",
+    "independence is an assumption, not a result of logs",
+    "a model is always needed for a likelihood"
+   ]
+  },
+  "solution": "The log is monotone, so the maximiser is unchanged.",
+  "hints": [
+   "A monotone transform keeps the location of the peak."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In 10 independent Bernoulli trials there are 3 successes. Give the MLE of $p$ as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "3/10",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "Fraction(3,10)",
+  "solution": "$\\hat p=k/n=3/10$.",
+  "hints": [
+   "Set the derivative of the log-likelihood to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Independent Poisson counts are $2, 4, 3, 5, 6$. Give the MLE of $\\lambda$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(2+4+3+5+6)/5",
+  "solution": "The MLE is the sample mean, $20/5=4$.",
+  "hints": [
+   "Average the counts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0033",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A normal sample is $1, 2, 4, 9$, with $\\mu$ and $\\sigma^2$ unknown. Give the MLE of $\\sigma^2$, dividing by $n$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum((x-4)**2 for x in [1,2,4,9])/4",
+  "solution": "$\\hat\\mu=4$ and $\\sum(x-4)^2=38$, so $\\hat\\sigma^2=38/4=9.5$.",
+  "hints": [
+   "The MLE of the variance divides by $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0034",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For a Poisson model the log-likelihood is $\\ell(\\lambda)=S\\ln\\lambda-n\\lambda$, up to a constant. With $n=4$ and $S=10$, give the $\\lambda$ where $\\ell'(\\lambda)=0$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "10/4",
+  "solution": "$\\ell'=S/\\lambda-n=0$ gives $\\lambda=S/n=2.5$.",
+  "hints": [
+   "Differentiate and set the derivative to zero."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0035",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Independent exponential observations have log-likelihood $n\\ln\\lambda-\\lambda\\sum x_i$. Write the MLE of $\\lambda$ in terms of $n$ and $T=\\sum x_i$.",
+  "answer": {
+   "kind": "expression",
+   "value": "n/T",
+   "vars": [
+    "n",
+    "T"
+   ],
+   "also": [
+    "n*T^(-1)",
+    "1/(T/n)"
+   ]
+  },
+  "check": null,
+  "solution": "Setting $n/\\lambda-T=0$ gives $\\lambda=n/T$.",
+  "hints": [
+   "Differentiate in lambda only; T is fixed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0036",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.mle"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which steps are needed to find a maximum likelihood estimate by calculus? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Write the log-likelihood for the sample",
+    "Differentiate it with respect to the parameter",
+    "Check the stationary point is a maximum",
+    "Use the sample average whatever the model"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "Write, differentiate, then check the stationary point. A sample average is the MLE only for some models.",
+  "hints": [
+   "The model decides the estimate."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0037",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the form of a $(1-\\alpha)$ z confidence interval for a population mean.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Estimate $\\pm\\, z \\times$ standard error",
+    "Estimate $\\times\\, z \\pm$ standard error",
+    "$z \\pm$ estimate divided by standard error",
+    "Estimate $\\pm$ standard error divided by $z$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "multiplies the estimate by $z$",
+    "puts the statistic in the wrong place",
+    "divides by the critical value"
+   ]
+  },
+  "solution": "The interval is the estimate plus and minus critical value times standard error.",
+  "hints": [
+   "The critical value multiplies the standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0038",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the margin of error of a z interval for a mean, with critical value $z$, population sd $\\sigma$ and sample size $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "z*sigma/sqrt(n)",
+   "vars": [
+    "z",
+    "sigma",
+    "n"
+   ],
+   "also": [
+    "z*sigma*n^(-1/2)",
+    "sigma*z/n^0.5"
+   ]
+  },
+  "check": null,
+  "solution": "Margin $=z\\cdot\\sigma/\\sqrt n$.",
+  "hints": [
+   "Margin is critical value times standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0039",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "What does a 95% confidence interval mean?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The method captures the true mean in about 95% of repeated samples",
+    "The true mean lies in this interval with probability 0.95",
+    "95% of the data values lie in the interval",
+    "The sample mean lies in the interval with probability 0.95"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a probability for a fixed mean is not what the interval gives",
+    "that describes a prediction of single values",
+    "the sample mean is always the centre of its own interval, so this is not the meaning"
+   ]
+  },
+  "solution": "The 95% describes the long-run capture rate of the method.",
+  "hints": [
+   "The randomness sits in the sample, not in the true mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0040",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "A sample of $n=25$ has mean 40 from a population with known sd 5. Using $z=1.96$, give the margin of error of a 95% interval.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.96,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1.96*5/math.sqrt(25)",
+  "solution": "$1.96\\cdot 5/\\sqrt{25}=1.96$.",
+  "hints": [
+   "Margin is z times sd over the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0041",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sample of $n=16$ has mean 50 and sample sd 8. Using $t_{0.975,15}=2.131$, give the margin of error of a 95% t interval.",
+  "answer": {
+   "kind": "numeric",
+   "value": 4.262,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "2.131*8/math.sqrt(16)",
+  "solution": "$2.131\\cdot 8/4=4.262$.",
+  "hints": [
+   "Use the t value for $n-1$ degrees of freedom."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0042",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A 95% z interval for a mean has half-width 3.0 at $n=36$, with the same sd. Give the half-width at $n=144$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3.0*math.sqrt(36)/math.sqrt(144)",
+  "solution": "Half-width scales with $1/\\sqrt n$, and $n$ rises by 4, so it halves.",
+  "hints": [
+   "The width depends on the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0043",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A sample of $n=400$ has proportion $\\hat p=0.25$. Using $z=1.96$, give the Wald half-width of the 95% interval as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.04243524478543749,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1.96*math.sqrt(0.25*0.75/400)",
+  "solution": "$\\sqrt{0.25\\cdot0.75/400}\\approx0.02165$, times 1.96 gives $0.04244$.",
+  "hints": [
+   "Use the Bernoulli variance inside the root."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0044",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which changes make a confidence interval for a mean narrower? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Raise the confidence level from 90% to 99%",
+    "Increase the sample size",
+    "Reduce the population sd",
+    "Use a larger sample sd"
+   ],
+   "correct": [
+    1,
+    2
+   ]
+  },
+  "solution": "Larger $n$ and smaller sd narrow it. Higher confidence and larger sd widen it.",
+  "hints": [
+   "Width is z times sd over the square root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0045",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ci"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "The population sd is 10, known. How many observations give a 95% z margin of error of exactly 1.96? Use $z=1.96$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 100,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "round((1.96*10/1.96)**2)",
+  "solution": "$1.96\\cdot10/\\sqrt n=1.96$ gives $\\sqrt n=10$, so $n=100$.",
+  "hints": [
+   "Solve the margin formula for $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0046",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the p-value of a test in words.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The probability of a result at least as extreme as the observed one, assuming $H_0$ is true",
+    "The probability that $H_0$ is true",
+    "The probability of the observed data alone",
+    "The probability of rejecting $H_0$ when $H_1$ is true"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "reverses the conditioning, which gives a posterior, not a p-value",
+    "drops the 'at least as extreme' part",
+    "that is power, not a p-value"
+   ]
+  },
+  "solution": "A p-value conditions on the null being true.",
+  "hints": [
+   "Ask what is assumed and what is measured."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0047",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A test has significance level $0.05$. Give the probability of a type I error when $H_0$ is true, as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.05,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "0.05",
+  "solution": "The type I error rate equals the significance level, $0.05$.",
+  "hints": [
+   "A type I error is rejecting a true null."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0048",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which outcome is a type II error?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Failing to reject $H_0$ when $H_1$ is true",
+    "Rejecting $H_0$ when $H_0$ is true",
+    "Rejecting $H_0$ when $H_1$ is true",
+    "Failing to reject $H_0$ when $H_0$ is true"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is a type I error",
+    "a correct rejection, which is power",
+    "a correct decision"
+   ]
+  },
+  "solution": "A type II error misses a real effect.",
+  "hints": [
+   "Type II means a missed true alternative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0049",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "probe": true,
+  "prompt": "A test rejects $H_0:\\mu=50$ when $\\bar x>52$, with standard error 1. Under $H_1:\\mu=54$, the power is $P(\\bar x>52)$. Using $\\Phi(-2)=0.0228$, give the power as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.9772,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1-0.0228",
+  "solution": "$z=(52-54)/1=-2$, so power $=1-\\Phi(-2)=0.9772$.",
+  "hints": [
+   "Standardise the cut-off under the alternative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0050",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A two-sided z test gives $z=2.10$. Using $\\Phi(2.10)=0.9821$, give the two-sided p-value as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0358,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "2*(1-0.9821)",
+  "solution": "$p=2(1-\\Phi(2.10))=2(0.0179)=0.0358$.",
+  "hints": [
+   "Two-sided doubles one tail."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0051",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about a p-value are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "It is $P(\\text{data this extreme or more}\\mid H_0)$",
+    "It is $P(H_0 \\text{ true}\\mid \\text{data})$",
+    "A smaller p-value is stronger evidence against $H_0$",
+    "It equals $\\alpha$ whenever the test rejects"
+   ],
+   "correct": [
+    0,
+    2
+   ]
+  },
+  "solution": "The p-value conditions on $H_0$. It is not the probability that $H_0$ is true.",
+  "hints": [
+   "Remember the p-value conditions on the null."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0052",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which changes increase the power of a test at fixed significance level? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "A larger true effect size",
+    "A larger sample size",
+    "A larger noise standard deviation",
+    "A stricter significance level of 0.001"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Larger effects and samples raise power. More noise and a stricter level lower it.",
+  "hints": [
+   "Power is the chance of rejecting when the alternative is true."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0053",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A sample of $n=100$ has mean $10.5$. Under $H_0:\\mu=10$ with known sd 5, give the z statistic.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "(10.5-10)/(5/math.sqrt(100))",
+  "solution": "$z=(10.5-10)/(5/10)=1$.",
+  "hints": [
+   "Standard error is sd over the root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0054",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.hypothesis"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A one-sided z test gives $z=1.64$. Using $\\Phi(1.64)=0.9495$, give the one-sided p-value as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0505,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1-0.9495",
+  "solution": "$p=1-\\Phi(1.64)=0.0505$.",
+  "hints": [
+   "A one-sided test uses one tail only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0055",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What are the degrees of freedom of a one-sample t statistic from $n$ observations?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n-1$",
+    "$n$",
+    "$n+1$",
+    "$2n-2$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the z case, which has no estimated spread",
+    "adds one, which is wrong for a sample mean",
+    "the pooled two-sample count"
+   ]
+  },
+  "solution": "One parameter, the mean, is estimated, so one df is lost.",
+  "hints": [
+   "The sd is estimated from the same data."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0056",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the one-sample t statistic for sample mean $\\bar x$, null mean $\\mu_0$, sample sd $s$ and sample size $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(xbar-mu0)/(s/sqrt(n))",
+   "vars": [
+    "xbar",
+    "mu0",
+    "s",
+    "n"
+   ],
+   "also": [
+    "(xbar-mu0)*sqrt(n)/s",
+    "(xbar-mu0)/s*sqrt(n)"
+   ]
+  },
+  "check": null,
+  "solution": "$t=(\\bar x-\\mu_0)/(s/\\sqrt n)$.",
+  "hints": [
+   "Standardise with the estimated standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0057",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which test applies a one-sample t to paired data?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The differences $d_i=x_i-y_i$ of matched pairs",
+    "Two independent groups with pooled variance",
+    "Counts in the cells of a table",
+    "Two sample proportions"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "independent groups, not matched pairs",
+    "chi-square territory",
+    "a proportion test"
+   ]
+  },
+  "solution": "Pairing turns two samples into one sample of differences.",
+  "hints": [
+   "Matching removes between-pair variation."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0058",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "probe": true,
+  "prompt": "A sample has $n=10$, mean $52$ and sd $6$. Test $H_0:\\mu=50$. Give the t statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.0540925533894598,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(52-50)/(6/math.sqrt(10))",
+  "solution": "$t=(52-50)/(6/\\sqrt{10})=\\sqrt{10}/3\\approx1.054$.",
+  "hints": [
+   "Standard error is sd over the root of $n$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0059",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Paired differences are $2, 4, 1, 3$. Give the paired t statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.872983346207417,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "2.5/(math.sqrt(5/3)/math.sqrt(4))",
+  "solution": "Mean difference $2.5$, sd $\\sqrt{5/3}$, so $t=2.5/(\\sqrt{5/3}/2)=\\sqrt{15}\\approx3.873$.",
+  "hints": [
+   "Test the mean of the differences, not the raw values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0060",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Two independent groups of sizes 12 and 15 use a pooled-variance t test. Give the degrees of freedom.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "12+15-2",
+  "solution": "Pooled df is $n_1+n_2-2=25$.",
+  "hints": [
+   "Each group loses one df for its mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0061",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which conditions justify a one-sample t test? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Observations are independent",
+    "The population is roughly normal, or $n$ is large",
+    "The two groups have equal variances",
+    "The data are category counts"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "A one-sample t needs independence and a near-normal mean (roughly normal data, or large $n$). Equal variances belong to two-sample tests.",
+  "hints": [
+   "Equal variances only matter when comparing two groups."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0062",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Paired differences have mean $3$ and sd $6$ over $n=9$ pairs. Give the paired t statistic.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "3/(6/math.sqrt(9))",
+  "solution": "$t=3/(6/3)=1.5$.",
+  "hints": [
+   "Use the sd of the differences."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0063",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.t-tests"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two independent groups, each of size 10, have means 20 and 23 and both sds equal 2. Assume equal variances. Give the pooled t statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.3541019662496847,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(23-20)/(2*math.sqrt(1/10+1/10))",
+  "solution": "Pooled sd is 2, the SE is $2\\sqrt{1/10+1/10}$, so $t=3/0.894\\approx3.354$.",
+  "hints": [
+   "Pool the variance, then use the SE for two groups."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0064",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which standard error does a two-proportion z test use under $H_0: p_1=p_2$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "A pooled proportion in both groups, $\\sqrt{\\hat p(1-\\hat p)(1/n_1+1/n_2)}$",
+    "Separate unpooled proportions in each group",
+    "The one-sample standard error at $p_0=0.5$",
+    "$\\sqrt{\\hat p_1\\hat p_2}$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the unpooled form, used for intervals",
+    "a fixed value that ignores the data",
+    "not a standard error"
+   ]
+  },
+  "solution": "Under the null both groups share one proportion, so the SE pools it.",
+  "hints": [
+   "The null says the two proportions are equal."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0065",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the one-sample z statistic for sample proportion $\\hat p$ against null proportion $p_0$ with sample size $n$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(phat-p0)/sqrt(p0*(1-p0)/n)",
+   "vars": [
+    "phat",
+    "p0",
+    "n"
+   ],
+   "also": [
+    "(phat-p0)*sqrt(n)/sqrt(p0*(1-p0))"
+   ],
+   "domain": {
+    "phat": [
+     0.05,
+     0.95
+    ],
+    "p0": [
+     0.05,
+     0.95
+    ],
+    "n": [
+     1,
+     100
+    ]
+   }
+  },
+  "check": null,
+  "solution": "$z=(\\hat p-p_0)/\\sqrt{p_0(1-p_0)/n}$.",
+  "hints": [
+   "The SE uses the null value."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0066",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why does the one-sample proportion test use $p_0$ in its standard error?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The test is computed assuming $H_0$ is true",
+    "$p_0$ is the sample estimate",
+    "It is needed only for the interval",
+    "Proportions have no variance"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the estimate is $\\hat p$, not $p_0$",
+    "the test statistic uses the null SE",
+    "proportions do have variance, $p(1-p)/n$"
+   ]
+  },
+  "solution": "Tests are calculated under the null.",
+  "hints": [
+   "Tests assume the null is true."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0067",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Under $H_0:p=0.3$ with $n=100$, the observed proportion is $0.4$. Give the z statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.1821789023599245,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(0.4-0.3)/math.sqrt(0.3*0.7/100)",
+  "solution": "SE $=\\sqrt{0.3\\cdot0.7/100}=0.04583$, so $z=0.1/0.04583=2.182$.",
+  "hints": [
+   "Use $p_0$ in the standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0068",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Group 1 has 45 successes in 100. Group 2 has 30 successes in 100. Give the pooled proportion as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.375,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(45+30)/(100+100)",
+  "solution": "Pooled $=75/200=0.375$.",
+  "hints": [
+   "Add successes and add sizes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0069",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using pooled proportion $0.375$ with group sizes 100 and 100, give the pooled standard error of $\\hat p_1-\\hat p_2$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.06846531968814576,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(0.375*0.625*(1/100+1/100))",
+  "solution": "$\\sqrt{0.375\\cdot0.625\\cdot0.02}=\\sqrt{0.0046875}\\approx0.06847$.",
+  "hints": [
+   "Add the two reciprocal sizes inside the bracket."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0070",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The difference $\\hat p_1-\\hat p_2$ is $0.15$, with pooled proportion $0.375$ and group sizes 100 and 100. Give the z statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.1908902300206647,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.005
+  },
+  "check": "0.15/math.sqrt(0.375*0.625*(1/100+1/100))",
+  "solution": "$z=0.15/0.06847\\approx2.191$.",
+  "hints": [
+   "Divide the observed difference by the pooled SE."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0071",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about a z test on proportions are correct? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Expected successes and failures are each at least about 5",
+    "Observations are independent",
+    "The population is normally distributed",
+    "The null proportion $p_0$ is used in the one-sample standard error"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Large expected counts and independence justify the normal approximation. Raw normality is not needed.",
+  "hints": [
+   "Normality of the raw population is not the condition here."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0072",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.proportions"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A one-sample test has $n=400$, $p_0=0.2$ and 90 successes. Give the z statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.25,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(90/400-0.2)/math.sqrt(0.2*0.8/400)",
+  "solution": "$\\hat p=0.225$, SE $=\\sqrt{0.0004}=0.02$, so $z=0.025/0.02=1.25$.",
+  "hints": [
+   "Compute $\\hat p$ first, then use the null SE."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0073",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What are the degrees of freedom of an independence test on an $r\\times c$ table?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$(r-1)(c-1)$",
+    "$rc-1$",
+    "$r+c-2$",
+    "$rc$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the goodness-of-fit count over all cells, not independence",
+    "adds the margins instead of multiplying",
+    "counts cells, not free ones"
+   ]
+  },
+  "solution": "Row and column totals fix $(r-1)(c-1)$ free cells.",
+  "hints": [
+   "Free cells are what the margins leave open."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0074",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the expected count in a cell of a contingency table, with row total $R$, column total $C$ and grand total $N$.",
+  "answer": {
+   "kind": "expression",
+   "value": "R*C/N",
+   "vars": [
+    "R",
+    "C",
+    "N"
+   ],
+   "also": [
+    "C*R/N",
+    "R*(C/N)"
+   ]
+  },
+  "check": null,
+  "solution": "Expected $=$ row total $\\times$ column total $/N$.",
+  "hints": [
+   "Expected counts come from the margins."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0075",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which statement about the chi-square statistic is true?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It is never negative",
+    "It is negative when observed counts fall below expected",
+    "It is built from the sample variance of the counts",
+    "It needs normally distributed raw measurements"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "every term is a squared deviation, so none is negative",
+    "it is built from observed minus expected counts, not a variance",
+    "it applies to counts, not raw measurements"
+   ]
+  },
+  "solution": "Each term is a squared deviation over a positive expected count.",
+  "hints": [
+   "Squares cannot be negative."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0076",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A fair die is rolled 60 times, so each face is expected 10 times. Observed counts for faces 1 to 6 are $8, 12, 9, 11, 10, 10$. Give the chi-square statistic.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "sum((o-10)**2/10 for o in [8,12,9,11,10,10])",
+  "solution": "Squared deviations $4+4+1+1+0+0=10$, divided by 10 gives 1.",
+  "hints": [
+   "Square each deviation, divide by its expected count, then add."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0077",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A goodness-of-fit test compares observed and expected counts in 6 categories, with no parameters estimated. Give the degrees of freedom.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "6-1",
+  "solution": "$k-1=6-1=5$.",
+  "hints": [
+   "Categories minus one."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0078",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $2\\times 3$ table has row totals 40 and 60, column totals 30, 35 and 35, and grand total 100. Give the expected count in row 1, column 2.",
+  "answer": {
+   "kind": "numeric",
+   "value": 14,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "40*35/100",
+  "solution": "$E=40\\cdot35/100=14$.",
+  "hints": [
+   "Use row total times column total over the grand total."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0079",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A $2\\times2$ table has rows $[20, 30]$ and $[10, 40]$. Give its chi-square statistic as an exact fraction, with no continuity correction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "100/21",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "sum(Fraction((o-e)**2,e) for o,e in [(20,15),(30,35),(10,15),(40,35)])",
+  "solution": "Expected counts are $15, 35, 15, 35$. The sum of $(O-E)^2/E$ is $5/3+5/7+5/3+5/7=100/21$.",
+  "hints": [
+   "Find the four expected counts from the margins first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0080",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which are conditions for a chi-square test of independence? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Expected counts are large enough, typically at least 5",
+    "Observations are independent",
+    "Raw measurements are normally distributed",
+    "The table holds counts, not percentages"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Expected counts and independence are the conditions. Raw measurements are not used.",
+  "hints": [
+   "The test works on counts."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0081",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.chisq"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A $3\\times2$ table has $N=120$, row totals $60$, $30$ and $30$, and column totals $50$ and $70$. Give the expected count in row 3, column 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 12.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "30*50/120",
+  "solution": "$E=30\\cdot50/120=12.5$.",
+  "hints": [
+   "Row total times column total over $N$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0082",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "State the Bonferroni rule for $m$ tests at family-wise level $\\alpha$.",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Reject each test when its p-value is below $\\alpha/m$",
+    "Reject each test when its p-value is below $\\alpha m$",
+    "Reject each test when its p-value is below $\\alpha$",
+    "Reject each test when its p-value is below $1-\\alpha/m$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "raises the threshold, so it adds false positives",
+    "no correction at all",
+    "a threshold near 1, which controls nothing"
+   ]
+  },
+  "solution": "Each test uses $\\alpha/m$, and the union bound caps the family error at $\\alpha$.",
+  "hints": [
+   "Split the error budget across the tests."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0083",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the probability of at least one false positive among $m$ independent tests of true nulls, each at level $a$.",
+  "answer": {
+   "kind": "expression",
+   "value": "1-(1-a)^m",
+   "vars": [
+    "a",
+    "m"
+   ],
+   "also": [
+    "1-(1-a)^(m*1)",
+    "1-exp(m*ln(1-a))"
+   ],
+   "domain": {
+    "a": [
+     0.01,
+     0.5
+    ],
+    "m": [
+     1,
+     10
+    ]
+   }
+  },
+  "check": null,
+  "solution": "Each test avoids a false positive with probability $1-a$, and all $m$ do.",
+  "hints": [
+   "Take the complement of no false positives."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0084",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which error rate does the false discovery rate control?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The expected share of false discoveries among rejected hypotheses",
+    "The probability of making any false positive",
+    "The type II error rate",
+    "The per-test significance level"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the family-wise error rate",
+    "FDR concerns false rejections, not missed effects",
+    "the per-test level is set by hand, not controlled"
+   ]
+  },
+  "solution": "FDR is a ratio over rejections.",
+  "hints": [
+   "Look at the denominator: rejections, not hypotheses."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0085",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Bonferroni is used for $m=20$ tests at family-wise level $0.05$. Give the per-test threshold as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.0025,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "0.05/20",
+  "solution": "$0.05/20=0.0025$.",
+  "hints": [
+   "Divide the family level by the number of tests."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0086",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Twenty independent tests are run, all with true nulls, each at level $0.05$. Give the probability of at least one false positive as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6415140775914581,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1-0.95**20",
+  "solution": "$1-0.95^{20}\\approx1-0.3585=0.6415$.",
+  "hints": [
+   "Compute the chance that all twenty avoid a false positive."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0087",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A study runs 1000 tests, of which 900 have true nulls. Each uses level $0.05$ with no correction. Give the expected number of false positives.",
+  "answer": {
+   "kind": "numeric",
+   "value": 45,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "900*0.05",
+  "solution": "$900\\cdot0.05=45$.",
+  "hints": [
+   "Only true nulls can produce false positives."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0088",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Five p-values sorted are $0.001, 0.008, 0.039, 0.041, 0.20$. Benjamini–Hochberg at FDR $0.05$ rejects the largest $k$ with $p_{(k)}\\le \\frac{k}{5}\\cdot 0.05$. Give $k$.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "max(k for k in range(1,6) if [0.001,0.008,0.039,0.041,0.20][k-1]<=k/5*0.05)",
+  "solution": "Thresholds are $0.01, 0.02, 0.03, 0.04, 0.05$. $p_{(2)}=0.008$ passes, while $p_{(3)}=0.039$ and $p_{(4)}=0.041$ fail.",
+  "hints": [
+   "Compare each sorted p-value with its own rank threshold."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0089",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which practices inflate false positive rates? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Testing many outcomes and reporting only the significant ones",
+    "Stopping data collection as soon as p first dips below 0.05",
+    "Pre-registering one primary test",
+    "Applying Bonferroni across all tests"
+   ],
+   "correct": [
+    0,
+    1
+   ]
+  },
+  "solution": "Selective reporting and optional stopping both inflate false positives. Pre-registration and correction limit them.",
+  "hints": [
+   "Look for a search over outcomes or a flexible stopping rule."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0090",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.multiple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Eight tests are run with Bonferroni correction. One raw p-value is $0.007$. Give the adjusted p-value $\\min(1, 8p)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.056,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "min(1,8*0.007)",
+  "solution": "$8\\cdot0.007=0.056$, which is above 0.05, so not significant after correction.",
+  "hints": [
+   "Multiply by the number of tests and cap at 1."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0091",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which change raises the power of a test, at fixed significance level and effect size?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Increase the sample size",
+    "Lower the significance level",
+    "Shrink the true effect",
+    "Raise the noise standard deviation"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a stricter level lowers power",
+    "a smaller effect is harder to detect",
+    "more noise hides the effect"
+   ]
+  },
+  "solution": "More data shrinks the standard error.",
+  "hints": [
+   "Power grows with the information in the data."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0092",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the sample size $n$ of a two-sided one-sample z test to detect a mean shift $\\delta$ with sd $\\sigma$, where $z_a$ is the critical value for $\\alpha$ and $z_b$ for the power.",
+  "answer": {
+   "kind": "expression",
+   "value": "((za+zb)*sigma/delta)^2",
+   "vars": [
+    "za",
+    "zb",
+    "sigma",
+    "delta"
+   ],
+   "also": [
+    "(za+zb)^2*sigma^2/delta^2",
+    "((za+zb)*sigma*delta^(-1))^2"
+   ]
+  },
+  "check": null,
+  "solution": "$n=((z_a+z_b)\\sigma/\\delta)^2$.",
+  "hints": [
+   "Square the standardised effect size scaled by the z values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0093",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a power calculation, what is the type II error probability at the target?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "One minus the target power",
+    "The significance level",
+    "One minus alpha",
+    "The p-value"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "that is the type I error rate",
+    "a confidence level, not a power term",
+    "a data summary, not a design target"
+   ]
+  },
+  "solution": "Power is one minus the type II error.",
+  "hints": [
+   "Power and type II error are complements."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0094",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "probe": true,
+  "prompt": "A one-sample z test must detect a mean shift of $4$ with sd $10$, two-sided $\\alpha=0.05$ ($z=1.96$) and power $0.80$ ($z=0.8416$). Give the sample size, rounded up to a whole number.",
+  "answer": {
+   "kind": "numeric",
+   "value": 50,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "math.ceil(((1.96+0.8416)*10/4)**2)",
+  "solution": "$n=((1.96+0.8416)\\cdot10/4)^2=49.06$, rounded up to 50.",
+  "hints": [
+   "Compute the formula, then round up, never down."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0095",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A two-sided one-sample z test at 0.05 uses $n=25$, sd 10 and true shift 5. Using $\\Phi(-0.54)=0.2946$, give the approximate power as a decimal in 0 to 1.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.7054,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1-0.2946",
+  "solution": "Shift $=5/(10/5)=2.5$, so power $\\approx1-\\Phi(-0.54)=0.7054$.",
+  "hints": [
+   "The shift is the effect over the standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0096",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "With all else fixed, the required sample size is proportional to $1/\\delta^2$. If the detectable effect halves, by what factor does the required $n$ change?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "2**2",
+  "solution": "Halving $\\delta$ multiplies $1/\\delta^2$ by 4.",
+  "hints": [
+   "Square the change in the effect."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0097",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which increase the sample size needed for a fixed power? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "A smaller effect to detect",
+    "A higher target power",
+    "A smaller noise sd",
+    "A stricter significance level"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Smaller effects, higher power and stricter alpha all need more data. Less noise needs less.",
+  "hints": [
+   "Ask whether each change makes the test harder to pass."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0098",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Compare two equal groups, each with sd $1$, to detect a mean difference of $0.5$. Use two-sided $\\alpha=0.05$ ($z=1.96$) and power $0.90$ ($z=1.2816$). Give the sample size per group, rounded up.",
+  "answer": {
+   "kind": "numeric",
+   "value": 85,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "math.ceil(2*((1.96+1.2816)*1/0.5)**2)",
+  "solution": "$n=2\\left((1.96+1.2816)\\cdot1/0.5\\right)^2=84.07$, rounded up to 85.",
+  "hints": [
+   "Two groups: the variance of the difference doubles. Round up."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0099",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.power"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A one-sample z test has sd 10, $n=100$, two-sided $\\alpha=0.05$ ($z=1.96$) and power 0.80 ($z=0.8416$). Give the minimum detectable shift as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.8016,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(1.96+0.8416)*10/math.sqrt(100)",
+  "solution": "$\\delta=(1.96+0.8416)\\cdot10/\\sqrt{100}=2.8016$.",
+  "hints": [
+   "Solve the sample size formula for the effect."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0100",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does random assignment buy in an A/B test?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Groups that match on confounders in expectation, so the difference estimates a causal effect",
+    "A lower variance than observing the same users",
+    "Exactly equal group sizes",
+    "No need for a significance test"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "variance depends on sample size, not assignment",
+    "assignment does not force equal sizes",
+    "the test still needs inference for noise"
+   ]
+  },
+  "solution": "Randomisation balances confounders on average.",
+  "hints": [
+   "Randomisation breaks the link between treatment and other causes."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0101",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the relative lift of a treatment mean $m_t$ over a control mean $m_c$.",
+  "answer": {
+   "kind": "expression",
+   "value": "(mt-mc)/mc",
+   "vars": [
+    "mt",
+    "mc"
+   ],
+   "also": [
+    "(mt-mc)*mc^(-1)",
+    "mt/mc-1"
+   ]
+  },
+  "check": null,
+  "solution": "Lift $=(m_t-m_c)/m_c$.",
+  "hints": [
+   "Divide the difference by the control."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0102",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Why is stopping an A/B test at the first moment $p<0.05$ a problem?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "It inflates the false positive rate above the planned level",
+    "It lowers the power only",
+    "It biases the treatment effect to zero",
+    "It breaks the randomisation"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "power is not the issue here",
+    "peeking does not shrink effects to zero",
+    "stopping does not change who is assigned"
+   ]
+  },
+  "solution": "Repeated looks give many chances to cross the threshold.",
+  "hints": [
+   "Each look is another test."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0103",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Control conversion is $0.10$ and treatment conversion is $0.12$, each from $n=1000$ users. Give the absolute difference as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.02,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "0.12-0.10",
+  "solution": "$0.12-0.10=0.02$.",
+  "hints": [
+   "Subtract control from treatment."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0104",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Using the same conversions of $0.10$ and $0.12$, give the relative lift of treatment over control as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.2,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(0.12-0.10)/0.10",
+  "solution": "$(0.12-0.10)/0.10=0.2$, a 20% lift.",
+  "hints": [
+   "Divide the difference by the control rate."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0105",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Control has mean 50, sd 10, $n=100$. Treatment has mean 52, sd 10, $n=100$. Give the standard error of the difference in means as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.4142135623730951,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(10**2/100+10**2/100)",
+  "solution": "$\\sqrt{100/100+100/100}=\\sqrt2\\approx1.414$.",
+  "hints": [
+   "Add the two variances of the means."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0106",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "An experiment randomises by user. 200 users each produce 4 page views. How many independent units does the analysis use?",
+  "answer": {
+   "kind": "numeric",
+   "value": 200,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "200",
+  "solution": "Randomisation is by user, so the independent units are the 200 users.",
+  "hints": [
+   "Page views from one user are not independent."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0107",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which are standard checks in an A/B test? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The sample ratio matches the planned split",
+    "Sample size or stopping rule is fixed in advance",
+    "Guardrail metrics do not drop sharply",
+    "Swap the control group after seeing results"
+   ],
+   "correct": [
+    0,
+    1,
+    2
+   ]
+  },
+  "solution": "Ratio checks, fixed stopping rules and guardrails protect validity. Swapping groups after results invalidates the test.",
+  "hints": [
+   "Each check guards against a validity problem."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0108",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ab-design"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Control mean 4.0, treatment mean 4.4, both with sd 2 and 2000 users each. Give the z statistic for the difference as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.324555320336759,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "(4.4-4.0)/math.sqrt(2**2/2000+2**2/2000)",
+  "solution": "$SE=\\sqrt{0.002+0.002}=\\sqrt{0.004}$, so $z=0.4/\\sqrt{0.004}=\\sqrt{40}\\approx6.325$.",
+  "hints": [
+   "Add the two variances of the means."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0109",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does a percentile bootstrap 95% interval use as its endpoints?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The 2.5th and 97.5th percentiles of the bootstrap distribution",
+    "The sample mean plus or minus 1.96 times the sample sd",
+    "The smallest and largest data values",
+    "The 5th and 95th percentiles of the raw data"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "a normal formula, not resampling",
+    "the data range, not an interval for the statistic",
+    "raw data percentiles describe spread, not the statistic's uncertainty"
+   ]
+  },
+  "solution": "The endpoints are quantiles of the resampled statistic.",
+  "hints": [
+   "The interval is for the statistic, not the data."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0110",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the number of ordered bootstrap resamples of size $n$ drawn with replacement from $n$ distinct values.",
+  "answer": {
+   "kind": "expression",
+   "value": "n^n",
+   "vars": [
+    "n"
+   ],
+   "also": [
+    "exp(n*ln(n))"
+   ]
+  },
+  "check": null,
+  "solution": "Each of $n$ draws has $n$ choices, giving $n^n$ ordered resamples.",
+  "hints": [
+   "Each draw is independent."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0111",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which distribution does a bootstrap resample from?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The observed sample, with replacement",
+    "The population, without replacement",
+    "A normal curve fitted to the sample mean",
+    "The null distribution with labels shuffled"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "the population is not available to resample",
+    "a parametric shortcut, not a bootstrap",
+    "that is a permutation test, which shuffles without replacement"
+   ]
+  },
+  "solution": "The sample stands in for the population.",
+  "hints": [
+   "Resample the data you have."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0112",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Data are $2, 4, 9$. One bootstrap resample is $4, 4, 9$. Give its mean as a fraction.",
+  "answer": {
+   "kind": "numeric",
+   "value": "17/3",
+   "form": "fraction",
+   "tol": 0
+  },
+  "check": "Fraction(4+4+9,3)",
+  "solution": "Mean $=17/3$.",
+  "hints": [
+   "Average the three resampled values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0113",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Four bootstrap means are $4.0, 5.0, 6.0, 7.0$, equally weighted. Using the $n-1$ divisor, give the bootstrap standard error as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.2909944487358056,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(sum((b-5.5)**2 for b in [4,5,6,7])/3)",
+  "solution": "Mean $5.5$, squared deviations sum to $5$, so $\\sqrt{5/3}\\approx1.291$.",
+  "hints": [
+   "The bootstrap SE is the sd of the bootstrap statistics."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0114",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "A percentile bootstrap uses $B=1000$ sorted resamples. The 2.5% endpoint is the element at rank $0.025\\,B$. Give that rank.",
+  "answer": {
+   "kind": "numeric",
+   "value": 25,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "int(0.025*1000)",
+  "solution": "$0.025\\cdot1000=25$.",
+  "hints": [
+   "Multiply the tail fraction by the number of resamples."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0115",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Group A has values $\\{5,7\\}$ and group B has $\\{3,4\\}$. In a permutation test, how many ways are there to choose which two of the four values form group A?",
+  "answer": {
+   "kind": "numeric",
+   "value": 6,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "4*3//2",
+  "solution": "Choose 2 of 4 for the first group: $4\\cdot3/2=6$ splits.",
+  "hints": [
+   "Count the ways to choose the first group."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0116",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about the bootstrap are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "Resamples are drawn with replacement from the observed sample",
+    "It requires a normal population",
+    "It gives a standard error without a closed-form formula",
+    "Percentile endpoints are the 2.5% and 97.5% quantiles of the bootstrap statistics"
+   ],
+   "correct": [
+    0,
+    2,
+    3
+   ]
+  },
+  "solution": "The bootstrap needs no normality. It gives SEs and percentile intervals from resample spread.",
+  "hints": [
+   "Check each claim against the resampling recipe."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0117",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.bootstrap"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Group A $=\\{5,7\\}$ and group B $=\\{3,4\\}$ give an observed mean difference (A minus B) of $2.5$. Under a permutation test the 6 ways to choose group A are equally likely. Give the one-sided p-value $P(\\text{difference}\\ge 2.5)$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.16666666666666666,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1/6",
+  "solution": "Group A mean differences over the 6 choices: $2.5,\\,1.5,\\,0.5,\\,-0.5,\\,-1.5,\\,-2.5$. Only one reaches $2.5$, so $p=1/6\\approx0.1667$.",
+  "hints": [
+   "List the 6 choices of group A and compute each difference."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0118",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Which quantity is the least-squares slope of $y$ on $x$?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$\\operatorname{cov}(x,y)/\\operatorname{var}(x)$",
+    "$\\operatorname{cov}(x,y)/\\operatorname{var}(y)$",
+    "$\\operatorname{var}(x)/\\operatorname{cov}(x,y)$",
+    "$\\operatorname{corr}(x,y)$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "divides by the response variance instead of the regressor variance",
+    "is the reciprocal of the slope",
+    "the correlation drops the scale of $y$"
+   ]
+  },
+  "solution": "Slope is the covariance over the variance of the regressor.",
+  "hints": [
+   "The regressor's variance goes in the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0119",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the least-squares slope of $y$ on $x$ in terms of the sample covariance $c_{xy}$ and the sample variance $v_x$ of $x$.",
+  "answer": {
+   "kind": "expression",
+   "value": "cxy/vx",
+   "vars": [
+    "cxy",
+    "vx"
+   ],
+   "also": [
+    "cxy*vx^(-1)",
+    "1/vx*cxy"
+   ]
+  },
+  "check": null,
+  "solution": "Slope $=c_{xy}/v_x$.",
+  "hints": [
+   "The regressor's variance is the denominator."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0120",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In simple regression, what does $R^2$ equal?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "The square of the correlation between $x$ and $y$",
+    "The square of the slope",
+    "One minus the correlation",
+    "The residual sum of squares"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "slope scales with units, R-squared does not",
+    "R-squared is a squared quantity, not one minus",
+    "the residual sum is a size, not a share of variance"
+   ]
+  },
+  "solution": "$R^2$ is the share of variance explained.",
+  "hints": [
+   "Think of the share of variance explained."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0121",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Data $(x,y)$: $(1,2), (2,4), (3,5), (4,4), (5,5)$. Give the least-squares slope.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.6,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "sum((x-3)*(y-4) for x,y in [(1,2),(2,4),(3,5),(4,4),(5,5)])/sum((x-3)**2 for x in [1,2,3,4,5])",
+  "solution": "$\\bar x=3$, $\\bar y=4$, $S_{xy}=6$, $S_{xx}=10$, slope $=0.6$.",
+  "hints": [
+   "Centre both variables, then take the ratio of the sums."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0122",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "For the data $(1,2), (2,4), (3,5), (4,4), (5,5)$, give the intercept of the least-squares line as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.2,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "sum(y for x,y in [(1,2),(2,4),(3,5),(4,4),(5,5)])/5-(6/10)*sum(x for x,y in [(1,2),(2,4),(3,5),(4,4),(5,5)])/5",
+  "solution": "Intercept $=\\bar y-b\\bar x=4-0.6\\cdot3=2.2$.",
+  "hints": [
+   "Use the line passes through the means."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0123",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The fitted line is $\\hat y=2.2+0.6x$. Give the residual $y-\\hat y$ for the point $(4,4)$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -0.6,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "4-(2.2+0.6*4)",
+  "solution": "$\\hat y(4)=2.2+2.4=4.6$, so the residual is $4-4.6=-0.6$.",
+  "hints": [
+   "Residual is observed minus fitted."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0124",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "For the data $(1,3), (2,4), (3,4), (4,6), (5,8)$, give $R^2$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 0.9,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "sum((x-3)*(y-5) for x,y in [(1,3),(2,4),(3,4),(4,6),(5,8)])**2/(sum((x-3)**2 for x in [1,2,3,4,5])*sum((y-5)**2 for y in [3,4,4,6,8]))",
+  "solution": "$\\bar x=3$, $\\bar y=5$. $S_{xy}=12$, $S_{xx}=10$, $S_{yy}=16$.\n$R^2=S_{xy}^2/(S_{xx}S_{yy})=144/160=0.9$.",
+  "hints": [
+   "Use the sums of squares and cross-products."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0125",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which statements about simple linear regression are true? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "The least-squares line passes through $(\\bar x,\\bar y)$",
+    "Residuals sum to zero when an intercept is fitted",
+    "$R^2$ can be negative for a least-squares fit",
+    "Multiplying $x$ by 10 divides the slope by 10"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "The line passes through the means and residuals sum to zero. $R^2$ is a squared correlation, so it is never negative.",
+  "hints": [
+   "Check each claim against the normal equations."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0126",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "The correlation between $x$ and $y$ is $0.6$, with $s_x=2$ and $s_y=5$. Give the least-squares slope.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.5,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "0.6*5/2",
+  "solution": "Slope $=r\\,s_y/s_x=0.6\\cdot5/2=1.5$.",
+  "hints": [
+   "Convert the correlation to a slope with the sd ratio."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0127",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "What does coefficient $b_j$ in a multiple regression measure?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "Change in the mean of $y$ per unit change in $x_j$, holding the other predictors fixed",
+    "The total marginal association of $x_j$ with $y$",
+    "The correlation of $x_j$ with $y$",
+    "The change in $y$ when all predictors change together"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "ignores adjustment for the other predictors",
+    "a correlation, not a slope",
+    "a joint change, not a single-predictor effect"
+   ]
+  },
+  "solution": "Coefficients are partial effects.",
+  "hints": [
+   "Other predictors are held fixed."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0128",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write the variance inflation factor of predictor $j$ in terms of $R_j^2$, the $R^2$ from regressing $x_j$ on the other predictors.",
+  "answer": {
+   "kind": "expression",
+   "value": "1/(1-Rj2)",
+   "vars": [
+    "Rj2"
+   ],
+   "also": [
+    "(1-Rj2)^(-1)"
+   ],
+   "domain": {
+    "Rj2": [
+     0,
+     0.9
+    ]
+   }
+  },
+  "check": null,
+  "solution": "$\\text{VIF}_j=1/(1-R_j^2)$.",
+  "hints": [
+   "Inflation grows as the other predictors explain more of $x_j$."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0129",
+  "tier": "a",
+  "type": "recall",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "In a multiple regression with $n$ observations and $k$ predictors plus an intercept, what are the residual degrees of freedom for a coefficient t test?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "$n-k-1$",
+    "$n-k$",
+    "$n-1$",
+    "$k$"
+   ],
+   "correct": 0,
+   "why": [
+    "",
+    "forgets the intercept",
+    "is the simple-regression count",
+    "counts predictors, not residual freedom"
+   ]
+  },
+  "solution": "Each predictor and the intercept use one df.",
+  "hints": [
+   "Subtract the parameters you estimate, intercept included."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0130",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "probe": true,
+  "prompt": "A coefficient on $x_1$ is $0.8$ with standard error $0.25$, in a model with $n=40$ observations and 2 predictors. Give the t statistic as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.2,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "0.8/0.25",
+  "solution": "$t=0.8/0.25=3.2$.",
+  "hints": [
+   "A t statistic is the coefficient over its standard error."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0131",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "A model has $n=40$ observations and 2 predictors plus an intercept. Give the residual degrees of freedom for the coefficient t tests.",
+  "answer": {
+   "kind": "numeric",
+   "value": 37,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "40-2-1",
+  "solution": "$n-k-1=40-2-1=37$.",
+  "hints": [
+   "Subtract the predictors and the intercept."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0132",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Regressing $x_1$ on the other predictors gives $R^2=0.8$. Give the variance inflation factor of $x_1$ as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 5,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "1/(1-0.8)",
+  "solution": "$\\text{VIF}=1/(1-0.8)=5$.",
+  "hints": [
+   "Use one over one minus the auxiliary R-squared."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0133",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two models differ only in the correlation between predictors. The first has VIF 5 and the second has VIF 1, with the same residual sd and $S_{xx}$. Give the ratio of the first standard error to the second as a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 2.23606797749979,
+   "form": "decimal",
+   "tol": 0,
+   "rel": 0.02
+  },
+  "check": "math.sqrt(5)/math.sqrt(1)",
+  "solution": "SE scales with $\\sqrt{\\text{VIF}}$, so the ratio is $\\sqrt5\\approx2.236$.",
+  "hints": [
+   "The standard error scales with the square root of the VIF."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0134",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Which are assumptions or issues for OLS inference on coefficients? Select all that apply.",
+  "answer": {
+   "kind": "multi",
+   "options": [
+    "A linear mean function",
+    "Independent errors",
+    "Every predictor has the same sd",
+    "Residuals approximately normal in small samples for exact t tests"
+   ],
+   "correct": [
+    0,
+    1,
+    3
+   ]
+  },
+  "solution": "Linearity, independence and near-normal residuals matter. Equal predictor sds are not required.",
+  "hints": [
+   "Equal predictor sds are not a requirement."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ },
+ {
+  "id": "t3-0135",
+  "tier": "b",
+  "type": "micro",
+  "level": "T3",
+  "tags": [
+   "t3.ols-multi"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "In $y=b_0+b_1x_1+b_2x_2$, the coefficient $b_1=-1.5$ holds $x_2$ fixed. Give the change in $\\hat y$ for a rise of 2 units in $x_1$.",
+  "answer": {
+   "kind": "numeric",
+   "value": -3,
+   "form": "exact",
+   "tol": 0
+  },
+  "check": "-1.5*2",
+  "solution": "$\\Delta\\hat y=b_1\\Delta x_1=-1.5\\cdot2=-3$.",
+  "hints": [
+   "Multiply the coefficient by the change in x."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/haiku-5.5",
+   "ver": "checker"
+  }
+ }
+]

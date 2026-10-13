@@ -12,6 +12,10 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 - [x] M7 session resume (M1-review F2; tests/session_resume_checks.js 53 checks, browser proof 25 checks at 360x780 on the fixture, 2026-10-12)
 - [x] M8 content T1–T9 live 2026-10-13: 1,485 items (135 techniques × 3 recall + 6 micro + 2 full, 5–6 probes/tier), every tier Haiku/Sonnet-authored, code-checked, Sonnet blind-solved (0 wrong keys across 9 tiers; ~60 wording/distractor/domain fixes). T10 (test mode, 5 techniques) has no items yet: it is a separate milestone (timed mixed sets + full-length practice), teach cards TODO.
 - [x] gre-physics pack 2026-10-13: packs/gre-physics (137 techniques, 1,452 items T1–T9, 0 wrong keys after review except t2-0042 fixed); engine deltas: `figure` SVG allowlist (tools/figure.js), numeric `rel`, zero-target tolerance floor, scientific-notation literals, tools/deploy_pack.sh for a second site. Publish: site repo gre-physics (output only) — pending owner approval.
+- [x] ds-core pack 2026-10-13: packs/ds-core (138 techniques T1–T10, 1,463 items T1–T9, MS-level data science; 0 wrong keys after Sonnet blind review of every tier). Engine: `code` answer kind (Python via Pyodide in a worker, engine/pyharness.py, tools/run_code_items.py); Opus code-kind review fixed 12 findings. No code items authored yet: T5–T9 "code pass" is a follow-up. Publish: site repo ds-core (output only) — pending owner approval.
+- [x] Teach cards v2 2026-10-13 (docs/TEACH_CARDS.md): all 415 cards across the three packs rewritten to the six-section shape (Sonnet author + Sonnet reviewer per pack; review changed 101/140 math, 106/137 physics, 48/64 ds T1–T4+T10 cards, mostly missing moves the drills need); engine/text.js single-asterisk italics + display-math spacing, app.css `.teach`.
+- [x] Opus engine review 2026-10-13: 21 findings (D1–D6 data safety, L1–L6 learning model, A1–A7 checker, S1, V1–V3, T1–T2, Q1) fixed + 8 more from the re-review; tests/opus_review_checks.js (36) wired into the fast tier. Decisions: streak capped at mastered+1 (L4), one step lost per technique per session (L6), exam miss drops the placement flag (J2), 2-slot backup rings (J1). Pacing sim after L4/L6: 95%/90% gates within 10%, 80% gates 22–30% faster.
+- [ ] ds-core code pass: author `code` items for T5–T9 (SQL/pandas/numpy), then a second blind review; `tools/run_code_items.py` is the author-side checker.
 - [ ] Placement result after an early stop lists unreached levels as "0 of 0" (browser smoke 2026-10-13); show "not reached".
 - [ ] M9 ETA calibration (needs ~14 real owner sessions); deploy done (Pages)
 - [ ] T10 test mode: timed mixed sets drawn across tiers, 66-question full-length practice, T10 teach cards
@@ -21,7 +25,7 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 - [x] F1 (med): `in` set at startSession, teach card comes after Review → End during Review leaves tech started but never taught. Fixed in M2: `in` set when the teach card is advanced; teach re-offered for in>0 && r+w==0.
 - [x] F4 (low): validator requires ≥1 tier b numeric/expression item per technique with items. Fixed in M2; pickItem now prefers unused-today items before the numeric preference.
 - [x] F5 (low): validator warns on answer kinds the engine can't play yet (expression/multi/self without options). Fixed in M2.
-- F7 (low): single pre_import backup slot. (`<!--` guard added for pack.json in the M2/M3 review; items/techniques html is escaped.)
+- [x] F7 (low): single pre_import backup slot — 2-slot rings since 2026-10-13 (J1). (`<!--` guard added for pack.json in the M2/M3 review; items/techniques html is escaped.)
 
 ## M4 reconciliation (core.js must adopt answer.js semantics) — done
 - core.js has no numeric copy; grading goes through answer.check (`PEAnswer`). `itemKind` plays numeric, expression, mcq, multi. `self` waits for M5.
@@ -46,16 +50,15 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 - Open: ETA (M9).
 
 ## M4 carry-overs (2026-10-12)
-- Single-slot backups: a second unreadable record overwrites `_invalid_backup`, and a second import overwrites `_pre_import_backup` (F7). Multi-slot backups are a later decision.
+- Single-slot backups (F7): a second unreadable record still overwrites `_invalid_backup`. `_pre_import_backup` and `_reset_backup` no longer lose progress to an empty record (D5, 2026-10-13); a ring of 2 per slot is the fuller fix, a later decision.
 - The page load order bug (store.js read core.js at load) passed the node suites and only showed in the browser. Add a tier check that runs the built page's scripts in a vm with a fake DOM, or keep the browser checks in the release routine.
 - Browser checks are not in the tier: `.cache/m4/browser.js` (Playwright, from the china-harbour install). Run before each publish.
 - Build output lives at repo root (index.html + sw.js) for Pages; fixture builds go to .cache/. Pages in one directory share one `sw.js`, so keep one page per directory (README "Offline use").
-- Not yet committed: the M4 files are uncommitted, `check_site.sh` reports them untracked until the commit.
 
 ## M5 carry-overs (2026-10-12)
 - Full items use top-level `rubric` and `pass`; answer kind is mcq (5 options) or numeric. Content must emit that shape; `self` is refused for tier c. Full items with no mastered secondary tag never play.
 - Full stage needs 4 techniques with a streak and a mastered secondary tag on the chosen item. Owner call: confirm the 4 and the 0.5 "far below" share (`FULL_NEAR` in core).
-- Grade 0 also sets `wk` on the primary, not only the secondaries (SPEC 2.4 says secondaries). Needed so the failed technique leads the next Micro.
+- Grade 0 also sets `wk` on the primary (SPEC 2.4 now says so).
 - Reload mid-full drops the card (closed in M7: the parked session keeps the committed or uncommitted card and its timer). `fp` is set but the gate does not read it until M6.
 - Browser proof is `.cache/m5/browser.js` (seed: `.cache/m5/seed.js`), not in the tier. It covers the grade 0 path in the browser. Grade 2 is covered by core tests only. The hidden-tab step skews `Date.now` in the page, not a real backgrounded tab.
 
@@ -66,12 +69,12 @@ Milestones: docs/SPEC.md §8. Decisions: docs/DECISIONS.md.
 ## M6 carry-overs (2026-10-12)
 - STATUS (measured, not promised): seeded gre-math sim, T1 to T2 gate opens at session 20 for 95% right (seeds 20261012, 1, 2, 3, 4: 20, 35, 40, 20, 27); 90% right: 63, 38, 38, 50, 60; 80% right: not within 200 on seeds 20261012 and 4, 171, 111, 129 on seeds 1, 2, 3. Source: `tests/m6_checks.js` output line `SIM gre-math`.
 - Learn stalls at about 80% accuracy. Each miss resets the streak (SPEC 2.4), so mastery slows, the prerequisite wait holds Learn, and Full has no mastered secondary tag. Decision needed before M9: keep the reset, or soften it for tier b misses.
-- Content gap: every gre-math tier a item is mcq. Review's typed cards come from tier b until M8 adds typed recall items. Remove the fallback in `take` when that lands, or keep it as a documented rule.
-- Placement tests T1 only. T2 to T9 skip with "has 0 probe items" until each content batch flags probes (M8).
+- gre-math has 122 typed tier a items and gre-physics 157, so Review mostly has typed recall. The tier b fallback in `take` stays as a documented rule for techniques with no typed tier a item; decide whether to keep it.
+- Placement: every tier T1 to T9 has 5 probes now (the old T1-only note is closed). Unreached levels still show "0 of 0" in the placement result (`app.js` placeResultHtml).
 - Placement state lives only in the page. A reload mid-test drops it, and nothing is written. Placement and exam do not resume (M7 resumes Today only).
 - Retake UI is not offered (DECISIONS 9). The core applies forward-only retakes and is tested.
 - Level exam needs a tier c item whose secondary tag is mastered. The exam is covered by core checks; the browser proof does not drive it.
-- Pack rule to add to the validator: a level with fewer than 4 techniques deadlocks the gate, since fp comes from Full problems and Full needs 4 techniques with a streak. Fixture block 7 in `tests/full_checks.js` opens the gate for this reason.
+- Small levels: `fp` now also comes from a typed tier b right at streak >= 2, so a level with fewer than 4 techniques should no longer deadlock the gate. Reasoned from code, not run against a small-level pack; the validator now errors on a technique with no tier b item below the last level (V2).
 - Browser proof is `.cache/m6/browser.js` (not in the tier). Screenshots are in `.cache/m6/`.
 
 ## Pacing study 2026-10-12

@@ -289,3 +289,150 @@ Left as is:
 - t9-f017, f021 to f027 (except f024), f030 to f032, f034, f037, f038 have `check: null`; accepted by the checker, keys verified by hand here.
 - Author-flagged items checked and correct: t9-0099 (reworded), 0162 ($\{0,1,3\}$: Euler global error is $O(h)$, left-endpoint $O(h)$), 0048 (10), 0089 (reworded), 0043 (1; $K_{3,3}$ minus an edge is planar), f034 (period $\pi\sqrt2$), f024 ($a=-3$, $v(1,1)=3$), f011 (10).
 - Teach cards: all 19 are at most 70 words, each states a move and a trap, no mathematical errors found; no edits.
+
+## Audit fixes (2026-10-13)
+
+Source: `packs/gre-math/AUDIT-2026-10-13.md`. Edits made in batches, then `tools/merge_batches.py`. T1 has no batch, so t1 items were edited in `items.json` directly. The new T10 teach cards live in `batches/T10.teach.json`.
+
+| Id | Class | Change |
+|---|---|---|
+| t5-0078, t5-0080, t5-0105 | Decimal with unstated precision and tol 1e-6 | `rel: 0.02`, `tol` = 0.02 × value (matches physics convention) |
+| t8-0005 | ℕ convention unstated | Prompt now defines $\mathbb N=\{1,2,3,\dots\}$ |
+| t9-0170 | Prompt printed the answer | Prompt now gives matrix $M$ and asks for the first coordinate of $M(x,y)^T$; key `x+2*y` kept; difficulty 2 to 1; solution and hint rewritten |
+| t3.curve-shape | Teach card 80+ words | Trimmed to 73 words (whitespace count) |
+| t10.triage, t10.plug-choices, t10.special-cases, t10.sanity-check, t10.time-boxing | Teach card TODO | Written, 62 to 77 words each, each with When, Move, Example, Trap |
+| t1-0047, t1-0084, t6-0037 | `why` blank or shifted | Realigned, one reason per option; correct option says "correct" |
+
+Scan results: no other decimal items with tol below 1e-3 and no stated precision; no other teach cards over 80 words by whitespace count; no other mcq `why` blank or misaligned.
+
+
+## Teach cards v2 review (T1–T10, sonnet-5.5)
+
+Scope: all 140 rewritten cards in `batches/T1..T10.teach.json`, read against `techniques.json`, `docs/TEACH_CARDS.md` and the b-tier drills of each technique. Arithmetic in every new or changed Example was recomputed in Python (polynomial multiplication, synthetic division, determinants, ranks, eigenvalues, powers mod n, sums). Overlap was scripted two ways: shared numbers per drill, and shared LaTeX fragments between Example and drill prompts or options.
+
+Result: 101 cards changed, 39 left as is. A card can carry several classes.
+
+| Class | Cards |
+|---|---|
+| teaching (core move the drills need was missing, or a symbol undefined) | 68 |
+| overlap (Example repeated a drill's function, equation or numbers) | 50 |
+| shape (under 90 words, padded with useful content) | 13 |
+| factual (wrong or self-contradicting statement, or a Check broken by new numbers) | 7 |
+
+Factual fixes proper: `t1.poly-div` (Example mixed two polynomials and claimed p(2)=0 for the wrong one), `t10.sanity-check` (said "above the midpoint is suspect" about a candidate equal to the midpoint). The other five factual rows are Check or Trap lines that had to follow an Example rewrite.
+
+### Changed cards
+
+| id | class | change |
+|---|---|---|
+| t1.abs-ineq | teaching | drills include |2x-3|=7; equation case added |
+| t1.coord-geom | teaching | drill t1-0105 needs line equation |
+| t1.factor | teaching+overlap | added grouping and Vieta (drills t1-0034,0035,0036 need them); example 27 clashed with t1-0033 -> x^3+64 |
+| t1.func-basics | overlap | Example function was the function of t1-0080 verbatim |
+| t1.geom-formulas | teaching | cylinder volume used by t1-0114 and cited in Check |
+| t1.poly-div | factual+teaching | Example mixed two polynomials (p(2)=0 claim false for p); rewritten as exact division with synthetic coefficients; quotient items need it |
+| t1.sys-eq | overlap | Example shared 2x+3y=12 with t1-0014; new numbers |
+| t1.transforms | teaching | trap now says why |
+| t2.exp-log | teaching | quotient rule used in Example was not stated |
+| t2.induction | teaching+shape | inequality drill t2-0114 needs start search; wc 89 -> 99 |
+| t2.inv-trig | teaching+overlap | 3-4-5 triangle same as t2-0040; arccos(cos) step needed by t2-0042 |
+| t2.logic-sets | teaching | subset count drills t2-0094/0096 |
+| t2.proof-methods | overlap | Example was the exact claim of drill t2-0103 |
+| t2.sigma-binom | teaching | drills t2-0086/0087 need exponent matching and splitting sums |
+| t2.trig-eq | teaching | drills t2-0022 (cos 2x) need multiple-angle step |
+| t2.trig-id | teaching+overlap | 5/13 clashed with t2-0013/0014; double-angle forms needed by t2-0014, 0015 |
+| t2.unit-circle | teaching+overlap | Example angle 2pi/3 reused by t2-0006; now 5pi/6; tan = sin/cos added (drill needs tan) |
+| t3.continuity | teaching | drill t3-0023 hole |
+| t3.deriv-def | factual+teaching+overlap | drills t3-0032 and 0033 are limits in disguise / roots; Example function was t3-0036 verbatim; Check text updated |
+| t3.deriv-rules | shape | wc 88 -> 105 |
+| t3.implicit | shape+overlap | Example equation form x^2+xy=c equals drill t3-0069; wc 85 -> 105 |
+| t3.limit-special | teaching | drill t3-0014 tan x/x |
+| t3.mvt-rolle | overlap | x^3 on [0,3] shares function and interval with t3-0123; avoid duplicate of t8.diff-thms example (x^3 on [0,2]); now [1,2] |
+| t3.optimize | overlap | sum 10 -> 25 equals drill t3-0103; perimeter 40 drill 0105 |
+| t3.related-rates | overlap | dr/dt=3 clashed with t3-0095 |
+| t4.antideriv | overlap | 4x^3 term shared with t4-0004; definite-integral step added |
+| t4.arc-avg | teaching | arc length drills need the simplify-under-root step |
+| t4.area-volume | overlap | Example was exactly drill t4-0077 (8 pi) |
+| t4.by-parts | teaching | drills t4-0022..24 are definite |
+| t4.ftc | shape | wc 86 -> 100 |
+| t4.improper-int | overlap | Example was exactly drill t4-0068 |
+| t4.param-polar | shape+overlap | x=t^2 shared with t4-0139; wc 88 -> 97 |
+| t4.partial-frac | teaching | cover-up was named but not explained |
+| t4.power-series | teaching+overlap | Example (x-2)^n/(3^n n) mirrored t4-0121 (5^n n); geometric sum for t4-0123 |
+| t4.series-tests | teaching+overlap | Example was same pattern as t4-0104; ratio test statement added (t4-0103) |
+| t4.taylor | teaching | ln(1+x) series needed by t4-0132 was missing |
+| t4.trig-sub | overlap | Example was the same integral type as t4-0042 (x^2+4); now sec row of table |
+| t4.u-sub | shape | wc 88 -> 100 |
+| t5.gradient | factual+overlap | f=x^2y with u=<3,4>/5 repeated t5-0040; Check rewritten for new numbers (old Check said 5.6, 28/5=5.6 ok) |
+| t5.green | overlap | x^2 dy over unit square has the same integrand 2x as t5-0104 |
+| t5.lagrange | shape+overlap | xy with a linear constraint mirrored t5-0059; wc 88 -> 100 |
+| t5.line-int | teaching+overlap | F=<y,x> is the field of t5-0094; scalar form of line integral used by t5-0095/0096 |
+| t5.lines-planes | teaching+overlap | Example mirrored t5-0015; point-plane distance (t5-0014) was missing |
+| t5.mv-chain | shape | wc 88 -> 98 |
+| t5.mv-extrema | teaching | drill t5-0051 is a boundary problem |
+| t5.stokes-gauss | teaching | drill t5-0122 needs the orientation rule |
+| t5.vec-ops | teaching+overlap | Example was the exact cross product of drill t5-0005; length and projection added; component formula was only implied |
+| t6.basis-dim | overlap | second = twice first pattern equals t6-0049 |
+| t6.cayley-ham | factual+overlap | trace 3 matched t6-0105; Check rewritten and verified 52 |
+| t6.determinant | teaching+overlap | Example repeated t6-0024 structure and never row-reduced a matrix |
+| t6.diagonalize | shape+overlap | 81 = answer of t6-0095; wc 87 -> 105 |
+| t6.eigen-2x2 | factual+teaching+overlap | drill t6-0087 sum of squares; matrix was in t6-f019; Check updated to new numbers |
+| t6.gauss | teaching+overlap | Example matrix shared its first two rows with t6-0015; back-substitution step added |
+| t6.jordan-nilpotent | teaching | drill t6-0132 needs block counting |
+| t6.matrix-ops | teaching | trace named in When but never defined (t6-0006) |
+| t6.rank-nullity | overlap | 6 columns/rank near t6-0059; new numbers |
+| t6.spectral | overlap | x^2+6xy+y^2 same family as t6-0122 |
+| t7.abelian-class | teaching | drills t7-0094..0096 count elements of given order |
+| t7.cosets-normal | overlap | S3 with H=<(12)> is exactly t7-0076; example now index-2 normal case |
+| t7.dihedral-small | teaching | author flagged orders 4/8; drills t7-0066/0069/0070/0072 needed Klein group, r^k order, sr^k rule. Verified D4: 4 reflections + r^2 = 5 involutions |
+| t7.domain-ufd | teaching+overlap | d=24 equals t7-0121 answer; norm/unit hint for t7-0122/0123 |
+| t7.field-ext | factual+teaching+overlap | Q(sqrt2,sqrt3) ~ t7-0139; Eisenstein and coprime-degree rule needed by t7-0140/0141; coprime rule stated precisely |
+| t7.group-axioms | teaching | drills t7-0031/0032/0033 |
+| t7.nt-euler | overlap | base 3 and same shape as t7-0022; changed to 7^50 mod 13 (49=39+10) |
+| t7.nt-gcd | teaching | drill t7-0006 coprime counting |
+| t7.nt-mod | teaching | drills t7-0013/0015 powers need cycle reduction |
+| t7.order-lagrange | teaching | drill t7-0050 |
+| t7.perm-groups | teaching | drills t7-0059/0060 count k-cycles |
+| t7.poly-irred | overlap | x^3+x+1 over Z2 is one of the two answers of t7-0131 |
+| t7.quotient-hom | teaching | drill t7-0086 has infinite domain |
+| t7.ring-basics | teaching+overlap | Z12 example = t7-0113 ring; ideal size and nonunit zero-divisor rule needed by t7-0112/0113; Z_18 appears in t7-f026; Z_14 is unused |
+| t7.subgroup-cyclic | teaching | drills t7-0041 and 0042 |
+| t7.sylow-action | teaching | drill t7-0103 S4 needs tie-break |
+| t8.cardinality | teaching | drills t8-0122/0123 count functions |
+| t8.cauchy-bw | teaching+overlap | sin(n pi/2) is the sequence of t8-0023; limsup/liminf were undefined |
+| t8.compact-conn | teaching | drills t8-0100/0105 |
+| t8.cont-eps | shape | wc 89 -> 104; reciprocal case for t8-0032 |
+| t8.cont-thms | teaching | drills t8-0049..0051 compute extremes |
+| t8.counterexamples | overlap | n*1_[0,1/n] is t8-0131 verbatim; new example uses uniform limit of smooth functions (Move line) |
+| t8.metric-open | teaching | drills t8-0091/0095/0096 |
+| t8.real-axioms | teaching | attained-maximum for sequences (t8-0005/0006) |
+| t8.seq-conv | teaching | conjugate and squeeze for t8-0014/0015 |
+| t8.series-formal | teaching+overlap | shifted copy of t8-0076; tail formula for t8-0078 |
+| t8.top-general | teaching | drill t8-0113 counts topologies; drill t8-0112 |
+| t8.unif-conv | overlap | x/n on [0,1] is t8-0085 verbatim |
+| t9.algorithms | teaching+overlap | Example T(8)=24 was t9-0049 verbatim; spanning-tree edges for t9-0051 |
+| t9.complex-analytic | teaching+overlap | Example was u=Re z^3, the function of t9-0103/0104; f prime formula added |
+| t9.complex-maps | teaching+overlap | Example fixed points +-1 mirrored t9-0122; circles (author flag), composition, modulus, Rouche added for t9-0123/0125/f028 |
+| t9.contour-residue | teaching | residue by limit for t9-0112/0113 |
+| t9.counting | teaching | author flagged repeats case: stars and bars and block gluing were missing (t9-0004, 0006) |
+| t9.distributions | teaching | Poisson named in When but no formula (t9-0078) |
+| t9.geometry-misc | teaching+overlap | plane x+2y+2z=c repeated t9-0166; triangle area and reflection for t9-0167/0168 |
+| t9.graph-structure | teaching | drill t9-0040 |
+| t9.incl-excl | teaching | lcm step (t9-0014) and the guarantee count (t9-0015) |
+| t9.numerical | shape+overlap | x^2 with n=2 as in t9-0158/0159; new function 1/x; h defined |
+| t9.ode-first | shape | wc 89 -> 106 |
+| t9.ode-linear | teaching+overlap | drill t9-0141 particular solution; y''+2y'+5y=0 is the ODE of t9-f032 |
+| t9.prob-basics | teaching+shape | drill t9-0059 needs chain rule; wc 89 -> 101 |
+| t9.rand-var | teaching+overlap | values 0,1,2 as in t9-0067; uniform variance (t9-0068/0069) |
+| t9.recurrence | teaching | drills t9-0022 and 0024 |
+| t10.sanity-check | factual | "above the midpoint" contradicted candidate 45 which equals the midpoint |
+
+### Left as is (39)
+
+t1.lin-eq, t1.quad, t1.rational-expr, t1.exp-rules, t1.compose, t2.trig-graph, t2.tri-laws, t2.log-eq, t2.seq-series, t3.limit-algebra, t3.chain-rule, t3.trans-deriv, t3.log-diff, t3.lhopital, t3.curve-shape, t4.trig-int, t4.seq-limits, t4.alt-series, t5.partials, t5.double-int, t5.coord-change, t5.triple-int, t5.div-curl, t6.inverse, t6.vector-spaces, t6.lin-maps, t6.change-basis, t6.inner-product, t8.unif-cont, t8.diff-thms, t8.riemann, t9.graph-basics, t9.stats-basics, t9.complex-arith, t9.ode-systems, t10.triage, t10.plug-choices, t10.special-cases, t10.time-boxing.
+
+Notes on the author-flagged cards: `t4.alt-series` correct (error bound, sign of remainder, conditional example). `t5.stokes-gauss` `\oiint` renders with core fonts; flux example 32 pi verified; orientation rule added. `t4.power-series` radius, endpoints and interval recomputed for the new example. `t9.counting` repeats case (stars and bars) and block gluing added. `t9.complex-maps` circles, composition, Rouche added. `t7.dihedral-small` order 4 (Z4 vs Klein) and order 8 (D4 has five involutions) added and checked. `t8.counterexamples` and `t8.top-general` fixed as listed.
+
+Known limits: t10 cards have no drills, so teaching fit there is judged against the curriculum only. Several cards sit near 150-160 words after additions; further drill-driven additions will need trimming elsewhere. Full-tier (c) items were scanned for Example overlap only, not for whether the card teaches them.
+
+Verification (script, all 140 cards): `renderText` succeeds, `glyphIssues` empty, word count 90–160 excluding math and code, six italic labels in order, display math or fenced block in Move and Example, no heading, no banned font commands, no "note that", Example shares no function, equation or numbers with any drill of its technique. All ten JSON files load under `python3 -I`.

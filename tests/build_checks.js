@@ -27,8 +27,8 @@ S.check('page contains the engine core', html.includes('window.PE || ') || html.
 S.check('no leftover placeholders', !/<!--PE_|__PE_BUILD__/.test(html));
 S.check('build marker is last', /<!--pe-build:[0-9]+-[0-9]+-->\s*<\/body>/.test(html));
 S.check('no external script or stylesheet', !/<script[^>]+src=|<link[^>]+href=/i.test(html));
-S.check('no network URL in page', !/https?:\/\//.test(html.replace(/https?:\/\/www\.w3\.org[^"' ]*/g, '')));
-S.check('pack JSON never closes its own script', (html.match(/<\/script>/g) || []).length === 8);   // DATA, KATEX_JS, TEXT, ANSWER, STORE, CORE, APP, BUILD (M7 window.PE_BUILD)
+S.check('no network URL in page', !/https?:\/\//.test(html.replace(/https?:\/\/www\.w3\.org[^"' ]*/g, '').split('https://cdn.jsdelivr.net/pyodide/v0.26.4/full/').join('')));
+S.check('pack JSON never closes its own script', (html.match(/<\/script>/gi) || []).length === 10);   // pyworker + pyharness text blocks, DATA, KATEX_JS, TEXT, ANSWER, STORE, CORE, APP, BUILD (M7 window.PE_BUILD)
 S.check('KaTeX CSS inlined with ten core faces as base64 woff2', (html.match(/data:font\/woff2;base64,/g) || []).length === 10);
 const katexJs = fs.readFileSync(path.join(ROOT, 'vendor', 'katex', 'katex.min.js'), 'utf8');
 S.eq('KaTeX 0.16.11 JS is inlined exactly once (runtime rendering)', html.split(katexJs).length - 1, 1);
@@ -68,6 +68,29 @@ S.check('engine text module is inlined', html.includes('window.PEText') || html.
   S.check('page renders a 2x2 matrix', out.matrix.includes('arraycolsep') && (out.matrix.match(/<span class="vlist-r">/g) || []).length >= 2, out.matrix);
 }
 
+// code answers: worker and harness are inlined as inert text blocks only when the pack has a code item
+S.check('page inlines the Python worker and harness as text blocks', /<script type="text\/plain" id="pe-pyworker">/.test(html) && /<script type="text\/plain" id="pe-pyharness">/.test(html) &&
+  html.includes(fs.readFileSync(path.join(ROOT, 'engine', 'pyharness.py'), 'utf8').split('\n')[0]));
+{
+  const nc = fs.mkdtempSync(path.join(OUT_DIR, 'nocode-'));
+  ['pack.json', 'techniques.json'].forEach((f) => fs.copyFileSync(path.join(ROOT, 'packs', '_fixture', f), path.join(nc, f)));
+  const its = JSON.parse(fs.readFileSync(path.join(ROOT, 'packs', '_fixture', 'items.json'), 'utf8')).filter((i) => i.answer.kind !== 'code');
+  fs.writeFileSync(path.join(nc, 'items.json'), JSON.stringify(its));
+  const ncOut = path.join(nc, 'out', 'nocode.html');   // own directory: sw.js is per output directory
+  S.check('pack without code items builds', build(nc, ncOut).code === 0);
+  const nh = fs.existsSync(ncOut) ? fs.readFileSync(ncOut, 'utf8') : '';
+  S.check('pack without code items carries no Python blocks', nh.length > 0 && !/<script type="text\/plain"/.test(nh));
+  // the real gre-math pack has no code items: its page must not carry the worker or harness
+  const gm = path.join(ROOT, 'packs', 'gre-math');
+  if (fs.existsSync(path.join(gm, 'items.json')) && !/"kind"\s*:\s*"code"/.test(fs.readFileSync(path.join(gm, 'items.json'), 'utf8'))) {
+    const gmOut = path.join(fs.mkdtempSync(path.join(OUT_DIR, 'gre-math-')), 'index.html');
+    S.check('gre-math builds', build(gm, gmOut).code === 0);
+    const gh = fs.existsSync(gmOut) ? fs.readFileSync(gmOut, 'utf8') : '';
+    S.check('gre-math page carries no Python worker, harness or Pyodide URL', gh.length > 0 && !gh.includes('id="pe-pyworker"') && !gh.includes('id="pe-pyharness"') && !gh.includes('loadPyodide'));
+  }
+  const blocks = fs.statSync(path.join(ROOT, 'engine', 'pyworker.js')).size + fs.statSync(path.join(ROOT, 'engine', 'pyharness.py')).size;
+  S.check('the two inlined Python blocks stay under 12 KB', blocks < 12000, blocks);
+}
 // offline worker (M4): sw.js next to the page, same build id, caches only the marked page
 const swPath = path.join(OUT_DIR, 'sw.js');
 const sw = fs.existsSync(swPath) ? fs.readFileSync(swPath, 'utf8') : '';
@@ -79,7 +102,12 @@ S.check('page carries a build marker', !!pageId);
 S.check('sw.js build id matches the page marker', !!pageId && pageId === swId);
 S.check('sw.js has no leftover placeholders', !/__PE_/.test(sw));
 S.check('sw.js checks the marker before caching the page', sw.includes('"<!--pe-build:" + BUILD + "-->"') && sw.includes('t.indexOf(MARK) >= 0'));
-S.check('sw.js writes to the cache only the page URL, no precache list', (sw.match(/\.put\(/g) || []).length > 0 && (sw.match(/\.put\(/g) || []).length === (sw.match(/\.put\(PAGE_URL,/g) || []).length && !/addAll|precache/i.test(sw));
+S.check('sw.js writes to the cache only the page URL and the pinned Pyodide URLs, no precache list', (sw.match(/\.put\(/g) || []).length === (sw.match(/\.put\(PAGE_URL,/g) || []).length + (sw.match(/\.put\(req\.url,/g) || []).length && (sw.match(/\.put\(PAGE_URL,/g) || []).length > 0 && !/addAll|precache/i.test(sw));
+S.check('sw.js Pyodide cache is per scope, kept on activate, pinned to the version', sw.includes('const PYODIDE_CACHE = PREFIX + "pyodide-v0.26.4"') &&
+  sw.includes('k !== CACHE && k !== PYODIDE_CACHE') && sw.includes('"https://cdn.jsdelivr.net/pyodide/v0.26.4/"'));
+S.check('sw.js fetches Pyodide in cors mode and stores only ok, non-opaque responses', sw.includes('mode: "cors"') &&
+  sw.includes('if(res.ok && res.type !== "opaque") c.put(req.url') && !/res\.type === "opaque"\) c\.put/.test(sw));
+S.check('kill switch deletes every cache under the site prefix (Pyodide cache included)', /k\.indexOf\(PREFIX\) === 0\)/.test(fs.readFileSync(path.join(ROOT, 'engine', 'sw.disable.js'), 'utf8')));
 S.check('sw.js handles fetch only inside its scope', sw.includes('url.href.indexOf(SCOPE) !== 0') && sw.includes('rel === PAGE'));
 S.check('sw.js deletes only its own prefixed caches', sw.includes('k.indexOf(PREFIX) === 0 && k !== CACHE'));
 S.check('kill switch copy is in engine/', fs.existsSync(path.join(ROOT, 'engine', 'sw.disable.js')));
@@ -219,6 +247,21 @@ const makeFigPack = (dir, itemFig, techFig) => {
   const r2 = spawnSync('/bin/sh', [path.join(ROOT, 'tools', 'deploy_pack.sh'), path.join(ROOT, 'packs', '_fixture'), ROOT], { env: Object.assign({}, process.env, { NODE }), encoding: 'utf8' });
   S.check('deploy_pack refuses a non gre-math pack at the repo root', r2.status === 1 && /refusing/.test(r2.stderr || ''), r2.stderr);
   S.eq('refusal leaves the root index.html untouched', fs.statSync(rootIndex).mtimeMs, before);
+}
+
+// deploy_pack.sh refuses a site whose page holds another pack: by the pe-pack marker, or (pages built before the
+// marker existed) by the key of the inlined pack JSON.
+{
+  const { spawnSync } = require('child_process');
+  [['marker', '<!doctype html>\n<!--pe-pack:gre-physics-->\n'],
+   ['legacy', '<!doctype html>\n<script>window.PE_DATA={"pack":{\n  "key": "gre-physics",\n  "title": "x"},"items":[]};</script>\n']].forEach(([name, page]) => {
+    const site = path.join(OUT_DIR, 'deploy-' + name);
+    fs.mkdirSync(site, { recursive: true });
+    fs.writeFileSync(path.join(site, 'index.html'), page);
+    const r = spawnSync('/bin/sh', [path.join(ROOT, 'tools', 'deploy_pack.sh'), path.join(ROOT, 'packs', '_fixture'), site], { env: Object.assign({}, process.env, { NODE }), encoding: 'utf8' });
+    S.check('deploy_pack refuses to overwrite a gre-physics page (' + name + ')', r.status === 1 && /holds a gre-physics page/.test(r.stderr || ''), r.stderr);
+    S.eq('refused site page untouched (' + name + ')', fs.readFileSync(path.join(site, 'index.html'), 'utf8'), page);
+  });
 }
 
 S.done();

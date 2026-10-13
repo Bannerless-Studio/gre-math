@@ -1,0 +1,1328 @@
+[
+ {
+  "id": "t5-f001",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.relational",
+   "t5.sql-select"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Treat the 5 rows below as the whole relation. A *minimal key* is a set of columns whose combination is unique in every row, with no smaller subset of it unique. Judge from this data only.\n\n`t`\n\n| a | b | c | d |\n|---|---|---|---|\n| 1 | x | p | 5 |\n| 1 | y | q | 6 |\n| 2 | x | q | 7 |\n| 2 | y | p | 5 |\n| 3 | x | p | 6 |\n\nHow many minimal keys does `t` have?",
+  "answer": {
+   "kind": "numeric",
+   "value": 4,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(lambda R: sum(1 for i in range(4) for j in range(i+1,4) if len({(r[i],r[j]) for r in R})==len(R)))([(1,'x','p',5),(1,'y','q',6),(2,'x','q',7),(2,'y','p',5),(3,'x','p',6)])",
+  "rubric": [
+   {
+    "text": "No single column is unique (each repeats a value)",
+    "weight": 1
+   },
+   {
+    "text": "Test each of the 6 column pairs for duplicate combinations",
+    "weight": 2
+   },
+   {
+    "text": "Pairs b,c and c,d repeat; the other 4 are unique and minimal",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Singles: a repeats 1 and 2, b repeats x and y, c repeats p and q, d repeats 5 and 6. None is a key (relational).\nPairs: ab, ac, ad, bd give 5 distinct combinations each.\nbc repeats (x,p); cd repeats (p,5).\nTriples contain a key, so none is minimal.\nCount = 4.",
+  "hints": [
+   "List the single columns first, then check pairs."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f002",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.relational",
+   "t5.sql-joins",
+   "t5.sql-agg"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`cust_id` and `order_id` are primary keys of `customers` and `orders`; `items.order_id` references `orders`.\n\n`customers`\n\n| cust_id | region |\n|---|---|\n| 1 | N |\n| 2 | S |\n| 3 | N |\n\n`orders`\n\n| order_id | cust_id | total |\n|---|---|---|\n| 10 | 1 | 100 |\n| 11 | 1 | 50 |\n| 12 | 2 | 80 |\n| 13 | 3 | 40 |\n\n`items`\n\n| item_id | order_id | qty |\n|---|---|---|\n| 1 | 10 | 2 |\n| 2 | 10 | 1 |\n| 3 | 10 | 3 |\n| 4 | 11 | 1 |\n| 5 | 12 | 2 |\n| 6 | 12 | 2 |\n| 7 | 13 | 1 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT c.region, SUM(o.total) AS rev\nFROM customers c\nJOIN orders o ON o.cust_id = c.cust_id\nJOIN items i ON i.order_id = o.order_id\nGROUP BY c.region;\n```\n\nWhat value of `rev` does the query return for region N?",
+  "answer": {
+   "kind": "numeric",
+   "value": 390,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "100*3+50*1+40*1",
+  "rubric": [
+   {
+    "text": "Join cardinality: each order repeats once per item row",
+    "weight": 2
+   },
+   {
+    "text": "Order 10 counts 3 times, 11 once, 13 once",
+    "weight": 1
+   },
+   {
+    "text": "Sum 300 + 50 + 40",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "The join to `items` is one-to-many on order (relational).\nOrder 10 has 3 item rows, so its total 100 is added 3 times.\nRegion N orders: 10 (x3), 11 (x1), 13 (x1).\nrev = 300 + 50 + 40 = 390, not the true 190.",
+  "hints": [
+   "Count item rows per order before summing."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f003",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-select",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`p`\n\n| pid | price | disc |\n|---|---|---|\n| 1 | 30 | 5 |\n| 2 | 30 | NULL |\n| 3 | 10 | NULL |\n| 4 | NULL | 5 |\n| 5 | NULL | NULL |\n| 6 | 10 | 0 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT pid FROM p\nWHERE NOT (price > 20 AND disc > 0)\nORDER BY pid;\n```\n\nAdd up the `pid` values the query returns.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3+6",
+  "rubric": [
+   {
+    "text": "WHERE keeps only rows that evaluate to TRUE",
+    "weight": 1
+   },
+   {
+    "text": "Evaluate AND and NOT in three-valued logic per row",
+    "weight": 2
+   },
+   {
+    "text": "Rows 3 and 6 pass; sum 3 + 6",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "WHERE keeps TRUE only (select).\nRow 1: TRUE AND TRUE, NOT gives FALSE, dropped.\nRows 2, 4, 5: the AND is UNKNOWN, NOT UNKNOWN is UNKNOWN, dropped (null).\nRows 3, 6: the AND is FALSE, NOT gives TRUE, kept.\nSum = 3 + 6 = 9.",
+  "hints": [
+   "FALSE AND UNKNOWN is FALSE."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f004",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-select",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`s`\n\n| id | score |\n|---|---|\n| 1 | 50 |\n| 2 | NULL |\n| 3 | 80 |\n| 4 | 50 |\n| 5 | NULL |\n| 6 | 70 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT id FROM s\nORDER BY score DESC, id DESC\nLIMIT 2 OFFSET 2;\n```\n\nAdd up the `id` values returned.",
+  "answer": {
+   "kind": "numeric",
+   "value": 9,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3+6",
+  "rubric": [
+   {
+    "text": "PostgreSQL DESC puts NULL first",
+    "weight": 2
+   },
+   {
+    "text": "Order rows: ids 5, 2, 3, 6, 4, 1",
+    "weight": 1
+   },
+   {
+    "text": "OFFSET 2 skips two, LIMIT 2 takes ids 3 and 6",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "NULL is the largest value, so DESC lists NULL scores first (null).\nTies broken by id DESC: NULLs are 5, 2; then 80 (id 3), 70 (id 6), 50 (ids 4, 1).\nFull order: 5, 2, 3, 6, 4, 1.\nSkip 2, take 2: ids 3 and 6, sum 9 (select).",
+  "hints": [
+   "Decide where NULL goes before applying OFFSET."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f005",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-null",
+   "t5.sql-agg",
+   "t5.sql-select"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`t`\n\n| g | x |\n|---|---|\n| a | 10 |\n| a | NULL |\n| a | 25 |\n| b | NULL |\n| b | NULL |\n| b | 30 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT SUM(x) / COUNT(*) AS r FROM t;\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "10",
+    "10.83",
+    "21",
+    "21.67",
+    "NULL"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "real division kept the fraction; integer / integer truncates",
+    "divided by COUNT(x)=3 instead of COUNT(*)=6",
+    "that is AVG(x), which skips NULLs in both sum and count",
+    "believed any NULL makes the sum NULL; SUM skips NULLs"
+   ]
+  },
+  "check": null,
+  "rubric": [
+   {
+    "text": "SUM ignores NULL: 10+25+30 = 65",
+    "weight": 1
+   },
+   {
+    "text": "COUNT(*) counts all 6 rows",
+    "weight": 1
+   },
+   {
+    "text": "Integer division 65/6 truncates to 10",
+    "weight": 2
+   }
+  ],
+  "pass": 3.0,
+  "solution": "SUM(x) skips NULLs: 65 (null).\nCOUNT(*) counts every row: 6 (agg).\n65 / 6 with integer operands truncates to 10 (select).\nAVG(x) would give 21.67 instead.",
+  "hints": [
+   "Which count is in the denominator?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f006",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-null",
+   "t5.sql-sub"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Two queries:\n\n`a`\n\n| id |\n|---|\n| 1 |\n| 2 |\n| 3 |\n| 4 |\n| 5 |\n\n`b`\n\n| ref |\n|---|\n| 2 |\n| 4 |\n| NULL |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\n-- Q1\nSELECT COUNT(*) FROM a WHERE id NOT IN (SELECT ref FROM b);\n-- Q2\nSELECT COUNT(*) FROM a\nWHERE NOT EXISTS (SELECT 1 FROM b WHERE b.ref = a.id);\n```\n\nHow many more rows does Q2 count than Q1?",
+  "answer": {
+   "kind": "numeric",
+   "value": 3,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3-0",
+  "rubric": [
+   {
+    "text": "Q1: `id NOT IN (...,NULL)` is never TRUE, so 0 rows",
+    "weight": 2
+   },
+   {
+    "text": "Q2: NOT EXISTS ignores the NULL; ids 1, 3, 5 qualify",
+    "weight": 1
+   },
+   {
+    "text": "Difference 3 - 0",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "`id NOT IN (2, 4, NULL)` expands to id<>2 AND id<>4 AND id<>NULL (null).\nThe last term is UNKNOWN, so no row is ever TRUE: Q1 = 0.\nNOT EXISTS tests row existence; b.ref = a.id never matches NULL (sub).\nQ2 counts ids 1, 3, 5 = 3.\nDifference = 3.",
+  "hints": [
+   "Expand NOT IN into a chain of <> and AND."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f007",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-joins",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`emp`\n\n| eid | dept_id |\n|---|---|\n| 1 | 10 |\n| 2 | 10 |\n| 3 | 20 |\n| 4 | NULL |\n| 5 | 30 |\n\n`dept`\n\n| dept_id | name |\n|---|---|\n| 10 | A |\n| 20 | B |\n| 40 | D |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT e.eid\nFROM emp e\nLEFT JOIN dept d\n  ON d.dept_id = e.dept_id AND d.name <> 'A'\nWHERE d.dept_id IS NULL;\n```\n\nWhich `eid` values come back?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "1, 2, 4, 5",
+    "4, 5",
+    "4",
+    "1, 2, 3, 4, 5",
+    "3"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "treated the ON test as a WHERE: only the true anti-join rows 4, 5 are kept",
+    "dropped the unmatched non-NULL key 5, keeping only the NULL-key row",
+    "forgot the IS NULL filter and returned every left row",
+    "picked the one employee whose join row is real"
+   ]
+  },
+  "check": null,
+  "rubric": [
+   {
+    "text": "ON filter applies before the outer rows are padded",
+    "weight": 2
+   },
+   {
+    "text": "Dept A matches fail the ON test, so employees 1, 2 get NULL",
+    "weight": 1
+   },
+   {
+    "text": "Employees 4 (NULL key) and 5 (no dept) also unmatched",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "In a LEFT JOIN the ON condition decides matches; every emp row survives (joins).\nEmployees 1, 2 match dept A, but `name <> 'A'` fails, so their d columns are NULL.\nEmployee 3 matches B and keeps a real d.dept_id.\nEmployee 4 has NULL key, never equal; employee 5 has no dept 30 (null).\nIS NULL keeps 1, 2, 4, 5.",
+  "hints": [
+   "Apply the whole ON clause before looking at WHERE."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f008",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-joins",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`l`\n\n| k |\n|---|\n| 1 |\n| 1 |\n| 2 |\n| NULL |\n| 3 |\n\n`r`\n\n| k |\n|---|\n| 1 |\n| 1 |\n| 1 |\n| 2 |\n| NULL |\n| 4 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT COUNT(*)\nFROM l FULL OUTER JOIN r ON l.k = r.k;\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "numeric",
+   "value": 11,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "2*3+1*1+2+2",
+  "rubric": [
+   {
+    "text": "Matches multiply: key 1 gives 2 x 3 = 6, key 2 gives 1",
+    "weight": 2
+   },
+   {
+    "text": "NULL never equals NULL, so NULL keys are unmatched",
+    "weight": 1
+   },
+   {
+    "text": "Add unmatched rows: left NULL and 3, right NULL and 4",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Inner matches: key 1 pairs 2 left x 3 right = 6; key 2 pairs 1 x 1 = 1 (joins).\nNULL = NULL is UNKNOWN, so NULL keys never match (null).\nUnmatched left: NULL, 3 = 2 rows. Unmatched right: NULL, 4 = 2 rows.\nTotal = 7 + 2 + 2 = 11.",
+  "hints": [
+   "Count matches per key, then add unmatched rows from both sides."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f009",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-agg",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`sales`\n\n| rep | region | amt |\n|---|---|---|\n| r1 | N | 60 |\n| r1 | N | 50 |\n| r2 | S | 70 |\n| r3 | S | 40 |\n| r4 | E | 120 |\n| r5 | E | NULL |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT region, SUM(amt) AS s\nFROM sales\nGROUP BY region\nHAVING SUM(amt) > 100\n   AND COUNT(DISTINCT rep) > 1;\n```\n\nAdd up the `s` values in the result.",
+  "answer": {
+   "kind": "numeric",
+   "value": 230,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "110+120",
+  "rubric": [
+   {
+    "text": "HAVING filters groups after aggregation",
+    "weight": 1
+   },
+   {
+    "text": "COUNT(DISTINCT rep) counts reps even when amt is NULL",
+    "weight": 2
+   },
+   {
+    "text": "N fails (1 rep); S = 110 and E = 120 pass",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Per region: N has 1 distinct rep, sum 110. S has 2 reps, sum 110. E has 2 reps (r5 counts although amt is NULL), sum 120 (agg).\nHAVING needs sum > 100 and reps > 1.\nN fails on reps; S and E pass.\nSum of s = 110 + 120 = 230.",
+  "hints": [
+   "Count reps by rep id, not by non-NULL amt."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f010",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-agg",
+   "t5.sql-sub",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`t`\n\n| dept | sal |\n|---|---|\n| A | 100 |\n| A | 200 |\n| A | 300 |\n| B | 400 |\n| B | NULL |\n| C | NULL |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT AVG(a) FROM (\n  SELECT dept, AVG(sal) AS a FROM t GROUP BY dept\n) d;\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "numeric",
+   "value": 300,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(200+400)/2",
+  "rubric": [
+   {
+    "text": "Inner query gives A = 200, B = 400, C = NULL",
+    "weight": 2
+   },
+   {
+    "text": "Outer AVG skips the NULL group average",
+    "weight": 1
+   },
+   {
+    "text": "Mean of 200 and 400 is 300",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Inner AVG skips NULL salaries (null): A = 200, B = 400.\nDept C has only NULL, so AVG is NULL (agg).\nOuter AVG skips that NULL: (200 + 400) / 2 = 300 (sub).\nThe pooled mean would be 1000 / 5 = 200.",
+  "hints": [
+   "Which groups produce a NULL average?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f011",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-sub",
+   "t5.sql-agg",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`emp`\n\n| id | dept | sal |\n|---|---|---|\n| 1 | A | 50 |\n| 2 | A | 70 |\n| 3 | A | 90 |\n| 4 | A | 100 |\n| 5 | B | 60 |\n| 6 | B | 60 |\n| 7 | B | NULL |\n| 8 | C | 80 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT id FROM emp e\nWHERE sal > (SELECT AVG(sal) FROM emp\n              WHERE dept = e.dept);\n```\n\nAdd up the `id` values returned.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "3+4",
+  "rubric": [
+   {
+    "text": "Correlated subquery recomputes the average per department",
+    "weight": 1
+   },
+   {
+    "text": "Dept A mean 77.5 keeps ids 3, 4; B mean 60 keeps none",
+    "weight": 2
+   },
+   {
+    "text": "NULL salary is never > anything; C alone is not above its mean",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "The subquery depends on e.dept, so it yields each row's own department mean (sub).\nA: (50+70+90+100)/4 = 77.5, so ids 3 (90) and 4 (100).\nB: AVG skips NULL, mean 60; 60 > 60 is false (agg).\nC: 80 > 80 false. Row 7: NULL > 60 is UNKNOWN (null).\nSum = 3 + 4 = 7.",
+  "hints": [
+   "Compute each department mean first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f012",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-sub",
+   "t5.sql-agg",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "`tx`\n\n| id | acct | amt |\n|---|---|---|\n| 1 | X | 60 |\n| 2 | X | 20 |\n| 3 | Y | 70 |\n| 4 | Z | 60 |\n| 5 | Z | 40 |\n| 6 | W | NULL |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nWITH tot AS (\n  SELECT acct, SUM(amt) AS s FROM tx GROUP BY acct\n)\nSELECT SUM(s) FROM tot\nWHERE s > (SELECT AVG(s) FROM tot);\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "numeric",
+   "value": 100,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "100",
+  "rubric": [
+   {
+    "text": "CTE totals: X 80, Y 70, Z 100, W NULL",
+    "weight": 1
+   },
+   {
+    "text": "AVG over totals skips W: 250/3 = 83.33",
+    "weight": 2
+   },
+   {
+    "text": "Only Z exceeds the mean; the answer is 100",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "CTE totals (agg): X = 80, Y = 70, Z = 100, W = NULL (sum of only NULLs).\nAVG(s) skips the NULL total (null): 250 / 3 = 83.33.\ns > 83.33 keeps only Z (sub).\nSUM = 100. Treating W as 0 would lower the mean to 62.5 and return 250.",
+  "hints": [
+   "Does the NULL total enter the mean?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f013",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-window",
+   "t5.sql-agg"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Window frame default: with ORDER BY and no frame clause, `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` (peer rows share a value).\n\n`w`\n\n| id | day | amt |\n|---|---|---|\n| 1 | 1 | 10 |\n| 2 | 2 | 20 |\n| 3 | 2 | 5 |\n| 4 | 3 | 15 |\n| 5 | 4 | 30 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT SUM(run) FROM (\n  SELECT SUM(amt) OVER (ORDER BY day) AS run FROM w\n) q;\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "210",
+    "205",
+    "295",
+    "400",
+    "80"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "used a ROWS frame, which splits the two day-2 peers (running 30, 35)",
+    "ran the cumulative sum in descending day order",
+    "dropped ORDER BY, so every row shows the grand total 80 (5 x 80)",
+    "summed amt once; the grand total, not the column of running sums"
+   ]
+  },
+  "check": null,
+  "rubric": [
+   {
+    "text": "Running sums per row: 10, 35, 35, 50, 80",
+    "weight": 2
+   },
+   {
+    "text": "Peers (same day) share the same running value",
+    "weight": 1
+   },
+   {
+    "text": "Add the column: 210",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Default frame is RANGE up to the current row, so day-2 peers both include 20 and 5 (window).\nRunning column: 10, 35, 35, 50, 80.\nOuter SUM adds the five values (agg): 210.\nA ROWS frame would give 10, 30, 35, 50, 80 = 205.",
+  "hints": [
+   "Do the two day-2 rows see the same frame?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f014",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.sql-window",
+   "t5.sql-sub"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`g`\n\n| student | score |\n|---|---|\n| a | 90 |\n| b | 85 |\n| c | 90 |\n| d | 70 |\n| e | 85 |\n| f | 60 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nSELECT SUM(score) FROM (\n  SELECT score, RANK() OVER (ORDER BY score DESC) AS r FROM g\n) q\nWHERE r <= 3;\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "numeric",
+   "value": 350,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "90+90+85+85",
+  "rubric": [
+   {
+    "text": "RANK skips after ties: 90,90 -> 1,1; 85,85 -> 3,3; 70 -> 5",
+    "weight": 2
+   },
+   {
+    "text": "r <= 3 keeps the four rows scoring 90 or 85",
+    "weight": 1
+   },
+   {
+    "text": "Sum 90+90+85+85",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "RANK gives tied rows the same rank and leaves gaps (window).\nScores 90, 90 get rank 1; 85, 85 get rank 3; 70 gets rank 5; 60 gets 6.\nWHERE on the window result needs the subquery (sub).\nr <= 3 keeps 90, 90, 85, 85: sum 350.\nDENSE_RANK would also keep 70 and give 420.",
+  "hints": [
+   "Write out the rank of every row."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f015",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.pandas-index",
+   "t5.pandas-vector"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A pandas Series `s` has the labels and values below, in this row order. `.loc` slices by label with both ends included; `.iloc` slices by position with the end excluded.\n\n`s`\n\n| label | value |\n|---|---|\n| 3 | 5 |\n| 1 | 6 |\n| 4 | 7 |\n| 2 | 8 |\n| 0 | 9 |\n\n```python\ns.loc[1:4].sum() + s.iloc[1:4].sum()\n```\n\nWhat does the expression evaluate to?",
+  "answer": {
+   "kind": "numeric",
+   "value": 34,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "6+7+6+7+8",
+  "rubric": [
+   {
+    "text": "loc[1:4] starts at label 1 and stops at label 4 in row order: values 6, 7",
+    "weight": 2
+   },
+   {
+    "text": "iloc[1:4] takes positions 1, 2, 3: values 6, 7, 8",
+    "weight": 1
+   },
+   {
+    "text": "13 + 21",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Labels are not sorted; a label slice follows row order (index).\nloc[1:4]: rows labelled 1 and 4, both ends included, so 6 + 7 = 13.\niloc[1:4]: positions 1, 2, 3 are 6, 7, 8, end excluded, sum 21 (vector).\nTotal 34.",
+  "hints": [
+   "Do not assume sorted labels."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f016",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.pandas-index",
+   "t5.pandas-vector",
+   "t5.missing"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A pandas Series `s` is shown below. `a.add(b, fill_value=0)` aligns on labels and treats a label missing from one side as 0; labels missing from both stay NaN.\n\n`s`\n\n| label | value |\n|---|---|\n| a | 5 |\n| b | 6 |\n| c | 7 |\n| d | 8 |\n| e | 9 |\n\n```python\nu = s.add(s[s > 6], fill_value=0)\nu.sum()\n```\n\nWhat does `u.sum()` return?",
+  "answer": {
+   "kind": "numeric",
+   "value": 59,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "5+6+14+16+18",
+  "rubric": [
+   {
+    "text": "Mask `s > 6` keeps labels c, d, e",
+    "weight": 1
+   },
+   {
+    "text": "Alignment is by label; fill_value=0 revives a and b",
+    "weight": 2
+   },
+   {
+    "text": "a, b stay 5, 6; c, d, e double to 14, 16, 18",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "`s[s > 6]` keeps c, d, e only (index).\nAddition aligns on labels (vector). With fill_value=0, a and b keep 5 and 6.\nc, d, e become 14, 16, 18.\nSum = 5 + 6 + 14 + 16 + 18 = 59. Plain `+` would give NaN for a, b and sum 48 (missing).",
+  "hints": [
+   "Which labels exist on only one side?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f017",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.pandas-vector",
+   "t5.pandas-index"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "DataFrame `d` has the rows below, row labels 0, 1, 2. `sub(v, axis=0)` subtracts the Series `v` from each column, matching `v` to row labels.\n\n`d`\n\n| x | y | z |\n|---|---|---|\n| 1 | 2 | 6 |\n| 3 | 5 | 4 |\n| 2 | 2 | 2 |\n\n```python\nc = d.sub(d.mean(axis=1), axis=0)\nc.abs().sum().sum()\n```\n\nWhat does the last line evaluate to?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "8",
+    "10",
+    "0",
+    "16",
+    "6"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "centred each column by its column mean instead of each row by its row mean",
+    "used `d - d.mean(axis=1)`: the row means align to column names, nothing matches, all NaN, sum 0",
+    "doubled by counting positive and negative deviations separately",
+    "only summed row 0 deviations"
+   ]
+  },
+  "check": null,
+  "rubric": [
+   {
+    "text": "Row means: 3, 4, 2",
+    "weight": 1
+   },
+   {
+    "text": "Subtract per row: row 0 is -2, -1, 3; row 1 is -1, 1, 0; row 2 is 0",
+    "weight": 2
+   },
+   {
+    "text": "Absolute sum 6 + 2 + 0 = 8",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "axis=1 mean is the mean across columns for each row: 3, 4, 2 (vector).\naxis=0 in `sub` aligns that Series with row labels (index).\nRow 0: -2, -1, 3 gives 6. Row 1: -1, 1, 0 gives 2. Row 2: 0.\nTotal 8. Column centring would give 10.",
+  "hints": [
+   "Which axis does each mean run along?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f018",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.pandas-vector",
+   "t5.pandas-index"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "NumPy array `a` is the column `A` as shape (3, 1). Array `b = np.array([10, 20, 30, 40])` has shape (4,).\n\n`A`\n\n| v |\n|---|\n| 1 |\n| 2 |\n| 3 |\n\n```python\nm = a + b\nm[m > 25].sum()\n```\n\nWhat does the last line evaluate to?",
+  "answer": {
+   "kind": "numeric",
+   "value": 222,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "(31+41)+(32+42)+(33+43)",
+  "rubric": [
+   {
+    "text": "Broadcast: (3,1) + (4,) gives a 3 x 4 grid of a_i + b_j",
+    "weight": 2
+   },
+   {
+    "text": "Boolean mask keeps the entries above 25",
+    "weight": 1
+   },
+   {
+    "text": "Sum 72 + 74 + 76",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Broadcasting aligns shapes from the right: (3,1) and (4,) give (3,4) (vector).\nRow i holds i + 10, 20, 30, 40.\nThe mask m > 25 keeps the 30 and 40 columns in each row (index).\nRow sums: 31+41=72, 32+42=74, 33+43=76.\nTotal 222.",
+  "hints": [
+   "Write out the 3 x 4 grid."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f019",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.pandas-merge",
+   "t5.sql-joins",
+   "t5.missing"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`tiers` repeats customer `a` (tier history). Outer merge keeps unmatched rows from both sides.\n\n`orders`\n\n| oid | cust |\n|---|---|\n| 1 | a |\n| 2 | b |\n| 3 | a |\n| 4 | c |\n\n`tiers`\n\n| cust | tier |\n|---|---|\n| a | gold |\n| a | silver |\n| b | gold |\n| d | gold |\n\n```python\nm = orders.merge(tiers, on=\"cust\", how=\"outer\")\n(m.tier == \"gold\").sum()\n```\n\nWhat does the last line evaluate to?",
+  "answer": {
+   "kind": "mcq",
+   "options": [
+    "4",
+    "3",
+    "7",
+    "2",
+    "6"
+   ],
+   "correct": 0,
+   "shuffle": true,
+   "why": [
+    "",
+    "left-merge thinking: forgot the unmatched `d` gold row",
+    "counted all merged rows, not only gold",
+    "counted each customer once (a, b)",
+    "counted rows for orders only (left merge: 6 rows)"
+   ]
+  },
+  "check": null,
+  "rubric": [
+   {
+    "text": "Merge size: a x2 orders x2 tiers = 4 rows, plus b, c, d",
+    "weight": 2
+   },
+   {
+    "text": "Gold rows: orders 1, 3 (a), order 2 (b), customer d",
+    "weight": 1
+   },
+   {
+    "text": "NaN tier never equals gold",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Customer a: 2 orders x 2 tiers = 4 merged rows (merge).\nb: 1 row gold. c: 1 row, tier NaN. d: 1 row, order NaN, gold (missing).\nGold rows: oid 1, oid 3, oid 2, and d = 4.\nNaN == 'gold' is False.",
+  "hints": [
+   "Count rows per customer after the merge."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f020",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.pandas-merge",
+   "t5.sql-agg",
+   "t5.missing"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`sales`\n\n| store | month | rev |\n|---|---|---|\n| A | 1 | 30 |\n| A | 2 | 10 |\n| B | 1 | 20 |\n| B | 2 | 20 |\n| B | 3 | 10 |\n| C | 1 | NaN |\n\n```python\nshare = sales.rev / sales.groupby(\"store\").rev.transform(\"sum\")\nshare[share > 0.3].sum()\n```\n\nWhat does the last line evaluate to? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.55,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "0.75+0.4+0.4",
+  "rubric": [
+   {
+    "text": "transform('sum') returns the store total on every row",
+    "weight": 1
+   },
+   {
+    "text": "Shares: A 0.75, 0.25; B 0.4, 0.4, 0.2; C NaN",
+    "weight": 2
+   },
+   {
+    "text": "NaN > 0.3 is False; keep 0.75, 0.4, 0.4",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "transform broadcasts the group sum back to each row (merge).\nA total 40: 0.75, 0.25. B total 50: 0.4, 0.4, 0.2.\nC: sum of only NaN is 0, NaN / 0 is NaN (missing).\nShare > 0.3 keeps 0.75, 0.4, 0.4. Sum 1.55.",
+  "hints": [
+   "Compute each store total first."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f021",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.tidy",
+   "t5.sql-agg",
+   "t5.missing"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`wide`\n\n| id | q1 | q2 | q3 |\n|---|---|---|---|\n| a | 4 | 6 | NaN |\n| b | 8 | NaN | NaN |\n| c | 2 | 6 | 10 |\n\n```python\nlong = wide.melt(id_vars=\"id\")   # columns: id, variable, value\nlong.groupby(\"id\").value.mean().mean()\n```\n\nWhat does the last line evaluate to? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 6.333333333333333,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(5+8+6)/3",
+  "rubric": [
+   {
+    "text": "melt gives one row per id and quarter, 9 rows with NaN kept",
+    "weight": 1
+   },
+   {
+    "text": "Group means skip NaN: a 5, b 8, c 6",
+    "weight": 2
+   },
+   {
+    "text": "Mean of means is 19/3, not the pooled 6",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "melt stacks q1 to q3 into one value column (tidy). NaN cells stay as NaN rows.\nmean per id skips NaN (missing): a = (4+6)/2 = 5, b = 8, c = 6.\nMean of group means = 19/3 = 6.33.\nThe pooled mean of six values is 6.",
+  "hints": [
+   "Mean of group means weights groups equally."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f022",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.tidy",
+   "t5.pandas-merge",
+   "t5.pandas-vector"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`lg`\n\n| store | month | rev |\n|---|---|---|\n| A | Jan | 10 |\n| A | Jan | 5 |\n| A | Feb | 20 |\n| B | Jan | 7 |\n| C | Feb | 3 |\n\n```python\np = lg.pivot_table(index=\"store\", columns=\"month\",\n                   values=\"rev\", aggfunc=\"sum\", fill_value=0)\np.values.mean()\n```\n\nWhat does the last line evaluate to? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 7.5,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(15+20+7+0+0+3)/6",
+  "rubric": [
+   {
+    "text": "Duplicate (A, Jan) rows are summed to 15",
+    "weight": 1
+   },
+   {
+    "text": "Pivot grid is 3 stores x 2 months = 6 cells; absent pairs become 0",
+    "weight": 2
+   },
+   {
+    "text": "Total 45 over 6 cells",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "pivot_table groups by (store, month) and sums (tidy): A,Jan = 15.\nGrid: A 15, 20; B 7, 0; C 0, 3 (fill_value fills the absent pairs).\nAll 6 cells count in the mean (vector): 45 / 6 = 7.5.\nWithout fill, the mean over 4 present cells would be 11.25.",
+  "hints": [
+   "How many cells does the full grid have?"
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f023",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.missing",
+   "t3.descriptive"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Series `s` holds column `v` in order. `ffill` copies the last valid value forward over each NaN. `std` is the sample standard deviation (divisor $n-1$).\n\n`s`\n\n| v |\n|---|\n| 2 |\n| NaN |\n| 4 |\n| NaN |\n| 10 |\n\n```python\ns.ffill().std()\n```\n\nWhat does the expression evaluate to? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 3.286335345030997,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(43.2/4)**0.5",
+  "rubric": [
+   {
+    "text": "ffill gives 2, 2, 4, 4, 10",
+    "weight": 1
+   },
+   {
+    "text": "Mean 4.4 and squared deviations sum 43.2",
+    "weight": 2
+   },
+   {
+    "text": "Divide by n-1 = 4, square root of 10.8",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "Forward fill (missing): 2, 2, 4, 4, 10.\nMean = 22 / 5 = 4.4 (descriptive).\nSum of squares: 2(2.4)^2 + 2(0.4)^2 + (5.6)^2 = 11.52 + 0.32 + 31.36 = 43.2.\nVariance = 43.2 / 4 = 10.8; sd = 3.286.",
+  "hints": [
+   "Fill first, then count 5 values."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f024",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.missing",
+   "t3.ols-simple"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Rows with any missing value are dropped (listwise deletion), then ordinary least squares fits $y = a + b x$.\n\n`xy`\n\n| x | y |\n|---|---|\n| 1 | 2 |\n| 2 | NaN |\n| NaN | 3 |\n| 4 | 7 |\n| 5 | 10 |\n| NaN | 1 |\n\n```python\nxy.dropna()   # then fit y on x\n```\n\nWhat is the fitted slope $b$? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 1.9230769230769231,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "(80-3*(10/3)*(19/3))/(42-3*(10/3)**2)",
+  "rubric": [
+   {
+    "text": "Listwise deletion leaves (1,2), (4,7), (5,10)",
+    "weight": 1
+   },
+   {
+    "text": "Means $\\bar x=10/3$, $\\bar y=19/3$",
+    "weight": 1
+   },
+   {
+    "text": "$S_{xy}=50/3$ and $S_{xx}=26/3$",
+    "weight": 1
+   },
+   {
+    "text": "Slope $=50/26\\approx1.923$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "dropna removes rows 2, 3 and 6 (missing); three points remain: (1,2), (4,7), (5,10).\nMeans: $\\bar x=10/3$, $\\bar y=19/3$ (missing).\n$S_{xy}=\\sum xy-n\\bar x\\bar y=80-190/3=50/3$.\n$S_{xx}=\\sum x^2-n\\bar x^2=42-100/3=26/3$.\nSlope $=S_{xy}/S_{xx}=50/26=1.923$ (OLS).",
+  "hints": [
+   "Drop incomplete rows before computing any mean."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f025",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.cleaning",
+   "t5.missing",
+   "t5.tidy"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "`amt` is text. Cleaning steps run in order, row order as shown. `to_numeric(..., errors=\"coerce\")` turns unparseable text into NaN. `drop_duplicates(\"id\", keep=\"first\")` keeps the first row of each id.\n\n`raw`\n\n| id | amt |\n|---|---|\n| 1 | 10 |\n| 2 |  5 |\n| 2 | 5 |\n| 3 | n/a |\n| 4 | 20 |\n| 1 | 11 |\n\n```python\nraw[\"amt\"] = pd.to_numeric(raw.amt.str.strip(), errors=\"coerce\")\nclean = raw.drop_duplicates(\"id\", keep=\"first\")\nclean.amt.sum()\n```\n\nWhat does the last line evaluate to?",
+  "answer": {
+   "kind": "numeric",
+   "value": 35,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "10+5+20",
+  "rubric": [
+   {
+    "text": "strip then coerce: 10, 5, 5, NaN, 20, 11",
+    "weight": 1
+   },
+   {
+    "text": "Keep first per id: ids 1, 2, 3, 4 with 10, 5, NaN, 20",
+    "weight": 2
+   },
+   {
+    "text": "sum skips NaN: 35",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "strip and coerce (cleaning): 10, 5, 5, NaN, 20, 11; 'n/a' becomes NaN (missing).\nDedupe on id keeping first: id 1 keeps 10 (not 11), id 2 keeps 5.\nRemaining amt: 10, 5, NaN, 20.\nsum skips NaN: 35.",
+  "hints": [
+   "Dedupe by id keeps the first row, not the last."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f026",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.cleaning",
+   "t5.sql-window",
+   "t5.sql-null"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "`amt` is text and `ts` is a unique event time.\n\n`raw`\n\n| id | email | amt | ts |\n|---|---|---|---|\n| 1 |  Ann@x.com  | 10 | 3 |\n| 2 | ann@x.com | 15 | 5 |\n| 3 | bob@x.com | n/a | 4 |\n| 4 | BOB@x.com | 20 | 2 |\n| 5 | cy@x.com | NULL | 1 |\n| 6 | cy@x.com | 7 | 6 |\n\nDialect: standard SQL, PostgreSQL semantics (NULL sorts as largest, integer / integer truncates).\n\n```sql\nWITH c AS (\n  SELECT LOWER(TRIM(email)) AS em, NULLIF(amt, 'n/a') AS a, ts,\n         ROW_NUMBER() OVER (PARTITION BY LOWER(TRIM(email))\n                            ORDER BY ts DESC) AS rn\n  FROM raw\n)\nSELECT SUM(CAST(a AS INTEGER)) FROM c WHERE rn = 1;\n```\n\nWhat does the query return?",
+  "answer": {
+   "kind": "numeric",
+   "value": 22,
+   "tol": 0,
+   "form": "exact"
+  },
+  "check": "15+7",
+  "rubric": [
+   {
+    "text": "Normalising email merges Ann/ann and Bob/BOB",
+    "weight": 1
+   },
+   {
+    "text": "ROW_NUMBER by ts DESC keeps the latest row per email: ids 2, 3, 6",
+    "weight": 2
+   },
+   {
+    "text": "NULLIF turns 'n/a' into NULL; SUM = 15 + 7",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "LOWER(TRIM(...)) groups ' Ann@x.com ' with 'ann@x.com' and so on (cleaning).\nrn = 1 per email by latest ts: ann id 2 (15), bob id 3 ('n/a'), cy id 6 (7) (window).\nNULLIF makes 'n/a' NULL; SUM skips it (null).\nSum = 15 + 7 = 22.",
+  "hints": [
+   "Latest row per person, then deal with 'n/a'."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f027",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.complexity",
+   "t5.sql-joins",
+   "t5.sql-select"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "Table $A$ has 2,000 rows and $B$ has 500 rows. A query filters $A$ to 10% of its rows with a WHERE, then joins to $B$ on a key. Plan 1 is a nested loop (every filtered $A$ row against every $B$ row). Plan 2 builds a hash table on $B$ ($|B|$ operations) and probes it once per filtered $A$ row. Count one comparison or one insert/probe as one operation.\n\nHow many times more operations does Plan 1 use than Plan 2? Give a decimal.",
+  "answer": {
+   "kind": "numeric",
+   "value": 142.85714285714286,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "200*500/(500+200)",
+  "rubric": [
+   {
+    "text": "Filter first: 200 rows of A",
+    "weight": 1
+   },
+   {
+    "text": "Nested loop: 200 x 500 = 100,000",
+    "weight": 1
+   },
+   {
+    "text": "Hash: 500 build + 200 probe = 700",
+    "weight": 1
+   },
+   {
+    "text": "Ratio 100000/700 = 142.9",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "The WHERE reduces A to 200 rows before the join (select).\nNested loop: 200 x 500 = 100,000 comparisons (complexity).\nHash join: 500 inserts + 200 probes = 700 operations (joins).\nRatio = 100,000 / 700 = 142.9.",
+  "hints": [
+   "Apply the filter before sizing the join."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t5-f028",
+  "tier": "c",
+  "type": "full",
+  "level": "T5",
+  "tags": [
+   "t5.complexity",
+   "t5.sql-window",
+   "t5.sql-agg"
+  ],
+  "critical": [],
+  "difficulty": 4,
+  "prompt": "A table has $n=10^6$ rows. Query X sorts all rows once (`OVER (ORDER BY v)`). Query Y partitions into 1,000 equal groups and sorts each (`OVER (PARTITION BY g ORDER BY v)`). Model a sort of $m$ rows as $m\\log_2 m$ comparisons and ignore everything else.\n\nHow many times more comparisons does Query X use than Query Y?",
+  "answer": {
+   "kind": "numeric",
+   "value": 2,
+   "tol": 0,
+   "form": "decimal",
+   "rel": 0.02
+  },
+  "check": "math.log2(10**6)/math.log2(10**3)",
+  "rubric": [
+   {
+    "text": "X cost = $n\\log_2 n$ with $\\log_2 10^6\\approx19.93$",
+    "weight": 1
+   },
+   {
+    "text": "Y cost = 1000 sorts of 1000 rows: $10^6\\log_2 1000$",
+    "weight": 2
+   },
+   {
+    "text": "Ratio $\\log_2 10^6/\\log_2 10^3=2$",
+    "weight": 1
+   }
+  ],
+  "pass": 3.0,
+  "solution": "X: $10^6\\log_2 10^6 \\approx 19.9\\times10^6$ (complexity).\nY: 1,000 groups, each $10^3\\log_2 10^3$, total $10^6\\log_2 10^3\\approx 10.0\\times10^6$ (window).\nThe $10^6$ factors cancel.\nRatio $=\\log_2 10^6/\\log_2 10^3 = 6/3 = 2$ (agg of costs).",
+  "hints": [
+   "The partition count changes the log term only."
+  ],
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

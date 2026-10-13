@@ -1,0 +1,3878 @@
+[
+  {
+    "id": "t5-0001",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 1,
+    "prompt": "Which condition must a primary key meet for every row?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Its value is unique and never NULL",
+        "Its value may repeat when the other columns differ",
+        "Its value may be NULL until the row is complete",
+        "Its value must be a whole number"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a repeated key value cannot identify one row",
+        "NULL breaks row identity, so a primary key forbids it",
+        "the type is not the defining rule; text keys are allowed"
+      ]
+    },
+    "solution": "A primary key identifies each row, so it must be unique and not NULL.",
+    "hints": [
+      "Think about what lets one row be referred to from another table."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0002",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 1,
+    "prompt": "A foreign key column in table B refers to table A. For each non-NULL value in it, what must hold?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The same value exists as a key row in table A",
+        "The same value appears only once in table B",
+        "The value must be sorted the same way in both tables",
+        "Table A must hold the value at least twice"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is a uniqueness rule on B's own key, not a foreign key rule",
+        "row order is not part of the relational model",
+        "a foreign key needs one parent row, not two"
+      ]
+    },
+    "solution": "A foreign key must point at an existing parent key.",
+    "hints": [
+      "The parent side holds the key; the child side only refers to it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0003",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 1,
+    "prompt": "Three students each take both of two courses. A junction table holds one row per student and course pair. How many rows does it hold?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "3*2",
+    "solution": "Each of the 3 students gives 2 pairs, so 6 rows.",
+    "hints": [
+      "Count the pairs, one per student and course."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 1,
+    "prompt": "**students**\n\n| sid | name |\n|---|---|\n| 1 | Ana |\n| 2 | Bo |\n| 3 | Chi |\n\n**enrol**\n\n| sid | cid |\n|---|---|\n| 1 | 10 |\n| 1 | 11 |\n| 2 | 10 |\n| 4 | 12 |\n\n```sql\nSELECT COUNT(DISTINCT s.sid)\nFROM students s JOIN enrol e ON e.sid = s.sid;\n```\n\nHow many students have at least one enrolment? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set([s for s in [1, 2, 3] if s in [1, 1, 2, 4]]))",
+    "solution": "Only sids 1 and 2 appear in enrol; sid 4 has no student row.",
+    "hints": [
+      "Sid 4 in enrol has no matching student, so the join drops it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 1,
+    "prompt": "**students**\n\n| sid | name |\n|---|---|\n| 1 | Ana |\n| 2 | Bo |\n| 3 | Chi |\n\n**enrol**\n\n| sid | cid |\n|---|---|\n| 1 | 10 |\n| 1 | 11 |\n| 2 | 10 |\n| 4 | 12 |\n\n```sql\nSELECT COUNT(*)\nFROM enrol e\nWHERE e.sid NOT IN (SELECT sid FROM students);\n```\n\nHow many enrol rows break the foreign key to students? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([x for x in [1, 1, 2, 4] if x not in [1, 2, 3]])",
+    "solution": "Only the row with sid 4 has no parent student.",
+    "hints": [
+      "Count the child rows whose key is missing from the parent."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 2,
+    "prompt": "**visits**\n\n| pid | day | ward |\n|---|---|---|\n| p1 | d1 | W1 |\n| p1 | d1 | W2 |\n| p2 | d1 | W1 |\n| p3 | d2 | W2 |\n| p3 | d2 | W2 |\n\n```sql\nSELECT pid, day, COUNT(*) AS n\nFROM visits\nGROUP BY pid, day\nHAVING COUNT(*) > 1;\n```\n\nWhich rows does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`(p1, d1, 2)`",
+        "`(p2, d1, 1)`",
+        "`(p3, d2, 2)`",
+        "`(p1, d1, 1)`"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Pairs (p1, d1) and (p3, d2) occur twice, so each has count 2.",
+    "hints": [
+      "Group by the key pair, then keep groups with more than one row."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 2,
+    "prompt": "**visits**\n\n| pid | day | ward |\n|---|---|---|\n| p1 | d1 | W1 |\n| p1 | d1 | W2 |\n| p2 | d1 | W1 |\n| p3 | d2 | W2 |\n| p3 | d2 | W2 |\n\n```sql\nSELECT COUNT(*)\nFROM (SELECT DISTINCT pid, day FROM visits) t;\n```\n\nHow many distinct (pid, day) pairs are there? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set([('p1', 'd1'), ('p1', 'd1'), ('p2', 'd1'), ('p3', 'd2'), ('p3', 'd2')]))",
+    "solution": "The distinct pairs are (p1,d1), (p2,d1) and (p3,d2).",
+    "hints": [
+      "Duplicates collapse only when every compared column matches."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 2,
+    "prompt": "**visits**\n\n| pid | day | ward |\n|---|---|---|\n| p1 | d1 | W1 |\n| p1 | d1 | W2 |\n| p2 | d1 | W1 |\n| p3 | d2 | W2 |\n| p3 | d2 | W2 |\n\n```sql\nSELECT COUNT(*)\nFROM (SELECT DISTINCT * FROM visits) t;\n```\n\nHow many rows remain after removing exact duplicates across all columns? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set([('p1', 'd1', 'W1'), ('p1', 'd1', 'W2'), ('p2', 'd1', 'W1'), ('p3', 'd2', 'W2'), ('p3', 'd2', 'W2')]))",
+    "solution": "Only the last two rows are identical on all columns, so one is removed.",
+    "hints": [
+      "A row is a duplicate only when every column matches."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "difficulty": 2,
+    "prompt": "**visits**\n\n| pid | day | ward |\n|---|---|---|\n| p1 | d1 | W1 |\n| p1 | d1 | W2 |\n| p2 | d1 | W1 |\n| p3 | d2 | W2 |\n| p3 | d2 | W2 |\n\n```sql\nSELECT DISTINCT pid, ward\nFROM visits;\n```\n\nWhich table is the result? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| pid | ward |\n|---|---|\n| p1 | W1 |\n| p1 | W2 |\n| p2 | W1 |\n| p3 | W2 |",
+        "| pid | ward |\n|---|---|\n| p1 | W1 |\n| p1 | W1 |\n| p1 | W2 |\n| p2 | W1 |\n| p3 | W2 |",
+        "| pid | ward |\n|---|---|\n| p1 | W1 |\n| p1 | W2 |\n| p2 | W1 |\n| p3 | W1 |",
+        "| pid |\n|---|\n| p1 |\n| p2 |\n| p3 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "left the duplicate rows in place",
+        "misread the ward of p3",
+        "kept only pid, so the ward column is gone"
+      ]
+    },
+    "solution": "The distinct pairs are four: p1 with W1 and W2, p2 with W1, p3 with W2.",
+    "hints": [
+      "DISTINCT applies to the whole selected row, not to one column."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0010",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 1,
+    "prompt": "Which clause removes duplicate rows from a query result?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "DISTINCT in the select list",
+        "GROUP BY on the first column only",
+        "WHERE with a not-equal test",
+        "ORDER BY on the key column"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "grouping by one column returns fewer columns, not unique rows",
+        "WHERE filters rows, it does not compare rows with each other",
+        "ORDER BY sorts the rows but keeps every duplicate"
+      ]
+    },
+    "solution": "DISTINCT compares whole output rows and keeps one of each.",
+    "hints": [
+      "Ask which clause compares output rows with each other."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0011",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 1,
+    "prompt": "Which statement about LIMIT is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It caps the number of rows returned, after ordering",
+        "It caps the number of rows read before ordering",
+        "It removes rows whose value is NULL",
+        "It caps the number of columns"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "LIMIT is applied after ORDER BY, so the order is set first",
+        "removing NULLs is a WHERE filter",
+        "LIMIT counts rows, not columns"
+      ]
+    },
+    "solution": "LIMIT takes the first rows of the already sorted result.",
+    "hints": [
+      "The order of evaluation is filter, sort, then cut."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0012",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 1,
+    "prompt": "A query on a 12-row table runs with LIMIT 5 OFFSET 10. How many rows does it return?",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "min(5, max(0, 12 - 10))",
+    "solution": "Offset 10 skips 10 rows, leaving 2 rows, which is below the limit of 5.",
+    "hints": [
+      "Subtract the offset first, then apply the limit."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 1,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n```sql\nSELECT COUNT(*)\nFROM customers\nWHERE city = 'Lima' OR name > 'Cy';\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([c for c in [('Ana', 'Lima'), ('Bo', 'Oslo'), ('Cy', 'Lima'), ('Dee', 'Rome')] if c[1] == 'Lima' or c[0] > 'Cy'])",
+    "solution": "Ana and Cy are in Lima, and Dee sorts after Cy. Bo matches neither.",
+    "hints": [
+      "Check each row against both sides of the OR."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n```sql\nSELECT DISTINCT city\nFROM customers\nWHERE cid < 4;\n```\n\nWhich values does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`Lima`",
+        "`Oslo`",
+        "`Rome`",
+        "`Ana`"
+      ],
+      "correct": [
+        0,
+        1
+      ]
+    },
+    "solution": "Customers 1 to 3 live in Lima, Oslo and Lima, so the distinct cities are Lima and Oslo.",
+    "hints": [
+      "The cid filter runs first, so Dee's city is excluded."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT SUM(CASE WHEN amount >= 30 THEN 1 ELSE 0 END)\nFROM orders;\n```\n\nWhat value does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([a for a in [40, 25, 60, 15] if a >= 30])",
+    "solution": "The CASE gives 1 for 40 and 60. A NULL amount gives the ELSE branch.",
+    "hints": [
+      "A NULL test inside CASE is unknown, so it takes ELSE."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT amount\nFROM orders\nWHERE amount IS NOT NULL\nORDER BY amount DESC\nLIMIT 1 OFFSET 1;\n```\n\nWhat value does the query return? Give the amount.",
+    "answer": {
+      "kind": "numeric",
+      "value": 40,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "max([a for a in [40, 25, 60, 15] if a < max([40, 25, 60, 15])])",
+    "solution": "Sorted descending the amounts are 60, 40, 25, 15. Offset 1 skips 60.",
+    "hints": [
+      "Offset skips rows after sorting, so the first kept row is the second largest."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n```sql\nSELECT name\nFROM customers\nWHERE city IN ('Lima', 'Rome') AND cid > 1\nORDER BY cid DESC;\n```\n\nWhich result table is returned? Keep the row order.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| name |\n|---|\n| Dee |\n| Cy |",
+        "| name |\n|---|\n| Cy |\n| Dee |",
+        "| name |\n|---|\n| Dee |\n| Bo |\n| Cy |",
+        "| name |\n|---|\n| Dee |\n| Cy |\n| Ana |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "sorted ascending instead of descending",
+        "dropped the city test, so Bo's row stays",
+        "bounded the id with cid >= 1, so Ana stays"
+      ]
+    },
+    "solution": "Lima and Rome rows with cid above 1 are Cy and Dee, sorted by cid descending.",
+    "hints": [
+      "Keep the rows that pass both tests, then sort the survivors."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n```sql\nSELECT COUNT(DISTINCT city)\nFROM customers;\n```\n\nWhat value does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set(['Lima', 'Oslo', 'Lima', 'Rome']))",
+    "solution": "The cities are Lima, Oslo, Lima and Rome, so three distinct values.",
+    "hints": [
+      "COUNT(DISTINCT) skips repeats of the same city."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0019",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 1,
+    "prompt": "What is the value of NULL = NULL in SQL, as far as a WHERE clause is concerned?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Unknown, so a WHERE test on it keeps no row",
+        "True, because both sides are missing",
+        "False, so the row is dropped",
+        "Zero"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "NULL is not a value, so two NULLs are not known to be equal",
+        "False would make NOT (NULL = NULL) true, but it stays unknown",
+        "NULL is not zero"
+      ]
+    },
+    "solution": "Comparisons with NULL give unknown, and WHERE keeps only rows that are true.",
+    "hints": [
+      "Ask what a three-valued logic gives for an unknown input."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0020",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 1,
+    "prompt": "Which function returns the first argument that is not NULL?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "COALESCE",
+        "NULLIF",
+        "LENGTH",
+        "IS NULL"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "NULLIF returns NULL when its two arguments are equal, so it gives no fallback",
+        "LENGTH counts characters",
+        "IS NULL is a test that gives true or false, not a value"
+      ]
+    },
+    "solution": "COALESCE scans its arguments and returns the first non-NULL one.",
+    "hints": [
+      "The function needs a fallback value, not a test."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0021",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 1,
+    "prompt": "A column of 10 rows has 3 NULL values. What does COUNT(column) return?",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "10 - 3",
+    "solution": "COUNT of a column skips NULL, so 10 minus 3 gives 7.",
+    "hints": [
+      "COUNT(column) counts only non-NULL values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 1,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(amount)\nFROM orders;\n```\n\nWhat value does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([a for a in [40, 25, None, 60, 15] if a is not None])",
+    "solution": "Five rows, one NULL amount, so four non-NULL values are counted.",
+    "hints": [
+      "COUNT(column) skips NULL, COUNT(*) does not."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "probe": true,
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM orders\nWHERE NOT (amount > 20);\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for a in [40, 25, None, 60, 15] if a is not None and not (a > 20))",
+    "solution": "Only 15 fails the test. The NULL amount gives unknown, and NOT unknown is unknown, so it is dropped.",
+    "hints": [
+      "A NULL row fails both the test and its negation."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT oid\nFROM orders\nWHERE amount IS NULL OR amount < 20;\n```\n\nWhich oids does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`oid 10`",
+        "`oid 12`",
+        "`oid 14`",
+        "`oid 11`"
+      ],
+      "correct": [
+        1,
+        2
+      ]
+    },
+    "solution": "Order 12 has a NULL amount and order 14 has 15, which is below 20.",
+    "hints": [
+      "IS NULL is the only test that catches a NULL amount."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT SUM(amount)\nFROM orders;\n```\n\nWhat value does the query return? Give the total.",
+    "answer": {
+      "kind": "numeric",
+      "value": 140,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum([a for a in [40, 25, None, 60, 15] if a is not None])",
+    "solution": "SUM skips the NULL amount and adds 40, 25, 60 and 15.",
+    "hints": [
+      "Aggregates ignore NULL inputs."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 3,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM orders o LEFT JOIN customers c ON c.cid = o.cid\nWHERE c.name IS NULL;\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for c in [1, 1, 2, 3, None] if c not in [1, 2, 3, 4])",
+    "solution": "Order 14 has a NULL cid, so no customer matches it. The other four orders match.",
+    "hints": [
+      "A NULL join key never equals anything, so the row finds no partner."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT oid\nFROM orders\nWHERE cid <> 1;\n```\n\nWhich result table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| oid |\n|---|\n| 12 |\n| 13 |",
+        "| oid |\n|---|\n| 12 |\n| 13 |\n| 14 |",
+        "| oid |\n|---|\n| 12 |",
+        "| oid |\n|---|\n| 10 |\n| 11 |\n| 12 |\n| 13 |\n| 14 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "treated NULL <> 1 as true, but it is unknown and drops out",
+        "dropped the cid 3 row by mistake",
+        "ignored the WHERE clause"
+      ]
+    },
+    "solution": "Only cid 2 and cid 3 are known to differ from 1. Order 14 has a NULL cid.",
+    "hints": [
+      "A NULL cid fails <> the same way it fails =."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0028",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 1,
+    "prompt": "Which join keeps every row of the left table, even when no match exists?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "LEFT (OUTER) JOIN",
+        "INNER JOIN",
+        "CROSS JOIN",
+        "RIGHT JOIN"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "an inner join drops left rows that have no match",
+        "a cross join pairs every row and keeps no unmatched rows",
+        "a right join keeps the unmatched right rows, not the left ones"
+      ]
+    },
+    "solution": "A LEFT join pads unmatched left rows with NULL on the right.",
+    "hints": [
+      "Think about which side the join keeps when nothing matches."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0029",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 1,
+    "prompt": "Two left rows match two right rows on the same key. Which statement about the inner join is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Each matching pair becomes one output row, so the left row appears twice",
+        "The left row appears only once",
+        "The duplicate matches are dropped",
+        "The result has the row count of the smaller table"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "joins keep every matching pair, not one row per left row",
+        "inner joins keep all matches",
+        "row count follows the matching pairs, not the smaller side"
+      ]
+    },
+    "solution": "Each left row pairs with each matching right row.",
+    "hints": [
+      "Count the pairs that share the key."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0030",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 1,
+    "prompt": "Table L has 3 rows and table R has 4 rows, and every L key matches every R key. How many rows does the inner join return?",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "3 * 4",
+    "solution": "Every pair matches, so 3 times 4 gives 12 output rows.",
+    "hints": [
+      "With all keys equal, every pair survives."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 1,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM customers c JOIN orders o ON c.cid = o.cid;\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([(c, o) for c in [1, 2, 3, 4] for o in [1, 1, 2, 3, None] if c == o])",
+    "solution": "Ana matches two orders, Bo and Cy one each, Dee none. The NULL cid matches nothing.",
+    "hints": [
+      "Count the matching pairs, not the customers."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM customers c LEFT JOIN orders o ON c.cid = o.cid;\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([(c, o) for c in [1, 2, 3, 4] for o in [1, 1, 2, 3, None] if c == o]) + len([c for c in [1, 2, 3, 4] if c not in [1, 1, 2, 3, None]])",
+    "solution": "The four matched pairs plus one row for Dee, who has no order.",
+    "hints": [
+      "A LEFT join keeps each unmatched left row once."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "probe": true,
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM customers c FULL JOIN orders o ON c.cid = o.cid;\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([(c, o) for c in [1, 2, 3, 4] for o in [1, 1, 2, 3, None] if c == o]) + len([c for c in [1, 2, 3, 4] if c not in [1, 1, 2, 3, None]]) + len([o for o in [1, 1, 2, 3, None] if o not in [1, 2, 3, 4]])",
+    "solution": "Four matched pairs, Dee with no order, and order 14 with no customer.",
+    "hints": [
+      "A FULL join keeps unmatched rows from both sides."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 3,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM customers c JOIN orders o ON o.amount > 30;\n```\n\nHow many rows does the query return? The join has no equality key.",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for c in [1, 2, 3, 4] for a in [40, 25, None, 60, 15] if a is not None and a > 30)",
+    "solution": "Only orders with amount 40 and 60 pass, and each pairs with all four customers.",
+    "hints": [
+      "A join condition that does not use the customer key still pairs every customer."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT c.name, o.oid\nFROM customers c LEFT JOIN orders o ON c.cid = o.cid\nWHERE o.amount IS NULL OR o.oid IS NULL;\n```\n\nWhich rows does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`(Ana, 10)`",
+        "`(Bo, 12)`",
+        "`(Dee, NULL)`",
+        "`(Cy, 13)`"
+      ],
+      "correct": [
+        1,
+        2
+      ]
+    },
+    "solution": "Bo's order has a NULL amount, and Dee has no order at all.",
+    "hints": [
+      "The WHERE test runs after the LEFT join pads the unmatched row."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT o.oid, c.name\nFROM orders o JOIN customers c ON c.cid = o.cid\nWHERE o.oid > 10;\n```\n\nWhich result table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| oid | name |\n|---|---|\n| 11 | Ana |\n| 12 | Bo |\n| 13 | Cy |",
+        "| oid | name |\n|---|---|\n| 10 | Ana |\n| 11 | Ana |\n| 12 | Bo |\n| 13 | Cy |",
+        "| oid | name |\n|---|---|\n| 11 | Ana |\n| 12 | Bo |",
+        "| oid | name |\n|---|---|\n| 11 | Ana |\n| 12 | Bo |\n| 13 | Cy |\n| 14 | NULL |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "used oid >= 10, which keeps order 10",
+        "dropped the cid 3 match",
+        "switched to a LEFT join from orders, which keeps order 14"
+      ]
+    },
+    "solution": "Orders 11, 12 and 13 pass the filter and each has a customer.",
+    "hints": [
+      "Filter the orders, then join. Order 14 passes only if the join keeps it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0037",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 1,
+    "prompt": "Which condition filters whole groups after GROUP BY has formed them?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "HAVING",
+        "WHERE",
+        "ON",
+        "ORDER BY"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "WHERE filters rows before grouping",
+        "ON belongs to a join, before grouping",
+        "ORDER BY sorts the result and does not drop groups"
+      ]
+    },
+    "solution": "HAVING tests aggregate values per group.",
+    "hints": [
+      "Ask which clause sees aggregate values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0038",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 1,
+    "prompt": "A query groups by city and counts rows. Which select-list column may appear without an aggregate?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The grouping column city",
+        "Any column of the table",
+        "The row id",
+        "Any text column"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a non-grouped column has no single value per group",
+        "a row id differs within a group",
+        "text is not special; the rule concerns grouping"
+      ]
+    },
+    "solution": "Every select column must be grouped or aggregated.",
+    "hints": [
+      "Each output row is one group, so each column needs one value per group."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0039",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 1,
+    "prompt": "A table has 20 rows, and each group contains 4 rows. How many rows does GROUP BY on the group column return?",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "20 // 4",
+    "solution": "Twenty rows in groups of four give five groups.",
+    "hints": [
+      "Divide the rows by the size of each group."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 1,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT SUM(amount) / COUNT(*)\nFROM orders;\n```\n\nWhat value does the query return? Integer division applies, as in PostgreSQL.",
+    "answer": {
+      "kind": "numeric",
+      "value": 28,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum([40, 25, 60, 15]) // 5",
+    "solution": "SUM is 140 over the non-NULL values, and COUNT(*) counts all five rows, so 140 divided by 5.",
+    "hints": [
+      "COUNT(*) includes the NULL row in the denominator."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT AVG(amount)\nFROM orders;\n```\n\nWhat value does the query return? Give the average.",
+    "answer": {
+      "kind": "numeric",
+      "value": 35,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum([40, 25, 60, 15]) / len([40, 25, 60, 15])",
+    "solution": "The NULL is excluded from both the sum and the count, leaving 140 over 4.",
+    "hints": [
+      "AVG divides by the number of non-NULL values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT cid, SUM(amount) AS total\nFROM orders\nGROUP BY cid\nHAVING SUM(amount) > 30;\n```\n\nWhich rows does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`(1, 65)`",
+        "`(2, NULL)`",
+        "`(3, 60)`",
+        "`(NULL, 15)`"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Customer 1 sums to 65 and customer 3 to 60. Customer 2 sums to NULL, which fails HAVING.",
+    "hints": [
+      "A group whose sum is NULL does not pass a > test."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0043",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM (SELECT cid FROM orders GROUP BY cid) t;\n```\n\nHow many rows does the query return? NULL is a group of its own.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set([1, 1, 2, 3, None]))",
+    "solution": "The distinct keys are 1, 2, 3 and NULL.",
+    "hints": [
+      "GROUP BY treats all NULL keys as one group."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0044",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 3,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM (SELECT cid\n      FROM orders\n      GROUP BY cid\n      HAVING COUNT(*) = 1) t;\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for g in [1, 2, 3, None] if [1, 1, 2, 3, None].count(g) == 1)",
+    "solution": "Customer 1 has two orders. Customers 2 and 3 and the NULL group have one each.",
+    "hints": [
+      "HAVING COUNT(*) = 1 counts rows per key, NULL included."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0045",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT c.city, COUNT(*) AS n\nFROM customers c JOIN orders o ON c.cid = o.cid\nGROUP BY c.city;\n```\n\nWhich result table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| city | n |\n|---|---|\n| Lima | 3 |\n| Oslo | 1 |",
+        "| city | n |\n|---|---|\n| Lima | 2 |\n| Oslo | 1 |",
+        "| city | n |\n|---|---|\n| Lima | 3 |\n| Oslo | 1 |\n| Rome | 1 |",
+        "| city | n |\n|---|---|\n| Lima | 3 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "counted customers instead of orders",
+        "switched to a LEFT join, so Dee's row adds Rome",
+        "dropped the Oslo group"
+      ]
+    },
+    "solution": "Ana has two orders and Cy one, so Lima has 3 rows. Bo gives Oslo 1.",
+    "hints": [
+      "Count the joined rows per city, not the customers."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0046",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 1,
+    "prompt": "Which subquery form tests whether any matching row exists, returning true or false?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "EXISTS",
+        "scalar subquery",
+        "CTE",
+        "UNION"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a scalar subquery returns one value, not a test",
+        "a CTE names a result, it does not test rows",
+        "UNION combines result sets"
+      ]
+    },
+    "solution": "EXISTS is true when the subquery returns at least one row.",
+    "hints": [
+      "Think about the form that asks is there at least one match."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0047",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 1,
+    "prompt": "What does an anti-join return?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Rows of one table with no match in the other",
+        "Rows that match in both tables",
+        "All pairs of rows",
+        "Only the first match for each row"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is an inner or semi join",
+        "that is a cross join",
+        "that is a limited join, not an anti-join"
+      ]
+    },
+    "solution": "An anti-join keeps the unmatched rows, often via NOT EXISTS.",
+    "hints": [
+      "The anti-join is the complement of a semi join."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0048",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 1,
+    "prompt": "A CTE with 4 rows is joined to a table of 5 rows, where each CTE row matches exactly 2 table rows. How many rows does the join return?",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "4 * 2",
+    "solution": "Each of the 4 CTE rows gives 2 output rows.",
+    "hints": [
+      "Multiply each row's match count by the number of CTE rows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0049",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 1,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM customers\nWHERE cid NOT IN (SELECT cid FROM orders);\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 0,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for c in [1, 2, 3, 4] if c not in [1, 1, 2, 3] and not (None in [1, 1, 2, 3, None]))",
+    "solution": "The subquery contains a NULL cid. Each NOT IN test is then unknown or false, so no row passes.",
+    "hints": [
+      "NOT IN with a NULL inside the list never returns true."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0050",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM customers c\nWHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.cid = c.cid);\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for c in [1, 2, 3, 4] if c not in [1, 1, 2, 3, None])",
+    "solution": "Only Dee has no order row with her cid.",
+    "hints": [
+      "NOT EXISTS is safe with NULL keys in the subquery."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0051",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM orders\nWHERE amount > (SELECT AVG(amount) FROM orders);\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for a in [40, 25, None, 60, 15] if a is not None and a > sum([40, 25, 60, 15]) / 4)",
+    "solution": "The average is 35 over the four non-NULL amounts. Only 40 and 60 exceed it.",
+    "hints": [
+      "The scalar subquery returns one value, which is compared with every row."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0052",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 2,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nWITH big AS (\n  SELECT oid, amount FROM orders WHERE amount >= 25\n)\nSELECT oid FROM big WHERE oid > 10;\n```\n\nWhich oids does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`oid 10`",
+        "`oid 11`",
+        "`oid 13`",
+        "`oid 14`"
+      ],
+      "correct": [
+        1,
+        2
+      ]
+    },
+    "solution": "The CTE keeps orders 10, 11 and 13. Of those, oid above 10 leaves 11 and 13.",
+    "hints": [
+      "Apply the CTE first, then the outer filter."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0053",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 3,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT COUNT(*)\nFROM orders o\nWHERE o.amount = (SELECT MAX(o2.amount)\n                   FROM orders o2\n                   WHERE o2.cid = o.cid);\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for (c, a) in [(1, 40), (1, 25), (2, None), (3, 60), (None, 15)] if a is not None and c is not None and a == max([x for (d, x) in [(1, 40), (1, 25), (2, None), (3, 60), (None, 15)] if d == c and x is not None]))",
+    "solution": "Order 10 is the max for customer 1 and order 13 for customer 3. Customer 2 has a NULL max, and the NULL cid matches no row.",
+    "hints": [
+      "A correlated subquery reruns for each outer row, using that row's key."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0054",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "difficulty": 2,
+    "prompt": "**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n```sql\nSELECT c.name\nFROM customers c\nWHERE EXISTS (SELECT 1 FROM orders o\n                WHERE o.cid = c.cid AND o.amount > 30);\n```\n\nWhich result table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| name |\n|---|\n| Ana |\n| Cy |",
+        "| name |\n|---|\n| Ana |\n| Bo |\n| Cy |",
+        "| name |\n|---|\n| Cy |",
+        "| name |\n|---|\n| Bo |\n| Dee |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "dropped the amount test, so Bo's NULL-amount order counts",
+        "compared with 40 instead of 30, which drops Ana",
+        "used NOT EXISTS, which gives the complement"
+      ]
+    },
+    "solution": "Ana has an order of 40 and Cy one of 60, both above 30.",
+    "hints": [
+      "EXISTS needs one row that passes every condition in its WHERE."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0055",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 1,
+    "prompt": "What does a window function do that GROUP BY does not?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Keeps every input row and adds a value computed over related rows",
+        "Collapses each group to one row",
+        "Removes duplicate rows",
+        "Filters rows with a WHERE on the window value"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is what GROUP BY does",
+        "that is what DISTINCT does",
+        "window values cannot appear in WHERE, so the filter goes in an outer query"
+      ]
+    },
+    "solution": "A window function adds a computed column and keeps each row.",
+    "hints": [
+      "Compare the row count before and after the function."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0056",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 1,
+    "prompt": "Which function gives tied rows the same rank and then skips numbers after the tie?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "RANK",
+        "ROW_NUMBER",
+        "DENSE_RANK",
+        "LAG"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ROW_NUMBER gives every row a distinct number, with ties broken arbitrarily",
+        "DENSE_RANK does not skip numbers after a tie",
+        "LAG returns a previous row's value"
+      ]
+    },
+    "solution": "RANK leaves a gap after ties; DENSE_RANK does not.",
+    "hints": [
+      "Ask whether the numbering has gaps after a tie."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0057",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 1,
+    "prompt": "Three rows tie for first place, and RANK gives them rank 1. What rank does the next distinct row get?",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "1 + 3",
+    "solution": "The three tied rows take positions 1 to 3, so the next row is 4.",
+    "hints": [
+      "Count the positions the tied rows occupy."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0058",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 1,
+    "prompt": "**sales**\n\n| store | day | amt |\n|---|---|---|\n| S1 | 1 | 10 |\n| S1 | 2 | 20 |\n| S1 | 3 | 20 |\n| S2 | 1 | 5 |\n| S2 | 2 | 8 |\n\n```sql\nSELECT SUM(amt) OVER (PARTITION BY store ORDER BY day) AS run\nFROM sales\nWHERE store = 'S1'\nORDER BY day DESC\nLIMIT 1;\n```\n\nWhat value does the query return? Give the running sum.",
+    "answer": {
+      "kind": "numeric",
+      "value": 50,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum([10, 20, 20])",
+    "solution": "The running sum for S1 grows 10, 30, 50 over days 1 to 3.",
+    "hints": [
+      "The running sum includes all earlier rows in the partition."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0059",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "probe": true,
+    "difficulty": 2,
+    "prompt": "**sales**\n\n| store | day | amt |\n|---|---|---|\n| S1 | 1 | 10 |\n| S1 | 2 | 20 |\n| S1 | 3 | 20 |\n| S2 | 1 | 5 |\n| S2 | 2 | 8 |\n\n```sql\nSELECT r\nFROM (SELECT store, day,\n             RANK() OVER (ORDER BY amt DESC) AS r\n      FROM sales) t\nWHERE store = 'S1' AND day = 1;\n```\n\nWhat value does the query return? Give the rank.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "1 + sum(1 for a in [10, 20, 20, 5, 8] if a > 10)",
+    "solution": "Two amounts exceed 10, so the rank is 3. Ties at 20 do not change that.",
+    "hints": [
+      "RANK adds one for each strictly larger value."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0060",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 2,
+    "prompt": "**sales**\n\n| store | day | amt |\n|---|---|---|\n| S1 | 1 | 10 |\n| S1 | 2 | 20 |\n| S1 | 3 | 20 |\n| S2 | 1 | 5 |\n| S2 | 2 | 8 |\n\n```sql\nSELECT SUM(diff) AS total\nFROM (\n  SELECT amt - LAG(amt) OVER (PARTITION BY store ORDER BY day) AS diff\n  FROM sales\n) t;\n```\n\nWhat value does the query return? Give the total.",
+    "answer": {
+      "kind": "numeric",
+      "value": 13,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "(20 - 10) + (20 - 20) + (8 - 5)",
+    "solution": "The first row of each store has no previous row, so its difference is NULL and SUM skips it.",
+    "hints": [
+      "LAG is NULL on the first row of each partition."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0061",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 2,
+    "prompt": "**sales**\n\n| store | day | amt |\n|---|---|---|\n| S1 | 1 | 10 |\n| S1 | 2 | 20 |\n| S1 | 3 | 20 |\n| S2 | 1 | 5 |\n| S2 | 2 | 8 |\n\n```sql\nSELECT store, day\nFROM (\n  SELECT store, day,\n         ROW_NUMBER() OVER (PARTITION BY store\n                            ORDER BY amt DESC, day) AS rn\n  FROM sales\n) t\nWHERE rn = 1;\n```\n\nWhich rows does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`(S1, day 2)`",
+        "`(S1, day 3)`",
+        "`(S2, day 2)`",
+        "`(S2, day 1)`"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "In S1 the two 20s tie, and the secondary key day breaks it toward day 2. In S2 the top amount is day 2.",
+    "hints": [
+      "Each ORDER BY key breaks ties in turn."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0062",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 3,
+    "prompt": "**sales**\n\n| store | day | amt |\n|---|---|---|\n| S1 | 1 | 10 |\n| S1 | 2 | 20 |\n| S1 | 3 | 20 |\n| S2 | 1 | 5 |\n| S2 | 2 | 8 |\n\n```sql\nSELECT s\nFROM (SELECT store, day,\n             SUM(amt) OVER (PARTITION BY store ORDER BY amt) AS s\n      FROM sales) t\nWHERE store = 'S1' AND day = 2;\n```\n\nWhat value does the query return for the row (S1, 2)? The default frame includes peers.",
+    "answer": {
+      "kind": "numeric",
+      "value": 50,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(a for a in [10, 20, 20] if a <= 20)",
+    "solution": "With ORDER BY, the default frame runs up to the current row and includes the other row tied at 20, so 10 + 20 + 20.",
+    "hints": [
+      "A tie on the order key puts the peer rows inside the frame."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0063",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "difficulty": 2,
+    "prompt": "**sales**\n\n| store | day | amt |\n|---|---|---|\n| S1 | 1 | 10 |\n| S1 | 2 | 20 |\n| S1 | 3 | 20 |\n| S2 | 1 | 5 |\n| S2 | 2 | 8 |\n\n```sql\nSELECT store, day,\n       ROW_NUMBER() OVER (PARTITION BY store ORDER BY day DESC) AS rn\nFROM sales;\n```\n\nWhich result table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| store | day | rn |\n|---|---|---|\n| S1 | 1 | 3 |\n| S1 | 2 | 2 |\n| S1 | 3 | 1 |\n| S2 | 1 | 2 |\n| S2 | 2 | 1 |",
+        "| store | day | rn |\n|---|---|---|\n| S1 | 1 | 1 |\n| S1 | 2 | 2 |\n| S1 | 3 | 3 |\n| S2 | 1 | 1 |\n| S2 | 2 | 2 |",
+        "| store | day | rn |\n|---|---|---|\n| S1 | 1 | 2 |\n| S1 | 2 | 1 |\n| S1 | 3 | 0 |\n| S2 | 1 | 1 |\n| S2 | 2 | 0 |",
+        "| store | day | rn |\n|---|---|---|\n| S1 | 1 | 3 |\n| S1 | 2 | 2 |\n| S1 | 3 | 1 |\n| S2 | 1 | 5 |\n| S2 | 2 | 4 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "ordered by day ascending",
+        "numbered from zero",
+        "did not restart the numbering for S2"
+      ]
+    },
+    "solution": "Within each store, the latest day gets 1 and the numbers count down.",
+    "hints": [
+      "DESC reverses the order inside each partition only."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0064",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 1,
+    "prompt": "Which accessor selects a row or column by integer position rather than by label?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "iloc",
+        "loc",
+        "at",
+        "head"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "loc selects by label, which can differ from position",
+        "at reads one label-based value",
+        "head returns the first rows, not a chosen position"
+      ]
+    },
+    "solution": "iloc counts positions from zero and excludes the end of a slice.",
+    "hints": [
+      "Ask which accessor ignores the index labels."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0065",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 1,
+    "prompt": "What does a boolean mask such as df[df['x'] > 2] return?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "The rows where the test is True, with their original index labels",
+        "The values of x only, re-numbered from zero",
+        "The rows where the test is False",
+        "A copy of x with every value above 2"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "the index labels are kept, not reset",
+        "a mask keeps True rows; the inverse needs ~",
+        "the mask selects rows, it does not change values"
+      ]
+    },
+    "solution": "A boolean mask keeps the rows where it is True.",
+    "hints": [
+      "The index labels travel with the selected rows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0066",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 1,
+    "prompt": "A DataFrame has index labels [5, 6, 7]. df.iloc[1] selects the row with which label?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "[5, 6, 7][1]",
+    "solution": "Position 1 is the second row, and its label is 6.",
+    "hints": [
+      "Position and label are different things here."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0067",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 1,
+    "prompt": "| index | v |\n|---|---|\n| x | 4 |\n| y | 7 |\n| z | 1 |\n\n```python\nd.loc['x':'y', 'v'].sum()\n```\n\nWhat value does the expression return? Give the sum.",
+    "answer": {
+      "kind": "numeric",
+      "value": 11,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "4 + 7",
+    "solution": "loc slices by label and includes both ends, so rows x and y are summed.",
+    "hints": [
+      "A label slice includes the end label, unlike a position slice."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0068",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "probe": true,
+    "difficulty": 2,
+    "prompt": "| index | v |\n|---|---|\n| 2 | 5 |\n| 0 | 6 |\n| 1 | 7 |\n\n```python\nd.loc[1, 'v'] - d.iloc[1, 0]\n```\n\nWhat value does the expression return? Give the difference.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "7 - 6",
+    "solution": "loc uses the label 1, which is the last row, so 7. iloc uses position 1, which is label 0, so 6.",
+    "hints": [
+      "The index here is not 0 to n-1, so label and position differ."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0069",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | v |\n|---|---|\n| a | 3 |\n| b | 8 |\n| c | 5 |\n| d | 8 |\n\n```python\nlist(d[d['v'] == 8].index)\n```\n\nWhich index labels does the expression return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`a`",
+        "`b`",
+        "`c`",
+        "`d`"
+      ],
+      "correct": [
+        1,
+        3
+      ]
+    },
+    "solution": "Rows b and d hold the value 8, and the mask keeps their labels.",
+    "hints": [
+      "The mask keeps the labels of the True rows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0070",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 2,
+    "prompt": "**s1**\n\n| index | value |\n|---|---|\n| a | 1 |\n| b | 2 |\n| c | 3 |\n\n**s2**\n\n| index | value |\n|---|---|\n| c | 10 |\n| a | 20 |\n\n```python\n(s1 + s2).sum()\n```\n\nWhat value does the expression return? Give the sum.",
+    "answer": {
+      "kind": "numeric",
+      "value": 34,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "21 + 13",
+    "solution": "Arithmetic aligns by label. a gives 1 + 20, c gives 3 + 10, and b has no partner, so it is NaN and skipped.",
+    "hints": [
+      "Series arithmetic aligns by label, not by position."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0071",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | v |\n|---|---|\n| a | 3 |\n| b | 8 |\n| c | 5 |\n| d | 8 |\n\n```python\nd.loc[d.index > 'a', 'v'].sum()\n```\n\nWhat value does the expression return? Give the sum.",
+    "answer": {
+      "kind": "numeric",
+      "value": 21,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "8 + 5 + 8",
+    "solution": "The label mask keeps b, c and d, since they sort after a.",
+    "hints": [
+      "A comparison on the index is a label mask."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0072",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | w |\n|---|---|\n| a | x |\n| b | y |\n| c | z |\n\n```python\nd.loc[['c', 'a'], 'w']\n```\n\nWhich result is returned? Keep the row order.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| index | w |\n|---|---|\n| c | z |\n| a | x |",
+        "| index | w |\n|---|---|\n| a | x |\n| c | z |",
+        "| index | w |\n|---|---|\n| a | x |\n| b | y |",
+        "| index | w |\n|---|---|\n| c | z |\n| a | x |\n| b | y |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "returned the rows in the data order, not the requested order",
+        "took b in place of c",
+        "added b, which the list did not name"
+      ]
+    },
+    "solution": "A list of labels returns those rows in the order given.",
+    "hints": [
+      "A label list sets the output order."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0073",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 1,
+    "prompt": "What does df['a'] * df['b'] do when both are columns of the same frame?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Multiplies element by element, aligned by index",
+        "Computes a matrix product",
+        "Stacks the two columns into one",
+        "Raises an error unless both are integer columns"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a matrix product needs @ or dot, not *",
+        "concatenation joins frames, it does not multiply",
+        "element-wise multiplication works for any numeric dtype with a shared index"
+      ]
+    },
+    "solution": "The star operator multiplies matching elements.",
+    "hints": [
+      "Ask whether the operation is element-wise or a matrix product."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0074",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 1,
+    "prompt": "A NaN is added to the number 2 in pandas. What is the result?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "NaN",
+        "2, because NaN counts as zero",
+        "An error is raised",
+        "0"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "NaN is not zero, so the arithmetic is missing too",
+        "pandas returns NaN instead of raising",
+        "NaN is not zero"
+      ]
+    },
+    "solution": "NaN propagates through arithmetic.",
+    "hints": [
+      "Missing values spread to any result that uses them."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0075",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 1,
+    "prompt": "A 2 by 3 array is added to a row vector of length 3 by broadcasting. How many elements does the result have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "2 * 3",
+    "solution": "The result has the shape of the 2 by 3 array, so six elements.",
+    "hints": [
+      "Broadcasting keeps the larger shape."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0076",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 1,
+    "prompt": "| index | a | b |\n|---|---|---|\n| 0 | 1 | 10 |\n| 1 | 2 | 20 |\n| 2 | NaN | 30 |\n\n```python\n(d['a'] + d['b']).count()\n```\n\nWhat value does the expression return? Give the count of non-missing values.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for x in [11, 22, None] if x is not None)",
+    "solution": "The sums are 11, 22 and NaN. The count skips the missing one.",
+    "hints": [
+      "count() skips NaN, while len() does not."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0077",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | x | y |\n|---|---|---|\n| 0 | 1 | 4 |\n| 1 | 2 | 5 |\n| 2 | 3 | 6 |\n\n```python\n(d * pd.Series({'x': 1, 'y': 10})).sum().sum()\n```\n\nWhat value does the expression return? Give the total.",
+    "answer": {
+      "kind": "numeric",
+      "value": 156,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum([1, 2, 3]) * 1 + sum([4, 5, 6]) * 10",
+    "solution": "The Series broadcasts across the columns by label: x is scaled by 1, y by 10.",
+    "hints": [
+      "A Series aligns with the columns, not the rows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0078",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | a | b |\n|---|---|---|\n| 0 | 1 | 10 |\n| 1 | 2 | 20 |\n| 2 | 3 | 30 |\n| 3 | NaN | 40 |\n\n```python\nlist(d.index[~((d['a'] > 1) & (d['b'] < 25))])\n```\n\nWhich rows does the expression return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "row 0 (a = 1, b = 10)",
+        "row 1 (a = 2, b = 20)",
+        "row 2 (a = 3, b = 30)",
+        "row 3 (a = NaN, b = 40)"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ]
+    },
+    "solution": "Row 1 passes both tests, so the negated mask drops it. A NaN comparison is False, so row 3 is kept.",
+    "hints": [
+      "Negating an AND keeps every row that fails one part."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0079",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | a |\n|---|---|\n| 0 | 1 |\n| 1 | 2 |\n| 2 | NaN |\n| 3 | 4 |\n\n```python\nd['a'].mean()\n```\n\nWhat value does the expression return? Give the mean, to 4 decimals.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2.3333,
+      "form": "decimal",
+      "tol": 0,
+      "rel": 0.02
+    },
+    "check": "(1 + 2 + 4) / 3",
+    "solution": "The mean skips the NaN and divides 7 by 3.",
+    "hints": [
+      "Filling with zero first would give 1.75 instead."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0080",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 3,
+    "prompt": "| index | a |\n|---|---|\n| 0 | 1 |\n| 1 | 2 |\n| 2 | NaN |\n| 3 | 4 |\n\n```python\nd['a'].cumsum().iloc[-1]\n```\n\nWhat value does the expression return? Give the last value.",
+    "answer": {
+      "kind": "numeric",
+      "value": 7,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "1 + 2 + 4",
+    "solution": "The cumulative sum skips the NaN and carries on, so the last value is 1 + 2 + 4.",
+    "hints": [
+      "cumsum leaves NaN in place and keeps adding the other values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0081",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "difficulty": 3,
+    "prompt": "**a6**\n\n| index | value |\n|---|---|\n| 0 | 1 |\n| 1 | 2 |\n| 2 | 3 |\n\n**b6**\n\n| index | value |\n|---|---|\n| 1 | 10 |\n| 2 | 20 |\n| 3 | 30 |\n\n```python\na6 + b6\n```\n\nWhich result is returned? Missing labels appear as NaN.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| index | value |\n|---|---|\n| 0 | NaN |\n| 1 | 12 |\n| 2 | 23 |\n| 3 | NaN |",
+        "| index | value |\n|---|---|\n| 0 | 11 |\n| 1 | 22 |\n| 2 | 33 |",
+        "| index | value |\n|---|---|\n| 1 | 12 |\n| 2 | 23 |",
+        "| index | value |\n|---|---|\n| 0 | 1 |\n| 1 | 12 |\n| 2 | 23 |\n| 3 | 30 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "added by position, so label 0 pairs with 10",
+        "kept only the shared labels, as an inner join does",
+        "filled the missing side with 0 before adding"
+      ]
+    },
+    "solution": "Labels 1 and 2 pair up. Labels 0 and 3 exist on one side only, so they are NaN.",
+    "hints": [
+      "Align on labels first, then add."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0082",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 1,
+    "prompt": "Which merge(how=) value keeps unmatched rows from both frames?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "outer",
+        "inner",
+        "left",
+        "cross"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "inner keeps only matching keys",
+        "left keeps only the left frame's unmatched rows",
+        "cross pairs every row and does not match keys"
+      ]
+    },
+    "solution": "An outer merge keeps all keys from both sides.",
+    "hints": [
+      "Ask which setting keeps unmatched rows on both sides."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0083",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 1,
+    "prompt": "How does groupby(...).transform('sum') differ from groupby(...).sum()?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "transform returns a value for every original row, aligned to the input",
+        "transform returns one row per group",
+        "transform drops the group key",
+        "transform only works on strings"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that is what sum() returns",
+        "transform keeps the frame shape, so the key is still there",
+        "transform works on numeric and other dtypes"
+      ]
+    },
+    "solution": "transform broadcasts the group result back to each row.",
+    "hints": [
+      "Compare the number of rows in each result."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0084",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 1,
+    "prompt": "A frame has 10 rows. Applying groupby(...)[col].transform('count') returns how many rows?",
+    "answer": {
+      "kind": "numeric",
+      "value": 10,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "10",
+    "solution": "transform keeps one value for each original row.",
+    "hints": [
+      "Transform never changes the row count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0085",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 1,
+    "prompt": "**L**\n\n| id | x |\n|---|---|\n| 1 | a |\n| 2 | b |\n| 3 | c |\n\n**R**\n\n| id | y |\n|---|---|\n| 2 | p |\n| 3 | q |\n| 3 | r |\n\n```python\nlen(L.merge(R, on='id', how='inner'))\n```\n\nWhat value does the expression return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for l in [1, 2, 3] for r in [2, 3, 3] if l == r)",
+    "solution": "Id 2 matches one row and id 3 matches two, so three rows.",
+    "hints": [
+      "Each matching pair is one output row."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0086",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 2,
+    "prompt": "**L**\n\n| id | x |\n|---|---|\n| 1 | a |\n| 2 | b |\n| 3 | c |\n\n**R**\n\n| id | y |\n|---|---|\n| 2 | p |\n| 3 | q |\n| 3 | r |\n\n```python\nlen(L.merge(R, on='id', how='left'))\n```\n\nWhat value does the expression return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for l in [1, 2, 3] for r in [2, 3, 3] if l == r) + sum(1 for l in [1, 2, 3] if l not in [2, 3, 3])",
+    "solution": "Three matched pairs, plus id 1 which keeps one row with NaN for y.",
+    "hints": [
+      "A left merge keeps every left row at least once."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0087",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 2,
+    "prompt": "**L**\n\n| id | x |\n|---|---|\n| 1 | a |\n| 2 | b |\n| 3 | c |\n\n**R2**\n\n| id | y |\n|---|---|\n| 2 | p |\n| 3 | q |\n| 3 | r |\n| 5 | s |\n\n```python\nM[M['y'].isna() | M['x'].isna()]\n```\n\nwhere M = L.merge(R2, on='id', how='outer'). Which rows of the result contain a missing value? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`(1, a, NaN)`",
+        "`(2, b, p)`",
+        "`(5, NaN, s)`",
+        "`(3, c, r)`"
+      ],
+      "correct": [
+        0,
+        2
+      ]
+    },
+    "solution": "Id 1 has no y and id 5 has no x. The other rows are complete.",
+    "hints": [
+      "An outer merge fills the missing side with NaN."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0088",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 2,
+    "prompt": "| g | v |\n|---|---|\n| a | 1 |\n| a | 2 |\n| b | 3 |\n| b | 4 |\n| b | 5 |\n\n```python\ndf.groupby('g')['v'].transform('sum').iloc[3]\n```\n\nWhat value does the expression return? Give the value at position 3.",
+    "answer": {
+      "kind": "numeric",
+      "value": 12,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "3 + 4 + 5",
+    "solution": "Position 3 is in group b, whose transformed sum is 3 + 4 + 5 on every row.",
+    "hints": [
+      "transform repeats the group total on each row of that group."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0089",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 3,
+    "prompt": "| g | h | v |\n|---|---|---|\n| a | x | 1 |\n| a | y | 2 |\n| b | x | 3 |\n| b | x | 4 |\n\n```python\nint(df.groupby(['g', 'h'])['v'].sum().unstack().isna().sum().sum())\n```\n\nWhat value does the expression return? Give the count of missing cells.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "1",
+    "solution": "The pairs (a, x), (a, y) and (b, x) exist. The pair (b, y) has no row, so its cell is NaN.",
+    "hints": [
+      "unstack fills a missing combination with NaN unless told otherwise."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0090",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "difficulty": 3,
+    "prompt": "| id | q1 | q2 |\n|---|---|---|\n| 1 | 5 | 7 |\n| 2 | 6 | 8 |\n\n```python\npd.melt(df, id_vars=['id'], value_vars=['q1', 'q2'])\n```\n\nWhich long table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| id | variable | value |\n|---|---|---|\n| 1 | q1 | 5 |\n| 2 | q1 | 6 |\n| 1 | q2 | 7 |\n| 2 | q2 | 8 |",
+        "| id | variable | value |\n|---|---|---|\n| 2 | q1 | 5 |\n| 1 | q1 | 6 |\n| 1 | q2 | 7 |\n| 2 | q2 | 8 |",
+        "| id | value |\n|---|---|\n| 1 | 5 |\n| 2 | 6 |\n| 1 | 7 |\n| 2 | 8 |",
+        "| id | q1 | q2 |\n|---|---|---|\n| 1 | 5 | 7 |\n| 2 | 6 | 8 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "swapped the ids of the first two values",
+        "dropped the variable column",
+        "did not melt, so the wide table comes back"
+      ]
+    },
+    "solution": "Melt stacks q1 and then q2, keeping the id beside each value.",
+    "hints": [
+      "Each melted row keeps its id and gets one variable name."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0091",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 1,
+    "prompt": "In tidy data, which statement is true?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Each variable is a column and each observation is a row",
+        "Each cell may hold a list of several values",
+        "Each table has one row per time period only",
+        "Column names must be numbers"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "tidy data keeps exactly one value in each cell",
+        "time is a variable only when observations are keyed by it",
+        "in wide data, column names carry values, which tidy data avoids"
+      ]
+    },
+    "solution": "Tidy data puts one variable per column and one observation per row.",
+    "hints": [
+      "Ask where the variable names and the observations go."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0092",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 1,
+    "prompt": "What is the usual name for reshaping wide columns into long rows with a variable column?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "melt",
+        "pivot",
+        "groupby",
+        "merge"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "pivot goes from long to wide, the reverse move",
+        "groupby summarises, it does not reshape",
+        "merge joins two tables"
+      ]
+    },
+    "solution": "melt stacks chosen columns into two new columns.",
+    "hints": [
+      "The wide columns become values of one variable column."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0093",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 1,
+    "prompt": "A wide table has 2 people and 3 time columns. After melting the 3 time columns with the person kept, how many rows does the long table have?",
+    "answer": {
+      "kind": "numeric",
+      "value": 6,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "2 * 3",
+    "solution": "Each person contributes one row per time column.",
+    "hints": [
+      "Multiply the number of people by the number of melted columns."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0094",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 1,
+    "prompt": "| name | t1 | t2 |\n|---|---|---|\n| Ana | 5 | 6 |\n| Bo | 7 | NaN |\n\n```python\nlen(pd.melt(df, id_vars=['name'], value_vars=['t1', 't2']).dropna())\n```\n\nWhat value does the expression return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "2 * 2 - 1",
+    "solution": "Melting gives four rows. Dropping the one NaN leaves three.",
+    "hints": [
+      "dropna runs after melt, so it removes long rows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0095",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 2,
+    "prompt": "| name | t1 | t2 |\n|---|---|---|\n| Ana | 5 | 6 |\n| Bo | 7 | NaN |\n\n```python\npd.melt(df, id_vars=['name'], value_vars=['t1', 't2'])['value'].sum()\n```\n\nWhat value does the expression return? Give the sum.",
+    "answer": {
+      "kind": "numeric",
+      "value": 18,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "5 + 7 + 6",
+    "solution": "The long value column holds 5, 7, 6 and NaN. sum skips the NaN.",
+    "hints": [
+      "sum skips missing values by default."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0096",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 2,
+    "prompt": "| name | t1 | t2 |\n|---|---|---|\n| Ana | 5 | 6 |\n| Bo | 7 | NaN |\n\n```python\nlist(pd.melt(df, id_vars=['name'], var_name='time', value_name='score').columns)\n```\n\nWhich column names does the expression return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`name`",
+        "`time`",
+        "`score`",
+        "`t1`"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Melting with var_name and value_name gives name, time and score. t1 is a value of time now.",
+    "hints": [
+      "The names you pass control the new columns."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0097",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 2,
+    "prompt": "| name | t1 | t2 |\n|---|---|---|\n| Ana | 5 | 6 |\n| Bo | 7 | NaN |\n\n```python\nlong.groupby('name')['score'].size()['Bo']   (long = melt with var_name='time', value_name='score')\n```\n\nWhat value does the expression return? Give the size of group Bo.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len([7, None])",
+    "solution": "Bo has two long rows, one of them NaN. size counts rows; count would skip the NaN.",
+    "hints": [
+      "size() counts missing rows, count() does not."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0098",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "probe": true,
+    "difficulty": 3,
+    "prompt": "| name | t1 | t2 |\n|---|---|---|\n| Ana | 5 | 6 |\n| Bo | 7 | NaN |\n\n```python\nint(long.dropna().pivot(index='name', columns='time', values='score').isna().sum().sum())\n```\n\nwhere long is the melt of the table above. What value does the expression return? Give the count of missing cells.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "1",
+    "solution": "After dropping the NaN row, Bo has no t2 value, so the pivot cell for Bo and t2 is missing.",
+    "hints": [
+      "Pivot makes a missing cell for a combination that has no row."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0099",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "difficulty": 3,
+    "prompt": "| name | k | v |\n|---|---|---|\n| Ana | a | 1 |\n| Ana | b | 2 |\n| Bo | a | 3 |\n\n```python\ndf6.pivot(index='name', columns='k', values='v').reset_index()\n```\n\nWhich table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| name | a | b |\n|---|---|---|\n| Ana | 1 | 2 |\n| Bo | 3 | NaN |",
+        "| name | a | b |\n|---|---|---|\n| Ana | 1 | 2 |\n| Bo | NaN | 3 |",
+        "| name | a | b |\n|---|---|---|\n| Ana | 1 | 2 |\n| Bo | 3 | 0 |",
+        "| name | k | v |\n|---|---|---|\n| Ana | a | 1 |\n| Ana | b | 2 |\n| Bo | a | 3 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "placed Bo's value in column b",
+        "filled the missing cell with 0 instead of NaN",
+        "did not pivot, so the long table comes back"
+      ]
+    },
+    "solution": "Pivot makes one row per name and one column per k. Bo has no b value, so it is NaN.",
+    "hints": [
+      "pivot leaves combinations with no row as NaN."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0100",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 1,
+    "prompt": "Which mechanism means the chance a value is missing does not depend on any variable, observed or not?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "MCAR",
+        "MAR",
+        "MNAR",
+        "Listwise deletion"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "MAR depends on observed variables",
+        "MNAR depends on the missing value itself",
+        "listwise deletion is a handling method, not a mechanism"
+      ]
+    },
+    "solution": "MCAR means missingness is unrelated to the data.",
+    "hints": [
+      "Ask whether anything at all predicts the missingness."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0101",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 1,
+    "prompt": "Which statement about mean imputation is correct?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "It keeps the sample mean but shrinks the variance",
+        "It keeps the variance unchanged",
+        "It is unbiased under MNAR",
+        "It adds new rows to the data"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "imputed points sit at the centre, so the spread falls",
+        "a fixed mean does not fix missingness that depends on the value",
+        "imputation fills cells and does not add rows"
+      ]
+    },
+    "solution": "Mean imputation keeps the mean and reduces the spread.",
+    "hints": [
+      "Imputed points sit at the centre of the distribution."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0102",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 1,
+    "prompt": "A column of 10 values has 2 missing. Complete-case analysis uses how many values?",
+    "answer": {
+      "kind": "numeric",
+      "value": 8,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "10 - 2",
+    "solution": "Complete-case analysis drops any row with a missing value, leaving 8.",
+    "hints": [
+      "Subtract the missing count from the total."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0103",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 1,
+    "prompt": "| index | x |\n|---|---|\n| 0 | 2 |\n| 1 | 4 |\n| 2 | NaN |\n| 3 | 8 |\n\n```python\ns.mean()\n```\n\nWhat value does the expression return? Give the mean, to 4 decimals.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4.6667,
+      "form": "decimal",
+      "tol": 0,
+      "rel": 0.02
+    },
+    "check": "(2 + 4 + 8) / 3",
+    "solution": "The NaN is skipped, so the mean is 14 over 3 values.",
+    "hints": [
+      "Filling with zero first gives 3.5, which is wrong."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0104",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | a | b |\n|---|---|---|\n| 0 | 1 | 5 |\n| 1 | NaN | 6 |\n| 2 | 3 | NaN |\n| 3 | 4 | 8 |\n\n```python\nlen(df.dropna())\n```\n\nWhat value does the expression return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for (x, y) in [(1, 5), (None, 6), (3, None), (4, 8)] if x is not None and y is not None)",
+    "solution": "Only rows 0 and 3 have no missing value.",
+    "hints": [
+      "dropna removes any row with at least one NaN."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0105",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 2,
+    "prompt": "| index | value |\n|---|---|\n| 0 | 1 |\n| 1 | NaN |\n| 2 | 3 |\n| 3 | NaN |\n\n```python\nlist(a.index[a.isna()])   (a is the column above; the mean of its observed values is 2)\n```\n\nWhich rows does the expression return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "row 0 (value 1)",
+        "row 1 (value 2 after fill)",
+        "row 2 (value 3)",
+        "row 3 (value 2 after fill)"
+      ],
+      "correct": [
+        1,
+        3
+      ]
+    },
+    "solution": "Rows 1 and 3 hold NaN, so the fill replaces exactly those two.",
+    "hints": [
+      "Missing rows are the ones isna() flags."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0106",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 2,
+    "prompt": "**t**\n\n| x |\n|---|\n| 1 |\n| NULL |\n| 3 |\n| NULL |\n\n```sql\nSELECT COUNT(*) - COUNT(x)\nFROM t;\n```\n\nWhat value does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for v in [1, None, 3, None] if v is None)",
+    "solution": "Four rows, two non-NULL values, so two are missing.",
+    "hints": [
+      "COUNT(*) minus COUNT(column) counts the missing values."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0107",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 3,
+    "prompt": "| index | value |\n|---|---|\n| 0 | 2 |\n| 1 | 4 |\n| 2 | 6 |\n| 3 | NaN |\n\n```python\ns.fillna(s.mean()).std()\n```\n\nWhat value does the expression return? Give the sample standard deviation, to 4 decimals.",
+    "answer": {
+      "kind": "numeric",
+      "value": 1.63299,
+      "form": "decimal",
+      "tol": 0,
+      "rel": 0.02
+    },
+    "check": "(8 / 3) ** 0.5",
+    "solution": "Mean imputation adds a 4 at position 3. The squared deviations sum to 8 over 3 degrees of freedom.",
+    "hints": [
+      "Imputing the mean shrinks the spread of the column."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0108",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "difficulty": 2,
+    "prompt": "| bracket | income |\n|---|---|\n| low | 20 |\n| low | 25 |\n| high | NaN |\n| high | 90 |\n| high | NaN |\n| high | 60 |\n\n```python\ndf.groupby('bracket')['income'].apply(lambda s: s.isna().mean())\n```\n\nWhich result is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| bracket | share missing |\n|---|---|\n| low | 0.0 |\n| high | 0.5 |",
+        "| bracket | share missing |\n|---|---|\n| low | 0.0 |\n| high | 2.0 |",
+        "| bracket | share missing |\n|---|---|\n| low | 0.0 |\n| high | 1.0 |",
+        "| bracket | share missing |\n|---|---|\n| low | 0.0 |\n| high | 0.0 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "summed the missing flags instead of averaging them",
+        "took the largest flag, not the mean",
+        "tested for zero instead of missing"
+      ]
+    },
+    "solution": "Two of the four high-bracket incomes are NaN, so the mean of the missing flags is 0.5. Low has none.",
+    "hints": [
+      "The mean of an isna() flag is the share missing."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0109",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 1,
+    "prompt": "Which of these is an invariant check rather than a cleaning step?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Every end date is on or after its start date",
+        "Replace the outlier with the median",
+        "Convert the text column to a float",
+        "Drop the duplicate rows"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "that changes a value; it does not test one",
+        "that is a type fix",
+        "that removes rows; it does not test a rule"
+      ]
+    },
+    "solution": "An invariant is a rule that must hold for every row.",
+    "hints": [
+      "Ask which option tests a rule instead of changing data."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0110",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 1,
+    "prompt": "Why are timestamps with and without time zones a cleaning risk?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "Mixing them compares and converts wrongly unless both are on one zone",
+        "Time zones add extra rows to the table",
+        "Dates cannot be stored as text",
+        "Time zones stop the column from being sorted"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a zone label does not add rows",
+        "text storage is allowed for ISO dates",
+        "sorting still works on values normalised to one zone"
+      ]
+    },
+    "solution": "Normalise times to one zone before comparing them.",
+    "hints": [
+      "Ask what happens when two times mean different things."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0111",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 1,
+    "prompt": "A table has 100 rows, and 7 of them are exact duplicates of an earlier row. How many rows remain after removing duplicates?",
+    "answer": {
+      "kind": "numeric",
+      "value": 93,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "100 - 7",
+    "solution": "Each duplicate is removed, leaving 93 rows.",
+    "hints": [
+      "Count only the later copies that get removed."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0112",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 1,
+    "prompt": "| id | v |\n|---|---|\n| 1 | a |\n| 1 | b |\n| 2 | a |\n| 3 | c |\n| 3 | c |\n| 3 | d |\n\n```python\nlen(dup.drop_duplicates(subset=['id']))\n```\n\nWhat value does the expression return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set([1, 1, 2, 3, 3, 3]))",
+    "solution": "Only three distinct ids remain when the key is id alone.",
+    "hints": [
+      "subset= limits which columns decide a duplicate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0113",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 1,
+    "prompt": "| id | v |\n|---|---|\n| 1 | a |\n| 1 | b |\n| 2 | a |\n| 3 | c |\n| 3 | c |\n| 3 | d |\n\n```python\nlen(dup.drop_duplicates())\n```\n\nWhat value does the expression return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 5,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "len(set([(1, 'a'), (1, 'b'), (2, 'a'), (3, 'c'), (3, 'c'), (3, 'd')]))",
+    "solution": "Only the two (3, c) rows are identical on every column, so one is removed.",
+    "hints": [
+      "With no subset, all columns must match for a duplicate."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0114",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 2,
+    "prompt": "| id | age |\n|---|---|\n| a | 34 |\n| b | -1 |\n| c | 200 |\n| d | NaN |\n\n```python\nlist(ages.loc[~ages['age'].between(0, 120), 'id'])\n```\n\nWhich ids does the expression return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`b` (age -1)",
+        "`c` (age 200)",
+        "`d` (age NaN)",
+        "`a` (age 34)"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    "solution": "Ages outside 0 to 120 and the missing age all fail the range test. NaN fails between, so the negation keeps it.",
+    "hints": [
+      "Negate the range test to get the rows that break it."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0115",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 2,
+    "prompt": "**events**\n\n| start_d | end_d |\n|---|---|\n| 2026-01-05 | 2026-01-03 |\n| 2026-02-01 | 2026-02-01 |\n| 2026-03-10 | 2026-03-09 |\n| 2026-04-01 | NULL |\n\n```sql\nSELECT COUNT(*)\nFROM events\nWHERE end_d < start_d;\n```\n\nWhat value does the query return? ISO dates compare as text.",
+    "answer": {
+      "kind": "numeric",
+      "value": 2,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for (s, e) in [('2026-01-05', '2026-01-03'), ('2026-02-01', '2026-02-01'), ('2026-03-10', '2026-03-09'), ('2026-04-01', None)] if e is not None and e < s)",
+    "solution": "Rows 1 and 3 end before they start. Row 4 has a NULL end, which is unknown, so it is not counted.",
+    "hints": [
+      "A NULL on either side makes the comparison unknown."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0116",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 3,
+    "prompt": "**cents**\n\n| cents |\n|---|\n| 1250 |\n| 399 |\n| 1 |\n\n```sql\nSELECT SUM(cents) / 100\nFROM cents;\n```\n\nWhat value does the query return? The column is an integer type, so division truncates as in PostgreSQL.",
+    "answer": {
+      "kind": "numeric",
+      "value": 16,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum([1250, 399, 1]) // 100",
+    "solution": "The total is 1650 cents. Integer division by 100 truncates 16.50 to 16.",
+    "hints": [
+      "Divide after converting to a decimal type when cents matter."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0117",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "difficulty": 2,
+    "prompt": "| row | v |\n|---|---|\n| 0 | 10 |\n| 1 | 9 |\n| 2 | 100 |\n\n```python\nlist(df.sort_values('v')['v'])\n```\n\nThe column v holds text. Which list is returned, in order?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| v |\n|---|\n| 9 |\n| 10 |\n| 100 |",
+        "| v |\n|---|\n| 10 |\n| 100 |\n| 9 |",
+        "| v |\n|---|\n| 9 |\n| 100 |\n| 10 |",
+        "| v |\n|---|\n| 100 |\n| 10 |\n| 9 |"
+      ],
+      "correct": 1,
+      "why": [
+        "that is numeric order, but the column is text",
+        "",
+        "that is descending text order",
+        "that is numeric order reversed, which text sorting never gives"
+      ]
+    },
+    "solution": "Text sorting compares character by character, so '10' comes before '100', and '9' comes last.",
+    "hints": [
+      "Text order compares the first character first."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0118",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 1,
+    "prompt": "A hash join on inputs of n and m rows typically costs roughly which amount of work?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "About n plus m, building and probing a hash table",
+        "About n times m",
+        "About n log n plus m log m",
+        "A constant, since each row is read once"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "a nested loop compares every pair",
+        "that is the sort cost of a sort-merge join",
+        "every row must still be read at least once"
+      ]
+    },
+    "solution": "A hash join reads each input once, after building a table on one side.",
+    "hints": [
+      "Ask how many times each row is touched."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0119",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 1,
+    "prompt": "Which change turns a full table scan into a direct lookup for a filter on one column?",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "An index on that column",
+        "A larger LIMIT",
+        "DISTINCT on the whole row",
+        "A UNION with the same table"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "LIMIT caps the output but does not avoid scanning for matches",
+        "DISTINCT needs to see every row",
+        "UNION reads both inputs in full"
+      ]
+    },
+    "solution": "An index lets the engine find matching rows without reading the whole table.",
+    "hints": [
+      "Ask which structure finds rows by value directly."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0120",
+    "tier": "a",
+    "type": "recall",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 1,
+    "prompt": "Sorting n rows by comparison costs about n log2 n comparisons. Give that for n = 1000, to the nearest integer, using log2(1000) = 9.97 approximately.",
+    "answer": {
+      "kind": "numeric",
+      "value": 9966,
+      "form": "decimal",
+      "tol": 0,
+      "rel": 0.02
+    },
+    "check": "1000 * math.log(1000, 2)",
+    "solution": "log2 of 1000 is about 9.97, so the cost is about 9966.",
+    "hints": [
+      "Compute log2 of n, then multiply by n."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0121",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 1,
+    "prompt": "**a**\n\n| k |\n|---|\n| 1 |\n| 2 |\n| 2 |\n| 3 |\n\n**b**\n\n| k |\n|---|\n| 2 |\n| 3 |\n| 3 |\n| 4 |\n| 5 |\n\n```sql\nSELECT COUNT(*)\nFROM a JOIN b ON a.k = b.k;\n```\n\nHow many rows does the query return? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for x in [1, 2, 2, 3] for y in [2, 3, 3, 4, 5] if x == y)",
+    "solution": "Key 2 matches once in b and appears twice in a, giving 2. Key 3 matches twice in b and once in a, giving 2.",
+    "hints": [
+      "Count matching pairs, not rows of either input."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0122",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 2,
+    "prompt": "**a**\n\n| k |\n|---|\n| 1 |\n| 2 |\n| 2 |\n| 3 |\n\n**b**\n\n| k |\n|---|\n| 2 |\n| 3 |\n| 3 |\n| 4 |\n| 5 |\n\n```sql\nSELECT a.k, b.k\nFROM a, b;\n```\n\nA nested loop join of these tables compares every pair of rows. How many comparisons does it make?",
+    "answer": {
+      "kind": "numeric",
+      "value": 20,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "4 * 5",
+    "solution": "Table a has 4 rows and table b has 5, so the nested loop makes 4 times 5 checks.",
+    "hints": [
+      "A nested loop checks every pair, whether or not the keys match."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0123",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 2,
+    "prompt": "**a**\n\n| k |\n|---|\n| 1 |\n| 2 |\n| 2 |\n| 3 |\n\n**b**\n\n| k |\n|---|\n| 2 |\n| 3 |\n| 3 |\n| 4 |\n| 5 |\n\n```sql\nSELECT DISTINCT a.k\nFROM a JOIN b ON a.k = b.k;\n```\n\nWhich keys does the query return? Select all that apply.",
+    "answer": {
+      "kind": "multi",
+      "options": [
+        "`k 1`",
+        "`k 2`",
+        "`k 3`",
+        "`k 4`"
+      ],
+      "correct": [
+        1,
+        2
+      ]
+    },
+    "solution": "Keys 2 and 3 appear in both tables. Key 1 is only in a, and key 4 only in b.",
+    "hints": [
+      "Keys present on both sides survive an inner join."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0124",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 2,
+    "prompt": "**a**\n\n| k |\n|---|\n| 1 |\n| 2 |\n| 2 |\n| 3 |\n\n**b**\n\n| k |\n|---|\n| 2 |\n| 3 |\n| 3 |\n| 4 |\n| 5 |\n\n```sql\nSELECT COUNT(*)\nFROM a JOIN b ON a.k = b.k;\n-- a hash join builds its table on the smaller input\n```\n\nFor a hash join of these two tables, how many rows go into the hash table? Give a count.",
+    "answer": {
+      "kind": "numeric",
+      "value": 4,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "min(4, 5)",
+    "solution": "Table a has 4 rows and table b has 5, so the smaller input is a with 4 rows.",
+    "hints": [
+      "Build on the smaller input to keep the table small."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0125",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 3,
+    "prompt": "**orders**\n\n| oid | cid | amount |\n|---|---|---|\n| 10 | 1 | 40 |\n| 11 | 1 | 25 |\n| 12 | 2 | NULL |\n| 13 | 3 | 60 |\n| 14 | NULL | 15 |\n\n**customers**\n\n| cid | name | city |\n|---|---|---|\n| 1 | Ana | Lima |\n| 2 | Bo | Oslo |\n| 3 | Cy | Lima |\n| 4 | Dee | Rome |\n\n```sql\nSELECT COUNT(*)\nFROM orders o JOIN customers c ON c.cid = o.cid\nWHERE o.amount > 20;\n```\n\nHow many rows does the query return? Filtering before or after the join gives the same result.",
+    "answer": {
+      "kind": "numeric",
+      "value": 3,
+      "form": "exact",
+      "tol": 0
+    },
+    "check": "sum(1 for (c, a) in [(1, 40), (1, 25), (2, None), (3, 60), (None, 15)] if a is not None and c is not None and a > 20)",
+    "solution": "Orders 10, 11 and 13 pass the filter, and each has a matching customer.",
+    "hints": [
+      "Filtering first makes the join see fewer rows."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  },
+  {
+    "id": "t5-0126",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "difficulty": 2,
+    "prompt": "**a**\n\n| k |\n|---|\n| 1 |\n| 2 |\n| 2 |\n| 3 |\n\n```sql\nSELECT k, COUNT(*)\nFROM a\nGROUP BY k;\n```\n\nWhich result table is returned? Row order does not matter.",
+    "answer": {
+      "kind": "mcq",
+      "options": [
+        "| k | count |\n|---|---|\n| 1 | 1 |\n| 2 | 2 |\n| 3 | 1 |",
+        "| k | count |\n|---|---|\n| 1 | 1 |\n| 2 | 1 |\n| 3 | 1 |",
+        "| k | count |\n|---|---|\n| 1 | 1 |\n| 2 | 2 |\n| 3 | 1 |\n| 4 | 0 |",
+        "| k | count |\n|---|---|\n| 1 | 4 |\n| 2 | 4 |\n| 3 | 4 |"
+      ],
+      "correct": 0,
+      "why": [
+        "",
+        "counted distinct keys, not rows",
+        "added a row for the absent key 4",
+        "counted the whole table in each group"
+      ]
+    },
+    "solution": "Key 2 appears twice, and keys 1 and 3 once each.",
+    "hints": [
+      "One pass over the rows gives each group's count."
+    ],
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/haiku-5.5",
+      "ver": "checker"
+    }
+  }
+]
