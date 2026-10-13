@@ -93,11 +93,13 @@ localStorage key `pe_<pack.key>`; same backup keys as vocab (`_invalid_backup`, 
 ```
 
 - `tech[id]`: `s` streak, `l` last credited session ordinal, `r`/`w` lifetime counts, `m` mastered, `in` teach card passed (0 or the ordinal, drives "started"), `wk` weak flag from a failed full problem, `prov` placement-seeded, `fp` full problem solved at grade 2 at least once (the exam rule bit, 2.6).
+- `theme`: legacy and unused. The theme lives in its own key `pe_<key>_theme`; the page never writes this field (older files may carry it and keep it).
 - `items[id]`: `r`/`w` counts, `l` last session seen, `t` last answer seconds (feeds timing estimates). Written lazily on first sight.
 - `full[id]`: last two self-grades `g`, best seconds.
 - `day`: same-day log so repeated sessions don't repeat items (vocab dayAware); optional.
 - Top level also carries `pauseNew` (owner toggle, Review-only sessions). Unknown fields at every level, including `full[id]` and `day`, are kept through load and save (fixed 2026-10-13, review D6).
 - `pv`: last Progress visit totals for the hero delta (as in vocab).
+- `rm`: optional, the last five items missed and not answered right since (a right answer, including on a requeued retry, removes the id), `[{"id","a"}]` (`a` is the answer text); written by the page on a scored miss, shown under Progress "Recent misses". No format bump: older builds keep it as an unknown field.
 - Ids are append-only strings; unknown ids in an import are kept (not dropped) so a newer pack's progress survives an older build.
 
 ### 2.6 Levels, gate, exam rule
@@ -246,6 +248,15 @@ Floor assumption: the learner finished O-level (arithmetic, fractions, basic alg
 - Writes: techniques in the placed prefix get `{s:1, prov:1}` (tier-of-placed-word analogue); `prov` is dropped at first miss (a level exam miss included, §2.6) or at mastered (at mastered, `fp` is set first so the technique stays known, 2.6). They count as known for the gate (`wordKnownP`, vocab fb52 reasoning) so a placed learner doesn't see "Level 2 waits, Level 1 at 0%". `pl` stores the landing level; retake only moves forward. Placement writes no `items` or `full` records.
 - Length: up to 9 tiers x 5 = 45 items worst case; the early stop makes a beginner's test ~10 items.
 - Re-placement: Test tab offers it only before `placedOnce` (vocab fb-appView C rule), plus a level exam later.
+
+### 6.1 UI v2 surfaces (ported from vocab-engine appView v2, 2026-10-13; DECISIONS 16)
+
+- Shell: header names the step (pack name on Today, Learn, Review, Micro, Full, Exam, Placement, Test, Progress) with "N left" and End during a drill; Today / Test / Progress is a fixed bottom bar (56px, sticky rounded card from 900px), hidden during a drill. Ink-on-bg buttons, no accent colour, 17px IBM Plex Sans stack with system fallback, `.wrap` 480px (640px from 900px), 44px targets. Dark theme: chip in Progress settings, stored in `pe_<key>_theme`, system setting when unset.
+- Today: anchor `Session N`, goal bar (current level, `k of n known`, tap opens Progress), one row per stage (name and count; a skipped or unusual stage says why; the gate sentence `T3 opens at 70% of T2 known. Now 50%.` on Learn), one Start, ghost link Pause/Resume new techniques.
+- Drill card: stimulus pinned at `--stim-top` and never moves on answer; no meter. The answered option or field carries the right/wrong state; a rule-topped reveal grows below it: `Right.` or `Not quite.`, the answer when wrong, solution, notes, Next last. Teach card: anchor `T3, <technique>`, card, Start problems.
+- Session done: `Session N done`, `R of S`, one signed hero line (`+3 mastered  +2 started`, none when nothing moved), Missed as 44px rows (technique name, prompt first line) that expand in place, or `No misses.`; Back to Today.
+- Progress: anchor `N sessions`, hero (mastered), goal bar, level blocks (row, 6px bar with known under mastered, one detail line; the gate sentence as a muted line under the waiting level), only the first unfinished level and the next shown until Show all, Recent misses (last 5, expand in place), Settings chips (Dark theme, Export, Import, Reset). `etaLine(level)` is the empty hook for the sessions-to-go estimate (M9).
+- Test: placement result is a Tier / Right table (levels never asked are hidden) and `Placed through Tn.`. Read-only and storage notices share one muted `.notice` card.
 
 ## 7. Content pipeline
 

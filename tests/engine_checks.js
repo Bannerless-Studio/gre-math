@@ -301,6 +301,23 @@ eq('empty level status pct 0', lsx[0].pct, 0);
 
 // item pool sanity from the fixture
 const fixture = load();
+// --- recent misses (SPEC 2.5 `rm`): PE.noteMiss
+{
+  const mk = (i, requeued) => ({ item: { id: 'i' + i }, requeued: !!requeued });
+  const bad = (a) => ({ ok: false, answer: a });
+  const prog = core.newProg();
+  for (let i = 1; i <= 6; i++) core.noteMiss(prog, mk(i), bad('x' + i));
+  eq('noteMiss keeps five, newest first', [prog.rm.length, prog.rm[0].id, prog.rm[4].id], [5, 'i6', 'i2']);
+  core.noteMiss(prog, mk(4, true), { ok: true });
+  check('noteMiss: right answer on a requeued card removes the id', prog.rm.every((x) => x.id !== 'i4') && prog.rm.length === 4);
+  core.noteMiss(prog, mk(3, true), bad('y'));
+  eq('noteMiss: missed requeued retry adds nothing and keeps the entry', prog.rm.filter((x) => x.id === 'i3').length, 1);
+  const p2 = core.newProg();
+  core.noteMiss(p2, mk(1), { unparsable: false, done: false });
+  core.noteMiss(p2, { item: null }, bad('z'));
+  check('noteMiss: non-scored (placement) answer never writes', p2.rm === undefined);
+}
+
 check('every fixture item has a kind', fixture.items.every((it) => core.itemKind(it) !== null));
 check('fixture has tier a and b per technique', fixture.techniques.every((t) => ['a', 'b'].every((tier) => fixture.items.some((it) => it.tags[0] === t.id && it.tier === tier))));
 

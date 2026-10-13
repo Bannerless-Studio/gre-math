@@ -251,7 +251,7 @@
     if (F <= 0) return { held: false, F: F, sentence: null, levels: st };
     var prev = st[F - 1];
     if (prev.pct >= ix.cfg.gate) return { held: false, F: F, sentence: null, levels: st };
-    var pct = Math.floor(prev.pct * 100);
+    var pct = Math.floor(prev.pct * 100 + 1e-9);
     return { held: true, F: F, levels: st,
       sentence: st[F].id + ' waits: ' + prev.id + ' at ' + pct + '% known.', short: 'gate: ' + prev.id + ' at ' + pct + '%' };
   }
@@ -896,6 +896,19 @@
     };
   }
 
+  // The last five items missed and not answered right since, kept on the record as `rm` (SPEC 2.5).
+  // Only scored answers count (r.ok boolean); a missed retry of a requeued card adds nothing.
+  function noteMiss(prog, card, r) {
+    if (!prog || !card || !card.item || !r || typeof r.ok !== 'boolean') return;
+    var id = card.item.id;
+    var rm = Array.isArray(prog.rm) ? prog.rm.filter(function (x) { return x && x.id !== id; }) : [];
+    if (!r.ok) {
+      if (card.requeued) return;
+      rm.unshift({ id: id, a: String(r.answer == null ? '' : r.answer) });
+    }
+    prog.rm = rm.slice(0, 5);
+  }
+
   return {
     snapshotSession: snapshotSession, restoreSession: restoreSession,
     PROG_VERSION: PROG_VERSION, REFRESH_SHARE: REFRESH_SHARE, PER_TECH_CAP: PER_TECH_CAP, WIP_CAP: WIP_CAP,
@@ -914,7 +927,7 @@
     finishSession: finishSession,
     placementPlan: placementPlan, placeProbes: placeProbes, startPlacement: startPlacement,
     placementAnswer: placementAnswer, placementResult: placementResult, applyPlacement: applyPlacement,
-    examLevel: examLevel, examOffered: examOffered, startExam: startExam, finishExam: finishExam, setPauseNew: setPauseNew,
+    noteMiss: noteMiss, examLevel: examLevel, examOffered: examOffered, startExam: startExam, finishExam: finishExam, setPauseNew: setPauseNew,
     FULL_MIN_TECHS: FULL_MIN_TECHS, FULL_NEAR: FULL_NEAR, FULL_BUDGET: FULL_BUDGET,
     budgetFor: budgetFor, clockFor: clockFor, gradeFullRule: gradeFullRule, planFull: planFull,
     fullCommit: fullCommit, fullGrade: fullGrade, rubricPicks: rubricPicks

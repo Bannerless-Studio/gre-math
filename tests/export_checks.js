@@ -199,4 +199,20 @@ const freshState = () => ({ prog: null, readonly: false, notice: '' });
 // 20. messages are the wording the page shows (non-empty, one line each)
 check('every store message is one non-empty line', Object.keys(store.MSG).every((k) => typeof store.MSG[k] === 'string' && store.MSG[k].length > 0 && store.MSG[k].indexOf('\n') < 0));
 
+// 21. rm (recent misses) round-trips export -> import; reset drops it
+{
+  const rm = [{ id: 'i1', a: '4' }, { id: 'i2', a: '1/2' }];
+  const st = fakeStorage({ [KEY]: progJson({ rm }) });
+  const m = store.make(st, KEY); const s = freshState(); m.open(s);
+  eq('rm survives open', s.prog.rm, rm);
+  const exported = m.raw();
+  const st2 = fakeStorage({ [KEY]: progJson() });
+  const m2 = store.make(st2, KEY); const s2 = freshState(); m2.open(s2);
+  const r = m2.importText(s2, exported);
+  check('rm import ok', r.ok === true);
+  eq('rm round-trips export to import', s2.prog.rm, rm);
+  m2.reset(s2);
+  eq('reset clears rm', s2.prog.rm, undefined);
+}
+
 S.done();

@@ -8,7 +8,7 @@
   var IX = PE.index(DATA);
   var root = document.getElementById('root');
   var S = { tab: 'today', prog: null, readonly: false, notice: '', sess: null, reveal: null, summary: null,
-    hint: '', msg: '', cardStart: 0, draft: '', ask: null, codeReport: null, placeResult: null, examResult: null, delta: null };
+    hint: '', msg: '', cardStart: 0, draft: '', ask: null, codeReport: null, placeResult: null, examResult: null, delta: null, showAll: false, lastView: '' };
 
   function p2(n) { return (n < 10 ? '0' : '') + n; }
   function today() { var d = new Date(); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
@@ -92,31 +92,57 @@
 
   // ---- views
   function row(name, dev) {
-    return '<li class="row"><span class="name">' + name + '</span>' + (dev ? '<span class="dev">' + esc(dev) + '</span>' : '') + '</li>';
+    return '<li class="tst"><span>' + name + '</span>' + (dev ? '<span class="tsd">' + esc(dev) + '</span>' : '') + '</li>';
   }
-  // The gate sentence (T2 waits: T1 at 62% known.) is the Learn note while the gate holds.
-  function learnNote(l) {
+  function pctInt(x) { return Math.floor(x * 100 + 1e-9); }
+  // Hook for the sessions-to-go estimate (no model yet, SPEC 5): returns '' until one exists.
+  function etaLine(level) { return ''; }   // non-empty results start with a space
+  // "T3 opens at 70% of T2 known. Now 50%." while the gate holds; '' otherwise.
+  function gateLine(gate) {
+    if (!gate.held) return '';
+    var next = gate.levels[gate.F], prev = gate.levels[gate.F - 1];
+    return next.id + ' opens at ' + pctInt(IX.cfg.gate) + '% of ' + prev.id + ' known. Now ' + pctInt(prev.pct) + '%.' + etaLine(next.id);
+  }
+  // Learn row: the techniques coming, the gate sentence while it holds, else the reason.
+  function learnNote(l, gate) {
     if (l.status === 'ready') {
       var list = l.techs && l.techs.length ? l.techs : (l.tech ? [l.tech] : []);
       return 'New: ' + list.map(function (t) { return techName(t.id); }).join(', ');
     }
     if (l.status === 'paused') return 'Paused';
+    if (l.status === 'held') return gateLine(gate) || l.reason || '';
     return l.reason || '';
   }
+  // A stage row is its name and count; a skipped or unusual stage says why instead.
+  function stageNote(st) { return st.status === 'ready' ? String(st.count) : (st.reason || '0'); }
+  // First level that is not fully known (the last one when all are).
+  function currentLevel(prog) {
+    var st = PE.levelStatus(prog, IX), i;
+    for (i = 0; i < st.length; i++) if (st[i].total && st[i].known < st[i].total) return st[i];
+    return st[st.length - 1];
+  }
+  function masteredIn(p, ts) { return ts.filter(function (x) { return p.tech[x.id] && p.tech[x.id].m === 1; }).length; }
+  // 6px two-tone bar: known (mid tone) under mastered (ink).
+  function bar(known, mastered, total) {
+    var w = function (n) { return total ? Math.min(100, Math.round(n / total * 100)) : 0; };
+    return '<div class="pvb" aria-hidden="true"><i class="pvk2" style="width:' + w(known) + '%"></i><i class="pvm" style="width:' + w(mastered) + '%"></i></div>';
+  }
+  function goalHtml(p, tap) {
+    var l = currentLevel(p), ts = IX.techsByLevel[l.id] || [];
+    var inner = '<span class="pvt"><span>' + esc(l.id) + '</span><span class="pvn">' + l.known + ' of ' + l.total + ' known</span></span>' + bar(l.known, masteredIn(p, ts), l.total);
+    return tap ? '<button type="button" class="goalc" data-act="to-progress">' + inner + '</button>' : '<div class="goalc">' + inner + '</div>';
+  }
   function viewToday() {
-    var t = today(), plan = PE.buildPlan(S.prog, IX, t);
-    var rows = row('Review', plan.review.status === 'ready' ? '' : plan.review.reason) +
-      row('Learn', learnNote(plan.learn)) +
-      row('Micro', plan.micro.status === 'ready' ? '' : plan.micro.reason) +
-      row('Full', plan.full.status === 'ready' ? '' : plan.full.reason);
+    var t = today(), plan = PE.buildPlan(S.prog, IX, t), gate = PE.gateState(S.prog, IX);
+    var rows = row('Review', stageNote(plan.review)) + row('Learn', learnNote(plan.learn, gate)) +
+      row('Micro', stageNote(plan.micro)) + row('Full', stageNote(plan.full));
     var action = plan.cards.length
       ? '<button type="button" class="primary" data-act="start">Start</button>'
       : '<p class="empty">Nothing due today.</p>';
     var pause = '<button type="button" class="ghost pause" data-act="pause-new"' + (S.readonly ? ' disabled' : '') + '>' +
       (S.prog.pauseNew ? 'Resume new techniques' : 'Pause new techniques') + '</button>';
-    return '<section><p class="anchor">Session ' + plan.n + '</p>' +
-      '<p class="goal">' + knownCount(S.prog) + ' of ' + IX.techs.length + ' known</p>' +
-      '<ol class="stages">' + rows + '</ol>' + action + '<p class="pause-row">' + pause + '</p></section>';
+    return '<section class="tdv card"><p class="anchor">Session ' + plan.n + '</p>' + goalHtml(S.prog, true) +
+      '<ul class="tsts">' + rows + '</ul><div>' + action + '</div><p class="pause-row">' + pause + '</p></section>';
   }
 
   function stageLabel(card, sess) {
@@ -267,7 +293,8 @@
     });
   }
 
-  // Reveal: the verdict, the answer when wrong, the solution, and only the facts that are not routine.
+  // Reveal: a rule under the answer, growing down. Verdict, the answer when wrong, the solution, the facts that are
+  // not routine, then Next last. The option or field carries the right/wrong state (answeredBody).
   function revealHtml(card, r) {
     var notes = [], name = techName(card.tech);
     if (!r.ok && WHY[r.error]) notes.push(WHY[r.error]);
@@ -284,10 +311,32 @@
       if (!r.ok && r.code.parsed && /^\d+\/\d+$/.test(r.code.parsed)) notes.unshift(r.code.parsed.split('/')[0] + ' of ' + r.code.parsed.split('/')[1] + ' tests pass.');
     }
     return '<div class="reveal ' + (r.ok ? 'ok' : 'bad') + '">' +
-      '<p class="verdict">' + (r.ok ? 'Right' : 'Not quite') + '</p>' + ans +
+      '<p class="verdict">' + (r.ok ? 'Right.' : 'Not quite.') + '</p>' + ans +
+      (card.type === 'code' && r.code && r.code.src ? '<h3 class="mine-h">Your code</h3><pre class="mine">' + esc(r.code.src) + '</pre>' : '') +
       '<div class="prose">' + field(card.item, 'solution') + '</div>' +
       (notes.length ? '<p class="note">' + esc(notes.join(' ')) + '</p>' : '') +
-      '<button type="button" class="primary" data-act="continue">Continue</button></div>';
+      '<button type="button" class="primary" data-act="continue">Next</button></div>';
+  }
+
+  // The answered card's body: the options (or the typed field) stay in place with the verdict on them.
+  function answeredBody(card, r) {
+    var a = card.item.answer;
+    if (card.type === 'mcq') {
+      return '<div class="opts">' + card.order.map(function (orig) {
+        var cls = orig === a.correct ? ' ok' : (orig === r.chosen ? ' bad' : '');
+        return '<button type="button" class="opt' + cls + '" disabled>' + optHtml(card.item, orig) + '</button>';
+      }).join('') + '</div>';
+    }
+    if (card.type === 'multi') {
+      var picked = Array.isArray(r.chosen) ? r.chosen : [];
+      return '<div class="multi"><div class="checks">' + card.order.map(function (orig) {
+        var right = a.correct.indexOf(orig) >= 0, on = picked.indexOf(orig) >= 0;
+        var cls = right ? ' ok' : (on ? ' bad' : '');
+        return '<label class="check' + cls + '"><input type="checkbox" disabled' + (on ? ' checked' : '') + '><span>' + optHtml(card.item, orig) + '</span></label>';
+      }).join('') + '</div></div>';
+    }
+    if (card.type === 'code') return '';
+    return r.typed != null && String(r.typed) !== '' ? '<div class="field ' + (r.ok ? 'ok' : 'bad') + '">' + esc(String(r.typed)) + '</div>' : '';
   }
 
   // The problem body for a playable card: options, multi checks, or the typed box.
@@ -324,35 +373,56 @@
     return body;
   }
 
+  // Header: the step names the card; the right side counts what is left and offers End during a drill.
+  function stepTitle() {
+    if (S.summary) return 'Done';
+    if (S.sess) { var c = PE.currentCard(S.sess); return c ? (c.type === 'teach' ? 'Learn' : stageLabel(c, S.sess)) : DATA.pack.name; }
+    return S.tab === 'progress' ? 'Progress' : S.tab === 'test' ? 'Test' : 'Today';
+  }
+  // Planned cards still unanswered: requeued copies, lessons and the answered current card do not count.
+  function cardsLeft() {
+    var sess = S.sess, n = 0, i, c, cur = PE.currentCard(sess);
+    for (i = sess.pos; i < sess.queue.length; i++) {
+      c = sess.queue[i];
+      if (c.requeued || c.type === 'teach') continue;
+      if (c === cur && (c.type === 'full' ? c.graded : (S.reveal && sess.kind !== 'place'))) continue;
+      n++;
+    }
+    return n;
+  }
+  function headRight() {
+    if (!S.sess) return !S.summary && S.tab === 'today' ? '<span class="pk">' + esc(DATA.pack.name) + '</span>' : '';
+    return '<span class="score">' + cardsLeft() + ' left</span>' +
+      (S.ask === 'quit' ? '' : '<button type="button" class="end" data-act="quit">End</button>');
+  }
   function viewDrill() {
-    var sess = S.sess, card = PE.currentCard(sess), total = sess.queue.length;
-    var pct = Math.round((sess.pos / total) * 100);
+    var sess = S.sess, card = PE.currentCard(sess);
     var quitText = sess.kind === 'place' ? 'End the test? Nothing is saved.' : 'End this session? Answers so far are saved.';
-    var head = '<div class="bar"><span>' + stageLabel(card, sess) + ' · ' + (sess.pos + 1) + ' of ' + total + '</span>' +
-      (S.ask === 'quit' ? '' : '<button type="button" class="ghost" data-act="quit">End</button>') + '</div>' +
-      '<div class="meter"><i style="width:' + pct + '%"></i></div>';
+    var head = '';
     if (S.ask === 'quit') {
       head += '<div class="confirm"><p>' + quitText + '</p>' +
         '<button type="button" class="danger" data-act="quit-yes">End</button> ' +
         '<button type="button" class="ghost" data-act="cancel">Keep going</button></div>';
     }
     if (card.type === 'teach') {
-      return head + '<article class="card"><p class="kicker">New technique</p><h2>' + esc(card.name) + '</h2>' +
+      var tc = IX.techById[card.tech];
+      return head + '<p class="anchor">' + esc((tc ? tc.level + ', ' : '') + card.name) + '</p><article class="card" style="margin-top:12px">' +
         T.figure(card.figure) + '<div class="prose teach">' + techHtml(card) + '</div>' +
         '<button type="button" class="primary" data-act="continue">Start problems</button></article>';
     }
     if (card.type === 'full') return head + viewFull(card);
-    var body = '<div class="card">' + T.figure(card.item && card.item.figure) + '<div class="prose">' + field(card.item, 'prompt') + '</div>';
+    var body = '<div class="card"><div class="drill-body">' + T.figure(card.item && card.item.figure) + '<div class="prose">' + field(card.item, 'prompt') + '</div>';
     if (sess.kind === 'place') {
       // Placement gives no feedback: the probe is answered and the next one opens.
       body += cardBody(card) + '<button type="button" class="ghost dk" data-act="dk">I don\'t know</button>';
     } else if (S.reveal) {
-      body += revealHtml(card, S.reveal);
+      body += answeredBody(card, S.reveal);
     } else {
       body += cardBody(card);
     }
     body += '<p class="hint">' + esc(S.hint) + '</p></div>';
-    return head + body;
+    if (sess.kind !== 'place' && S.reveal) body += revealHtml(card, S.reveal);
+    return head + body + '</div>';
   }
 
   // ---- full problem (timed commit, reveal, rubric self-grade, grade)
@@ -396,7 +466,7 @@
           'autocorrect="off" spellcheck="false" placeholder="e.g. 7, 0.5 or 9/2" aria-label="Your answer">' +
           '<button type="submit" class="primary">Commit</button></form>';
       }
-      return '<div class="card full">' + meta + clock + prompt + body + '<p class="hint">' + esc(S.hint) + '</p></div>';
+      return '<div class="card full"><div class="drill-body">' + meta + clock + prompt + body + '<p class="hint">' + esc(S.hint) + '</p></div></div>';
     }
     var committed = '<p class="kicker">Committed at ' + mmss(c.seconds) + ' of ' + mmss(budget) + (c.over ? ' · over budget' : '') + '</p>';
     if (!g) {
@@ -405,7 +475,7 @@
           return '<label class="check"><input type="checkbox" name="tick" value="' + i + '"><span>' + rubricHtml(item, i) +
             ' <small class="weight">(' + esc(String(r.weight)) + ')</small></span></label>';
         }).join('') + '</fieldset>';
-      return '<div class="card full">' + meta + committed +
+      return '<div class="card full"><div class="drill-body">' + meta + committed + '</div>' +
         '<div class="reveal ' + (c.ok ? 'ok' : 'bad') + '"><p class="verdict">' + (c.ok ? 'Committed right' : 'Committed wrong') + '</p>' +
         (c.ok ? '' : '<p class="answer">Answer: ' + ansHtml(item, String(item.answer.value)) + '</p>') +
         '<div class="prose">' + field(item, 'solution') + '</div>' +
@@ -420,69 +490,85 @@
     if (fx.reset) facts.push('Streak reset: ' + name + '.');
     if (fx.weak.length) facts.push('Weak, next Micro starts with: ' + fx.weak.map(techName).join(', ') + '.');
     var why = facts.length ? '<ul class="why">' + facts.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' : '';
-    return '<div class="card full">' + meta + committed +
+    return '<div class="card full"><div class="drill-body">' + meta + committed + '</div>' +
       '<div class="reveal grade g' + g.grade + '"><p class="verdict">Grade ' + g.grade + ' of 2, ' + GRADE_WORD[g.grade] + '.</p>' + why +
-      '<button type="button" class="primary" data-act="continue">Continue</button></div></div>';
+      '<button type="button" class="primary" data-act="continue">Next</button></div></div>';
   }
 
-  // Summary: the count, the changes, and the missed prompts with the answer. Solutions sit behind a fold.
+  // A 44px row: technique name and the prompt's first line; a tap shows the answer and the solution in place.
+  function missRowHtml(id, prompt, answer, solution) {
+    var it = IX.itemById[id], tid = it && it.tags ? it.tags[0] : '';
+    var first = String(it ? it.prompt : prompt || '').split('\n')[0];
+    var ans = it ? ansHtml(it, answer) : T.md(answer, true);
+    var sol = it ? field(it, 'solution') : md(solution);
+    return '<div class="mrow"><button type="button" class="mtap" data-act="miss" aria-expanded="false">' +
+      (tid ? '<span class="mn">' + esc(techName(tid)) + '</span>' : '') + '<span class="mg">' + md(first, true) + '</span></button>' +
+      '<div class="mfull" hidden>' + (ans ? '<p class="answer">Answer: ' + ans + '</p>' : '') + '<div class="prose">' + sol + '</div></div></div>';
+  }
+  function missesHtml(rows, title) {
+    return '<div><h3>' + (title || 'Missed') + '</h3><div class="mlist">' + rows.join('') + '</div></div>';
+  }
+  // One signed delta line in hero style: "+3 mastered  +2 started". Nothing moved: no line.
+  function heroLine(parts) {
+    if (!parts.length) return '';
+    return '<p class="pvds pvin">' + parts.map(function (d) { return '<span class="pvd"><b>+' + d[0] + '</b> ' + d[1] + '</span>'; }).join('') + '</p>';
+  }
+  // Session done: the count, what moved, what was missed (expand in place), back to Today.
   function viewSummary() {
-    var s = S.summary, miss = s.missed.map(function (m) {
-      var it = IX.itemById[m.id];
-      var prompt = it ? field(it, 'prompt') : md(m.prompt), sol = it ? field(it, 'solution') : md(m.solution);
-      var ans = it ? ansHtml(it, m.answer) : T.md(m.answer, true);
-      return '<article class="card"><div class="prose">' + prompt + '</div>' +
-        '<p class="answer">Answer: ' + ans + '</p><details class="sol"><summary>Solution</summary><div class="prose">' + sol + '</div></details></article>';
-    }).join('');
-    var deltas = [];
-    if (s.mastered.length) deltas.push('+' + s.mastered.length + ' mastered: ' + s.mastered.join(', '));
-    if (s.introduced.length) deltas.push('New: ' + s.introduced.join(', '));
-    return '<section><p class="anchor">Session ' + s.n + ' done</p>' +
-      '<p class="big">' + s.right + ' of ' + s.scored + '</p>' +
-      (deltas.length ? '<p class="goal">' + esc(deltas.join(' · ')) + '</p>' : '') +
-      (miss ? '<h3>Missed</h3><div class="missed">' + miss + '</div>' : '') +
-      '<button type="button" class="primary" data-act="home" style="margin-top:18px">Back to Today</button></section>';
+    var s = S.summary, deltas = [];
+    if (s.mastered.length) deltas.push([s.mastered.length, 'mastered']);
+    if (s.introduced.length) deltas.push([s.introduced.length, 'started']);
+    var miss = s.missed.map(function (m) { return missRowHtml(m.id, m.prompt, m.answer, m.solution); });
+    return '<section class="pv done card"><p class="anchor">Session ' + s.n + ' done</p>' +
+      (s.scored ? '<p class="big">' + s.right + ' of ' + s.scored + '</p>' : '') + heroLine(deltas) +
+      (s.scored ? (miss.length ? missesHtml(miss) : '<p class="pvk">No misses.</p>') : '') +
+      '<button type="button" class="primary" data-act="home">Back to Today</button></section>';
   }
 
   // ---- Test tab: placement (SPEC 6) and the level exam (SPEC 2.6)
   function placeResultHtml(r) {
-    // Skipped buckets fold into one row per run (a skip is expected until a tier has probes).
-    var rows = '', run = [];
+    // A level with nothing asked is hidden. Skipped buckets fold into one row per run; skips after the last asked tier are dropped.
+    var ent = [], run = [];
     function flush() {
       if (!run.length) return;
       var lbl = run.length > 1 ? run[0].tier + ' to ' + run[run.length - 1].tier : run[0].tier;
-      rows += '<li><span>' + esc(lbl) + '</span><span class="streak">skipped: ' + esc(run[0].reason) + '</span></li>';
+      ent.push({ skip: true, h: '<tr><td>' + esc(lbl) + '</td><td>skipped: ' + esc(run[0].reason) + '</td></tr>' });
       run = [];
     }
     r.buckets.forEach(function (b) {
       if (b.status === 'skip') { if (run.length && run[0].reason.replace(/^\S+ /, '') !== b.reason.replace(/^\S+ /, '')) flush(); run.push(b); return; }
       flush();
-      rows += '<li><span>' + esc(b.tier) + '</span><span class="streak">' + b.right + ' of ' + b.asked + '</span></li>';
+      if (!b.asked) return;
+      ent.push({ skip: false, h: '<tr><td>' + esc(b.tier) + '</td><td>' + b.right + ' of ' + b.asked + '</td></tr>' });
     });
     flush();
-    return '<h3>Placement result</h3><ul class="techs">' + rows + '</ul>';
+    while (ent.length && ent[ent.length - 1].skip) ent.pop();
+    var rows = ent.map(function (e) { return e.h; }).join('');
+    var through = r.placed && r.placed.length ? 'Placed through ' + esc(r.placed[r.placed.length - 1]) + '.' : 'Placed at the start.';
+    return (rows ? '<table class="ptab"><thead><tr><th>Tier</th><th>Right</th></tr></thead><tbody>' + rows + '</tbody></table>' : '') +
+      '<p class="note">' + through + '</p>';
   }
   function examResultHtml(x) {
     var need = Math.ceil(PE.EXAM_PASS * x.total);
-    return '<h3>Level exam</h3><p class="goal">' + esc(x.level) + ': ' + x.right + ' of ' + x.total + '</p>' +
-      '<p class="note">' + (x.pass ? 'Passed. ' + x.fp.length + ' techniques marked known.' : 'Not passed. Need ' + need + '.') + '</p>';
+    return '<div><h3>Level exam</h3><p class="med">' + esc(x.level) + ': ' + x.right + ' of ' + x.total + '</p>' +
+      '<p class="note">' + (x.pass ? 'Passed. ' + x.fp.length + ' techniques marked known.' : 'Not passed. Need ' + need + '.') + '</p></div>';
   }
   function viewTest() {
-    var p = S.prog, ro = S.readonly ? ' disabled' : '', html = '<section><p class="anchor">Test</p>';
+    var p = S.prog, ro = S.readonly ? ' disabled' : '', html = '<section class="pv card">';
     if (p.placedOnce) {
-      html += '<p class="goal">Placed. Next: ' + esc(p.pl ? levelLabel(p.pl) : 'none') + '.</p>';
+      html += '<div><p class="med">Next: ' + esc(p.pl || 'none') + '</p>' + (S.placeResult ? placeResultHtml(S.placeResult) : '') + '</div>';
     } else {
-      html += '<p class="goal">Not placed yet.</p>' +
+      html += '<div><p class="med">Not placed yet.</p>' +
         '<p class="note">About 5 problems per level. No feedback until the end. "I don\'t know" scores 0.</p>' +
-        '<button type="button" class="primary" data-act="place"' + ro + '>Place me</button>';
+        '<button type="button" class="primary" data-act="place"' + ro + '>Place me</button></div>';
     }
-    if (S.placeResult) html += placeResultHtml(S.placeResult);
     var lx = PE.examLevel(p, IX);
     if (lx) {
-      html += '<h3>Level exam</h3><p class="note">' + esc(lx.id + ' · ' + lx.label) + '. 8 micro and 2 full problems. ' +
+      html += '<div><h3>Level exam</h3><p class="note">' + esc(lx.id + ' · ' + lx.label) + '. 8 micro and 2 full problems. ' +
         'Pass at 70% marks the techniques you got right as known.</p>' +
-        '<button type="button" class="primary" data-act="exam"' + ro + '>Start exam</button>';
+        '<button type="button" class="primary" data-act="exam"' + ro + '>Start exam</button></div>';
     }
+    if (S.placeResult && !p.placedOnce) html += '<div>' + placeResultHtml(S.placeResult) + '</div>';
     if (S.examResult) html += examResultHtml(S.examResult);
     if (S.readonly) html += '<p class="note">Read-only: nothing is saved.</p>';
     html += '<p class="data-msg">' + esc(S.msg) + '</p></section>';
@@ -515,52 +601,74 @@
     save(); render();
   }
 
-  // ---- Progress v2: hero with the change since the last visit, level blocks, folded lower levels
-  function levelBlock(p, l) {
+  // ---- Progress v2: hero, goal bar, level blocks (settled and far levels behind Show all), recent misses, settings
+  function techsHtml(p, ts) {
+    if (!ts.length) return '';
+    return '<details class="pvtech"><summary>Techniques</summary>' + ts.map(function (x) {
+      var r = p.tech[x.id] || {};
+      var st = r.m ? 'mastered' : (r.s > 0 ? 'streak ' + r.s : 'new');
+      return '<p class="pvt"><span>' + esc(x.name) + '</span><span class="pvn">' + st + '</span></p>';
+    }).join('') + '</details>';
+  }
+  function levelBlock(p, l, gate) {
     var ts = IX.techsByLevel[l.id] || [];
-    var mastered = ts.filter(function (x) { return p.tech[x.id] && p.tech[x.id].m === 1; }).length;
+    var mastered = masteredIn(p, ts);
     var started = ts.filter(function (x) { return PE.isIntro(p, x.id); }).length;
-    var filled = l.total ? Math.round(l.pct * 10) : 0, cells = '';
-    for (var i = 0; i < 10; i++) cells += '<i class="' + (i < filled ? 'on' : '') + '"></i>';
-    var on = ts.filter(function (x) { return PE.isIntro(p, x.id); });
-    var techs = on.length ? '<details class="lvdet"><summary>Techniques</summary><ul class="techs">' + on.map(function (x) {
-      var r = p.tech[x.id];
-      return '<li><span>' + esc(x.name) + '</span><span class="streak">' + (r.m ? 'Mastered' : (r.prov ? 'Placed' : r.s + ' of ' + IX.cfg.mastered)) + '</span></li>';
-    }).join('') + '</ul></details>' : '';
-    return '<div class="lv"><div class="lv-head"><span>' + esc(l.id + ' · ' + l.label) + '</span>' +
-      '<span>' + l.known + ' of ' + l.total + ' known</span></div>' +
-      '<div class="cells" aria-hidden="true">' + cells + '</div>' +
-      (started ? '<p class="lv-foot">' + mastered + ' mastered · ' + started + ' started</p>' : '') + techs + '</div>';
+    var waiting = gate.held && gate.levels[gate.F].id === l.id;
+    var detail = waiting ? gateLine(gate) : (started ? mastered + ' mastered · ' + started + ' started' : '');
+    return '<div class="pvl' + (waiting ? ' pvo' : '') + '"><p class="pvt"><span>' + esc(l.id + ' · ' + l.label) + '</span>' +
+      '<span class="pvn">' + l.known + ' of ' + l.total + ' known</span></p>' + bar(l.known, mastered, l.total) +
+      (detail ? '<p class="pvs">' + esc(detail) + '</p>' : '') + techsHtml(p, ts) + '</div>';
+  }
+  function recentMisses(p) {
+    var rm = Array.isArray(p.rm) ? p.rm : [];
+    return rm.filter(function (x) { return x && typeof x.id === 'string' && IX.itemById[x.id]; }).slice(0, 5);
+  }
+  // Theme: its own key (pe_<key>_theme); unset follows the system.
+  var THEME_KEY = KEY + '_theme';
+  function applyTheme(v) {
+    if (v) document.documentElement.setAttribute('data-theme', v); else document.documentElement.removeAttribute('data-theme');
+  }
+  function isDark() {
+    var a = document.documentElement.getAttribute('data-theme');
+    if (a) return a === 'dark';
+    try { return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches); } catch (e) { return false; }
+  }
+  function loadTheme() {
+    try { var ls = storageOrNull(), v = ls && ls.getItem(THEME_KEY); if (v === 'dark' || v === 'light') applyTheme(v); } catch (e) { /* unreadable: follow the system */ }
+  }
+  function toggleTheme() {
+    var v = isDark() ? 'light' : 'dark';
+    applyTheme(v);
+    try { var ls = storageOrNull(); if (ls) ls.setItem(THEME_KEY, v); } catch (e) { /* theme lasts this visit */ }
+    render();
   }
   function viewProgress() {
-    var p = S.prog, st = PE.levelStatus(p, IX), gate = PE.gateState(p, IX);
-    var started = IX.techs.filter(function (x) { return PE.isIntro(p, x.id); }).length;
-    var html = '<section><p class="anchor">' + p.sessions + (p.sessions === 1 ? ' session' : ' sessions') + '</p>' +
-      '<p class="goal">' + knownCount(p) + ' of ' + IX.techs.length + ' known · ' + masteredCount(p) + ' mastered · ' + started + ' started</p>';
-    if (S.delta) html += '<p class="delta">' + esc(S.delta) + '</p>';
-    if (gate.held) html += '<p class="gate">' + esc(gate.sentence) + '</p>';
-    // Levels below the first one under 90 percent known fold into one block (the last level always shows).
+    var p = S.prog, st = PE.levelStatus(p, IX), gate = PE.gateState(p, IX), n = p.sessions;
+    var html = '<section class="pv card"><p class="anchor">' + n + (n === 1 ? ' session' : ' sessions') + '</p>' +
+      '<p class="pvds"><span class="pvd"><b>' + masteredCount(p) + '</b> mastered</span></p>';
+    if (S.delta) html += '<p class="pvk">' + esc(S.delta) + '</p>';
+    var lo;
     var firstOpen = -1;
-    st.forEach(function (l, i) { if (firstOpen < 0 && l.total && l.pct < 0.9) firstOpen = i; });
-    var cut = firstOpen < 0 ? st.length - 1 : firstOpen;
-    var folded = st.slice(0, cut), open = st.slice(cut);
-    if (folded.length) {
-      var fk = folded.reduce(function (s, l) { return s + l.known; }, 0), ft = folded.reduce(function (s, l) { return s + l.total; }, 0);
-      var span = folded.length > 1 ? folded[0].id + ' to ' + folded[folded.length - 1].id : folded[0].id;
-      html += '<details class="folded"><summary>' + esc(span) + ' · ' +
-        fk + ' of ' + ft + ' known</summary>' + folded.map(function (l) { return levelBlock(p, l); }).join('') + '</details>';
-    }
-    html += open.map(function (l) { return levelBlock(p, l); }).join('');
+    st.forEach(function (l, i) { if (firstOpen < 0 && l.total && l.known < l.total) firstOpen = i; });
+    lo = firstOpen < 0 ? st.length - 1 : firstOpen;
+    var hi = Math.min(st.length - 1, Math.max(lo + 1, gate.held ? gate.F : 0));
+    var shown = S.showAll ? st : st.slice(lo, hi + 1);
+    html += '<div class="pvls">' + shown.map(function (l) { return levelBlock(p, l, gate); }).join('') + '</div>';
+    if (st.length > hi - lo + 1) html += '<button type="button" class="chip pvall" data-act="show-all">' + (S.showAll ? 'Show less' : 'Show all') + '</button>';
+    var misses = recentMisses(p);
+    if (misses.length) html += missesHtml(misses.map(function (x) { return missRowHtml(x.id, '', x.a, ''); }), 'Recent misses');
     var resetPart = S.ask === 'reset'
       ? '<div class="confirm"><p>Reset all progress? A backup is kept in this browser.</p>' +
         '<button type="button" class="danger" data-act="reset-yes">Reset progress</button> ' +
         '<button type="button" class="ghost" data-act="cancel">Keep progress</button></div>'
-      : '<button type="button" class="danger" data-act="reset">Reset progress</button>';
-    html += '<h3>Your data</h3><div class="data">' +
-      '<button type="button" class="ghost" data-act="export">Export progress (JSON)</button>' +
-      '<label class="file-btn">Import progress (JSON)<input type="file" id="import" accept="application/json,.json"></label>' +
-      resetPart + '</div>' +
-      '<p class="data-msg">' + esc(S.msg) + '</p></section>';
+      : '';
+    html += '<div><h3>Settings</h3><div class="chips" style="margin-top:8px">' +
+      '<button type="button" class="chip' + (isDark() ? ' on' : '') + '" data-act="theme" aria-pressed="' + isDark() + '">Dark theme</button>' +
+      '<button type="button" class="chip" data-act="export">Export</button>' +
+      '<label class="chip">Import<input type="file" id="import" accept="application/json,.json"></label>' +
+      (S.ask === 'reset' ? '' : '<button type="button" class="chip danger" data-act="reset">Reset</button>') + '</div>' +
+      resetPart + '<p class="data-msg">' + esc(S.msg) + '</p></div></section>';
     return html;
   }
   // Entering Progress: the change since the last visit, then the new visit point is saved.
@@ -592,10 +700,20 @@
     el.textContent = 'Read as ' + shown;
   }
 
+  // The scroll resets when the view or the card changes, not when an answer opens the reveal (the stimulus stays put).
+  function viewKey() {
+    if (S.summary) return 'summary';
+    if (S.sess) {
+      var c = PE.currentCard(S.sess);
+      return 'd' + S.sess.pos + ':' + (c && c.type === 'full' ? (c.commit ? 1 : 0) + '' + (c.graded ? 1 : 0) : '');
+    }
+    return S.tab;
+  }
   function render() {
     syncSession();
-    var nav = document.getElementById('tabs');
-    nav.hidden = !!(S.sess || S.summary);
+    var nav = document.getElementById('tabs'), tabs = !(S.sess || S.summary);
+    nav.hidden = !tabs;
+    document.body.classList.toggle('hastabs', tabs);
     ['today', 'test', 'progress'].forEach(function (t) {
       document.getElementById('tab-' + t).setAttribute('aria-selected', String(S.tab === t));
     });
@@ -607,17 +725,55 @@
     else if (S.tab === 'progress') root.innerHTML = viewProgress();
     else if (S.tab === 'test') root.innerHTML = viewTest();
     else root.innerHTML = viewToday();
+    document.getElementById('pack-name').textContent = stepTitle();
+    document.getElementById('hdr-right').innerHTML = headRight();
     if (clockRead()) startClock(); else stopClock();
-    window.scrollTo(0, 0);
+    var vk = viewKey();
+    if (vk !== S.lastView) { S.lastView = vk; window.scrollTo(0, 0); }
     var inp = document.getElementById('ans');
     if (inp && S.sess && !S.reveal) {
       var cc = PE.currentCard(S.sess);
       if (cc && cc.type === 'code' && !S.draft) S.draft = cc.item.answer.starter || '';
     }
     if (inp) { inp.value = S.draft; inp.focus(); }
+    // after an answer, Next stays in view without moving the stimulus
+    // (only the render that opened the reveal, and never over the quit confirm)
+    var scrollNext = S.revealScroll; S.revealScroll = false;
+    if (scrollNext && S.sess && S.reveal && !S.ask) {
+      var nx = root.querySelector('.reveal .primary');
+      if (nx && nx.scrollIntoView) nx.scrollIntoView({ block: 'nearest' });
+    }
     updateEcho();
     warmCode();
+    markOverflow();
+    requestAnimationFrame(markOverflow);
   }
+  // Display math: shrink a wide block to fit (floor 72%); the edge-shadow scroll cue shows only on a block that still overflows.
+  function markOverflow() {
+    Array.prototype.forEach.call(root.querySelectorAll('.teach .katex-display'), function (el) {
+      el.style.fontSize = '';
+      var over = el.scrollWidth > el.clientWidth + 1;
+      if (over) {
+        // Shrink a wide block to fit, down to 72% of its styled size (measured in px, so the mobile .9em rule
+        // is multiplied, not replaced); only a block still too wide after that scrolls and gets the cue.
+        var base = parseFloat(getComputedStyle(el).fontSize) || 16;
+        var k = Math.max(0.72, el.clientWidth / el.scrollWidth);
+        el.style.fontSize = (base * k).toFixed(2) + 'px';
+        over = el.scrollWidth > el.clientWidth + 1;
+        // Width is not linear in font size: step down a little further while it still overflows and room remains.
+        for (var step = 0; over && k > 0.72 && step < 6; step++) {
+          k = Math.max(0.72, k - 0.02);
+          el.style.fontSize = (base * k).toFixed(2) + 'px';
+          over = el.scrollWidth > el.clientWidth + 1;
+        }
+      }
+      el.classList.toggle('ovf', over);
+    });
+  }
+  window.addEventListener('resize', markOverflow);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(markOverflow);
+  // KaTeX fonts load lazily per glyph set; a card that pulls in a new face changes width after the render pass.
+  if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', markOverflow);
 
   function secondsSince() { return Math.max(0, Math.floor((Date.now() - S.cardStart) / 1000)); }
 
@@ -661,16 +817,17 @@
     var card = PE.currentCard(S.sess);
     var r = PE.answerCard(S.prog, IX, S.sess, response, secondsSince());
     if (r.unparsable) { S.hint = unparsableHint(r); render(); return; }
+    if (!S.readonly) PE.noteMiss(S.prog, card, r);
     // The choice-card note shows once per session: the first reveal where it applies sets the flag.
     var tc = S.prog.tech[card.tech], choiceHold = r.ok && !r.requeue && !card.requeued && tc && tc.s >= PE.PRODUCTION_STREAK && !PE.isProduction(card.type);
     if (choiceHold && !S.sess.choiceNoted) { r.choiceNote = true; S.sess.choiceNoted = true; }
     if (card.type === 'code' && S.codeReport) {
       var cr = S.codeReport;
       r.code = { line: A.codeFailLine(card.item.answer, cr), err: cr.error === 'runtime-error' ? 'Error: ' + cr.detail : cr.error === 'timeout' ? 'Timed out after ' + (PY_WALL_MS / 1000) + ' s.' : '',
-        stdout: cr.stdout || '', parsed: cr.parsed, tests: cr.tests || [] };
+        src: S.draft, stdout: cr.stdout || '', parsed: cr.parsed, tests: cr.tests || [] };
     }
     S.codeReport = null;
-    S.reveal = r; S.hint = ''; S.draft = '';
+    S.reveal = r; S.hint = ''; S.draft = ''; S.revealScroll = true;
     save(); render();
   }
 
@@ -729,7 +886,7 @@
     return JSON.stringify(S.prog, null, 2);
   }
 
-  root.addEventListener('click', function (e) {
+  function onAct(e) {
     var el = e.target.closest('[data-act]');
     if (!el) return;
     var act = el.getAttribute('data-act');
@@ -742,6 +899,13 @@
     else if (act === 'run') runCode('run');
     else if (act === 'code-skip') skipCode();
     else if (act === 'continue') next();
+    else if (act === 'to-progress') { visitProgress(); S.tab = 'progress'; S.msg = ''; S.ask = null; render(); }
+    else if (act === 'show-all') { S.showAll = !S.showAll; render(); }
+    else if (act === 'theme') toggleTheme();
+    else if (act === 'miss') {
+      var full = el.nextElementSibling;
+      if (full) { full.hidden = !full.hidden; el.setAttribute('aria-expanded', String(!full.hidden)); }
+    }
     else if (act === 'quit') { S.ask = 'quit'; render(); }
     else if (act === 'quit-yes') { S.sess = null; S.ask = null; S.tab = 'today'; render(); }
     else if (act === 'home') { S.summary = null; S.tab = 'today'; render(); }
@@ -757,7 +921,9 @@
       if (r.ok) { S.sess = null; S.reveal = null; S.summary = null; }
       S.msg = r.msg; S.ask = null; S.delta = null; render();
     }
-  });
+  }
+  root.addEventListener('click', onAct);
+  document.getElementById('hdr-right').addEventListener('click', onAct);
   root.addEventListener('submit', function (e) {
     if (e.target.id === 'typed') {
       e.preventDefault();
@@ -827,8 +993,8 @@
   }
 
   document.getElementById('update').addEventListener('click', function () { location.reload(); });
-  document.getElementById('pack-name').textContent = DATA.pack.name;
   document.title = DATA.pack.name;
+  loadTheme();
   store.open(S);
   if (!resumeParked()) S.cardStart = Date.now();
   render();

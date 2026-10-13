@@ -327,4 +327,12 @@ S.check('A3 domain [1,1] is bad-spec', A.check({ kind: 'expression', value: 'x^2
   S.check('R9 read-only export writes the stored record', exported === other, exported && exported.slice(0, 80));
 }
 
+// ---- UI port review: theme key, storage guard, no prog.theme writes
+{
+  const app = fs.readFileSync(path.join(ROOT, 'engine', 'app.js'), 'utf8');
+  S.check('U1 app.js never assigns prog.theme', !/prog\.theme\s*=[^=]/.test(app));
+  S.check('U2 THEME_KEY is KEY + _theme', /THEME_KEY\s*=\s*KEY\s*\+\s*'_theme'/.test(app));
+  S.check('U3 storage listener guard is e.key !== KEY', /addEventListener\('storage',[\s\S]{0,80}e\.key !== KEY/.test(app));
+}
+
 S.done();

@@ -1,0 +1,3992 @@
+[
+ {
+  "id": "t9-k001",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.causal-po"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `naive_bias(y1, y0, t)` returning, as a float, the naive observed gap (mean observed outcome of treated minus control) minus the true sample ATE. The lists hold each unit's potential outcomes Y(1) and Y(0) and its 0/1 treatment flag, and the observed outcome is Y(1) if treated, else Y(0). Both groups are non-empty.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "naive_bias",
+   "tests": [
+    {
+     "args": [
+      [
+       5,
+       7,
+       6,
+       8
+      ],
+      [
+       3,
+       4,
+       6,
+       5
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ]
+     ],
+     "expect": -1.0
+    },
+    {
+     "args": [
+      [
+       5,
+       7,
+       6,
+       8
+      ],
+      [
+       3,
+       4,
+       6,
+       5
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "expect": -1.5
+    },
+    {
+     "args": [
+      [
+       2,
+       2,
+       2,
+       2
+      ],
+      [
+       2,
+       2,
+       2,
+       2
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       10,
+       3,
+       8,
+       4
+      ],
+      [
+       6,
+       3,
+       5,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0
+      ]
+     ],
+     "expect": -0.5
+    },
+    {
+     "args": [
+      [
+       9,
+       9
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "expect": 0.0
+    }
+   ],
+   "starter": "def naive_bias(y1, y0, t):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Observe one outcome per unit, take the treated-minus-control gap, then subtract the gap you would see if you knew every effect.\n\n```python\ndef naive_bias(y1, y0, t):\n    obs = [a if k else b for a, b, k in zip(y1, y0, t)]\n    m = lambda xs: sum(xs) / len(xs)\n    naive = m([o for o, k in zip(obs, t) if k]) - m([o for o, k in zip(obs, t) if not k])\n    return naive - m([a - b for a, b in zip(y1, y0)])\n```",
+  "hints": [
+   "Build the observed outcome list first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k002",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.causal-po"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `att_ate_atu(y1, y0, t)` returning a list `[ATE, ATT, ATU]` of floats from each unit's potential outcomes Y(1), Y(0) and 0/1 treatment flag. ATT averages the unit effects Y(1)-Y(0) over treated units and ATU over untreated units. An average over no units is 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "att_ate_atu",
+   "tests": [
+    {
+     "args": [
+      [
+       5,
+       7,
+       6,
+       8
+      ],
+      [
+       3,
+       4,
+       6,
+       5
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ]
+     ],
+     "expect": [
+      2.0,
+      1.0,
+      3.0
+     ]
+    },
+    {
+     "args": [
+      [
+       5,
+       7,
+       6,
+       8
+      ],
+      [
+       3,
+       4,
+       6,
+       5
+      ],
+      [
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "expect": [
+      2.0,
+      2.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "expect": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       4,
+       6,
+       9
+      ],
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       1,
+       0,
+       0
+      ]
+     ],
+     "expect": [
+      4.333333333333333,
+      3.0,
+      5.0
+     ]
+    },
+    {
+     "args": [
+      [],
+      [],
+      []
+     ],
+     "expect": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    }
+   ],
+   "starter": "def att_ate_atu(y1, y0, t):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Average the unit-level effects over all units, over the treated, and over the untreated.\n\n```python\ndef att_ate_atu(y1, y0, t):\n    eff = [a - b for a, b in zip(y1, y0)]\n    def m(xs):\n        return sum(xs) / len(xs) if xs else 0.0\n    return [m(eff), m([e for e, k in zip(eff, t) if k]), m([e for e, k in zip(eff, t) if not k])]\n```",
+  "hints": [
+   "Compute the effect list once, then average subsets."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k003",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.causal-dag"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `adjusted_effect(rows)` returning the back-door adjusted effect of T on Y as a float. Each row is `[z, t, y]` with a discrete confounder `z` and a 0/1 treatment `t`. Within each `z` take mean Y of treated minus mean Y of control, then average these gaps weighted by the share of rows in each `z`; every `z` has both arms.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "adjusted_effect",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        0,
+        1,
+        9
+       ],
+       [
+        0,
+        1,
+        7
+       ],
+       [
+        0,
+        0,
+        8
+       ],
+       [
+        1,
+        1,
+        5
+       ],
+       [
+        1,
+        0,
+        2
+       ],
+       [
+        1,
+        0,
+        4
+       ],
+       [
+        1,
+        0,
+        3
+       ]
+      ]
+     ],
+     "expect": 1.1428571428571428
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        1,
+        3
+       ],
+       [
+        0,
+        0,
+        1
+       ]
+      ]
+     ],
+     "expect": 2.0
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        1,
+        10
+       ],
+       [
+        0,
+        0,
+        6
+       ],
+       [
+        1,
+        1,
+        3
+       ],
+       [
+        1,
+        0,
+        3
+       ],
+       [
+        1,
+        0,
+        3
+       ],
+       [
+        1,
+        0,
+        3
+       ]
+      ]
+     ],
+     "expect": 1.3333333333333333
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        1,
+        5
+       ],
+       [
+        0,
+        0,
+        5
+       ],
+       [
+        1,
+        1,
+        2
+       ],
+       [
+        1,
+        0,
+        4
+       ]
+      ]
+     ],
+     "expect": -1.0
+    }
+   ],
+   "starter": "def adjusted_effect(rows):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Back-door adjustment: compare treated with control inside each confounder stratum, then average with stratum weights.\n\n```python\ndef adjusted_effect(rows):\n    tot = 0.0\n    for z in set(r[0] for r in rows):\n        g = [r for r in rows if r[0] == z]\n        m = lambda k: sum(r[2] for r in g if r[1] == k) / sum(1 for r in g if r[1] == k)\n        tot += len(g) / len(rows) * (m(1) - m(0))\n    return tot\n```",
+  "hints": [
+   "Loop over the distinct z values."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.causal-dag"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `common_causes(edges, t, y)` returning the sorted list of node names that are ancestors of both `t` and `y`. `edges` is a list of `[parent, child]` pairs of an acyclic graph, and an ancestor is any node with a directed path into the target. A node is not its own ancestor.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "common_causes",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        "Z",
+        "T"
+       ],
+       [
+        "Z",
+        "Y"
+       ],
+       [
+        "T",
+        "Y"
+       ]
+      ],
+      "T",
+      "Y"
+     ],
+     "expect": [
+      "Z"
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        "T",
+        "M"
+       ],
+       [
+        "M",
+        "Y"
+       ]
+      ],
+      "T",
+      "Y"
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       [
+        "Z",
+        "W"
+       ],
+       [
+        "W",
+        "T"
+       ],
+       [
+        "W",
+        "Y"
+       ]
+      ],
+      "T",
+      "Y"
+     ],
+     "expect": [
+      "W",
+      "Z"
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        "T",
+        "C"
+       ],
+       [
+        "Y",
+        "C"
+       ]
+      ],
+      "T",
+      "Y"
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [],
+      "T",
+      "Y"
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       [
+        "A",
+        "T"
+       ],
+       [
+        "B",
+        "Y"
+       ],
+       [
+        "A",
+        "B"
+       ]
+      ],
+      "T",
+      "Y"
+     ],
+     "expect": [
+      "A"
+     ]
+    }
+   ],
+   "starter": "def common_causes(edges, t, y):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Back-door candidates are common ancestors: collect each target's ancestors, then intersect.\n\n```python\ndef common_causes(edges, t, y):\n    def anc(n, seen):\n        for a, b in edges:\n            if b == n and a not in seen:\n                seen.add(a)\n                anc(a, seen)\n        return seen\n    return sorted(anc(t, set()) & anc(y, set()))\n```",
+  "hints": [
+   "Walk the edges backwards from each target."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.causal-quasi"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `did(rows)` returning the difference-in-differences estimate as a float. Each row is `[group, period, y]` with group `\"T\"` or `\"C\"` and period 0 (before) or 1 (after). Use the mean of `y` in each group-period cell: (T after - T before) - (C after - C before).",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "did",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        "T",
+        0,
+        10
+       ],
+       [
+        "T",
+        1,
+        16
+       ],
+       [
+        "C",
+        0,
+        12
+       ],
+       [
+        "C",
+        1,
+        15
+       ]
+      ]
+     ],
+     "expect": 3.0
+    },
+    {
+     "args": [
+      [
+       [
+        "T",
+        0,
+        4
+       ],
+       [
+        "T",
+        0,
+        6
+       ],
+       [
+        "T",
+        1,
+        9
+       ],
+       [
+        "T",
+        1,
+        11
+       ],
+       [
+        "C",
+        0,
+        3
+       ],
+       [
+        "C",
+        1,
+        5
+       ]
+      ]
+     ],
+     "expect": 3.0
+    },
+    {
+     "args": [
+      [
+       [
+        "T",
+        0,
+        1
+       ],
+       [
+        "T",
+        1,
+        1
+       ],
+       [
+        "C",
+        0,
+        1
+       ],
+       [
+        "C",
+        1,
+        1
+       ]
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       [
+        "T",
+        0,
+        8
+       ],
+       [
+        "T",
+        1,
+        5
+       ],
+       [
+        "C",
+        0,
+        8
+       ],
+       [
+        "C",
+        0,
+        10
+       ],
+       [
+        "C",
+        1,
+        9
+       ],
+       [
+        "C",
+        1,
+        9
+       ]
+      ]
+     ],
+     "expect": -3.0
+    }
+   ],
+   "starter": "def did(rows):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Subtract the control group's before-after change from the treated group's change.\n\n```python\ndef did(rows):\n    def m(g, p):\n        v = [y for a, b, y in rows if a == g and b == p]\n        return sum(v) / len(v)\n    return (m(\"T\", 1) - m(\"T\", 0)) - (m(\"C\", 1) - m(\"C\", 0))\n```",
+  "hints": [
+   "Write a small cell-mean helper."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.causal-quasi"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `ipw_ate(t, y, ps)` returning the inverse-probability-weighted ATE as a float: the mean over all units of `t*y/ps` minus the mean over all units of `(1-t)*y/(1-ps)`. Inputs are equal-length lists of 0/1 treatment flags, outcomes and propensity scores strictly between 0 and 1.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "ipw_ate",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       10,
+       6,
+       8,
+       4
+      ],
+      [
+       0.5,
+       0.5,
+       0.5,
+       0.5
+      ]
+     ],
+     "expect": 4.0
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       9,
+       2,
+       4,
+       6
+      ],
+      [
+       0.25,
+       0.25,
+       0.25,
+       0.25
+      ]
+     ],
+     "expect": 5.0
+    },
+    {
+     "args": [
+      [
+       1,
+       1
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       0.5,
+       0.5
+      ]
+     ],
+     "expect": 8.0
+    },
+    {
+     "args": [
+      [
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       5,
+       9,
+       7,
+       3
+      ],
+      [
+       0.2,
+       0.8,
+       0.4,
+       0.5
+      ]
+     ],
+     "expect": -0.16666666666666696
+    }
+   ],
+   "starter": "def ipw_ate(t, y, ps):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Weight each treated outcome by 1/ps and each control outcome by 1/(1-ps), then take the two means over all units.\n\n```python\ndef ipw_ate(t, y, ps):\n    n = len(t)\n    a = sum(k * v / p for k, v, p in zip(t, y, ps)) / n\n    b = sum((1 - k) * v / (1 - p) for k, v, p in zip(t, y, ps)) / n\n    return a - b\n```",
+  "hints": [
+   "Divide both sums by the total number of units."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ts-decomp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `autocorr(y, k)` returning the sample autocorrelation at lag `k` as a float: the sum over t >= k of (y[t]-m)(y[t-k]-m), divided by the sum of (y[t]-m)^2 over all points, where m is the series mean. A constant series returns 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "autocorr",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      1
+     ],
+     "expect": 0.4
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      0
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      2
+     ],
+     "expect": -0.1
+    },
+    {
+     "args": [
+      [
+       4,
+       4,
+       4,
+       4
+      ],
+      1
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       2,
+       5,
+       1,
+       6,
+       2,
+       5
+      ],
+      3
+     ],
+     "expect": -0.45348837209302323
+    }
+   ],
+   "starter": "def autocorr(y, k):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Centre the series, then divide the lagged cross-products by the total squared deviation.\n\n```python\ndef autocorr(y, k):\n    m = sum(y) / len(y)\n    den = sum((v - m) ** 2 for v in y)\n    num = sum((y[i] - m) * (y[i - k] - m) for i in range(k, len(y)))\n    return num / den if den else 0.0\n```",
+  "hints": [
+   "The denominator uses all points, the numerator only t >= k."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ts-decomp"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `seasonal_effects(y, period)` returning a list of `period` floats: for each phase p (0-indexed, values `y[p], y[p+period], ...`) the mean of that phase minus the mean of the whole series. The series has at least `period` values.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "seasonal_effects",
+   "tests": [
+    {
+     "args": [
+      [
+       10,
+       14,
+       12,
+       20,
+       12,
+       16,
+       14,
+       22
+      ],
+      4
+     ],
+     "expect": [
+      -4.0,
+      0.0,
+      -2.0,
+      6.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      3
+     ],
+     "expect": [
+      -1.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "args": [
+      [
+       5,
+       7,
+       9
+      ],
+      1
+     ],
+     "expect": [
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       3,
+       9,
+       6,
+       12,
+       3
+      ],
+      2
+     ],
+     "expect": [
+      -2.5999999999999996,
+      3.9000000000000004
+     ]
+    },
+    {
+     "args": [
+      [
+       8,
+       8,
+       8,
+       8
+      ],
+      2
+     ],
+     "expect": [
+      0.0,
+      0.0
+     ]
+    }
+   ],
+   "starter": "def seasonal_effects(y, period):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Estimate each season's effect as its phase mean less the grand mean.\n\n```python\ndef seasonal_effects(y, period):\n    m = sum(y) / len(y)\n    out = []\n    for p in range(period):\n        v = y[p::period]\n        out.append(sum(v) / len(v) - m)\n    return out\n```",
+  "hints": [
+   "Slice with y[p::period]."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ts-arima"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `ar_forecast(y, phi, c, h)` returning a list of the next `h` forecasts of an AR(p) model `y_t = c + phi[0]*y_{t-1} + phi[1]*y_{t-2} + ...` with zero-mean noise. Feed each forecast back in as history for the next step; `h = 0` returns `[]`. `y` holds at least `len(phi)` values.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "ar_forecast",
+   "tests": [
+    {
+     "args": [
+      [
+       2,
+       4
+      ],
+      [
+       0.5
+      ],
+      1,
+      3
+     ],
+     "expect": [
+      3.0,
+      2.5,
+      2.25
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       0.5,
+       0.25
+      ],
+      0,
+      2
+     ],
+     "expect": [
+      2.0,
+      1.75
+     ]
+    },
+    {
+     "args": [
+      [
+       5
+      ],
+      [
+       0.9
+      ],
+      0,
+      0
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       10,
+       20
+      ],
+      [
+       1.0
+      ],
+      0,
+      2
+     ],
+     "expect": [
+      20.0,
+      20.0
+     ]
+    },
+    {
+     "args": [
+      [
+       3,
+       1,
+       4
+      ],
+      [
+       0.2,
+       0.3,
+       0.4
+      ],
+      1,
+      3
+     ],
+     "expect": [
+      3.3000000000000003,
+      3.2600000000000002,
+      4.242
+     ]
+    }
+   ],
+   "starter": "def ar_forecast(y, phi, c, h):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Iterate the recursion, appending each forecast to the history.\n\n```python\ndef ar_forecast(y, phi, c, h):\n    hist = list(y)\n    for _ in range(h):\n        hist.append(c + sum(p * hist[-i] for i, p in enumerate(phi, 1)))\n    return hist[len(y):]\n```",
+  "hints": [
+   "Lag 1 is hist[-1], lag 2 is hist[-2]."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k010",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ts-arima"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `ma1_residuals(y, theta)` returning the list of residuals of a zero-mean MA(1) model `y_t = e_t + theta*e_{t-1}`. Recover them recursively as `e_t = y_t - theta*e_{t-1}`, starting from `e_{-1} = 0`. Return floats, one per observation, `[]` for an empty series.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "ma1_residuals",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2,
+       3
+      ],
+      0.5
+     ],
+     "expect": [
+      1.0,
+      1.5,
+      2.25
+     ]
+    },
+    {
+     "args": [
+      [
+       4,
+       -2,
+       6,
+       0
+      ],
+      -0.5
+     ],
+     "expect": [
+      4.0,
+      0.0,
+      6.0,
+      3.0
+     ]
+    },
+    {
+     "args": [
+      [
+       3,
+       3
+      ],
+      0.0
+     ],
+     "expect": [
+      3.0,
+      3.0
+     ]
+    },
+    {
+     "args": [
+      [],
+      0.7
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       2,
+       0,
+       0,
+       0
+      ],
+      1.0
+     ],
+     "expect": [
+      2.0,
+      -2.0,
+      2.0,
+      -2.0
+     ]
+    }
+   ],
+   "starter": "def ma1_residuals(y, theta):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Invert the MA recursion: each residual is the observation less theta times the previous residual.\n\n```python\ndef ma1_residuals(y, theta):\n    e, prev = [], 0.0\n    for v in y:\n        prev = v - theta * prev\n        e.append(prev)\n    return e\n```",
+  "hints": [
+   "Carry the previous residual in one variable."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k011",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ts-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `rolling_mae(y, n0)` returning the mean absolute error of expanding-window forecasts as a float. For each t from `n0` to the end (0-indexed, `n0 >= 1`), forecast `y[t]` by the mean of all earlier values `y[:t]`. If there is no forecast, return 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "rolling_mae",
+   "tests": [
+    {
+     "args": [
+      [
+       10,
+       12,
+       14,
+       16
+      ],
+      2
+     ],
+     "expect": 3.5
+    },
+    {
+     "args": [
+      [
+       10,
+       12,
+       14,
+       16
+      ],
+      1
+     ],
+     "expect": 3.0
+    },
+    {
+     "args": [
+      [
+       10,
+       12,
+       14,
+       16
+      ],
+      4
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       5,
+       5,
+       5,
+       5,
+       9
+      ],
+      2
+     ],
+     "expect": 1.3333333333333333
+    },
+    {
+     "args": [
+      [
+       3,
+       9,
+       6,
+       12,
+       0,
+       3
+      ],
+      3
+     ],
+     "expect": 5.5
+    }
+   ],
+   "starter": "def rolling_mae(y, n0):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Refit at every origin using only the past, then average the absolute errors.\n\n```python\ndef rolling_mae(y, n0):\n    errs = [abs(y[t] - sum(y[:t]) / t) for t in range(n0, len(y))]\n    return sum(errs) / len(errs) if errs else 0.0\n```",
+  "hints": [
+   "Use only y[:t] when forecasting y[t]."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k012",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ts-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `rolling_splits(n, min_train, horizon, step)` returning a list of `[train_size, test_end]` pairs for a rolling-origin evaluation of a series of `n` points. Origins start at `min_train` and advance by `step`; each split trains on points `0..origin-1` and tests on `origin..origin+horizon-1`, so `test_end = origin + horizon`. Only keep splits whose `test_end <= n`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "rolling_splits",
+   "tests": [
+    {
+     "args": [
+      6,
+      3,
+      2,
+      1
+     ],
+     "expect": [
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       6
+      ]
+     ]
+    },
+    {
+     "args": [
+      10,
+      4,
+      1,
+      2
+     ],
+     "expect": [
+      [
+       4,
+       5
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       8,
+       9
+      ]
+     ]
+    },
+    {
+     "args": [
+      10,
+      4,
+      3,
+      3
+     ],
+     "expect": [
+      [
+       4,
+       7
+      ],
+      [
+       7,
+       10
+      ]
+     ]
+    },
+    {
+     "args": [
+      5,
+      5,
+      1,
+      1
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      12,
+      6,
+      2,
+      2
+     ],
+     "expect": [
+      [
+       6,
+       8
+      ],
+      [
+       8,
+       10
+      ],
+      [
+       10,
+       12
+      ]
+     ]
+    },
+    {
+     "args": [
+      4,
+      2,
+      3,
+      1
+     ],
+     "expect": []
+    }
+   ],
+   "starter": "def rolling_splits(n, min_train, horizon, step):\n    ..."
+  },
+  "solution": "Slide the origin forward and stop once the test window would run past the end.\n\n```python\ndef rolling_splits(n, min_train, horizon, step):\n    return [[o, o + horizon] for o in range(min_train, n - horizon + 1, step)]\n```",
+  "hints": [
+   "Largest allowed origin is n - horizon."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-conj"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `beta_posterior(a, b, s, n)` for a Beta(a, b) prior and `s` successes in `n` Bernoulli trials. Return `[a_post, b_post, mean, variance]` as floats, with the Beta variance `ab / ((a+b)^2 (a+b+1))`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "beta_posterior",
+   "tests": [
+    {
+     "args": [
+      2,
+      2,
+      6,
+      10
+     ],
+     "expect": [
+      8,
+      6,
+      0.5714285714285714,
+      0.0163265306122449
+     ]
+    },
+    {
+     "args": [
+      1,
+      1,
+      3,
+      3
+     ],
+     "expect": [
+      4,
+      1,
+      0.8,
+      0.02666666666666667
+     ]
+    },
+    {
+     "args": [
+      3,
+      7,
+      2,
+      5
+     ],
+     "expect": [
+      5,
+      10,
+      0.3333333333333333,
+      0.013888888888888888
+     ]
+    },
+    {
+     "args": [
+      1,
+      1,
+      0,
+      0
+     ],
+     "expect": [
+      1,
+      1,
+      0.5,
+      0.08333333333333333
+     ]
+    },
+    {
+     "args": [
+      0.5,
+      0.5,
+      0,
+      4
+     ],
+     "expect": [
+      0.5,
+      4.5,
+      0.1,
+      0.015
+     ]
+    }
+   ],
+   "starter": "def beta_posterior(a, b, s, n):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Beta prior plus binomial data gives Beta(a+s, b+n-s).\n\n```python\ndef beta_posterior(a, b, s, n):\n    a2, b2 = a + s, b + n - s\n    return [a2, b2, a2 / (a2 + b2), a2 * b2 / ((a2 + b2) ** 2 * (a2 + b2 + 1))]\n```",
+  "hints": [
+   "Add successes to a, failures to b."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-conj"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `gamma_poisson(alpha, beta, counts, exposures)` for a Gamma(alpha, beta) prior on a Poisson rate, with rate parameter `beta` so the prior mean is alpha/beta. Observed `counts[i]` events occurred over `exposures[i]` time units. Return `[alpha_post, beta_post, posterior_mean]` as floats; empty data returns the prior.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "gamma_poisson",
+   "tests": [
+    {
+     "args": [
+      2,
+      1,
+      [
+       3,
+       5,
+       4
+      ],
+      [
+       1,
+       1,
+       1
+      ]
+     ],
+     "expect": [
+      14,
+      4,
+      3.5
+     ]
+    },
+    {
+     "args": [
+      1,
+      1,
+      [
+       10
+      ],
+      [
+       2.5
+      ]
+     ],
+     "expect": [
+      11,
+      3.5,
+      3.142857142857143
+     ]
+    },
+    {
+     "args": [
+      3,
+      2,
+      [],
+      []
+     ],
+     "expect": [
+      3,
+      2,
+      1.5
+     ]
+    },
+    {
+     "args": [
+      0.5,
+      0.5,
+      [
+       0,
+       0
+      ],
+      [
+       4,
+       6
+      ]
+     ],
+     "expect": [
+      0.5,
+      10.5,
+      0.047619047619047616
+     ]
+    },
+    {
+     "args": [
+      4,
+      2,
+      [
+       6,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "expect": [
+      12,
+      6,
+      2.0
+     ]
+    }
+   ],
+   "starter": "def gamma_poisson(alpha, beta, counts, exposures):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Gamma-Poisson: alpha adds the total count, beta adds the total exposure.\n\n```python\ndef gamma_poisson(alpha, beta, counts, exposures):\n    a2, b2 = alpha + sum(counts), beta + sum(exposures)\n    return [a2, b2, a2 / b2]\n```",
+  "hints": [
+   "Sum counts and exposures separately."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-mcmc"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "A function `target(x) = exp(-x*x/2)` (unnormalised standard normal) is already defined. Write `mh_run(start, steps, us)` returning the list of chain states after each iteration of Metropolis sampling: propose `x + steps[i]`, and accept if `us[i] < target(proposal) / target(x)`, otherwise stay. The inputs have equal length; an empty input returns `[]`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "mh_run",
+   "tests": [
+    {
+     "args": [
+      0,
+      [
+       1,
+       0.5,
+       -2
+      ],
+      [
+       0.5,
+       0.3,
+       0.9
+      ]
+     ],
+     "expect": [
+      1,
+      1.5,
+      -0.5
+     ]
+    },
+    {
+     "args": [
+      3,
+      [
+       -1,
+       -1,
+       -1
+      ],
+      [
+       0.99,
+       0.99,
+       0.99
+      ]
+     ],
+     "expect": [
+      2,
+      1,
+      0
+     ]
+    },
+    {
+     "args": [
+      0,
+      [],
+      []
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      0,
+      [
+       2,
+       -2,
+       2
+      ],
+      [
+       0.5,
+       0.01,
+       0.9
+      ]
+     ],
+     "expect": [
+      0,
+      -2,
+      0
+     ]
+    },
+    {
+     "args": [
+      1,
+      [
+       0,
+       0
+      ],
+      [
+       0.5,
+       0.999
+      ]
+     ],
+     "expect": [
+      1,
+      1
+     ]
+    }
+   ],
+   "starter": "def mh_run(start, steps, us):\n    ...",
+   "tol": 1e-09,
+   "setup": "import math\n\ndef target(x):\n    return math.exp(-x * x / 2)"
+  },
+  "solution": "A move to a higher-density point always passes; a lower one passes with probability equal to the density ratio.\n\n```python\ndef mh_run(start, steps, us):\n    x, out = start, []\n    for s, u in zip(steps, us):\n        if u < target(x + s) / target(x):\n            x = x + s\n        out.append(x)\n    return out\n```",
+  "hints": [
+   "Compare u against the density ratio at the proposal."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.bayes-mcmc"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `rhat(chains)` returning the Gelman-Rubin statistic as a float, for `m >= 2` chains of equal length `n >= 2`. Let W be the mean of the chains' sample variances (divisor n-1) and B be n times the sample variance (divisor m-1) of the chain means. Return `sqrt(((n-1)/n * W + B/n) / W)`; W is positive.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "rhat",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        1,
+        2,
+        3
+       ],
+       [
+        1,
+        2,
+        3
+       ]
+      ]
+     ],
+     "expect": 0.816496580927726
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        2,
+        3,
+        4
+       ],
+       [
+        11,
+        12,
+        13,
+        14
+       ]
+      ]
+     ],
+     "expect": 5.545268253204709
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        2,
+        1,
+        3
+       ],
+       [
+        1,
+        3,
+        0,
+        2
+       ],
+       [
+        2,
+        0,
+        3,
+        1
+       ]
+      ]
+     ],
+     "expect": 0.8660254037844386
+    },
+    {
+     "args": [
+      [
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        8
+       ]
+      ]
+     ],
+     "expect": 0.8660254037844386
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        3,
+        2
+       ],
+       [
+        2,
+        2,
+        5
+       ]
+      ]
+     ],
+     "expect": 0.9574271077563381
+    }
+   ],
+   "starter": "def rhat(chains):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "R-hat compares between-chain to within-chain variance; chains that agree give a value near 1 or below it.\n\n```python\ndef rhat(chains):\n    n = len(chains[0])\n    var = lambda xs: sum((v - sum(xs) / len(xs)) ** 2 for v in xs) / (len(xs) - 1)\n    W = sum(var(c) for c in chains) / len(chains)\n    B = n * var([sum(c) / n for c in chains])\n    return (((n - 1) / n * W + B / n) / W) ** 0.5\n```",
+  "hints": [
+   "Compute W and B first, then combine."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-cf"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `cosine_sim(u, v)` returning the cosine similarity of two equal-length numeric vectors as a float. If either vector has zero norm (all zeros), return 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "cosine_sim",
+   "tests": [
+    {
+     "args": [
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ]
+     ],
+     "expect": 0.96
+    },
+    {
+     "args": [
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       2
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       2,
+       4,
+       6
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       -1
+      ],
+      [
+       -1,
+       1
+      ]
+     ],
+     "expect": -0.9999999999999998
+    }
+   ],
+   "starter": "def cosine_sim(u, v):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Divide the dot product by the product of the two norms.\n\n```python\ndef cosine_sim(u, v):\n    nu = sum(a * a for a in u) ** 0.5\n    nv = sum(b * b for b in v) ** 0.5\n    return sum(a * b for a, b in zip(u, v)) / (nu * nv) if nu and nv else 0.0\n```",
+  "hints": [
+   "Guard against a zero norm before dividing."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-cf"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Using the provided `cosine_sim(u, v)`, write `cf_predict(R, user, item, k)` returning, as a float, the similarity-weighted average rating of `item` over the `k` most similar of the other users who rated it. `R` is a list of user rows with `None` for missing ratings, similarity is cosine on the full rows with `None` read as 0, and ties go to the lower user index. Return 0.0 if no neighbour qualifies or the weights sum to 0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "cf_predict",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        5,
+        3,
+        null
+       ],
+       [
+        4,
+        3,
+        4
+       ],
+       [
+        1,
+        5,
+        2
+       ],
+       [
+        5,
+        null,
+        5
+       ]
+      ],
+      0,
+      2,
+      2
+     ],
+     "expect": 3.107273752337438
+    },
+    {
+     "args": [
+      [
+       [
+        5,
+        3,
+        null
+       ],
+       [
+        4,
+        3,
+        4
+       ],
+       [
+        1,
+        5,
+        2
+       ],
+       [
+        5,
+        null,
+        5
+       ]
+      ],
+      0,
+      2,
+      1
+     ],
+     "expect": 4.0
+    },
+    {
+     "args": [
+      [
+       [
+        5,
+        3,
+        null
+       ],
+       [
+        4,
+        3,
+        4
+       ],
+       [
+        1,
+        5,
+        2
+       ],
+       [
+        5,
+        null,
+        5
+       ]
+      ],
+      0,
+      2,
+      5
+     ],
+     "expect": 3.678438435529831
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        null
+       ],
+       [
+        null,
+        2
+       ]
+      ],
+      0,
+      1,
+      1
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       [
+        2,
+        2,
+        null
+       ]
+      ],
+      0,
+      2,
+      3
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       [
+        5,
+        0,
+        null
+       ],
+       [
+        0,
+        4,
+        3
+       ]
+      ],
+      0,
+      2,
+      1
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        1,
+        null
+       ],
+       [
+        1,
+        0,
+        3
+       ],
+       [
+        0,
+        1,
+        5
+       ]
+      ],
+      0,
+      2,
+      1
+     ],
+     "expect": 3.0
+    },
+    {
+     "args": [
+      [
+       [
+        5,
+        3,
+        null
+       ],
+       [
+        5,
+        3,
+        null
+       ],
+       [
+        1,
+        5,
+        2
+       ],
+       [
+        4,
+        2,
+        4
+       ]
+      ],
+      0,
+      2,
+      1
+     ],
+     "expect": 4.0
+    }
+   ],
+   "starter": "def cf_predict(R, user, item, k):\n    ...",
+   "tol": 1e-09,
+   "setup": "def cosine_sim(u, v):\n    nu = sum(a * a for a in u) ** 0.5\n    nv = sum(b * b for b in v) ** 0.5\n    return sum(a * b for a, b in zip(u, v)) / (nu * nv) if nu and nv else 0.0"
+  },
+  "solution": "User-based collaborative filtering: rank neighbours by similarity, then average their ratings with those weights.\n\n```python\ndef cf_predict(R, user, item, k):\n    z = lambda r: [x or 0 for x in r]\n    sims = [(cosine_sim(z(R[user]), z(r)), j) for j, r in enumerate(R) if j != user and r[item] is not None]\n    top = sorted(sims, key=lambda s: (-s[0], s[1]))[:k]\n    den = sum(s for s, _ in top)\n    return sum(s * R[j][item] for s, j in top) / den if den else 0.0\n```",
+  "hints": [
+   "Only users who rated the item are candidates."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k019",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-mf"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `sgd_step(u, v, r, lr, lam)` for one rating `r` with user factors `u` and item factors `v` (lists). With error `e = r - u.v`, return `[u_new, v_new]` where `u_new = u + lr*(e*v - lam*u)` and `v_new = v + lr*(e*u - lam*v)`, both computed from the old `u` and `v`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "sgd_step",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       1
+      ],
+      4,
+      0.1,
+      0.0
+     ],
+     "expect": [
+      [
+       1.1,
+       2.1
+      ],
+      [
+       1.1,
+       1.2
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       1
+      ],
+      4,
+      0.1,
+      0.1
+     ],
+     "expect": [
+      [
+       1.09,
+       2.08
+      ],
+      [
+       1.09,
+       1.19
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       2
+      ],
+      [
+       3
+      ],
+      6,
+      0.5,
+      0.0
+     ],
+     "expect": [
+      [
+       2.0
+      ],
+      [
+       3.0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      3,
+      0.1,
+      0.1
+     ],
+     "expect": [
+      [
+       0.30000000000000004,
+       0.30000000000000004
+      ],
+      [
+       0.99,
+       0.99
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      2,
+      0.2,
+      0.5
+     ],
+     "expect": [
+      [
+       0.9,
+       0.9
+      ],
+      [
+       0.9,
+       0.9
+      ]
+     ]
+    }
+   ],
+   "starter": "def sgd_step(u, v, r, lr, lam):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Move each factor along the error times the other factor, shrunk by the regulariser.\n\n```python\ndef sgd_step(u, v, r, lr, lam):\n    e = r - sum(a * b for a, b in zip(u, v))\n    nu = [a + lr * (e * b - lam * a) for a, b in zip(u, v)]\n    nv = [b + lr * (e * a - lam * b) for a, b in zip(u, v)]\n    return [nu, nv]\n```",
+  "hints": [
+   "Compute both updates before replacing either vector."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k020",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.recsys-mf"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `als_user(v, ratings, lam)` returning the rank-1 ridge least-squares user factor as a float. `v` holds the item factors (scalars), `ratings` the user's ratings with `None` for unrated items, and the answer is `sum(v_j*r_j) / (sum(v_j^2) + lam)` over rated items only. With no rated items return 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "als_user",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       2,
+       4,
+       6
+      ],
+      0.0
+     ],
+     "expect": 2.0
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       2,
+       null,
+       6
+      ],
+      0.0
+     ],
+     "expect": 2.0
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3
+      ],
+      [
+       2,
+       4,
+       6
+      ],
+      1.0
+     ],
+     "expect": 1.8666666666666667
+    },
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      [
+       null,
+       null
+      ],
+      0.5
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       0.5,
+       1.5
+      ],
+      [
+       4,
+       null
+      ],
+      0.5
+     ],
+     "expect": 2.6666666666666665
+    }
+   ],
+   "starter": "def als_user(v, ratings, lam):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Alternating least squares fixes the item factors and solves each user factor in closed form.\n\n```python\ndef als_user(v, ratings, lam):\n    obs = [(x, r) for x, r in zip(v, ratings) if r is not None]\n    if not obs:\n        return 0.0\n    return sum(x * r for x, r in obs) / (sum(x * x for x, _ in obs) + lam)\n```",
+  "hints": [
+   "Skip None entries in both sums."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k021",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ranking-metrics"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `pr_at_k(rels, k, total_rel)` returning `[precision, recall]` at cut-off `k` as floats. `rels` is the ranked list of 0/1 relevance flags, precision is hits in the top `k` divided by `k` (even if the list is shorter), and recall is hits divided by `total_rel`, or 0.0 when `total_rel` is 0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "pr_at_k",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      5,
+      4
+     ],
+     "expect": [
+      0.4,
+      0.5
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      3,
+      2
+     ],
+     "expect": [
+      0.6666666666666666,
+      1.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       1
+      ],
+      5,
+      2
+     ],
+     "expect": [
+      0.4,
+      1.0
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       0
+      ],
+      2,
+      0
+     ],
+     "expect": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      1,
+      3
+     ],
+     "expect": [
+      1.0,
+      0.3333333333333333
+     ]
+    }
+   ],
+   "starter": "def pr_at_k(rels, k, total_rel):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Count hits in the top k, then divide by k for precision and by all relevant items for recall.\n\n```python\ndef pr_at_k(rels, k, total_rel):\n    hits = sum(rels[:k])\n    return [hits / k, hits / total_rel if total_rel else 0.0]\n```",
+  "hints": [
+   "Slice rels[:k]."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.ranking-metrics"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `ndcg_at_k(gains, k)` returning NDCG at `k` as a float. `gains` are graded relevances in ranked order, DCG sums `gain / log2(rank + 1)` over the top `k` with ranks starting at 1, and the ideal DCG uses the same list sorted by gain, descending. Return 0.0 when the ideal DCG is 0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "ndcg_at_k",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       0,
+       1
+      ],
+      3
+     ],
+     "expect": 0.9197207891481876
+    },
+    {
+     "args": [
+      [
+       3,
+       2,
+       0,
+       1
+      ],
+      4
+     ],
+     "expect": 0.9854419388428785
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       0
+      ],
+      3
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       3,
+       2
+      ],
+      2
+     ],
+     "expect": 0.6787622294601761
+    },
+    {
+     "args": [
+      [
+       2,
+       2,
+       2
+      ],
+      2
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       3,
+       2,
+       3,
+       0,
+       1,
+       2
+      ],
+      6
+     ],
+     "expect": 0.9608081943360616
+    }
+   ],
+   "starter": "def ndcg_at_k(gains, k):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Discount each gain by log2 of its rank plus 1, then divide by the best possible ordering.\n\n```python\nimport math\n\ndef ndcg_at_k(gains, k):\n    dcg = lambda g: sum(x / math.log2(i + 2) for i, x in enumerate(g[:k]))\n    ideal = dcg(sorted(gains, reverse=True))\n    return dcg(gains) / ideal if ideal else 0.0\n```",
+  "hints": [
+   "enumerate gives index i, so rank + 1 is i + 2."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nlp-ngram"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `bigram_prob(tokens, w1, w2, alpha)` returning the add-alpha smoothed `P(w2 | w1)` as a float: `(count(w1 w2) + alpha) / (count(w1 as bigram start) + alpha*V)`, with `V` the number of distinct tokens in `tokens`. Count bigrams of consecutive tokens only. If the denominator is 0, return 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "bigram_prob",
+   "tests": [
+    {
+     "args": [
+      [
+       "the",
+       "cat",
+       "sat",
+       "on",
+       "the",
+       "mat"
+      ],
+      "the",
+      "cat",
+      0
+     ],
+     "expect": 0.5
+    },
+    {
+     "args": [
+      [
+       "the",
+       "cat",
+       "sat",
+       "on",
+       "the",
+       "mat"
+      ],
+      "the",
+      "cat",
+      1
+     ],
+     "expect": 0.2857142857142857
+    },
+    {
+     "args": [
+      [
+       "the",
+       "cat",
+       "sat",
+       "on",
+       "the",
+       "mat"
+      ],
+      "the",
+      "dog",
+      1
+     ],
+     "expect": 0.14285714285714285
+    },
+    {
+     "args": [
+      [
+       "a",
+       "b",
+       "a",
+       "b",
+       "a"
+      ],
+      "a",
+      "b",
+      0
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       "a",
+       "b"
+      ],
+      "b",
+      "a",
+      0
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       "x",
+       "y",
+       "x",
+       "z"
+      ],
+      "q",
+      "x",
+      0.5
+     ],
+     "expect": 0.3333333333333333
+    }
+   ],
+   "starter": "def bigram_prob(tokens, w1, w2, alpha):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Count bigrams and bigram starts, then smooth both counts.\n\n```python\ndef bigram_prob(tokens, w1, w2, alpha):\n    pairs = list(zip(tokens, tokens[1:]))\n    c12 = sum(1 for p in pairs if p == (w1, w2))\n    c1 = sum(1 for a, _ in pairs if a == w1)\n    den = c1 + alpha * len(set(tokens))\n    return (c12 + alpha) / den if den else 0.0\n```",
+  "hints": [
+   "A bigram start is a token followed by another token."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.nlp-ngram"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `bigram_perplexity(train, test, alpha)` returning the perplexity of the `test` token list under an add-alpha bigram model trained on `train`, as a float. Use `P(b | a) = (count(a b) + alpha) / (count(a as bigram start) + alpha*V)` with `V` the distinct tokens of `train`, `alpha > 0`, and perplexity `exp(-mean log P)` over the test bigrams. With fewer than two test tokens return 1.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "bigram_perplexity",
+   "tests": [
+    {
+     "args": [
+      [
+       "a",
+       "b",
+       "a",
+       "b",
+       "a",
+       "b"
+      ],
+      [
+       "a",
+       "b",
+       "a"
+      ],
+      1
+     ],
+     "expect": 1.2909944487358056
+    },
+    {
+     "args": [
+      [
+       "a",
+       "b",
+       "a",
+       "b"
+      ],
+      [
+       "b",
+       "b"
+      ],
+      1
+     ],
+     "expect": 3.0000000000000004
+    },
+    {
+     "args": [
+      [
+       "a",
+       "b"
+      ],
+      [
+       "a"
+      ],
+      1
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       "the",
+       "cat",
+       "sat",
+       "the",
+       "cat",
+       "ran"
+      ],
+      [
+       "the",
+       "cat",
+       "sat"
+      ],
+      0.5
+     ],
+     "expect": 2.0655911179772892
+    },
+    {
+     "args": [
+      [
+       "x",
+       "y",
+       "z"
+      ],
+      [
+       "z",
+       "y",
+       "x",
+       "q"
+      ],
+      2
+     ],
+     "expect": 3.324699880575489
+    }
+   ],
+   "starter": "def bigram_perplexity(train, test, alpha):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Perplexity is the exponential of the negative mean log probability of the test bigrams.\n\n```python\nimport math\nfrom collections import Counter\n\ndef bigram_perplexity(train, test, alpha):\n    big, uni = Counter(zip(train, train[1:])), Counter(train[:-1])\n    V = len(set(train))\n    lp = [math.log((big[p] + alpha) / (uni[p[0]] + alpha * V)) for p in zip(test, test[1:])]\n    return math.exp(-sum(lp) / len(lp)) if lp else 1.0\n```",
+  "hints": [
+   "Sum logs, not products."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.mlops-track"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `mean_ci(scores)` returning `[mean, lower, upper]` as floats for the scores of repeated runs. The interval is the mean plus or minus `1.96 * s / sqrt(n)`, where `s` is the sample standard deviation (divisor n-1). With fewer than two scores, return the mean for all three entries.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "mean_ci",
+   "tests": [
+    {
+     "args": [
+      [
+       0.8,
+       0.84,
+       0.82,
+       0.78
+      ]
+     ],
+     "expect": [
+      0.81,
+      0.7846965088047783,
+      0.8353034911952218
+     ]
+    },
+    {
+     "args": [
+      [
+       0.7
+      ]
+     ],
+     "expect": [
+      0.7,
+      0.7,
+      0.7
+     ]
+    },
+    {
+     "args": [
+      [
+       0.5,
+       0.5,
+       0.5
+      ]
+     ],
+     "expect": [
+      0.5,
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "args": [
+      [
+       0.71,
+       0.74,
+       0.69,
+       0.73,
+       0.7
+      ]
+     ],
+     "expect": [
+      0.714,
+      0.6958237077488284,
+      0.7321762922511715
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       3
+      ]
+     ],
+     "expect": [
+      2.0,
+      0.04000000000000026,
+      3.96
+     ]
+    }
+   ],
+   "starter": "def mean_ci(scores):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Report seed-to-seed spread with the mean, not a single run.\n\n```python\ndef mean_ci(scores):\n    n = len(scores)\n    m = sum(scores) / n\n    if n < 2:\n        return [m, m, m]\n    s = (sum((x - m) ** 2 for x in scores) / (n - 1)) ** 0.5\n    h = 1.96 * s / n ** 0.5\n    return [m, m - h, m + h]\n```",
+  "hints": [
+   "Standard error is s over root n."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.mlops-track"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `best_config(runs)` returning `[config, mean_score]` for the config with the highest mean score over its seeds. Each run is `[config, seed, score]` with a string config name; on equal means choose the config name that sorts first. `runs` is non-empty.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "best_config",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        "a",
+        1,
+        0.5
+       ],
+       [
+        "a",
+        2,
+        0.75
+       ],
+       [
+        "b",
+        1,
+        0.75
+       ],
+       [
+        "b",
+        2,
+        0.75
+       ]
+      ]
+     ],
+     "expect": [
+      "b",
+      0.75
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        "lr1",
+        0,
+        0.9
+       ],
+       [
+        "lr1",
+        1,
+        0.5
+       ],
+       [
+        "lr2",
+        0,
+        0.75
+       ],
+       [
+        "lr2",
+        1,
+        0.75
+       ]
+      ]
+     ],
+     "expect": [
+      "lr2",
+      0.75
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        "z",
+        0,
+        0.5
+       ],
+       [
+        "y",
+        0,
+        0.5
+       ]
+      ]
+     ],
+     "expect": [
+      "y",
+      0.5
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        "only",
+        0,
+        0.25
+       ]
+      ]
+     ],
+     "expect": [
+      "only",
+      0.25
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        "a",
+        0,
+        1.0
+       ],
+       [
+        "b",
+        0,
+        0.5
+       ],
+       [
+        "b",
+        1,
+        0.5
+       ],
+       [
+        "c",
+        0,
+        0.75
+       ]
+      ]
+     ],
+     "expect": [
+      "a",
+      1.0
+     ]
+    }
+   ],
+   "starter": "def best_config(runs):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Average over seeds per config before comparing configs; one lucky seed proves nothing.\n\n```python\ndef best_config(runs):\n    g = {}\n    for c, _, s in runs:\n        g.setdefault(c, []).append(s)\n    return list(min(((c, sum(v) / len(v)) for c, v in g.items()), key=lambda x: (-x[1], x[0])))\n```",
+  "hints": [
+   "Group scores by config first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.drift"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `psi(expected, actual)` returning the population stability index as a float: the sum over bins of `(a - e) * ln(a / e)`. Both lists hold bin proportions; first raise any proportion below 1e-4 to 1e-4. Identical lists give 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "psi",
+   "tests": [
+    {
+     "args": [
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.5,
+       0.5
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0.3,
+       0.7
+      ]
+     ],
+     "expect": 0.16945957207744072
+    },
+    {
+     "args": [
+      [
+       0.25,
+       0.25,
+       0.25,
+       0.25
+      ],
+      [
+       0.4,
+       0.3,
+       0.2,
+       0.1
+      ]
+     ],
+     "expect": 0.22821740957339182
+    },
+    {
+     "args": [
+      [
+       0.5,
+       0.5
+      ],
+      [
+       1.0,
+       0.0
+      ]
+     ],
+     "expect": 4.60431846666895
+    },
+    {
+     "args": [
+      [
+       0.2,
+       0.8
+      ],
+      [
+       0.1,
+       0.9
+      ]
+     ],
+     "expect": 0.08109302162163287
+    }
+   ],
+   "starter": "def psi(expected, actual):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "PSI sums, per bin, the proportion gap times the log ratio of the proportions.\n\n```python\nimport math\n\ndef psi(expected, actual):\n    f = lambda p: max(p, 1e-4)\n    return sum((f(a) - f(e)) * math.log(f(a) / f(e)) for e, a in zip(expected, actual))\n```",
+  "hints": [
+   "Floor the proportions before the log."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k028",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.drift"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `ks_stat(a, b)` returning the two-sample Kolmogorov-Smirnov statistic as a float: the largest absolute gap between the two empirical CDFs, where the CDF at `v` is the share of values `<= v`. Check at every value in `a` and `b`. If either sample is empty, return 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "ks_stat",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4
+      ],
+      [
+       1,
+       2,
+       3,
+       4
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4
+      ],
+      [
+       5,
+       6,
+       7,
+       8
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4
+      ],
+      [
+       3,
+       4,
+       5,
+       6
+      ]
+     ],
+     "expect": 0.5
+    },
+    {
+     "args": [
+      [
+       2,
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "expect": 0.5
+    },
+    {
+     "args": [
+      [],
+      [
+       1,
+       2
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       5,
+       5
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "expect": 0.3333333333333333
+    }
+   ],
+   "starter": "def ks_stat(a, b):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Compare the two empirical CDFs at every observed value and keep the biggest gap.\n\n```python\ndef ks_stat(a, b):\n    if not a or not b:\n        return 0.0\n    cdf = lambda xs, v: sum(x <= v for x in xs) / len(xs)\n    return max(abs(cdf(a, v) - cdf(b, v)) for v in a + b)\n```",
+  "hints": [
+   "Ties count: use <= when building the CDF."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k029",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fairness"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `selection_rate_ratio(pred, group)` returning the lowest group selection rate divided by the highest, as a float. `pred` is a list of 0/1 decisions and `group` the matching list of group labels. If the highest rate is 0, return 1.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "selection_rate_ratio",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       1,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "A",
+       "A",
+       "B",
+       "B",
+       "B",
+       "B"
+      ]
+     ],
+     "expect": 0.5
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "B",
+       "B"
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       0,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "B",
+       "B"
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       1,
+       1,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "A",
+       "B"
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1
+      ],
+      [
+       "A",
+       "A",
+       "A"
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       "x",
+       "y",
+       "x",
+       "y",
+       "z",
+       "z"
+      ]
+     ],
+     "expect": 0.0
+    }
+   ],
+   "starter": "def selection_rate_ratio(pred, group):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Compute each group's selection rate, then take the min-to-max ratio.\n\n```python\ndef selection_rate_ratio(pred, group):\n    rates = []\n    for g in set(group):\n        p = [x for x, h in zip(pred, group) if h == g]\n        rates.append(sum(p) / len(p))\n    return min(rates) / max(rates) if max(rates) else 1.0\n```",
+  "hints": [
+   "Group first, then average each group's 0/1 flags."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k030",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.fairness"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `equalized_odds_gap(y, pred, group)` returning a float: the larger of the true-positive-rate spread and the false-positive-rate spread across groups, each spread being the highest group rate minus the lowest. `y` and `pred` are 0/1 lists and `group` holds labels; a group with no members of a class has rate 0.0 for it.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "equalized_odds_gap",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       1,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "A",
+       "A",
+       "B",
+       "B",
+       "B",
+       "B"
+      ]
+     ],
+     "expect": 0.5
+    },
+    {
+     "args": [
+      [
+       1,
+       1,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "A",
+       "A",
+       "B",
+       "B",
+       "B",
+       "B"
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "B",
+       "B"
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       "A",
+       "B"
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1,
+       0
+      ],
+      [
+       "A",
+       "A",
+       "A",
+       "A"
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       0,
+       1
+      ],
+      [
+       1,
+       1,
+       1
+      ],
+      [
+       "A",
+       "A",
+       "B"
+      ]
+     ],
+     "expect": 1.0
+    }
+   ],
+   "starter": "def equalized_odds_gap(y, pred, group):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Equalized odds compares true-positive and false-positive rates across groups.\n\n```python\ndef equalized_odds_gap(y, pred, group):\n    def rate(g, label):\n        p = [q for q, t, h in zip(pred, y, group) if h == g and t == label]\n        return sum(p) / len(p) if p else 0.0\n    gs = set(group)\n    gap = lambda label: max(rate(g, label) for g in gs) - min(rate(g, label) for g in gs)\n    return max(gap(1), gap(0))\n```",
+  "hints": [
+   "Condition on the true label first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k031",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.privacy"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `k_anonymity(rows)` returning the largest k (an int) for which the table is k-anonymous. Each row is a list of quasi-identifier values, and k is the size of the smallest group of identical rows. An empty table returns 0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "k_anonymity",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        "10001",
+        "M",
+        1980
+       ],
+       [
+        "10001",
+        "M",
+        1980
+       ],
+       [
+        "10002",
+        "F",
+        1975
+       ]
+      ]
+     ],
+     "expect": 1
+    },
+    {
+     "args": [
+      [
+       [
+        "a"
+       ],
+       [
+        "a"
+       ],
+       [
+        "b"
+       ],
+       [
+        "b"
+       ],
+       [
+        "b"
+       ]
+      ]
+     ],
+     "expect": 2
+    },
+    {
+     "args": [
+      []
+     ],
+     "expect": 0
+    },
+    {
+     "args": [
+      [
+       [
+        "x",
+        1
+       ]
+      ]
+     ],
+     "expect": 1
+    },
+    {
+     "args": [
+      [
+       [
+        "x",
+        1
+       ],
+       [
+        "x",
+        2
+       ],
+       [
+        "x",
+        1
+       ],
+       [
+        "x",
+        2
+       ]
+      ]
+     ],
+     "expect": 2
+    }
+   ],
+   "starter": "def k_anonymity(rows):\n    ..."
+  },
+  "solution": "k is set by the rarest combination of quasi-identifiers.\n\n```python\ndef k_anonymity(rows):\n    counts = {}\n    for r in rows:\n        counts[tuple(r)] = counts.get(tuple(r), 0) + 1\n    return min(counts.values()) if counts else 0\n```",
+  "hints": [
+   "Count identical rows, then take the minimum."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t9-k032",
+  "tier": "b",
+  "type": "micro",
+  "level": "T9",
+  "tags": [
+   "t9.privacy"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `laplace_from_uniform(u, sensitivity, eps)` returning, as a float, a Laplace noise value with scale `b = sensitivity/eps` from one uniform draw `u` in (0, 1) by inverse CDF: with `w = u - 0.5`, the noise is `-b * sign(w) * ln(1 - 2|w|)`. A draw of exactly 0.5 gives 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "laplace_from_uniform",
+   "tests": [
+    {
+     "args": [
+      0.75,
+      1,
+      0.5
+     ],
+     "expect": 1.3862943611198906
+    },
+    {
+     "args": [
+      0.25,
+      1,
+      0.5
+     ],
+     "expect": -1.3862943611198906
+    },
+    {
+     "args": [
+      0.5,
+      1,
+      1
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      0.9,
+      2,
+      1
+     ],
+     "expect": 3.218875824868201
+    },
+    {
+     "args": [
+      0.1,
+      1,
+      0.1
+     ],
+     "expect": -16.094379124341003
+    }
+   ],
+   "starter": "def laplace_from_uniform(u, sensitivity, eps):\n    ...",
+   "tol": 1e-09
+  },
+  "solution": "Scale the noise to sensitivity over epsilon, then invert the Laplace CDF.\n\n```python\nimport math\n\ndef laplace_from_uniform(u, sensitivity, eps):\n    b, w = sensitivity / eps, u - 0.5\n    if w == 0:\n        return 0.0\n    return -b * (1 if w > 0 else -1) * math.log(1 - 2 * abs(w))\n```",
+  "hints": [
+   "Smaller eps means a larger scale b."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

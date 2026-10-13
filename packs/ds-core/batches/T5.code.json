@@ -1,0 +1,4045 @@
+[
+  {
+    "id": "t5-k001",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `orphans(parent_ids, child_fks)` returning the list of foreign-key values in `child_fks`, in order, that match no id in `parent_ids`. A None foreign key means no link and is not an orphan.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "orphans",
+      "starter": "def orphans(parent_ids, child_fks):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4,
+              2,
+              5
+            ]
+          ],
+          "expect": [
+            4,
+            5
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            [
+              null,
+              1,
+              null
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [],
+            [
+              7,
+              7
+            ]
+          ],
+          "expect": [
+            7,
+            7
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            []
+          ],
+          "expect": []
+        }
+      ]
+    },
+    "solution": "A foreign key is valid only if its value exists in the parent key set.\n\n```python\ndef orphans(parent_ids, child_fks):\n    ids = set(parent_ids)\n    return [f for f in child_fks if f is not None and f not in ids]\n```",
+    "hints": [
+      "Membership test against the parent keys."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k002",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `children_per_parent(parent_ids, child_fks)` returning a list of counts, one per parent id in the given order, of how many child rows point at it. Parents with no children get 0, and None foreign keys count for nobody.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "children_per_parent",
+      "starter": "def children_per_parent(parent_ids, child_fks):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              1,
+              3,
+              null
+            ]
+          ],
+          "expect": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              5
+            ],
+            []
+          ],
+          "expect": [
+            0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              2,
+              2
+            ]
+          ],
+          "expect": [
+            0,
+            3
+          ]
+        },
+        {
+          "args": [
+            [],
+            [
+              1
+            ]
+          ],
+          "expect": []
+        }
+      ]
+    },
+    "solution": "One parent row to many child rows: count rows whose foreign key equals each primary key.\n\n```python\ndef children_per_parent(parent_ids, child_fks):\n    return [sum(1 for f in child_fks if f == p) for p in parent_ids]\n```",
+    "hints": [
+      "Compare each child key with each parent key."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k003",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.relational"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `is_unique_key(rows, cols)` where `rows` is a list of dicts and `cols` a list of column names. Return True if no two rows share the same values on all of `cols`, else False. An empty `rows` is unique.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "is_unique_key",
+      "starter": "def is_unique_key(rows, cols):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "a": 1,
+                "b": 1
+              },
+              {
+                "a": 1,
+                "b": 2
+              },
+              {
+                "a": 2,
+                "b": 1
+              }
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          "expect": true
+        },
+        {
+          "args": [
+            [
+              {
+                "a": 1,
+                "b": 1
+              },
+              {
+                "a": 1,
+                "b": 2
+              }
+            ],
+            [
+              "a"
+            ]
+          ],
+          "expect": false
+        },
+        {
+          "args": [
+            [],
+            [
+              "a"
+            ]
+          ],
+          "expect": true
+        },
+        {
+          "args": [
+            [
+              {
+                "a": 1,
+                "b": "x"
+              },
+              {
+                "a": 1,
+                "b": "x"
+              }
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          "expect": false
+        }
+      ]
+    },
+    "solution": "A composite key is valid when its tuples are all distinct, so distinct count equals row count.\n\n```python\ndef is_unique_key(rows, cols):\n    seen = {tuple(r[c] for c in cols) for r in rows}\n    return len(seen) == len(rows)\n```",
+    "hints": [
+      "Tuples of the key columns."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `top_names(rows, n)` where `rows` is a list of dicts with `name` and `score`. Return the names of the `n` highest scores as a list, ties broken by name A to Z; fewer rows than `n` returns all.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "top_names",
+      "starter": "def top_names(rows, n):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "name": "b",
+                "score": 5
+              },
+              {
+                "name": "a",
+                "score": 5
+              },
+              {
+                "name": "c",
+                "score": 9
+              }
+            ],
+            2
+          ],
+          "expect": [
+            "c",
+            "a"
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "name": "x",
+                "score": 1
+              }
+            ],
+            3
+          ],
+          "expect": [
+            "x"
+          ]
+        },
+        {
+          "args": [
+            [],
+            2
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              {
+                "name": "b",
+                "score": 2
+              },
+              {
+                "name": "a",
+                "score": 2
+              }
+            ],
+            1
+          ],
+          "expect": [
+            "a"
+          ]
+        }
+      ]
+    },
+    "solution": "ORDER BY score DESC, name, then LIMIT n.\n\n```python\ndef top_names(rows, n):\n    ordered = sorted(rows, key=lambda r: (-r['score'], r['name']))\n    return [r['name'] for r in ordered[:n]]\n```",
+    "hints": [
+      "Sort by a two-part key, then slice."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `distinct_sorted(rows, col)` where `rows` is a list of dicts. Return the distinct values of column `col` as a list in ascending order, like SELECT DISTINCT col ORDER BY col.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "distinct_sorted",
+      "starter": "def distinct_sorted(rows, col):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "c": "Oslo"
+              },
+              {
+                "c": "Lima"
+              },
+              {
+                "c": "Oslo"
+              }
+            ],
+            "c"
+          ],
+          "expect": [
+            "Lima",
+            "Oslo"
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "c": 3
+              },
+              {
+                "c": 1
+              },
+              {
+                "c": 3
+              },
+              {
+                "c": 2
+              }
+            ],
+            "c"
+          ],
+          "expect": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "args": [
+            [],
+            "c"
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              {
+                "c": "a",
+                "z": 1
+              }
+            ],
+            "z"
+          ],
+          "expect": [
+            1
+          ]
+        }
+      ]
+    },
+    "solution": "DISTINCT is a set, ORDER BY is a sort.\n\n```python\ndef distinct_sorted(rows, col):\n    return sorted({r[col] for r in rows})\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-select"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `ids_between(rows, col, lo, hi)` where `rows` is a list of dicts that each have an `id`. Return the ids of rows whose `col` value lies in $[lo, hi]$ with both bounds inclusive, ordered by that value and then by id, both ascending.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "ids_between",
+      "starter": "def ids_between(rows, col, lo, hi):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "id": 1,
+                "v": 5
+              },
+              {
+                "id": 2,
+                "v": 3
+              },
+              {
+                "id": 3,
+                "v": 5
+              },
+              {
+                "id": 4,
+                "v": 9
+              }
+            ],
+            "v",
+            3,
+            5
+          ],
+          "expect": [
+            2,
+            1,
+            3
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "id": 1,
+                "v": 5
+              }
+            ],
+            "v",
+            6,
+            9
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [],
+            "v",
+            0,
+            1
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              {
+                "id": 2,
+                "v": 4
+              },
+              {
+                "id": 1,
+                "v": 4
+              }
+            ],
+            "v",
+            4,
+            4
+          ],
+          "expect": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "solution": "BETWEEN is inclusive on both ends; filter first, then order.\n\n```python\ndef ids_between(rows, col, lo, hi):\n    keep = [r for r in rows if lo <= r[col] <= hi]\n    keep.sort(key=lambda r: (r[col], r['id']))\n    return [r['id'] for r in keep]\n```",
+    "hints": [
+      "Inclusive comparison on both bounds."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `sum_default(values, default)` where `values` may hold None for NULL. Return the sum with each None replaced by `default`, like SUM(COALESCE(v, default)); an empty list sums to 0.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "sum_default",
+      "starter": "def sum_default(values, default):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              null,
+              3
+            ],
+            0
+          ],
+          "expect": 4
+        },
+        {
+          "args": [
+            [
+              null,
+              null
+            ],
+            5
+          ],
+          "expect": 10
+        },
+        {
+          "args": [
+            [],
+            9
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              2,
+              2
+            ],
+            100
+          ],
+          "expect": 4
+        }
+      ]
+    },
+    "solution": "COALESCE swaps NULL for a value before the sum.\n\n```python\ndef sum_default(values, default):\n    return sum(default if v is None else v for v in values)\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `count_not_gt(values, t)` where `values` may hold None for NULL. Return how many rows satisfy WHERE NOT (v > t) under SQL three-valued logic, so NULL rows are not counted.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "count_not_gt",
+      "starter": "def count_not_gt(values, t):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              5,
+              null,
+              7
+            ],
+            5
+          ],
+          "expect": 2
+        },
+        {
+          "args": [
+            [
+              null,
+              null
+            ],
+            0
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [],
+            3
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              10,
+              20
+            ],
+            5
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              5,
+              5,
+              null
+            ],
+            5
+          ],
+          "expect": 2
+        }
+      ]
+    },
+    "solution": "NOT unknown is still unknown, so NULL rows fail both the test and its negation.\n\n```python\ndef count_not_gt(values, t):\n    return sum(1 for v in values if v is not None and not (v > t))\n```",
+    "hints": [
+      "A comparison with NULL is never true."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-null"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `kleene_and(a, b)` for values True, False or None (unknown), returning SQL's `a AND b`. False AND anything is False, True AND True is True, and every other mix gives None.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "kleene_and",
+      "starter": "def kleene_and(a, b):\n    ...",
+      "tests": [
+        {
+          "args": [
+            true,
+            true
+          ],
+          "expect": true
+        },
+        {
+          "args": [
+            true,
+            null
+          ],
+          "expect": null
+        },
+        {
+          "args": [
+            null,
+            false
+          ],
+          "expect": false
+        },
+        {
+          "args": [
+            false,
+            null
+          ],
+          "expect": false
+        },
+        {
+          "args": [
+            null,
+            null
+          ],
+          "expect": null
+        },
+        {
+          "args": [
+            false,
+            true
+          ],
+          "expect": false
+        }
+      ]
+    },
+    "solution": "FALSE dominates AND; otherwise any unknown makes the result unknown.\n\n```python\ndef kleene_and(a, b):\n    if a is False or b is False:\n        return False\n    if a is None or b is None:\n        return None\n    return True\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k010",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `inner_join_count(left_keys, right_keys)` returning how many rows an inner join of two key lists produces. Each left row pairs with every right row of equal key, and None never matches.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "inner_join_count",
+      "starter": "def inner_join_count(left_keys, right_keys):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              2,
+              3
+            ],
+            [
+              2,
+              3,
+              3,
+              4
+            ]
+          ],
+          "expect": 4
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            [
+              2
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [],
+            [
+              1
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              null,
+              1
+            ],
+            [
+              null,
+              1,
+              1
+            ]
+          ],
+          "expect": 2
+        }
+      ]
+    },
+    "solution": "Each matching pair is one output row, so duplicate keys multiply.\n\n```python\ndef inner_join_count(left_keys, right_keys):\n    return sum(1 for a in left_keys for b in right_keys\n               if a is not None and a == b)\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k011",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `left_join(left, right)` where `left` is a list of `[id, x]` and `right` a list of `[id, y]`. Return a list of `[id, x, y]` for a left join, `y` None when unmatched, ordered by left row then right row.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "left_join",
+      "starter": "def left_join(left, right):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                1,
+                "a"
+              ],
+              [
+                2,
+                "b"
+              ],
+              [
+                3,
+                "c"
+              ]
+            ],
+            [
+              [
+                2,
+                "p"
+              ],
+              [
+                3,
+                "q"
+              ],
+              [
+                3,
+                "r"
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              1,
+              "a",
+              null
+            ],
+            [
+              2,
+              "b",
+              "p"
+            ],
+            [
+              3,
+              "c",
+              "q"
+            ],
+            [
+              3,
+              "c",
+              "r"
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1,
+                "a"
+              ]
+            ],
+            []
+          ],
+          "expect": [
+            [
+              1,
+              "a",
+              null
+            ]
+          ]
+        },
+        {
+          "args": [
+            [],
+            [
+              [
+                1,
+                "p"
+              ]
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              [
+                5,
+                "z"
+              ],
+              [
+                5,
+                "w"
+              ]
+            ],
+            [
+              [
+                5,
+                "k"
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              5,
+              "z",
+              "k"
+            ],
+            [
+              5,
+              "w",
+              "k"
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "Every left row survives; a missing partner becomes one row of NULL.\n\n```python\ndef left_join(left, right):\n    out = []\n    for i, x in left:\n        ys = [y for j, y in right if j == i] or [None]\n        out += [[i, x, y] for y in ys]\n    return out\n```",
+    "hints": [
+      "Use a one-element [None] when no match."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k012",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-joins"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `full_outer_count(left_keys, right_keys)` returning the number of rows in a FULL OUTER JOIN on key equality. Matched keys give one row per pair, and every unmatched row on either side gives one row. A None key never matches, so each None row counts as unmatched.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "full_outer_count",
+      "starter": "def full_outer_count(left_keys, right_keys):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              2,
+              3
+            ],
+            [
+              2,
+              3,
+              3,
+              4
+            ]
+          ],
+          "expect": 6
+        },
+        {
+          "args": [
+            [],
+            [
+              1,
+              1
+            ]
+          ],
+          "expect": 2
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ],
+            []
+          ],
+          "expect": 2
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "expect": 4
+        },
+        {
+          "args": [
+            [
+              7,
+              7
+            ],
+            [
+              7,
+              7,
+              7
+            ]
+          ],
+          "expect": 6
+        },
+        {
+          "args": [
+            [
+              null,
+              1
+            ],
+            [
+              null,
+              1
+            ]
+          ],
+          "expect": 3
+        }
+      ]
+    },
+    "solution": "Output is matched pairs plus rows with no partner on either side.\n\n```python\ndef full_outer_count(left_keys, right_keys):\n    from collections import Counter\n    cl, cr = Counter(left_keys), Counter(right_keys)\n    pairs = sum(cl[k] * cr[k] for k in cl if k is not None)\n    lone = sum(n for k, n in cl.items() if k is None or k not in cr) + sum(n for k, n in cr.items() if k is None or k not in cl)\n    return pairs + lone\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `groups_at_least(keys, m)` returning the sorted list of keys that appear at least `m` times in `keys`, like GROUP BY key HAVING COUNT(*) >= m.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "groups_at_least",
+      "starter": "def groups_at_least(keys, m):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              "a",
+              "b",
+              "a",
+              "c",
+              "a",
+              "b"
+            ],
+            2
+          ],
+          "expect": [
+            "a",
+            "b"
+          ]
+        },
+        {
+          "args": [
+            [
+              "a",
+              "b"
+            ],
+            3
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [],
+            1
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              "x",
+              "x"
+            ],
+            2
+          ],
+          "expect": [
+            "x"
+          ]
+        }
+      ]
+    },
+    "solution": "HAVING filters groups after counting.\n\n```python\ndef groups_at_least(keys, m):\n    from collections import Counter\n    return sorted(k for k, n in Counter(keys).items() if n >= m)\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `group_sum(rows)` where `rows` is a list of `[key, amount]` with amount maybe None. Return `[key, total]` pairs sorted by key, where total skips None, and is None if every amount in the group is None (SQL SUM).",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "group_sum",
+      "starter": "def group_sum(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                "a",
+                1
+              ],
+              [
+                "b",
+                null
+              ],
+              [
+                "a",
+                2
+              ],
+              [
+                "b",
+                null
+              ],
+              [
+                "c",
+                5
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              "a",
+              3
+            ],
+            [
+              "b",
+              null
+            ],
+            [
+              "c",
+              5
+            ]
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              [
+                "x",
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              "x",
+              null
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                "x",
+                null
+              ],
+              [
+                "x",
+                4
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              "x",
+              4
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "SUM skips NULLs per group and returns NULL only when nothing was left to add.\n\n```python\ndef group_sum(rows):\n    out = {}\n    for k, a in rows:\n        if a is not None:\n            out[k] = (out.get(k) or 0) + a\n        else:\n            out.setdefault(k, None)\n    return sorted([k, t] for k, t in out.items())\n```",
+    "hints": [
+      "A group of only NULLs sums to NULL, not 0."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-agg"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `avg_per_group(rows)` where `rows` is a list of `[key, value]` with value maybe None. Return `[key, avg]` sorted by key, where avg divides the sum of non-None values by their count (not the row count), and is None if there are none.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "avg_per_group",
+      "tol": 1e-09,
+      "starter": "def avg_per_group(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                "a",
+                2
+              ],
+              [
+                "a",
+                null
+              ],
+              [
+                "a",
+                4
+              ],
+              [
+                "b",
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              "a",
+              3.0
+            ],
+            [
+              "b",
+              null
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                "x",
+                10
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              "x",
+              10.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              [
+                "q",
+                1
+              ],
+              [
+                "r",
+                2
+              ],
+              [
+                "q",
+                2
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              "q",
+              1.5
+            ],
+            [
+              "r",
+              2.0
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "AVG divides by the count of non-NULL values, not by the group size.\n\n```python\ndef avg_per_group(rows):\n    g = {}\n    for k, v in rows:\n        g.setdefault(k, [])\n        if v is not None:\n            g[k].append(v)\n    return sorted([k, sum(v) / len(v) if v else None] for k, v in g.items())\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `above_average(values)` returning the values strictly greater than the mean of all `values`, in original order, like WHERE v > (SELECT AVG(v) ...). An empty list gives [].",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "above_average",
+      "tol": 1e-09,
+      "starter": "def above_average(values):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              10
+            ]
+          ],
+          "expect": [
+            10
+          ]
+        },
+        {
+          "args": [
+            [
+              5,
+              5,
+              5
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              4,
+              1,
+              9,
+              9,
+              2
+            ]
+          ],
+          "expect": [
+            9,
+            9
+          ]
+        }
+      ]
+    },
+    "solution": "The subquery computes the mean over the whole table first.\n\n```python\ndef above_average(values):\n    if not values:\n        return []\n    m = sum(values) / len(values)\n    return [v for v in values if v > m]\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `top_per_group(rows)` where `rows` is a list of `[key, id, val]`. Return the sorted ids of rows whose `val` equals the maximum `val` of their own key; ties all stay.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "top_per_group",
+      "starter": "def top_per_group(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                "a",
+                1,
+                5
+              ],
+              [
+                "a",
+                2,
+                7
+              ],
+              [
+                "b",
+                3,
+                2
+              ],
+              [
+                "b",
+                4,
+                2
+              ]
+            ]
+          ],
+          "expect": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              [
+                "x",
+                9,
+                1
+              ]
+            ]
+          ],
+          "expect": [
+            9
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                "a",
+                1,
+                3
+              ],
+              [
+                "a",
+                2,
+                3
+              ],
+              [
+                "b",
+                3,
+                9
+              ]
+            ]
+          ],
+          "expect": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "solution": "A correlated subquery compares each row with its own group's maximum.\n\n```python\ndef top_per_group(rows):\n    best = {}\n    for k, i, v in rows:\n        best[k] = max(best.get(k, v), v)\n    return sorted(i for k, i, v in rows if v == best[k])\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-sub"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `not_in(values, sub)` returning the values `v` for which `v NOT IN (sub)` is TRUE under SQL three-valued logic, in original order. `None` in `values` or `sub` stands for NULL, and NOT IN against a list that contains NULL is never TRUE for a non-member. An empty `sub` keeps every value, NULL included.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "not_in",
+      "starter": "def not_in(values, sub):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2
+            ]
+          ],
+          "expect": [
+            1,
+            3
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              null
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              1,
+              null,
+              3
+            ],
+            [
+              2
+            ]
+          ],
+          "expect": [
+            1,
+            3
+          ]
+        },
+        {
+          "args": [
+            [],
+            [
+              1
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            []
+          ],
+          "expect": [
+            1,
+            2
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              null
+            ],
+            []
+          ],
+          "expect": [
+            1,
+            null
+          ]
+        }
+      ]
+    },
+    "solution": "A NULL in the subquery makes every non-member unknown, so nothing passes.\n\n```python\ndef not_in(values, sub):\n    if not sub:\n        return list(values)\n    if None in sub:\n        return []\n    return [v for v in values if v is not None and v not in sub]\n```",
+    "hints": [
+      "x <> NULL is unknown for every x."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k019",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `running_total(values)` returning the cumulative sum as a list of the same length, like SUM(v) OVER (ORDER BY row). An empty list gives [].",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "running_total",
+      "starter": "def running_total(values):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ]
+          ],
+          "expect": [
+            1,
+            3,
+            6,
+            10
+          ]
+        },
+        {
+          "args": [
+            [
+              5
+            ]
+          ],
+          "expect": [
+            5
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              3,
+              -3,
+              2
+            ]
+          ],
+          "expect": [
+            3,
+            0,
+            2
+          ]
+        }
+      ]
+    },
+    "solution": "A running total is a sum over a frame that grows with each row.\n\n```python\ndef running_total(values):\n    out, t = [], 0\n    for v in values:\n        t += v\n        out.append(t)\n    return out\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k020",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `rank_desc(values)` returning, for each value in input order, its SQL RANK() when ordered descending. Ties share a rank and the next rank skips, so rank is 1 plus the number of strictly larger values.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "rank_desc",
+      "starter": "def rank_desc(values):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              10,
+              20,
+              20,
+              5
+            ]
+          ],
+          "expect": [
+            3,
+            1,
+            1,
+            4
+          ]
+        },
+        {
+          "args": [
+            [
+              1
+            ]
+          ],
+          "expect": [
+            1
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              3,
+              3,
+              3
+            ]
+          ],
+          "expect": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              7,
+              9,
+              8
+            ]
+          ],
+          "expect": [
+            3,
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    "solution": "RANK counts how many rows are strictly ahead.\n\n```python\ndef rank_desc(values):\n    return [1 + sum(1 for w in values if w > v) for v in values]\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k021",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.sql-window"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `store_running(rows)` where `rows` is a list of `[store, day, amt]` in arbitrary order. Return a list aligned with the input where each entry is the sum of `amt` over rows of the same store with day less than or equal to this row's day, like SUM(amt) OVER (PARTITION BY store ORDER BY day).",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "store_running",
+      "starter": "def store_running(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                "A",
+                2,
+                10
+              ],
+              [
+                "A",
+                1,
+                5
+              ],
+              [
+                "B",
+                1,
+                7
+              ],
+              [
+                "A",
+                3,
+                1
+              ]
+            ]
+          ],
+          "expect": [
+            15,
+            5,
+            7,
+            16
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              [
+                "A",
+                1,
+                4
+              ]
+            ]
+          ],
+          "expect": [
+            4
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                "A",
+                1,
+                2
+              ],
+              [
+                "B",
+                1,
+                3
+              ],
+              [
+                "A",
+                1,
+                4
+              ]
+            ]
+          ],
+          "expect": [
+            6,
+            3,
+            6
+          ]
+        }
+      ]
+    },
+    "solution": "PARTITION BY limits the frame to the same store; ORDER BY day limits it to days up to now.\n\n```python\ndef store_running(rows):\n    return [sum(a for s2, d2, a in rows if s2 == s and d2 <= d) for s, d, _ in rows]\n```",
+    "hints": [
+      "Compare store and day, not row position."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `labels_above(index, values, thr)` that builds a pandas Series from `values` with the given `index` labels. Return, as a list, the labels whose value is strictly greater than `thr`, in original order.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "labels_above",
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef labels_above(index, values, thr):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              "x",
+              "y",
+              "z"
+            ],
+            [
+              4,
+              7,
+              1
+            ],
+            3
+          ],
+          "expect": [
+            "x",
+            "y"
+          ]
+        },
+        {
+          "args": [
+            [
+              10,
+              20,
+              30
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            5
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [],
+            [],
+            0
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              3,
+              1,
+              2
+            ],
+            [
+              9,
+              9,
+              0
+            ],
+            8
+          ],
+          "expect": [
+            3,
+            1
+          ]
+        }
+      ]
+    },
+    "solution": "A boolean mask selects rows; the index holds their labels.\n\n```python\nimport pandas as pd\n\ndef labels_above(index, values, thr):\n    s = pd.Series(values, index=index)\n    return s[s > thr].index.tolist()\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `label_slice_sum(index, values, start, end)` that builds a Series from `values` with unique `index` labels, then returns the sum of `s.loc[start:end]`. Label slices include both ends, and the labels are in the given order, not sorted.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "label_slice_sum",
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef label_slice_sum(index, values, start, end):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            "b",
+            "c"
+          ],
+          "expect": 5
+        },
+        {
+          "args": [
+            [
+              5,
+              0,
+              9,
+              2
+            ],
+            [
+              10,
+              20,
+              30,
+              40
+            ],
+            0,
+            9
+          ],
+          "expect": 50
+        },
+        {
+          "args": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              3,
+              4
+            ],
+            "a",
+            "a"
+          ],
+          "expect": 3
+        },
+        {
+          "args": [
+            [
+              "p",
+              "q",
+              "r"
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            "q",
+            "r"
+          ],
+          "expect": 6
+        }
+      ]
+    },
+    "solution": "loc slices by label and includes the end label; it follows stored order.\n\n```python\nimport pandas as pd\n\ndef label_slice_sum(index, values, start, end):\n    s = pd.Series(values, index=index)\n    return int(s.loc[start:end].sum())\n```",
+    "hints": [
+      "loc end label is included."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-index"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `label_of_kth(values, k)` that builds a Series with default labels 0, 1, 2, ..., sorts it descending (ties keep original order), and returns the original label of the row at sorted position `k`, counting from 0, as an int.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "label_of_kth",
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef label_of_kth(values, k):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              5,
+              9,
+              1,
+              7
+            ],
+            0
+          ],
+          "expect": 1
+        },
+        {
+          "args": [
+            [
+              5,
+              9,
+              1,
+              7
+            ],
+            2
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              3,
+              3,
+              3
+            ],
+            1
+          ],
+          "expect": 1
+        },
+        {
+          "args": [
+            [
+              4
+            ],
+            0
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              1,
+              8,
+              8,
+              2
+            ],
+            1
+          ],
+          "expect": 2
+        }
+      ]
+    },
+    "solution": "After sorting, position and label differ; read the index at that position.\n\n```python\nimport pandas as pd\n\ndef label_of_kth(values, k):\n    s = pd.Series(values).sort_values(ascending=False, kind='stable')\n    return int(s.index[k])\n```",
+    "hints": [
+      "Sorting keeps labels attached to values."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `align_add(idx1, v1, idx2, v2)` that makes two Series from the label and value lists and adds them by label, treating a label missing from one side as 0. Return the sums as a list ordered by label ascending.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "align_add",
+      "tol": 1e-09,
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef align_add(idx1, v1, idx2, v2):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              "b",
+              "c"
+            ],
+            [
+              10,
+              20
+            ]
+          ],
+          "expect": [
+            1.0,
+            12.0,
+            20.0
+          ]
+        },
+        {
+          "args": [
+            [
+              "x"
+            ],
+            [
+              5
+            ],
+            [
+              "x"
+            ],
+            [
+              6
+            ]
+          ],
+          "expect": [
+            11
+          ]
+        },
+        {
+          "args": [
+            [],
+            [],
+            [
+              "k"
+            ],
+            [
+              3
+            ]
+          ],
+          "expect": [
+            3
+          ]
+        },
+        {
+          "args": [
+            [
+              "a",
+              "b"
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              "c",
+              "d"
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "expect": [
+            1.0,
+            2.0,
+            3.0,
+            4.0
+          ]
+        }
+      ]
+    },
+    "solution": "Series arithmetic matches by label, and fill_value replaces the gaps.\n\n```python\nimport pandas as pd\n\ndef align_add(idx1, v1, idx2, v2):\n    a, b = pd.Series(v1, index=idx1), pd.Series(v2, index=idx2)\n    return a.add(b, fill_value=0).sort_index().tolist()\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `center_columns(rows)` taking a list of equal-length numeric lists (a matrix) and returning it as a list of lists with each column's mean subtracted. Use numpy, with no Python loops over rows.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "center_columns",
+      "tol": 1e-09,
+      "packages": [
+        "numpy"
+      ],
+      "starter": "import numpy as np\n\ndef center_columns(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                5,
+                9
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              -2.0,
+              -3.0
+            ],
+            [
+              0.0,
+              -1.0
+            ],
+            [
+              2.0,
+              4.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                2
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                4,
+                8
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              0.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                3
+              ]
+            ]
+          ],
+          "expect": [
+            [
+              -1.0
+            ],
+            [
+              0.0
+            ],
+            [
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "Broadcasting subtracts the length-m mean row from every row.\n\n```python\nimport numpy as np\n\ndef center_columns(rows):\n    m = np.array(rows, dtype=float)\n    return (m - m.mean(axis=0)).tolist()\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-vector"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `pairwise_diff(a, b)` taking two numeric lists and returning an `len(a)` by `len(b)` list of lists whose cell `(i, j)` is `a[i] - b[j]`. Use numpy broadcasting, no loops.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "pairwise_diff",
+      "tol": 1e-09,
+      "packages": [
+        "numpy"
+      ],
+      "starter": "import numpy as np\n\ndef pairwise_diff(a, b):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              10,
+              20
+            ]
+          ],
+          "expect": [
+            [
+              -9.0,
+              -19.0
+            ],
+            [
+              -8.0,
+              -18.0
+            ],
+            [
+              -7.0,
+              -17.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              5
+            ],
+            [
+              5
+            ]
+          ],
+          "expect": [
+            [
+              0.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            [
+              0
+            ]
+          ],
+          "expect": [
+            [
+              1.0
+            ],
+            [
+              2.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expect": [
+            [
+              -1.0,
+              -2.0,
+              -3.0
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "A column against a row broadcasts to a full grid.\n\n```python\nimport numpy as np\n\ndef pairwise_diff(a, b):\n    a, b = np.array(a, dtype=float), np.array(b, dtype=float)\n    return (a[:, None] - b[None, :]).tolist()\n```",
+    "hints": [
+      "Add an axis to each vector."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k028",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `inner_merge(left, right)` where both are lists of dicts sharing an `id` key. Return a list of dicts from `pd.DataFrame(left).merge(pd.DataFrame(right), on='id')` as `.to_dict('records')`; duplicate ids multiply rows.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "inner_merge",
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef inner_merge(left, right):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "id": 1,
+                "x": "a"
+              },
+              {
+                "id": 2,
+                "x": "b"
+              },
+              {
+                "id": 3,
+                "x": "c"
+              }
+            ],
+            [
+              {
+                "id": 2,
+                "y": "p"
+              },
+              {
+                "id": 3,
+                "y": "q"
+              },
+              {
+                "id": 3,
+                "y": "r"
+              }
+            ]
+          ],
+          "expect": [
+            {
+              "id": 2,
+              "x": "b",
+              "y": "p"
+            },
+            {
+              "id": 3,
+              "x": "c",
+              "y": "q"
+            },
+            {
+              "id": 3,
+              "x": "c",
+              "y": "r"
+            }
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "id": 1,
+                "x": "a"
+              }
+            ],
+            [
+              {
+                "id": 9,
+                "y": "z"
+              }
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              {
+                "id": 1,
+                "x": 5
+              },
+              {
+                "id": 1,
+                "x": 6
+              }
+            ],
+            [
+              {
+                "id": 1,
+                "y": 0
+              }
+            ]
+          ],
+          "expect": [
+            {
+              "id": 1,
+              "x": 5,
+              "y": 0
+            },
+            {
+              "id": 1,
+              "x": 6,
+              "y": 0
+            }
+          ]
+        }
+      ]
+    },
+    "solution": "Merge pairs rows by key like an inner join and keeps columns from both.\n\n```python\nimport pandas as pd\n\ndef inner_merge(left, right):\n    out = pd.DataFrame(left).merge(pd.DataFrame(right), on='id')\n    return out.to_dict('records')\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k029",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `group_share(rows)` where `rows` is a list of dicts with `g` and `v`. Return a list, in input order, of each row's `v` divided by the total `v` of its own group `g`, using groupby transform.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "group_share",
+      "tol": 1e-09,
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef group_share(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "g": "a",
+                "v": 1
+              },
+              {
+                "g": "a",
+                "v": 3
+              },
+              {
+                "g": "b",
+                "v": 5
+              }
+            ]
+          ],
+          "expect": [
+            0.25,
+            0.75,
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "g": "z",
+                "v": 2
+              }
+            ]
+          ],
+          "expect": [
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "g": "a",
+                "v": 2
+              },
+              {
+                "g": "b",
+                "v": 4
+              },
+              {
+                "g": "a",
+                "v": 2
+              },
+              {
+                "g": "b",
+                "v": 4
+              }
+            ]
+          ],
+          "expect": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      ]
+    },
+    "solution": "transform returns a group value aligned to every row, so division is row by row.\n\n```python\nimport pandas as pd\n\ndef group_share(rows):\n    df = pd.DataFrame(rows)\n    return (df['v'] / df.groupby('g')['v'].transform('sum')).tolist()\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k030",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.pandas-merge"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `pivot_sum(rows)` where `rows` is a list of dicts with `r`, `c`, `v`. Return the row-by-column table of summed `v` as a list of lists, rows and columns in ascending order, with 0 for combinations that never occur.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "pivot_sum",
+      "tol": 1e-09,
+      "packages": [
+        "pandas"
+      ],
+      "starter": "import pandas as pd\n\ndef pivot_sum(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "r": "a",
+                "c": "x",
+                "v": 1
+              },
+              {
+                "r": "a",
+                "c": "y",
+                "v": 2
+              },
+              {
+                "r": "b",
+                "c": "x",
+                "v": 3
+              },
+              {
+                "r": "a",
+                "c": "x",
+                "v": 4
+              }
+            ]
+          ],
+          "expect": [
+            [
+              5,
+              2
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "r": "p",
+                "c": "q",
+                "v": 7
+              }
+            ]
+          ],
+          "expect": [
+            [
+              7
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "r": "b",
+                "c": "y",
+                "v": 1
+              },
+              {
+                "r": "a",
+                "c": "x",
+                "v": 1
+              }
+            ]
+          ],
+          "expect": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "A pivot table groups by two keys and spreads one of them across columns.\n\n```python\nimport pandas as pd\n\ndef pivot_sum(rows):\n    df = pd.DataFrame(rows)\n    t = df.pivot_table(index='r', columns='c', values='v', aggfunc='sum', fill_value=0)\n    return t.values.tolist()\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `split_city_year(values)` where each value looks like `Lima-2020`. Return a list of `[city, year]` pairs with `year` as an int, splitting on the last hyphen.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "split_city_year",
+      "starter": "def split_city_year(values):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              "Lima-2020",
+              "Oslo-2021"
+            ]
+          ],
+          "expect": [
+            [
+              "Lima",
+              2020
+            ],
+            [
+              "Oslo",
+              2021
+            ]
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              "Port-au-Prince-1999"
+            ]
+          ],
+          "expect": [
+            [
+              "Port-au-Prince",
+              1999
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              "Rome-2000",
+              "Rome-2001"
+            ]
+          ],
+          "expect": [
+            [
+              "Rome",
+              2000
+            ],
+            [
+              "Rome",
+              2001
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "One column mixed two variables; split it into one column each.\n\n```python\ndef split_city_year(values):\n    out = []\n    for s in values:\n        city, year = s.rsplit('-', 1)\n        out.append([city, int(year)])\n    return out\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `wide_to_long(rows)` where `rows` is a list of dicts with `name` and year columns such as `y2020`, `y2021`. Return a list of `[name, year, value]` with `year` an int, sorted by name then year, one entry per cell.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "wide_to_long",
+      "starter": "def wide_to_long(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "name": "Bo",
+                "y2020": 3,
+                "y2021": 4
+              },
+              {
+                "name": "Ana",
+                "y2020": 1,
+                "y2021": 2
+              }
+            ]
+          ],
+          "expect": [
+            [
+              "Ana",
+              2020,
+              1
+            ],
+            [
+              "Ana",
+              2021,
+              2
+            ],
+            [
+              "Bo",
+              2020,
+              3
+            ],
+            [
+              "Bo",
+              2021,
+              4
+            ]
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              {
+                "name": "A",
+                "y1999": 5
+              }
+            ]
+          ],
+          "expect": [
+            [
+              "A",
+              1999,
+              5
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "name": "A",
+                "y2021": 2,
+                "y2020": 1
+              }
+            ]
+          ],
+          "expect": [
+            [
+              "A",
+              2020,
+              1
+            ],
+            [
+              "A",
+              2021,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "Column names that hold a year become values of a year column.\n\n```python\ndef wide_to_long(rows):\n    out = [[r['name'], int(k[1:]), v] for r in rows for k, v in r.items() if k != 'name']\n    return sorted(out)\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k033",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.tidy"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `obs_per_id(rows)` where `rows` is a list of dicts with `id` and measurement columns that may be None. Melt to long form, drop missing values, and return `[id, n]` pairs sorted by id, where n counts that id's remaining observations (ids with none give 0). Empty input gives [].",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "obs_per_id",
+      "starter": "def obs_per_id(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              {
+                "id": 2,
+                "a": 1,
+                "b": null
+              },
+              {
+                "id": 1,
+                "a": 3,
+                "b": 4
+              }
+            ]
+          ],
+          "expect": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              {
+                "id": 1,
+                "a": null,
+                "b": null
+              }
+            ]
+          ],
+          "expect": [
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              {
+                "id": 5,
+                "a": 0,
+                "b": 0,
+                "c": null
+              }
+            ]
+          ],
+          "expect": [
+            [
+              5,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "After melting, each non-missing cell is one observation row.\n\n```python\ndef obs_per_id(rows):\n    out = []\n    for r in rows:\n        n = sum(1 for k, v in r.items() if k != 'id' and v is not None)\n        out.append([r['id'], n])\n    return sorted(out)\n```",
+    "hints": [
+      "A zero is data; only None is missing."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k034",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `missing_rate(rows)` where `rows` is a list of equal-length lists that may hold None. Return a list with each column's fraction of None values, between 0 and 1.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "missing_rate",
+      "tol": 1e-09,
+      "starter": "def missing_rate(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                1,
+                null
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                null,
+                null
+              ],
+              [
+                4,
+                5
+              ]
+            ]
+          ],
+          "expect": [
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1,
+                2
+              ]
+            ]
+          ],
+          "expect": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                null
+              ],
+              [
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                null,
+                5,
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            0.5,
+            0.0,
+            0.5
+          ]
+        }
+      ]
+    },
+    "solution": "Missing rate is missing count over row count, per column.\n\n```python\ndef missing_rate(rows):\n    n = len(rows)\n    return [sum(r[j] is None for r in rows) / n for j in range(len(rows[0]))]\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k035",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `mean_impute(values)` where `values` may hold None. Return a pair `[filled, flags]`: `filled` replaces each None with the mean of the non-missing values, and `flags` holds 1 where a value was missing, else 0. With no observed values `filled` is unchanged and `flags` still mark the Nones.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "mean_impute",
+      "tol": 1e-09,
+      "starter": "def mean_impute(values):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              null,
+              3
+            ]
+          ],
+          "expect": [
+            [
+              1,
+              2.0,
+              3
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              2,
+              4
+            ]
+          ],
+          "expect": [
+            [
+              2,
+              4
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": [
+            [],
+            []
+          ]
+        },
+        {
+          "args": [
+            [
+              null,
+              6,
+              null,
+              10
+            ]
+          ],
+          "expect": [
+            [
+              8.0,
+              6,
+              8.0,
+              10
+            ],
+            [
+              1,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              null,
+              null
+            ]
+          ],
+          "expect": [
+            [
+              null,
+              null
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "solution": "Fill with the observed mean and keep a flag so the filled rows stay traceable.\n\n```python\ndef mean_impute(values):\n    obs = [v for v in values if v is not None]\n    m = sum(obs) / len(obs) if obs else None\n    return [[m if v is None else v for v in values], [int(v is None) for v in values]]\n```",
+    "hints": [
+      "Mean over observed values only."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k036",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.missing"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `group_median_impute(rows)` where `rows` is a list of `[group, value]`, value maybe None. Replace each None with the median of that group's non-missing values (average of the two middle ones if even), returning the values in input order. A group with none observed stays None.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "group_median_impute",
+      "tol": 1e-09,
+      "starter": "def group_median_impute(rows):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                "a",
+                1
+              ],
+              [
+                "a",
+                null
+              ],
+              [
+                "a",
+                3
+              ],
+              [
+                "b",
+                10
+              ],
+              [
+                "b",
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            1,
+            2.0,
+            3,
+            10,
+            10
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                "a",
+                1
+              ],
+              [
+                "a",
+                2
+              ],
+              [
+                "a",
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            1,
+            2,
+            1.5
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                "x",
+                null
+              ]
+            ]
+          ],
+          "expect": [
+            null
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        }
+      ]
+    },
+    "solution": "Impute from the observed values of the same group, so the fill respects the group.\n\n```python\ndef group_median_impute(rows):\n    import statistics as st\n    obs = {}\n    for g, v in rows:\n        if v is not None:\n            obs.setdefault(g, []).append(v)\n    med = {g: st.median(v) for g, v in obs.items()}\n    return [med.get(g) if v is None else v for g, v in rows]\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k037",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `invalid_positions(values, lo, hi)` returning the 0-based positions of values that are None or outside the closed range $[lo, hi]$, in order.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "invalid_positions",
+      "starter": "def invalid_positions(values, lo, hi):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              5,
+              -1,
+              null,
+              120,
+              100
+            ],
+            0,
+            100
+          ],
+          "expect": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "args": [
+            [],
+            0,
+            1
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              0,
+              1
+            ],
+            0,
+            1
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              null
+            ],
+            0,
+            1
+          ],
+          "expect": [
+            0
+          ]
+        }
+      ]
+    },
+    "solution": "Validation flags missing values and values outside the allowed bounds, inclusive.\n\n```python\ndef invalid_positions(values, lo, hi):\n    return [i for i, v in enumerate(values) if v is None or not lo <= v <= hi]\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k038",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `to_numbers(strings)` converting text to floats. Strip spaces, drop `$` and thousands commas, and return None for an empty string or `n/a` in any letter case.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "to_numbers",
+      "tol": 1e-09,
+      "starter": "def to_numbers(strings):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              " 1,200 ",
+              "$3.5",
+              "N/A",
+              ""
+            ]
+          ],
+          "expect": [
+            1200.0,
+            3.5,
+            null,
+            null
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              "7",
+              " n/a "
+            ]
+          ],
+          "expect": [
+            7.0,
+            null
+          ]
+        },
+        {
+          "args": [
+            [
+              "$1,000,000.25"
+            ]
+          ],
+          "expect": [
+            1000000.25
+          ]
+        }
+      ]
+    },
+    "solution": "Normalise the text first, then convert; sentinels become missing.\n\n```python\ndef to_numbers(strings):\n    out = []\n    for s in strings:\n        t = s.strip().replace('$', '').replace(',', '')\n        out.append(None if t == '' or t.lower() == 'n/a' else float(t))\n    return out\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k039",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.cleaning"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `dedupe_names(names)` that strips spaces, lower-cases each name, and returns the list of distinct cleaned names in order of first appearance. Drop names that are empty after cleaning.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "dedupe_names",
+      "starter": "def dedupe_names(names):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              "Ana ",
+              " ana",
+              "Bo",
+              "BO",
+              "Cy"
+            ]
+          ],
+          "expect": [
+            "ana",
+            "bo",
+            "cy"
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              "  ",
+              "x"
+            ]
+          ],
+          "expect": [
+            "x"
+          ]
+        },
+        {
+          "args": [
+            [
+              "A",
+              "a",
+              "A "
+            ]
+          ],
+          "expect": [
+            "a"
+          ]
+        }
+      ]
+    },
+    "solution": "Duplicates only show after normalising, so clean first and dedupe second.\n\n```python\ndef dedupe_names(names):\n    seen, out = set(), []\n    for n in names:\n        c = n.strip().lower()\n        if c and c not in seen:\n            seen.add(c)\n            out.append(c)\n    return out\n```",
+    "hints": [
+      "Clean before comparing."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k040",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `cheaper_join(n, m)` returning `'nested'` or `'hash'`. Nested loop costs $n\\cdot m$ steps, hash join costs $n+m$ steps; return the cheaper, and `'nested'` on a tie.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "cheaper_join",
+      "starter": "def cheaper_join(n, m):\n    ...",
+      "tests": [
+        {
+          "args": [
+            1,
+            1
+          ],
+          "expect": "nested"
+        },
+        {
+          "args": [
+            2,
+            2
+          ],
+          "expect": "nested"
+        },
+        {
+          "args": [
+            100,
+            100
+          ],
+          "expect": "hash"
+        },
+        {
+          "args": [
+            1,
+            50
+          ],
+          "expect": "nested"
+        },
+        {
+          "args": [
+            3,
+            2
+          ],
+          "expect": "hash"
+        }
+      ]
+    },
+    "solution": "Compare the two cost formulas directly.\n\n```python\ndef cheaper_join(n, m):\n    return 'nested' if n * m <= n + m else 'hash'\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k041",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `binary_steps(n)` returning the worst-case number of probes a binary search needs on a sorted list of `n` items, which is $\\lfloor\\log_2 n\\rfloor+1$ for $n\\ge1$ and 0 for $n=0$. Return an int.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "binary_steps",
+      "starter": "def binary_steps(n):\n    ...",
+      "tests": [
+        {
+          "args": [
+            0
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            1
+          ],
+          "expect": 1
+        },
+        {
+          "args": [
+            7
+          ],
+          "expect": 3
+        },
+        {
+          "args": [
+            8
+          ],
+          "expect": 4
+        },
+        {
+          "args": [
+            1000
+          ],
+          "expect": 10
+        }
+      ]
+    },
+    "solution": "Each probe halves the range, so depth is the bit length of n.\n\n```python\ndef binary_steps(n):\n    return n.bit_length()\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t5-k042",
+    "tier": "b",
+    "type": "micro",
+    "level": "T5",
+    "tags": [
+      "t5.complexity"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `pair_count(values, target)` returning how many index pairs $i<j$ satisfy `values[i] + values[j] == target`. Do it in one pass with a hash table rather than comparing every pair.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "pair_count",
+      "starter": "def pair_count(values, target):\n    ...",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            5
+          ],
+          "expect": 2
+        },
+        {
+          "args": [
+            [
+              2,
+              2,
+              2
+            ],
+            4
+          ],
+          "expect": 3
+        },
+        {
+          "args": [
+            [],
+            3
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              5
+            ],
+            10
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              1,
+              -1,
+              0,
+              0
+            ],
+            0
+          ],
+          "expect": 2
+        }
+      ]
+    },
+    "solution": "Look up each value's partner in a hash table, giving linear cost instead of quadratic.\n\n```python\ndef pair_count(values, target):\n    seen, n = {}, 0\n    for v in values:\n        n += seen.get(target - v, 0)\n        seen[v] = seen.get(v, 0) + 1\n    return n\n```",
+    "hints": [
+      "Work one case by hand first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  }
+]

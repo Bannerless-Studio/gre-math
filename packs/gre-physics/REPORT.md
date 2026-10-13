@@ -503,3 +503,34 @@ Cards with no edit are those whose Example, formulas and drill coverage all pass
 - `t10.pacing` scoring sentence depends on ETS policy; reconfirm against the current Information Bulletin.
 - `t9.zeeman-stark` Stark paragraph is qualitative; drills do not test it numerically.
 - Longest cards after edits are under 140 words; the densest for a cold reader are `t4.images`, `t6.gen-coords` and `t8.identical`.
+
+## Teach cards v3 review (sonnet-5.5)
+
+Cards read: 137 of 137 (132 compared against 3 same-level drills each; the 5 `t10.*` cards have no tagged drills, read for shape and facts only). Every worked number in every Example was recomputed. Changed 75 cards by writing only `batches/Tn.teach.json` entries (`techniques.json` and `items.json` untouched; merge still needed).
+
+Counts by class: prose 43, factual 19, rule 10, overlap 3.
+
+### Changed
+
+| class | ids |
+|---|---|
+| factual | t1.sigfig (worst-case linear rule, drill t1-0016), t2.circular (banked curve, drill t2-0044), t2.torque-statics (Example beam now stated horizontal), t2.rot-dynamics (a = alpha R for a non-slipping string, drill t2-0107), t3.wave-basics (v = omega/k, drill t3-f001), t3.interference (Delta = d sin theta, drill t3-0063), t3.optical-instruments (magnifier with image at near point M = 1 + N/f, drill t3-0098), t3.fluid-flow (Example Delta p was sign-ambiguous: now p1 - p2; added Q = Av), t4.potential (K = q dV contradicted W = -q dV: now K_f = q(V_i - V_f)), t5.biot-savart (arc-centre field, drill t5-0018), t5.rl-lc (current decay, drill t5-0062), t5.ac-circuits (phase angle, omega = 2 pi f, drills t5-0067/0072), t5.poynting (instantaneous u, drill t5-0110), t5.radiation (oscillating charge P grows as omega^4, drill t5-f030), t9.fine-hyperfine (spin-orbit shift, drill t9-0017), t9.particle-kinematics (Cherenkov angle, drill t9-f022), t9.crystal-bands (Fermi wavevector and speed, drills t9-0116/f026), t9.semiconductors (n_i temperature law, drills t9-0119/0124), t9.lab-electronics (10-90% rise time, Johnson noise, drills t9-0152/f034) |
+| rule | t1.dimanal (T clashed: period renamed P), t1.kin-1d (u v a s t unnamed), t2.friction-drag (b, v_t, N unnamed), t2.incline-pulley (theta, mu, m1, m2 unnamed), t3.geom-optics (m, R, P unnamed; dioptre units), t4.multipole (d unnamed), t4.dielectrics (kappa, C0, E0 unnamed), t6.central-force (ell unnamed), t7.heat-transfer (k, L, A, h unnamed; Example k had no units), t8.time-evol (banned "note that") |
+| overlap | t3.sound (Example 600 Hz / 25 m/s matched drill t3-f005: now 450 Hz / 20 m/s, 425 Hz), t7.engines (Example refrigerator 250/300 K matched drill t7-f005: now 280/320 K, COP 7), t7.canonical (Example 0.10 eV at 300 K duplicated drill t7-0097: now 0.060 eV, p_up 0.090) |
+| prose | t1.small-angle, t1.scaling, t1.calc-rates, t2.com, t2.gravitation, t2.shm, t2.damped-driven, t3.superpose (Example "also differ" fixed), t3.polarization, t3.fluid-static, t3.ideal-gas, t4.coulomb, t4.gauss, t4.images (dense paragraph and awkward intuition), t4.conductors, t4.rc-transient (paragraph 1 never stated the move), t4.drude (no move stated), t5.inductance, t5.resonance, t5.maxwell, t5.em-waves, t5.em-boundary, t6.gen-coords, t6.euler-lagrange, t6.eff-potential, t6.small-osc (garbled Check), t6.rotating (thin intuition), t6.invariants, t6.rel-collisions, t7.entropy (vague intuition), t7.phase, t8.step-tunnel, t8.inf-well, t8.uncertainty (garbled opening), t8.two-level (garbled opening), t8.perturbation, t8.variational, t8.identical, t9.hydrogen, t9.zeeman-stark, t9.nuclear-structure, t9.standard-model, t9.solid-thermal |
+
+### Left as is (62 cards)
+
+All Example numbers, formulas, signs and constants re-derived and correct; words 90-170; no nested parentheses; no leftover labels; drills covered. Notes: `t3.sound` still takes 343 m/s while drills give 340, covered by "unless told otherwise". `t10.pacing` (161 words) is close to the limit and its scoring sentence depends on current ETS policy. Number overlaps with drills that remain are physical constants only (copper n = 8.5e28, e, k_B, c).
+
+### Checks run
+
+Changed cards: `renderText` returned no errors on all 75; word count, nested parentheses, display-math-alone, label, heading and banned-phrase checks passed on all 75; Example vs tagged-drill number overlap shows only constants. Unchanged cards (65) passed the same checks.
+
+### Least sure
+
+1. `t9.crystal-bands` (new Fermi-gas line added to a card already carrying three topics; cold reader may still find it crowded)
+2. `t2.circular` (banked curve added; the sentence points to the last display line)
+3. `t4.images` (still near the word limit)
+4. `t8.identical` (symmetric and antisymmetric combination now in display, but two ideas per card)
+5. `t6.gen-coords` (Example mixes a rigid-rod count with a pendulum T)

@@ -1,0 +1,3680 @@
+[
+  {
+    "id": "t6-k001",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.ml-setup"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `split_by_index(rows, test_idx)` returning a list `[train, test]` of two lists of rows. Rows at the 0-based positions in `test_idx` go to test, the rest to train, and both keep the original row order.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "split_by_index",
+      "tests": [
+        {
+          "args": [
+            [
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "expect": [
+            [
+              "a",
+              "c",
+              "e"
+            ],
+            [
+              "b",
+              "d"
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              10,
+              20,
+              30
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          "expect": [
+            [
+              20
+            ],
+            [
+              10,
+              30
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              "x",
+              "y"
+            ],
+            []
+          ],
+          "expect": [
+            [
+              "x",
+              "y"
+            ],
+            []
+          ]
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expect": [
+            [],
+            []
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              1,
+              2,
+              3
+            ]
+          ],
+          "expect": [
+            [],
+            [
+              1,
+              2,
+              3,
+              4
+            ]
+          ]
+        }
+      ],
+      "starter": "def split_by_index(rows, test_idx):\n    # return [train, test]\n    ..."
+    },
+    "solution": "Hold rows out by position so no row sits in both sets.\n\n```python\ndef split_by_index(rows, test_idx):\n    t = set(test_idx)\n    train = [r for i, r in enumerate(rows) if i not in t]\n    test = [r for i, r in enumerate(rows) if i in t]\n    return [train, test]\n```",
+    "hints": [
+      "Test the position, not the value."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k002",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.ml-setup"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `standardize_with_train(train, test)` returning a list of floats: each test value minus the train mean, divided by the train population standard deviation (divide by n). If the train sd is 0, return 0.0 for every test value.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "standardize_with_train",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              4,
+              4,
+              4,
+              5,
+              5,
+              7,
+              9
+            ],
+            [
+              5,
+              9,
+              1
+            ]
+          ],
+          "expect": [
+            0.0,
+            2.0,
+            -2.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              3,
+              5
+            ]
+          ],
+          "expect": [
+            -1.0,
+            1.0,
+            3.0
+          ]
+        },
+        {
+          "args": [
+            [
+              7,
+              7,
+              7
+            ],
+            [
+              1,
+              7
+            ]
+          ],
+          "expect": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              10
+            ],
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              10,
+              20,
+              30,
+              40
+            ],
+            [
+              25
+            ]
+          ],
+          "expect": [
+            0.0
+          ]
+        }
+      ],
+      "starter": "def standardize_with_train(train, test):\n    # scale test using train statistics only\n    ..."
+    },
+    "solution": "Fit mean and sd on train, then apply them to test to avoid leakage.\n\n```python\ndef standardize_with_train(train, test):\n    m = sum(train) / len(train)\n    s = (sum((v - m) ** 2 for v in train) / len(train)) ** 0.5\n    return [(v - m) / s if s else 0.0 for v in test]\n```",
+    "hints": [
+      "Statistics come from train only."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k003",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.bias-variance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `bias_variance(preds, truth)` where `preds` holds one model's prediction at a point from each of several training sets. Return `[bias_squared, variance]` as floats: squared gap between the mean prediction and `truth`, and the population variance (divide by n) of `preds`.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "bias_variance",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              4,
+              6
+            ],
+            4
+          ],
+          "expect": [
+            0.0,
+            2.6666666666666665
+          ]
+        },
+        {
+          "args": [
+            [
+              3,
+              3,
+              3
+            ],
+            1
+          ],
+          "expect": [
+            4.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            2.5
+          ],
+          "expect": [
+            0.0,
+            1.25
+          ]
+        },
+        {
+          "args": [
+            [
+              5
+            ],
+            2
+          ],
+          "expect": [
+            9.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              10
+            ],
+            5
+          ],
+          "expect": [
+            0.0,
+            25.0
+          ]
+        }
+      ],
+      "starter": "def bias_variance(preds, truth):\n    # return [bias_squared, variance]\n    ..."
+    },
+    "solution": "Split expected error into the squared gap of the average prediction and the spread across training sets.\n\n```python\ndef bias_variance(preds, truth):\n    m = sum(preds) / len(preds)\n    var = sum((p - m) ** 2 for p in preds) / len(preds)\n    return [(m - truth) ** 2, var]\n```",
+    "hints": [
+      "Bias uses the mean prediction; variance is the spread around it."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k004",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.bias-variance"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `diagnose(train_err, val_err, tol)` returning a string. Return `\"high bias\"` if `train_err` is greater than `tol`; otherwise `\"high variance\"` if `val_err - train_err` is greater than `tol`; otherwise `\"good fit\"`. Comparisons are strict.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "diagnose",
+      "tests": [
+        {
+          "args": [
+            0.5,
+            0.55,
+            0.2
+          ],
+          "expect": "high bias"
+        },
+        {
+          "args": [
+            0.05,
+            0.4,
+            0.2
+          ],
+          "expect": "high variance"
+        },
+        {
+          "args": [
+            0.05,
+            0.2,
+            0.2
+          ],
+          "expect": "good fit"
+        },
+        {
+          "args": [
+            0.2,
+            0.9,
+            0.2
+          ],
+          "expect": "high variance"
+        },
+        {
+          "args": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "expect": "good fit"
+        }
+      ],
+      "starter": "def diagnose(train_err, val_err, tol):\n    # return one of three strings\n    ..."
+    },
+    "solution": "Read bias from the training error first, then variance from the train-validation gap.\n\n```python\ndef diagnose(train_err, val_err, tol):\n    if train_err > tol:\n        return \"high bias\"\n    if val_err - train_err > tol:\n        return \"high variance\"\n    return \"good fit\"\n```",
+    "hints": [
+      "Check the training error first."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k005",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.ridge-lasso"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `ridge_slope(x, y, lam)` returning the float slope $b$ that minimises $\\sum (y_i - b x_i)^2 + \\lambda b^2$, with no intercept. Both inputs are equal-length lists and `lam` is at least 0.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "ridge_slope",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              4,
+              6
+            ],
+            0
+          ],
+          "expect": 2.0
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              4,
+              6
+            ],
+            14
+          ],
+          "expect": 1.0
+        },
+        {
+          "args": [
+            [
+              1,
+              -1
+            ],
+            [
+              3,
+              1
+            ],
+            1
+          ],
+          "expect": 0.6666666666666666
+        },
+        {
+          "args": [
+            [
+              2
+            ],
+            [
+              5
+            ],
+            1000
+          ],
+          "expect": 0.0099601593625498
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            1
+          ],
+          "expect": 0.0
+        }
+      ],
+      "starter": "def ridge_slope(x, y, lam):\n    # return the minimising slope\n    ..."
+    },
+    "solution": "Differentiating gives a closed form: the OLS numerator over the OLS denominator plus lambda.\n\n```python\ndef ridge_slope(x, y, lam):\n    sxy = sum(a * b for a, b in zip(x, y))\n    sxx = sum(a * a for a in x)\n    return sxy / (sxx + lam)\n```",
+    "hints": [
+      "Set the derivative to zero."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k006",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.ridge-lasso"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `soft_threshold(values, t)` returning a list of floats: each value moved toward zero by `t`, and set to 0.0 when its magnitude is at most `t`. This is the lasso update for orthonormal features.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "soft_threshold",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              3,
+              -3,
+              0.5
+            ],
+            1
+          ],
+          "expect": [
+            2,
+            -2,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              -1
+            ],
+            1
+          ],
+          "expect": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [],
+            2
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              -5,
+              5,
+              0
+            ],
+            0
+          ],
+          "expect": [
+            -5,
+            5,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0.2,
+              -0.2,
+              2.2
+            ],
+            0.2
+          ],
+          "expect": [
+            0.0,
+            0.0,
+            2.0
+          ]
+        }
+      ],
+      "starter": "def soft_threshold(values, t):\n    # shrink each value toward zero by t\n    ..."
+    },
+    "solution": "Shrink each magnitude by t and clip at zero, which is what makes lasso sparse.\n\n```python\ndef soft_threshold(values, t):\n    out = []\n    for v in values:\n        m = abs(v) - t\n        out.append(0.0 if m <= 0 else (m if v > 0 else -m))\n    return out\n```",
+    "hints": [
+      "Keep the sign, subtract t from the magnitude."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k007",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.logistic"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `predict_proba(X, w, b)` returning a list of floats: for each row `x` of `X`, the sigmoid of $w\\cdot x + b$. It must not overflow for scores such as 800 or -800.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "predict_proba",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                -1
+              ]
+            ],
+            [
+              2
+            ],
+            0
+          ],
+          "expect": [
+            0.5,
+            0.8807970779778823,
+            0.11920292202211755
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1,
+                2
+              ]
+            ],
+            [
+              0.5,
+              -0.25
+            ],
+            0.1
+          ],
+          "expect": [
+            0.52497918747894
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                400
+              ]
+            ],
+            [
+              2
+            ],
+            0
+          ],
+          "expect": [
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                400
+              ]
+            ],
+            [
+              -2
+            ],
+            0
+          ],
+          "expect": [
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [],
+            [
+              1
+            ],
+            0
+          ],
+          "expect": []
+        }
+      ],
+      "starter": "def predict_proba(X, w, b):\n    # sigmoid of w.x + b per row, stable for large |z|\n    ..."
+    },
+    "solution": "Map the linear score through a numerically stable sigmoid.\n\n```python\nimport math\n\ndef predict_proba(X, w, b):\n    out = []\n    for x in X:\n        z = sum(wi * xi for wi, xi in zip(w, x)) + b\n        e = math.exp(-abs(z))\n        out.append(1 / (1 + e) if z >= 0 else e / (1 + e))\n    return out\n```",
+    "hints": [
+      "Use exp of minus the absolute score."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k008",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.logistic"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `log_loss(y, p)` returning the mean negative log-likelihood (natural log) for 0/1 labels `y` and probabilities `p`. Clip each probability into [1e-15, 1 - 1e-15] first, and return 0.0 for empty input.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "log_loss",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              0
+            ],
+            [
+              0.8,
+              0.3
+            ]
+          ],
+          "expect": 0.2899092476264711
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            [
+              0.5
+            ]
+          ],
+          "expect": 0.6931471805599453
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            [
+              0.0
+            ]
+          ],
+          "expect": 34.538776394910684
+        },
+        {
+          "args": [
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0.1,
+              0.1,
+              0.9,
+              0.9
+            ]
+          ],
+          "expect": 0.10536051565782628
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expect": 0.0
+        }
+      ],
+      "starter": "def log_loss(y, p):\n    # mean of -[y ln p + (1-y) ln(1-p)] with clipping\n    ..."
+    },
+    "solution": "Score each row by the log of the probability given to its true label, then average.\n\n```python\nimport math\n\ndef log_loss(y, p):\n    eps = 1e-15\n    q = [min(max(v, eps), 1 - eps) for v in p]\n    t = sum(-math.log(v if yi else 1 - v) for yi, v in zip(y, q))\n    return t / len(y) if y else 0.0\n```",
+    "hints": [
+      "Pick p or 1-p by the label."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k009",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.loss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `huber_mean(residuals, delta)` returning the mean Huber loss as a float: $\\tfrac12 r^2$ when $|r|\\le\\delta$, otherwise $\\delta(|r|-\\tfrac12\\delta)$. Return 0.0 for an empty list.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "huber_mean",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              -2,
+              4
+            ],
+            1
+          ],
+          "expect": 1.8333333333333333
+        },
+        {
+          "args": [
+            [
+              0.5,
+              -0.5
+            ],
+            1
+          ],
+          "expect": 0.125
+        },
+        {
+          "args": [
+            [
+              3
+            ],
+            3
+          ],
+          "expect": 4.5
+        },
+        {
+          "args": [
+            [
+              -10,
+              10
+            ],
+            2
+          ],
+          "expect": 18.0
+        },
+        {
+          "args": [
+            [],
+            1
+          ],
+          "expect": 0.0
+        }
+      ],
+      "starter": "def huber_mean(residuals, delta):\n    # average the piecewise loss\n    ..."
+    },
+    "solution": "Quadratic near zero, linear in the tails, then average.\n\n```python\ndef huber_mean(residuals, delta):\n    def h(r):\n        a = abs(r)\n        return 0.5 * a * a if a <= delta else delta * (a - 0.5 * delta)\n    return sum(h(r) for r in residuals) / len(residuals) if residuals else 0.0\n```",
+    "hints": [
+      "The boundary |r| = delta uses the quadratic branch."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k010",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.loss"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `hinge_mean(y, scores)` returning the mean hinge loss $\\max(0, 1 - y f)$ as a float, for labels `y` in $\\{-1,+1\\}$ and model scores `f`. Return 0.0 for empty input.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "hinge_mean",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              -1
+            ],
+            [
+              0.4,
+              0.4
+            ]
+          ],
+          "expect": 1.0
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "expect": 0.0
+        },
+        {
+          "args": [
+            [
+              -1
+            ],
+            [
+              1
+            ]
+          ],
+          "expect": 2.0
+        },
+        {
+          "args": [
+            [
+              1,
+              -1,
+              1
+            ],
+            [
+              1,
+              -1,
+              -0.5
+            ]
+          ],
+          "expect": 0.5
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expect": 0.0
+        }
+      ],
+      "starter": "def hinge_mean(y, scores):\n    # mean of max(0, 1 - y*f)\n    ..."
+    },
+    "solution": "Penalise only points inside the margin or on the wrong side, then average.\n\n```python\ndef hinge_mean(y, scores):\n    t = sum(max(0, 1 - yi * f) for yi, f in zip(y, scores))\n    return t / len(y) if y else 0.0\n```",
+    "hints": [
+      "Correct side beyond the margin costs nothing."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k011",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.knn"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `knn_classify(X, y, q, k)` returning the integer label chosen by the `k` nearest rows of `X` to point `q` by Euclidean distance. Break distance ties by lower row index, and break vote ties by the smaller label.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "knn_classify",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                10
+              ]
+            ],
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0.4
+            ],
+            1
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ],
+              [
+                10
+              ]
+            ],
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0.4
+            ],
+            3
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                2
+              ]
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1
+            ],
+            1
+          ],
+          "expect": 1
+        },
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                2
+              ]
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1
+            ],
+            2
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                9,
+                9
+              ]
+            ],
+            [
+              2,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1
+            ],
+            3
+          ],
+          "expect": 2
+        }
+      ],
+      "starter": "def knn_classify(X, y, q, k):\n    # majority label among k nearest\n    ..."
+    },
+    "solution": "Rank rows by distance with an index tie-break, then take a vote among the top k.\n\n```python\ndef knn_classify(X, y, q, k):\n    d = lambda i: (sum((a - b) ** 2 for a, b in zip(X[i], q)), i)\n    near = sorted(range(len(X)), key=d)[:k]\n    votes = {}\n    for i in near:\n        votes[y[i]] = votes.get(y[i], 0) + 1\n    return min(votes, key=lambda c: (-votes[c], c))\n```",
+    "hints": [
+      "Sort by (distance, index)."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k012",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.knn"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `knn_regress(X, y, q, k)` returning the float mean of `y` over the `k` rows of `X` nearest to `q` by Euclidean distance, ties by lower row index. If `k` exceeds the number of rows, use all rows.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "knn_regress",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ]
+            ],
+            [
+              10,
+              20,
+              60
+            ],
+            [
+              0.9
+            ],
+            2
+          ],
+          "expect": 15.0
+        },
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                1
+              ],
+              [
+                2
+              ]
+            ],
+            [
+              10,
+              20,
+              60
+            ],
+            [
+              0.9
+            ],
+            10
+          ],
+          "expect": 30.0
+        },
+        {
+          "args": [
+            [
+              [
+                0
+              ],
+              [
+                2
+              ]
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              1
+            ],
+            1
+          ],
+          "expect": 4.0
+        },
+        {
+          "args": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                3,
+                4
+              ]
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              0,
+              0
+            ],
+            1
+          ],
+          "expect": 1.0
+        },
+        {
+          "args": [
+            [
+              [
+                5
+              ]
+            ],
+            [
+              7
+            ],
+            [
+              0
+            ],
+            1
+          ],
+          "expect": 7.0
+        }
+      ],
+      "starter": "def knn_regress(X, y, q, k):\n    # mean target of k nearest rows\n    ..."
+    },
+    "solution": "Average the targets of the nearest k rows, with k capped at n.\n\n```python\ndef knn_regress(X, y, q, k):\n    d = lambda i: (sum((a - b) ** 2 for a, b in zip(X[i], q)), i)\n    near = sorted(range(len(X)), key=d)[:k]\n    return sum(y[i] for i in near) / len(near)\n```",
+    "hints": [
+      "Slicing past the end is safe."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k013",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.naive-bayes"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `smoothed_probs(counts, alpha)` returning a list of floats: for each word count in one class, $(c + \\alpha) / (\\text{total} + \\alpha V)$ where total is the sum of counts and $V$ is the number of words in the vocabulary (the list length).",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "smoothed_probs",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              0,
+              3
+            ],
+            1
+          ],
+          "expect": [
+            0.375,
+            0.125,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ],
+            1
+          ],
+          "expect": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              5,
+              5
+            ],
+            0
+          ],
+          "expect": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            0.5
+          ],
+          "expect": [
+            0.125,
+            0.20833333333333334,
+            0.2916666666666667,
+            0.375
+          ]
+        },
+        {
+          "args": [
+            [
+              7
+            ],
+            2
+          ],
+          "expect": [
+            1.0
+          ]
+        }
+      ],
+      "starter": "def smoothed_probs(counts, alpha):\n    # additive smoothing per word\n    ..."
+    },
+    "solution": "Add alpha to every count so unseen words keep nonzero probability.\n\n```python\ndef smoothed_probs(counts, alpha):\n    d = sum(counts) + alpha * len(counts)\n    return [(c + alpha) / d for c in counts]\n```",
+    "hints": [
+      "Every word gains alpha, so the denominator gains alpha times V."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k014",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.naive-bayes"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `nb_predict(priors, likelihoods, x)` returning the integer index of the class with the highest score $\\ln \\text{prior}_c + \\sum_j x_j \\ln P(j\\mid c)$. Here `likelihoods[c][j]` is the word probability for class `c` (all positive), and `x` holds word counts. Ties go to the lower class index.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "nb_predict",
+      "tests": [
+        {
+          "args": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              [
+                0.7,
+                0.3
+              ],
+              [
+                0.2,
+                0.8
+              ]
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              [
+                0.7,
+                0.3
+              ],
+              [
+                0.2,
+                0.8
+              ]
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "expect": 1
+        },
+        {
+          "args": [
+            [
+              0.9,
+              0.1
+            ],
+            [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              0.2,
+              0.8
+            ],
+            [
+              [
+                0.6,
+                0.4
+              ],
+              [
+                0.1,
+                0.9
+              ]
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "expect": 0
+        }
+      ],
+      "starter": "def nb_predict(priors, likelihoods, x):\n    # argmax of log prior + count-weighted log likelihoods\n    ..."
+    },
+    "solution": "Score each class in log space with the independence product, then take the argmax.\n\n```python\nimport math\n\ndef nb_predict(priors, likelihoods, x):\n    def score(c):\n        return math.log(priors[c]) + sum(n * math.log(p) for n, p in zip(x, likelihoods[c]))\n    return max(range(len(priors)), key=lambda c: (score(c), -c))\n```",
+    "hints": [
+      "Sum logs instead of multiplying probabilities."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k015",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.trees"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `gini(labels)` returning the Gini impurity $1 - \\sum_c p_c^2$ of a list of class labels as a float. Return 0.0 for an empty list.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "gini",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              "a",
+              "a",
+              "a",
+              "b"
+            ]
+          ],
+          "expect": 0.375
+        },
+        {
+          "args": [
+            [
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "expect": 0.0
+        },
+        {
+          "args": [
+            [
+              0,
+              1,
+              0,
+              1
+            ]
+          ],
+          "expect": 0.5
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": 0.0
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4,
+              1,
+              2
+            ]
+          ],
+          "expect": 0.7222222222222222
+        }
+      ],
+      "starter": "def gini(labels):\n    # 1 - sum of squared class shares\n    ..."
+    },
+    "solution": "One minus the sum of squared class shares measures how mixed the node is.\n\n```python\ndef gini(labels):\n    n = len(labels)\n    return 1 - sum((labels.count(c) / n) ** 2 for c in set(labels)) if n else 0.0\n```",
+    "hints": [
+      "Class share is count over n."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k016",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.trees"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `best_threshold(xs, ys)` returning the float split threshold on one numeric feature that minimises weighted Gini impurity. Candidates are midpoints of consecutive distinct sorted `xs` values; a row goes left when $x \\le t$. Ties keep the smallest threshold; return `None` if `xs` has fewer than two distinct values.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "best_threshold",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "expect": 2.5
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              0,
+              1,
+              1,
+              1
+            ]
+          ],
+          "expect": 1.5
+        },
+        {
+          "args": [
+            [
+              3,
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "expect": 2.5
+        },
+        {
+          "args": [
+            [
+              5,
+              5,
+              5
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "expect": null
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "expect": 1.5
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "expect": 2.5
+        }
+      ],
+      "starter": "def best_threshold(xs, ys):\n    # scan midpoints, keep lowest weighted Gini\n    ..."
+    },
+    "solution": "Try every midpoint, compute the row-weighted child impurity, keep the lowest.\n\n```python\ndef best_threshold(xs, ys):\n    g = lambda l: len(l) - sum(l.count(c) ** 2 for c in set(l)) / len(l) if l else 0\n    v, best = sorted(set(xs)), None\n    for a, b in zip(v, v[1:]):\n        t = (a + b) / 2\n        s = g([y for x, y in zip(xs, ys) if x <= t]) + g([y for x, y in zip(xs, ys) if x > t])\n        best = (s, t) if best is None or s < best[0] - 1e-12 else best\n    return best[1] if best else None\n```",
+    "hints": [
+      "Weight each side's impurity by its share of rows."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k017",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.bagging"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `oob_indices(n, draws)` returning the sorted list of row indices in `range(n)` that never appear in `draws`, the bootstrap indices drawn with replacement for one tree. These are that tree's out-of-bag rows.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "oob_indices",
+      "tests": [
+        {
+          "args": [
+            5,
+            [
+              0,
+              0,
+              2,
+              4,
+              4
+            ]
+          ],
+          "expect": [
+            1,
+            3
+          ]
+        },
+        {
+          "args": [
+            3,
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            4,
+            []
+          ],
+          "expect": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "args": [
+            0,
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            6,
+            [
+              5,
+              5,
+              5,
+              5,
+              5,
+              5
+            ]
+          ],
+          "expect": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      ],
+      "starter": "def oob_indices(n, draws):\n    # rows never drawn\n    ..."
+    },
+    "solution": "A row is out-of-bag when the bootstrap draw missed it, so it can score that tree honestly.\n\n```python\ndef oob_indices(n, draws):\n    seen = set(draws)\n    return [i for i in range(n) if i not in seen]\n```",
+    "hints": [
+      "Repeats in draws count once."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k018",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.bagging"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `forest_vote(votes)` where `votes[t][r]` is tree `t`'s 0/1 prediction for row `r`. Return a list of 0/1 ints, one per row: 1 when at least half of the trees vote 1, else 0. Return `[]` when there are no trees.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "forest_vote",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ]
+          ],
+          "expect": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "expect": [
+            1,
+            0
+          ]
+        },
+        {
+          "args": [
+            [
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ],
+          "expect": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              [
+                1
+              ],
+              [
+                1
+              ],
+              [
+                0
+              ],
+              [
+                0
+              ]
+            ]
+          ],
+          "expect": [
+            1
+          ]
+        }
+      ],
+      "starter": "def forest_vote(votes):\n    # majority vote per row, ties go to 1\n    ..."
+    },
+    "solution": "Aggregate trees by column: majority across trees for each row.\n\n```python\ndef forest_vote(votes):\n    if not votes:\n        return []\n    n = len(votes)\n    return [1 if 2 * sum(col) >= n else 0 for col in zip(*votes)]\n```",
+    "hints": [
+      "Transpose so each row's votes sit together."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k019",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.boosting"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `boost_constant(y, eta, rounds)` for gradient boosting with squared loss where each weak learner is the constant equal to the mean of the current residuals. Start from a prediction of 0, add `eta` times that learner each round, and return the list of floats holding the prediction after each round.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "boost_constant",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              10
+            ],
+            0.5,
+            3
+          ],
+          "expect": [
+            5.0,
+            7.5,
+            8.75
+          ]
+        },
+        {
+          "args": [
+            [
+              2,
+              4,
+              6
+            ],
+            1.0,
+            2
+          ],
+          "expect": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              10
+            ],
+            0.1,
+            3
+          ],
+          "expect": [
+            0.5,
+            0.95,
+            1.355
+          ]
+        },
+        {
+          "args": [
+            [
+              5
+            ],
+            0.5,
+            0
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              8,
+              12
+            ],
+            0.25,
+            4
+          ],
+          "expect": [
+            2.5,
+            4.375,
+            5.78125,
+            6.8359375
+          ]
+        }
+      ],
+      "starter": "def boost_constant(y, eta, rounds):\n    # F += eta * mean(y - F) per round\n    ..."
+    },
+    "solution": "Each round fits the residuals and adds a shrunken copy of the fit.\n\n```python\ndef boost_constant(y, eta, rounds):\n    F, out = 0.0, []\n    for _ in range(rounds):\n        F += eta * sum(v - F for v in y) / len(y)\n        out.append(F)\n    return out\n```",
+    "hints": [
+      "Residual is label minus current F."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k020",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.boosting"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `adaboost_reweight(weights, wrong)` where `weights` sum to 1 and `wrong[i]` is 1 if the learner missed row `i`, else 0. With weighted error $\\varepsilon$ (assume $0<\\varepsilon<1$) and $\\alpha=\\tfrac12\\ln\\frac{1-\\varepsilon}{\\varepsilon}$, multiply missed weights by $e^{\\alpha}$ and others by $e^{-\\alpha}$, then renormalise to sum 1. Return the list of floats.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "adaboost_reweight",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ]
+          ],
+          "expect": [
+            0.5000000000000001,
+            0.16666666666666666,
+            0.16666666666666666,
+            0.16666666666666666
+          ]
+        },
+        {
+          "args": [
+            [
+              0.5,
+              0.5
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "expect": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              0.1,
+              0.2,
+              0.3,
+              0.4
+            ],
+            [
+              0,
+              1,
+              0,
+              1
+            ]
+          ],
+          "expect": [
+            0.12500000000000003,
+            0.16666666666666663,
+            0.37500000000000006,
+            0.33333333333333326
+          ]
+        },
+        {
+          "args": [
+            [
+              0.2,
+              0.8
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "expect": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              0.4,
+              0.6
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "expect": [
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "starter": "def adaboost_reweight(weights, wrong):\n    # scale by exp(+-alpha), renormalise\n    ..."
+    },
+    "solution": "Raise the weight of missed rows by exp(alpha), lower the rest, and renormalise.\n\n```python\nimport math\n\ndef adaboost_reweight(weights, wrong):\n    eps = sum(w for w, m in zip(weights, wrong) if m)\n    a = 0.5 * math.log((1 - eps) / eps)\n    new = [w * math.exp(a if m else -a) for w, m in zip(weights, wrong)]\n    s = sum(new)\n    return [v / s for v in new]\n```",
+    "hints": [
+      "The missed rows end up carrying half the total weight."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k021",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.svm"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `svm_objective(w, b, X, y, C)` returning the soft-margin primal value as a float: $\\tfrac12\\|w\\|^2 + C\\sum_i \\max(0,\\,1 - y_i(w\\cdot x_i + b))$, with labels $y_i\\in\\{-1,+1\\}$.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "svm_objective",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              0
+            ],
+            0,
+            [
+              [
+                2,
+                0
+              ],
+              [
+                -2,
+                0
+              ]
+            ],
+            [
+              1,
+              -1
+            ],
+            1
+          ],
+          "expect": 0.5
+        },
+        {
+          "args": [
+            [
+              1,
+              0
+            ],
+            0,
+            [
+              [
+                0.5,
+                0
+              ]
+            ],
+            [
+              1
+            ],
+            2
+          ],
+          "expect": 1.5
+        },
+        {
+          "args": [
+            [
+              3,
+              4
+            ],
+            0,
+            [],
+            [],
+            10
+          ],
+          "expect": 12.5
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            -1,
+            [
+              [
+                0
+              ],
+              [
+                3
+              ]
+            ],
+            [
+              1,
+              1
+            ],
+            0.5
+          ],
+          "expect": 1.5
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ],
+            0,
+            [
+              [
+                1,
+                1
+              ]
+            ],
+            [
+              -1
+            ],
+            3
+          ],
+          "expect": 3.0
+        }
+      ],
+      "starter": "def svm_objective(w, b, X, y, C):\n    # half squared norm plus C times total hinge\n    ..."
+    },
+    "solution": "Combine a margin-width penalty with C-weighted hinge violations.\n\n```python\ndef svm_objective(w, b, X, y, C):\n    reg = 0.5 * sum(v * v for v in w)\n    hinge = sum(max(0, 1 - yi * (sum(a * c for a, c in zip(w, x)) + b)) for x, yi in zip(X, y))\n    return reg + C * hinge\n```",
+    "hints": [
+      "Margin term is y times the score."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k022",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.svm"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `margin_violators(w, b, X, y)` returning the sorted list of row indices whose margin $y_i(w\\cdot x_i + b)$ is strictly less than 1. These rows sit inside the margin or on the wrong side. Rows exactly on the margin are not violators.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "margin_violators",
+      "tests": [
+        {
+          "args": [
+            [
+              1
+            ],
+            0,
+            [
+              [
+                2
+              ],
+              [
+                1
+              ],
+              [
+                0.5
+              ],
+              [
+                -2
+              ]
+            ],
+            [
+              1,
+              1,
+              1,
+              -1
+            ]
+          ],
+          "expect": [
+            2
+          ]
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            0,
+            [
+              [
+                -3
+              ]
+            ],
+            [
+              1
+            ]
+          ],
+          "expect": [
+            0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ],
+            -1,
+            [
+              [
+                1,
+                1
+              ],
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              1,
+              -1
+            ]
+          ],
+          "expect": [
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            0,
+            [],
+            []
+          ],
+          "expect": []
+        },
+        {
+          "args": [
+            [
+              2
+            ],
+            0,
+            [
+              [
+                0.5
+              ],
+              [
+                -0.5
+              ]
+            ],
+            [
+              1,
+              -1
+            ]
+          ],
+          "expect": []
+        }
+      ],
+      "starter": "def margin_violators(w, b, X, y):\n    # indices with y*(w.x+b) < 1\n    ..."
+    },
+    "solution": "A point violates the margin when its signed score falls short of 1.\n\n```python\ndef margin_violators(w, b, X, y):\n    m = lambda x, yi: yi * (sum(a * c for a, c in zip(w, x)) + b)\n    return [i for i, (x, yi) in enumerate(zip(X, y)) if m(x, yi) < 1]\n```",
+    "hints": [
+      "Strictly less than 1."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k023",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cv"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `kfold_indices(n, k)` returning a list of `k` validation index lists, with no shuffling. Fold sizes are as equal as possible: the first `n % k` folds get one extra row, and indices run consecutively from 0. Folds may be empty when `n < k`.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "kfold_indices",
+      "tests": [
+        {
+          "args": [
+            10,
+            5
+          ],
+          "expect": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              9
+            ]
+          ]
+        },
+        {
+          "args": [
+            7,
+            3
+          ],
+          "expect": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              6
+            ]
+          ]
+        },
+        {
+          "args": [
+            5,
+            5
+          ],
+          "expect": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ]
+        },
+        {
+          "args": [
+            2,
+            4
+          ],
+          "expect": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [],
+            []
+          ]
+        },
+        {
+          "args": [
+            0,
+            2
+          ],
+          "expect": [
+            [],
+            []
+          ]
+        },
+        {
+          "args": [
+            9,
+            1
+          ],
+          "expect": [
+            [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          ]
+        }
+      ],
+      "starter": "def kfold_indices(n, k):\n    # consecutive folds, remainder to the first folds\n    ..."
+    },
+    "solution": "Cut consecutive blocks, giving the remainder rows one each to the first folds.\n\n```python\ndef kfold_indices(n, k):\n    folds, start = [], 0\n    for f in range(k):\n        size = n // k + (1 if f < n % k else 0)\n        folds.append(list(range(start, start + size)))\n        start += size\n    return folds\n```",
+    "hints": [
+      "Track a running start index."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k024",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.cv"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `cv_summary(scores)` returning `[mean, sd]` as floats for a list of fold scores, where sd is the sample standard deviation (divide by n - 1). If there is one fold, sd is 0.0.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "cv_summary",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              0.8,
+              0.84,
+              0.76,
+              0.82,
+              0.78
+            ]
+          ],
+          "expect": [
+            0.8,
+            0.03162277660168377
+          ]
+        },
+        {
+          "args": [
+            [
+              0.5
+            ]
+          ],
+          "expect": [
+            0.5,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              3
+            ]
+          ],
+          "expect": [
+            2.0,
+            1.4142135623730951
+          ]
+        },
+        {
+          "args": [
+            [
+              2,
+              2,
+              2
+            ]
+          ],
+          "expect": [
+            2.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0.9,
+              0.7,
+              0.8
+            ]
+          ],
+          "expect": [
+            0.7999999999999999,
+            0.10000000000000003
+          ]
+        }
+      ],
+      "starter": "def cv_summary(scores):\n    # mean and sample sd\n    ..."
+    },
+    "solution": "Report the mean fold score and its spread across folds.\n\n```python\ndef cv_summary(scores):\n    n = len(scores)\n    m = sum(scores) / n\n    sd = (sum((s - m) ** 2 for s in scores) / (n - 1)) ** 0.5 if n > 1 else 0.0\n    return [m, sd]\n```",
+    "hints": [
+      "Sample sd divides by n - 1."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k025",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.clf-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `confusion(y_true, y_pred)` for 0/1 labels (1 is positive) returning the list of ints `[TP, FP, FN, TN]`.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "confusion",
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0
+            ]
+          ],
+          "expect": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "expect": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "expect": [
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expect": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "expect": [
+            2,
+            1,
+            1,
+            2
+          ]
+        }
+      ],
+      "starter": "def confusion(y_true, y_pred):\n    # count the four outcomes\n    ..."
+    },
+    "solution": "Tally each (truth, prediction) pair into its confusion cell.\n\n```python\ndef confusion(y_true, y_pred):\n    pairs = list(zip(y_true, y_pred))\n    return [sum(1 for t, p in pairs if (t, p) == c) for c in [(1, 1), (0, 1), (1, 0), (0, 0)]]\n```",
+    "hints": [
+      "Order is TP, FP, FN, TN."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k026",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.clf-metrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `prf1(y_true, y_pred)` for 0/1 labels (1 is positive) returning `[precision, recall, f1]` as floats. Any ratio with a zero denominator is 0.0, and F1 is 0.0 when precision plus recall is 0.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "prf1",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "expect": [
+            0.6666666666666666,
+            0.6666666666666666,
+            0.6666666666666666
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "expect": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "expect": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "expect": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "expect": [
+            0.25,
+            1.0,
+            0.4
+          ]
+        }
+      ],
+      "starter": "def prf1(y_true, y_pred):\n    # precision, recall and their harmonic mean, zero-safe\n    ..."
+    },
+    "solution": "Read precision and recall off TP, FP and FN, guarding each empty denominator.\n\n```python\ndef prf1(y_true, y_pred):\n    tp = sum(1 for t, p in zip(y_true, y_pred) if t and p)\n    fp = sum(1 for t, p in zip(y_true, y_pred) if not t and p)\n    fn = sum(1 for t, p in zip(y_true, y_pred) if t and not p)\n    pr = tp / (tp + fp) if tp + fp else 0.0\n    rc = tp / (tp + fn) if tp + fn else 0.0\n    return [pr, rc, 2 * pr * rc / (pr + rc) if pr + rc else 0.0]\n```",
+    "hints": [
+      "No predicted positives gives precision 0.0 here."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k027",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.roc-pr"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `roc_point(y, scores, thr)` returning `[fpr, tpr]` as floats, predicting positive when `score >= thr`. Labels `y` are 0/1. A rate whose denominator is 0 is 0.0.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "roc_point",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0.9,
+              0.4,
+              0.6,
+              0.2
+            ],
+            0.5
+          ],
+          "expect": [
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0.9,
+              0.4,
+              0.6,
+              0.2
+            ],
+            0.4
+          ],
+          "expect": [
+            0.5,
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              0
+            ],
+            [
+              0.5,
+              0.5
+            ],
+            0.5
+          ],
+          "expect": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ],
+            [
+              0.3,
+              0.7
+            ],
+            0.9
+          ],
+          "expect": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0.1,
+              0.9,
+              0.8
+            ],
+            0.0
+          ],
+          "expect": [
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "starter": "def roc_point(y, scores, thr):\n    # one threshold gives one (FPR, TPR) point\n    ..."
+    },
+    "solution": "Split by true class, then count the share of each scored at or above the threshold.\n\n```python\ndef roc_point(y, scores, thr):\n    pos = [s for yi, s in zip(y, scores) if yi == 1]\n    neg = [s for yi, s in zip(y, scores) if yi == 0]\n    tpr = sum(s >= thr for s in pos) / len(pos) if pos else 0.0\n    fpr = sum(s >= thr for s in neg) / len(neg) if neg else 0.0\n    return [fpr, tpr]\n```",
+    "hints": [
+      "The threshold is inclusive."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k028",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.roc-pr"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `auc_pairs(y, scores)` returning the ROC AUC as a float: over all (positive, negative) pairs, count 1 when the positive scores higher, 0.5 for equal scores, and divide by the number of pairs. Return 0.5 if either class is absent.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "auc_pairs",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0.9,
+              0.4,
+              0.6,
+              0.2
+            ]
+          ],
+          "expect": 0.75
+        },
+        {
+          "args": [
+            [
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ]
+          ],
+          "expect": 0.5
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ],
+            [
+              0.2,
+              0.9
+            ]
+          ],
+          "expect": 0.5
+        },
+        {
+          "args": [
+            [
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0.1,
+              0.2,
+              0.3,
+              0.4
+            ]
+          ],
+          "expect": 0.75
+        },
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0.1,
+              0.2,
+              0.8,
+              0.9
+            ]
+          ],
+          "expect": 0.0
+        }
+      ],
+      "starter": "def auc_pairs(y, scores):\n    # pairwise win rate with half credit for ties\n    ..."
+    },
+    "solution": "AUC equals the pairwise ranking probability, counting ties as half.\n\n```python\ndef auc_pairs(y, scores):\n    pos = [s for yi, s in zip(y, scores) if yi == 1]\n    neg = [s for yi, s in zip(y, scores) if yi == 0]\n    if not pos or not neg:\n        return 0.5\n    return sum((p > n) + 0.5 * (p == n) for p in pos for n in neg) / (len(pos) * len(neg))\n```",
+    "hints": [
+      "AUC is the chance a random positive outranks a random negative."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k029",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.reg-metrics"
+    ],
+    "critical": [],
+    "difficulty": 1,
+    "prompt": "Write `reg_metrics(y, pred)` returning the list of floats `[mse, rmse, mae]` for equal-length lists of targets and predictions. Return `[0.0, 0.0, 0.0]` for empty lists.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "reg_metrics",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              3,
+              -0.5,
+              2,
+              7
+            ],
+            [
+              2.5,
+              0.0,
+              2,
+              8
+            ]
+          ],
+          "expect": [
+            0.375,
+            0.6123724356957945,
+            0.5
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "expect": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              0
+            ],
+            [
+              4
+            ]
+          ],
+          "expect": [
+            16.0,
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "args": [
+            [],
+            []
+          ],
+          "expect": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "args": [
+            [
+              10,
+              20,
+              30
+            ],
+            [
+              12,
+              18,
+              36
+            ]
+          ],
+          "expect": [
+            14.666666666666666,
+            3.8297084310253524,
+            3.3333333333333335
+          ]
+        }
+      ],
+      "starter": "def reg_metrics(y, pred):\n    # mean squared, root, and mean absolute error\n    ..."
+    },
+    "solution": "Average squared and absolute residuals, and take the root for RMSE.\n\n```python\ndef reg_metrics(y, pred):\n    n = len(y)\n    if not n:\n        return [0.0, 0.0, 0.0]\n    mse = sum((a - b) ** 2 for a, b in zip(y, pred)) / n\n    return [mse, mse ** 0.5, sum(abs(a - b) for a, b in zip(y, pred)) / n]\n```",
+    "hints": [
+      "RMSE is the square root of MSE."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k030",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.reg-metrics"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `r_squared(y, pred)` returning $1 - SS_{res}/SS_{tot}$ as a float, where $SS_{tot}$ sums squared gaps from the mean of `y`. If $SS_{tot}$ is 0, return 0.0. The result may be negative.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "r_squared",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1.5,
+              2,
+              2.5
+            ]
+          ],
+          "expect": 0.75
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expect": 1.0
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              3,
+              2,
+              1
+            ]
+          ],
+          "expect": -3.0
+        },
+        {
+          "args": [
+            [
+              4,
+              4,
+              4
+            ],
+            [
+              4,
+              5,
+              4
+            ]
+          ],
+          "expect": 0.0
+        },
+        {
+          "args": [
+            [
+              2,
+              4,
+              6,
+              8
+            ],
+            [
+              3,
+              3,
+              7,
+              7
+            ]
+          ],
+          "expect": 0.8
+        }
+      ],
+      "starter": "def r_squared(y, pred):\n    # 1 - residual SS over total SS\n    ..."
+    },
+    "solution": "Compare residual error with the error of always predicting the mean.\n\n```python\ndef r_squared(y, pred):\n    m = sum(y) / len(y)\n    tot = sum((v - m) ** 2 for v in y)\n    res = sum((a - b) ** 2 for a, b in zip(y, pred))\n    return 1 - res / tot if tot else 0.0\n```",
+    "hints": [
+      "Predicting the mean scores 0."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k031",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.tuning"
+    ],
+    "critical": [],
+    "difficulty": 2,
+    "prompt": "Write `best_config(cv_scores)` where `cv_scores[i]` is the list of fold scores for configuration `i` (higher is better). Return the integer index of the configuration with the highest mean score; ties go to the lowest index.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "best_config",
+      "tests": [
+        {
+          "args": [
+            [
+              [
+                0.7,
+                0.8
+              ],
+              [
+                0.9,
+                0.5
+              ],
+              [
+                0.6,
+                0.6
+              ]
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              [
+                0.5,
+                0.5
+              ],
+              [
+                0.4,
+                0.6
+              ]
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              [
+                0.9
+              ]
+            ]
+          ],
+          "expect": 0
+        },
+        {
+          "args": [
+            [
+              [
+                0.1,
+                0.2,
+                0.3
+              ],
+              [
+                0.9,
+                0.1
+              ],
+              [
+                0.25,
+                0.25
+              ]
+            ]
+          ],
+          "expect": 1
+        },
+        {
+          "args": [
+            [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0.5,
+                0.5,
+                0.5
+              ]
+            ]
+          ],
+          "expect": 0
+        }
+      ],
+      "starter": "def best_config(cv_scores):\n    # argmax of mean CV score\n    ..."
+    },
+    "solution": "Rank settings by cross-validated mean, never by a single split.\n\n```python\ndef best_config(cv_scores):\n    means = [sum(s) / len(s) for s in cv_scores]\n    return max(range(len(means)), key=lambda i: (means[i], -i))\n```",
+    "hints": [
+      "Compare means, not single folds."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  },
+  {
+    "id": "t6-k032",
+    "tier": "b",
+    "type": "micro",
+    "level": "T6",
+    "tags": [
+      "t6.tuning"
+    ],
+    "critical": [],
+    "difficulty": 3,
+    "prompt": "Write `calibration_bins(y, p, n_bins)` splitting [0, 1] into `n_bins` equal-width bins, with bin index `min(int(p * n_bins), n_bins - 1)` so p = 1 falls in the last bin. Return one entry per bin: `[mean_p, frac_positive]` as floats, or `None` for an empty bin.",
+    "answer": {
+      "kind": "code",
+      "lang": "python",
+      "entry": "calibration_bins",
+      "tol": 1e-09,
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0.75,
+              0.25,
+              0.75,
+              0.25
+            ],
+            2
+          ],
+          "expect": [
+            [
+              0.25,
+              0.5
+            ],
+            [
+              0.75,
+              1.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0.5,
+              1.0,
+              0.25
+            ],
+            4
+          ],
+          "expect": [
+            null,
+            [
+              0.25,
+              0.0
+            ],
+            [
+              0.5,
+              1.0
+            ],
+            [
+              1.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [
+              1
+            ],
+            [
+              0.9
+            ],
+            1
+          ],
+          "expect": [
+            [
+              0.9,
+              1.0
+            ]
+          ]
+        },
+        {
+          "args": [
+            [],
+            [],
+            3
+          ],
+          "expect": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0.125,
+              0.375,
+              0.625,
+              0.875
+            ],
+            2
+          ],
+          "expect": [
+            [
+              0.25,
+              1.0
+            ],
+            [
+              0.75,
+              0.0
+            ]
+          ]
+        }
+      ],
+      "starter": "def calibration_bins(y, p, n_bins):\n    # per-bin mean prediction vs observed rate\n    ..."
+    },
+    "solution": "A calibrated model has mean prediction close to the observed positive rate in every bin.\n\n```python\ndef calibration_bins(y, p, n_bins):\n    bins = [[] for _ in range(n_bins)]\n    for yi, pi in zip(y, p):\n        bins[min(int(pi * n_bins), n_bins - 1)].append((yi, pi))\n    return [[sum(q for _, q in b) / len(b), sum(a for a, _ in b) / len(b)] if b else None for b in bins]\n```",
+    "hints": [
+      "Compare the average prediction with the observed rate in each bin."
+    ],
+    "check": null,
+    "source": {
+      "type": "original",
+      "gen": "2026-10-13/sonnet-5.5",
+      "ver": "author+blind"
+    }
+  }
+]

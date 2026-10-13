@@ -12,15 +12,16 @@
 <body>
 <header class="top">
   <h1 id="pack-name">Problem engine</h1>
-  <nav class="tabs" id="tabs" role="tablist">
-    <button type="button" role="tab" id="tab-today" data-tab="today" aria-selected="true">Today</button>
-    <button type="button" role="tab" id="tab-test" data-tab="test" aria-selected="false">Test</button>
-    <button type="button" role="tab" id="tab-progress" data-tab="progress" aria-selected="false">Progress</button>
-  </nav>
+  <div class="hr" id="hdr-right"></div>
 </header>
-<div class="banner" id="banner" hidden></div>
+<div class="notice" id="banner" hidden></div>
 <button type="button" class="update" id="update" hidden>Updated, reload for the new version</button>
 <main id="root" class="wrap"></main>
+<nav class="tabs" id="tabs" role="tablist">
+  <button type="button" role="tab" id="tab-today" data-tab="today" aria-selected="true">Today</button>
+  <button type="button" role="tab" id="tab-test" data-tab="test" aria-selected="false">Test</button>
+  <button type="button" role="tab" id="tab-progress" data-tab="progress" aria-selected="false">Progress</button>
+</nav>
 <script>window.PE_BUILD = '__PE_BUILD__';</script>
 <!--PE_PYCODE-->
 <!--PE_DATA-->

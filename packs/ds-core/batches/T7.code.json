@@ -1,0 +1,3238 @@
+[
+ {
+  "id": "t7-k001",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `kmeans_step(points, centers)` returning the new centers (list of `[x, y]`) after one k-means step. Assign each 2-D point to its nearest center by Euclidean distance, ties to the lower index. Each new center is the mean of its points; an empty cluster keeps its old center.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "kmeans_step",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        10,
+        10
+       ],
+       [
+        12,
+        10
+       ]
+      ],
+      [
+       [
+        1,
+        1
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     ],
+     "expect": [
+      [
+       1.0,
+       0.0
+      ],
+      [
+       11.0,
+       10.0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        2,
+        6
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        100,
+        100
+       ]
+      ]
+     ],
+     "expect": [
+      [
+       2.0,
+       2.0
+      ],
+      [
+       100,
+       100
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        1
+       ],
+       [
+        3,
+        3
+       ]
+      ],
+      [
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        2
+       ]
+      ]
+     ],
+     "expect": [
+      [
+       2.0,
+       2.0
+      ],
+      [
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "args": [
+      [],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        1,
+        1
+       ]
+      ]
+     ],
+     "expect": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   ],
+   "starter": "def kmeans_step(points, centers):\n    ..."
+  },
+  "solution": "Assign to the nearest center, then move each center to its cluster mean.\n\n```python\ndef kmeans_step(points, centers):\n    groups = [[] for _ in centers]\n    for p in points:\n        d = [(p[0]-c[0])**2 + (p[1]-c[1])**2 for c in centers]\n        groups[d.index(min(d))].append(p)\n    return [[sum(q[0] for q in g)/len(g), sum(q[1] for q in g)/len(g)] if g else list(c)\n            for g, c in zip(groups, centers)]\n```",
+  "hints": [
+   "Keep one list of points per center."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k002",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.kmeans"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `inertia(points, labels)` returning the k-means inertia as a float: the sum over all 2-D points of the squared Euclidean distance to the mean of the points sharing its label. `labels[i]` is the integer cluster of `points[i]`. Empty input gives 0.0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "inertia",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        10,
+        10
+       ],
+       [
+        12,
+        10
+       ]
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "expect": 4.0
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        2,
+        6
+       ]
+      ],
+      [
+       0,
+       0,
+       0
+      ]
+     ],
+     "expect": 32.0
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        1
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        9,
+        9
+       ]
+      ],
+      [
+       0,
+       1,
+       2
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [],
+      []
+     ],
+     "expect": 0.0
+    }
+   ],
+   "starter": "def inertia(points, labels):\n    ..."
+  },
+  "solution": "Sum squared distances to each cluster's own mean.\n\n```python\ndef inertia(points, labels):\n    total = 0.0\n    for k in set(labels):\n        g = [p for p, l in zip(points, labels) if l == k]\n        mx = sum(p[0] for p in g)/len(g); my = sum(p[1] for p in g)/len(g)\n        total += sum((p[0]-mx)**2 + (p[1]-my)**2 for p in g)\n    return total\n```",
+  "hints": [
+   "Group by label first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k003",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `single_link(a, b)` returning the single-linkage distance between clusters `a` and `b`, each a non-empty list of 2-D points `[x, y]`. It is the smallest Euclidean distance over all cross pairs, as a float.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "single_link",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      [
+       [
+        5,
+        0
+       ]
+      ]
+     ],
+     "expect": 4.0
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        3
+       ]
+      ],
+      [
+       [
+        4,
+        0
+       ],
+       [
+        0,
+        5
+       ]
+      ]
+     ],
+     "expect": 2.0
+    },
+    {
+     "args": [
+      [
+       [
+        2,
+        2
+       ]
+      ],
+      [
+       [
+        2,
+        2
+       ]
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        10,
+        0
+       ]
+      ],
+      [
+       [
+        6,
+        0
+       ],
+       [
+        3,
+        4
+       ]
+      ]
+     ],
+     "expect": 4.0
+    }
+   ],
+   "starter": "def single_link(a, b):\n    ..."
+  },
+  "solution": "Single linkage is the minimum over cross pairs.\n\n```python\nimport math\n\ndef single_link(a, b):\n    return min(math.dist(p, q) for p in a for q in b)\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k004",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.hierarchical"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `next_merge(D)` for a symmetric distance matrix `D` (list of lists). Return `[i, j]` with `i < j` for the pair of distinct items with the smallest distance, the first merge of agglomerative clustering. Ties go to the lowest `i`, then the lowest `j`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "next_merge",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        0,
+        4,
+        1
+       ],
+       [
+        4,
+        0,
+        3
+       ],
+       [
+        1,
+        3,
+        0
+       ]
+      ]
+     ],
+     "expect": [
+      0,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        2,
+        2
+       ],
+       [
+        2,
+        0,
+        2
+       ],
+       [
+        2,
+        2,
+        0
+       ]
+      ]
+     ],
+     "expect": [
+      0,
+      1
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        9,
+        5,
+        6
+       ],
+       [
+        9,
+        0,
+        7,
+        2
+       ],
+       [
+        5,
+        7,
+        0,
+        8
+       ],
+       [
+        6,
+        2,
+        8,
+        0
+       ]
+      ]
+     ],
+     "expect": [
+      1,
+      3
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ]
+     ],
+     "expect": [
+      0,
+      1
+     ]
+    }
+   ],
+   "starter": "def next_merge(D):\n    ..."
+  },
+  "solution": "Scan the upper triangle for the smallest entry; tuple order breaks ties.\n\n```python\ndef next_merge(D):\n    n = len(D)\n    pairs = [(D[i][j], i, j) for i in range(n) for j in range(i+1, n)]\n    d, i, j = min(pairs)\n    return [i, j]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k005",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `core_points(xs, eps, m)` returning the sorted list of indices of core points among 1-D values `xs`. A point is core when at least `m` points lie within distance `eps` of it, inclusive of `eps` and counting the point itself.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "core_points",
+   "tests": [
+    {
+     "args": [
+      [
+       0,
+       1,
+       2,
+       3,
+       10
+      ],
+      1.5,
+      3
+     ],
+     "expect": [
+      1,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       1,
+       2,
+       3,
+       10
+      ],
+      1,
+      3
+     ],
+     "expect": [
+      1,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       5,
+       5,
+       5
+      ],
+      0,
+      3
+     ],
+     "expect": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "args": [
+      [],
+      1,
+      2
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       0,
+       2,
+       4
+      ],
+      2,
+      2
+     ],
+     "expect": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "starter": "def core_points(xs, eps, m):\n    ..."
+  },
+  "solution": "A core point has at least m neighbours in its eps-ball, itself included.\n\n```python\ndef core_points(xs, eps, m):\n    return [i for i, x in enumerate(xs)\n            if sum(abs(x - y) <= eps for y in xs) >= m]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k006",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.density"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `noise_points(xs, eps, m)` returning the sorted indices of DBSCAN noise among 1-D values `xs`. A point is core with at least `m` points within `eps` inclusive, itself counted. Noise is neither core nor within `eps` of any core point.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "noise_points",
+   "tests": [
+    {
+     "args": [
+      [
+       0,
+       1,
+       2,
+       3,
+       10
+      ],
+      1.5,
+      3
+     ],
+     "expect": [
+      4
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       1,
+       2,
+       4.5,
+       10
+      ],
+      1.5,
+      3
+     ],
+     "expect": [
+      3,
+      4
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       10,
+       20
+      ],
+      1,
+      2
+     ],
+     "expect": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "args": [
+      [],
+      1,
+      2
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       0,
+       1,
+       2
+      ],
+      5,
+      3
+     ],
+     "expect": []
+    }
+   ],
+   "starter": "def noise_points(xs, eps, m):\n    ..."
+  },
+  "solution": "Border points sit within eps of a core point; the rest are noise.\n\n```python\ndef noise_points(xs, eps, m):\n    n = len(xs)\n    core = [i for i in range(n) if sum(abs(xs[i]-y) <= eps for y in xs) >= m]\n    return [i for i in range(n)\n            if i not in core and all(abs(xs[i]-xs[c]) > eps for c in core)]\n```",
+  "hints": [
+   "Find the core indices first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k007",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `responsibilities(x, weights, means, sds)` for a 1-D Gaussian mixture. Return the list of posterior probabilities, one per component, that the value `x` came from each component: weight times normal density, normalised to sum to 1. `sds` are standard deviations.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "responsibilities",
+   "tol": 1e-06,
+   "tests": [
+    {
+     "args": [
+      0,
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "expect": [
+      0.9996646498695335,
+      0.0003353501304664781
+     ]
+    },
+    {
+     "args": [
+      2,
+      [
+       0.5,
+       0.5
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "expect": [
+      0.5,
+      0.5
+     ]
+    },
+    {
+     "args": [
+      1,
+      [
+       0.9,
+       0.1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       2
+      ]
+     ],
+     "expect": [
+      0.9252124360473918,
+      0.07478756395260815
+     ]
+    },
+    {
+     "args": [
+      3,
+      [
+       1.0
+      ],
+      [
+       0
+      ],
+      [
+       1
+      ]
+     ],
+     "expect": [
+      1.0
+     ]
+    }
+   ],
+   "starter": "def responsibilities(x, weights, means, sds):\n    ..."
+  },
+  "solution": "E-step: weighted densities divided by their total.\n\n```python\nimport math\n\ndef responsibilities(x, weights, means, sds):\n    p = [w*math.exp(-0.5*((x-m)/s)**2)/(s*math.sqrt(2*math.pi))\n         for w, m, s in zip(weights, means, sds)]\n    return [v/sum(p) for v in p]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k008",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.gmm-em"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `m_step(xs, r)` for one 1-D mixture component. `r[i]` is the responsibility of this component for `xs[i]`. Return `[weight, mean, variance]`: weight is sum(r)/n, mean is the r-weighted mean, variance is the r-weighted mean of squared deviations from that new mean (divide by sum(r)).",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "m_step",
+   "tol": 1e-06,
+   "tests": [
+    {
+     "args": [
+      [
+       0,
+       2,
+       4
+      ],
+      [
+       1,
+       1,
+       1
+      ]
+     ],
+     "expect": [
+      1.0,
+      2.0,
+      2.6666666666666665
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       10
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "expect": [
+      0.5,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       10
+      ],
+      [
+       0.9,
+       0.9,
+       0.9,
+       0.1
+      ]
+     ],
+     "expect": [
+      0.7000000000000001,
+      2.2857142857142856,
+      2.8469387755102042
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       4
+      ],
+      [
+       0.5,
+       0.5
+      ]
+     ],
+     "expect": [
+      0.5,
+      2.0,
+      4.0
+     ]
+    }
+   ],
+   "starter": "def m_step(xs, r):\n    ..."
+  },
+  "solution": "M-step: responsibility-weighted weight, mean and variance.\n\n```python\ndef m_step(xs, r):\n    s = sum(r)\n    mu = sum(a*b for a, b in zip(r, xs)) / s\n    var = sum(a*(b-mu)**2 for a, b in zip(r, xs)) / s\n    return [s/len(xs), mu, var]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k009",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `silhouette(x, own, others)` for a 1-D point `x`. `own` lists the other points in its cluster, `others` is a list of the other clusters (lists). Let a be the mean distance to `own` and b the smallest mean distance to any other cluster. Return (b - a) / max(a, b); return 0.0 when `own` is empty.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "silhouette",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      1,
+      [
+       2
+      ],
+      [
+       [
+        8,
+        10
+       ]
+      ]
+     ],
+     "expect": 0.875
+    },
+    {
+     "args": [
+      5,
+      [
+       1,
+       9
+      ],
+      [
+       [
+        20
+       ]
+      ]
+     ],
+     "expect": 0.7333333333333333
+    },
+    {
+     "args": [
+      5,
+      [
+       4
+      ],
+      [
+       [
+        6
+       ]
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      3,
+      [],
+      [
+       [
+        10
+       ]
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      0,
+      [
+       1,
+       3
+      ],
+      [
+       [
+        4
+       ],
+       [
+        7,
+        9
+       ]
+      ]
+     ],
+     "expect": 0.5
+    }
+   ],
+   "starter": "def silhouette(x, own, others):\n    ..."
+  },
+  "solution": "Compare cohesion a with the nearest other cluster's separation b.\n\n```python\ndef silhouette(x, own, others):\n    if not own:\n        return 0.0\n    mean = lambda g: sum(abs(x - y) for y in g) / len(g)\n    a, b = mean(own), min(mean(g) for g in others)\n    return (b - a) / max(a, b)\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k010",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.cluster-eval"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `rand_index(a, b)` for two equal-length label lists. Over all unordered pairs of items, count pairs the two labelings treat the same way (together in both, or apart in both). Return that count divided by the number of pairs as a float; return 1.0 when there are fewer than two items.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "rand_index",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1
+      ]
+     ],
+     "expect": 0.3333333333333333
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       2
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       7
+      ],
+      [
+       3
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [],
+      []
+     ],
+     "expect": 1.0
+    }
+   ],
+   "starter": "def rand_index(a, b):\n    ..."
+  },
+  "solution": "A pair agrees when both labelings say same or both say different.\n\n```python\ndef rand_index(a, b):\n    n = len(a)\n    if n < 2:\n        return 1.0\n    pairs = [(i, j) for i in range(n) for j in range(i+1, n)]\n    agree = sum((a[i] == a[j]) == (b[i] == b[j]) for i, j in pairs)\n    return agree / len(pairs)\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k011",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `n_components(eigs, target)` returning the smallest number of principal components whose cumulative explained variance ratio is at least `target` (0 to 1). `eigs` are the covariance eigenvalues in any order; use them largest first. Compare with a small float slack: treat a cumulative ratio within 1e-12 of `target` as reaching it.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "n_components",
+   "tests": [
+    {
+     "args": [
+      [
+       3,
+       1
+      ],
+      0.7
+     ],
+     "expect": 1
+    },
+    {
+     "args": [
+      [
+       1,
+       3
+      ],
+      0.8
+     ],
+     "expect": 2
+    },
+    {
+     "args": [
+      [
+       5,
+       3,
+       1,
+       1
+      ],
+      0.9
+     ],
+     "expect": 3
+    },
+    {
+     "args": [
+      [
+       4
+      ],
+      0.5
+     ],
+     "expect": 1
+    },
+    {
+     "args": [
+      [
+       2,
+       2,
+       2,
+       2
+      ],
+      1.0
+     ],
+     "expect": 4
+    },
+    {
+     "args": [
+      [
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1
+      ],
+      0.8
+     ],
+     "expect": 8
+    }
+   ],
+   "starter": "def n_components(eigs, target):\n    ..."
+  },
+  "solution": "Sort descending and accumulate until the share reaches the target.\n\n```python\ndef n_components(eigs, target):\n    e = sorted(eigs, reverse=True)\n    total, acc = sum(e), 0.0\n    for k, v in enumerate(e, 1):\n        acc += v\n        if acc / total >= target - 1e-12:\n            return k\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k012",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.pca-practice"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `project(X, v)` returning a list of floats: first centre each column of the data matrix `X` (list of rows) by subtracting its column mean, then take each centred row's dot product with the direction vector `v`. Do not rescale `v`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "project",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        1,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        6
+       ]
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "expect": [
+      -2.0,
+      0.0,
+      2.0
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        6
+       ]
+      ],
+      [
+       0.7071067811865476,
+       0.7071067811865476
+      ]
+     ],
+     "expect": [
+      -2.8284271247461903,
+      0.0,
+      2.8284271247461903
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        2,
+        0
+       ],
+       [
+        0,
+        2
+       ]
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "expect": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        4
+       ]
+      ],
+      [
+       1
+      ]
+     ],
+     "expect": [
+      0.0
+     ]
+    }
+   ],
+   "starter": "def project(X, v):\n    ..."
+  },
+  "solution": "Centre columns, then score rows by dot product with the component.\n\n```python\ndef project(X, v):\n    n, d = len(X), len(v)\n    mu = [sum(r[j] for r in X) / n for j in range(d)]\n    return [sum((r[j] - mu[j]) * v[j] for j in range(d)) for r in X]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k013",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `knn_indices(D, i, k)` for a symmetric distance matrix `D` (list of lists). Return the indices of the `k` nearest neighbours of row `i`, excluding `i` itself, nearest first. Ties go to the lower index. If fewer than `k` other rows exist, return all of them.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "knn_indices",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        0,
+        1,
+        4,
+        3
+       ],
+       [
+        1,
+        0,
+        2,
+        5
+       ],
+       [
+        4,
+        2,
+        0,
+        2
+       ],
+       [
+        3,
+        5,
+        2,
+        0
+       ]
+      ],
+      2,
+      2
+     ],
+     "expect": [
+      1,
+      3
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        1,
+        4,
+        3
+       ],
+       [
+        1,
+        0,
+        2,
+        5
+       ],
+       [
+        4,
+        2,
+        0,
+        2
+       ],
+       [
+        3,
+        5,
+        2,
+        0
+       ]
+      ],
+      0,
+      3
+     ],
+     "expect": [
+      1,
+      3,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        2,
+        2
+       ],
+       [
+        2,
+        0,
+        2
+       ],
+       [
+        2,
+        2,
+        0
+       ]
+      ],
+      1,
+      1
+     ],
+     "expect": [
+      0
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      0,
+      5
+     ],
+     "expect": [
+      1
+     ]
+    }
+   ],
+   "starter": "def knn_indices(D, i, k):\n    ..."
+  },
+  "solution": "Sort other rows by (distance, index) and take the first k.\n\n```python\ndef knn_indices(D, i, k):\n    others = sorted((D[i][j], j) for j in range(len(D)) if j != i)\n    return [j for _, j in others[:k]]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k014",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.manifold"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `perplexity(p)` for a probability list `p` summing to 1: return 2 raised to the Shannon entropy in bits, as a float. Treat 0*log(0) as 0. A uniform distribution over n outcomes has perplexity n.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "perplexity",
+   "tol": 1e-06,
+   "tests": [
+    {
+     "args": [
+      [
+       0.25,
+       0.25,
+       0.25,
+       0.25
+      ]
+     ],
+     "expect": 4.0
+    },
+    {
+     "args": [
+      [
+       1.0,
+       0.0
+      ]
+     ],
+     "expect": 1.0
+    },
+    {
+     "args": [
+      [
+       0.5,
+       0.5,
+       0,
+       0
+      ]
+     ],
+     "expect": 2.0
+    },
+    {
+     "args": [
+      [
+       0.5,
+       0.25,
+       0.25
+      ]
+     ],
+     "expect": 2.8284271247461903
+    },
+    {
+     "args": [
+      [
+       0.9,
+       0.1
+      ]
+     ],
+     "expect": 1.384145488461686
+    }
+   ],
+   "starter": "def perplexity(p):\n    ..."
+  },
+  "solution": "Perplexity is the effective neighbour count, 2 to the entropy in bits.\n\n```python\nimport math\n\ndef perplexity(p):\n    h = -sum(q * math.log2(q) for q in p if q > 0)\n    return 2 ** h\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k015",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `cosine(u, v)` returning the cosine similarity of two equal-length numeric vectors as a float: dot product over the product of the Euclidean norms. Return 0.0 if either vector has zero norm.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "cosine",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ]
+     ],
+     "expect": 0.96
+    },
+    {
+     "args": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "expect": 0.7071067811865475
+    },
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      [
+       -1,
+       -2
+      ]
+     ],
+     "expect": -0.9999999999999998
+    },
+    {
+     "args": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "expect": 0.0
+    },
+    {
+     "args": [
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       5
+      ]
+     ],
+     "expect": 0.0
+    }
+   ],
+   "starter": "def cosine(u, v):\n    ..."
+  },
+  "solution": "Normalise the dot product by both lengths; guard the zero vector.\n\n```python\nimport math\n\ndef cosine(u, v):\n    nu, nv = math.sqrt(sum(a*a for a in u)), math.sqrt(sum(b*b for b in v))\n    if nu == 0 or nv == 0:\n        return 0.0\n    return sum(a*b for a, b in zip(u, v)) / (nu * nv)\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k016",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.embeddings"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `most_similar(query, vecs, k)` returning the indices of the `k` vectors in `vecs` with the highest cosine similarity to `query`, best first. Ties go to the lower index. A zero-norm vector has similarity 0.0. If `k` exceeds `len(vecs)`, return all indices.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "most_similar",
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       0
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        -1,
+        0
+       ]
+      ],
+      2
+     ],
+     "expect": [
+      1,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       0
+      ],
+      [
+       [
+        3,
+        0
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        0,
+        0
+       ]
+      ],
+      3
+     ],
+     "expect": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       3
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        0,
+        1
+       ]
+      ],
+      1
+     ],
+     "expect": [
+      1
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       0
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      9
+     ],
+     "expect": [
+      1,
+      0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      [],
+      2
+     ],
+     "expect": []
+    }
+   ],
+   "starter": "def most_similar(query, vecs, k):\n    ..."
+  },
+  "solution": "Rank by cosine similarity descending, index ascending.\n\n```python\nimport math\n\ndef most_similar(query, vecs, k):\n    def cos(v):\n        n = math.hypot(*query) * math.hypot(*v)\n        return sum(a*b for a, b in zip(query, v)) / n if n else 0.0\n    order = sorted(range(len(vecs)), key=lambda i: (-cos(vecs[i]), i))\n    return order[:k]\n```",
+  "hints": [
+   "Sort by a (-score, index) key."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k017",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `one_hot(values, categories)` returning a list of rows, one per value, each a list of 0/1 integers with one slot per entry of `categories` in that order. A value not in `categories` gives a row of all zeros.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "one_hot",
+   "tests": [
+    {
+     "args": [
+      [
+       "a",
+       "b",
+       "a"
+      ],
+      [
+       "a",
+       "b",
+       "c"
+      ]
+     ],
+     "expect": [
+      [
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "z"
+      ],
+      [
+       "a",
+       "b"
+      ]
+     ],
+     "expect": [
+      [
+       0,
+       0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [],
+      [
+       "a"
+      ]
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       "b",
+       "a"
+      ],
+      [
+       "a",
+       "b"
+      ]
+     ],
+     "expect": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       0
+      ]
+     ]
+    }
+   ],
+   "starter": "def one_hot(values, categories):\n    ..."
+  },
+  "solution": "Compare each value with every category; unseen values match none.\n\n```python\ndef one_hot(values, categories):\n    return [[int(v == c) for c in categories] for v in values]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k018",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.encoding"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `target_encode(train_cats, train_y, test_cats, m)` returning one float per test category: (sum of that category's train targets + m * global_mean) / (count + m), where `global_mean` is the mean of all `train_y`. A category unseen in training gets `global_mean`.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "target_encode",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       "a",
+       "a",
+       "b",
+       "b"
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       "a",
+       "b"
+      ],
+      2
+     ],
+     "expect": [
+      0.625,
+      0.875
+     ]
+    },
+    {
+     "args": [
+      [
+       "a",
+       "a",
+       "b",
+       "b"
+      ],
+      [
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       "c"
+      ],
+      2
+     ],
+     "expect": [
+      0.75
+     ]
+    },
+    {
+     "args": [
+      [
+       "a",
+       "a",
+       "a"
+      ],
+      [
+       1,
+       1,
+       1
+      ],
+      [
+       "a"
+      ],
+      0
+     ],
+     "expect": [
+      1.0
+     ]
+    },
+    {
+     "args": [
+      [
+       "a",
+       "b"
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       "a",
+       "b",
+       "a"
+      ],
+      1
+     ],
+     "expect": [
+      0.25,
+      0.75,
+      0.25
+     ]
+    }
+   ],
+   "starter": "def target_encode(train_cats, train_y, test_cats, m):\n    ..."
+  },
+  "solution": "Smooth each category mean toward the global mean; unseen has zero count.\n\n```python\ndef target_encode(train_cats, train_y, test_cats, m):\n    g = sum(train_y) / len(train_y)\n    def enc(c):\n        ys = [y for k, y in zip(train_cats, train_y) if k == c]\n        return (sum(ys) + m * g) / (len(ys) + m)\n    return [enc(c) for c in test_cats]\n```",
+  "hints": [
+   "Fit on train only; unseen means count 0."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k019",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `standardize(train, test)` returning the `test` values as z-scores computed with the mean and population standard deviation (divide by n) of `train` only. If the train standard deviation is 0, return 0.0 for every test value.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "standardize",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       2,
+       4,
+       4,
+       4,
+       5,
+       5,
+       7,
+       9
+      ],
+      [
+       5,
+       9,
+       1
+      ]
+     ],
+     "expect": [
+      0.0,
+      2.0,
+      -2.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       3
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     "expect": [
+      1.0,
+      3.0
+     ]
+    },
+    {
+     "args": [
+      [
+       5,
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ]
+     ],
+     "expect": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       10
+      ],
+      []
+     ],
+     "expect": []
+    }
+   ],
+   "starter": "def standardize(train, test):\n    ..."
+  },
+  "solution": "Fit mean and sd on train, then apply them to test.\n\n```python\ndef standardize(train, test):\n    mu = sum(train) / len(train)\n    sd = (sum((x - mu)**2 for x in train) / len(train)) ** 0.5\n    return [(x - mu) / sd if sd else 0.0 for x in test]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k020",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.scaling"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `minmax_clip(train, test)` returning `test` rescaled with the train minimum and maximum: (x - min) / (max - min), then clipped into [0, 1]. If train max equals min, return 0.0 for every value.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "minmax_clip",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       20,
+       60
+      ],
+      [
+       35,
+       20,
+       60
+      ]
+     ],
+     "expect": [
+      0.375,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "args": [
+      [
+       20,
+       60
+      ],
+      [
+       10,
+       80
+      ]
+     ],
+     "expect": [
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "args": [
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ]
+     ],
+     "expect": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "args": [
+      [
+       0,
+       5,
+       10
+      ],
+      [
+       2.5,
+       -1
+      ]
+     ],
+     "expect": [
+      0.25,
+      0.0
+     ]
+    }
+   ],
+   "starter": "def minmax_clip(train, test):\n    ..."
+  },
+  "solution": "Scale with train range, then clip unseen extremes.\n\n```python\ndef minmax_clip(train, test):\n    lo, hi = min(train), max(train)\n    if hi == lo:\n        return [0.0 for _ in test]\n    return [min(1.0, max(0.0, (x - lo) / (hi - lo))) for x in test]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k021",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `variance_filter(rows, threshold)` returning the sorted column indices whose population variance (divide by n) is strictly greater than `threshold`. `rows` is a non-empty list of equal-length numeric rows.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "variance_filter",
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        1,
+        5,
+        0
+       ],
+       [
+        3,
+        5,
+        0
+       ],
+       [
+        5,
+        5,
+        1
+       ]
+      ],
+      0.0
+     ],
+     "expect": [
+      0,
+      2
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        5,
+        0
+       ],
+       [
+        3,
+        5,
+        0
+       ],
+       [
+        5,
+        5,
+        1
+       ]
+      ],
+      0.3
+     ],
+     "expect": [
+      0
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        5,
+        0
+       ],
+       [
+        3,
+        5,
+        0
+       ],
+       [
+        5,
+        5,
+        1
+       ]
+      ],
+      2.6
+     ],
+     "expect": [
+      0
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        2
+       ]
+      ],
+      0
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       [
+        0,
+        0
+       ],
+       [
+        2,
+        4
+       ]
+      ],
+      1.0
+     ],
+     "expect": [
+      1
+     ]
+    }
+   ],
+   "starter": "def variance_filter(rows, threshold):\n    ..."
+  },
+  "solution": "Keep features whose variance exceeds the cut-off.\n\n```python\ndef variance_filter(rows, threshold):\n    n = len(rows)\n    def var(j):\n        mu = sum(r[j] for r in rows) / n\n        return sum((r[j] - mu)**2 for r in rows) / n\n    return [j for j in range(len(rows[0])) if var(j) > threshold]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k022",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.feature-select"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `top_k_corr(X, y, k)` returning the indices of the `k` columns of `X` (list of rows) with the largest absolute Pearson correlation with `y`, strongest first, ties to the lower index. A constant column, or a constant `y`, gives correlation 0.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "top_k_corr",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       [
+        1,
+        5,
+        2
+       ],
+       [
+        2,
+        3,
+        2
+       ],
+       [
+        3,
+        4,
+        2
+       ],
+       [
+        4,
+        1,
+        2
+       ]
+      ],
+      [
+       1,
+       2,
+       3,
+       4
+      ],
+      2
+     ],
+     "expect": [
+      0,
+      1
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        -1
+       ],
+       [
+        2,
+        -2
+       ],
+       [
+        3,
+        -3
+       ]
+      ],
+      [
+       1,
+       2,
+       3
+      ],
+      2
+     ],
+     "expect": [
+      0,
+      1
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        4,
+        1
+       ]
+      ],
+      [
+       10,
+       20,
+       30,
+       41
+      ],
+      1
+     ],
+     "expect": [
+      0
+     ]
+    },
+    {
+     "args": [
+      [
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        3,
+        3
+       ]
+      ],
+      [
+       5,
+       5,
+       5
+      ],
+      2
+     ],
+     "expect": [
+      0,
+      1
+     ]
+    }
+   ],
+   "starter": "def top_k_corr(X, y, k):\n    ..."
+  },
+  "solution": "Rank columns by absolute correlation with the target.\n\n```python\ndef top_k_corr(X, y, k):\n    def r(c):\n        a = [v - sum(c)/len(c) for v in c]; b = [v - sum(y)/len(y) for v in y]\n        den = (sum(v*v for v in a) * sum(v*v for v in b)) ** 0.5\n        return abs(sum(p*q for p, q in zip(a, b)) / den) if den else 0.0\n    cols = list(zip(*X))\n    return sorted(range(len(cols)), key=lambda j: (-r(cols[j]), j))[:k]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k023",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `bow(docs, vocab)` returning a count matrix: one row per document string, one column per word in `vocab` (same order). Lowercase each document, split on whitespace, and count exact matches. Words outside `vocab` are ignored.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "bow",
+   "tests": [
+    {
+     "args": [
+      [
+       "the cat sat",
+       "The dog"
+      ],
+      [
+       "the",
+       "cat",
+       "dog"
+      ]
+     ],
+     "expect": [
+      [
+       1,
+       1,
+       0
+      ],
+      [
+       1,
+       0,
+       1
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "a a a b"
+      ],
+      [
+       "a",
+       "b",
+       "c"
+      ]
+     ],
+     "expect": [
+      [
+       3,
+       1,
+       0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       ""
+      ],
+      [
+       "x"
+      ]
+     ],
+     "expect": [
+      [
+       0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [],
+      [
+       "x",
+       "y"
+      ]
+     ],
+     "expect": []
+    }
+   ],
+   "starter": "def bow(docs, vocab):\n    ..."
+  },
+  "solution": "Count each vocabulary word in the tokenised document.\n\n```python\ndef bow(docs, vocab):\n    rows = []\n    for d in docs:\n        toks = d.lower().split()\n        rows.append([toks.count(w) for w in vocab])\n    return rows\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k024",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.text-features"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `tfidf(docs, vocab)` returning a matrix of floats: tf is the raw count of the word in the document, idf is the natural log of N / df, with N documents and df the number of documents containing the word (idf is 0.0 if df is 0). Lowercase and split on whitespace; no normalisation.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "tfidf",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       "a a b",
+       "b c"
+      ],
+      [
+       "a",
+       "b",
+       "c"
+      ]
+     ],
+     "expect": [
+      [
+       1.3862943611198906,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.6931471805599453
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "x y",
+       "x z",
+       "x"
+      ],
+      [
+       "x",
+       "y",
+       "q"
+      ]
+     ],
+     "expect": [
+      [
+       0.0,
+       1.0986122886681098,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "Go go go"
+      ],
+      [
+       "go"
+      ]
+     ],
+     "expect": [
+      [
+       0.0
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "a",
+       "b",
+       "a b",
+       "b"
+      ],
+      [
+       "a",
+       "b"
+      ]
+     ],
+     "expect": [
+      [
+       0.6931471805599453,
+       0.0
+      ],
+      [
+       0.0,
+       0.28768207245178085
+      ],
+      [
+       0.6931471805599453,
+       0.28768207245178085
+      ],
+      [
+       0.0,
+       0.28768207245178085
+      ]
+     ]
+    }
+   ],
+   "starter": "def tfidf(docs, vocab):\n    ..."
+  },
+  "solution": "Multiply raw counts by ln(N/df).\n\n```python\nimport math\n\ndef tfidf(docs, vocab):\n    toks = [d.lower().split() for d in docs]\n    df = [sum(w in t for t in toks) for w in vocab]\n    idf = [math.log(len(docs) / n) if n else 0.0 for n in df]\n    return [[t.count(w) * i for w, i in zip(vocab, idf)] for t in toks]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k025",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 1,
+  "prompt": "Write `time_split(dates, cutoff)` for ISO date strings (`YYYY-MM-DD`, comparable as strings). Return `[train_idx, test_idx]`, each ascending: train holds indices with date strictly before `cutoff`, test holds those on or after it. Rows are not assumed sorted.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "time_split",
+   "tests": [
+    {
+     "args": [
+      [
+       "2024-01-01",
+       "2024-02-01",
+       "2024-03-01"
+      ],
+      "2024-02-01"
+     ],
+     "expect": [
+      [
+       0
+      ],
+      [
+       1,
+       2
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "2024-03-01",
+       "2024-01-15",
+       "2024-02-20",
+       "2024-01-01"
+      ],
+      "2024-02-01"
+     ],
+     "expect": [
+      [
+       1,
+       3
+      ],
+      [
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "args": [
+      [
+       "2024-05-01"
+      ],
+      "2025-01-01"
+     ],
+     "expect": [
+      [
+       0
+      ],
+      []
+     ]
+    },
+    {
+     "args": [
+      [],
+      "2024-01-01"
+     ],
+     "expect": [
+      [],
+      []
+     ]
+    }
+   ],
+   "starter": "def time_split(dates, cutoff):\n    ..."
+  },
+  "solution": "Split on time so training never sees the future.\n\n```python\ndef time_split(dates, cutoff):\n    train = [i for i, d in enumerate(dates) if d < cutoff]\n    test = [i for i, d in enumerate(dates) if d >= cutoff]\n    return [train, test]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k026",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.leakage"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `past_mean(xs, w)` returning a list the length of `xs` where entry `t` is the mean of the `w` values just before `t` (`xs[t-w:t]`, excluding `xs[t]`). Use `None` when fewer than `w` earlier values exist, so no feature sees the present or future.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "past_mean",
+   "tol": 1e-09,
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      2
+     ],
+     "expect": [
+      null,
+      null,
+      1.5,
+      2.5,
+      3.5
+     ]
+    },
+    {
+     "args": [
+      [
+       10,
+       20,
+       30
+      ],
+      1
+     ],
+     "expect": [
+      null,
+      10.0,
+      20.0
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2
+      ],
+      3
+     ],
+     "expect": [
+      null,
+      null
+     ]
+    },
+    {
+     "args": [
+      [],
+      2
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       4,
+       8,
+       6,
+       2
+      ],
+      3
+     ],
+     "expect": [
+      null,
+      null,
+      null,
+      6.0
+     ]
+    }
+   ],
+   "starter": "def past_mean(xs, w):\n    ..."
+  },
+  "solution": "Window ends before t, so the feature uses only the past.\n\n```python\ndef past_mean(xs, w):\n    return [sum(xs[t-w:t]) / w if t >= w else None for t in range(len(xs))]\n```",
+  "hints": [
+   "Slice xs[t-w:t]."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k027",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 2,
+  "prompt": "Write `zscore_outliers(xs, thr)` returning the sorted indices where the absolute z-score exceeds `thr` strictly. Use the mean and population standard deviation (divide by n) of `xs`. If the standard deviation is 0 or `xs` is empty, return an empty list.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "zscore_outliers",
+   "tests": [
+    {
+     "args": [
+      [
+       10,
+       10,
+       10,
+       10,
+       10,
+       10,
+       10,
+       10,
+       10,
+       100
+      ],
+      2
+     ],
+     "expect": [
+      9
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      1.5
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       5,
+       5,
+       5
+      ],
+      1
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [],
+      1
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       10,
+       -10
+      ],
+      2
+     ],
+     "expect": [
+      9,
+      10
+     ]
+    }
+   ],
+   "starter": "def zscore_outliers(xs, thr):\n    ..."
+  },
+  "solution": "Flag points whose standardised distance from the mean exceeds thr.\n\n```python\ndef zscore_outliers(xs, thr):\n    if not xs:\n        return []\n    mu = sum(xs) / len(xs)\n    sd = (sum((x - mu)**2 for x in xs) / len(xs)) ** 0.5\n    return [i for i, x in enumerate(xs) if sd and abs(x - mu) / sd > thr]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ },
+ {
+  "id": "t7-k028",
+  "tier": "b",
+  "type": "micro",
+  "level": "T7",
+  "tags": [
+   "t7.anomaly"
+  ],
+  "critical": [],
+  "difficulty": 3,
+  "prompt": "Write `iqr_outliers(xs, k)` returning the sorted indices of values outside `[Q1 - k*IQR, Q3 + k*IQR]`, where Q1 and Q3 are the 25th and 75th percentiles by linear interpolation (numpy's default) and IQR is Q3 - Q1. Values on the fence are not outliers. Empty input gives an empty list.",
+  "answer": {
+   "kind": "code",
+   "lang": "python",
+   "entry": "iqr_outliers",
+   "packages": [
+    "numpy"
+   ],
+   "tests": [
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       100
+      ],
+      1.5
+     ],
+     "expect": [
+      7
+     ]
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      1.5
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       -50,
+       10,
+       11,
+       12,
+       13,
+       14
+      ],
+      1.5
+     ],
+     "expect": [
+      0
+     ]
+    },
+    {
+     "args": [
+      [
+       7,
+       7,
+       7,
+       7
+      ],
+      1.5
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [],
+      1.5
+     ],
+     "expect": []
+    },
+    {
+     "args": [
+      [
+       1,
+       2,
+       3,
+       4,
+       10
+      ],
+      0
+     ],
+     "expect": [
+      0,
+      4
+     ]
+    }
+   ],
+   "starter": "import numpy as np\n\ndef iqr_outliers(xs, k):\n    ..."
+  },
+  "solution": "Tukey fences: points beyond k IQRs from the quartiles are flagged.\n\n```python\nimport numpy as np\n\ndef iqr_outliers(xs, k):\n    if not xs:\n        return []\n    q1, q3 = np.percentile(xs, [25, 75])\n    lo, hi = q1 - k*(q3 - q1), q3 + k*(q3 - q1)\n    return [i for i, x in enumerate(xs) if x < lo or x > hi]\n```",
+  "hints": [
+   "Work the tiny example by hand first."
+  ],
+  "check": null,
+  "source": {
+   "type": "original",
+   "gen": "2026-10-13/sonnet-5.5",
+   "ver": "author+blind"
+  }
+ }
+]

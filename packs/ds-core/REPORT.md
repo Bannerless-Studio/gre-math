@@ -424,3 +424,120 @@ python3 -I tools/check_items.py packs/ds-core --batch=packs/ds-core/batches/T9.c
 engine/answer.js check(): value + all `also` forms ok:true for 22/22 forms (8 expression items)
 tools/render.js renderItem on 176 items, renderTechnique on 16 cards: 0 errors
 ```
+
+## T6 code review (sonnet-5.5)
+
+- Count: 32 code items (t6-k001..k032), 16 techniques x 2.
+- Blind agreement: 32/32 (own solutions from prompt + starter + test args only; expect hidden; graded through engine harness and code_verdict.js).
+- Changed items:
+
+| id | class | change |
+|---|---|---|
+| t6-k016 | model solution over 8 lines (9) | Gini written as weighted-count form (n - sum(count^2)/n), 8 lines; tests and expect unchanged, still proven |
+
+- Left as is: no ill-posed prompts found; all rounding, population vs sample sd, ties, empty input, and return types are stated. No packages used or listed (pure stdlib). Run time 0.12 s for all 32. Tags all valid T6 technique ids. No starter passes. Item kind is new to the tier (code vs ab/c), so no duplicates of existing non-code items.
+- Float-tie note: k016 test 6 (tie at weighted Gini 0.25) and k031 test 2 rely on exact float ties; checked three common weighting formulas for k016, all give exactly 0.25.
+- Least sure: t6-k016 (float tie on threshold), t6-k031 (float mean tie), t6-k020 (AdaBoost tol-only, k=0.5 error gives alpha 0 edge).
+
+## T5 code review (sonnet-5.5)
+
+42 code items (t5-k001..k042). Blind solve from prompt + test args only: 42 of 42 passed the original tests (100%). After unhiding, 3 unstated edge cases found where a reasonable reading differs from the key; tests added so the prompt now decides them.
+
+| id | class | change |
+|---|---|---|
+| t5-k012 | ILL-POSED (NULL keys) | k010 says None never matches, k012 silent; Counter-style solutions match None to None. Prompt now states None never matches; test `[None,1] vs [None,1]` -> 3 added; solution updated |
+| t5-k018 | ILL-POSED (NULL vs empty subquery) | SQL gives NULL NOT IN () = TRUE; prompt silent, key untested. Prompt states empty `sub` keeps every value; test `[1,None] vs []` -> `[1,None]` added; solution updated |
+| t5-k035 | ILL-POSED (flags when nothing observed) | "leaves the list as is" did not say whether flags still mark Nones. Prompt reworded; test `[None,None]` -> `[[None,None],[1,1]]` added |
+
+- Left as is: tags all valid T5 ids and match their technique; no starter passes; packages listed match use (pandas k022-25, k028-30; numpy k026-27); all functions at most 8 solution lines; prompts at most 3 sentences; total run 0.7 s for 42 items; no duplicates of T5.ab.json items (code items are write-the-function forms; closest overlaps t5-0021, t5-0030, t5-0058 are numeric counting, not duplicates).
+- Unenforced by tests: "no loops" / "use numpy" (k026, k027), "groupby transform" and `pd.merge` call (k028, k029), one-pass hash table (k042). Learners can pass with loops; accepted as style guidance. t5-k041 prompt gives the formula, so it is near-trivial (`n.bit_length()`); left.
+- Untested but unstated: k034 empty `rows` (no test, key returns []); k005 missing column.
+- Least sure: t5-k018 (SQL empty-subquery edge now keyed to true SQL), t5-k035 (flags with no observed), t5-k023 (`.loc` slice on unsorted integer index; pandas-version dependent behaviour, passes on pandas 3.0.5).
+- Gates: check_items OK 42 items; run_code_items proven=42 failed=0 (every starter fails).
+
+## T7 code review (sonnet-5.5)
+
+Batch `batches/T7.code.json`: 28 code items (t7-k001 to t7-k028), 2 per technique across 14 `t7.*` techniques. Blind pass: own solutions written from prompt + test args only, run through `engine/pyharness.py`, compared with `expect`. Blind agreement 28/28 (100%) on first pass; zero KEY WRONG, zero ILL-POSED mismatches, zero MY ERROR.
+
+Checks run on all items: starter fails every test; no tests-without-edge-case; packages consistent (only k028 lists numpy and uses it; starter imports it); every model solution <= 7 non-blank lines; run_code_items total wall 1.1 s for 56 runs (each well under 1 s); prompts <= 3 sentences (k009, k013, k016 borderline at 4 by rough count); all tags exist as T7 techniques; each tag has 9 non-code items in T7.ab.json and the code items extend rather than duplicate.
+
+| id | class | change |
+|---|---|---|
+| t7-k011 | test does not exercise stated rule | Added test `[[1 x10], 0.8] -> 8`. Prompt demands a 1e-12 slack but no test failed a solution without it; a ratio-accumulating solution gives 9 here. |
+| t7-k022 | prompt omits case a test relies on | Prompt now says a constant `y` also gives correlation 0 (test 4 uses constant `y`; undefined/NaN otherwise). |
+
+Left as is:
+- 20 of 28 hints are the generic "Work the tiny example by hand first." Weak, not wrong; hint pass is a separate job.
+- k009: `max(a, b) == 0` (x identical to all neighbours) is undefined and untested; not a learner trap.
+- k022 test 2 relies on an exact tie between column and its negation; safe since negation is exact in float (verified against corrcoef, cov/std and two hand formulas).
+- k016 test 2 ties at cosine 1.0 (`[3,0]` vs `[1,0]`); exact under division-based and normalise-first forms.
+- k028 numpy load time in Pyodide is not part of the 1 s run budget measured here.
+
+Least sure ids: t7-k022 (float correlation ties), t7-k011 (slack semantics hinge on test design), t7-k009 (undefined zero-denominator case).
+
+Gates after edits: `check_items.py ... --batch=T7.code.json` -> `OK 28 items`; `run_code_items.py` (temp pack with the batch as items.json) -> `RESULT run_code_items code_items=28 proven=28 skipped=0 failed=0`.
+
+## T8 code review (sonnet-5.5)
+
+28 code items in `T8.code.json`. Blind agreement 28/28 (100%): solved from prompt + test args only, then proven against hidden `expect` through `tools/run_code_items.py`. No KEY WRONG, no MY ERROR. Whole batch runs in 0.4 s; no packages used or listed; all tags are real T8 techniques; no starter passes; no item duplicates a non-code T8.ab item (same-tag items there are extended, not repeated); all model solutions are at most 8 lines; hints are one line each.
+
+| id | class | change |
+|---|---|---|
+| t8-k017 | prompt admits two readings (floor vs ceil of the output width) | Prompt now says only full windows count, a partial last window is dropped. Tests already fixed floor. |
+| t8-k018 | prompt admits two readings (partial last window) | Same sentence added. |
+| t8-k008 | test misses a stated rule | Added test `[3, 0, 2, 1] -> [0.0, 0.0]`: z = 0 exactly; a `z >= 0` ReLU slope gives -6 for dL/dw1. |
+| t8-k025 | prompt ambiguity (index i vs pair i) | Prompt says `i` runs over pairs 0..d/2-1. Tests unchanged. |
+
+Left as is:
+- k003 tests pass with a naive sigmoid; fine, |z| <= 40 does not overflow and 1e-6 tol is absolute.
+- k004 test `[0] -> [0.0]` cannot distinguish `x>0` from `x>=0` (both give 0); harmless.
+- k016 behaviour for step > total is unstated and untested; not a learner trap.
+- k015 relies on "tie does not beat best" which the prompt states; tests 3 and 5 cover tie and early stop.
+
+Least sure ids: t8-k025 (index/pair notation), t8-k015 (stop/patience counting, stated but easy to off-by-one), t8-k016 (warmup `(step+1)/warmup` vs cosine start at p=0 is a given convention).
+
+Gates after edits: `check_items.py packs/ds-core --batch=packs/ds-core/batches/T8.code.json` -> `OK 28 items`; `run_code_items.py` on temp pack with the batch as items.json -> `RESULT run_code_items code_items=28 proven=28 skipped=0 failed=0` (starters all fail, enforced by the tool).
+
+## T9 code review (sonnet-5.5)
+
+32 code items. Blind agreement 32/32 (31 first pass; the one miss, k016, was my error: I took n as the chain count; re-solved, matches). No KEY WRONG. All run well under 1 s, no `packages`, all model solutions <= 8 lines, prompts <= 3 sentences, technique tags all valid T9 ids.
+
+| id | class | change |
+|---|---|---|
+| t9-k018 | ILL-POSED (filter-then-top-k vs top-k-then-filter) | prompt now says "the `k` most similar of the other users who rated it"; added test where the closest user has not rated the item (expect 4.0). Old tests could not tell the readings apart. |
+| t9-k030 | weak test | added test where one group has no negatives while the other has FPR 1 (expect 1.0), pinning the "empty class = 0.0" rule against skip-the-group. |
+| t9-k002 | unstated convention | "If a group is empty" -> "An average over no units is 0.0" (the empty-input test covers ATE too). |
+| t9-k017 | wording | "zero length (all zeros)" -> "zero norm (all zeros)". |
+
+Left as is: k001, k002, k005, k013, k017, k021, k025, k031 reuse the data of a numeric item in `T9.ab.json` (e.g. t9-0008, t9-0022, t9-0076, t9-0094/0095, t9-0114/0116, t9-0139) but generalise it into a function with new edge cases; they extend rather than duplicate, though a learner who did the numeric twin knows the first test answer. k023 denominator "bigram start" count differs from unigram count only for the final token; stated in the prompt. k026 tie test uses binary-exact floats, safe.
+
+Least sure: t9-k018 (neighbour selection, now pinned), t9-k024 (perplexity with unseen test bigrams relies on the stated V and alpha > 0), t9-k022 (ideal DCG over the sorted list truncated to k, matches the prompt but readers may use the full ideal list; equal for these tests).
+
+Gates: `check_items.py packs/ds-core --batch=packs/ds-core/batches/T9.code.json` -> `OK 32 items`; `run_code_items.py` on temp pack (batch as items.json) -> `RESULT run_code_items code_items=32 proven=32 skipped=0 failed=0` (starters all fail, enforced by the tool).
+
+## Teach cards v3 review (sonnet-5.5)
+
+Read all 138 cards against `docs/TEACH_CARDS.md`, a 3-drill sample per technique, and a scripted drill-number overlap scan. Checks run on every card: words 90-170 excluding math and code, nested parentheses, old When/Why/Move/How labels, forbidden fonts, two-paragraph shape with "The core intuition here is", renderText errors. Result before and after edits: 0 flagged (the mechanical rules were already met). All worked numbers in the Examples were recomputed by hand and are correct, except where listed below. No Example duplicates a drill item (the scan found only incidental small-number overlaps, e.g. t5.pandas-vector vs t5-0081 uses a different operation).
+
+Changed 57 cards, written only to `batches/<Tn>.teach.json` (techniques.json not touched, merge pending).
+
+| class | n | ids |
+|---|---|---|
+| factual | 5 | t5.sql-select, t5.sql-agg, t6.bias-variance, t7.manifold, t7.pca-practice |
+| rule | 12 | t1.log-scale, t3.multiple, t3.ols-simple, t3.proportions, t3.ols-multi, t4.spectral, t4.svd, t4.pca, t7.feature-select, t9.bayes-mcmc, t9.nlp-ngram, t9.ts-arima |
+| prose | 40 | t1.functions, t1.deriv-rules, t1.integral, t1.dot-norm, t1.sigma, t2.discrete-dists, t2.normal, t2.cont-dists, t2.tail-bounds, t2.lln-clt, t3.sampling, t3.mle, t3.hypothesis, t3.bootstrap, t4.inverse-det, t4.projection, t4.gradient, t4.matrix-calc, t5.sql-sub, t5.missing, t6.ridge-lasso, t6.loss, t6.boosting, t6.reg-metrics, t6.roc-pr, t7.gmm-em, t8.activations, t8.backprop, t8.optimizers, t8.init-norm, t8.regularization, t8.cnn-arch, t8.attention, t8.transformer, t8.rnn, t9.causal-dag, t9.ts-decomp, t9.drift, t9.fairness, t9.recsys-cf |
+
+Factual fixes:
+- t5.sql-select: Check said the first row is the largest when sorted descending; false with OFFSET (the Example's first row is Rex, not Lu). Now qualified "without an OFFSET".
+- t5.sql-agg: "Both sums below" referred to one formula; intuition said numerator and denominator count different rows (they do not; SUM(x) and COUNT(x) both skip NULL). Now contrasts COUNT(x) with COUNT(*).
+- t6.bias-variance: decomposition displayed `bias` where the quantity is squared bias; now `bias^2`.
+- t7.pca-practice: Example "two standardised features have eigenvalues 5 and 2" is impossible (correlation eigenvalues sum to 2). Replaced by covariance eigenvalues 7, 5, 3 (shares 0.47, 0.80).
+- t7.manifold: card never gave perplexity = 2^H, which drills t7-f013 and t7-k014 need, and the Example (120 choose 2) did not exercise the move. Now states perplexity = 2^H and works H for (1/2, 1/4, 1/4) to 2.83. Dropped the p_{j|i} kernel and sigma_i (no drill uses them).
+
+Rule fixes (undefined symbols or non-sentence): q in BH (t3.multiple); S_yy, r, s_x, s_y (t3.ols-simple); x1, x2 and the p-hat clash between one-sample and pooled (t3.proportions); n, k (t3.ols-multi); Q, Lambda, q_i (t4.spectral); U, Sigma, V (t4.svd); X_c, Sigma (t4.pca); N, rho_k (t9.bayes-mcmc); c(.) (t9.nlp-ngram); ACF/PACF spelled out (t9.ts-arima); sigmoid sigma undefined (t1.log-scale); Check was a fragment ending in a formula (t7.feature-select).
+
+Prose class: first paragraph rewritten from stacked imperatives and wedged "Also ..." / "Here X is ..." fragments into situation then move in whole sentences, with extra formulas moved into display math. t1.sigma gained the index-shift sentence that drill t1-0030 needs. t8.cnn-arch now covers pooling, residual and 1x1 cost so P1 matches its Example.
+
+Left as is (read, no change): t1 sets, derivative, exp-log, critical-points, vectors, linear-approx; t2 counting (dense but correct), axioms, conditional, bayes, independence, discrete-rv, expectation, variance, pdf-cdf, joint-cov; t3 descriptive, estimators, ci, t-tests, chisq, power, ab-design; t4 matrix-ops, linear-systems, span-rank, normal-eq, eigen, convexity, grad-descent, lagrange; t5 relational (thin), sql-null, sql-joins, sql-window, pandas-index, pandas-vector, pandas-merge, tidy, cleaning, complexity; t6 ml-setup, logistic, knn, naive-bayes, trees, bagging, svm, cv, clf-metrics, tuning; t7 kmeans, hierarchical, density, cluster-eval, embeddings, encoding, scaling, text-features, leakage, anomaly; t8 mlp, softmax-ce, training-diag, conv, transfer; t9 causal-po, causal-quasi, ts-eval, bayes-conj, recsys-mf, ranking-metrics (dense), mlops-track, privacy; all of t10. Minor unfixed: t3.mle Trap names an inconvenience rather than a wrong move; t6.tuning has no display math (allowed).
+
+Least sure: t7.manifold (new formula and Example), t3.hypothesis (long first paragraph carrying power), t4.svd (dense, Frobenius clause), t8.cnn-arch (scope changed), t5.sql-agg (rewritten intuition).
